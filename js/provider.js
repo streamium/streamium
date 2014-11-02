@@ -10,7 +10,8 @@ var peerJSOpts = {
       url: 'stun:stun.l.google.com:19302'
     }]
   }
-}
+};
+
 
 // Compatibility shim
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -19,12 +20,13 @@ var clients = [];
 
 var provider = function() {
 
+  var insight = new Insight();
   $(document).ready(function() {
-    var username = 'somebitch69';
+    var username = 'sexybitch69';
     var rpm = 0.5;
     var withdrawAddress = '2N2Tc9v76P85hKwj3mdByDdowp5jH5DR2z5';
-    var k = Key.generateSync();
-    console.log(k.private.toString('hex'));
+    var identity = Key.generateSync();
+    console.log(identity.private.toString('hex'));
 
     var peer = new Peer(username, peerJSOpts);
 
@@ -35,7 +37,6 @@ var provider = function() {
     // Receiving a call
     peer.on('connection', function(connection) {
       // TODO: setup payment channel
-      console.log(JSON.stringify(connection.peer));
       var call = peer.call(connection.peer, window.localStream);
       setupCall(call);
     });

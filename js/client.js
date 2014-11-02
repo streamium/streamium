@@ -1,9 +1,14 @@
 'use strict';
 
 var bitcore = require('bitcore');
-var Key = bitcore.Key;
 
 var client = function(room) {
+  var insight = new Insight();
+
+  var fundAddress = '2MvmJg8Yb8htySEoAsJTxRQAoPuJmcA7YXW';
+  insight.getUTXOs(fundAddress, function(res) {
+    console.log(JSON.stringify(res));
+  });
 
   var peer = new Peer(null, {
     key: 'lwjd5qra8257b9',
@@ -28,7 +33,7 @@ var client = function(room) {
     var connection = peer.connect(room);
 
     connection.on('open', function() {
-        // connection.close();
+      // connection.close();
     });
     connection.on('close', function() {
       console.log('Initial connection closed.');
