@@ -46,19 +46,28 @@
       <div class="content">
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
+            <p class="lead">Hi! Want to join {nameofchannel}?</p>
             <form class="form-horizontal" role="form">
-              <div class="">
-                  <input type="email" class="form-control" id="name" placeholder="Your Name">
+              <div class="form-group">
+                  <input type="email" class="form-control" id="name" placeholder="Insert your name">
               </div>
-              <p class="lead">Lock your funds, remember that all your unused founds will be refunded to you.</p>
+              <p>Lock your funds, remember that all your unused founds will be refunded to you.</p>
               <div class="row">
-                <div class="col-md-4">
-                  <img src="http://qrfree.kaywa.com/?l=1&s=8&d=https%3A%2F%2Fgithub.com%2Fmaraoz%2Fpaystream">
+                <div class="col-md-4 col-sm-4">
+                  <img src="http://qrfree.kaywa.com/?l=1&s=8&d=https%3A%2F%2Fgithub.com%2Fmaraoz%2Fpaystreambitcoin%3A12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu%3Famount%3D0.000001" class="img-thumbnail">
                 </div>
-                <div class="col-md-8">
-                  <div class="">
-                    <label for="maxtime" class="col-md-4 control-label">Max. time</label>
-                    <div class="col-md-8">
+                <div class="col-md-8 col-sm-8">
+                  <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-4 control-label">
+                      <p><strong>Rate:</strong></p>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
+                      <p class="lead">3 USD / min <small>0.0004 BTC/min</small></p>
+                    </div>
+                  </div>
+                  <div class="form-group ">
+                    <label for="maxtime" class="col-md-4 col-sm-4 col-xs-4 control-label">Max. time</label>
+                    <div class="col-md-8 col-sm-8 col-xs-8">
                       <select class="form-control" id="maxtime">
                         <option>10 min</option>
                         <option>20 min</option>
@@ -68,7 +77,8 @@
                       </select>
                     </div>
                   </div>
-                  <a class="btn btn-success" href="bitcoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu?amount=0.000001">Pay 0.000001 BTC</a>
+                  <a class="btn btn-success pull-right" href="bitcoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu?amount=0.000001">Pay 0.000001 BTC</a>
+
                   <p>Address: 12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu</p>
                 </div>
               </div>
