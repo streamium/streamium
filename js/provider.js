@@ -2,15 +2,6 @@
 
 var bitcore = require('bitcore');
 var Key = bitcore.Key;
-var peerJSOpts = {
-  key: 'lwjd5qra8257b9',
-  debug: 3,
-  config: {
-    'iceServers': [{
-      url: 'stun:stun.l.google.com:19302'
-    }]
-  }
-};
 
 
 // Compatibility shim
@@ -26,35 +17,14 @@ var provider = function() {
     var rpm = 0.5;
     var withdrawAddress = '2N2Tc9v76P85hKwj3mdByDdowp5jH5DR2z5';
     var identity = Key.generateSync();
-    console.log(identity.private.toString('hex'));
 
-    var peer = new Peer(username, peerJSOpts);
 
-    peer.on('open', function() {
-      $('#roomURL').text(document.URL + peer.id);
+    $('#end-call').click(function() {
+      window.existingCall.close();
+      $('#provider-success').show();
     });
 
-    // Receiving a call
-    peer.on('connection', function(connection) {
-      // TODO: setup payment channel
-      var call = peer.call(connection.peer, window.localStream);
-      setupCall(call);
-    });
-    peer.on('error', function(err) {
-      console.log('peer error: ' + JSON.stringify(err));
-      step2();
-    });
-
-    // Click handlers setup
-    $(function() {
-      $('#end-call').click(function() {
-        window.existingCall.close();
-        $('#provider-success').show();
-      });
-
-      // Get things started
-      step1();
-    });
+    step1();
 
     function step1() {
       navigator.getUserMedia({
@@ -63,20 +33,43 @@ var provider = function() {
       }, function(stream) {
         $('#video').prop('src', URL.createObjectURL(stream));
         window.localStream = stream;
-        step2();
+        connectToPeerJS();
       }, function() {
         $('#step1-error').show();
       });
     }
 
-    function step2() {
+    function connectToPeerJS() {
+      var peer = new Peer(username, peerJSConfig);
+
+      peer.on('open', function() {
+        $('#roomURL').text(document.URL + peer.id);
+      });
+
+      // Receiving a call
+      peer.on('connection', function(connection) {
+        // TODO: setup payment channel
+
+        console.log('sending hello');
+        connection.send('hello');
+        /*
+        connection.on('data', function(data) {
+          console.log('DATA ON PROVIDER ' + data);
+          var call = peer.call(connection.peer, window.localStream);
+          setupCall(call);
+        });
+       */
+
+      });
+      peer.on('error', function(err) {
+        console.log('peer error: ' + JSON.stringify(err));
+        setTimeout(connectToPeerJS, 1000); // reconnect in 1 sec
+      });
       $('#step1').hide();
       $('#step2').show();
     }
 
-    var updateClientList = function() {
-      console.dir(clients);
-    };
+    var updateClientList = function() {};
 
     function setupCall(call) {
       var clientName = call.peer;

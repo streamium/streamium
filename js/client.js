@@ -7,18 +7,10 @@ var client = function(room) {
 
   var fundAddress = '2MvmJg8Yb8htySEoAsJTxRQAoPuJmcA7YXW';
   insight.getUTXOs(fundAddress, function(res) {
-    console.log(JSON.stringify(res));
+    //console.log(JSON.stringify(res));
   });
 
-  var peer = new Peer(null, {
-    key: 'lwjd5qra8257b9',
-    debug: 3,
-    config: {
-      'iceServers': [{
-        url: 'stun:stun.l.google.com:19302'
-      }]
-    }
-  });
+  var peer = new Peer(null, peerJSConfig);
 
   peer.on('close', function() {
     console.log('Peer connection closed');
@@ -33,7 +25,10 @@ var client = function(room) {
     var connection = peer.connect(room);
 
     connection.on('open', function() {
-      // connection.close();
+      console.log('connection open');
+      connection.on('data', function(data) {
+        console.log('dataaaaaaaaaaaa ' + data);
+      });
     });
     connection.on('close', function() {
       console.log('Initial connection closed.');
