@@ -52,16 +52,17 @@
 
         <form class="form-horizontal" role="form">
 
-          <div class="form-group has-success has-feedback">
+          <div class="form-group has-feedback">
             <div class="input-group">
               <div class="input-group-addon">streamium.io/</div>
-              <input type="email" class="form-control" id="inputEmail3" placeholder="Channel name">
-              <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+              <input type="text" class="form-control" id="name" placeholder="Channel name">
+              <span class="glyphicon glyphicon-ok form-control-feedback hide"></span>
             </div>
           </div>
 
-          <div class="form-group">
-            <input type="password" class="form-control" id="inputPassword3" placeholder="Bitcoin address">
+          <div class="form-group has-feedback">
+              <input type="text" class="form-control" id="address" placeholder="Bitcoin address">
+              <span class="glyphicon glyphicon-ok form-control-feedback hide"></span>
           </div>
 
           <div class="form-group">
@@ -78,7 +79,7 @@
           </div>
 
           <div class="form-group">
-              <button type="submit" class="btn btn-success">Create Channel</button>
+              <button type="submit" id="create-room" class="btn btn-success" disabled="disabled">Create Channel</button>
           </div>
         </form>
       </div>
@@ -92,25 +93,67 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bitcore.js"></script>
     <script type="text/javascript">
       var RATE = null;
       var FEE  = null;
-      $(function onLoad(argument) {
 
-        function updatePrice() {
-          if (!RATE) return;
-          var dollars = parseInt($('#price').val());
-          var FEE = parseFloat((dollars / RATE).toFixed(8));
-          $('#btc').val(FEE + " BTC/min");
-        }
+      var NAME_VALID = false;
+      var ADDRESS_VALID = false;
 
-        $('#price').change(updatePrice);
-        $.get('https://bitpay.com/api/rates/usd', function(price) {
-          RATE = price.rate;
-          updatePrice();
-        });
+      function updatePrice() {
+        if (!RATE) return;
+        var dollars = parseInt($('#price').val());
+        var FEE = parseFloat((dollars / RATE).toFixed(8));
+        $('#btc').val(FEE + " BTC/min");
+      }
 
+      function checkValidName() {
+        var name = $('#name').val().trim();
+        name = name.toLowerCase().replace(/ /g, '-').replace(/\\/g, '-');
+
+        $('#name').val(name);
+        $('#name').siblings('span').toggleClass('hide', false);
+        $('#name').parent().parent().toggleClass('has-success', true);
+        NAME_VALID = true;
+
+        checkFormValid();
+      }
+
+      function checkValidAddress() {
+        bitcore = require('bitcore');
+        var address = new bitcore.Address($('#address').val());
+        ADDRESS_VALID = address.isValid();
+
+        $('#address').siblings('span').toggleClass('hide', false);
+
+        var colorClass = ADDRESS_VALID ? 'has-success' : 'has-error';
+        var iconClass = ADDRESS_VALID ? 'glyphicon-ok' : 'glyphicon-remove';
+
+        $('#address').parent().removeClass('has-success').removeClass('has-error');
+        $('#address').parent().addClass(colorClass);
+
+        $('#address').siblings('span').toggleClass('hide', false);
+        $('#address').siblings('span').removeClass('glyphicon-ok').removeClass('glyphicon-remove');
+        $('#address').siblings('span').addClass(iconClass);
+
+        checkFormValid();
+      }
+
+      function checkFormValid() {
+        var isValid = NAME_VALID && ADDRESS_VALID;
+        $('#create-room').prop("disabled", !isValid);
+      }
+
+      $('#price').change(updatePrice);
+      $('#name').change(checkValidName);
+      $('#address').change(checkValidAddress);
+
+      $.get('https://bitpay.com/api/rates/usd', function(price) {
+        RATE = price.rate;
+        updatePrice();
       });
+
     </script>
 
   </body>
