@@ -47,38 +47,37 @@
         <h1>PayStream</h1>
 
         <p class="lead">
-          Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.
+          Create a room and charge your viewers per minute, using bitcoin payment channels.
         </p>
 
         <form class="form-horizontal" role="form">
+
+          <div class="form-group has-success has-feedback">
+            <input type="email" class="form-control" id="inputEmail3" placeholder="Channel name">
+            <span class="glyphicon glyphicon-ok form-control-feedback"></span>
+          </div>
+
           <div class="form-group">
-            <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Bitcoin address">
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-4">
+              <select class="form-control col-md-2">
+                <option>$1 USD/min</option>
+                <option>$5 USD/min</option>
+                <option>$10 USD/min</option>
+              </select>
+            </div>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" value="12.123" disabled="disabled">
             </div>
           </div>
+
           <div class="form-group">
-            <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-            <div class="col-sm-10">
-              <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox"> Remember me
-                </label>
-              </div>
-            </div>
-          </div>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button type="submit" class="btn btn-default">Sign in</button>
-            </div>
+              <button type="submit" class="btn btn-success">Create Channel</button>
           </div>
         </form>
-        <button>Create stream</button>
       </div>
 
     </div><!-- /.container -->
