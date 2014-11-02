@@ -66,14 +66,14 @@
 
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-4">
-              <select class="form-control col-md-2">
-                <option>$1 USD/min</option>
-                <option>$5 USD/min</option>
-                <option>$10 USD/min</option>
+              <select class="form-control col-md-2" id="price">
+                <option value="1">$1 USD/min</option>
+                <option value="5">$5 USD/min</option>
+                <option value="10">$10 USD/min</option>
               </select>
             </div>
             <div class="col-sm-4">
-              <input type="text" class="form-control" value="12.123 BTC" disabled="disabled">
+              <input type="text" class="form-control" id="btc" value="BTC/min" disabled="disabled">
             </div>
           </div>
 
@@ -86,11 +86,32 @@
     </div><!-- /.container -->
 
 
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      var RATE = null;
+      var FEE  = null;
+      $(function onLoad(argument) {
+
+        function updatePrice() {
+          if (!RATE) return;
+          var dollars = parseInt($('#price').val());
+          var FEE = parseFloat((dollars / RATE).toFixed(8));
+          $('#btc').val(FEE + " BTC/min");
+        }
+
+        $('#price').change(updatePrice);
+        $.get('https://bitpay.com/api/rates/usd', function(price) {
+          RATE = price.rate;
+          updatePrice();
+        });
+
+      });
+    </script>
 
   </body>
 </html>
