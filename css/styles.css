@@ -8,3 +8,13 @@ body {
 	background-color: rgba(200,200,200,0.1);
 	border-color: rgba(200,200,200,0.2);
 }
+
+
+.video {
+  background-color: rgba(200,200,200,0.1);
+  min-height: 500px;
+}
+
+.chat {
+  background-color: rgba(200,200,200,0.1);
+}
