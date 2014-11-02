@@ -18,13 +18,11 @@
 
     <!-- Video area -->
     <div class="pure-u-2-3" id="video-container">
-      <video id="their-video" autoplay></video>
-      <video id="my-video" muted="true" autoplay></video>
+      <video id="video" muted="true" autoplay></video>
     </div>
 
     <!-- Steps -->
     <div class="pure-u-1-3">
-      <h2>PeerJS Video Chat</h2>
 
       <!-- Get local audio/video stream -->
       <div id="step1">
@@ -37,22 +35,9 @@
 
       <!-- Make calls to others -->
       <div id="step2">
-        <p>Your id: <span id="my-id">...</span>
+        <p>Your room URL: <span id="roomURL">...</span>
         </p>
-        <p>Share this id with others so they can call you.</p>
-        <h3>Make a call</h3>
-        <div class="pure-form">
-          <input type="text" placeholder="Call user id..." id="callto-id">
-          <a href="#" class="pure-button pure-button-success" id="make-call">Call</a>
-        </div>
-      </div>
-
-      <!-- Call in progress -->
-      <div id="step3">
-        <p>Currently in call with <span id="their-id">...</span>
-        </p>
-        <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a>
-        </p>
+        <p>Share this url with others so they can call you.</p>
       </div>
     </div>
   </div>
