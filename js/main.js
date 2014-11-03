@@ -12,7 +12,7 @@ $(function() {
     client(room);
   } else {
     $('#home').removeClass('hide');
-    setHomeListeners();
+    //setHomeListeners();
     provider();
   }
 
