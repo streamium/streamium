@@ -10,7 +10,7 @@ function updatePrice() {
   if (!RATE) return;
   var dollars = parseFloat($('#price').val());
   var FEE = parseFloat((dollars / RATE).toFixed(8));
-  $('#btc').val(FEE + " BTC/min");
+  $('#btc').val(FEE*1000000 + " bits/min");
 }
 
 function checkValidName() {

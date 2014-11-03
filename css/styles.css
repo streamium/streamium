@@ -1,6 +1,9 @@
 body {
   padding-top: 50px;
 }
+.start{
+	padding: 100px 0;
+}
 .content {
   padding: 40px 15px;
 }
