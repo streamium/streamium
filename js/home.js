@@ -50,10 +50,16 @@ function checkFormValid() {
   $('#create-room').prop("disabled", !isValid);
 }
 
+function next() {
+  console.log('NEEEXT!');
+  return false;
+}
+
 function setHomeListeners() {
   $('#price').change(updatePrice);
   $('#name').change(checkValidName);
   $('#address').change(checkValidAddress);
+  $('#create-room').click(next);
 
   $.get('https://bitpay.com/api/rates/usd', function(price) {
     RATE = price.rate;
