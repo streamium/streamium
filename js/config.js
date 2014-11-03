@@ -1,8 +1,8 @@
 var peerJSConfig = {
-  //key: 'satoshirocks',
-  //host: 'localhost',
-  //port: 9000,
-  key: 'lwjd5qra8257b9',
+  key: 'satoshirocks',
+  host: 'localhost',
+  port: 9000,
+  // key: 'lwjd5qra8257b9',
   debug: 0,
   config: {
     'iceServers': [{
