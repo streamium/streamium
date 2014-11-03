@@ -9,7 +9,6 @@ body {
 	border-color: rgba(200,200,200,0.2);
 }
 
-
 .video {
   background-color: rgba(200,200,200,0.1);
   min-height: 500px;
@@ -18,3 +17,30 @@ body {
 .chat {
   background-color: rgba(200,200,200,0.1);
 }
+
+.bghome{
+	background-size: cover;
+	-moz-background-size: cover;
+	-webkit-background-size: cover;
+	background-image:url(../img/bghome.png);
+}
+.stripe1{
+	background-color: #333;
+	color:white;
+	text-align: center;
+}
+.stripe1 h4{
+	font-weight: 300;
+}
+.stripe1 h2{
+	font-weight: 300;
+}
+.section{background-color:#fafafa;padding:70px 0}
+.section.darker{background-color:#f5f5f5}
+.section.most-dark{background-color:#4d4d4d;color:#fafafa}
+.section-heading{text-align:center;margin-bottom:50px}
+.section-heading h2,.section-heading p{font-family:"Dosis",sans-serif}
+.section-heading h2{font-size:3em;color:#0db3d0}
+.section-heading p{font-size:1.5em;color:#c2c2c2}
+.section-heading hr{display:-moz-inline-stack;display:inline-block;vertical-align:middle;*vertical-align:auto;zoom:1;*display:inline;width:100px;border-top:1px solid #acacac}
+.section-content h3{color:#c2c2c2}
