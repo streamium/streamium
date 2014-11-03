@@ -4,9 +4,6 @@
 
 var client = function(room) {
 
-  document.addEventListener('utxos', function(e) {
-    console.log(e.detail);
-  });
 
   var refundAddress = '2MvmJg8Yb8htySEoAsJTxRQAoPuJmcA7YXW';
   var insight = new Insight();
@@ -39,17 +36,23 @@ var client = function(room) {
           var consumer = new channel.Consumer({
             network: network,
             refundAddress: refundAddress,
-            serverPublicKey: payload
+            serverPublicKey: payload,
           });
+          console.dir(consumer);
           console.log('Funding address: ' + consumer.getFundingAddress());
           console.log('Refund address: ' + consumer.getRefundAddress());
           insight.watchAdress(consumer.getFundingAddress());
-          console.log('Refund transaction: ' + consumer.createCommitmentTx());
-          console.log('Refund transaction: ' + consumer.getRefundTxForSigning());
-          console.log('server public key: ' + payload);
-          connection.send({
-            type: 'refundTx',
-            payload: 'a refund tx'
+          document.addEventListener('utxos', function(e) {
+            console.dir(e.detail[0]);
+            consumer.addUtxo(e.detail[0]);
+            console.log('Commitment transaction: ' + consumer.createCommitmentTx());
+            console.log('Refund transaction: ' + consumer.getRefundTxForSigning());
+            console.log('server public key: ' + payload);
+            connection.send({
+              type: 'refundTx',
+              payload: 'a refund tx'
+            });
+            console.log(e.detail);
           });
         } else if (type === 'refundTx') {
           console.log('refundTx: ' + payload);

@@ -41,7 +41,7 @@ var provider = function() {
       var peer = new Peer(username, peerJSConfig);
 
       peer.on('open', function() {
-        $('#roomURL').text(document.URL + peer.id);
+        $('#roomURL').text(document.URL + '#' +peer.id);
       });
 
       // Receiving a call

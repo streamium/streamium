@@ -10,5 +10,5 @@ var peerJSConfig = {
     }]
   }
 };
-var baseURL = 'https://test-insight.bitpay.com/';
-var network = 'livenet';
+var baseURL = 'https://test-insight.bitpay.com:443/';
+var network = 'testnet';

@@ -1,7 +1,6 @@
 'use strict';
 
 var bitcore = require('bitcore');
-var baseURL = 'https://test-insight.bitpay.com:443/';
 
 var Insight = function() {};
 

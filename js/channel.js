@@ -51,7 +51,7 @@ function Consumer(opts) {
   this.serverAddress = opts.serverAddress;
 
   this.fundingKey = opts.fundingKey || bitcore.Key.generateSync();
-  this.fundingAddress = util.createAddress(this.fundingKey.public);
+  this.fundingAddress = util.createAddress(this.fundingKey.public, this.network);
 
   this.amountPaid = opts.amountPaid || 0;
 
@@ -59,7 +59,7 @@ function Consumer(opts) {
     this.refundAddress = opts.refundAddress;
   } else {
     this.refundKey = bitcore.Key.generateSync();
-    this.refundAddress = util.createAddress(this.refundKey.public);
+    this.refundAddress = util.createAddress(this.refundKey.public, this.network);
   }
 }
 
@@ -106,7 +106,7 @@ Consumer.prototype._createCommitmentAddress = function _createCommitmentAddress(
   var outputPubkeys = [this.commitmentKey.public, this.serverPublicKey];
   return bitcore.Address.fromScript(
     bitcore.Script.createMultisig(2, outputPubkeys).getBuffer().toString('hex'),
-    this.networkName
+    this.network
   ).toString();
 };
 
@@ -121,13 +121,19 @@ Consumer.prototype._createCommitmentTxBuilder = function _createCommitmentTxBuil
   assert(_.size(this.inputs), 'Must have at least one input stored to establish channel');
 
   this._calculateAmount();
-  this.commitmentTransactionBuilder = new bitcore.TransactionBuilder({fee: STANDARD_FEE})
+  this.commitmentTransactionBuilder = new bitcore.TransactionBuilder({
+    spendUnconfirmed: true,
+    fee: STANDARD_FEE
+  })
     .setUnspent(this.inputs)
     .setOutputs([{
       amount: this.amount - STANDARD_FEE,
       address: this._createCommitmentAddress()
     }])
-    .sign(this.fundingKey.privKey)
+    .sign([new bitcore.WalletKey({
+      network: bitcore.networks[this.network],
+      privKey: this.fundingKey
+    })])
   ;
   assert(this.commitmentTransactionBuilder.isFullySigned(),
     'Internal error: inputs for commitment transaction could not be signed with private key'
@@ -145,19 +151,26 @@ Consumer.prototype.getRefundTxForSigning = function getRefundTxForSigning() {
   assert(this.amount > 0, 'Amount must be greater than zero');
   assert(_.size(this.inputs), 'Must have at least one input stored to establish channel');
 
-  var output = this.commitmentTransaction.outs()[0];
-  console.log(output)
-  this.refundTransaction = new bitcore.TransactionBuilder({lockTime: this.expires})
+  var output = this.commitmentTransaction.outs[0];
+  this.refundTransaction = new bitcore.TransactionBuilder({
+    lockTime: this.expires,
+    spendUnconfirmed: true,
+    fee: STANDARD_FEE
+  })
     .setUnspent([{
       txid: this.commitmentTransaction.getHash(),
-      amountSat: output.v,
+      vout: 0,
+      amount: this.amount - STANDARD_FEE,
       scriptPubKey: output.s
     }])
     .setOutputs([{
-      amount: this.amount,
-      address: this.refundAddress
+      amount: this.amount - 2 * STANDARD_FEE,
+      address: this._createCommitmentAddress()
     }])
-    .sign(this.commitmentKey.privKey)
+    .sign([new bitcore.WalletKey({
+      network: bitcore.networks[this.network],
+      privKey: this.commitmentKey
+    })])
   ;
   return this.refundTransaction.toObj();
 };
@@ -258,8 +271,8 @@ var bitcore = _dereq_('bitcore');
 var _ = _dereq_('lodash');
 var Address = bitcore.Address;
 
-function createAddress(key) {
-  var address = Address.fromPubKey(key);
+function createAddress(key, network) {
+  var address = Address.fromPubKey(key, network || 'livenet');
   return address.toString();
 }
 
