@@ -13,7 +13,7 @@ var provider = function() {
 
   var insight = new Insight();
   $(document).ready(function() {
-    var username = 'sexybitch69';
+    var username = 'sexybitch68';
     var rpm = 0.5;
     var withdrawAddress = '2N2Tc9v76P85hKwj3mdByDdowp5jH5DR2z5';
     var identity = Key.generateSync();
@@ -46,6 +46,7 @@ var provider = function() {
         var deadline;
         var deathnote;
         var call;
+
         connection.on('data', function(data) {
           var type = data.type;
           var payload = data.payload;
@@ -77,7 +78,9 @@ var provider = function() {
           }
         });
 
+
       });
+
       peer.on('error', function(err) {
         console.log('peer error: ' + JSON.stringify(err));
         setTimeout(connectToPeerJS, 1000); // reconnect in 1 sec
