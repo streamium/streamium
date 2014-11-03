@@ -17,6 +17,9 @@ var provider = function() {
     var rpm = 0.5;
     var withdrawAddress = '2N2Tc9v76P85hKwj3mdByDdowp5jH5DR2z5';
     var identity = Key.generateSync();
+    var provider = new channel.Provider({
+      paymentAddress: withdrawAddress
+    });
 
     $('#end-call').click(function() {
       window.existingCall.close();
@@ -50,7 +53,13 @@ var provider = function() {
         connection.on('data', function(data) {
           var type = data.type;
           var payload = data.payload;
-          if (type === 'refundTx') {
+          if (type === 'hello') {
+            console.log('client public key: ' + payload);
+            connection.send({
+              type: 'hello',
+              payload: provider.getPublicKey()
+            });
+          } else if (type === 'refundTx') {
             // validate unsigned refund tx
             if (payload === 'a refund tx') {
               connection.send({
