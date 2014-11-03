@@ -44,3 +44,26 @@ body {
 .section-heading p{font-size:1.5em;color:#c2c2c2}
 .section-heading hr{display:-moz-inline-stack;display:inline-block;vertical-align:middle;*vertical-align:auto;zoom:1;*display:inline;width:100px;border-top:1px solid #acacac}
 .section-content h3{color:#c2c2c2}
+
+.video {
+  background-color: rgba(200,200,200,0.1);
+  min-height: 500px;
+}
+
+.chat {
+  background-color: rgba(200,200,200,0.1);
+  min-height: 500px;
+}
+
+.stats {
+  margin-top: 20px;
+  font-size: 1.4em;
+}
+
+.withdraw {
+  width: 100%;
+}
+
+.text-right {
+  text-align: right;
+}

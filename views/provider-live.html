@@ -43,17 +43,42 @@
     </nav>
 
     <div class="container">
+
+      <div class="alert alert-warning alert-dismissible hide" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <strong>Hey!</strong> Please click `allow` on the top of the screen so we can access your webcam and microphone.
+      </div>
+
+      <div class="alert alert-danger hide" role="alert">
+        <a href="#" class="alert-link">We failed to access the webcam and microphone!</a>
+      </div>
+
       <div class="content">
         <div class="row">
           <div class="col-md-7 video">VIDEO</div>
           <div class="col-md-1"></div>
-          <div class="col-md-4 chat">CHAT</div>
+          <div class="col-md-4 chat">
+            <ul>
+              <li><span>machote88:</span> SIII!!</li>
+              <li><span>machote88:</span> SIII!!</li>
+              <li><span>machote88:</span> SIII!!</li>
+              <li><span>machote88:</span> SIII!!</li>
+              <li><span>machote88:</span> SIII!!</li>
+              <li><span>machote88:</span> SIII!!</li>
+            </ul>
+          </div>
         </div>
 
         <div class="row stats">
-          <div class="col-md-8">STATS</div>
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-7">Balance: $00.00 USD (0.000000 BTC)</div>
+              <div class="col-md-5 text-right">Live Viewers: 0</div>
+            </div>    
+          </div>
+          <div class="col-md-1"></div>
           <div class="col-md-4">
-            <button class="btn btn-warning">End Stream & Withdraw</button>
+            <button class="btn btn-warning col-md-12">End Stream & Withdraw</button>
           </div>
         </div>
       </div>

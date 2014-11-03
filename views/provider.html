@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Starter Template for Bootstrap</title>
+    <title>Streamium.io</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -32,7 +32,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="#">Streamium.io</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -48,14 +48,14 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
             <p class="lead">
-              Create your stream and charge your viewers per minute, using bitcoin payment channels.
+              Stream to your viewers and get paid directly, no middlemen.
             </p>
 
             <form class="form-horizontal" role="form">
 
               <div class="form-group has-feedback">
                 <div class="input-group">
-                  <div class="input-group-addon">streamium.io/</div>
+                  <div class="input-group-addon">Streamium.io/#</div>
                   <input type="text" class="form-control" id="name" placeholder="Stream name">
                   <span class="glyphicon glyphicon-ok form-control-feedback hide"></span>
                 </div>
@@ -69,9 +69,9 @@
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
                   <select class="form-control col-md-2" id="price">
-                    <option value="1">$1 USD/min</option>
-                    <option value="5">$5 USD/min</option>
-                    <option value="10">$10 USD/min</option>
+                    <option value="1">$1.00 USD/min</option>
+                    <option value="0.1">$0.10 USD/min</option>
+                    <option value="0.01">$0.01 USD/min</option>
                   </select>
                 </div>
                 <div class="col-sm-4">
@@ -90,31 +90,29 @@
     <div class="section">
       <div class="container">
         <div class="section-heading">
-          <h2>- How it works? -</h2>
+          <h2>How it works</h2>
         </div>
         
         <div class="row">
 
           <div class="col-md-4 col-sm-4">
-            <h4>1. Create a stream tied to your BTC address.</h4>
+            <h4>Create a stream tied to your bitcoin address.</h4>
             <img src="https://d1x2efl61akomv.cloudfront.net/images/frontpage/create.jpg" class="img-circle img-responsive">
             <p></p>
           </div>
           <div class="col-md-4 col-sm-4">
-            <h4>2. Start streaming and charge your viewers on a per minute basis.</h4>
+            <h4>Start streaming and charge your viewers on a per minute basis.</h4>
             <img src="https://d1x2efl61akomv.cloudfront.net/images/frontpage/create.jpg" class="img-circle img-responsive">
             <p></p>
           </div>
           <div class="col-md-4 col-sm-4">
-            <h4>3. Withdraw your earned funds, without service fees.</h4>
+            <h4>Withdraw your earned funds, without any service fees.</h4>
             <img src="https://d1x2efl61akomv.cloudfront.net/images/frontpage/create.jpg" class="img-circle img-responsive">
             <p></p>
           </div>
         </div>
       </div>
     </div>
-    <p class="lead">Stream directly to your viewers and get paid directly, with no middlemen.</p>
-
 
 
     <!-- Bootstrap core JavaScript
@@ -123,67 +121,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/bitcore.js"></script>
-    <script type="text/javascript">
-      var RATE = null;
-      var FEE  = null;
+    <script src="../js/home.js"></script>
 
-      var NAME_VALID = false;
-      var ADDRESS_VALID = false;
-
-      function updatePrice() {
-        if (!RATE) return;
-        var dollars = parseInt($('#price').val());
-        var FEE = parseFloat((dollars / RATE).toFixed(8));
-        $('#btc').val(FEE + " BTC/min");
-      }
-
-      function checkValidName() {
-        var name = $('#name').val().trim();
-        name = name.toLowerCase().replace(/ /g, '-').replace(/\\/g, '-');
-
-        $('#name').val(name);
-        $('#name').siblings('span').toggleClass('hide', false);
-        $('#name').parent().parent().toggleClass('has-success', true);
-        NAME_VALID = true;
-
-        checkFormValid();
-      }
-
-      function checkValidAddress() {
-        bitcore = require('bitcore');
-        var address = new bitcore.Address($('#address').val());
-        ADDRESS_VALID = address.isValid();
-
-        $('#address').siblings('span').toggleClass('hide', false);
-
-        var colorClass = ADDRESS_VALID ? 'has-success' : 'has-error';
-        var iconClass = ADDRESS_VALID ? 'glyphicon-ok' : 'glyphicon-remove';
-
-        $('#address').parent().removeClass('has-success').removeClass('has-error');
-        $('#address').parent().addClass(colorClass);
-
-        $('#address').siblings('span').toggleClass('hide', false);
-        $('#address').siblings('span').removeClass('glyphicon-ok').removeClass('glyphicon-remove');
-        $('#address').siblings('span').addClass(iconClass);
-
-        checkFormValid();
-      }
-
-      function checkFormValid() {
-        var isValid = NAME_VALID && ADDRESS_VALID;
-        $('#create-room').prop("disabled", !isValid);
-      }
-
-      $('#price').change(updatePrice);
-      $('#name').change(checkValidName);
-      $('#address').change(checkValidAddress);
-
-      $.get('https://bitpay.com/api/rates/usd', function(price) {
-        RATE = price.rate;
-        updatePrice();
-      });
-
-    </script>
 
   </body>
 </html>
