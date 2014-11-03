@@ -28,9 +28,38 @@ var client = function(room) {
     var connection = peer.connect(room);
 
     connection.on('open', function() {
-      console.log('connection open');
+      var balance = 10000;
+      connection.send({
+        type: 'refundTx',
+        payload: 'a refund tx'
+      });
       connection.on('data', function(data) {
-        console.log('dataaaaaaaaaaaa ' + data);
+        var type = data.type;
+        var payload = data.payload;
+        if (type === 'refundTx') {
+          console.log('refundTx: ' + payload);
+          // validate signed refund tx
+          if (payload === 'signed refund tx') {
+            connection.send({
+              type: 'commitTx',
+              payload: 'a commit tx'
+            });
+            connection.send({
+              type: 'paymentTx',
+              payload: 2000
+            });
+            balance -= 2000
+            setInterval(function() {
+              if (balance <= 0) return;
+              console.log('remaining balance: '+ balance);
+              connection.send({
+                type: 'paymentTx',
+                payload: 1000
+              });
+              balance -= 1000;
+            }, 1000);
+          }
+        }
       });
     });
     connection.on('close', function() {

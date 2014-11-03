@@ -18,26 +18,21 @@ var provider = function() {
     var withdrawAddress = '2N2Tc9v76P85hKwj3mdByDdowp5jH5DR2z5';
     var identity = Key.generateSync();
 
-
     $('#end-call').click(function() {
       window.existingCall.close();
       $('#provider-success').show();
     });
 
-    step1();
-
-    function step1() {
-      navigator.getUserMedia({
-        audio: false,
-        video: true
-      }, function(stream) {
-        $('#video').prop('src', URL.createObjectURL(stream));
-        window.localStream = stream;
-        connectToPeerJS();
-      }, function() {
-        $('#step1-error').show();
-      });
-    }
+    navigator.getUserMedia({
+      audio: false,
+      video: true
+    }, function(stream) {
+      $('#video').prop('src', URL.createObjectURL(stream));
+      window.localStream = stream;
+      connectToPeerJS();
+    }, function() {
+      $('#step1-error').show();
+    });
 
     function connectToPeerJS() {
       var peer = new Peer(username, peerJSConfig);
@@ -48,17 +43,39 @@ var provider = function() {
 
       // Receiving a call
       peer.on('connection', function(connection) {
-        // TODO: setup payment channel
-
-        console.log('sending hello');
-        connection.send('hello');
-        /*
+        var deadline;
+        var deathnote;
+        var call;
         connection.on('data', function(data) {
-          console.log('DATA ON PROVIDER ' + data);
-          var call = peer.call(connection.peer, window.localStream);
-          setupCall(call);
+          var type = data.type;
+          var payload = data.payload;
+          if (type === 'refundTx') {
+            // validate unsigned refund tx
+            if (payload === 'a refund tx') {
+              connection.send({
+                type: 'refundTx',
+                payload: 'signed refund tx'
+              });
+            }
+          } else if (type === 'commitTx') {
+            console.log('commitTx: ' + payload);
+            console.log('paychan OPEN!');
+          } else if (type === 'paymentTx') {
+            if (!deadline) {
+              deadline = Date.now();
+              call = peer.call(connection.peer, window.localStream);
+              setupCall(call);
+            }
+            var extraCredit = payload;
+            deadline += extraCredit;
+            clearTimeout(deathnote);
+            deathnote = setTimeout(function() {
+              call.close();
+              console.log('closing connection: out of funds');
+            }, deadline - Date.now());
+            console.log('Remaining paid time: ' + (deadline - Date.now()));
+          }
         });
-       */
 
       });
       peer.on('error', function(err) {
@@ -77,7 +94,7 @@ var provider = function() {
       updateClientList();
 
       call.on('close', function() {
-        alert('call closed with ' + clientName);
+        console.log('client ' + clientName + ' out of funds');
       });
     }
   });
