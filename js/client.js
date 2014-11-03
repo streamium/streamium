@@ -46,9 +46,9 @@ var client = function(room) {
             });
             connection.send({
               type: 'paymentTx',
-              payload: 15000
+              payload: 5000
             });
-            balance -= 15000
+            balance -= 5000;
             setInterval(function() {
               if (balance <= 0) return;
               console.log('remaining balance: '+ balance);
