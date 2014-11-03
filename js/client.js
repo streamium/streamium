@@ -28,7 +28,7 @@ var client = function(room) {
     var connection = peer.connect(room);
 
     connection.on('open', function() {
-      var balance = 10000;
+      var balance = 30000;
       connection.send({
         type: 'refundTx',
         payload: 'a refund tx'
@@ -46,9 +46,9 @@ var client = function(room) {
             });
             connection.send({
               type: 'paymentTx',
-              payload: 2000
+              payload: 15000
             });
-            balance -= 2000
+            balance -= 15000
             setInterval(function() {
               if (balance <= 0) return;
               console.log('remaining balance: '+ balance);
