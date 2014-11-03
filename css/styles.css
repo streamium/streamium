@@ -52,6 +52,12 @@ body {
 .chat {
   background-color: rgba(200,200,200,0.1);
   min-height: 500px;
+  list-style: none;
+  padding-top: 5px;
+}
+
+.chat li {
+  border-top: solid 1px gray;
 }
 
 .stats {

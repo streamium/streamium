@@ -26,7 +26,7 @@ function checkValidName() {
 }
 
 function checkValidAddress() {
-  bitcore = require('bitcore');
+  var bitcore = require('bitcore');
   var address = new bitcore.Address($('#address').val());
   ADDRESS_VALID = address.isValid();
 
@@ -50,11 +50,13 @@ function checkFormValid() {
   $('#create-room').prop("disabled", !isValid);
 }
 
-$('#price').change(updatePrice);
-$('#name').change(checkValidName);
-$('#address').change(checkValidAddress);
+function setHomeListeners() {
+  $('#price').change(updatePrice);
+  $('#name').change(checkValidName);
+  $('#address').change(checkValidAddress);
 
-$.get('https://bitpay.com/api/rates/usd', function(price) {
-  RATE = price.rate;
-  updatePrice();
-});
+  $.get('https://bitpay.com/api/rates/usd', function(price) {
+    RATE = price.rate;
+    updatePrice();
+  });
+}

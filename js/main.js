@@ -1,12 +1,16 @@
 'use strict';
 
+$(function() {
 
-var room = window.location.hash;
-room = room.substring(1);
+  var room = window.location.hash.substring(1);
 
-if (room) {
-  client(room);
-} else {
-  provider();
-}
+  if (room) {
+    $('#client').removeClass('hide');
+    client(room);
+  } else {
+    $('#home').removeClass('hide');
+    provider();
+  }
+
+});
 
