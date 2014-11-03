@@ -1,14 +1,17 @@
 'use strict';
 
+// var io = require('socket.io')(80);
 var bitcore = require('bitcore');
 
 var client = function(room) {
-  var insight = new Insight();
+
+  document.addEventListener('utxos', function(e) {
+    console.log(e.detail);
+  });
 
   var fundAddress = '2MvmJg8Yb8htySEoAsJTxRQAoPuJmcA7YXW';
-  insight.getUTXOs(fundAddress, function(res) {
-    //console.log(JSON.stringify(res));
-  });
+  var insight = new Insight();
+  insight.watchAdress(fundAddress);
 
   var peer = new Peer(null, peerJSConfig);
 
