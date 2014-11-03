@@ -28,7 +28,7 @@ var client = function(room) {
     var connection = peer.connect(room);
 
     connection.on('open', function() {
-      var balance = 30000;
+      var balance = 300000;
       connection.send({
         type: 'refundTx',
         payload: 'a refund tx'
