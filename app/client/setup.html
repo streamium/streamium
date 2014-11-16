@@ -1,0 +1,30 @@
+<h2>Join Stream</h2>
+<p>Status: {{client.status}}</p>
+<p>Name: {{client.streamId}}</p>
+<p>Rate: {{client.rate}}</p>
+<form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4">
+      <select
+        name="time" required
+        ng-model="stream.time"
+        class="form-control col-md-2"
+        ng-options="'$' + val + ' USD/min' for val in prices"/>
+    </div>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="btc" value="{{stream.rate|USD2BTC}}/min" disabled="disabled">
+    </div>
+  </div>
+  <input type="hidden" ng-model="paied" required>
+
+  // QR CODE
+  // PAY TO
+
+  <div class="form-group">
+      <button
+        type="submit"
+        class="btn btn-success"
+        ng-disabled="form.$invalid">Start</button>
+  </div>
+</form>
