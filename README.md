@@ -33,14 +33,16 @@ http://localhost:8000/
 Streamium is a static HTML web application and thus requires no servers to run.
 
 ### AngularJS
-AngularJS was used for client-side application code (and there's no server-side code!)
+[AngularJS](https://angularjs.org/) was used for client-side application code (and there's no server-side code!)
 
 ### WebRTC
-WebRTC is a browser to browser communications protocol used to share video streams between
-clients and service providers. It allows sharing of data and media without central servers.
+[WebRTC](http://www.webrtc.org/) is a browser to browser communications protocol used to share video streams between
+clients and service providers. It allows sharing of data and media without central servers. We use [PeerJS](http://peerjs.com/)
+to manage WebRTC connections.
 
 ### Bitcoin payment channels
-Bitcoin is a p2p currency used for trustless payments. Bitcoin payment channels are used to establish
+Bitcoin is a p2p currency used for trustless payments.
+[Bitcoin payment channels](https://bitcoin.org/en/developer-guide#micropayment-channel) are used to establish
 a secure pay-as-you-go mechanism which needs no third party to occur.
 
 ## License
