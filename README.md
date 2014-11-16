@@ -43,7 +43,7 @@ to manage WebRTC connections.
 ### Bitcoin payment channels
 Bitcoin is a p2p currency used for trustless payments.
 [Bitcoin payment channels](https://bitcoin.org/en/developer-guide#micropayment-channel) are used to establish
-a secure pay-as-you-go mechanism which needs no third party to occur.
+a secure pay-as-you-go mechanism with no need for a third party.
 
 ## License
 Code released under the [MIT license](https://github.com/streamium/paystream/blob/master/LICENSE).
