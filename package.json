@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "peer": "^0.2.8",
-    "http-server": "^0.6.1"
+    "http-server": "^0.6.1",
+    "bitcore-stream": "git://github.com/eordano/bitcore-channel.git"
   },
   "scripts": {
     "prestart": "npm install",
