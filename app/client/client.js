@@ -14,8 +14,15 @@ angular.module('streamium.client', ['ngRoute'])
   });
 }])
 
-.controller('ClientSetupCtrl', function($routeParams) {
-  console.log('Params', $routeParams);
+.controller('ClientSetupCtrl', function($scope, $routeParams, StreamiumClient) {
+  $scope.client = StreamiumClient;
+
+  StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
+    if (err) throw err;
+
+    console.log('DONE send funds at', fundingAddress);
+    $scope.$apply();
+  });
 })
 
 .controller('ClientStreamCtrl', function($routeParams) {
