@@ -1,1 +1,1 @@
-browserify --standalone channel node_modules/bitcore-stream/index.js > js/channel.js
+browserify --standalone channel node_modules/bitcore-channel/index.js > app/bower_components/channel.js

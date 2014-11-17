@@ -27,6 +27,7 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 -c-1"
+    "start": "http-server -a localhost -p 8000 -c-1",
+    "postinstall": "sh build-deps.sh"
   }
 }
