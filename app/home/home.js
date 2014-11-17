@@ -2,14 +2,14 @@
 
 angular.module('streamium.home', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
+.config(function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'home/home.html',
     controller: 'HomeCtrl'
   });
-}])
+})
 
-.controller('HomeCtrl', function($scope, $location, Rates) {
+.controller('HomeCtrl', function($scope, $location, Rates, StreamiumProvider) {
   $scope.prices = [1, 0.1, 0.01];
   $scope.stream = { rate: $scope.prices[0] };
 
@@ -21,7 +21,17 @@ angular.module('streamium.home', ['ngRoute'])
 
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
-    $location.url('/provider');
+    console.log('Initializing channel');
+    StreamiumProvider.init(
+      $scope.stream.name,
+      $scope.stream.address,
+      $scope.stream.rate,
+      function onCretate(err, done) {
+        if (err) throw err;
+        console.log('DONE');
+        $location.url('/provider');
+        $scope.$apply();
+      });
   };
 
 });

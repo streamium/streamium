@@ -7,7 +7,8 @@ angular.module('streamium', [
   'streamium.provider',
   'streamium.home',
   'streamium.rates',
-  'streamium.bitcoin'
+  'streamium.bitcoin',
+  'streamium.core'
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/'});

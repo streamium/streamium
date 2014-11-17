@@ -4,8 +4,9 @@ angular.module('streamium.core', [])
 
 .service('StreamiumProvider', function(bitcore) {
 
-  function StreamiumProvider (streamId, address, rate) {
+  function StreamiumProvider () {
     this.address = this.streamId = this.rate = null;
+    this.clients = [];
     this.status = this.STATUS.disconnected;
 
     this.config = {
@@ -27,11 +28,11 @@ angular.module('streamium.core', [])
     finished      : 'finished'
   };
 
-  StreamiumProvider.prototype.init = function(streamId, address, rate, cb) {
-    if (!streamId || !address || !rate || !cb) return cb('Invalid arguments');
+  StreamiumProvider.prototype.init = function(streamId, address, rate, callback) {
+    if (!streamId || !address || !rate || !callback) return callback('Invalid arguments');
 
-    var address = new bitcore.Address(address);
-    if (!address.isValid()) return cb('Invalid address');
+    address = new bitcore.Address(address);
+    if (!address.isValid()) return callback('Invalid address');
 
     this.status = this.STATUS.connecting;
 
@@ -39,11 +40,12 @@ angular.module('streamium.core', [])
     this.address = address;
     this.rate = rate;
 
-
     this.peer = new Peer(this.streamId, this.config);
     var self = this;
     this.peer.on('open', function onOpen() {
+      console.log('Open is working', self.peer);
       self.status = self.STATUS.ready;
+      callback(null, true);
     });
 
     this.peer.on('close', function onClose() {
@@ -52,31 +54,118 @@ angular.module('streamium.core', [])
 
     this.peer.on('error', function onError(error) {
       self.status = self.STATUS.disconnected;
-      cb(error);
+      console.log('we have an error');
+      callback(error);
     });
 
     this.peer.on('connection', function onConnection(connection) {
-      console.log('Connection!');
-      // TODO:
+      console.log('New connection!', connection);
+
+      connection.on('data', function(data) {
+        console.log('New message', data);
+        if (!data.type || !self.handlers[data.type]) throw 'Kernel panic'; // TODO!
+        self.handlers[data.type].call(self, connection, data.payload);
+      });
+
     });
 
     // Init Provider
     // Change status
   };
 
+  StreamiumProvider.prototype.handlers = {};
+  
+  StreamiumProvider.prototype.handlers.hello = function(connection, data) {
+    connection.send({
+      type: 'hello',
+      payload: {
+        rate: this.rate,
+        pubkey: 'server pubkey'
+      }
+    });
+  };
+
   StreamiumProvider.prototype.getLink = function() {
     if (this.status == this.STATUS.disconnected) throw 'Invalid State';
     return 'https://streamium.io/join/' + this.streamId;
-  }
+  };
 
   return new StreamiumProvider();
 })
 
 .service('StreamiumClient', function() {
   
-  function StreamiumClient (streamId, address) {
-    this.address = address;
-    this.streamId = streamId;
+  function StreamiumClient () {
+    this.peer = this.connection = null;
+    this.status = this.STATUS.disconnected;
+
+    this.rate = this.providerKey = null;
+
+    // TODO: Make this GLOBAL
+    this.config = {
+      key: 'lwjd5qra8257b9',
+      debug: 0,
+      config: {
+        'iceServers': [{
+          url: 'stun:stun.l.google.com:19302'
+        }]
+      }
+    };
+  };
+
+  StreamiumClient.prototype.STATUS = {
+    disconnected  : 'disconnected',
+    connecting    : 'connecting',
+    funding       : 'funding',
+    ready         : 'ready',
+    finished      : 'finished'
+  };
+
+  StreamiumClient.prototype.connect = function(streamId, callback) {
+    this.peer = new Peer(null, this.config);
+    this.status = this.STATUS.connecting;
+    this.fundingCallback = callback;
+
+    var self = this;
+    this.peer.on('open', function onOpen(connection) {
+      console.log('Open is working, sending data', self.peer);
+
+      self.connection = self.peer.connect(streamId);
+      self.connection.on('open', function() {
+        self.connection.send({
+          type: 'hello',
+          payload: 'client pubkey'
+        });
+
+        self.connection.on('data', function(data) {
+          console.log('New message', data);
+          if (!data.type || !self.handlers[data.type]) throw 'Kernel panic'; // TODO!
+          self.handlers[data.type].call(self, data.payload);
+        });
+
+      });
+    });
+
+    this.peer.on('close', function onClose() {
+      self.status = self.STATUS.finished;
+    });
+
+    this.peer.on('error', function onError(error) {
+      self.status = self.STATUS.disconnected;
+      console.log('we have an error');
+      callback(error);
+    });
+  };
+
+  StreamiumClient.prototype.handlers = {};
+  StreamiumClient.prototype.handlers.hello = function(data) {
+    this.rate = data.rate;
+    this.providerKey = data.pubkey;
+
+    this.fundingAddress = 'mkYY5NRvikVBY1EPtaq9fAFgquesdjqECw'; // TODO: GET FUNDIND ADDRESS
+    this.status = this.STATUS.funding;
+    this.fundingCallback(null, this.fundingAddress);
+    this.fundingCallback = null;
   };
 
   return new StreamiumClient();
