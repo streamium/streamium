@@ -1,31 +1,27 @@
 'use strict';
 
+
+var Provider = channel.Provider;
+var Consumer = channel.Consumer;
+
 angular.module('streamium.core', [])
 
 .service('StreamiumProvider', function(bitcore) {
 
-  function StreamiumProvider () {
+  function StreamiumProvider() {
     this.address = this.streamId = this.rate = null;
     this.clients = [];
     this.status = this.STATUS.disconnected;
 
-    this.config = {
-      key: 'lwjd5qra8257b9',
-      debug: 0,
-      config: {
-        'iceServers': [{
-          url: 'stun:stun.l.google.com:19302'
-        }]
-      }
-    };
+    this.config = config.peerJS;
 
-  };
+  }
 
   StreamiumProvider.prototype.STATUS = {
-    disconnected  : 'disconnected',
-    connecting    : 'connecting',
-    ready         : 'ready',
-    finished      : 'finished'
+    disconnected: 'disconnected',
+    connecting: 'connecting',
+    ready: 'ready',
+    finished: 'finished'
   };
 
   StreamiumProvider.prototype.init = function(streamId, address, rate, callback) {
@@ -74,7 +70,7 @@ angular.module('streamium.core', [])
   };
 
   StreamiumProvider.prototype.handlers = {};
-  
+
   StreamiumProvider.prototype.handlers.hello = function(connection, data) {
     connection.send({
       type: 'hello',
@@ -94,31 +90,22 @@ angular.module('streamium.core', [])
 })
 
 .service('StreamiumClient', function() {
-  
-  function StreamiumClient () {
+
+  function StreamiumClient() {
     this.peer = this.connection = null;
     this.status = this.STATUS.disconnected;
 
     this.rate = this.providerKey = null;
 
-    // TODO: Make this GLOBAL
-    this.config = {
-      key: 'lwjd5qra8257b9',
-      debug: 0,
-      config: {
-        'iceServers': [{
-          url: 'stun:stun.l.google.com:19302'
-        }]
-      }
-    };
+    this.config = config.peerJS;
   };
 
   StreamiumClient.prototype.STATUS = {
-    disconnected  : 'disconnected',
-    connecting    : 'connecting',
-    funding       : 'funding',
-    ready         : 'ready',
-    finished      : 'finished'
+    disconnected: 'disconnected',
+    connecting: 'connecting',
+    funding: 'funding',
+    ready: 'ready',
+    finished: 'finished'
   };
 
   StreamiumClient.prototype.connect = function(streamId, callback) {
