@@ -1,5 +1,7 @@
 'use strict';
 
+
+
 angular.module('streamium.provider', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
