@@ -74,7 +74,7 @@ angular.module('streamium.core', [])
 
     // TODO: Assert state
 
-    var provider =  = new Provider({
+    var provider = new Provider({
       network: this.address.network(),
       paymentAddress: this.address
     });
@@ -85,11 +85,9 @@ angular.module('streamium.core', [])
     connection.send({
       type: 'hello',
       payload: {
-        type: 'hello',
-        payload: {
-          pubkey: provider.getPublicKey(),
-          rate: this.rate
-        }
+        pubkey: provider.getPublicKey(),
+        address: this.address,
+        rate: this.rate
       }
     });
   };
@@ -199,7 +197,7 @@ angular.module('streamium.core', [])
 
     this.consumer = new Consumer({
       network: this.network,
-      providerKey: this.providerKey,
+      providerPublicKey: this.providerKey,
       providerAddress: this.providerAddress
     });
     this.status = StreamiumClient.STATUS.funding;
