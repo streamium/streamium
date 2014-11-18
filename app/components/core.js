@@ -11,13 +11,15 @@ angular.module('streamium.core', [])
   function StreamiumProvider() {
     this.address = this.streamId = this.rate = null;
     this.clients = [];
-    this.status = this.STATUS.disconnected;
+
+    // TODO: this screams for a status object or add status into Provider
+    this.mapClientIdToProvider = {};
+    this.mapClientIdToStatus = {};
 
     this.config = config.peerJS;
-
   }
 
-  StreamiumProvider.prototype.STATUS = {
+  StreamiumProvider.STATUS = {
     disconnected: 'disconnected',
     connecting: 'connecting',
     ready: 'ready',
@@ -30,8 +32,6 @@ angular.module('streamium.core', [])
     address = new bitcore.Address(address);
     if (!address.isValid()) return callback('Invalid address');
 
-    this.status = this.STATUS.connecting;
-
     this.streamId = streamId;
     this.address = address;
     this.rate = rate;
@@ -39,17 +39,16 @@ angular.module('streamium.core', [])
     this.peer = new Peer(this.streamId, this.config);
     var self = this;
     this.peer.on('open', function onOpen() {
-      console.log('Open is working', self.peer);
-      self.status = self.STATUS.ready;
+      console.log('Conected to peer:', self.peer);
       callback(null, true);
     });
 
     this.peer.on('close', function onClose() {
-      self.status = self.STATUS.finished;
+      self.status = StreamiumProvider.STATUS.finished;
     });
 
     this.peer.on('error', function onError(error) {
-      self.status = self.STATUS.disconnected;
+      self.status = StreamiumProvider.STATUS.disconnected;
       console.log('we have an error');
       callback(error);
     });
@@ -72,17 +71,64 @@ angular.module('streamium.core', [])
   StreamiumProvider.prototype.handlers = {};
 
   StreamiumProvider.prototype.handlers.hello = function(connection, data) {
+
+    // TODO: Assert state
+
+    var provider =  = new Provider({
+      network: this.address.network(),
+      paymentAddress: this.address
+    });
+
+    this.mapClientIdToProvider[connection.peer.id] = provider;
+    this.mapClientIdToStatus[connection.peer.id] = StreamiumProvider.STATUS.disconnected;
+
     connection.send({
       type: 'hello',
       payload: {
-        rate: this.rate,
-        pubkey: 'server pubkey'
+        type: 'hello',
+        payload: {
+          pubkey: provider.getPublicKey(),
+          rate: this.rate
+        }
+      }
+    });
+  };
+
+  StreamiumProvider.prototype.handlers.sign = function(connection, data) {
+
+    // TODO: Assert state
+
+    var provider = this.mapClientIdToProvider[connection.peer.id];
+    var status = this.mapClientIdToStatus[connection.peer.id];
+
+    connection.send({
+      type: 'refundAck',
+      payload: provider.signRefund(data)
+    });
+  };
+
+  StreamiumProvider.prototype.handlers.payment = function(connection, data) {
+
+    // TODO: Assert state
+
+    // TODO: this looks like duplicated code
+    var provider = this.mapClientIdToProvider[connection.peer.id];
+    var status = this.mapClientIdToStatus[connection.peer.id];
+
+    assert(provider.validPayment(data));
+    // TODO: Do some check with provider.currentAmount
+
+    connection.send({
+      type: 'paymentAck',
+      payload: {
+        success: true,
+        nextTimeout: 0 // TODO: Signal when the next payment is due
       }
     });
   };
 
   StreamiumProvider.prototype.getLink = function() {
-    if (this.status == this.STATUS.disconnected) throw 'Invalid State';
+    if (this.status == StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
     return 'https://streamium.io/join/' + this.streamId;
   };
 
@@ -93,14 +139,14 @@ angular.module('streamium.core', [])
 
   function StreamiumClient() {
     this.peer = this.connection = null;
-    this.status = this.STATUS.disconnected;
+    this.status = StreamiumClient.STATUS.disconnected;
 
     this.rate = this.providerKey = null;
 
     this.config = config.peerJS;
   };
 
-  StreamiumClient.prototype.STATUS = {
+  StreamiumClient.STATUS = {
     disconnected: 'disconnected',
     connecting: 'connecting',
     funding: 'funding',
@@ -110,7 +156,7 @@ angular.module('streamium.core', [])
 
   StreamiumClient.prototype.connect = function(streamId, callback) {
     this.peer = new Peer(null, this.config);
-    this.status = this.STATUS.connecting;
+    this.status = StreamiumClient.STATUS.connecting;
     this.fundingCallback = callback;
 
     var self = this;
@@ -121,7 +167,7 @@ angular.module('streamium.core', [])
       self.connection.on('open', function() {
         self.connection.send({
           type: 'hello',
-          payload: 'client pubkey'
+          payload: ''
         });
 
         self.connection.on('data', function(data) {
@@ -134,11 +180,11 @@ angular.module('streamium.core', [])
     });
 
     this.peer.on('close', function onClose() {
-      self.status = self.STATUS.finished;
+      self.status = StreamiumClient.STATUS.finished;
     });
 
     this.peer.on('error', function onError(error) {
-      self.status = self.STATUS.disconnected;
+      self.status = StreamiumClient.STATUS.disconnected;
       console.log('we have an error');
       callback(error);
     });
@@ -147,12 +193,37 @@ angular.module('streamium.core', [])
   StreamiumClient.prototype.handlers = {};
   StreamiumClient.prototype.handlers.hello = function(data) {
     this.rate = data.rate;
+    this.network = data.network;
     this.providerKey = data.pubkey;
+    this.providerAddress = data.address;
 
-    this.fundingAddress = 'mkYY5NRvikVBY1EPtaq9fAFgquesdjqECw'; // TODO: GET FUNDIND ADDRESS
-    this.status = this.STATUS.funding;
-    this.fundingCallback(null, this.fundingAddress);
+    this.consumer = new Consumer({
+      network: this.network,
+      providerKey: this.providerKey,
+      providerAddress: this.providerAddress
+    });
+    this.status = StreamiumClient.STATUS.funding;
+    this.fundingCallback(null, this.consumer.fundingAddress.toString());
     this.fundingCallback = null;
+  };
+
+  StreamiumClient.prototype.handlers.refundAck = function(data) {
+    assert(consumer.validateRefund(messageFromProvider));
+    this.connection.send({
+      type: 'payment',
+      payload: this.consumer.getPayment()
+    });
+  };
+
+  StreamiumClient.prototype.handlers.paymentAck = function(data) {
+    // TODO: Pass
+  };
+
+  StreamiumClient.prototype.askForRefund = function() {
+    this.connection.send({
+      type: 'sign',
+      payload: this.consumer.getRefundTxToSign()
+    });
   };
 
   return new StreamiumClient();

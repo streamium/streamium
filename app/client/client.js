@@ -31,8 +31,6 @@ angular.module('streamium.client', ['ngRoute'])
   console.log('Params', $routeParams);
 });
 
-
-
 var consumer = new channel.Consumer({
   network: config.network,
   refundAddress: '2MvmJg8Yb8htySEoAsJTxRQAoPuJmcA7YXW',
