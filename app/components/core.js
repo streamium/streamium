@@ -85,8 +85,11 @@ angular.module('streamium.core', [])
     connection.send({
       type: 'hello',
       payload: {
-        rate: this.rate,
-        pubkey: provider.getPublicKey()
+        type: 'hello',
+        payload: {
+          pubkey: provider.getPublicKey(),
+          rate: this.rate
+        }
       }
     });
   };
@@ -164,7 +167,7 @@ angular.module('streamium.core', [])
       self.connection.on('open', function() {
         self.connection.send({
           type: 'hello',
-          payload: 'client pubkey'
+          payload: ''
         });
 
         self.connection.on('data', function(data) {
@@ -190,12 +193,37 @@ angular.module('streamium.core', [])
   StreamiumClient.prototype.handlers = {};
   StreamiumClient.prototype.handlers.hello = function(data) {
     this.rate = data.rate;
+    this.network = data.network;
     this.providerKey = data.pubkey;
+    this.providerAddress = data.address;
 
-    this.fundingAddress = 'mkYY5NRvikVBY1EPtaq9fAFgquesdjqECw'; // TODO: GET FUNDIND ADDRESS
+    this.consumer = new Consumer({
+      network: this.network,
+      providerKey: this.providerKey,
+      providerAddress: this.providerAddress
+    });
     this.status = StreamiumClient.STATUS.funding;
-    this.fundingCallback(null, this.fundingAddress);
+    this.fundingCallback(null, this.consumer.fundingAddress.toString());
     this.fundingCallback = null;
+  };
+
+  StreamiumClient.prototype.handlers.refundAck = function(data) {
+    assert(consumer.validateRefund(messageFromProvider));
+    this.connection.send({
+      type: 'payment',
+      payload: this.consumer.getPayment()
+    });
+  };
+
+  StreamiumClient.prototype.handlers.paymentAck = function(data) {
+    // TODO: Pass
+  };
+
+  StreamiumClient.prototype.askForRefund = function() {
+    this.connection.send({
+      type: 'sign',
+      payload: this.consumer.getRefundTxToSign()
+    });
   };
 
   return new StreamiumClient();
