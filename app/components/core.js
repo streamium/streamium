@@ -1,6 +1,5 @@
 'use strict';
 
-
 var Provider = channel.Provider;
 var Consumer = channel.Consumer;
 
@@ -76,7 +75,7 @@ angular.module('streamium.core', [])
 
     var provider = new Provider({
       network: this.address.network(),
-      paymentAddress: this.address
+      paymentAddress: this.address,
     });
 
     this.mapClientIdToProvider[connection.peer.id] = provider;
@@ -86,7 +85,7 @@ angular.module('streamium.core', [])
       type: 'hello',
       payload: {
         pubkey: provider.getPublicKey(),
-        address: this.address,
+        address: this.address.toString(),
         rate: this.rate
       }
     });
@@ -133,7 +132,7 @@ angular.module('streamium.core', [])
   return new StreamiumProvider();
 })
 
-.service('StreamiumClient', function() {
+.service('StreamiumClient', function(bitcore) {
 
   function StreamiumClient() {
     this.peer = this.connection = null;
@@ -191,9 +190,9 @@ angular.module('streamium.core', [])
   StreamiumClient.prototype.handlers = {};
   StreamiumClient.prototype.handlers.hello = function(data) {
     this.rate = data.rate;
-    this.network = data.network;
     this.providerKey = data.pubkey;
-    this.providerAddress = data.address;
+    this.providerAddress = new bitcore.Address(data.address);
+    this.network = this.providerAddress.network().name;
 
     this.consumer = new Consumer({
       network: this.network,
