@@ -1,6 +1,5 @@
 'use strict';
 
-
 var Provider = channel.Provider;
 var Consumer = channel.Consumer;
 
@@ -74,9 +73,9 @@ angular.module('streamium.core', [])
 
     // TODO: Assert state
 
-    var provider =  = new Provider({
+    var provider = new Provider({
       network: this.address.network(),
-      paymentAddress: this.address
+      paymentAddress: this.address,
     });
 
     this.mapClientIdToProvider[connection.peer.id] = provider;
@@ -85,11 +84,9 @@ angular.module('streamium.core', [])
     connection.send({
       type: 'hello',
       payload: {
-        type: 'hello',
-        payload: {
-          pubkey: provider.getPublicKey(),
-          rate: this.rate
-        }
+        pubkey: provider.getPublicKey(),
+        address: this.address.toString(),
+        rate: this.rate
       }
     });
   };
@@ -135,7 +132,7 @@ angular.module('streamium.core', [])
   return new StreamiumProvider();
 })
 
-.service('StreamiumClient', function() {
+.service('StreamiumClient', function(bitcore) {
 
   function StreamiumClient() {
     this.peer = this.connection = null;
@@ -193,13 +190,13 @@ angular.module('streamium.core', [])
   StreamiumClient.prototype.handlers = {};
   StreamiumClient.prototype.handlers.hello = function(data) {
     this.rate = data.rate;
-    this.network = data.network;
     this.providerKey = data.pubkey;
-    this.providerAddress = data.address;
+    this.providerAddress = new bitcore.Address(data.address);
+    this.network = this.providerAddress.network().name;
 
     this.consumer = new Consumer({
       network: this.network,
-      providerKey: this.providerKey,
+      providerPublicKey: this.providerKey,
       providerAddress: this.providerAddress
     });
     this.status = StreamiumClient.STATUS.funding;
