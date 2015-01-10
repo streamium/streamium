@@ -53,10 +53,14 @@ URL: http://twitter.com/MizanME
 
     3.15 FOOTER
 
+4. VIEWS STYLES
+	4.1 GENERAL
 
-TO CHANGE RESPONSIVE FIXES, PELEASE CHECK css/responsive.css
+	4.2 PROVIDER
 
-TO CHANGE PRE_DEFINED COLORS. PLEASE CHECK css/colors/your_selected_color.css
+	4.3 CLIENT
+
+	
 
 -----------------------------------------*/
 
@@ -78,7 +82,6 @@ body {
 	line-height: 28px;
 	font-weight: 300;
 	color: #313131;
-	text-align: center;
 	overflow-x: hidden !important;
 	margin: auto !important;
 	padding-top: 84px;
@@ -1220,3 +1223,35 @@ strong,
 .social-icons li a:hover .transparent-text-dark {
 	color: #313131;
 }
+
+
+/* --------------------------------------
+=========================================
+   4. VIEWS
+=========================================
+-----------------------------------------*/
+/*---------------------------------------
+   4.1 GENERAL 
+-----------------------------------------*/
+
+.stream-video {
+	box-shadow: 0 0 10px #333;
+	padding: 0;
+	margin-bottom: 20px;
+}
+
+.stream-data {
+	font-size: 28px;
+	line-height: 38px;
+}
+
+/*---------------------------------------
+   4.2 PROVIDER
+-----------------------------------------*/
+
+.btn-end {
+	display: block;
+}
+
+
+

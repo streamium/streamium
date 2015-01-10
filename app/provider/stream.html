@@ -1,23 +1,29 @@
-<h2>Provider Stream - {{client.streamId}}</h2>
+<h3>Provider Stream - {{client.streamId}}</h3>
 
 <p>Share this link to your viewers: {{client.getLink()}}</p>
 <div class="row">
 	<div class="col-md-12">
-		<video width="355" height="200" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+		<video class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 stream-video"  id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
 	</div>
 </div>
+
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-3 col-sm-6 stream-data">
 		<ul class="list-unstyled">
-			<li><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{time}</li>
-			<li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Balance: $ ({{client.rate}})</li>
+			<li><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{time}}</li>
+		</ul>
+	</div>
+	<div class="col-md-3 col-sm-6 stream-data">
+		<ul class="list-unstyled">
+			<li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 0.00 ({{client.rate}} $/min)</li>
+		</ul>
+	</div>
+	<div class="col-md-3 col-sm-6 stream-data">
+		<ul class="list-unstyled">
 			<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.clients.length}}</li>
 		</ul>
 	</div>
-	<div class="col-md-4">
-		
-	</div>
-	<div class="col-md-4">
-		<a href="#" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End </a>
+	<div class="col-md-3 col-sm-6">
+		<a href="#" class="btn btn-danger btn-lg btn-end"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End </a>
 	</div>
 </div>
