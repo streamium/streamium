@@ -5,7 +5,6 @@ angular.module('streamium', [
   'ngRoute',
   'streamium.client',
   'streamium.provider',
-  'streamium.home',
   'streamium.rates',
   'streamium.bitcoin',
   'streamium.core',
@@ -14,7 +13,7 @@ angular.module('streamium', [
 
 config(function($routeProvider, $sceProvider) {
   $routeProvider.otherwise({
-    redirectTo: '/'
+    redirectTo: '/provider'
   });
   $sceProvider.enabled(false);
 });
