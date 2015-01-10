@@ -68,7 +68,6 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     video.setPeer(StreamiumProvider.peer);
     video.broadcast(StreamiumProvider.clientConnections, function(err) {
       if (err) throw err;
-      alert('broadcast');
       $scope.broadcasting = true;
     });
   };
