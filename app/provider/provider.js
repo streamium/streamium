@@ -7,8 +7,12 @@ angular.module('streamium.provider.service', [])
 .service('StreamiumProvider', function(bitcore) {
 
   var Address = bitcore.Address;
+  var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
 
   function StreamiumProvider() {
+    this.network = bitcore.Networks.testnet;
+    bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
+
     this.address = this.streamId = this.rate = null;
     this.clients = [];
 
@@ -79,6 +83,7 @@ angular.module('streamium.provider.service', [])
     var provider = new Provider({
       network: this.address.network,
       paymentAddress: this.address,
+      key: key
     });
 
     this.mapClientIdToProvider[connection.peer.id] = provider;

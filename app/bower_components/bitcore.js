@@ -4261,7 +4261,7 @@ function getNetwork(arg, key) {
  * @namespace Network
  */
 module.exports = {
-  defaultNetwork: livenet,
+  defaultNetwork: testnet,
   livenet: livenet,
   mainnet: livenet,
   testnet: testnet,
