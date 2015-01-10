@@ -61,15 +61,19 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
 .controller('BroadcastStreamCtrl', function($scope, $location, video, StreamiumProvider) {
   var name = $location.$$url.split('/')[2];
+  $scope.requiresApproval = true;
+
   var startVideo = function() {
     $scope.client = StreamiumProvider;
+
     video.init(function(err, stream) {
       if (err) {
         console.log(err);
         return;
       }
-      var videoSrc = URL.createObjectURL(stream);
-      $scope.videoSrc = videoSrc;
+
+      $scope.requiresApproval = false;
+      $scope.videoSrc = URL.createObjectURL(stream);
       $scope.$digest();
     });
   };

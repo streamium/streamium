@@ -2,7 +2,10 @@
 
 <p>Share this link to your viewers: {{client.getLink()}}</p>
 <div class="row">
-	<div class="col-md-12">
+	<div class="bg-warning" ng-show="requiresApproval">
+		Please allow Streamium to use the camera.
+	</div>
+	<div class="col-md-12" ng-hide="requiresApproval">
 		<video class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 stream-video"  id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
 	</div>
 </div>
