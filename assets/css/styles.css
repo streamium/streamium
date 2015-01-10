@@ -1,0 +1,1222 @@
+/* --------------------------------------
+=========================================
+Stamp - Landing Page Template
+Version: 1.0 (Initial Release)
+Designed By: Mizanur Rahman
+URL: http://twitter.com/MizanME
+=========================================
+
+1. GLOBAL STYLES (USED IN VARIOUS SECTION OF THE WEBSITE)
+	1.1 GENERAL STYLES
+	1.2 PRE LOADER
+	1.3 ANCHOR
+	1.4 MISC FIXES
+
+2. COMPONENTS (ELEMNTS USED IN MANY SECTION)
+	2.1 TYPOGRAPHY
+	2.2 BUTTONS
+	2.3 BORDER AND LINE
+	2.4 SECTION HEADER
+	2.5 FORM ELEMENTS
+
+3. SECTION STYLES
+	3.1 SECTION: HOME
+	    3.1.1 STICKY NAVIGATION
+	    3.1.2 ONLY LOGO
+	    3.1.3 INTRO
+
+	3.2 SECTION: CLIENTS LIST
+
+	3.3 SECTION: SERVICES
+
+	3.4 SECTION: LEFT / RIGHT BRIEF
+
+	3.5 SECTION: STATS
+
+    3.6 SECTION: FEATURES
+
+    3.7 SECTION: PRICING TABLE
+
+    3.8 SECTION: SCREENSHOTS
+
+    3.9 SECTION: TIMELINE
+
+    3.10 SECTION: TEAM
+
+    3.11 SECTION: TESTIMONIALS
+
+    3.12 SECTION: CALL TO ACTION
+
+    3.13 SECTION: CONTACT INFO
+
+    3.14 SECTION: GOOGLE MAP
+
+    3.15 FOOTER
+
+
+TO CHANGE RESPONSIVE FIXES, PELEASE CHECK css/responsive.css
+
+TO CHANGE PRE_DEFINED COLORS. PLEASE CHECK css/colors/your_selected_color.css
+
+-----------------------------------------*/
+
+/* --------------------------------------
+=========================================
+   1. GLOBAL STYLES
+=========================================
+-----------------------------------------*/
+/*---------------------------------------
+   1.1 GENERAL STYLES
+-----------------------------------------*/
+html {
+	font-size: 100%;
+}
+
+body {
+	font-family: 'Open Sans', Helvetica Neue, Sans-serif;
+	font-size: 16px;
+	line-height: 28px;
+	font-weight: 300;
+	color: #313131;
+	text-align: center;
+	overflow-x: hidden !important;
+	margin: auto !important;
+	padding-top: 84px;
+}
+
+/*---------------------------------------
+   1.2 PRE-LOADER
+-----------------------------------------*/
+.preloader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #fefefe;
+	z-index: 99999;
+	height: 100%;
+	width: 100%;
+	overflow: hidden !important;
+}
+
+.status {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin: -20px 0 0 -20px;
+}
+
+/*---------------------------------------
+   2.3 ANCHOR AND BOLD TEXT
+-----------------------------------------*/
+a {
+	text-decoration: none;
+	-webkit-transition: all ease 0.25s;
+	transition: all ease 0.25s;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+/*---------------------------------------
+   1.4 MISC FIXES
+-----------------------------------------*/
+@-webkit-viewport {
+	width: device-width;
+}
+
+@-moz-viewport {
+	width: device-width;
+}
+
+@-ms-viewport {
+	width: device-width;
+}
+
+@-o-viewport {
+	width: device-width;
+}
+
+@viewport {
+	width: device-width;
+}
+
+*,
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+ul,
+ol {
+	padding-left: 0 !important;
+}
+
+li {
+	list-style: none;
+}
+
+.row.no-gutters[class^="col-"],
+.row.no-gutters[class*=" col-"] {
+	padding-right: 0;
+	padding-left: 0;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+	color: inherit;
+}
+
+.nav > li > a {
+	padding: inherit;
+}
+
+.navbar-nav.navbar-right:last-child {
+	margin-right: 0;
+}
+
+.navbar-inverse .navbar-nav > li > a:focus {
+	color: inherit;
+}
+
+.mailchimp-success,
+.mailchimp-error,
+.email-success,
+.email-error {
+	display: none;
+	margin-top: 15px;
+}
+
+.mailchimp-success span,
+.mailchimp-error span,
+.email-success span,
+.email-error span {
+	margin-right: 10px;
+}
+
+/* --------------------------------------
+=========================================
+   2. COMPONENTS
+=========================================
+-----------------------------------------*/
+/*---------------------------------------
+   2.1 TYPOGRAPHY
+-----------------------------------------*/
+/* HEADINGS */
+h1,
+h2 {
+	font-family: 'Cabin', Helvetica Neue, Sans-serif;
+	font-weight: 400;
+}
+
+h1 {
+	font-size: 3.75rem;
+	line-height: 5rem;
+}
+
+h2 {
+	font-size: 2.4rem;
+	line-height: 3.125rem;
+}
+
+h2 strong {
+	color: #272727;
+}
+
+h3 {
+	font-size: 1.5rem;
+	line-height: 2.375rem;
+}
+
+h4 {
+	font-size: 1.25rem;
+	line-height: 1.875rem;
+}
+
+h5 {
+	font-size: 18px;
+	line-height: 28px;
+}
+
+/* BUTTONS */
+.standard-button {
+	font-weight: 600;
+}
+
+/* OTHER TEXTS */
+strong,
+.strong {
+	font-weight: 600;
+}
+
+.dark-text {
+	color: #454545;
+}
+
+.transparent-text {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.transparent-text-dark {
+	color: rgba(49, 49, 49, 0.5);
+}
+
+.small-text {
+	font-size: 14px;
+}
+
+.small-text-medium {
+	font-size: 14px;
+	font-weight: 600;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+.line-through {
+	text-decoration: line-through;
+}
+
+.button-text {
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.price .month {
+	font-family: 'Open Sans', Helvetica Neue, Sans-serif;
+	color: #666666;
+	font-size: 16px !important;
+}
+
+/*---------------------------------------
+   2.2 BUTTONS
+-----------------------------------------*/
+.standard-button {
+	border-radius: 3px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 16px;
+	line-height: 1.6;
+	border: none;
+	padding: 18px 40px 18px 40px;
+	color: #ffffff;
+	-webkit-transition: none;
+	transition: none;
+}
+
+.secondary-button {
+	border-radius: 3px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 14px;
+	line-height: 1.6;
+	border: none;
+	background: transparent;
+	padding: 20px 35px 20px 35px;
+	color: #ffffff;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-color: rgba(255, 255, 255, 0.5);
+	-webkit-transition: none;
+	transition: none;
+}
+
+.secondary-button:hover {
+	background: transparent;
+	border-color: #ffffff;
+}
+
+.secondary-button-dark {
+	border-radius: 3px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 14px;
+	line-height: 1.6;
+	border: none;
+	background: transparent;
+	padding: 20px 35px 20px 35px;
+	color: #272727;
+	border-color: rgba(39, 39, 39, 0.5);
+	-webkit-transition: none;
+	transition: none;
+}
+
+.secondary-button-dark:hover {
+	background: transparent;
+	border-color: #272727;
+	color: #272727;
+}
+
+.navbar-register-button {
+	border: none;
+	font-weight: 500;
+	text-transform: uppercase;
+	color: #ffffff !important;
+	-webkit-transition: none;
+	transition: none;
+}
+
+/*---------------------------------------
+   2.3 BORDER AND LINE
+-----------------------------------------*/
+.border-right {
+	border-right: 1px solid #eaeaea;
+}
+
+.border-left {
+	border-left: 1px solid #eaeaea;
+}
+
+.colored-line-left,
+.colored-line-right,
+.colored-line,
+.white-line,
+.grey-line {
+	height: 2px;
+	width: 80px;
+	display: block;
+}
+
+.white-line {
+	background: #ffffff;
+	margin: auto;
+}
+
+.grey-line {
+	background: #eaebec;
+}
+
+.grey-line-short {
+	height: 2px;
+	width: 40px;
+	display: block;
+	background: #eaebec;
+}
+
+.white-text {
+	color: #ffffff;
+}
+
+.white-bg-border {
+	background: #ffffff;
+	border-top: 1px solid #eaebec;
+	border-bottom: 1px solid #eaebec;
+}
+
+.white-bg {
+	background: #ffffff;
+}
+
+.grey-bg {
+	border-top: 1px solid #eaebec;
+	border-bottom: 1px solid #eaebec;
+	background: #F7F8FA;
+}
+
+.dark-bg {
+	background: #2e3336;
+}
+
+.colored-line-left {
+	float: left;
+}
+
+.colored-line-right {
+	float: right;
+}
+
+.colored-line {
+	margin: auto;
+}
+
+/*---------------------------------------
+   2.4 SECTION HEADERS
+-----------------------------------------*/
+.section-header {
+	margin-top: 90px;
+	margin-bottom: 60px;
+}
+
+.section-header h2 {
+	margin-bottom: 20px;
+	margin-top: 10px;
+}
+
+.sub-heading {
+	margin-top: 20px;
+}
+
+/*---------------------------------------
+   2.5 FORM ELEMENTS
+-----------------------------------------*/
+.input-box,
+.textarea-box {
+	margin-bottom: 15px;
+	margin-top: 15px;
+	outline: 0;
+	border: 0;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	border: 1px solid #dedede;
+	border-radius: 3px;
+	color: #999999;
+	padding-left: 21px;
+	line-height: auto;
+}
+
+.input-box {
+	min-height: 50px;
+}
+
+.textarea-box {
+	padding-top: 15px;
+}
+
+.input-box:active,
+.textarea-box:active,
+.input-box:focus,
+.textarea-box:focus {
+	color: #272727;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+/* --------------------------------------
+=========================================
+   3. SECTION STYLES
+=========================================
+-----------------------------------------*/
+/*---------------------------------------
+   3.1 SECTION: HOME / HEADER
+-----------------------------------------*/
+.header {
+    background: url(../images/background-images/1.jpg) no-repeat center top fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+.header .overlay-layer {
+    padding-top: 84px;
+    height: auto;
+}
+
+/* STICKY NAVIGATION AND LOGO */
+.appear-on-scroll {
+    opacity: 0;
+}
+
+.sticky-navigation {
+    background: #ffffff;
+    min-height: 70px;
+    border: none;
+    font-weight: 400;
+    margin-bottom: 0 !important;
+    -webkit-backface-visibility: hidden;
+    -webkit-box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.08);
+    box-shadow: 0px 2px 8px 0px rgba(50, 50, 50, 0.08);
+}
+
+.sticky-navigation .navbar-brand {
+    padding: 18px 15px;
+}
+
+.sticky-navigation .navbar-brand img {
+    max-width: 120px;
+    -webkit-backface-visibility: hidden;
+}
+
+.sticky-navigation .main-navigation {
+    margin-top: 0;
+}
+
+.sticky-navigation .main-navigation li a {
+    text-transform: uppercase;
+    line-height: 34px;
+    padding: 18px;
+}
+
+.sticky-navigation .login-register {
+    margin-top: 0;
+}
+
+.sticky-navigation .login-register .login a {
+    text-transform: uppercase;
+    line-height: 34px;
+    padding: 18px;
+}
+
+.sticky-navigation .login-register .register-button {
+    margin-top: 15px;
+}
+
+.sticky-navigation .login-register .register-button a {
+    padding: 10px 15px 8px 15px;
+    border-radius: 3px;
+}
+/* ONLY LOGO */
+.only-logo .navbar-header {
+    margin: auto;
+    float: none;
+}
+
+.only-logo .navbar-header img {
+    max-width: 250px;
+}
+
+/* INTRO */
+.intro-section {
+    margin-top: 40px;
+}
+
+.intro-section h5 {
+    margin-top: 15px;
+    margin-bottom: 45px;
+}
+
+.horizontal-subscribe-form {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 6px;
+    padding: 25px 25px 25px 25px;
+}
+
+.horizontal-subscribe-form form {
+    padding-right: 6px;
+}
+
+.horizontal-subscribe-form .standard-button {
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.horizontal-subscribe-form .input-box,
+.horizontal-subscribe-form .standard-button {
+    margin: 3px;
+}
+
+.horizontal-subscribe-form .input-box {
+    width: 350px;
+    font-size: inherit;
+}
+/*---------------------------------------
+   3.2 SECTION: CLIENTS LIST
+-----------------------------------------*/
+.client-logos {
+	border-bottom: 1px solid #dadfe3;
+	margin-bottom: 0;
+}
+
+.client-logos li {
+	display: inline-block;
+	margin: 25px 25px 25px 25px;
+	vertical-align: middle;
+}
+
+.client-logos li img {
+	max-height: 40px;
+	opacity: 0.6;
+}
+
+.client-logos li img:hover {
+	opacity: 1;
+	cursor: pointer;
+}
+
+/*---------------------------------------
+   3.3 SECTION: SERVICES
+-----------------------------------------*/
+.single-service {
+	padding: 40px 35px 40px 35px;
+	margin: 0 0 100px 0;
+	background: #ffffff;
+	border-top: 1px solid #eaeaea;
+	border-left: 1px solid #eaeaea;
+	border-right: 1px solid #eaeaea;
+	border-bottom: 4px solid #eaeaea;
+	border-radius: 3px;
+	-webkit-transition: all ease 0.55s;
+	transition: all ease 0.55s;
+}
+
+.single-service .service-icon {
+	font-size: 60px;
+	margin-bottom: 35px;
+}
+
+.single-service h3 {
+	margin-bottom: 10px;
+}
+
+/*---------------------------------------
+   3.4 SECTION: APP BRIEF
+-----------------------------------------*/
+.brief {
+	padding-top: 80px;
+	padding-bottom: 115px;
+}
+
+.brief .content-section {
+	margin-top: 15px;
+}
+
+.brief h2 {
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+
+.brief p {
+	margin-top: 40px;
+}
+
+.brief .brief-image-right {
+	margin-top: 20px;
+}
+
+.brief .brief-image-right img {
+	float: right;
+	width: 92%;
+}
+
+.brief .brief-image-left {
+	margin-top: 25px;
+	overflow: hidden;
+}
+
+.brief .brief-image-left img {
+	float: left;
+	width: 95%;
+}
+
+.feature-list {
+	margin-top: 15px;
+}
+
+.feature-list li {
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+.feature-list li span {
+	margin-right: 10px;
+}
+
+/* ACCORDION */
+.panel-default {
+	border: 0;
+	border-radius: 3px;
+	margin-top: 35px;
+	display: block;
+	text-align: left;
+}
+
+.panel-body {
+	border-top: 4px solid #F7F8FA !important;
+}
+
+.panel-heading {
+	background-color: #ffffff !important;
+	border: none;
+	padding: 0;
+}
+
+.panel-group .panel+.panel {
+	margin-top: 15px;
+}
+
+.panel-heading .title-text {
+	line-height: 40px;
+}
+
+.panel-title a:hover {
+	text-decoration: none;
+}
+
+.panel-title .icon-container {
+	display: inline-block;
+	margin-right: 10px;
+	vertical-align: middle;
+	text-align: !important;
+	font-size: 16px;
+	height: 40px;
+	line-height: 40px;
+	padding-top: 1px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-top-left-radius: 3px;
+	float: left;
+}
+
+/*---------------------------------------
+   3.5 SECTION: STATS
+-----------------------------------------*/
+.stats {
+	background: url(../images/background-images/2.jpg) no-repeat center top fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+.stats .overlay-layer-2 {
+	padding-top: 80px;
+	padding-bottom: 80px;
+}
+
+.single-stats {
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.single-stats .icon-container {
+	margin-bottom: 35px;
+}
+
+.single-stats .icon-container span {
+	font-size: 70px;
+}
+
+.stats-footer .long-transparent-line {
+	margin-bottom: 45px;
+}
+
+/*---------------------------------------
+   3.6 SECTION: UNIQUE FEATURES
+-----------------------------------------*/
+.unique-features {
+	padding-bottom: 100px;
+}
+
+.ipad-image {
+	margin: auto;
+}
+
+.ipad-image img {
+	width: 100%;
+}
+
+.feature {
+	margin: auto;
+	padding-left: 10px;
+	padding-right: 0;
+	margin-top: 30px;
+	margin-bottom: 25px;
+	overflow: hidden;
+}
+
+.feature .icon-container {
+	margin-right: 10px;
+	padding-top: 18px;
+	float: left;
+}
+
+.feature .icon-container span {
+	font-size: 30px;
+}
+
+.feature .description {
+	width: 85%;
+	float: right;
+}
+
+.feature .description p {
+	margin-top: 20px;
+}
+
+/*---------------------------------------
+   3.7 SECTION: PRICING TABLE
+-----------------------------------------*/
+.pricing {
+	padding-bottom: 30px;
+}
+
+.pricing-table {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.single-pricing {
+	background: #ffffff;
+	border-radius: 3px;
+	padding-bottom: 25px;
+	border: 1px solid #e4e7e7;
+	border-bottom: 4px solid #e4e7e7;
+	margin-bottom: 80px;
+	padding: 20px;
+	-webkit-transition: all ease 0.55s;
+	transition: all ease 0.55s;
+}
+
+.package-title h3 {
+	line-height: 60px;
+	margin-top: 0;
+	margin-bottom: 0;
+	border-radius: 3px;
+}
+
+.price {
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 5px;
+	border-bottom: 1px solid #ececec;
+	padding-bottom: 25px;
+	padding-top: 15px;
+}
+
+.price .superscript {
+	vertical-align: super;
+	font-size: 25px;
+}
+
+.price .month {
+	font-size: inherit;
+	display: block;
+	margin-top: 0;
+	line-height: 1;
+	font-size: 14px !important;
+	font-weight: 300;
+}
+
+.package-list {
+	padding-top: 10px;
+	margin-bottom: 25px;
+}
+
+.package-list li {
+	margin-top: 12px;
+	margin-bottom: 12px;
+	border-bottom: 1px dotted #eaeaea;
+	padding-bottom: 10px;
+}
+
+.package-list li span {
+	margin-right: 8px;
+}
+
+.single-pricing .button {
+	margin-bottom: 20px;
+}
+
+.highlighted {
+	margin-top: -24px;
+}
+
+.highlighted .package-title h3 {
+	line-height: 84px;
+}
+
+/*---------------------------------------
+   3.8 SECTION: SCREENSHOTS
+-----------------------------------------*/
+.features {
+	background: url(../images/background-images/1.jpg) no-repeat top center fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+}
+
+.features .overlay-layer-2 {
+	padding-bottom: 84px;
+}
+
+.single-feature {
+	margin-bottom: 58px;
+}
+
+.left-side .single-feature {
+	padding-right: 18px;
+}
+
+.right-side .single-feature {
+	padding-left: 18px;
+}
+
+.screenshot img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.screenshot img:hover {
+	cursor: crosshair;
+}
+
+.owl-theme .owl-controls .owl-page span {
+	background: #ffffff;
+}
+
+/*---------------------------------------
+   3.9 VERTICAL TIMELINE
+-----------------------------------------*/
+.vertical-timeline {
+	padding: 0;
+	margin: 0;
+}
+
+.timeline-section {
+	padding: 0;
+	padding-left: 135px;
+	padding-top: 20px;
+}
+
+.timeline-section li {
+	list-style-type: none;
+	padding: 1em;
+	margin: 0;
+	-webkit-transition: background-color 0.5s;
+	transition: background-color 0.5s;
+	overflow: visible;
+	border-left: 2px solid #eaeaea !important;
+}
+
+.timeline-section li .date {
+	display: inline-block;
+	float: left;
+	margin-left: -100px;
+	max-width: 55px;
+	margin-top: 5px;
+}
+
+.timeline-section li .icon-container {
+	display: inline-block;
+	float: left;
+	width: 42px;
+	height: 42px;
+	line-height: 42px;
+	border-radius: 50%;
+	margin-left: -38px;
+	padding-top: 2px;
+}
+
+.timeline-section li .info {
+	text-align: left;
+	background: #F7F8FA;
+	margin-left: 15px;
+	padding: 10px;
+	font-size: 14px;
+}
+
+/*---------------------------------------
+   3.10 SECTION: TEAM
+-----------------------------------------*/
+.team {
+	padding-bottom: 50px;
+}
+
+.team-member {
+	margin-bottom: 50px;
+}
+
+.team-member .social-icons {
+	opacity: 0;
+	margin-top: 5px;
+	position: relative;
+	-webkit-transition: all ease 0.55s;
+	transition: all ease 0.55s;
+}
+
+.team-member .social-icons li {
+	display: inline-block;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+}
+
+.team-member .social-icons li a {
+	opacity: 0.5;
+}
+
+.team-member .social-icons li a:hover {
+	opacity: 1;
+	text-decoration: none;
+}
+
+.team-member:hover .social-icons {
+	opacity: 1;
+}
+
+.member-pic {
+	border: 5px solid #ffffff;
+	border-radius: 3px;
+}
+
+.member-pic img {
+	width: 100%;
+}
+
+.member-pic img:hover {
+	filter: sepia(10%) hue-rotate(50deg);
+	-webkit-filter: sepia(10%) hue-rotate(50deg);
+	-moz-filter: sepia(10%) hue-rotate(50deg);
+	-o-filter: sepia(10%) hue-rotate(50deg);
+	-ms-filter: sepia(10%) hue-rotate(50deg);
+}
+
+.member-details {
+	padding-top: 10px;
+	padding-bottom: 12px;
+	position: relative;
+	width: 85%;
+	margin: auto;
+	background: #ffffff;
+	border-radius: 3px;
+	margin-top: -45px;
+	z-index: 1;
+}
+
+.member-details h5 {
+	margin-bottom: 3px;
+}
+
+/*---------------------------------------
+   3.11 SECTION: TESTIMONIALS
+-----------------------------------------*/
+.testimonials {
+	padding-bottom: 60px;
+}
+
+.feedback {
+	padding: 0 30px;
+	margin-bottom: 45px;
+}
+
+.feedback .pic-container {
+	border-radius: 50%;
+	display: inline-block;
+	overflow: hidden;
+	width: 60px;
+	height: 60px;
+	border: 3px solid #ffffff;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+}
+
+.feedback .pic-container img {
+	width: 100%;
+}
+
+.feedback p {
+	font-style: italic;
+	margin-top: 10px;
+	margin-bottom: 25px;
+}
+
+.feedback h5 {
+	margin-bottom: 0;
+}
+
+/*---------------------------------------
+   3.12 SECTION: CALL TO ACTION
+-----------------------------------------*/
+.call-to-action {
+    background: url('../images/background-images/2.jpg') fixed no-repeat top center;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.call-to-action .overlay-layer-2 {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.call-to-action h2 {
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+.modal-content {
+	padding: 10px 30px 30px 30px;
+}
+
+.modal-content button {
+	width: 100%;
+}
+
+/*---------------------------------------
+   3.13 SECTION: CONTACT INFO
+-----------------------------------------*/
+.contact-info {
+	padding-top: 30px;
+	padding-bottom: 70px;
+}
+
+.contact-info .logo-container {
+	margin-top: 20px;
+	margin-bottom: 35px;
+}
+
+.contact-info .logo-container img {
+	filter: grayscale(1);
+	-webkit-filter: grayscale(1);
+	-moz-filter: grayscale(1);
+	-o-filter: grayscale(1);
+	-ms-filter: grayscale(1);
+	opacity: 0.6;
+	max-width: 65px;
+}
+
+.contact-info .icon-container {
+	font-size: 30px;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+.contact-info .contact-links a {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+/*---------------------------------------
+   3.14 SECTION: GOOGLE MAP
+-----------------------------------------*/
+#google-container {
+	position: relative;
+	width: 100%;
+	height: 500px;
+}
+
+#cd-google-map {
+	position: relative;
+	-webkit-transition: all ease 0.55s;
+	transition: all ease 0.55s;
+}
+
+#cd-google-map address {
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	opacity: 0.8;
+	padding: 1em 1em;
+	color: #ffffff;
+}
+
+/*---------------------------------------
+   3.15 SECTION: FOOTER
+-----------------------------------------*/
+.footer {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.footer-links li {
+	display: inline-block;
+	padding: 10px;
+}
+
+.footer-links li a:hover {
+	text-decoration: none;
+}
+
+.social-icons li {
+	display: inline-block;
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+.social-icons li a:hover {
+	text-decoration: none;
+}
+
+.social-icons li a:hover .transparent-text-dark {
+	color: #313131;
+}
