@@ -8,7 +8,8 @@ angular.module('streamium', [
   'streamium.home',
   'streamium.rates',
   'streamium.bitcoin',
-  'streamium.core'
+  'streamium.core',
+  'streamium.video'
 ]).
 
 config(['$routeProvider', function($routeProvider) {
