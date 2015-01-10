@@ -1,10 +1,9 @@
 'use strict';
 
-var Provider = channel.Provider;
-
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore) {
+.service('StreamiumProvider', function(bitcore, channel) {
+  var Provider = channel.Provider;
 
   var Address = bitcore.Address;
   var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
