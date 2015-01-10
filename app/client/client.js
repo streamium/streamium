@@ -2,9 +2,14 @@
 
 var Consumer = channel.Consumer;
 
+
 angular.module('streamium.client.service', [])
 
 .service('StreamiumClient', function(bitcore) {
+  var fundingKey = bitcore.PrivateKey('cb5dc68fbcaf37f29139b50fa4664b395c03e49deb966e5d49a629af005d0654');
+  var refundKey = 'b65080da83f59a9bfa03841bc82fd0c0d1e036176b2f2c157eaa9547010a042e';
+  var refundAddress = bitcore.PrivateKey(refundKey).toAddress();
+  var commitmentKey = 'f1a140dc9d795c0aa537329379f645eb961fe42f27c660e10676c07ddf18777f';
 
   function StreamiumClient() {
     this.peer = this.connection = null;
@@ -71,7 +76,11 @@ angular.module('streamium.client.service', [])
     this.consumer = new Consumer({
       network: this.network,
       providerPublicKey: this.providerKey,
-      providerAddress: this.providerAddress
+      providerAddress: this.providerAddress,
+      fundingKey: fundingKey,
+      commitmentKey: commitmentKey,
+      refundKey: refundKey,
+      refundAddress: refundAddress
     });
     this.status = StreamiumClient.STATUS.funding;
     this.fundingCallback(null, this.consumer.fundingAddress.toString());
