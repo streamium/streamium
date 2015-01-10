@@ -25,17 +25,31 @@ angular.module('streamium.provider', ['ngRoute'])
   console.log('Create Ctrl');
 })
 
-.controller('BroadcastStreamCtrl', function($scope, $location, video) {
-  video.init(this.peer, function(err, stream) {
-    if (err) {
-      alert(err);
-      return;
-    }
-    var videoSrc = URL.createObjectURL(stream);
-    $scope.videoSrc = videoSrc;
-    $scope.$digest();
-  });
-  console.log('Broadcast Ctrl');
+.controller('BroadcastStreamCtrl', function($scope, $location, video, StreamiumProvider) {
+  var name = $location.$$url.split('/')[2];
+  var startVideo = function() {
+    $scope.client = StreamiumProvider;
+    video.init(function(err, stream) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      var videoSrc = URL.createObjectURL(stream);
+      $scope.videoSrc = videoSrc;
+      $scope.$digest();
+    });
+  };
+  if (!StreamiumProvider.streamId) {
+    StreamiumProvider.init(name, 'mjhohspVMgcuetHwkH74C2aVKfTdyYdVSP', 0.1, function(err) {
+      if (err) {
+        console.log(err);
+        return;
+      }
+      startVideo();
+    });
+  } else {
+    startVideo();
+  }
 })
 
 .controller('CashoutStreamCtrl', function($scope, $location) {

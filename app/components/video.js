@@ -6,7 +6,7 @@ var Video = function() {
 };
 
 
-Video.prototype.init = function(peer, cb) {
+Video.prototype.init = function(cb) {
   var self = this;
   navigator.getUserMedia({
     audio: true,
