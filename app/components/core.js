@@ -12,7 +12,10 @@ angular.module('streamium.core', [])
   function StreamiumProvider() {
     this.address = this.streamId = this.rate = null;
     this.clients = [];
-    this.status = this.STATUS.disconnected;
+
+    // TODO: this screams for a status object or add status into Provider
+    this.mapClientIdToProvider = {};
+    this.mapClientIdToStatus = {};
     this.config = config.peerJS;
   }
 
@@ -28,6 +31,7 @@ angular.module('streamium.core', [])
 
     address = new Address(address);
     if (!address.isValid()) return callback('Invalid address');
+    alert('valid!');
 
     this.streamId = streamId;
     this.address = address;
