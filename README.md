@@ -20,6 +20,7 @@ To run Streamium, just serve the root directory using any web server.
 For example:
 ```
 cd paystream/
+bower install
 python -m "SimpleHTTPServer"
 ```
 
