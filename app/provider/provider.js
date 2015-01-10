@@ -1,27 +1,32 @@
 'use strict';
 
-
-
 angular.module('streamium.provider', ['ngRoute'])
 
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/provider', {
-    templateUrl: 'provider/stream.html',
-    controller: 'ProviderStreamCtrl'
+    templateUrl: 'provider/create.html',
+    controller: 'CreateStreamCtrl'
   });
 
-  $routeProvider.when('/provider/cashout', {
+  $routeProvider.when('/provider/:streamId', {
+    templateUrl: 'provider/stream.html',
+    controller: 'BroadcastStreamCtrl'
+  });
+
+  $routeProvider.when('/provider/:streamId/cashout', {
     templateUrl: 'provider/cashout.html',
-    controller: 'ProviderCashoutCtrl'
+    controller: 'CashoutStreamCtrl'
   });
 }])
 
-.controller('ProviderStreamCtrl', function($scope, $location, StreamiumProvider) {
-  if (StreamiumProvider.status == 'disconnected') return $location.url('/');
-
-  $scope.client = StreamiumProvider;
+.controller('CreateStreamCtrl', function($scope, $location) {
+  console.log('Create Ctrl');
 })
 
-.controller('ProviderCashoutCtrl', function() {
+.controller('BroadcastStreamCtrl', function($scope, $location) {
+  console.log('Broadcast Ctrl');
+})
 
+.controller('CashoutStreamCtrl', function($scope, $location) {
+  console.log('Cashout Ctrl');
 });
