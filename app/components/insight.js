@@ -4,18 +4,10 @@ angular.module('streamium.insight', [])
 
 .service('Insight', function(bitcore, request) {
 
+  var insight = bitcore.transport.explorers.Insight('testnet');
+
   var queryBalance = function(address, callback) {
-    var url = ('https://' +
-        (address.network() === bitcore.network.mainnet ? '' : 'test-') +
-        'insight.bitpay.com/api/addr/' + address.toString() + '/utxo'
-    );
-    request(url, function(error, response, body) {
-      if (error || response.statusCode !== 200) {
-        console.error(error, response);
-        return callback({error: error});
-      }
-      return callback(JSON.parse(body));
-    });
+    insight.getUnspentUtxos(address, callback);
   };
 
   var pollBalance = function(address, callback) {
