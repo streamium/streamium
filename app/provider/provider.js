@@ -1,10 +1,9 @@
 'use strict';
 
-var Provider = channel.Provider;
-
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore) {
+.service('StreamiumProvider', function(bitcore, channel) {
+  var Provider = channel.Provider;
 
   var Address = bitcore.Address;
   var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
@@ -41,6 +40,7 @@ angular.module('streamium.provider.service', [])
     this.streamId = streamId;
     this.address = address;
     this.rate = rate;
+    this.clientConnections = [];
 
     this.peer = new Peer(this.streamId, this.config);
     var self = this;
@@ -61,11 +61,22 @@ angular.module('streamium.provider.service', [])
 
     this.peer.on('connection', function onConnection(connection) {
       console.log('New connection!', connection);
+      self.clientConnections.push(connection);
 
       connection.on('data', function(data) {
         console.log('New message', data);
         if (!data.type || !self.handlers[data.type]) throw 'Kernel panic'; // TODO!
         self.handlers[data.type].call(self, connection, data.payload);
+      });
+
+      connection.on('error', function(err) {
+        console.log(err);
+        self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
+      });
+
+      connection.on('close', function() {
+        console.log('client connection closed');
+        self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
       });
 
     });
@@ -105,6 +116,7 @@ angular.module('streamium.provider.service', [])
 
     var provider = this.mapClientIdToProvider[connection.peer.id];
     var status = this.mapClientIdToStatus[connection.peer.id];
+    var data = JSON.parse(data);
 
     connection.send({
       type: 'refundAck',
@@ -112,6 +124,12 @@ angular.module('streamium.provider.service', [])
     });
   };
 
+  StreamiumProvider.prototype.handlers.end = function(connection, data) {
+    if (data) {
+      StreamiumProvider.prototype.handlers.payment(data);
+    }
+    Insight.broadcast(this.mapClientIdToProvider[connection.peer.id].paymentTx, console.log);
+  };
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
 
     // TODO: Assert state
@@ -119,8 +137,20 @@ angular.module('streamium.provider.service', [])
     // TODO: this looks like duplicated code
     var provider = this.mapClientIdToProvider[connection.peer.id];
     var status = this.mapClientIdToStatus[connection.peer.id];
+    var data = JSON.parse(data);
 
-    assert(provider.validPayment(data));
+    provider.validPayment(data);
+    /*
+    try {
+      if (provider.validPayment(data)) {
+        console.log(data);
+        alert('Invalid payment received');
+      }
+    } catch (e) {
+      console.log(e);
+      alert('Invalid payment received');
+    }
+    */
     // TODO: Do some check with provider.currentAmount
 
     connection.send({
