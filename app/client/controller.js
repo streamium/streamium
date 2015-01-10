@@ -23,9 +23,13 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 .controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location) {
   $scope.client = StreamiumClient;
+  $scope.minutes = [5, 10, 30];
+  $scope.stream = {};
+  $scope.stream.minutes = $scope.minutes[0];
+  $scope.stream.founds = 0;
 
   console.log('Join stream');
-  
+
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;
 

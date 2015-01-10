@@ -11,7 +11,8 @@ angular.module('streamium', [
   'streamium.bitcoin',
   'streamium.insight',
   'streamium.core',
-  'streamium.video'
+  'streamium.video',
+  'ja.qr'
 ]).
 
 config(function($routeProvider, $sceProvider) {
