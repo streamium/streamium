@@ -1,5 +1,7 @@
 <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
 
+  <div class="bg-danger">{{ stream.error }}</div>
+
   <div class="form-group has-feedback">
     <div class="input-group">
       <div class="input-group-addon">Streamium.io/app/stream/</div>
@@ -39,6 +41,6 @@
       <button
         type="submit"
         class="btn btn-success"
-        ng-disabled="form.$invalid">Start</button>
+        ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Start'}}</button>
   </div>
 </form>

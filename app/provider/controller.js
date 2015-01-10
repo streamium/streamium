@@ -30,6 +30,9 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.stream.address = 'mjhohspVMgcuetHwkH74C2aVKfTdyYdVSP';
   $scope.stream.rate = 0.1;
 
+  $scope.stream.error = null;
+  $scope.stream.loading = false;
+
   $scope.normalizeName = function() {
     var name = $scope.stream.name || '';
     name = name.trim().toLowerCase().replace(/ /g, '-').replace(/\\/g, '-');
@@ -38,14 +41,19 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
-    console.log('Initializing channel');
+    $scope.stream.loading = true;
     StreamiumProvider.init(
       $scope.stream.name,
       $scope.stream.address,
       $scope.stream.rate,
       function onCreate(err, done) {
-        if (err) throw err;
-        $location.path('/provider/' + $scope.stream.name);
+        $scope.stream.loading = false;
+        if (err) {
+          $scope.stream.error = "Channel name is taken, please pick a different one";
+        } else {
+          $location.path('/provider/' + $scope.stream.name);
+        }
+
         $scope.$apply();
       });
   };
