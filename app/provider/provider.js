@@ -116,6 +116,7 @@ angular.module('streamium.provider.service', [])
 
     var provider = this.mapClientIdToProvider[connection.peer.id];
     var status = this.mapClientIdToStatus[connection.peer.id];
+    var data = JSON.parse(data);
 
     connection.send({
       type: 'refundAck',
@@ -130,8 +131,20 @@ angular.module('streamium.provider.service', [])
     // TODO: this looks like duplicated code
     var provider = this.mapClientIdToProvider[connection.peer.id];
     var status = this.mapClientIdToStatus[connection.peer.id];
+    var data = JSON.parse(data);
 
-    assert(provider.validPayment(data));
+    provider.validPayment(data);
+    /*
+    try {
+      if (provider.validPayment(data)) {
+        console.log(data);
+        alert('Invalid payment received');
+      }
+    } catch (e) {
+      console.log(e);
+      alert('Invalid payment received');
+    }
+    */
     // TODO: Do some check with provider.currentAmount
 
     connection.send({
