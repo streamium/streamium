@@ -3,8 +3,6 @@
 var Provider = channel.Provider;
 var Consumer = channel.Consumer;
 
-alert(channel);
-
 angular.module('streamium.core', [])
 
 .service('StreamiumProvider', function(bitcore) {

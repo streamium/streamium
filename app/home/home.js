@@ -34,7 +34,7 @@ angular.module('streamium.home', ['ngRoute'])
       function onCreate(err, done) {
         if (err) throw err;
         console.log('DONE');
-        $location.url('/provider');
+        $location.url('/provider/' + $scope.stream.name);
         $scope.$apply();
       });
   };

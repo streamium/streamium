@@ -12,6 +12,9 @@ angular.module('streamium', [
   'streamium.video'
 ]).
 
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/'});
-}]);
+config(function($routeProvider, $sceProvider) {
+  $routeProvider.otherwise({
+    redirectTo: '/'
+  });
+  $sceProvider.enabled(false);
+});

@@ -25,14 +25,15 @@ angular.module('streamium.provider', ['ngRoute'])
   console.log('Create Ctrl');
 })
 
-.controller('BroadcastStreamCtrl', function($scope, $location) {
+.controller('BroadcastStreamCtrl', function($scope, $location, video) {
   video.init(this.peer, function(err, stream) {
     if (err) {
       alert(err);
       return;
     }
-    $scope.videoSrc = URL.createObjectURL(stream);
-    alert('video should werk');
+    var videoSrc = URL.createObjectURL(stream);
+    $scope.videoSrc = videoSrc;
+    $scope.$digest();
   });
   console.log('Broadcast Ctrl');
 })
