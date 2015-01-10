@@ -33,6 +33,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
     if (err) throw err;
 
     console.log('DONE send funds at', fundingAddress);
+    $scope.fundingAddress = fundingAddress;
 
     Insight.pollBalance(fundingAddress, function(err, balance) {
       console.log('Balance!', balance);
