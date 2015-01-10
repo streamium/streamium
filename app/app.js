@@ -7,6 +7,7 @@ angular.module('streamium', [
   'streamium.provider',
   'streamium.rates',
   'streamium.bitcoin',
+  'streamium.insight',
   'streamium.core',
   'streamium.video'
 ]).

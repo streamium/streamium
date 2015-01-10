@@ -2,12 +2,12 @@
 
 angular.module('streamium.insight', [])
 
-.service('Insight', function(bitcore, request) {
+.service('Insight', function(bitcore) {
 
-  var insight = bitcore.transport.explorers.Insight('testnet');
+  var insight = new bitcore.transport.explorers.Insight('testnet');
 
   var queryBalance = function(address, callback) {
-    insight.getUnspentUtxos(address, callback);
+    return insight.getUnspentUtxos(address, callback);
   };
 
   var pollBalance = function(address, callback) {
@@ -22,10 +22,15 @@ angular.module('streamium.insight', [])
       }
     });
   };
+  
+  var broadcast = function(tx, callback) {
+    return insight.broadcast(tx, callback);
+  };
 
   return {
     checkBalance: queryBalance,
-    pollBalance: pollBalance
+    pollBalance: pollBalance,
+    broadcast: broadcast
   };
 
 });

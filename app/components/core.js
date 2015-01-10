@@ -158,6 +158,8 @@ angular.module('streamium.core', [])
   function StreamiumClient() {
     this.peer = this.connection = null;
     this.status = StreamiumClient.STATUS.disconnected;
+    this.network = bitcore.Networks.testnet;
+    bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
 
     this.rate = this.providerKey = null;
 
