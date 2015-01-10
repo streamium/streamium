@@ -40,6 +40,7 @@ angular.module('streamium.provider.service', [])
     this.streamId = streamId;
     this.address = address;
     this.rate = rate;
+    this.clientConnections = [];
 
     this.peer = new Peer(this.streamId, this.config);
     var self = this;
@@ -60,11 +61,22 @@ angular.module('streamium.provider.service', [])
 
     this.peer.on('connection', function onConnection(connection) {
       console.log('New connection!', connection);
+      self.clientConnections.push(connection);
 
       connection.on('data', function(data) {
         console.log('New message', data);
         if (!data.type || !self.handlers[data.type]) throw 'Kernel panic'; // TODO!
         self.handlers[data.type].call(self, connection, data.payload);
+      });
+
+      connection.on('error', function(err) {
+        console.log(err);
+        self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
+      });
+
+      connection.on('close', function() {
+        console.log('client connection closed');
+        self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
       });
 
     });

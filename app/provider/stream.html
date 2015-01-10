@@ -27,6 +27,12 @@
 		</ul>
 	</div>
 	<div class="col-md-3 col-sm-6">
+    <a ng-click="onStartBroadcasting()" ng-show="filming && !broadcasting" class="btn btn-success btn-lg">
+      <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+      Start </a>
+    <span ng-show="broadcasting" class="label label-success">
+      <span class="glyphicon glyphicon-record" aria-hidden="true"></span>
+      LIVE!</span>
 		<a href="#" class="btn btn-danger btn-lg btn-end"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End </a>
 	</div>
 </div>

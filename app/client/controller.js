@@ -21,7 +21,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   }
 ])
 
-.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight) {
+.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location) {
   $scope.client = StreamiumClient;
 
   console.log('Join stream');
@@ -52,8 +52,29 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
 })
 
-.controller('WatchStreamCtrl', function($routeParams) {
-  console.log('Watch Stream', $routeParams);
+.controller('WatchStreamCtrl', function($routeParams, $scope, video, StreamiumClient) {
+  var streamId = $routeParams.streamId;
+  var startViewer = function() {
+    video.setPeer(StreamiumClient.peer);
+    video.view(streamId, function(err, stream) {
+      // called on provider calling us
+      if (err) throw err;
+
+      var videoSrc = URL.createObjectURL(stream);
+      $scope.videoSrc = videoSrc;
+      $scope.$digest();
+    });
+  };
+  if (!StreamiumClient.peer) {
+    StreamiumClient.connect(streamId, function(err, fundingAddress) {
+      if (err) throw err;
+      console.log(fundingAddress);
+      startViewer();
+    });
+  } else {
+    startViewer();
+  }
+
 })
 
 .controller('WithdrawStreamCtrl', function($routeParams) {
