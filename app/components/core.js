@@ -28,7 +28,6 @@ angular.module('streamium.core', [])
 
     address = new Address(address);
     if (!address.isValid()) return callback('Invalid address');
-    alert('valid!');
 
     this.streamId = streamId;
     this.address = address;
