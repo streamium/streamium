@@ -22,7 +22,7 @@
     "grunt-markdown": "~0.5.0"
   },
   "dependencies": {
-    "bitcore": "^0.8.6",
+    "bitcore": "git://github.com/bitpay/bitcore.git",
     "bitcore-channel": "git://github.com/bitpay/bitcore-channel.git",
     "http-server": "^0.6.1",
     "peer": "^0.2.8"
