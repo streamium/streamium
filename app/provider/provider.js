@@ -128,10 +128,11 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.getLink = function() {
-    if (this.status == StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
-    return 'https://streamium.io/join/' + this.streamId;
+    if (this.status === StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
+    console.log('Open is working, sending data', self.peer);
+    var baseURL = window.location.origin;
+    return baseURL + '/app/#/join/' + this.streamId;
   };
 
   return new StreamiumProvider();
 });
-
