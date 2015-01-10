@@ -1,84 +1,137 @@
 'use strict';
 
-angular.module('streamium.provider', ['ngRoute'])
+var Provider = channel.Provider;
 
-.config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.when('/provider', {
-      templateUrl: 'provider/create.html',
-      controller: 'CreateStreamCtrl'
-    });
+angular.module('streamium.provider.service', [])
 
-    $routeProvider.when('/provider/:streamId', {
-      templateUrl: 'provider/stream.html',
-      controller: 'BroadcastStreamCtrl'
-    });
+.service('StreamiumProvider', function(bitcore) {
 
-    $routeProvider.when('/provider/:streamId/cashout', {
-      templateUrl: 'provider/cashout.html',
-      controller: 'CashoutStreamCtrl'
-    });
+  var Address = bitcore.Address;
+
+  function StreamiumProvider() {
+    this.address = this.streamId = this.rate = null;
+    this.clients = [];
+
+    // TODO: this screams for a status object or add status into Provider
+    this.mapClientIdToProvider = {};
+    this.mapClientIdToStatus = {};
+    this.config = config.peerJS;
   }
-])
 
-.controller('CreateStreamCtrl', function($scope, $location) {
-  $scope.prices = [1, 0.1, 0.01];
-  $scope.stream = {
-    rate: $scope.prices[0]
-  };
-  $scope.stream.name = 'sexybabe69';
-  $scope.stream.address = 'mjhohspVMgcuetHwkH74C2aVKfTdyYdVSP';
-  $scope.stream.rate = 0.1;
-
-  $scope.normalizeName = function() {
-    var name = $scope.stream.name || '';
-    name = name.trim().toLowerCase().replace(/ /g, '-').replace(/\\/g, '-');
-    $scope.stream.name = name;
+  StreamiumProvider.STATUS = {
+    disconnected: 'disconnected',
+    connecting: 'connecting',
+    ready: 'ready',
+    finished: 'finished'
   };
 
-  $scope.submit = function() {
-    if (!$scope.form.$valid) return;
-    console.log('Initializing channel');
-    StreamiumProvider.init(
-      $scope.stream.name,
-      $scope.stream.address,
-      $scope.stream.rate,
-      function onCreate(err, done) {
-        if (err) throw err;
-        console.log('DONE');
-        $location.url('/provider');
-        $scope.$apply();
+  StreamiumProvider.prototype.init = function(streamId, address, rate, callback) {
+    if (!streamId || !address || !rate || !callback) return callback('Invalid arguments');
+
+    try {
+      address = new Address(address);
+    } catch (e) {
+      return callback('Invalid address');
+    }
+
+    this.streamId = streamId;
+    this.address = address;
+    this.rate = rate;
+
+    this.peer = new Peer(this.streamId, this.config);
+    var self = this;
+    this.peer.on('open', function onOpen() {
+      console.log('Conected to peer:', self.peer);
+      callback(null, true);
+    });
+
+    this.peer.on('close', function onClose() {
+      self.status = StreamiumProvider.STATUS.finished;
+    });
+
+    this.peer.on('error', function onError(error) {
+      self.status = StreamiumProvider.STATUS.disconnected;
+      console.log('we have an error');
+      callback(error);
+    });
+
+    this.peer.on('connection', function onConnection(connection) {
+      console.log('New connection!', connection);
+
+      connection.on('data', function(data) {
+        console.log('New message', data);
+        if (!data.type || !self.handlers[data.type]) throw 'Kernel panic'; // TODO!
+        self.handlers[data.type].call(self, connection, data.payload);
       });
-  };
-})
 
-.controller('BroadcastStreamCtrl', function($scope, $location, video, StreamiumProvider) {
-  var name = $location.$$url.split('/')[2];
-  var startVideo = function() {
-    $scope.client = StreamiumProvider;
-    video.init(function(err, stream) {
-      if (err) {
-        console.log(err);
-        return;
+    });
+
+    // Init Provider
+    // Change status
+  };
+
+  StreamiumProvider.prototype.handlers = {};
+
+  StreamiumProvider.prototype.handlers.hello = function(connection, data) {
+
+    // TODO: Assert state
+
+    var provider = new Provider({
+      network: this.address.network,
+      paymentAddress: this.address,
+    });
+
+    this.mapClientIdToProvider[connection.peer.id] = provider;
+    this.mapClientIdToStatus[connection.peer.id] = StreamiumProvider.STATUS.disconnected;
+
+    connection.send({
+      type: 'hello',
+      payload: {
+        publicKey: provider.key.publicKey.toString(),
+        paymentAddress: this.address.toString(),
+        rate: this.rate
       }
-      var videoSrc = URL.createObjectURL(stream);
-      $scope.videoSrc = videoSrc;
-      $scope.$digest();
     });
   };
-  if (!StreamiumProvider.streamId) {
-    StreamiumProvider.init(name, 'mjhohspVMgcuetHwkH74C2aVKfTdyYdVSP', 0.1, function(err) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      startVideo();
-    });
-  } else {
-    startVideo();
-  }
-})
 
-.controller('CashoutStreamCtrl', function($scope, $location) {
-  console.log('Cashout Ctrl');
+  StreamiumProvider.prototype.handlers.sign = function(connection, data) {
+
+    // TODO: Assert state
+
+    var provider = this.mapClientIdToProvider[connection.peer.id];
+    var status = this.mapClientIdToStatus[connection.peer.id];
+
+    connection.send({
+      type: 'refundAck',
+      payload: provider.signRefund(data).refund.toJSON()
+    });
+  };
+
+  StreamiumProvider.prototype.handlers.payment = function(connection, data) {
+
+    // TODO: Assert state
+
+    // TODO: this looks like duplicated code
+    var provider = this.mapClientIdToProvider[connection.peer.id];
+    var status = this.mapClientIdToStatus[connection.peer.id];
+
+    assert(provider.validPayment(data));
+    // TODO: Do some check with provider.currentAmount
+
+    connection.send({
+      type: 'paymentAck',
+      payload: {
+        success: true,
+        nextTimeout: 0 // TODO: Signal when the next payment is due
+      }
+    });
+  };
+
+  StreamiumProvider.prototype.getLink = function() {
+    if (this.status == StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
+    return 'https://streamium.io/join/' + this.streamId;
+  };
+
+  return new StreamiumProvider();
 });
+

@@ -3,8 +3,10 @@
 // Declare app level module which depends on views, and components
 angular.module('streamium', [
   'ngRoute',
-  'streamium.client',
-  'streamium.provider',
+  'streamium.client.service',
+  'streamium.client.controller',
+  'streamium.provider.service',
+  'streamium.provider.controller',
   'streamium.rates',
   'streamium.bitcoin',
   'streamium.insight',

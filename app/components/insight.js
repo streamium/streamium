@@ -13,10 +13,10 @@ angular.module('streamium.insight', [])
   var pollBalance = function(address, callback) {
     queryBalance(address, function(err, response) {
       if (err) {
-        return setTimeout(pollBalance, 10000);
+        return setTimeout(function() { pollBalance(address, callback); }, 10000);
       }
       if (response.length === 0) {
-        return setTimeout(pollBalance, 10000);
+        return setTimeout(function() { pollBalance(address, callback); }, 10000);
       } else {
         return callback(null, response);
       }
