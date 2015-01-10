@@ -21,7 +21,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   }
 ])
 
-.controller('CreateStreamCtrl', function($scope, $location) {
+.controller('CreateStreamCtrl', function($scope, $location, StreamiumProvider) {
   $scope.prices = [1, 0.1, 0.01];
   $scope.stream = {
     rate: $scope.prices[0]
@@ -45,8 +45,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
       $scope.stream.rate,
       function onCreate(err, done) {
         if (err) throw err;
-        console.log('DONE');
-        $location.url('/provider');
+        $location.path('/provider/' + $scope.stream.name);
         $scope.$apply();
       });
   };
