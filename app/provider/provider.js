@@ -2,11 +2,12 @@
 
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore, channel) {
+.service('StreamiumProvider', function(bitcore, channel, events, inherits) {
   var Provider = channel.Provider;
 
   var Address = bitcore.Address;
   var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
+  var address = key.toAddress();
 
   function StreamiumProvider() {
     this.network = bitcore.Networks.testnet;
@@ -19,7 +20,9 @@ angular.module('streamium.provider.service', [])
     this.mapClientIdToProvider = {};
     this.mapClientIdToStatus = {};
     this.config = config.peerJS;
+    events.EventEmitter.call(this);
   }
+  inherits(StreamiumProvider, events.EventEmitter);
 
   StreamiumProvider.STATUS = {
     disconnected: 'disconnected',
@@ -122,6 +125,8 @@ angular.module('streamium.provider.service', [])
       type: 'refundAck',
       payload: provider.signRefund(data).refund.toJSON()
     });
+
+    this.emit('broadcast:start', connection.peer);
   };
 
   StreamiumProvider.prototype.handlers.end = function(connection, data) {
@@ -129,7 +134,9 @@ angular.module('streamium.provider.service', [])
       StreamiumProvider.prototype.handlers.payment(data);
     }
     Insight.broadcast(this.mapClientIdToProvider[connection.peer.id].paymentTx, console.log);
+    this.emit('broadcast:end', connection.peer);
   };
+
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
 
     // TODO: Assert state

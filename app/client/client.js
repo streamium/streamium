@@ -2,7 +2,7 @@
 
 angular.module('streamium.client.service', [])
 
-.service('StreamiumClient', function(bitcore, channel, Insight) {
+.service('StreamiumClient', function(bitcore, channel, Insight, events, inherits) {
   var Consumer = channel.Consumer;
 
   var fundingKey = bitcore.PrivateKey('cb5dc68fbcaf37f29139b50fa4664b395c03e49deb966e5d49a629af005d0654');
@@ -19,7 +19,10 @@ angular.module('streamium.client.service', [])
     this.rate = this.providerKey = null;
 
     this.config = config.peerJS;
-  };
+    events.EventEmitter.call(this);
+  }
+  inherits(StreamiumClient, events.EventEmitter);
+
 
   StreamiumClient.STATUS = {
     disconnected: 'disconnected',
@@ -91,13 +94,19 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.handlers.refundAck = function(data) {
+    var self = this;
     data = JSON.parse(data);
     this.consumer.validateRefund(data);
-    Insight.broadcast(this.consumer.commitmentTx, console.log);
-    this.consumer.incrementPaymentBy(0);
-    this.connection.send({
-      type: 'payment',
-      payload: this.consumer.paymentTx.toJSON()
+    Insight.broadcast(this.consumer.commitmentTx, function(err) {
+      if (err) {
+        alert('Impossibe to broadcast to insight');
+        return;
+      }
+      self.consumer.incrementPaymentBy(0);
+      self.connection.send({
+        type: 'payment',
+        payload: self.consumer.paymentTx.toJSON()
+      });
     });
   };
 

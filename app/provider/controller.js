@@ -21,13 +21,14 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   }
 ])
 
-.controller('CreateStreamCtrl', function($scope, $location, StreamiumProvider) {
-  $scope.prices = [1, 0.1, 0.01];
+.controller('CreateStreamCtrl', function($scope, $location, StreamiumProvider, bitcore) {
+  $scope.prices = [0.1, 0.01, 0.001];
   $scope.stream = {
     rate: $scope.prices[0]
   };
+  var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
   $scope.stream.name = 'sexybabe69';
-  $scope.stream.address = 'mjhohspVMgcuetHwkH74C2aVKfTdyYdVSP';
+  $scope.stream.address = key.toAddress().toString();
   $scope.stream.rate = 0.1;
 
   $scope.stream.error = null;
@@ -63,18 +64,27 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   var name = $location.$$url.split('/')[2];
   $scope.requiresApproval = true;
 
+  $scope.peers = {};
 
-  $scope.onStartBroadcasting = function() {
-    video.setPeer(StreamiumProvider.peer);
-    video.broadcast(StreamiumProvider.clientConnections, function(err) {
+  StreamiumProvider.on('broadcast:start', function(peer) {
+    $scope.peers[peer.id] = peer;
+    video.broadcast(peer, function(err) {
       if (err) throw err;
       $scope.broadcasting = true;
+      $scope.$apply();
     });
-  };
+  });
+
+  StreamiumProvider.on('broadcast:end', function(peer) {
+    $scope.peers[peer.id] = undefined;
+    video.end(peer);
+    $scope.$apply();
+  });
 
   var startCamera = function() {
     $scope.client = StreamiumProvider;
     $scope.filming = true;
+    video.setPeer(StreamiumProvider.peer);
     video.camera(function(err, stream) {
       if (err) {
         console.log(err);
