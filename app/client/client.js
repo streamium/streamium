@@ -5,19 +5,26 @@ angular.module('streamium.client', ['ngRoute'])
 .config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.when('/join/:streamId', {
-      templateUrl: 'client/setup.html',
-      controller: 'ClientSetupCtrl'
+      templateUrl: 'client/join.html',
+      controller: 'JoinStreamCtrl'
     });
 
-    $routeProvider.when('/join/:streamId/stream', {
+    $routeProvider.when('/stream/:streamId', {
       templateUrl: 'client/stream.html',
-      controller: 'ClientStreamCtrl'
+      controller: 'WatchStreamCtrl'
+    });
+
+    $routeProvider.when('/stream/:streamId/cashout', {
+      templateUrl: 'client/cashout.html',
+      controller: 'WithdrawStreamCtrl'
     });
   }
 ])
 
-.controller('ClientSetupCtrl', function($scope, $routeParams, StreamiumClient) {
+.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient) {
   $scope.client = StreamiumClient;
+
+  console.log('Join stream');
 
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;
@@ -27,6 +34,10 @@ angular.module('streamium.client', ['ngRoute'])
   });
 })
 
-.controller('ClientStreamCtrl', function($routeParams) {
-  console.log('Params', $routeParams);
+.controller('WatchStreamCtrl', function($routeParams) {
+  console.log('Watch Stream', $routeParams);
+})
+
+.controller('WithdrawStreamCtrl', function($routeParams) {
+  console.log('Cashout stream', $routeParams);
 });
