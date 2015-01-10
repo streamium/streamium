@@ -1,29 +1,24 @@
 <h2>Provider Stream</h2>
-<h3>Stream ID: </h3>
-<h3>#Clients: </h3>
 
 <p>Share this link to your viewers: {{client.getLink()}}</p>
 <div class="row">
 	<div class="col-md-12">
-		
+		Video
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-4">
-		<ul>
+		<ul class="list-unstyled">
 			<li><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{time}</li>
 			<li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Balance: $ ({{client.rate}})</li>
 			<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.clients.length}}</li>
 		</ul>
-		
 	</div>
 	<div class="col-md-4">
 		
-		{{client.clients.length}}
 	</div>
 	<div class="col-md-4">
-		<a href="#" class="btn">End stream</a>
+		<a href="#" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End </a>
 	</div>
 </div>
 
-Hola
