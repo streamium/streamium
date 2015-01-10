@@ -1,7 +1,7 @@
 'use strict';
 
-// var Provider = channel.Provider;
-// var Consumer = channel.Consumer;
+var Provider = channel.Provider;
+var Consumer = channel.Consumer;
 
 angular.module('streamium.core', [])
 
