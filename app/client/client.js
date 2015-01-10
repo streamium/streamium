@@ -63,6 +63,7 @@ angular.module('streamium.client.service', [])
       console.log('we have an error');
       callback(error);
     });
+
   };
 
   StreamiumClient.prototype.handlers = {};

@@ -42,7 +42,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
     $scope.stream.loading = true;
-    StreamiumProvider.init(
+    StreamiumProvider.camera(
       $scope.stream.name,
       $scope.stream.address,
       $scope.stream.rate,
@@ -63,10 +63,20 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   var name = $location.$$url.split('/')[2];
   $scope.requiresApproval = true;
 
-  var startVideo = function() {
-    $scope.client = StreamiumProvider;
 
-    video.init(function(err, stream) {
+  $scope.onStartBroadcasting = function() {
+    video.setPeer(StreamiumProvider.peer);
+    video.broadcast(StreamiumProvider.clientConnections, function(err) {
+      if (err) throw err;
+      alert('broadcast');
+      $scope.broadcasting = true;
+    });
+  };
+
+  var startCamera = function() {
+    $scope.client = StreamiumProvider;
+    $scope.filming = true;
+    video.camera(function(err, stream) {
       if (err) {
         console.log(err);
         return;
@@ -83,10 +93,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
         console.log(err);
         return;
       }
-      startVideo();
+      startCamera();
     });
   } else {
-    startVideo();
+    startCamera();
   }
 })
 
