@@ -4,3 +4,14 @@
     <video width="355" height="200" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
   </div>
 </div>
+
+<form name="end" ng-submit="end()" class="form" role="form">
+  <input type="hidden" ng-model="established" required>
+
+  <div class="form-group">
+      <button
+        type="submit"
+        class="btn btn-success"
+        ng-disabled="form.$invalid">End transmission</button>
+  </div>
+</form>

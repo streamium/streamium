@@ -2,7 +2,7 @@
 
 angular.module('streamium.client.service', [])
 
-.service('StreamiumClient', function(bitcore, channel) {
+.service('StreamiumClient', function(bitcore, channel, Insight) {
   var Consumer = channel.Consumer;
 
   var fundingKey = bitcore.PrivateKey('cb5dc68fbcaf37f29139b50fa4664b395c03e49deb966e5d49a629af005d0654');
@@ -93,6 +93,7 @@ angular.module('streamium.client.service', [])
   StreamiumClient.prototype.handlers.refundAck = function(data) {
     data = JSON.parse(data);
     this.consumer.validateRefund(data);
+    Insight.broadcast(this.consumer.commitmentTx, console.log);
     this.consumer.incrementPaymentBy(0);
     this.connection.send({
       type: 'payment',
@@ -116,6 +117,13 @@ angular.module('streamium.client.service', [])
     this.connection.send({
       type: 'sign',
       payload: payload
+    });
+  };
+
+  StreamiumClient.prototype.end = function() {
+    this.connection.send({
+      type: 'end',
+      payload: this.consumer.paymentTx.toJSON()
     });
   };
 

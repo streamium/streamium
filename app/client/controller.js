@@ -74,6 +74,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
   } else {
     startViewer();
   }
+  $scope.end = function() {
+    StreamiumClient.end();
+  };
 
 })
 
