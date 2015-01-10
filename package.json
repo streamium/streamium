@@ -22,9 +22,10 @@
     "grunt-markdown": "~0.5.0"
   },
   "dependencies": {
-    "peer": "^0.2.8",
+    "bitcore": "git://github.com/bitpay/bitcore.git",
+    "bitcore-channel": "git://github.com/bitpay/bitcore-channel.git",
     "http-server": "^0.6.1",
-    "bitcore-stream": "git://github.com/eordano/bitcore-channel.git"
+    "peer": "^0.2.8"
   },
   "scripts": {
     "prestart": "npm install",

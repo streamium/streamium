@@ -7,14 +7,12 @@ angular.module('streamium.core', [])
 
 .service('StreamiumProvider', function(bitcore) {
 
+  var Address = bitcore.Address;
+
   function StreamiumProvider() {
     this.address = this.streamId = this.rate = null;
     this.clients = [];
-
-    // TODO: this screams for a status object or add status into Provider
-    this.mapClientIdToProvider = {};
-    this.mapClientIdToStatus = {};
-
+    this.status = this.STATUS.disconnected;
     this.config = config.peerJS;
   }
 
@@ -28,8 +26,9 @@ angular.module('streamium.core', [])
   StreamiumProvider.prototype.init = function(streamId, address, rate, callback) {
     if (!streamId || !address || !rate || !callback) return callback('Invalid arguments');
 
-    address = new bitcore.Address(address);
+    address = new Address(address);
     if (!address.isValid()) return callback('Invalid address');
+    alert('valid!');
 
     this.streamId = streamId;
     this.address = address;
