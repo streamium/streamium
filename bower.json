@@ -11,8 +11,8 @@
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
     "bootstrap": "~3.3.1",
+    "bitcore": "git@github.com:bitpay/bitcore.git",
     "jquery": "~2.1.1",
-    "bitcore": "~0.1.39",
     "peerjs": "~0.3.14"
   }
 }
