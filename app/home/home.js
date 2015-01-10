@@ -14,9 +14,6 @@ angular.module('streamium.home', ['ngRoute'])
   $scope.stream = {
     rate: $scope.prices[0]
   };
-  $scope.stream.name = 'sexybabe69';
-  $scope.stream.address = 'mjhohspVMgcuetHwkH74C2aVKfTdyYdVSP';
-  $scope.stream.rate = 0.1;
 
   $scope.normalizeName = function() {
     var name = $scope.stream.name || '';
