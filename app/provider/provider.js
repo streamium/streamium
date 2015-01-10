@@ -124,6 +124,12 @@ angular.module('streamium.provider.service', [])
     });
   };
 
+  StreamiumProvider.prototype.handlers.end = function(connection, data) {
+    if (data) {
+      StreamiumProvider.prototype.handlers.payment(data);
+    }
+    Insight.broadcast(this.mapClientIdToProvider[connection.peer.id].paymentTx, console.log);
+  };
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
 
     // TODO: Assert state
