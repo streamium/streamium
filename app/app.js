@@ -8,9 +8,13 @@ angular.module('streamium', [
   'streamium.home',
   'streamium.rates',
   'streamium.bitcoin',
-  'streamium.core'
+  'streamium.core',
+  'streamium.video'
 ]).
 
-config(['$routeProvider', function($routeProvider) {
-  $routeProvider.otherwise({redirectTo: '/'});
-}]);
+config(function($routeProvider, $sceProvider) {
+  $routeProvider.otherwise({
+    redirectTo: '/'
+  });
+  $sceProvider.enabled(false);
+});
