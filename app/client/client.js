@@ -6,9 +6,9 @@ angular.module('streamium.client.service', [])
   var Consumer = channel.Consumer;
 
   var fundingKey = bitcore.PrivateKey('cb5dc68fbcaf37f29139b50fa4664b395c03e49deb966e5d49a629af005d0654');
-  var refundKey = 'b65080da83f59a9bfa03841bc82fd0c0d1e036176b2f2c157eaa9547010a042e';
+  var refundKey = bitcore.PrivateKey('b65080da83f59a9bfa03841bc82fd0c0d1e036176b2f2c157eaa9547010a042e');
   var refundAddress = bitcore.PrivateKey(refundKey).toAddress();
-  var commitmentKey = 'f1a140dc9d795c0aa537329379f645eb961fe42f27c660e10676c07ddf18777f';
+  var commitmentKey = bitcore.PrivateKey('f1a140dc9d795c0aa537329379f645eb961fe42f27c660e10676c07ddf18777f');
 
   function StreamiumClient() {
     this.peer = this.connection = null;
@@ -71,7 +71,6 @@ angular.module('streamium.client.service', [])
     this.rate = data.rate;
     this.providerKey = data.publicKey;
     this.providerAddress = new bitcore.Address(data.paymentAddress);
-    this.network = bitcore.Networks.get(this.providerAddress.name);
 
     this.consumer = new Consumer({
       network: this.network,
@@ -92,10 +91,12 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.handlers.refundAck = function(data) {
-    assert(consumer.validateRefund(messageFromProvider));
+    data = JSON.parse(data);
+    this.consumer.validateRefund(data);
+    this.consumer.incrementPaymentBy(0);
     this.connection.send({
       type: 'payment',
-      payload: this.consumer.getPayment().toJSON()
+      payload: this.consumer.paymentTx.toJSON()
     });
   };
 

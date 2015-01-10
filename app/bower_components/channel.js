@@ -254,6 +254,7 @@ Provider.prototype.signRefund = function signRefund(receivedData) {
 };
 
 Provider.prototype.validPayment = function validPayment(receivedData) {
+  receivedData.paymentAddress = this.paymentAddress;
   var payment = new Payment(receivedData);
   var newAmount;
   var self = this;
@@ -268,7 +269,7 @@ Provider.prototype.validPayment = function validPayment(receivedData) {
     payment.inputs[0].script,
     payment.inputs[0].output.script
   ), 'Script did not evaluate correctly (probably a bad signature received)');
-  $.checkState(!_.isUndefined(newAmount) && newAmount > this.currentAmount,
+  $.checkState(!_.isUndefined(newAmount) && newAmount >= this.currentAmount,
               'A payment for a greater amount was already received');
   this.paymentTx = payment;
   this.currentAmount = newAmount;
