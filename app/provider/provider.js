@@ -2,28 +2,38 @@
 
 angular.module('streamium.provider', ['ngRoute'])
 
-.config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/provider', {
-    templateUrl: 'provider/create.html',
-    controller: 'CreateStreamCtrl'
-  });
+.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.when('/provider', {
+      templateUrl: 'provider/create.html',
+      controller: 'CreateStreamCtrl'
+    });
 
-  $routeProvider.when('/provider/:streamId', {
-    templateUrl: 'provider/stream.html',
-    controller: 'BroadcastStreamCtrl'
-  });
+    $routeProvider.when('/provider/:streamId', {
+      templateUrl: 'provider/stream.html',
+      controller: 'BroadcastStreamCtrl'
+    });
 
-  $routeProvider.when('/provider/:streamId/cashout', {
-    templateUrl: 'provider/cashout.html',
-    controller: 'CashoutStreamCtrl'
-  });
-}])
+    $routeProvider.when('/provider/:streamId/cashout', {
+      templateUrl: 'provider/cashout.html',
+      controller: 'CashoutStreamCtrl'
+    });
+  }
+])
 
 .controller('CreateStreamCtrl', function($scope, $location) {
   console.log('Create Ctrl');
 })
 
 .controller('BroadcastStreamCtrl', function($scope, $location) {
+  video.init(this.peer, function(err, stream) {
+    if (err) {
+      alert(err);
+      return;
+    }
+    $scope.videoSrc = URL.createObjectURL(stream);
+    alert('video should werk');
+  });
   console.log('Broadcast Ctrl');
 })
 
