@@ -3,8 +3,10 @@
 angular.module('streamium.bitcoin', [])
 
 .factory('bitcore', function() {
-  var bitcore = window.bitcore;
-  return bitcore;
+  return require('bitcore');
+})
+.factory('channel', function() {
+  return require('bitcore-channel');
 })
 
 .directive('validAddress', ['bitcore',

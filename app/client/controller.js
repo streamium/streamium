@@ -25,16 +25,31 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.client = StreamiumClient;
 
   console.log('Join stream');
-
+  
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;
 
-    console.log('DONE send funds at', fundingAddress);
-    Insight.pollBalance(fundingAddress, function(err, balance) {
-      console.log('Balance!', balance);
-    });
+    $scope.fundingAddress = fundingAddress;
     $scope.$apply();
+
+    var updateBalance = function(err, utxos) {
+      var funds = 0;
+      var utxo;
+      for (utxo in utxos) {
+        funds += utxos[utxo].satoshis;
+      }
+      StreamiumClient.processFunding(utxos);
+      $scope.funds = funds;
+      $scope.funded = true;
+      $scope.$apply();
+      console.log('updated balance');
+    };
+    Insight.pollBalance(fundingAddress, updateBalance);
   });
+
+  $scope.submit = function() {
+    StreamiumClient.askForRefund();
+  };
 })
 
 .controller('WatchStreamCtrl', function($routeParams) {

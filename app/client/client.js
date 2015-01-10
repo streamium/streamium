@@ -1,11 +1,10 @@
 'use strict';
 
-var Consumer = channel.Consumer;
-
-
 angular.module('streamium.client.service', [])
 
-.service('StreamiumClient', function(bitcore) {
+.service('StreamiumClient', function(bitcore, channel) {
+  var Consumer = channel.Consumer;
+
   var fundingKey = bitcore.PrivateKey('cb5dc68fbcaf37f29139b50fa4664b395c03e49deb966e5d49a629af005d0654');
   var refundKey = 'b65080da83f59a9bfa03841bc82fd0c0d1e036176b2f2c157eaa9547010a042e';
   var refundAddress = bitcore.PrivateKey(refundKey).toAddress();
@@ -87,6 +86,10 @@ angular.module('streamium.client.service', [])
     this.fundingCallback = null;
   };
 
+  StreamiumClient.prototype.processFunding = function(utxos) {
+    this.consumer.processFunding(utxos);
+  };
+
   StreamiumClient.prototype.handlers.refundAck = function(data) {
     assert(consumer.validateRefund(messageFromProvider));
     this.connection.send({
@@ -100,11 +103,17 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.askForRefund = function() {
-    assert(this.consumer.commitmentTx._inputAmount);
+    if (!this.consumer.commitmentTx._inputAmount) {
+      console.log('Error');
+      alert('No funds');
+      return;
+    }
     this.consumer.commitmentTx._updateChangeOutput();
+    var payload = this.consumer.setupRefund().toJSON();
+    console.log(payload);
     this.connection.send({
       type: 'sign',
-      payload: this.consumer.setupRefund().toJSON()
+      payload: payload
     });
   };
 
