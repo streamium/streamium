@@ -5,6 +5,19 @@
 <p>Funds received: {{funds}}</p>
 <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
 
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-4">
+      <select
+        name="minutes" required
+        ng-model="stream.minutes"
+        class="form-control col-md-2"
+        ng-options="val + ' minutes' for val in minutes"/>
+    </div>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="btc" value="{{stream.minutes * client.rate|BTC2USD}}" disabled="disabled">
+    </div>
+  </div>
+
   <input type="hidden" ng-model="funded" required>
 
   <div class="form-group">

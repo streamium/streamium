@@ -23,13 +23,17 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 .controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight) {
   $scope.client = StreamiumClient;
+  $scope.minutes = [5, 10, 30];
 
-  console.log('Join stream');
+  $scope.stream = {};
+  $scope.stream.minutes = $scope.minutes[0];
+  $scope.stream.founds = 0;
 
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;
 
     console.log('DONE send funds at', fundingAddress);
+
     Insight.pollBalance(fundingAddress, function(err, balance) {
       console.log('Balance!', balance);
     });
