@@ -13,50 +13,16 @@
   <link rel="stylesheet" href="app.css">
   <link rel="stylesheet" href="../assets/css/styles.css"> 
   <link rel="stylesheet" href="../assets/css/colors/blue.css">
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
 
-  <!-- =========================
-   SECTION: HOME / HEADER
-  ============================== -->
-  <header>
-    <!-- STICKY NAVIGATION -->
-    <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
 
-                <!-- LOGO ON STICKY NAV BAR -->
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-grid-2x2"></span>
-                </button>
-
-                <!-- LOGO -->
-                <a class="navbar-brand" href="#">
-                    <img src="../assets/img/logo-nav.png" alt="">
-                </a>
-
-            </div>
-
-            <!-- TOP BAR -->
-            <div class="navbar-collapse collapse" id="stamp-navigation">
-
-                <!-- NAVIGATION LINK -->
-                <ul class="nav navbar-nav navbar-left main-navigation small-text">
-                    <li><a href="#section2"></a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-        <!-- /END CONTAINER -->
-    </div>
-    <!-- /END STICKY NAVIGATION -->
-  </header>
-  <div class="container" ng-view></div>
+  <div ng-view></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -64,8 +30,6 @@
   <script src="config.js"></script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="bower_components/peerjs/peer.min.js"></script>
   <script src="bower_components/bitcore.js"></script>
   <script src="bower_components/channel.js"></script>

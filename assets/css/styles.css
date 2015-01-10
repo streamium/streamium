@@ -84,7 +84,7 @@ body {
 	color: #313131;
 	overflow-x: hidden !important;
 	margin: auto !important;
-	padding-top: 84px;
+    background: url(../img/background-images/1.jpg) no-repeat center top fixed;
 }
 
 /*---------------------------------------
@@ -497,6 +497,10 @@ strong,
 /*---------------------------------------
    3.1 SECTION: HOME / HEADER
 -----------------------------------------*/
+
+.content-pg{
+    padding-top: 84px;
+}
 .header {
     background: url(../images/background-images/1.jpg) no-repeat center top fixed;
     -webkit-background-size: cover;
@@ -1241,10 +1245,20 @@ strong,
 }
 
 .stream-data {
-	font-size: 28px;
-	line-height: 38px;
+	font-size: 18px;
+	line-height: 28px;
+	color: #FFF;
+	font-weight: 600;
+	text-shadow: 0 0 5px #333;
 }
 
+.capitalize{
+    text-transform:capitalize;
+}
+
+.lowercase{
+    text-transform:lowercase !important;
+}
 /*---------------------------------------
    4.2 PROVIDER
 -----------------------------------------*/
