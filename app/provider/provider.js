@@ -9,6 +9,9 @@ angular.module('streamium.provider.service', [])
   var Address = bitcore.Address;
 
   function StreamiumProvider() {
+    this.network = bitcore.Networks.testnet;
+    bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
+
     this.address = this.streamId = this.rate = null;
     this.clients = [];
 
