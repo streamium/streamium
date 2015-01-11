@@ -154,6 +154,10 @@ angular.module('streamium.client.service', [])
     // TODO: Pass
   };
 
+  StreamiumClient.prototype.isReady = function() {
+    return !!this.consumer;
+  };
+
   StreamiumClient.prototype.askForRefund = function() {
     if (!this.consumer.commitmentTx._inputAmount) {
       console.log('Error');
