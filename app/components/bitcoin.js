@@ -8,6 +8,12 @@ angular.module('streamium.bitcoin', [])
 .factory('channel', function() {
   return require('bitcore-channel');
 })
+.factory('events', function() {
+  return require('events');
+})
+.factory('inherits', function() {
+  return require('inherits');
+})
 
 .directive('validAddress', ['bitcore',
   function(bitcore) {
@@ -27,4 +33,4 @@ angular.module('streamium.bitcoin', [])
       }
     };
   }
-])
+]);

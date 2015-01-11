@@ -2,8 +2,13 @@
 
 angular.module('streamium.client.service', [])
 
-.service('StreamiumClient', function(bitcore, channel, Insight) {
+.service('StreamiumClient', function(bitcore, channel, Insight, events, inherits) {
   var Consumer = channel.Consumer;
+
+  var SECONDS_IN_MINUTE = 60;
+  var MILLIS_IN_SECOND = 1000;
+  var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
+  var TIMESTEP = 10 * MILLIS_IN_SECOND;
 
   var fundingKey = bitcore.PrivateKey('cb5dc68fbcaf37f29139b50fa4664b395c03e49deb966e5d49a629af005d0654');
   var refundKey = bitcore.PrivateKey('b65080da83f59a9bfa03841bc82fd0c0d1e036176b2f2c157eaa9547010a042e');
@@ -19,7 +24,10 @@ angular.module('streamium.client.service', [])
     this.rate = this.providerKey = null;
 
     this.config = config.peerJS;
-  };
+    events.EventEmitter.call(this);
+  }
+  inherits(StreamiumClient, events.EventEmitter);
+
 
   StreamiumClient.STATUS = {
     disconnected: 'disconnected',
@@ -69,6 +77,12 @@ angular.module('streamium.client.service', [])
   StreamiumClient.prototype.handlers = {};
   StreamiumClient.prototype.handlers.hello = function(data) {
     this.rate = data.rate;
+    this.stepSatoshis = Math.round(
+      TIMESTEP * bitcore.Unit.fromBTC(this.rate).toSatoshis()
+      / MILLIS_IN_MINUTE
+    );
+    console.log(this.rate);
+
     this.providerKey = data.publicKey;
     this.providerAddress = new bitcore.Address(data.paymentAddress);
 
@@ -91,10 +105,45 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.handlers.refundAck = function(data) {
+    var self = this;
     data = JSON.parse(data);
     this.consumer.validateRefund(data);
-    Insight.broadcast(this.consumer.commitmentTx, console.log);
-    this.consumer.incrementPaymentBy(0);
+
+    Insight.broadcast(this.consumer.commitmentTx, function(err) {
+      if (err) {
+        alert('Impossibe to broadcast to insight');
+        return;
+      }
+      self.startPaying();
+    });
+  };
+
+  StreamiumClient.prototype.startPaying = function() {
+
+    var self = this;
+    var satoshis = 2 * this.stepSatoshis;
+    this.startTime = new Date().getTime();
+    console.log('Starting at ' + new Date(this.startTime) + ' sending ' + satoshis);
+
+    console.log('Will send again at ' + new Date(this.startTime + TIMESTEP));
+
+    this.interval = setInterval(function() {
+      self.updatePayment();
+    }, TIMESTEP);
+
+    this.consumer.incrementPaymentBy(satoshis);
+    this.sendPayment();
+  };
+
+  StreamiumClient.prototype.updatePayment = function() {
+    console.log('updating');
+
+    this.consumer.incrementPaymentBy(this.stepSatoshis);
+    this.consumer.paymentTx._updateChangeOutput();
+    this.sendPayment();
+  };
+
+  StreamiumClient.prototype.sendPayment = function() {
     this.connection.send({
       type: 'payment',
       payload: this.consumer.paymentTx.toJSON()
@@ -121,6 +170,7 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.end = function() {
+    clearInterval(this.interval);
     this.connection.send({
       type: 'end',
       payload: this.consumer.paymentTx.toJSON()

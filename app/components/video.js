@@ -23,23 +23,23 @@ Video.prototype.camera = function(cb) {
 
 };
 
-Video.prototype.broadcast = function(connections, cb) {
+Video.prototype.broadcast = function(peer, cb) {
   if (!this.peer) {
     cb('peer should be set');
     return;
   }
-  console.log('broadcasting to ' + connections.length + ' clients');
-  for (var i = 0; i < connections.length; i++) {
-    var connection = connections[i];
-    var call = this.peer.call(connection.peer, this.stream);
-    var clientName = call.peer;
-    call.on('close', function() {
-      console.log('client ' + clientName + ' out of funds');
-    });
-  }
+
+  var call = this.peer.call(peer, this.stream);
+  var clientName = call.peer;
+  call.on('close', function() {
+    console.log('client ' + clientName + ' out of funds');
+  });
   cb(null);
 };
 
+Video.prototype.end = function(peer, cb) {
+  // TODO
+};
 
 Video.prototype.view = function(streamId, cb) {
   if (!this.peer) {

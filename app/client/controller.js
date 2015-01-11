@@ -52,11 +52,12 @@ angular.module('streamium.client.controller', ['ngRoute'])
   });
 
   $scope.submit = function() {
-    StreamiumClient.askForRefund();
+    $location.path('/stream/' + $routeParams.streamId);
   };
 })
 
 .controller('WatchStreamCtrl', function($routeParams, $scope, video, StreamiumClient) {
+  StreamiumClient.askForRefund();
   var streamId = $routeParams.streamId;
   var startViewer = function() {
     video.setPeer(StreamiumClient.peer);
