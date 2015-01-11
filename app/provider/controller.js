@@ -43,7 +43,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
     $scope.stream.loading = true;
-    StreamiumProvider.camera(
+    StreamiumProvider.init(
       $scope.stream.name,
       $scope.stream.address,
       $scope.stream.rate,
