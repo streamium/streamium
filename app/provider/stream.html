@@ -1,76 +1,92 @@
 
-
 <div class="background">
-<!-- =========================
-SECTION: HOME / HEADER
-============================== -->
-<header>
-<!-- STICKY NAVIGATION -->
-<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
+	<!-- =========================
+	SECTION: HOME / HEADER
+	============================== -->
+	<header>
+	<!-- STICKY NAVIGATION -->
+	<div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
+	    <div class="container">
+	        <div class="navbar-header">
 
-            <!-- LOGO ON STICKY NAV BAR -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-grid-2x2"></span>
-            </button>
+	            <!-- LOGO ON STICKY NAV BAR -->
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
+	                <span class="sr-only">Toggle navigation</span>
+	                <span class="icon-grid-2x2"></span>
+	            </button>
 
-            <!-- LOGO -->
-            <a class="navbar-brand" href="#">
-                <img src="../assets/img/logo-nav.png" alt="">
-            </a>
-        </div>
+	            <!-- LOGO -->
+	            <a class="navbar-brand" href="#">
+	                <img src="../assets/img/logo-nav.png" alt="">
+	            </a>
+	        </div>
 
-        <!-- TOP BAR -->
-        <div class="navbar-collapse collapse" id="stamp-navigation">
+	        <!-- TOP BAR -->
+	        <div class="navbar-collapse collapse" id="stamp-navigation">
 
-            <!-- NAVIGATION LINK -->
-            <ul class="nav navbar-nav navbar-left main-navigation small-text">
-                <li>
-               		<a class="lowercase" id="copylink" data-toggle="popover" data-placement="bottom" title="Share your stream" data-content="Copy this url and share it to your viewers.">streamium.io/join/{{client.streamId}}</a>
-            	</li>
-            </ul>
-        </div>
-    </div>
-    <!-- /END CONTAINER -->
-</div>
-<!-- /END STICKY NAVIGATION -->
-</header>
+	            <!-- NAVIGATION LINK -->
+	            <ul class="nav navbar-nav navbar-left main-navigation small-text">
+	                <li>
+	               		<a class="lowercase" id="copylink" data-toggle="popover" data-placement="bottom" title="Share your stream" data-content="Copy this url and share it to your viewers.">streamium.io/join/{{client.streamId}}</a>
+	            	</li>
+	            </ul>
+	        </div>
+	    </div>
+	    <!-- /END CONTAINER -->
 
-<!-- =========================
-SECTION: Container
-============================== -->
-<div class="container content-pg">
-	<div class="row">
-		<div class="col-md-12">
-			<video class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 stream-video"  id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-			<div class="col-md-10 col-sm-10 stream-data">
-				<ul class="list-unstyled">
-					<li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 0.00 ({{client.rate}} $/min)</li>
-				</ul>
+		<div class="row">
+			<div class="bg-warning" ng-show="requiresApproval">
+				Please allow Streamium to use the camera.
 			</div>
-			<div class="col-md-2 col-sm-2 stream-data">
-				<ul class="list-unstyled">
-					<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.clients.length}}</li>
-				</ul>
+			<div class="col-md-12">
+				
 			</div>
 		</div>
 	</div>
+	<!-- /END STICKY NAVIGATION -->
+	</header>
 
-	<div class="row">
-		<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-			<a href="#" class="btn btn-danger btn-lg btn-end"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End </a>
+	<!-- =========================
+	SECTION: Container
+	============================== -->
+	<div class="container content-pg">
+		<div class="row">
+			<div class="col-md-12" ng-hide="requiresApproval">
+				<video class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 stream-video"  id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
+				<div class="col-md-10 col-sm-10 stream-data">
+					<ul class="list-unstyled">
+						<li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> 0.00 ({{client.rate}} $/min)</li>
+					</ul>
+				</div>
+				<div class="col-md-2 col-sm-2 stream-data">
+					<ul class="list-unstyled">
+						<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.clients.length}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
+				<a ng-click="onStartBroadcasting()" ng-show="filming && !broadcasting" class="btn btn-success btn-lg">
+					<span class="glyphicon glyphicon-play" aria-hidden="true"></span> Start 
+				</a>
+	    		<span ng-show="broadcasting" class="label label-success">
+					<span class="glyphicon glyphicon-record" aria-hidden="true"></span>LIVE!
+				</span>
+				<a href="#" class="btn btn-danger btn-lg btn-end">
+					<span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End
+				</a>
+			</div>
 		</div>
 	</div>
 </div>
-</div>
-
 
 <script type="text/javascript">
     $( document ).ready(function() {

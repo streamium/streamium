@@ -1,68 +1,4 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.bitcore=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (Buffer){
-var bitcore = module.exports;
-
-
-// crypto 
-bitcore.crypto = {};
-bitcore.crypto.BN = require('./lib/crypto/bn');
-bitcore.crypto.ECDSA = require('./lib/crypto/ecdsa');
-bitcore.crypto.Hash = require('./lib/crypto/hash');
-bitcore.crypto.Random = require('./lib/crypto/random');
-bitcore.crypto.Point = require('./lib/crypto/point');
-bitcore.crypto.Signature = require('./lib/crypto/signature');
-
-// encoding
-bitcore.encoding = {};
-bitcore.encoding.Base58 = require('./lib/encoding/base58');
-bitcore.encoding.Base58Check = require('./lib/encoding/base58check');
-bitcore.encoding.BufferReader = require('./lib/encoding/bufferreader');
-bitcore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
-bitcore.encoding.Varint = require('./lib/encoding/varint');
-
-// utilities
-bitcore.util = {};
-bitcore.util.buffer = require('./lib/util/buffer');
-bitcore.util.js = require('./lib/util/js');
-bitcore.util.preconditions = require('./lib/util/preconditions');
-
-// errors thrown by the library
-bitcore.errors = require('./lib/errors');
-
-// main bitcoin library
-bitcore.Address = require('./lib/address');
-bitcore.Block = require('./lib/block');
-bitcore.BlockHeader = require('./lib/blockheader');
-bitcore.HDPrivateKey = require('./lib/hdprivatekey.js');
-bitcore.HDPublicKey = require('./lib/hdpublickey.js');
-bitcore.Networks = require('./lib/networks');
-bitcore.Opcode = require('./lib/opcode');
-bitcore.PaymentProtocol = require('./lib/paymentprotocol');
-bitcore.PrivateKey = require('./lib/privatekey');
-bitcore.PublicKey = require('./lib/publickey');
-bitcore.Script = require('./lib/script');
-bitcore.Transaction = require('./lib/transaction');
-bitcore.URI = require('./lib/uri');
-bitcore.Unit = require('./lib/unit');
-
-// dependencies, subject to change
-bitcore.deps = {};
-bitcore.deps.bnjs = require('bn.js');
-bitcore.deps.bs58 = require('bs58');
-bitcore.deps.Buffer = Buffer;
-bitcore.deps.elliptic = require('elliptic');
-
-// transport
-bitcore.transport = require('./lib/transport');
-
-// Internal usage, exposed for testing/advanced tweaking
-bitcore._HDKeyCache = require('./lib/hdkeycache');
-
-// module information
-bitcore.version = 'v'+require('./package.json').version;
-
-}).call(this,require("buffer").Buffer)
-},{"./lib/address":2,"./lib/block":3,"./lib/blockheader":4,"./lib/crypto/bn":5,"./lib/crypto/ecdsa":6,"./lib/crypto/hash":7,"./lib/crypto/point":8,"./lib/crypto/random":9,"./lib/crypto/signature":10,"./lib/encoding/base58":11,"./lib/encoding/base58check":12,"./lib/encoding/bufferreader":13,"./lib/encoding/bufferwriter":14,"./lib/encoding/varint":15,"./lib/errors":16,"./lib/hdkeycache":17,"./lib/hdprivatekey.js":18,"./lib/hdpublickey.js":19,"./lib/networks":20,"./lib/opcode":21,"./lib/paymentprotocol":24,"./lib/privatekey":28,"./lib/publickey":29,"./lib/script":30,"./lib/transaction":33,"./lib/transport":44,"./lib/unit":48,"./lib/uri":49,"./lib/util/buffer":50,"./lib/util/js":51,"./lib/util/preconditions":52,"./package.json":111,"bn.js":67,"bs58":69,"buffer":115,"elliptic":72}],2:[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -566,7 +502,7 @@ Address.prototype.inspect = function() {
 module.exports = Address;
 
 }).call(this,require("buffer").Buffer)
-},{"./crypto/hash":7,"./encoding/base58check":12,"./networks":20,"./publickey":29,"./script":30,"./util/js":51,"./util/preconditions":52,"buffer":115,"lodash":94}],3:[function(require,module,exports){
+},{"./crypto/hash":6,"./encoding/base58check":11,"./networks":19,"./publickey":28,"./script":29,"./util/js":50,"./util/preconditions":51,"buffer":114,"lodash":110}],2:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -890,7 +826,7 @@ Block.Values = {
 module.exports = Block;
 
 }).call(this,require("buffer").Buffer)
-},{"./blockheader":4,"./crypto/bn":5,"./crypto/hash":7,"./encoding/bufferreader":13,"./encoding/bufferwriter":14,"./encoding/varint":15,"./transaction":33,"./util/buffer":50,"./util/js":51,"buffer":115,"lodash":94}],4:[function(require,module,exports){
+},{"./blockheader":3,"./crypto/bn":4,"./crypto/hash":6,"./encoding/bufferreader":12,"./encoding/bufferwriter":13,"./encoding/varint":14,"./transaction":32,"./util/buffer":49,"./util/js":50,"buffer":114,"lodash":110}],3:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -1164,7 +1100,7 @@ BlockHeader.Constants = {
 module.exports = BlockHeader;
 
 }).call(this,require("buffer").Buffer)
-},{"./crypto/bn":5,"./crypto/hash":7,"./encoding/bufferreader":13,"./encoding/bufferwriter":14,"./util/buffer":50,"./util/js":51,"buffer":115,"lodash":94}],5:[function(require,module,exports){
+},{"./crypto/bn":4,"./crypto/hash":6,"./encoding/bufferreader":12,"./encoding/bufferwriter":13,"./util/buffer":49,"./util/js":50,"buffer":114,"lodash":110}],4:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -1383,7 +1319,7 @@ decorate('lt');
 module.exports = BN;
 
 }).call(this,require("buffer").Buffer)
-},{"../util/preconditions":52,"bn.js":67,"buffer":115,"lodash":94}],6:[function(require,module,exports){
+},{"../util/preconditions":51,"bn.js":66,"buffer":114,"lodash":110}],5:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -1682,7 +1618,7 @@ ECDSA.verify = function(hashbuf, sig, pubkey, endian) {
 module.exports = ECDSA;
 
 }).call(this,require("buffer").Buffer)
-},{"../publickey":29,"../util/buffer":50,"../util/preconditions":52,"./bn":5,"./hash":7,"./point":8,"./random":9,"./signature":10,"buffer":115,"lodash":94}],7:[function(require,module,exports){
+},{"../publickey":28,"../util/buffer":49,"../util/preconditions":51,"./bn":4,"./hash":6,"./point":7,"./random":8,"./signature":9,"buffer":114,"lodash":110}],6:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -1775,7 +1711,7 @@ Hash.sha512hmac = function(data, key) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../util/buffer":50,"../util/preconditions":52,"buffer":115,"crypto":122,"hash.js":86,"sha512":101}],8:[function(require,module,exports){
+},{"../util/buffer":49,"../util/preconditions":51,"buffer":114,"crypto":121,"hash.js":85,"sha512":98}],7:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -1924,7 +1860,7 @@ Point.pointToCompressed = function pointToCompressed(point) {
 module.exports = Point;
 
 }).call(this,require("buffer").Buffer)
-},{"../util/buffer":50,"./bn":5,"buffer":115,"elliptic":72}],9:[function(require,module,exports){
+},{"../util/buffer":49,"./bn":4,"buffer":114,"elliptic":71}],8:[function(require,module,exports){
 (function (process,Buffer){
 'use strict';
 
@@ -1985,7 +1921,7 @@ Random.getPseudoRandomBuffer = function(size) {
 module.exports = Random;
 
 }).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":211,"buffer":115,"crypto":122}],10:[function(require,module,exports){
+},{"_process":210,"buffer":114,"crypto":121}],9:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -2286,7 +2222,7 @@ Signature.SIGHASH_ANYONECANPAY = 0x80;
 module.exports = Signature;
 
 }).call(this,require("buffer").Buffer)
-},{"../util/buffer":50,"../util/preconditions":52,"./bn":5,"buffer":115,"lodash":94}],11:[function(require,module,exports){
+},{"../util/buffer":49,"../util/preconditions":51,"./bn":4,"buffer":114,"lodash":110}],10:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -2360,7 +2296,7 @@ Base58.prototype.toString = function() {
 module.exports = Base58;
 
 }).call(this,require("buffer").Buffer)
-},{"bs58":69,"buffer":115,"lodash":94}],12:[function(require,module,exports){
+},{"bs58":68,"buffer":114,"lodash":110}],11:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -2459,7 +2395,7 @@ Base58Check.prototype.toString = function() {
 module.exports = Base58Check;
 
 }).call(this,require("buffer").Buffer)
-},{"../crypto/hash":7,"./base58":11,"buffer":115,"lodash":94}],13:[function(require,module,exports){
+},{"../crypto/hash":6,"./base58":10,"buffer":114,"lodash":110}],12:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -2619,7 +2555,7 @@ BufferReader.prototype.readReverse = function(len) {
 module.exports = BufferReader;
 
 }).call(this,require("buffer").Buffer)
-},{"../crypto/bn":5,"../util/buffer":50,"../util/preconditions":52,"buffer":115,"lodash":94}],14:[function(require,module,exports){
+},{"../crypto/bn":4,"../util/buffer":49,"../util/preconditions":51,"buffer":114,"lodash":110}],13:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -2775,7 +2711,7 @@ BufferWriter.varintBufBN = function(bn) {
 module.exports = BufferWriter;
 
 }).call(this,require("buffer").Buffer)
-},{"../util/buffer":50,"assert":113,"buffer":115}],15:[function(require,module,exports){
+},{"../util/buffer":49,"assert":112,"buffer":114}],14:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -2851,7 +2787,7 @@ Varint.prototype.toNumber = function() {
 module.exports = Varint;
 
 }).call(this,require("buffer").Buffer)
-},{"../crypto/bn":5,"./bufferreader":13,"./bufferwriter":14,"buffer":115}],16:[function(require,module,exports){
+},{"../crypto/bn":4,"./bufferreader":12,"./bufferwriter":13,"buffer":114}],15:[function(require,module,exports){
 'use strict';
 
 /* jshint maxlen: 300 */
@@ -3128,7 +3064,7 @@ bitcore.Error.HDPublicKey.UnrecognizedArgument.prototype.name = "bitcore.Error.H
 
 module.exports = bitcore.Error;
 
-},{}],17:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -3175,7 +3111,7 @@ module.exports = {
   }
 };
 
-},{}],18:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -3702,7 +3638,7 @@ assert(HDPrivateKey.ChecksumEnd === HDPrivateKey.SerializedByteSize);
 module.exports = HDPrivateKey;
 
 }).call(this,require("buffer").Buffer)
-},{"./crypto/bn":5,"./crypto/hash":7,"./crypto/point":8,"./crypto/random":9,"./encoding/base58":11,"./encoding/base58check":12,"./errors":16,"./hdkeycache":17,"./hdpublickey":19,"./networks":20,"./privatekey":28,"./util/buffer":50,"./util/js":51,"assert":113,"buffer":115,"lodash":94}],19:[function(require,module,exports){
+},{"./crypto/bn":4,"./crypto/hash":6,"./crypto/point":7,"./crypto/random":8,"./encoding/base58":10,"./encoding/base58check":11,"./errors":15,"./hdkeycache":16,"./hdpublickey":18,"./networks":19,"./privatekey":27,"./util/buffer":49,"./util/js":50,"assert":112,"buffer":114,"lodash":110}],18:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -4156,7 +4092,7 @@ assert(HDPublicKey.ChecksumEnd === HDPublicKey.SerializedByteSize);
 
 module.exports = HDPublicKey;
 
-},{"./crypto/bn":5,"./crypto/hash":7,"./crypto/point":8,"./encoding/base58":11,"./encoding/base58check":12,"./errors":16,"./hdkeycache":17,"./hdprivatekey":18,"./networks":20,"./publickey":29,"./util/buffer":50,"./util/js":51,"assert":113,"lodash":94}],20:[function(require,module,exports){
+},{"./crypto/bn":4,"./crypto/hash":6,"./crypto/point":7,"./encoding/base58":10,"./encoding/base58check":11,"./errors":15,"./hdkeycache":16,"./hdprivatekey":17,"./networks":19,"./publickey":28,"./util/buffer":49,"./util/js":50,"assert":112,"lodash":110}],19:[function(require,module,exports){
 'use strict';
 var _ = require('lodash');
 
@@ -4261,14 +4197,14 @@ function getNetwork(arg, key) {
  * @namespace Network
  */
 module.exports = {
-  defaultNetwork: livenet,
+  defaultNetwork: testnet,
   livenet: livenet,
   mainnet: livenet,
   testnet: testnet,
   get: getNetwork
 };
 
-},{"./util/buffer":50,"lodash":94}],21:[function(require,module,exports){
+},{"./util/buffer":49,"lodash":110}],20:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -4508,7 +4444,7 @@ Opcode.isSmallIntOp = function(opcode) {
 module.exports = Opcode;
 
 }).call(this,require("buffer").Buffer)
-},{"./util/buffer":50,"./util/js":51,"./util/preconditions":52,"buffer":115,"lodash":94}],22:[function(require,module,exports){
+},{"./util/buffer":49,"./util/js":50,"./util/preconditions":51,"buffer":114,"lodash":110}],21:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -4729,7 +4665,7 @@ PaymentProtocol.verifyCertChain = function(chain, sigHashAlg) {
 module.exports = PaymentProtocol;
 
 }).call(this,require("buffer").Buffer)
-},{"./common":23,"./rootcerts":27,"asn1.js/rfc/3280":66,"buffer":115,"jsrsasign":93}],23:[function(require,module,exports){
+},{"./common":22,"./rootcerts":26,"asn1.js/rfc/3280":65,"buffer":114,"jsrsasign":91}],22:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -5190,14 +5126,14 @@ PaymentProtocol.trusted = RootCerts.trusted;
 module.exports = PaymentProtocol;
 
 }).call(this,require("buffer").Buffer)
-},{"../crypto/ecdsa":6,"../crypto/hash":7,"../crypto/signature":10,"../encoding/bufferwriter":14,"../privatekey":28,"../publickey":29,"./rootcerts":27,"buffer":115,"protobufjs/dist/ProtoBuf":95}],24:[function(require,module,exports){
+},{"../crypto/ecdsa":5,"../crypto/hash":6,"../crypto/signature":9,"../encoding/bufferwriter":13,"../privatekey":27,"../publickey":28,"./rootcerts":26,"buffer":114,"protobufjs/dist/ProtoBuf":92}],23:[function(require,module,exports){
 if ( typeof(window) === 'undefined' ) {
   module.exports = require('./node');
 } else {
   module.exports = require('./browser');
 }
 
-},{"./browser":22,"./node":25}],25:[function(require,module,exports){
+},{"./browser":21,"./node":24}],24:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -5378,7 +5314,7 @@ PaymentProtocol.verifyCertChain = function(chain, sigHashAlg) {
 module.exports = PaymentProtocol;
 
 }).call(this,require("buffer").Buffer)
-},{"./common":23,"./rootcerts":27,"asn1.js/rfc/3280":66,"buffer":115,"crypto":122}],26:[function(require,module,exports){
+},{"./common":22,"./rootcerts":26,"asn1.js/rfc/3280":65,"buffer":114,"crypto":121}],25:[function(require,module,exports){
 module.exports={
   "GTE CyberTrust Global Root": "-----BEGIN CERTIFICATE-----\nMIICWjCCAcMCAgGlMA0GCSqGSIb3DQEBBAUAMHUxCzAJBgNVBAYTAlVTMRgwFgYDVQQKEw9H\nVEUgQ29ycG9yYXRpb24xJzAlBgNVBAsTHkdURSBDeWJlclRydXN0IFNvbHV0aW9ucywgSW5j\nLjEjMCEGA1UEAxMaR1RFIEN5YmVyVHJ1c3QgR2xvYmFsIFJvb3QwHhcNOTgwODEzMDAyOTAw\nWhcNMTgwODEzMjM1OTAwWjB1MQswCQYDVQQGEwJVUzEYMBYGA1UEChMPR1RFIENvcnBvcmF0\naW9uMScwJQYDVQQLEx5HVEUgQ3liZXJUcnVzdCBTb2x1dGlvbnMsIEluYy4xIzAhBgNVBAMT\nGkdURSBDeWJlclRydXN0IEdsb2JhbCBSb290MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKB\ngQCVD6C28FCc6HrHiM3dFw4usJTQGz0O9pTAipTHBsiQl8i4ZBp6fmw8U+E3KHNgf7KXUwef\nU/ltWJTSr41tiGeA5u2ylc9yMcqlHHK6XALnZELn+aks1joNrI1CqiQBOeacPwGFVw1Yh0X4\n04Wqk2kmhXBIgD8SFcd5tB8FLztimQIDAQABMA0GCSqGSIb3DQEBBAUAA4GBAG3rGwnpXtlR\n22ciYaQqPEh346B8pt5zohQDhT37qw4wxYMWM4ETCJ57NE7fQMh017l93PR2VX2bY1QY6fDq\n81yx2YtCHrnAlU66+tXifPVoYb+O7AWXX1uw16OFNMQkpw0PlZPvy5TYnh+dXIVtx6quTx8i\ntc2VrbqnzPmrC3p/\n-----END CERTIFICATE-----\n",
   "Thawte Server CA": "-----BEGIN CERTIFICATE-----\nMIIDEzCCAnygAwIBAgIBATANBgkqhkiG9w0BAQQFADCBxDELMAkGA1UEBhMCWkExFTATBgNV\nBAgTDFdlc3Rlcm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMR0wGwYDVQQKExRUaGF3dGUg\nQ29uc3VsdGluZyBjYzEoMCYGA1UECxMfQ2VydGlmaWNhdGlvbiBTZXJ2aWNlcyBEaXZpc2lv\nbjEZMBcGA1UEAxMQVGhhd3RlIFNlcnZlciBDQTEmMCQGCSqGSIb3DQEJARYXc2VydmVyLWNl\ncnRzQHRoYXd0ZS5jb20wHhcNOTYwODAxMDAwMDAwWhcNMjAxMjMxMjM1OTU5WjCBxDELMAkG\nA1UEBhMCWkExFTATBgNVBAgTDFdlc3Rlcm4gQ2FwZTESMBAGA1UEBxMJQ2FwZSBUb3duMR0w\nGwYDVQQKExRUaGF3dGUgQ29uc3VsdGluZyBjYzEoMCYGA1UECxMfQ2VydGlmaWNhdGlvbiBT\nZXJ2aWNlcyBEaXZpc2lvbjEZMBcGA1UEAxMQVGhhd3RlIFNlcnZlciBDQTEmMCQGCSqGSIb3\nDQEJARYXc2VydmVyLWNlcnRzQHRoYXd0ZS5jb20wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJ\nAoGBANOkUG7I/1Zr5s9dtuoMaHVHoqrC2oQl/Kj0R1HahbUgdJSGHg91yekIYfUGbTBuFRkC\n6VLAYttNmZ7iagxEOM3+vuNkCXDF/rFrKbYvScg71CcEJRCXL+eQbcAoQpnXTEPew/UhbVSf\nXcNY4cDk2VuwuNy0e982OsK1ZiIS1ocNAgMBAAGjEzARMA8GA1UdEwEB/wQFMAMBAf8wDQYJ\nKoZIhvcNAQEEBQADgYEAB/pMaVz7lcxG7oWDTSEwjsrZqG9JGubaUeNgcGyEYRGhGshIPllD\nfU+VPaGLtwtimHp1it2ITk6eQNuozDJ0uW8NxuOzRAvZim+aKZuZGCg70eNAKJpaPNW15yAb\ni8qkq43pUdniTCxZqdq5snUb9kLy78fyGPmJvKP/iiMucEc=\n-----END CERTIFICATE-----\n",
@@ -5523,7 +5459,7 @@ module.exports={
   "T-TeleSec GlobalRoot Class 3": "-----BEGIN CERTIFICATE-----\nMIIDwzCCAqugAwIBAgIBATANBgkqhkiG9w0BAQsFADCBgjELMAkGA1UEBhMCREUxKzApBgNV\nBAoMIlQtU3lzdGVtcyBFbnRlcnByaXNlIFNlcnZpY2VzIEdtYkgxHzAdBgNVBAsMFlQtU3lz\ndGVtcyBUcnVzdCBDZW50ZXIxJTAjBgNVBAMMHFQtVGVsZVNlYyBHbG9iYWxSb290IENsYXNz\nIDMwHhcNMDgxMDAxMTAyOTU2WhcNMzMxMDAxMjM1OTU5WjCBgjELMAkGA1UEBhMCREUxKzAp\nBgNVBAoMIlQtU3lzdGVtcyBFbnRlcnByaXNlIFNlcnZpY2VzIEdtYkgxHzAdBgNVBAsMFlQt\nU3lzdGVtcyBUcnVzdCBDZW50ZXIxJTAjBgNVBAMMHFQtVGVsZVNlYyBHbG9iYWxSb290IENs\nYXNzIDMwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC9dZPwYiJvJK7genasfb3Z\nJNW4t/zN8ELg63iIVl6bmlQdTQyK9tPPcPRStdiTBONGhnFBSivwKixVA9ZIw+A5OO3yXDw/\nRLyTPWGrTs0NvvAgJ1gORH8EGoel15YUNpDQSXuhdfsaa3Ox+M6pCSzyU9XDFES4hqX2iys5\n2qMzVNn6chr3IhUciJFrf2blw2qAsCTz34ZFiP0Zf3WHHx+xGwpzJFu5ZeAsVMhg02YXP+HM\nVDNzkQI6pn97djmiH5a2OK61yJN0HZ65tOVgnS9W0eDrXltMEnAMbEQgqxHY9Bn20pxSN+f6\ntsIxO0rUFJmtxxr1XV/6B7h8DR/Wgx6zAgMBAAGjQjBAMA8GA1UdEwEB/wQFMAMBAf8wDgYD\nVR0PAQH/BAQDAgEGMB0GA1UdDgQWBBS1A/d2O2GCahKqGFPrAyGUv/7OyjANBgkqhkiG9w0B\nAQsFAAOCAQEAVj3vlNW92nOyWL6ukK2YJ5f+AbGwUgC4TeQbIXQbfsDuXmkqJa9c1h3a0nnJ\n85cp4IaH3gRZD/FZ1GSFS5mvJQQeyUapl96Cshtwn5z2r3Ex3XsFpSzTucpH9sry9uetuUg/\nvBa3wW306gmv7PO15wWeph6KU1HWk4HMdJP2udqmJQV0eVp+QD6CSyYRMG7hP0HHRwA11fXT\n91Q+gT3aSWqas+8QPebrb9HIIkfLzM8BMZLZGOMivgkeGj5asuRrDFR6fUNOuImle9eiPZaG\nzPImNC1qkp2aGtAw4l1OBLBfiyB+d8E9lYLRRpo7PHi4b6HQDWSieB4pTpPDpFQUWw==\n-----END CERTIFICATE-----\n",
   "EE Certification Centre Root CA": "-----BEGIN CERTIFICATE-----\nMIIEAzCCAuugAwIBAgIQVID5oHPtPwBMyonY43HmSjANBgkqhkiG9w0BAQUFADB1MQswCQYD\nVQQGEwJFRTEiMCAGA1UECgwZQVMgU2VydGlmaXRzZWVyaW1pc2tlc2t1czEoMCYGA1UEAwwf\nRUUgQ2VydGlmaWNhdGlvbiBDZW50cmUgUm9vdCBDQTEYMBYGCSqGSIb3DQEJARYJcGtpQHNr\nLmVlMCIYDzIwMTAxMDMwMTAxMDMwWhgPMjAzMDEyMTcyMzU5NTlaMHUxCzAJBgNVBAYTAkVF\nMSIwIAYDVQQKDBlBUyBTZXJ0aWZpdHNlZXJpbWlza2Vza3VzMSgwJgYDVQQDDB9FRSBDZXJ0\naWZpY2F0aW9uIENlbnRyZSBSb290IENBMRgwFgYJKoZIhvcNAQkBFglwa2lAc2suZWUwggEi\nMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDIIMDs4MVLqwd4lfNE7vsLDP90jmG7sWLq\nI9iroWUyeuuOF0+W2Ap7kaJjbMeMTC55v6kF/GlclY1i+blw7cNRfdCT5mzrMEvhvH2/UpvO\nbntl8jixwKIy72KyaOBhU8E2lf/slLo2rpwcpzIP5Xy0xm90/XsY6KxX7QYgSzIwWFv9zajm\nofxwvI6Sc9uXp3whrj3B9UiHbCe9nyV0gVWw93X2PaRka9ZP585ArQ/dMtO8ihJTmMmJ+xAd\nTX7Nfh9WDSFwhfYggx/2uh8Ej+p3iDXE/+pOoYtNP2MbRMNE1CV2yreN1x5KZmTNXMWcg+HC\nCIia7E6j8T4cLNlsHaFLAgMBAAGjgYowgYcwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8E\nBAMCAQYwHQYDVR0OBBYEFBLyWj7qVhy/zQas8fElyalL1BSZMEUGA1UdJQQ+MDwGCCsGAQUF\nBwMCBggrBgEFBQcDAQYIKwYBBQUHAwMGCCsGAQUFBwMEBggrBgEFBQcDCAYIKwYBBQUHAwkw\nDQYJKoZIhvcNAQEFBQADggEBAHv25MANqhlHt01Xo/6tu7Fq1Q+e2+RjxY6hUFaTlrg4wCQi\nZrxTFGGVv9DHKpY5P30osxBAIWrEr7BSdxjhlthWXePdNl4dp1BUoMUq5KqMlIpPnTX/dqQG\nE5Gion0ARD9V04I8GtVbvFZMIi5GQ4okQC3zErg7cBqklrkar4dBGmoYDQZPxz5uuSlNDUmJ\nEYcyW+ZLBMjkXOZ0c5RdFpgTlf7727FE5TpwrDdr5rMzcijJs1eg9gIWiAYLtqZLICjU3j2L\nrTcFU3T+bsy8QxdxXvnFzBqpYe73dgzzcvRyrc9yAjYHR8/vGVCJYMzpJJUPwssd8m92kMfM\ndcGWxZ0=\n-----END CERTIFICATE-----\n"
 }
-},{}],27:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -5602,7 +5538,7 @@ RootCerts.certs = certs;
 RootCerts.trusted = trusted;
 
 }).call(this,require("buffer").Buffer)
-},{"./rootcerts.json":26,"buffer":115}],28:[function(require,module,exports){
+},{"./rootcerts.json":25,"buffer":114}],27:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -5980,7 +5916,7 @@ PrivateKey.prototype.inspect = function() {
 module.exports = PrivateKey;
 
 }).call(this,require("buffer").Buffer)
-},{"./address":2,"./crypto/bn":5,"./crypto/point":8,"./crypto/random":9,"./encoding/base58check":12,"./networks":20,"./publickey":29,"./util/js":51,"buffer":115,"lodash":94}],29:[function(require,module,exports){
+},{"./address":1,"./crypto/bn":4,"./crypto/point":7,"./crypto/random":8,"./encoding/base58check":11,"./networks":19,"./publickey":28,"./util/js":50,"buffer":114,"lodash":110}],28:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -6410,12 +6346,12 @@ PublicKey.prototype.inspect = function() {
 module.exports = PublicKey;
 
 }).call(this,require("buffer").Buffer)
-},{"./address":2,"./crypto/bn":5,"./crypto/hash":7,"./crypto/point":8,"./networks":20,"./privatekey":28,"./util/js":51,"./util/preconditions":52,"buffer":115,"lodash":94}],30:[function(require,module,exports){
+},{"./address":1,"./crypto/bn":4,"./crypto/hash":6,"./crypto/point":7,"./networks":19,"./privatekey":27,"./util/js":50,"./util/preconditions":51,"buffer":114,"lodash":110}],29:[function(require,module,exports){
 module.exports = require('./script');
 
 module.exports.Interpreter = require('./interpreter');
 
-},{"./interpreter":31,"./script":32}],31:[function(require,module,exports){
+},{"./interpreter":30,"./script":31}],30:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -7584,7 +7520,7 @@ Interpreter.prototype.step = function() {
 
 
 }).call(this,require("buffer").Buffer)
-},{"../crypto/bn":5,"../crypto/hash":7,"../crypto/signature":10,"../opcode":21,"../publickey":29,"../transaction":33,"./script":32,"buffer":115,"lodash":94}],32:[function(require,module,exports){
+},{"../crypto/bn":4,"../crypto/hash":6,"../crypto/signature":9,"../opcode":20,"../publickey":28,"../transaction":32,"./script":31,"buffer":114,"lodash":110}],31:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -8370,20 +8306,20 @@ Script.prototype.checkMinimalPush = function(i) {
 module.exports = Script;
 
 }).call(this,require("buffer").Buffer)
-},{"../address":2,"../crypto/hash":7,"../crypto/signature":10,"../encoding/bufferreader":13,"../encoding/bufferwriter":14,"../errors":16,"../networks":20,"../opcode":21,"../publickey":29,"../util/buffer":50,"../util/js":51,"../util/preconditions":52,"buffer":115,"lodash":94}],33:[function(require,module,exports){
+},{"../address":1,"../crypto/hash":6,"../crypto/signature":9,"../encoding/bufferreader":12,"../encoding/bufferwriter":13,"../errors":15,"../networks":19,"../opcode":20,"../publickey":28,"../util/buffer":49,"../util/js":50,"../util/preconditions":51,"buffer":114,"lodash":110}],32:[function(require,module,exports){
 module.exports = require('./transaction');
 
 module.exports.Input = require('./input');
 module.exports.Output = require('./output');
 module.exports.UnspentOutput = require('./unspentoutput');
 
-},{"./input":34,"./output":38,"./transaction":40,"./unspentoutput":41}],34:[function(require,module,exports){
+},{"./input":33,"./output":37,"./transaction":39,"./unspentoutput":40}],33:[function(require,module,exports){
 module.exports = require('./input');
 
 module.exports.PublicKeyHash = require('./publickeyhash');
 module.exports.MultiSigScriptHash = require('./multisigscripthash.js');
 
-},{"./input":35,"./multisigscripthash.js":36,"./publickeyhash":37}],35:[function(require,module,exports){
+},{"./input":34,"./multisigscripthash.js":35,"./publickeyhash":36}],34:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -8559,7 +8495,7 @@ Input.prototype._estimateSize = function() {
 
 module.exports = Input;
 
-},{"../../encoding/bufferwriter":14,"../../errors":16,"../../script":30,"../../util/buffer":50,"../../util/js":51,"../output":38,"../sighash":39,"buffer":115,"lodash":94}],36:[function(require,module,exports){
+},{"../../encoding/bufferwriter":13,"../../errors":15,"../../script":29,"../../util/buffer":49,"../../util/js":50,"../output":37,"../sighash":38,"buffer":114,"lodash":110}],35:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -8737,7 +8673,7 @@ MultiSigScriptHashInput.prototype._estimateSize = function() {
 
 module.exports = MultiSigScriptHashInput;
 
-},{"../../crypto/signature":10,"../../publickey":29,"../../script":30,"../../util/buffer":50,"../../util/preconditions":52,"../output":38,"../sighash":39,"./input":35,"inherits":92,"lodash":94}],37:[function(require,module,exports){
+},{"../../crypto/signature":9,"../../publickey":28,"../../script":29,"../../util/buffer":49,"../../util/preconditions":51,"../output":37,"../sighash":38,"./input":34,"inherits":109,"lodash":110}],36:[function(require,module,exports){
 'use strict';
 
 var inherits = require('inherits');
@@ -8833,7 +8769,7 @@ PublicKeyHashInput.prototype._estimateSize = function() {
 
 module.exports = PublicKeyHashInput;
 
-},{"../../crypto/hash":7,"../../crypto/signature":10,"../../script":30,"../../util/buffer":50,"../../util/preconditions":52,"../output":38,"../sighash":39,"./input":35,"inherits":92}],38:[function(require,module,exports){
+},{"../../crypto/hash":6,"../../crypto/signature":9,"../../script":29,"../../util/buffer":49,"../../util/preconditions":51,"../output":37,"../sighash":38,"./input":34,"inherits":109}],37:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -8960,7 +8896,7 @@ Output.prototype.toBufferWriter = function(writer) {
 
 module.exports = Output;
 
-},{"../crypto/bn":5,"../encoding/bufferwriter":14,"../script":30,"../util/buffer":50,"../util/js":51,"buffer":115,"lodash":94}],39:[function(require,module,exports){
+},{"../crypto/bn":4,"../encoding/bufferwriter":13,"../script":29,"../util/buffer":49,"../util/js":50,"buffer":114,"lodash":110}],38:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -9103,7 +9039,7 @@ module.exports = {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../crypto/bn":5,"../crypto/ecdsa":6,"../crypto/hash":7,"../crypto/signature":10,"../encoding/bufferreader":13,"../encoding/bufferwriter":14,"../script":30,"../util/preconditions":52,"./input":34,"./output":38,"./transaction":40,"buffer":115,"lodash":94}],40:[function(require,module,exports){
+},{"../crypto/bn":4,"../crypto/ecdsa":5,"../crypto/hash":6,"../crypto/signature":9,"../encoding/bufferreader":12,"../encoding/bufferwriter":13,"../script":29,"../util/preconditions":51,"./input":33,"./output":37,"./transaction":39,"buffer":114,"lodash":110}],39:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -9850,7 +9786,7 @@ Transaction.prototype.isCoinbase = function() {
 
 module.exports = Transaction;
 
-},{"../address":2,"../block":3,"../crypto/bn":5,"../crypto/hash":7,"../crypto/signature":10,"../encoding/bufferreader":13,"../encoding/bufferwriter":14,"../errors":16,"../privatekey":28,"../script":30,"../util/buffer":50,"../util/js":51,"../util/preconditions":52,"./input":34,"./output":38,"./sighash":39,"./unspentoutput":41,"buffer":115,"lodash":94}],41:[function(require,module,exports){
+},{"../address":1,"../block":2,"../crypto/bn":4,"../crypto/hash":6,"../crypto/signature":9,"../encoding/bufferreader":12,"../encoding/bufferwriter":13,"../errors":15,"../privatekey":27,"../script":29,"../util/buffer":49,"../util/js":50,"../util/preconditions":51,"./input":33,"./output":37,"./sighash":38,"./unspentoutput":40,"buffer":114,"lodash":110}],40:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -9961,12 +9897,12 @@ UnspentOutput.prototype.toObject = function() {
 
 module.exports = UnspentOutput;
 
-},{"../address":2,"../script":30,"../unit":48,"../util/js":51,"../util/preconditions":52,"lodash":94}],42:[function(require,module,exports){
+},{"../address":1,"../script":29,"../unit":47,"../util/js":50,"../util/preconditions":51,"lodash":110}],41:[function(require,module,exports){
 module.exports = {
   Insight: require('./insight')
 };
 
-},{"./insight":43}],43:[function(require,module,exports){
+},{"./insight":42}],42:[function(require,module,exports){
 'use strict';
 
 var $ = require('../../util/preconditions');
@@ -10083,7 +10019,7 @@ Insight.prototype.requestPost = function(path, data, callback) {
 
 module.exports = Insight;
 
-},{"../../address":2,"../../networks":20,"../../transaction":33,"../../util/js":51,"../../util/preconditions":52,"lodash":94,"request":68}],44:[function(require,module,exports){
+},{"../../address":1,"../../networks":19,"../../transaction":32,"../../util/js":50,"../../util/preconditions":51,"lodash":110,"request":67}],43:[function(require,module,exports){
 /**
  * @namespace Transport
  */
@@ -10094,7 +10030,7 @@ module.exports = {
   Pool: require('./pool')
 };
 
-},{"./explorers":42,"./messages":45,"./peer":46,"./pool":47}],45:[function(require,module,exports){
+},{"./explorers":41,"./messages":44,"./peer":45,"./pool":46}],44:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 /**
@@ -10700,7 +10636,7 @@ Buffers.prototype.skip = function (i) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"../block":3,"../blockheader":4,"../crypto/hash":7,"../crypto/random":9,"../encoding/bufferreader":13,"../transaction":33,"../util/buffer":50,"buffer":115,"bufferput":70,"buffers":71,"util":233}],46:[function(require,module,exports){
+},{"../block":2,"../blockheader":3,"../crypto/hash":6,"../crypto/random":8,"../encoding/bufferreader":12,"../transaction":32,"../util/buffer":49,"buffer":114,"bufferput":69,"buffers":70,"util":232}],45:[function(require,module,exports){
 'use strict';
 
 var Buffers = require('buffers');
@@ -10896,7 +10832,7 @@ Peer.prototype._getSocket = function() {
 
 module.exports = Peer;
 
-},{"../networks":20,"./messages":45,"buffers":71,"events":208,"net":112,"socks5-client":105,"util":233}],47:[function(require,module,exports){
+},{"../networks":19,"./messages":44,"buffers":70,"events":207,"net":111,"socks5-client":102,"util":232}],46:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -11175,7 +11111,7 @@ Pool.prototype.inspect = function inspect() {
 module.exports = Pool;
 
 }).call(this,require("buffer").Buffer)
-},{"../crypto/hash":7,"../networks":20,"./peer":46,"buffer":115,"dns":112,"events":208,"util":233}],48:[function(require,module,exports){
+},{"../crypto/hash":6,"../networks":19,"./peer":45,"buffer":114,"dns":111,"events":207,"util":232}],47:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -11421,7 +11357,7 @@ Unit.prototype.inspect = function() {
 
 module.exports = Unit;
 
-},{"./errors":16,"./util/js":51,"lodash":94}],49:[function(require,module,exports){
+},{"./errors":15,"./util/js":50,"lodash":110}],48:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -11650,7 +11586,7 @@ URI.prototype.inspect = function() {
 
 module.exports = URI;
 
-},{"./address":2,"./unit":48,"./util/js":51,"lodash":94,"url":231}],50:[function(require,module,exports){
+},{"./address":1,"./unit":47,"./util/js":50,"lodash":110,"url":230}],49:[function(require,module,exports){
 (function (Buffer){
 'use strict';
 
@@ -11820,7 +11756,7 @@ module.exports.NULL_HASH = module.exports.fill(new Buffer(32), 0);
 module.exports.EMPTY_BUFFER = new Buffer(0);
 
 }).call(this,require("buffer").Buffer)
-},{"./js":51,"./preconditions":52,"assert":113,"buffer":115}],51:[function(require,module,exports){
+},{"./js":50,"./preconditions":51,"assert":112,"buffer":114}],50:[function(require,module,exports){
 'use strict';
 
 var _ = require('lodash');
@@ -11891,7 +11827,7 @@ module.exports = {
   }
 };
 
-},{"lodash":94}],52:[function(require,module,exports){
+},{"lodash":110}],51:[function(require,module,exports){
 'use strict';
 
 var errors = require('../errors');
@@ -11927,7 +11863,7 @@ module.exports = {
   }
 };
 
-},{"../errors":16,"./buffer":50,"lodash":94}],53:[function(require,module,exports){
+},{"../errors":15,"./buffer":49,"lodash":110}],52:[function(require,module,exports){
 var asn1 = exports;
 
 asn1.bignum = require('bn.js');
@@ -11938,7 +11874,7 @@ asn1.constants = require('./asn1/constants');
 asn1.decoders = require('./asn1/decoders');
 asn1.encoders = require('./asn1/encoders');
 
-},{"./asn1/api":54,"./asn1/base":56,"./asn1/constants":60,"./asn1/decoders":62,"./asn1/encoders":64,"bn.js":65}],54:[function(require,module,exports){
+},{"./asn1/api":53,"./asn1/base":55,"./asn1/constants":59,"./asn1/decoders":61,"./asn1/encoders":63,"bn.js":64}],53:[function(require,module,exports){
 var asn1 = require('../asn1');
 var util = require('util');
 var vm = require('vm');
@@ -11991,7 +11927,7 @@ Entity.prototype.encode = function encode(data, enc, /* internal */ reporter) {
   return this._getEncoder(enc).encode(data, reporter);
 };
 
-},{"../asn1":53,"util":233,"vm":234}],55:[function(require,module,exports){
+},{"../asn1":52,"util":232,"vm":233}],54:[function(require,module,exports){
 var assert = require('assert');
 var util = require('util');
 var Reporter = require('../base').Reporter;
@@ -12109,7 +12045,7 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"../base":56,"assert":113,"buffer":115,"util":233}],56:[function(require,module,exports){
+},{"../base":55,"assert":112,"buffer":114,"util":232}],55:[function(require,module,exports){
 var base = exports;
 
 base.Reporter = require('./reporter').Reporter;
@@ -12117,7 +12053,7 @@ base.DecoderBuffer = require('./buffer').DecoderBuffer;
 base.EncoderBuffer = require('./buffer').EncoderBuffer;
 base.Node = require('./node');
 
-},{"./buffer":55,"./node":57,"./reporter":58}],57:[function(require,module,exports){
+},{"./buffer":54,"./node":56,"./reporter":57}],56:[function(require,module,exports){
 var assert = require('assert');
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
@@ -12667,7 +12603,7 @@ Node.prototype._encodePrimitive = function encodePrimitive(tag, data) {
     throw new Error('Unsupported tag: ' + tag);
 };
 
-},{"../base":56,"assert":113}],58:[function(require,module,exports){
+},{"../base":55,"assert":112}],57:[function(require,module,exports){
 var util = require('util');
 
 function Reporter(options) {
@@ -12758,7 +12694,7 @@ ReporterError.prototype.rethrow = function rethrow(msg) {
   return this;
 };
 
-},{"util":233}],59:[function(require,module,exports){
+},{"util":232}],58:[function(require,module,exports){
 var constants = require('../constants');
 
 exports.tagClass = {
@@ -12802,7 +12738,7 @@ exports.tag = {
 };
 exports.tagByName = constants._reverse(exports.tag);
 
-},{"../constants":60}],60:[function(require,module,exports){
+},{"../constants":59}],59:[function(require,module,exports){
 var constants = exports;
 
 // Helper
@@ -12823,7 +12759,7 @@ constants._reverse = function reverse(map) {
 
 constants.der = require('./der');
 
-},{"./der":59}],61:[function(require,module,exports){
+},{"./der":58}],60:[function(require,module,exports){
 var util = require('util');
 
 var asn1 = require('../../asn1');
@@ -13121,12 +13057,12 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"../../asn1":53,"util":233}],62:[function(require,module,exports){
+},{"../../asn1":52,"util":232}],61:[function(require,module,exports){
 var decoders = exports;
 
 decoders.der = require('./der');
 
-},{"./der":61}],63:[function(require,module,exports){
+},{"./der":60}],62:[function(require,module,exports){
 var util = require('util');
 var Buffer = require('buffer').Buffer;
 
@@ -13361,12 +13297,12 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"../../asn1":53,"buffer":115,"util":233}],64:[function(require,module,exports){
+},{"../../asn1":52,"buffer":114,"util":232}],63:[function(require,module,exports){
 var encoders = exports;
 
 encoders.der = require('./der');
 
-},{"./der":63}],65:[function(require,module,exports){
+},{"./der":62}],64:[function(require,module,exports){
 // Utils
 
 function assert(val, msg) {
@@ -15159,7 +15095,7 @@ Mont.prototype.invm = function invm(a) {
   return res._forceRed(this);
 };
 
-},{}],66:[function(require,module,exports){
+},{}],65:[function(require,module,exports){
 try {
   var asn1 = require('asn1.js');
 } catch (e) {
@@ -15313,7 +15249,7 @@ var AttributeValue = asn1.define('AttributeValue', function() {
 });
 exports.AttributeValue = AttributeValue;
 
-},{"../..":53,"asn1.js":53}],67:[function(require,module,exports){
+},{"../..":52,"asn1.js":52}],66:[function(require,module,exports){
 // Utils
 
 function assert(val, msg) {
@@ -17237,7 +17173,7 @@ Mont.prototype.invm = function invm(a) {
   return res._forceRed(this);
 };
 
-},{}],68:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 // Browser Request
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -17733,7 +17669,7 @@ function b64_enc (data) {
 }));
 //UMD FOOTER END
 
-},{}],69:[function(require,module,exports){
+},{}],68:[function(require,module,exports){
 // Base58 encoding/decoding
 // Originally written by Mike Hearn for BitcoinJ
 // Copyright (c) 2011 Google Inc
@@ -17815,7 +17751,7 @@ module.exports = {
   decode: decode
 }
 
-},{}],70:[function(require,module,exports){
+},{}],69:[function(require,module,exports){
 (function (Buffer){
 function BufferPut () {
   this.words = [];
@@ -17921,7 +17857,7 @@ BufferPut.prototype.write = function(stream) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],71:[function(require,module,exports){
+},{"buffer":114}],70:[function(require,module,exports){
 (function (Buffer){
 module.exports = Buffers;
 
@@ -18194,7 +18130,7 @@ Buffers.prototype.toString = function(encoding, start, end) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],72:[function(require,module,exports){
+},{"buffer":114}],71:[function(require,module,exports){
 var elliptic = exports;
 
 elliptic.version = require('../package.json').version;
@@ -18207,7 +18143,7 @@ elliptic.curves = require('./elliptic/curves');
 // Protocols
 elliptic.ec = require('./elliptic/ec');
 
-},{"../package.json":85,"./elliptic/curve":75,"./elliptic/curves":78,"./elliptic/ec":79,"./elliptic/hmac-drbg":82,"./elliptic/utils":83,"brorand":84}],73:[function(require,module,exports){
+},{"../package.json":84,"./elliptic/curve":74,"./elliptic/curves":77,"./elliptic/ec":78,"./elliptic/hmac-drbg":81,"./elliptic/utils":82,"brorand":83}],72:[function(require,module,exports){
 var assert = require('assert');
 var bn = require('bn.js');
 var elliptic = require('../../elliptic');
@@ -18511,7 +18447,7 @@ BasePoint.prototype.dblp = function dblp(k) {
   return r;
 };
 
-},{"../../elliptic":72,"assert":113,"bn.js":67}],74:[function(require,module,exports){
+},{"../../elliptic":71,"assert":112,"bn.js":66}],73:[function(require,module,exports){
 var assert = require('assert');
 var curve = require('../curve');
 var elliptic = require('../../elliptic');
@@ -18874,7 +18810,7 @@ Point.prototype.getY = function getY() {
 Point.prototype.toP = Point.prototype.normalize;
 Point.prototype.mixedAdd = Point.prototype.add;
 
-},{"../../elliptic":72,"../curve":75,"assert":113,"bn.js":67,"inherits":92}],75:[function(require,module,exports){
+},{"../../elliptic":71,"../curve":74,"assert":112,"bn.js":66,"inherits":109}],74:[function(require,module,exports){
 var curve = exports;
 
 curve.base = require('./base');
@@ -18882,7 +18818,7 @@ curve.short = require('./short');
 curve.mont = require('./mont');
 curve.edwards = require('./edwards');
 
-},{"./base":73,"./edwards":74,"./mont":76,"./short":77}],76:[function(require,module,exports){
+},{"./base":72,"./edwards":73,"./mont":75,"./short":76}],75:[function(require,module,exports){
 var assert = require('assert');
 var curve = require('../curve');
 var elliptic = require('../../elliptic');
@@ -19047,7 +18983,7 @@ Point.prototype.getX = function getX() {
   return this.x.fromRed();
 };
 
-},{"../../elliptic":72,"../curve":75,"assert":113,"bn.js":67,"inherits":92}],77:[function(require,module,exports){
+},{"../../elliptic":71,"../curve":74,"assert":112,"bn.js":66,"inherits":109}],76:[function(require,module,exports){
 var assert = require('assert');
 var curve = require('../curve');
 var elliptic = require('../../elliptic');
@@ -19945,7 +19881,7 @@ JPoint.prototype.isInfinity = function isInfinity() {
   return this.z.cmpn(0) === 0;
 };
 
-},{"../../elliptic":72,"../curve":75,"assert":113,"bn.js":67,"inherits":92}],78:[function(require,module,exports){
+},{"../../elliptic":71,"../curve":74,"assert":112,"bn.js":66,"inherits":109}],77:[function(require,module,exports){
 var curves = exports;
 
 var assert = require('assert');
@@ -20874,7 +20810,7 @@ defineCurve('secp256k1', {
   ]
 });
 
-},{"../elliptic":72,"assert":113,"bn.js":67,"hash.js":86}],79:[function(require,module,exports){
+},{"../elliptic":71,"assert":112,"bn.js":66,"hash.js":85}],78:[function(require,module,exports){
 var assert = require('assert');
 var bn = require('bn.js');
 var elliptic = require('../../elliptic');
@@ -21027,7 +20963,7 @@ EC.prototype.verify = function verify(msg, signature, key) {
   return p.getX().mod(this.n).cmp(r) === 0;
 };
 
-},{"../../elliptic":72,"./key":80,"./signature":81,"assert":113,"bn.js":67}],80:[function(require,module,exports){
+},{"../../elliptic":71,"./key":79,"./signature":80,"assert":112,"bn.js":66}],79:[function(require,module,exports){
 var assert = require('assert');
 var bn = require('bn.js');
 
@@ -21173,7 +21109,7 @@ KeyPair.prototype.inspect = function inspect() {
          ' pub: ' + (this.pub && this.pub.inspect()) + ' >';
 };
 
-},{"../../elliptic":72,"assert":113,"bn.js":67}],81:[function(require,module,exports){
+},{"../../elliptic":71,"assert":112,"bn.js":66}],80:[function(require,module,exports){
 var assert = require('assert');
 var bn = require('bn.js');
 
@@ -21238,7 +21174,7 @@ Signature.prototype.toDER = function toDER(enc) {
   return utils.encode(res, enc);
 };
 
-},{"../../elliptic":72,"assert":113,"bn.js":67}],82:[function(require,module,exports){
+},{"../../elliptic":71,"assert":112,"bn.js":66}],81:[function(require,module,exports){
 var assert = require('assert');
 
 var hash = require('hash.js');
@@ -21353,7 +21289,7 @@ HmacDRBG.prototype.generate = function generate(len, enc, add, addEnc) {
   return utils.encode(res, enc);
 };
 
-},{"../elliptic":72,"assert":113,"hash.js":86}],83:[function(require,module,exports){
+},{"../elliptic":71,"assert":112,"hash.js":85}],82:[function(require,module,exports){
 var assert = require('assert');
 var bn = require('bn.js');
 
@@ -21501,7 +21437,7 @@ function getJSF(k1, k2) {
 }
 utils.getJSF = getJSF;
 
-},{"assert":113,"bn.js":67}],84:[function(require,module,exports){
+},{"assert":112,"bn.js":66}],83:[function(require,module,exports){
 var r;
 
 module.exports = function rand(len) {
@@ -21549,7 +21485,7 @@ if (typeof window === 'object') {
   };
 }
 
-},{}],85:[function(require,module,exports){
+},{}],84:[function(require,module,exports){
 module.exports={
   "name": "elliptic",
   "version": "0.16.0",
@@ -21596,7 +21532,7 @@ module.exports={
   "_from": "https://registry.npmjs.org/elliptic/-/elliptic-0.16.0.tgz"
 }
 
-},{}],86:[function(require,module,exports){
+},{}],85:[function(require,module,exports){
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -21611,7 +21547,7 @@ hash.sha256 = hash.sha.sha256;
 hash.sha224 = hash.sha.sha224;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/common":87,"./hash/hmac":88,"./hash/ripemd":89,"./hash/sha":90,"./hash/utils":91}],87:[function(require,module,exports){
+},{"./hash/common":86,"./hash/hmac":87,"./hash/ripemd":88,"./hash/sha":89,"./hash/utils":90}],86:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -21697,7 +21633,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 }
 
-},{"../hash":86}],88:[function(require,module,exports){
+},{"../hash":85}],87:[function(require,module,exports){
 var hmac = exports;
 
 var hash = require('../hash');
@@ -21747,7 +21683,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.outer.digest(enc);
 };
 
-},{"../hash":86}],89:[function(require,module,exports){
+},{"../hash":85}],88:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 
@@ -21892,7 +21828,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"../hash":86}],90:[function(require,module,exports){
+},{"../hash":85}],89:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -22109,7 +22045,7 @@ function ft_1(s, x, y, z) {
     return maj32(x, y, z)
 }
 
-},{"../hash":86}],91:[function(require,module,exports){
+},{"../hash":85}],90:[function(require,module,exports){
 var utils = exports;
 var inherits = require('inherits');
 
@@ -22287,32 +22223,7 @@ utils.assert = assert;
 
 utils.inherits = inherits;
 
-},{"inherits":92}],92:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    ctor.prototype = Object.create(superCtor.prototype, {
-      constructor: {
-        value: ctor,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    ctor.super_ = superCtor
-    var TempCtor = function () {}
-    TempCtor.prototype = superCtor.prototype
-    ctor.prototype = new TempCtor()
-    ctor.prototype.constructor = ctor
-  }
-}
-
-},{}],93:[function(require,module,exports){
+},{"inherits":109}],91:[function(require,module,exports){
 (function (Buffer){
 
 var navigator = {};
@@ -22617,7 +22528,9403 @@ exports.asn1 = KJUR.asn1;
 exports.jws = KJUR.jws;
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],94:[function(require,module,exports){
+},{"buffer":114}],92:[function(require,module,exports){
+/*
+ Copyright 2013 Daniel Wirtz <dcode@dcode.io>
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
+/**
+ * @license ProtoBuf.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
+ * Released under the Apache License, Version 2.0
+ * see: https://github.com/dcodeIO/ProtoBuf.js for details
+ */
+(function(global) {
+    "use strict";
+
+    function loadProtoBuf(ByteBuffer) {
+
+        if (!ByteBuffer || !ByteBuffer.VERSION || ByteBuffer.VERSION.split(".")[0] < 3)
+            throw Error("ProtoBuf.js requires ByteBuffer.js >=3");
+
+        /**
+         * The ProtoBuf namespace.
+         * @exports ProtoBuf
+         * @namespace
+         * @expose
+         */
+        var ProtoBuf = {};
+
+        /**
+         * ProtoBuf.js version.
+         * @type {string}
+         * @const
+         * @expose
+         */
+        ProtoBuf.VERSION = "3.0.0";
+
+        /**
+         * Wire types.
+         * @type {Object.<string,number>}
+         * @const
+         * @expose
+         */
+        ProtoBuf.WIRE_TYPES = {};
+
+        /**
+         * Varint wire type.
+         * @type {number}
+         * @expose
+         */
+        ProtoBuf.WIRE_TYPES.VARINT = 0;
+
+        /**
+         * Fixed 64 bits wire type.
+         * @type {number}
+         * @const
+         * @expose
+         */
+        ProtoBuf.WIRE_TYPES.BITS64 = 1;
+
+        /**
+         * Length delimited wire type.
+         * @type {number}
+         * @const
+         * @expose
+         */
+        ProtoBuf.WIRE_TYPES.LDELIM = 2;
+
+        /**
+         * Start group wire type.
+         * @type {number}
+         * @const
+         * @expose
+         */
+        ProtoBuf.WIRE_TYPES.STARTGROUP = 3;
+
+        /**
+         * End group wire type.
+         * @type {number}
+         * @const
+         * @expose
+         */
+        ProtoBuf.WIRE_TYPES.ENDGROUP = 4;
+
+        /**
+         * Fixed 32 bits wire type.
+         * @type {number}
+         * @const
+         * @expose
+         */
+        ProtoBuf.WIRE_TYPES.BITS32 = 5;
+
+        /**
+         * Packable wire types.
+         * @type {!Array.<number>}
+         * @const
+         * @expose
+         */
+        ProtoBuf.PACKABLE_WIRE_TYPES =  [
+            ProtoBuf.WIRE_TYPES.VARINT,
+            ProtoBuf.WIRE_TYPES.BITS64,
+            ProtoBuf.WIRE_TYPES.BITS32
+        ];
+
+        /**
+         * Types.
+         * @dict
+         * @type {Object.<string,{name: string, wireType: number}>}
+         * @const
+         * @expose
+         */
+        ProtoBuf.TYPES = {
+            // According to the protobuf spec.
+            "int32": {
+                name: "int32",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "uint32": {
+                name: "uint32",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "sint32": {
+                name: "sint32",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "int64": {
+                name: "int64",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "uint64": {
+                name: "uint64",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "sint64": {
+                name: "sint64",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "bool": {
+                name: "bool",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "double": {
+                name: "double",
+                wireType: ProtoBuf.WIRE_TYPES.BITS64
+            },
+            "string": {
+                name: "string",
+                wireType: ProtoBuf.WIRE_TYPES.LDELIM
+            },
+            "bytes": {
+                name: "bytes",
+                wireType: ProtoBuf.WIRE_TYPES.LDELIM
+            },
+            "fixed32": {
+                name: "fixed32",
+                wireType: ProtoBuf.WIRE_TYPES.BITS32
+            },
+            "sfixed32": {
+                name: "sfixed32",
+                wireType: ProtoBuf.WIRE_TYPES.BITS32
+            },
+            "fixed64": {
+                name: "fixed64",
+                wireType: ProtoBuf.WIRE_TYPES.BITS64
+            },
+            "sfixed64": {
+                name: "sfixed64",
+                wireType: ProtoBuf.WIRE_TYPES.BITS64
+            },
+            "float": {
+                name: "float",
+                wireType: ProtoBuf.WIRE_TYPES.BITS32
+            },
+            "enum": {
+                name: "enum",
+                wireType: ProtoBuf.WIRE_TYPES.VARINT
+            },
+            "message": {
+                name: "message",
+                wireType: ProtoBuf.WIRE_TYPES.LDELIM
+            },
+            "group": {
+                name: "group",
+                wireType: ProtoBuf.WIRE_TYPES.STARTGROUP
+            }
+        };
+
+        /**
+         * Minimum field id.
+         * @type {number}
+         * @const
+         * @expose
+         */
+        ProtoBuf.ID_MIN = 1;
+
+        /**
+         * Maximum field id.
+         * @type {number}
+         * @const
+         * @expose
+         */
+        ProtoBuf.ID_MAX = 0x1FFFFFFF;
+
+        /**
+         * @type {!function(new: ByteBuffer, ...[*])}
+         * @expose
+         */
+        ProtoBuf.ByteBuffer = ByteBuffer;
+
+        /**
+         * @type {?function(new: Long, ...[*])}
+         * @expose
+         */
+        ProtoBuf.Long = ByteBuffer.Long || null;
+
+        /**
+         * If set to `true`, field names will be converted from underscore notation to camel case. Defaults to `false`.
+         *  Must be set prior to parsing.
+         * @type {boolean}
+         * @expose
+         */
+        ProtoBuf.convertFieldsToCamelCase = false;
+
+        /**
+         * @alias ProtoBuf.Util
+         * @expose
+         */
+        ProtoBuf.Util = (function() {
+            "use strict";
+
+            // Object.create polyfill
+            // ref: https://developer.mozilla.org/de/docs/JavaScript/Reference/Global_Objects/Object/create
+            if (!Object.create) {
+                /** @expose */
+                Object.create = function (o) {
+                    if (arguments.length > 1) {
+                        throw new Error('Object.create implementation only accepts the first parameter.');
+                    }
+                    function F() {}
+                    F.prototype = o;
+                    return new F();
+                };
+            }
+
+            /**
+             * ProtoBuf utilities.
+             * @exports ProtoBuf.Util
+             * @namespace
+             */
+            var Util = {};
+
+            /**
+             * Flag if running in node (fs is available) or not.
+             * @type {boolean}
+             * @const
+             * @expose
+             */
+            Util.IS_NODE = false;
+            try {
+                // There is no reliable way to detect node.js as an environment, so our
+                // best bet is to feature-detect what we actually need.
+                Util.IS_NODE =
+                    typeof require === 'function' &&
+                    typeof require("fs").readFileSync === 'function' &&
+                    typeof require("path").resolve === 'function';
+            } catch (e) {}
+
+            /**
+             * Constructs a XMLHttpRequest object.
+             * @return {XMLHttpRequest}
+             * @throws {Error} If XMLHttpRequest is not supported
+             * @expose
+             */
+            Util.XHR = function() {
+                // No dependencies please, ref: http://www.quirksmode.org/js/xmlhttp.html
+                var XMLHttpFactories = [
+                    function () {return new XMLHttpRequest()},
+                    function () {return new ActiveXObject("Msxml2.XMLHTTP")},
+                    function () {return new ActiveXObject("Msxml3.XMLHTTP")},
+                    function () {return new ActiveXObject("Microsoft.XMLHTTP")}
+                ];
+                /** @type {?XMLHttpRequest} */
+                var xhr = null;
+                for (var i=0;i<XMLHttpFactories.length;i++) {
+                    try { xhr = XMLHttpFactories[i](); }
+                    catch (e) { continue; }
+                    break;
+                }
+                if (!xhr) throw(new Error("XMLHttpRequest is not supported"));
+                return xhr;
+            };
+
+            /**
+             * Fetches a resource.
+             * @param {string} path Resource path
+             * @param {function(?string)=} callback Callback receiving the resource's contents. If omitted the resource will
+             *   be fetched synchronously. If the request failed, contents will be null.
+             * @return {?string|undefined} Resource contents if callback is omitted (null if the request failed), else undefined.
+             * @expose
+             */
+            Util.fetch = function(path, callback) {
+                if (callback && typeof callback != 'function') callback = null;
+                if (Util.IS_NODE) {
+                    if (callback) {
+                        require("fs").readFile(path, function(err, data) {
+                            if (err) {
+                                callback(null);
+                            }
+                            else callback(""+data);
+                        });
+                    } else {
+                        try {
+                            return require("fs").readFileSync(path);
+                        } catch (e) {
+                            return null;
+                        }
+                    }
+                } else {
+                    var xhr = Util.XHR();
+                    xhr.open('GET', path, callback ? true : false);
+                    // xhr.setRequestHeader('User-Agent', 'XMLHTTP/1.0');
+                    xhr.setRequestHeader('Accept', 'text/plain');
+                    if (typeof xhr.overrideMimeType === 'function') xhr.overrideMimeType('text/plain');
+                    if (callback) {
+                        xhr.onreadystatechange = function() {
+                            if (xhr.readyState != 4) return;
+                            if (/* remote */ xhr.status == 200 || /* local */ (xhr.status == 0 && typeof xhr.responseText === 'string')) {
+                                callback(xhr.responseText);
+                            } else {
+                                callback(null);
+                            }
+                        };
+                        if (xhr.readyState == 4) return;
+                        xhr.send(null);
+                    } else {
+                        xhr.send(null);
+                        if (/* remote */ xhr.status == 200 || /* local */ (xhr.status == 0 && typeof xhr.responseText === 'string')) {
+                            return xhr.responseText;
+                        }
+                        return null;
+                    }
+                }
+            };
+
+            /**
+             * Tests if an object is an array.
+             * @param {*} obj Object to test
+             * @returns {boolean} true if it is an array, else false
+             * @expose
+             */
+            Util.isArray = function(obj) {
+                if (!obj) return false;
+                if (obj instanceof Array) return true;
+                if (Array.isArray) return Array.isArray(obj);
+                return Object.prototype.toString.call(obj) === "[object Array]";
+            };
+
+            return Util;
+        })();
+
+        /**
+         * Language expressions.
+         * @exports ProtoBuf.Lang
+         * @type {Object.<string,string|RegExp>}
+         * @namespace
+         * @expose
+         */
+        ProtoBuf.Lang = {
+            OPEN: "{",
+            CLOSE: "}",
+            OPTOPEN: "[",
+            OPTCLOSE: "]",
+            OPTEND: ",",
+            EQUAL: "=",
+            END: ";",
+            STRINGOPEN: '"',
+            STRINGCLOSE: '"',
+            STRINGOPEN_SQ: "'",
+            STRINGCLOSE_SQ: "'",
+            COPTOPEN: '(',
+            COPTCLOSE: ')',
+            DELIM: /[\s\{\}=;\[\],'"\(\)]/g,
+            // KEYWORD: /^(?:package|option|import|message|enum|extend|service|syntax|extensions|group)$/,
+            RULE: /^(?:required|optional|repeated)$/,
+            TYPE: /^(?:double|float|int32|uint32|sint32|int64|uint64|sint64|fixed32|sfixed32|fixed64|sfixed64|bool|string|bytes)$/,
+            NAME: /^[a-zA-Z_][a-zA-Z_0-9]*$/,
+            TYPEDEF: /^[a-zA-Z][a-zA-Z_0-9]*$/,
+            TYPEREF: /^(?:\.?[a-zA-Z_][a-zA-Z_0-9]*)+$/,
+            FQTYPEREF: /^(?:\.[a-zA-Z][a-zA-Z_0-9]*)+$/,
+            NUMBER: /^-?(?:[1-9][0-9]*|0|0x[0-9a-fA-F]+|0[0-7]+|([0-9]*\.[0-9]+([Ee][+-]?[0-9]+)?))$/,
+            NUMBER_DEC: /^(?:[1-9][0-9]*|0)$/,
+            NUMBER_HEX: /^0x[0-9a-fA-F]+$/,
+            NUMBER_OCT: /^0[0-7]+$/,
+            NUMBER_FLT: /^[0-9]*\.[0-9]+([Ee][+-]?[0-9]+)?$/,
+            ID: /^(?:[1-9][0-9]*|0|0x[0-9a-fA-F]+|0[0-7]+)$/,
+            NEGID: /^\-?(?:[1-9][0-9]*|0|0x[0-9a-fA-F]+|0[0-7]+)$/,
+            WHITESPACE: /\s/,
+            STRING: /['"]([^'"\\]*(\\.[^"\\]*)*)['"]/g,
+            BOOL: /^(?:true|false)$/i
+        };
+
+        /**
+         * @alias ProtoBuf.DotProto
+         * @expose
+         */
+        ProtoBuf.DotProto = (function(ProtoBuf, Lang) {
+            "use strict";
+
+            /**
+             * Utilities to parse .proto files.
+             * @exports ProtoBuf.DotProto
+             * @namespace
+             */
+            var DotProto = {};
+
+            /**
+             * Constructs a new Tokenizer.
+             * @exports ProtoBuf.DotProto.Tokenizer
+             * @class .proto tokenizer
+             * @param {string} proto Proto to tokenize
+             * @constructor
+             */
+            var Tokenizer = function(proto) {
+
+                /**
+                 * Source to parse.
+                 * @type {string}
+                 * @expose
+                 */
+                this.source = ""+proto;
+
+                /**
+                 * Current index.
+                 * @type {number}
+                 * @expose
+                 */
+                this.index = 0;
+
+                /**
+                 * Current line.
+                 * @type {number}
+                 * @expose
+                 */
+                this.line = 1;
+
+                /**
+                 * Stacked values.
+                 * @type {Array}
+                 * @expose
+                 */
+                this.stack = [];
+
+                /**
+                 * Whether currently reading a string or not.
+                 * @type {boolean}
+                 * @expose
+                 */
+                this.readingString = false;
+
+                /**
+                 * Whatever character ends the string. Either a single or double quote character.
+                 * @type {string}
+                 * @expose
+                 */
+                this.stringEndsWith = Lang.STRINGCLOSE;
+            };
+
+            /**
+             * Reads a string beginning at the current index.
+             * @return {string} The string
+             * @throws {Error} If it's not a valid string
+             * @private
+             */
+            Tokenizer.prototype._readString = function() {
+                Lang.STRING.lastIndex = this.index-1; // Include the open quote
+                var match;
+                if ((match = Lang.STRING.exec(this.source)) !== null) {
+                    var s = match[1];
+                    this.index = Lang.STRING.lastIndex;
+                    this.stack.push(this.stringEndsWith);
+                    return s;
+                }
+                throw(new Error("Illegal string value at line "+this.line+", index "+this.index));
+            };
+
+            /**
+             * Gets the next token and advances by one.
+             * @return {?string} Token or `null` on EOF
+             * @throws {Error} If it's not a valid proto file
+             * @expose
+             */
+            Tokenizer.prototype.next = function() {
+                if (this.stack.length > 0) {
+                    return this.stack.shift();
+                }
+                if (this.index >= this.source.length) {
+                    return null; // No more tokens
+                }
+                if (this.readingString) {
+                    this.readingString = false;
+                    return this._readString();
+                }
+                var repeat, last;
+                do {
+                    repeat = false;
+                    // Strip white spaces
+                    while (Lang.WHITESPACE.test(last = this.source.charAt(this.index))) {
+                        this.index++;
+                        if (last === "\n") this.line++;
+                        if (this.index === this.source.length) return null;
+                    }
+                    // Strip comments
+                    if (this.source.charAt(this.index) === '/') {
+                        if (this.source.charAt(++this.index) === '/') { // Single line
+                            while (this.source.charAt(this.index) !== "\n") {
+                                this.index++;
+                                if (this.index == this.source.length) return null;
+                            }
+                            this.index++;
+                            this.line++;
+                            repeat = true;
+                        } else if (this.source.charAt(this.index) === '*') { /* Block */
+                            last = '';
+                            while (last+(last=this.source.charAt(this.index)) !== '*/') {
+                                this.index++;
+                                if (last === "\n") this.line++;
+                                if (this.index === this.source.length) return null;
+                            }
+                            this.index++;
+                            repeat = true;
+                        } else {
+                            throw(new Error("Invalid comment at line "+this.line+": /"+this.source.charAt(this.index)+" ('/' or '*' expected)"));
+                        }
+                    }
+                } while (repeat);
+                if (this.index === this.source.length) return null;
+
+                // Read the next token
+                var end = this.index;
+                Lang.DELIM.lastIndex = 0;
+                var delim = Lang.DELIM.test(this.source.charAt(end));
+                if (!delim) {
+                    end++;
+                    while(end < this.source.length && !Lang.DELIM.test(this.source.charAt(end))) {
+                        end++;
+                    }
+                } else {
+                    end++;
+                }
+                var token = this.source.substring(this.index, this.index = end);
+                if (token === Lang.STRINGOPEN) {
+                    this.readingString = true;
+                    this.stringEndsWith = Lang.STRINGCLOSE;
+                } else if (token === Lang.STRINGOPEN_SQ) {
+                    this.readingString = true;
+                    this.stringEndsWith = Lang.STRINGCLOSE_SQ;
+                }
+                return token;
+            };
+
+            /**
+             * Peeks for the next token.
+             * @return {?string} Token or `null` on EOF
+             * @throws {Error} If it's not a valid proto file
+             * @expose
+             */
+            Tokenizer.prototype.peek = function() {
+                if (this.stack.length === 0) {
+                    var token = this.next();
+                    if (token === null) return null;
+                    this.stack.push(token);
+                }
+                return this.stack[0];
+            };
+
+            /**
+             * Returns a string representation of this object.
+             * @return {string} String representation as of "Tokenizer(index/length)"
+             * @expose
+             */
+            Tokenizer.prototype.toString = function() {
+                return "Tokenizer("+this.index+"/"+this.source.length+" at line "+this.line+")";
+            };
+
+            /**
+             * @alias ProtoBuf.DotProto.Tokenizer
+             * @expose
+             */
+            DotProto.Tokenizer = Tokenizer;
+
+            /**
+             * Constructs a new Parser.
+             * @exports ProtoBuf.DotProto.Parser
+             * @class .proto parser
+             * @param {string} proto Protocol source
+             * @constructor
+             */
+            var Parser = function(proto) {
+
+                /**
+                 * Tokenizer.
+                 * @type {ProtoBuf.DotProto.Tokenizer}
+                 * @expose
+                 */
+                this.tn = new Tokenizer(proto);
+            };
+
+            /**
+             * Runs the parser.
+             * @return {{package: string|null, messages: Array.<object>, enums: Array.<object>, imports: Array.<string>, options: object<string,*>}}
+             * @throws {Error} If the source cannot be parsed
+             * @expose
+             */
+            Parser.prototype.parse = function() {
+                var topLevel = {
+                    "name": "[ROOT]", // temporary
+                    "package": null,
+                    "messages": [],
+                    "enums": [],
+                    "imports": [],
+                    "options": {},
+                    "services": []
+                };
+                var token, header = true;
+                while(token = this.tn.next()) {
+                    switch (token) {
+                        case 'package': {
+                            if (!header)
+                                throw(new Error("Illegal package definition at line "+this.tn.line+": Must be declared before the first message or enum"));
+                            if (topLevel["package"] !== null)
+                                throw(new Error("Illegal package definition at line "+this.tn.line+": Package already declared"));
+                            topLevel["package"] = this._parsePackage(token);
+                            break;
+                        }
+
+                        case 'import': {
+                            if (!header)
+                                throw(new Error("Illegal import definition at line "+this.tn.line+": Must be declared before the first message or enum"));
+                            topLevel.imports.push(this._parseImport(token));
+                            break;
+                        }
+
+                        case 'message': {
+                            this._parseMessage(topLevel, null, token);
+                            header = false;
+                            break;
+                        }
+
+                        case 'enum': {
+                            this._parseEnum(topLevel, token);
+                            header = false;
+                            break;
+                        }
+
+                        case 'option': {
+                            if (!header)
+                                throw(new Error("Illegal option definition at line "+this.tn.line+": Must be declared before the first message or enum"));
+                            this._parseOption(topLevel, token);
+                            break;
+                        }
+
+                        case 'service':
+                            this._parseService(topLevel, token);
+                            break;
+
+                        case 'extend':
+                            this._parseExtend(topLevel, token);
+                            break;
+
+                        case 'syntax':
+                            this._parseIgnoredStatement(topLevel, token);
+                            break;
+
+                        default:
+                            throw(new Error("Illegal top level declaration at line "+this.tn.line+": "+token));
+                    }
+                }
+                delete topLevel["name"];
+                return topLevel;
+            };
+
+            /**
+             * Parses a number value.
+             * @param {string} val Number value to parse
+             * @return {number} Number
+             * @throws {Error} If the number value is invalid
+             * @private
+             */
+            Parser.prototype._parseNumber = function(val) {
+                var sign = 1;
+                if (val.charAt(0) == '-') {
+                    sign = -1; val = val.substring(1);
+                }
+                if (Lang.NUMBER_DEC.test(val)) {
+                    return sign*parseInt(val, 10);
+                } else if (Lang.NUMBER_HEX.test(val)) {
+                    return sign*parseInt(val.substring(2), 16);
+                } else if (Lang.NUMBER_OCT.test(val)) {
+                    return sign*parseInt(val.substring(1), 8);
+                } else if (Lang.NUMBER_FLT.test(val)) {
+                    return sign*parseFloat(val);
+                }
+                throw(new Error("Illegal number value at line "+this.tn.line+": "+(sign < 0 ? '-' : '')+val));
+            };
+
+            /**
+             * Parses an ID value.
+             * @param {string} val ID value to parse
+             * @param {boolean=} neg Whether the ID may be negative, defaults to `false`
+             * @returns {number} ID
+             * @throws {Error} If the ID value is invalid
+             * @private
+             */
+            Parser.prototype._parseId = function(val, neg) {
+                var id = -1;
+                var sign = 1;
+                if (val.charAt(0) == '-') {
+                    sign = -1; val = val.substring(1);
+                }
+                if (Lang.NUMBER_DEC.test(val)) {
+                    id = parseInt(val);
+                } else if (Lang.NUMBER_HEX.test(val)) {
+                    id = parseInt(val.substring(2), 16);
+                } else if (Lang.NUMBER_OCT.test(val)) {
+                    id = parseInt(val.substring(1), 8);
+                } else {
+                    throw(new Error("Illegal ID value at line "+this.tn.line+": "+(sign < 0 ? '-' : '')+val));
+                }
+                id = (sign*id)|0; // Force to 32bit
+                if (!neg && id < 0) {
+                    throw(new Error("Illegal ID range at line "+this.tn.line+": "+(sign < 0 ? '-' : '')+val));
+                }
+                return id;
+            };
+
+            /**
+             * Parses the package definition.
+             * @param {string} token Initial token
+             * @return {string} Package name
+             * @throws {Error} If the package definition cannot be parsed
+             * @private
+             */
+            Parser.prototype._parsePackage = function(token) {
+                token = this.tn.next();
+                if (!Lang.TYPEREF.test(token)) {
+                    throw(new Error("Illegal package name at line "+this.tn.line+": "+token));
+                }
+                var pkg = token;
+                token = this.tn.next();
+                if (token != Lang.END) {
+                    throw(new Error("Illegal end of package definition at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
+                }
+                return pkg;
+            };
+
+            /**
+             * Parses an import definition.
+             * @param {string} token Initial token
+             * @return {string} Import file name
+             * @throws {Error} If the import definition cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseImport = function(token) {
+                token = this.tn.next();
+                if (token === "public") {
+                    token = this.tn.next();
+                }
+                if (token !== Lang.STRINGOPEN && token !== Lang.STRINGOPEN_SQ) {
+                    throw(new Error("Illegal begin of import value at line "+this.tn.line+": "+token+" ('"+Lang.STRINGOPEN+"' or '"+Lang.STRINGOPEN_SQ+"' expected)"));
+                }
+                var imported = this.tn.next();
+                token = this.tn.next();
+                if (token !== this.tn.stringEndsWith) {
+                    throw(new Error("Illegal end of import value at line "+this.tn.line+": "+token+" ('"+this.tn.stringEndsWith+"' expected)"));
+                }
+                token = this.tn.next();
+                if (token !== Lang.END) {
+                    throw(new Error("Illegal end of import definition at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
+                }
+                return imported;
+            };
+
+            /**
+             * Parses a namespace option.
+             * @param {Object} parent Parent definition
+             * @param {string} token Initial token
+             * @throws {Error} If the option cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseOption = function(parent, token) {
+                token = this.tn.next();
+                var custom = false;
+                if (token == Lang.COPTOPEN) {
+                    custom = true;
+                    token = this.tn.next();
+                }
+                if (!Lang.TYPEREF.test(token)) {
+                    // we can allow options of the form google.protobuf.* since they will just get ignored anyways
+                    if (!/google\.protobuf\./.test(token)) {
+                        throw(new Error("Illegal option name in message "+parent.name+" at line "+this.tn.line+": "+token));
+                    }
+                }
+                var name = token;
+                token = this.tn.next();
+                if (custom) { // (my_method_option).foo, (my_method_option), some_method_option, (foo.my_option).bar
+                    if (token !== Lang.COPTCLOSE) {
+                        throw(new Error("Illegal custom option name delimiter in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTCLOSE+"' expected)"));
+                    }
+                    name = '('+name+')';
+                    token = this.tn.next();
+                    if (Lang.FQTYPEREF.test(token)) {
+                        name += token;
+                        token = this.tn.next();
+                    }
+                }
+                if (token !== Lang.EQUAL) {
+                    throw(new Error("Illegal option operator in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
+                }
+                var value;
+                token = this.tn.next();
+                if (token === Lang.STRINGOPEN || token === Lang.STRINGOPEN_SQ) {
+                    value = this.tn.next();
+                    token = this.tn.next();
+                    if (token !== this.tn.stringEndsWith) {
+                        throw(new Error("Illegal end of option value in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+this.tn.stringEndsWith+"' expected)"));
+                    }
+                } else {
+                    if (Lang.NUMBER.test(token)) {
+                        value = this._parseNumber(token, true);
+                    } else if (Lang.TYPEREF.test(token)) {
+                        value = token;
+                    } else {
+                        throw(new Error("Illegal option value in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token));
+                    }
+                }
+                token = this.tn.next();
+                if (token !== Lang.END) {
+                    throw(new Error("Illegal end of option in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
+                }
+                parent["options"][name] = value;
+            };
+
+            /**
+             * Parses an ignored block of the form ['keyword', 'typeref', '{' ... '}'].
+             * @param {Object} parent Parent definition
+             * @param {string} keyword Initial token
+             * @throws {Error} If the directive cannot be parsed
+             * @private
+             */
+            /* Parser.prototype._parseIgnoredBlock = function(parent, keyword) {
+                var token = this.tn.next();
+                if (!Lang.TYPEREF.test(token)) {
+                    throw(new Error("Illegal "+keyword+" type in "+parent.name+": "+token));
+                }
+                var name = token;
+                token = this.tn.next();
+                if (token !== Lang.OPEN) {
+                    throw(new Error("Illegal OPEN in "+parent.name+" after "+keyword+" "+name+" at line "+this.tn.line+": "+token));
+                }
+                var depth = 1;
+                do {
+                    token = this.tn.next();
+                    if (token === null) {
+                        throw(new Error("Unexpected EOF in "+parent.name+", "+keyword+" (ignored) at line "+this.tn.line+": "+name));
+                    }
+                    if (token === Lang.OPEN) {
+                        depth++;
+                    } else if (token === Lang.CLOSE) {
+                        token = this.tn.peek();
+                        if (token === Lang.END) this.tn.next();
+                        depth--;
+                        if (depth === 0) {
+                            break;
+                        }
+                    }
+                } while(true);
+            }; */
+
+            /**
+             * Parses an ignored statement of the form ['keyword', ..., ';'].
+             * @param {Object} parent Parent definition
+             * @param {string} keyword Initial token
+             * @throws {Error} If the directive cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseIgnoredStatement = function(parent, keyword) {
+                var token;
+                do {
+                    token = this.tn.next();
+                    if (token === null) {
+                        throw(new Error("Unexpected EOF in "+parent.name+", "+keyword+" (ignored) at line "+this.tn.line));
+                    }
+                    if (token === Lang.END) break;
+                } while (true);
+            };
+
+            /**
+             * Parses a service definition.
+             * @param {Object} parent Parent definition
+             * @param {string} keyword Initial token
+             * @throws {Error} If the service cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseService = function(parent, keyword) {
+                var token = this.tn.next();
+                if (!Lang.NAME.test(token)) {
+                    throw(new Error("Illegal service name at line "+this.tn.line+": "+token));
+                }
+                var name = token;
+                var svc = {
+                    "name": name,
+                    "rpc": {},
+                    "options": {}
+                };
+                token = this.tn.next();
+                if (token !== Lang.OPEN) {
+                    throw(new Error("Illegal OPEN after service "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.OPEN+"' expected)"));
+                }
+                do {
+                    token = this.tn.next();
+                    if (token === "option") {
+                        this._parseOption(svc, token);
+                    } else if (token === 'rpc') {
+                        this._parseServiceRPC(svc, token);
+                    } else if (token !== Lang.CLOSE) {
+                        throw(new Error("Illegal type for service "+name+" at line "+this.tn.line+": "+token));
+                    }
+                } while (token !== Lang.CLOSE);
+                parent["services"].push(svc);
+            };
+
+            /**
+             * Parses a RPC service definition of the form ['rpc', name, (request), 'returns', (response)].
+             * @param {Object} svc Parent definition
+             * @param {string} token Initial token
+             * @private
+             */
+            Parser.prototype._parseServiceRPC = function(svc, token) {
+                var type = token;
+                token = this.tn.next();
+                if (!Lang.NAME.test(token)) {
+                    throw(new Error("Illegal RPC method name in service "+svc["name"]+" at line "+this.tn.line+": "+token));
+                }
+                var name = token;
+                var method = {
+                    "request": null,
+                    "response": null,
+                    "options": {}
+                };
+                token = this.tn.next();
+                if (token !== Lang.COPTOPEN) {
+                    throw(new Error("Illegal start of request type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTOPEN+"' expected)"));
+                }
+                token = this.tn.next();
+                if (!Lang.TYPEREF.test(token)) {
+                    throw(new Error("Illegal request type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token));
+                }
+                method["request"] = token;
+                token = this.tn.next();
+                if (token != Lang.COPTCLOSE) {
+                    throw(new Error("Illegal end of request type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTCLOSE+"' expected)"))
+                }
+                token = this.tn.next();
+                if (token.toLowerCase() !== "returns") {
+                    throw(new Error("Illegal request/response delimiter in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('returns' expected)"));
+                }
+                token = this.tn.next();
+                if (token != Lang.COPTOPEN) {
+                    throw(new Error("Illegal start of response type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTOPEN+"' expected)"));
+                }
+                token = this.tn.next();
+                method["response"] = token;
+                token = this.tn.next();
+                if (token !== Lang.COPTCLOSE) {
+                    throw(new Error("Illegal end of response type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTCLOSE+"' expected)"))
+                }
+                token = this.tn.next();
+                if (token === Lang.OPEN) {
+                    do {
+                        token = this.tn.next();
+                        if (token === 'option') {
+                            this._parseOption(method, token); // <- will fail for the custom-options example
+                        } else if (token !== Lang.CLOSE) {
+                            throw(new Error("Illegal start of option in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('option' expected)"));
+                        }
+                    } while (token !== Lang.CLOSE);
+                    if (this.tn.peek() === Lang.END) this.tn.next();
+                } else if (token !== Lang.END) {
+                    throw(new Error("Illegal method delimiter in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' or '"+Lang.OPEN+"' expected)"));
+                }
+                if (typeof svc[type] === 'undefined') svc[type] = {};
+                svc[type][name] = method;
+            };
+
+            /**
+             * Parses a message definition.
+             * @param {Object} parent Parent definition
+             * @param {Object} fld Field definition if this is a group, otherwise `null`
+             * @param {string} token First token
+             * @return {Object}
+             * @throws {Error} If the message cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseMessage = function(parent, fld, token) {
+                /** @dict */
+                var msg = {}; // Note: At some point we might want to exclude the parser, so we need a dict.
+                var isGroup = token === "group";
+                token = this.tn.next();
+                if (!Lang.NAME.test(token)) {
+                    throw(new Error("Illegal "+(isGroup ? "group" : "message")+" name"+(parent ? " in message "+parent["name"] : "")+" at line "+this.tn.line+": "+token));
+                }
+                msg["name"] = token;
+                if (isGroup) {
+                    token = this.tn.next();
+                    if (token !== Lang.EQUAL)
+                        throw(new Error("Illegal id assignment after group "+msg.name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
+                    token = this.tn.next();
+                    try {
+                        fld["id"] = this._parseId(token);
+                    } catch (e) {
+                        throw(new Error("Illegal field id value for group "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
+                    }
+                    msg["isGroup"] = true;
+                }
+                msg["fields"] = []; // Note: Using arrays to support also browser that cannot preserve order of object keys.
+                msg["enums"] = [];
+                msg["messages"] = [];
+                msg["options"] = {};
+                token = this.tn.next();
+                if (token === Lang.OPTOPEN && fld) {
+                    this._parseFieldOptions(msg, fld, token);
+                    token = this.tn.next();
+                }
+                if (token !== Lang.OPEN)
+                    throw(new Error("Illegal OPEN after "+(isGroup ? "group" : "message")+" "+msg.name+" at line "+this.tn.line+": "+token+" ('"+Lang.OPEN+"' expected)"));
+                // msg["extensions"] = undefined
+                do {
+                    token = this.tn.next();
+                    if (token === Lang.CLOSE) {
+                        token = this.tn.peek();
+                        if (token === Lang.END) this.tn.next();
+                        break;
+                    } else if (Lang.RULE.test(token)) {
+                        this._parseMessageField(msg, token);
+                    } else if (token === "enum") {
+                        this._parseEnum(msg, token);
+                    } else if (token === "message") {
+                        this._parseMessage(msg, null, token);
+                    } else if (token === "option") {
+                        this._parseOption(msg, token);
+                    } else if (token === "extensions") {
+                        msg["extensions"] = this._parseExtensions(msg, token);
+                    } else if (token === "extend") {
+                        this._parseExtend(msg, token);
+                    } else {
+                        throw(new Error("Illegal token in message "+msg.name+" at line "+this.tn.line+": "+token+" (type or '"+Lang.CLOSE+"' expected)"));
+                    }
+                } while (true);
+                parent["messages"].push(msg);
+                return msg;
+            };
+
+            /**
+             * Parses a message field.
+             * @param {Object} msg Message definition
+             * @param {string} token Initial token
+             * @throws {Error} If the message field cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseMessageField = function(msg, token) {
+                /** @dict */
+                var fld = {}, grp = null;
+                fld["rule"] = token;
+                /** @dict */
+                fld["options"] = {};
+                token = this.tn.next();
+                if (token === "group") {
+                    // "A [legacy] group simply combines a nested message type and a field into a single declaration. In your
+                    // code, you can treat this message just as if it had a Result type field called result (the latter name is
+                    // converted to lower-case so that it does not conflict with the former)."
+                    grp = this._parseMessage(msg, fld, token);
+                    if (!/^[A-Z]/.test(grp["name"])) {
+                        throw(new Error('Group names must start with a capital letter'));
+                    }
+                    fld["type"] = grp["name"];
+                    fld["name"] = grp["name"].toLowerCase();
+
+                    token = this.tn.peek();
+                    if (token === Lang.END)
+                        this.tn.next();
+                } else {
+                    if (!Lang.TYPE.test(token) && !Lang.TYPEREF.test(token)) {
+                        throw(new Error("Illegal field type in message "+msg.name+" at line "+this.tn.line+": "+token));
+                    }
+                    fld["type"] = token;
+                    token = this.tn.next();
+                    if (!Lang.NAME.test(token)) {
+                        throw(new Error("Illegal field name in message "+msg.name+" at line "+this.tn.line+": "+token));
+                    }
+                    fld["name"] = token;
+                    token = this.tn.next();
+                    if (token !== Lang.EQUAL) {
+                        throw(new Error("Illegal field id assignment in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
+                    }
+                    token = this.tn.next();
+                    try {
+                        fld["id"] = this._parseId(token);
+                    } catch (e) {
+                        throw(new Error("Illegal field id value in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
+                    }
+                    token = this.tn.next();
+                    if (token === Lang.OPTOPEN) {
+                        this._parseFieldOptions(msg, fld, token);
+                        token = this.tn.next();
+                    }
+                    if (token !== Lang.END) {
+                        throw(new Error("Illegal field delimiter in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
+                    }
+                }
+                msg["fields"].push(fld);
+            };
+
+            /**
+             * Parses a set of field option definitions.
+             * @param {Object} msg Message definition
+             * @param {Object} fld Field definition
+             * @param {string} token Initial token
+             * @throws {Error} If the message field options cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseFieldOptions = function(msg, fld, token) {
+                var first = true;
+                do {
+                    token = this.tn.next();
+                    if (token === Lang.OPTCLOSE) {
+                        break;
+                    } else if (token === Lang.OPTEND) {
+                        if (first) {
+                            throw(new Error("Illegal start of message field options in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
+                        }
+                        token = this.tn.next();
+                    }
+                    this._parseFieldOption(msg, fld, token);
+                    first = false;
+                } while (true);
+            };
+
+            /**
+             * Parses a single field option.
+             * @param {Object} msg Message definition
+             * @param {Object} fld Field definition
+             * @param {string} token Initial token
+             * @throws {Error} If the mesage field option cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseFieldOption = function(msg, fld, token) {
+                var custom = false;
+                if (token === Lang.COPTOPEN) {
+                    token = this.tn.next();
+                    custom = true;
+                }
+                if (!Lang.TYPEREF.test(token)) {
+                    throw(new Error("Illegal field option in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
+                }
+                var name = token;
+                token = this.tn.next();
+                if (custom) {
+                    if (token !== Lang.COPTCLOSE) {
+                        throw(new Error("Illegal custom field option name delimiter in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" (')' expected)"));
+                    }
+                    name = '('+name+')';
+                    token = this.tn.next();
+                    if (Lang.FQTYPEREF.test(token)) {
+                        name += token;
+                        token = this.tn.next();
+                    }
+                }
+                if (token !== Lang.EQUAL) {
+                    throw(new Error("Illegal field option operation in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" ('=' expected)"));
+                }
+                var value;
+                token = this.tn.next();
+                if (token === Lang.STRINGOPEN || token === Lang.STRINGOPEN_SQ) {
+                    value = this.tn.next();
+                    token = this.tn.next();
+                    if (token != this.tn.stringEndsWith) {
+                        throw(new Error("Illegal end of field value in message "+msg.name+"#"+fld.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+this.tn.stringEndsWith+"' expected)"));
+                    }
+                } else if (Lang.NUMBER.test(token, true)) {
+                    value = this._parseNumber(token, true);
+                } else if (Lang.BOOL.test(token)) {
+                    value = token.toLowerCase() === 'true';
+                } else if (Lang.TYPEREF.test(token)) {
+                    value = token; // TODO: Resolve?
+                } else {
+                    throw(new Error("Illegal field option value in message "+msg.name+"#"+fld.name+", option "+name+" at line "+this.tn.line+": "+token));
+                }
+                fld["options"][name] = value;
+            };
+
+            /**
+             * Parses an enum.
+             * @param {Object} msg Message definition
+             * @param {string} token Initial token
+             * @throws {Error} If the enum cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseEnum = function(msg, token) {
+                /** @dict */
+                var enm = {};
+                token = this.tn.next();
+                if (!Lang.NAME.test(token)) {
+                    throw(new Error("Illegal enum name in message "+msg.name+" at line "+this.tn.line+": "+token));
+                }
+                enm["name"] = token;
+                token = this.tn.next();
+                if (token !== Lang.OPEN) {
+                    throw(new Error("Illegal OPEN after enum "+enm.name+" at line "+this.tn.line+": "+token));
+                }
+                enm["values"] = [];
+                enm["options"] = {};
+                do {
+                    token = this.tn.next();
+                    if (token === Lang.CLOSE) {
+                        token = this.tn.peek();
+                        if (token === Lang.END) this.tn.next();
+                        break;
+                    }
+                    if (token == 'option') {
+                        this._parseOption(enm, token);
+                    } else {
+                        if (!Lang.NAME.test(token)) {
+                            throw(new Error("Illegal enum value name in enum "+enm.name+" at line "+this.tn.line+": "+token));
+                        }
+                        this._parseEnumValue(enm, token);
+                    }
+                } while (true);
+                msg["enums"].push(enm);
+            };
+
+            /**
+             * Parses an enum value.
+             * @param {Object} enm Enum definition
+             * @param {string} token Initial token
+             * @throws {Error} If the enum value cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseEnumValue = function(enm, token) {
+                /** @dict */
+                var val = {};
+                val["name"] = token;
+                token = this.tn.next();
+                if (token !== Lang.EQUAL) {
+                    throw(new Error("Illegal enum value operator in enum "+enm.name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
+                }
+                token = this.tn.next();
+                try {
+                    val["id"] = this._parseId(token, true);
+                } catch (e) {
+                    throw(new Error("Illegal enum value id in enum "+enm.name+" at line "+this.tn.line+": "+token));
+                }
+                enm["values"].push(val);
+                token = this.tn.next();
+                if (token === Lang.OPTOPEN) {
+                    var opt = { 'options' : {} }; // TODO: Actually expose them somehow.
+                    this._parseFieldOptions(enm, opt, token);
+                    token = this.tn.next();
+                }
+                if (token !== Lang.END) {
+                    throw(new Error("Illegal enum value delimiter in enum "+enm.name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
+                }
+            };
+
+            /**
+             * Parses an extensions statement.
+             * @param {Object} msg Message object
+             * @param {string} token Initial token
+             * @throws {Error} If the extensions statement cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseExtensions = function(msg, token) {
+                /** @type {Array.<number>} */
+                var range = [];
+                token = this.tn.next();
+                if (token === "min") { // FIXME: Does the official implementation support this?
+                    range.push(ProtoBuf.ID_MIN);
+                } else if (token === "max") {
+                    range.push(ProtoBuf.ID_MAX);
+                } else {
+                    range.push(this._parseNumber(token));
+                }
+                token = this.tn.next();
+                if (token !== 'to') {
+                    throw("Illegal extensions delimiter in message "+msg.name+" at line "+this.tn.line+" ('to' expected)");
+                }
+                token = this.tn.next();
+                if (token === "min") {
+                    range.push(ProtoBuf.ID_MIN);
+                } else if (token === "max") {
+                    range.push(ProtoBuf.ID_MAX);
+                } else {
+                    range.push(this._parseNumber(token));
+                }
+                token = this.tn.next();
+                if (token !== Lang.END) {
+                    throw(new Error("Illegal extension delimiter in message "+msg.name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
+                }
+                return range;
+            };
+
+            /**
+             * Parses an extend block.
+             * @param {Object} parent Parent object
+             * @param {string} token Initial token
+             * @throws {Error} If the extend block cannot be parsed
+             * @private
+             */
+            Parser.prototype._parseExtend = function(parent, token) {
+                token = this.tn.next();
+                if (!Lang.TYPEREF.test(token)) {
+                    throw(new Error("Illegal extended message name at line "+this.tn.line+": "+token));
+                }
+                /** @dict */
+                var ext = {};
+                ext["ref"] = token;
+                ext["fields"] = [];
+                token = this.tn.next();
+                if (token !== Lang.OPEN) {
+                    throw(new Error("Illegal OPEN in extend "+ext.name+" at line "+this.tn.line+": "+token+" ('"+Lang.OPEN+"' expected)"));
+                }
+                do {
+                    token = this.tn.next();
+                    if (token === Lang.CLOSE) {
+                        token = this.tn.peek();
+                        if (token == Lang.END) this.tn.next();
+                        break;
+                    } else if (Lang.RULE.test(token)) {
+                        this._parseMessageField(ext, token);
+                    } else {
+                        throw(new Error("Illegal token in extend "+ext.name+" at line "+this.tn.line+": "+token+" (rule or '"+Lang.CLOSE+"' expected)"));
+                    }
+                } while (true);
+                parent["messages"].push(ext);
+                return ext;
+            };
+
+            /**
+             * Returns a string representation of this object.
+             * @returns {string} String representation as of "Parser"
+             */
+            Parser.prototype.toString = function() {
+                return "Parser";
+            };
+
+            /**
+             * @alias ProtoBuf.DotProto.Parser
+             * @expose
+             */
+            DotProto.Parser = Parser;
+
+            return DotProto;
+
+        })(ProtoBuf, ProtoBuf.Lang);
+
+        /**
+         * @alias ProtoBuf.Reflect
+         * @expose
+         */
+        ProtoBuf.Reflect = (function(ProtoBuf) {
+            "use strict";
+
+            /**
+             * Reflection types.
+             * @exports ProtoBuf.Reflect
+             * @namespace
+             */
+            var Reflect = {};
+
+            /**
+             * Constructs a Reflect base class.
+             * @exports ProtoBuf.Reflect.T
+             * @constructor
+             * @abstract
+             * @param {ProtoBuf.Reflect.T} parent Parent object
+             * @param {string} name Object name
+             */
+            var T = function(parent, name) {
+
+                /**
+                 * Parent object.
+                 * @type {ProtoBuf.Reflect.T|null}
+                 * @expose
+                 */
+                this.parent = parent;
+
+                /**
+                 * Object name in namespace.
+                 * @type {string}
+                 * @expose
+                 */
+                this.name = name;
+
+                /**
+                 * Fully qualified class name
+                 * @type {string}
+                 * @expose
+                 */
+                this.className;
+            };
+
+            /**
+             * Returns the fully qualified name of this object.
+             * @returns {string} Fully qualified name as of ".PATH.TO.THIS"
+             * @expose
+             */
+            T.prototype.fqn = function() {
+                var name = this.name,
+                    ptr = this;
+                do {
+                    ptr = ptr.parent;
+                    if (ptr == null) break;
+                    name = ptr.name+"."+name;
+                } while (true);
+                return name;
+            };
+
+            /**
+             * Returns a string representation of this Reflect object (its fully qualified name).
+             * @param {boolean=} includeClass Set to true to include the class name. Defaults to false.
+             * @return String representation
+             * @expose
+             */
+            T.prototype.toString = function(includeClass) {
+                var pfx = includeClass
+                    ? this.className + " "
+                    : "";
+                return pfx + this.fqn();
+            };
+
+            /**
+             * Builds this type.
+             * @throws {Error} If this type cannot be built directly
+             * @expose
+             */
+            T.prototype.build = function() {
+                throw(new Error(this.toString(true)+" cannot be built directly"));
+            };
+
+            /**
+             * @alias ProtoBuf.Reflect.T
+             * @expose
+             */
+            Reflect.T = T;
+
+            /**
+             * Constructs a new Namespace.
+             * @exports ProtoBuf.Reflect.Namespace
+             * @param {ProtoBuf.Reflect.Namespace|null} parent Namespace parent
+             * @param {string} name Namespace name
+             * @param {Object.<string,*>} options Namespace options
+             * @constructor
+             * @extends ProtoBuf.Reflect.T
+             */
+            var Namespace = function(parent, name, options) {
+                T.call(this, parent, name);
+
+                /**
+                 * @override
+                 */
+                this.className = "Namespace";
+
+                /**
+                 * Children inside the namespace.
+                 * @type {Array.<ProtoBuf.Reflect.T>}
+                 */
+                this.children = [];
+
+                /**
+                 * Options.
+                 * @type {Object.<string, *>}
+                 */
+                this.options = options || {};
+            };
+
+            // Extends T
+            Namespace.prototype = Object.create(T.prototype);
+
+            /**
+             * Returns an array of the namespace's children.
+             * @param {ProtoBuf.Reflect.T=} type Filter type (returns instances of this type only). Defaults to null (all children).
+             * @return {Array.<ProtoBuf.Reflect.T>}
+             * @expose
+             */
+            Namespace.prototype.getChildren = function(type) {
+                type = type || null;
+                if (type == null) {
+                    return this.children.slice();
+                }
+                var children = [];
+                for (var i=0; i<this.children.length; i++) {
+                    if (this.children[i] instanceof type) {
+                        children.push(this.children[i]);
+                    }
+                }
+                return children;
+            };
+
+            /**
+             * Adds a child to the namespace.
+             * @param {ProtoBuf.Reflect.T} child Child
+             * @throws {Error} If the child cannot be added (duplicate)
+             * @expose
+             */
+            Namespace.prototype.addChild = function(child) {
+                var other;
+                if (other = this.getChild(child.name)) {
+                    // Try to revert camelcase transformation on collision
+                    if (other instanceof Message.Field && other.name !== other.originalName && !this.hasChild(other.originalName)) {
+                        other.name = other.originalName; // Revert previous first (effectively keeps both originals)
+                    } else if (child instanceof Message.Field && child.name !== child.originalName && !this.hasChild(child.originalName)) {
+                        child.name = child.originalName;
+                    } else {
+                        throw(new Error("Duplicate name in namespace "+this.toString(true)+": "+child.name));
+                    }
+                }
+                this.children.push(child);
+            };
+
+            /**
+             * Tests if this namespace has a child with the specified name.
+             * @param {string|number} nameOrId Child name or id
+             * @returns {boolean} true if there is one, else false
+             * @expose
+             */
+            Namespace.prototype.hasChild = function(nameOrId) {
+                return this._indexOf(nameOrId) > -1;
+            };
+
+            /**
+             * Gets a child by its name.
+             * @param {string|number} nameOrId Child name or id
+             * @return {?ProtoBuf.Reflect.T} The child or null if not found
+             * @expose
+             */
+            Namespace.prototype.getChild = function(nameOrId) {
+                var index = this._indexOf(nameOrId);
+                return index > -1 ? this.children[index] : null;
+            };
+
+            /**
+             * Returns child index by its name or id.
+             * @param {string|number} nameOrId Child name or id
+             * @return {Number} The child index
+             * @private
+             */
+            Namespace.prototype._indexOf = function(nameOrId) {
+                var key = (typeof nameOrId == 'number')
+                    ? 'id'
+                    : 'name';
+                for (var i=0; i<this.children.length; i++)
+                    if (typeof this.children[i][key] !== 'undefined' && this.children[i][key] == nameOrId)
+                        return i;
+                return -1;
+            };
+
+            /**
+             * Resolves a reflect object inside of this namespace.
+             * @param {string} qn Qualified name to resolve
+             * @param {boolean=} excludeFields Excludes fields, defaults to `false`
+             * @return {ProtoBuf.Reflect.Namespace|null} The resolved type or null if not found
+             * @expose
+             */
+            Namespace.prototype.resolve = function(qn, excludeFields) {
+                var part = qn.split(".");
+                var ptr = this, i=0;
+                if (part[i] == "") { // Fully qualified name, e.g. ".My.Message'
+                    while (ptr.parent != null) {
+                        ptr = ptr.parent;
+                    }
+                    i++;
+                }
+                var child;
+                do {
+                    do {
+                        child = ptr.getChild(part[i]);
+                        if (!child || !(child instanceof Reflect.T) || (excludeFields && child instanceof Reflect.Message.Field)) {
+                            ptr = null;
+                            break;
+                        }
+                        ptr = child; i++;
+                    } while (i < part.length);
+                    if (ptr != null) break; // Found
+                    // Else search the parent
+                    if (this.parent !== null) {
+                        return this.parent.resolve(qn, excludeFields);
+                    }
+                } while (ptr != null);
+                return ptr;
+            };
+
+            /**
+             * Builds the namespace and returns the runtime counterpart.
+             * @return {Object.<string,Function|Object>} Runtime namespace
+             * @expose
+             */
+            Namespace.prototype.build = function() {
+                /** @dict */
+                var ns = {};
+                var children = this.getChildren(), child;
+                for (var i=0; i<children.length; i++) {
+                    child = children[i];
+                    if (child instanceof Namespace) {
+                        ns[child.name] = child.build();
+                    }
+                }
+                if (Object.defineProperty) {
+                    Object.defineProperty(ns, "$options", {
+                        "value": this.buildOpt(),
+                        "enumerable": false,
+                        "configurable": false,
+                        "writable": false
+                    });
+                }
+                return ns;
+            };
+
+            /**
+             * Builds the namespace's '$options' property.
+             * @return {Object.<string,*>}
+             */
+            Namespace.prototype.buildOpt = function() {
+                var opt = {};
+                var keys = Object.keys(this.options);
+                for (var i=0; i<keys.length; i++) {
+                    var key = keys[i],
+                        val = this.options[keys[i]];
+                    // TODO: Options are not resolved, yet.
+                    // if (val instanceof Namespace) {
+                    //     opt[key] = val.build();
+                    // } else {
+                    opt[key] = val;
+                    // }
+                }
+                return opt;
+            };
+
+            /**
+             * Gets the value assigned to the option with the specified name.
+             * @param {string=} name Returns the option value if specified, otherwise all options are returned.
+             * @return {*|Object.<string,*>}null} Option value or NULL if there is no such option
+             */
+            Namespace.prototype.getOption = function(name) {
+                if (typeof name == 'undefined') {
+                    return this.options;
+                }
+                return typeof this.options[name] != 'undefined' ? this.options[name] : null;
+            };
+
+            /**
+             * @alias ProtoBuf.Reflect.Namespace
+             * @expose
+             */
+            Reflect.Namespace = Namespace;
+
+            /**
+             * Constructs a new Message.
+             * @exports ProtoBuf.Reflect.Message
+             * @param {ProtoBuf.Reflect.Namespace} parent Parent message or namespace
+             * @param {string} name Message name
+             * @param {Object.<string,*>} options Message options
+             * @param {boolean=} isGroup `true` if this is a legacy group
+             * @constructor
+             * @extends ProtoBuf.Reflect.Namespace
+             */
+            var Message = function(parent, name, options, isGroup) {
+                Namespace.call(this, parent, name, options);
+
+                /**
+                 * @override
+                 */
+                this.className = "Message";
+
+                /**
+                 * Extensions range.
+                 * @type {!Array.<number>}
+                 * @expose
+                 */
+                this.extensions = [ProtoBuf.ID_MIN, ProtoBuf.ID_MAX];
+
+                /**
+                 * Runtime message class.
+                 * @type {?function(new:ProtoBuf.Builder.Message)}
+                 * @expose
+                 */
+                this.clazz = null;
+
+                /**
+                 * Whether this is a legacy group or not.
+                 * @type {boolean}
+                 * @expose
+                 */
+                this.isGroup = !!isGroup;
+            };
+
+            // Extends Namespace
+            Message.prototype = Object.create(Namespace.prototype);
+
+            /**
+             * Builds the message and returns the runtime counterpart, which is a fully functional class.
+             * @see ProtoBuf.Builder.Message
+             * @param {boolean=} rebuild Whether to rebuild or not, defaults to false
+             * @return {ProtoBuf.Reflect.Message} Message class
+             * @throws {Error} If the message cannot be built
+             * @expose
+             */
+            Message.prototype.build = function(rebuild) {
+                if (this.clazz && !rebuild) return this.clazz;
+
+                // We need to create a prototyped Message class in an isolated scope
+                var clazz = (function(ProtoBuf, T) {
+
+                    var fields = T.getChildren(ProtoBuf.Reflect.Message.Field);
+
+                    /**
+                     * Constructs a new runtime Message.
+                     * @name ProtoBuf.Builder.Message
+                     * @class Barebone of all runtime messages.
+                     * @param {Object.<string,*>|...[string]} values Preset values
+                     * @constructor
+                     * @throws {Error} If the message cannot be created
+                     */
+                    var Message = function(values) {
+                        ProtoBuf.Builder.Message.call(this);
+                        var i, field;
+
+                        // Create fields on the object itself to allow setting and getting through Message#fieldname
+                        for (i=0; i<fields.length; i++) {
+                            field = fields[i];
+                            this[field.name] = (field.repeated) ? [] : null;
+                        }
+                        // Set the default values
+                        for (i=0; i<fields.length; i++) {
+                            field = fields[i];
+                            if (typeof field.options['default'] != 'undefined') {
+                                try {
+                                    this.$set(field.name, field.options['default']); // Should not throw
+                                } catch (e) {
+                                    throw(new Error("[INTERNAL] "+e));
+                                }
+                            }
+                        }
+                        // Set field values from a values object
+                        if (arguments.length == 1 && typeof values == 'object' &&
+                            /* not another Message */ typeof values.encode != 'function' &&
+                            /* not a repeated field */ !ProtoBuf.Util.isArray(values) &&
+                            /* not a ByteBuffer */ !(values instanceof ByteBuffer) &&
+                            /* not an ArrayBuffer */ !(values instanceof ArrayBuffer) &&
+                            /* not a Long */ !(ProtoBuf.Long && values instanceof ProtoBuf.Long)) {
+                            var keys = Object.keys(values);
+                            for (i=0; i<keys.length; i++) {
+                                this.$set(keys[i], values[keys[i]]); // May throw
+                            }
+                            // Else set field values from arguments, in correct order
+                        } else {
+                            for (i=0; i<arguments.length; i++) {
+                                if (i<fields.length) {
+                                    this.$set(fields[i].name, arguments[i]); // May throw
+                                }
+                            }
+                        }
+                    };
+
+                    // Extends ProtoBuf.Builder.Message
+                    Message.prototype = Object.create(ProtoBuf.Builder.Message.prototype);
+
+                    /**
+                     * Adds a value to a repeated field.
+                     * @name ProtoBuf.Builder.Message#add
+                     * @function
+                     * @param {string} key Field name
+                     * @param {*} value Value to add
+                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
+                     * @throws {Error} If the value cannot be added
+                     * @expose
+                     */
+                    Message.prototype.add = function(key, value, noAssert) {
+                        var field = T.getChild(key);
+                        if (!field) {
+                            throw(new Error(this+"#"+key+" is undefined"));
+                        }
+                        if (!(field instanceof ProtoBuf.Reflect.Message.Field)) {
+                            throw(new Error(this+"#"+key+" is not a field: "+field.toString(true))); // May throw if it's an enum or embedded message
+                        }
+                        if (!field.repeated) {
+                            throw(new Error(this+"#"+key+" is not a repeated field"));
+                        }
+                        if (this[field.name] === null) this[field.name] = [];
+                        this[field.name].push(noAssert ? value : field.verifyValue(value, true));
+                    };
+
+                    /**
+                     * Adds a value to a repeated field. This is an alias for {@link ProtoBuf.Builder.Message#add}.
+                     * @name ProtoBuf.Builder.Message#$add
+                     * @function
+                     * @param {string} key Field name
+                     * @param {*} value Value to add
+                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
+                     * @throws {Error} If the value cannot be added
+                     * @expose
+                     */
+                    Message.prototype.$add = Message.prototype.add;
+
+                    /**
+                     * Sets a field's value.
+                     * @name ProtoBuf.Builder.Message#set
+                     * @function
+                     * @param {string} key Key
+                     * @param {*} value Value to set
+                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
+                     * @throws {Error} If the value cannot be set
+                     * @expose
+                     */
+                    Message.prototype.set = function(key, value, noAssert) {
+                        var field = T.getChild(key);
+                        if (!field) {
+                            throw(new Error(this+"#"+key+" is not a field: undefined"));
+                        }
+                        if (!(field instanceof ProtoBuf.Reflect.Message.Field)) {
+                            throw(new Error(this+"#"+key+" is not a field: "+field.toString(true)));
+                        }
+                        this[field.name] = noAssert ? value : field.verifyValue(value); // May throw
+                    };
+
+                    /**
+                     * Sets a field's value. This is an alias for [@link ProtoBuf.Builder.Message#set}.
+                     * @name ProtoBuf.Builder.Message#$set
+                     * @function
+                     * @param {string} key Key
+                     * @param {*} value Value to set
+                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
+                     * @throws {Error} If the value cannot be set
+                     * @expose
+                     */
+                    Message.prototype.$set = Message.prototype.set;
+
+                    /**
+                     * Gets a field's value.
+                     * @name ProtoBuf.Builder.Message#get
+                     * @function
+                     * @param {string} key Key
+                     * @return {*} Value
+                     * @throws {Error} If there is no such field
+                     * @expose
+                     */
+                    Message.prototype.get = function(key) {
+                        var field = T.getChild(key);
+                        if (!field || !(field instanceof ProtoBuf.Reflect.Message.Field)) {
+                            throw(new Error(this+"#"+key+" is not a field: undefined"));
+                        }
+                        if (!(field instanceof ProtoBuf.Reflect.Message.Field)) {
+                            throw(new Error(this+"#"+key+" is not a field: "+field.toString(true)));
+                        }
+                        return this[field.name];
+                    };
+
+                    /**
+                     * Gets a field's value. This is an alias for {@link ProtoBuf.Builder.Message#$get}.
+                     * @name ProtoBuf.Builder.Message#$get
+                     * @function
+                     * @param {string} key Key
+                     * @return {*} Value
+                     * @throws {Error} If there is no such field
+                     * @expose
+                     */
+                    Message.prototype.$get = Message.prototype.get;
+
+                    // Getters and setters
+
+                    for (var i=0; i<fields.length; i++) {
+                        var field = fields[i];
+
+                        (function(field) {
+                            // set/get[SomeValue]
+                            var Name = field.originalName.replace(/(_[a-zA-Z])/g,
+                                function(match) {
+                                    return match.toUpperCase().replace('_','');
+                                }
+                            );
+                            Name = Name.substring(0,1).toUpperCase()+Name.substring(1);
+
+                            // set/get_[some_value]
+                            var name = field.originalName.replace(/([A-Z])/g,
+                                function(match) {
+                                    return "_"+match;
+                                }
+                            );
+
+                            /**
+                             * Sets a value. This method is present for each field, but only if there is no name conflict with
+                             * another field.
+                             * @name ProtoBuf.Builder.Message#set[SomeField]
+                             * @function
+                             * @param {*} value Value to set
+                             * @abstract
+                             * @throws {Error} If the value cannot be set
+                             */
+                            if (!T.hasChild("set"+Name)) {
+                                Message.prototype["set"+Name] = function(value) {
+                                    this.$set(field.name, value);
+                                }
+                            }
+
+                            /**
+                             * Sets a value. This method is present for each field, but only if there is no name conflict with
+                             * another field.
+                             * @name ProtoBuf.Builder.Message#set_[some_field]
+                             * @function
+                             * @param {*} value Value to set
+                             * @abstract
+                             * @throws {Error} If the value cannot be set
+                             */
+                            if (!T.hasChild("set_"+name)) {
+                                Message.prototype["set_"+name] = function(value) {
+                                    this.$set(field.name, value);
+                                };
+                            }
+
+                            /**
+                             * Gets a value. This method is present for each field, but only if there is no name conflict with
+                             * another field.
+                             * @name ProtoBuf.Builder.Message#get[SomeField]
+                             * @function
+                             * @abstract
+                             * @return {*} The value
+                             */
+                            if (!T.hasChild("get"+Name)) {
+                                Message.prototype["get"+Name] = function() {
+                                    return this.$get(field.name); // Does not throw, field exists
+                                }
+                            }
+
+                            /**
+                             * Gets a value. This method is present for each field, but only if there is no name conflict with
+                             * another field.
+                             * @name ProtoBuf.Builder.Message#get_[some_field]
+                             * @function
+                             * @return {*} The value
+                             * @abstract
+                             */
+                            if (!T.hasChild("get_"+name)) {
+                                Message.prototype["get_"+name] = function() {
+                                    return this.$get(field.name); // Does not throw, field exists
+                                };
+                            }
+
+                        })(field);
+                    }
+
+                    // En-/decoding
+
+                    /**
+                     * Encodes the message.
+                     * @name ProtoBuf.Builder.Message#$encode
+                     * @function
+                     * @param {(!ByteBuffer|boolean)=} buffer ByteBuffer to encode to. Will create a new one and flip it if omitted.
+                     * @return {!ByteBuffer} Encoded message as a ByteBuffer
+                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
+                     *  returns the encoded ByteBuffer in the `encoded` property on the error.
+                     * @expose
+                     * @see ProtoBuf.Builder.Message#encode64
+                     * @see ProtoBuf.Builder.Message#encodeHex
+                     * @see ProtoBuf.Builder.Message#encodeAB
+                     */
+                    Message.prototype.encode = function(buffer) {
+                        var isNew = false;
+                        if (!buffer) {
+                            buffer = new ByteBuffer();
+                            isNew = true;
+                        }
+                        var le = buffer.littleEndian;
+                        try {
+                            T.encode(this, buffer.LE());
+                            return (isNew ? buffer.flip() : buffer).LE(le);
+                        } catch (e) {
+                            buffer.LE(le);
+                            throw(e);
+                        }
+                    };
+
+                    /**
+                     * Encodes the varint32 length-delimited message.
+                     * @name ProtoBuf.Builder.Message#encodeDelimited
+                     * @function
+                     * @param {(!ByteBuffer|boolean)=} buffer ByteBuffer to encode to. Will create a new one and flip it if omitted.
+                     * @return {!ByteBuffer} Encoded message as a ByteBuffer
+                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
+                     *  returns the encoded ByteBuffer in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.encodeDelimited = function(buffer) {
+                        var isNew = false;
+                        if (!buffer) {
+                            buffer = new ByteBuffer();
+                            isNew = true;
+                        }
+                        // var le = buffer.littleEndian;
+                        try {
+                            var enc = new ByteBuffer().LE();
+                            T.encode(this, enc).flip();
+                            buffer.writeVarint32(enc.remaining());
+                            buffer.append(enc);
+                            return isNew ? buffer.flip() : buffer;
+                        } catch (e) {
+                            // buffer.LE(le);
+                            throw(e);
+                        }
+                    };
+
+                    /**
+                     * Directly encodes the message to an ArrayBuffer.
+                     * @name ProtoBuf.Builder.Message#encodeAB
+                     * @function
+                     * @return {ArrayBuffer} Encoded message as ArrayBuffer
+                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
+                     *  returns the encoded ArrayBuffer in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.encodeAB = function() {
+                        try {
+                            return this.encode().toArrayBuffer();
+                        } catch (err) {
+                            if (err["encoded"]) err["encoded"] = err["encoded"].toArrayBuffer();
+                            throw(err);
+                        }
+                    };
+
+                    /**
+                     * Returns the message as an ArrayBuffer. This is an alias for {@link ProtoBuf.Builder.Message#encodeAB}.
+                     * @name ProtoBuf.Builder.Message#toArrayBuffer
+                     * @function
+                     * @return {ArrayBuffer} Encoded message as ArrayBuffer
+                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
+                     *  returns the encoded ArrayBuffer in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.toArrayBuffer = Message.prototype.encodeAB;
+
+                    /**
+                     * Directly encodes the message to a node Buffer.
+                     * @name ProtoBuf.Builder.Message#encodeNB
+                     * @function
+                     * @return {!Buffer}
+                     * @throws {Error} If the message cannot be encoded, not running under node.js or if required fields are
+                     *  missing. The later still returns the encoded node Buffer in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.encodeNB = function() {
+                        try {
+                            return this.encode().toBuffer();
+                        } catch (err) {
+                            if (err["encoded"]) err["encoded"] = err["encoded"].toBuffer();
+                            throw(err);
+                        }
+                    };
+
+                    /**
+                     * Returns the message as a node Buffer. This is an alias for {@link ProtoBuf.Builder.Message#encodeNB}.
+                     * @name ProtoBuf.Builder.Message#toBuffer
+                     * @function
+                     * @return {!Buffer}
+                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
+                     *  returns the encoded node Buffer in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.toBuffer = Message.prototype.encodeNB;
+
+                    /**
+                     * Directly encodes the message to a base64 encoded string.
+                     * @name ProtoBuf.Builder.Message#encode64
+                     * @function
+                     * @return {string} Base64 encoded string
+                     * @throws {Error} If the underlying buffer cannot be encoded or if required fields are missing. The later
+                     *  still returns the encoded base64 string in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.encode64 = function() {
+                        try {
+                            return this.encode().toBase64();
+                        } catch (err) {
+                            if (err["encoded"]) err["encoded"] = err["encoded"].toBase64();
+                            throw(err);
+                        }
+                    };
+
+                    /**
+                     * Returns the message as a base64 encoded string. This is an alias for {@link ProtoBuf.Builder.Message#encode64}.
+                     * @name ProtoBuf.Builder.Message#toBase64
+                     * @function
+                     * @return {string} Base64 encoded string
+                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
+                     *  returns the encoded base64 string in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.toBase64 = Message.prototype.encode64;
+
+                    /**
+                     * Directly encodes the message to a hex encoded string.
+                     * @name ProtoBuf.Builder.Message#encodeHex
+                     * @function
+                     * @return {string} Hex encoded string
+                     * @throws {Error} If the underlying buffer cannot be encoded or if required fields are missing. The later
+                     *  still returns the encoded hex string in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.encodeHex = function() {
+                        try {
+                            return this.encode().toHex();
+                        } catch (err) {
+                            if (err["encoded"]) err["encoded"] = err["encoded"].toHex();
+                            throw(err);
+                        }
+                    };
+
+                    /**
+                     * Returns the message as a hex encoded string. This is an alias for {@link ProtoBuf.Builder.Message#encodeHex}.
+                     * @name ProtoBuf.Builder.Message#toHex
+                     * @function
+                     * @return {string} Hex encoded string
+                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
+                     *  returns the encoded hex string in the `encoded` property on the error.
+                     * @expose
+                     */
+                    Message.prototype.toHex = Message.prototype.encodeHex;
+
+                    /**
+                     * Clones a message object to a raw object.
+                     * @param {*} obj Object to clone
+                     * @param {boolean} includeBuffers Whether to include native buffer data or not
+                     * @returns {*} Cloned object
+                     * @inner
+                     */
+                    function cloneRaw(obj, includeBuffers) {
+                        var clone = {};
+                        for (var i in obj)
+                            if (obj.hasOwnProperty(i)) {
+                                if (obj[i] === null || typeof obj[i] !== 'object') {
+                                    clone[i] = obj[i];
+                                } else if (obj[i] instanceof ByteBuffer) {
+                                    if (includeBuffers)
+                                        clone[i] = obj.toBuffer();
+                                } else { // is a non-null object
+                                    clone[i] = cloneRaw(obj[i], includeBuffers);
+                                }
+                            }
+                        return clone;
+                    }
+
+                    /**
+                     * Returns the message's raw payload.
+                     * @param {boolean=} includeBuffers Whether to include native buffer data or not, defaults to `false`
+                     * @returns {Object.<string,*>} Raw payload
+                     * @expose
+                     */
+                    Message.prototype.toRaw = function(includeBuffers) {
+                        return cloneRaw(this, !!includeBuffers);
+                    };
+
+                    /**
+                     * Decodes a message from the specified buffer or string.
+                     * @name ProtoBuf.Builder.Message.decode
+                     * @function
+                     * @param {!ByteBuffer|!ArrayBuffer|!Buffer|string} buffer Buffer to decode from
+                     * @param {string=} enc Encoding if buffer is a string: hex, utf8 (not recommended), defaults to base64
+                     * @return {!ProtoBuf.Builder.Message} Decoded message
+                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
+                     *  returns the decoded message with missing fields in the `decoded` property on the error.
+                     * @expose
+                     * @see ProtoBuf.Builder.Message.decode64
+                     * @see ProtoBuf.Builder.Message.decodeHex
+                     */
+                    Message.decode = function(buffer, enc) {
+                        if (buffer === null) throw(new Error("buffer must not be null"));
+                        if (typeof buffer === 'string') {
+                            buffer = ByteBuffer.wrap(buffer, enc ? enc : "base64");
+                        }
+                        buffer = buffer instanceof ByteBuffer ? buffer : ByteBuffer.wrap(buffer); // May throw
+                        var le = buffer.littleEndian;
+                        try {
+                            var msg = T.decode(buffer.LE());
+                            buffer.LE(le);
+                            return msg;
+                        } catch (e) {
+                            buffer.LE(le);
+                            throw(e);
+                        }
+                    };
+
+                    /**
+                     * Decodes a varint32 length-delimited message from the specified buffer or string.
+                     * @name ProtoBuf.Builder.Message.decodeDelimited
+                     * @function
+                     * @param {!ByteBuffer|!ArrayBuffer|!Buffer|string} buffer Buffer to decode from
+                     * @param {string=} enc Encoding if buffer is a string: hex, utf8 (not recommended), defaults to base64
+                     * @return {!ProtoBuf.Builder.Message} Decoded message
+                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
+                     *  returns the decoded message with missing fields in the `decoded` property on the error.
+                     * @expose
+                     */
+                    Message.decodeDelimited = function(buffer, enc) {
+                        if (buffer === null) throw(new Error("buffer must not be null"));
+                        if (typeof buffer === 'string') {
+                            buffer = ByteBuffer.wrap(buffer, enc ? enc : "base64");
+                        }
+                        buffer = buffer instanceof ByteBuffer ? buffer : ByteBuffer.wrap(buffer); // May throw
+                        var len = buffer.readVarint32();
+                        var msg = T.decode(buffer.slice(buffer.offset, buffer.offset + len).LE());
+                        buffer.offset += len;
+                        return msg;
+                    };
+
+                    /**
+                     * Decodes the message from the specified base64 encoded string.
+                     * @name ProtoBuf.Builder.Message.decode64
+                     * @function
+                     * @param {string} str String to decode from
+                     * @return {!ProtoBuf.Builder.Message} Decoded message
+                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
+                     *  returns the decoded message with missing fields in the `decoded` property on the error.
+                     * @expose
+                     */
+                    Message.decode64 = function(str) {
+                        return Message.decode(str, "base64");
+                    };
+
+                    /**
+                     * Decodes the message from the specified hex encoded string.
+                     * @name ProtoBuf.Builder.Message.decodeHex
+                     * @function
+                     * @param {string} str String to decode from
+                     * @return {!ProtoBuf.Builder.Message} Decoded message
+                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
+                     *  returns the decoded message with missing fields in the `decoded` property on the error.
+                     * @expose
+                     */
+                    Message.decodeHex = function(str) {
+                        return Message.decode(str, "hex");
+                    };
+
+                    // Utility
+
+                    /**
+                     * Returns a string representation of this Message.
+                     * @name ProtoBuf.Builder.Message#toString
+                     * @function
+                     * @return {string} String representation as of ".Fully.Qualified.MessageName"
+                     * @expose
+                     */
+                    Message.prototype.toString = function() {
+                        return T.toString();
+                    };
+
+                    // Static
+
+                    /**
+                     * Options.
+                     * @name ProtoBuf.Builder.Message.$options
+                     * @type {Object.<string,*>}
+                     * @expose
+                     */
+                    var $options; // for cc
+
+                    if (Object.defineProperty) {
+                        Object.defineProperty(Message, '$options', {
+                            'value': T.buildOpt(),
+                            'enumerable': false,
+                            'configurable': false,
+                            'writable': false
+                        });
+                    }
+
+                    return Message;
+
+                })(ProtoBuf, this);
+
+                // Static enums and prototyped sub-messages
+                var children = this.getChildren();
+                for (var i=0; i<children.length; i++) {
+                    if (children[i] instanceof Enum) {
+                        clazz[children[i]['name']] = children[i].build();
+                    } else if (children[i] instanceof Message) {
+                        clazz[children[i]['name']] = children[i].build();
+                    } else if (children[i] instanceof Message.Field) {
+                        // Ignore
+                    } else {
+                        throw(new Error("Illegal reflect child of "+this.toString(true)+": "+children[i].toString(true)));
+                    }
+                }
+                return this.clazz = clazz;
+            };
+
+            /**
+             * Encodes a runtime message's contents to the specified buffer.
+             * @param {ProtoBuf.Builder.Message} message Runtime message to encode
+             * @param {ByteBuffer} buffer ByteBuffer to write to
+             * @return {ByteBuffer} The ByteBuffer for chaining
+             * @throws {Error} If required fields are missing or the message cannot be encoded for another reason
+             * @expose
+             */
+            Message.prototype.encode = function(message, buffer) {
+                var fields = this.getChildren(Message.Field),
+                    fieldMissing = null;
+                for (var i=0; i<fields.length; i++) {
+                    var val = message.$get(fields[i].name);
+                    if (fields[i].required && val === null) {
+                        if (fieldMissing === null) fieldMissing = fields[i];
+                    } else {
+                        fields[i].encode(val, buffer);
+                    }
+                }
+                if (fieldMissing !== null) {
+                    var err = new Error("Missing at least one required field for "+this.toString(true)+": "+fieldMissing);
+                    err["encoded"] = buffer; // Still expose what we got
+                    throw(err);
+                }
+                return buffer;
+            };
+
+            /**
+             * Skips all data until the end of the specified group has been reached.
+             * @param {number} expectedId Expected GROUPEND id
+             * @param {!ByteBuffer} buf ByteBuffer
+             * @returns {boolean} `true` if a value as been skipped, `false` if the end has been reached
+             * @throws {Error} If it wasn't possible to find the end of the group (buffer overrun or end tag mismatch)
+             * @inner
+             */
+            function skipTillGroupEnd(expectedId, buf) {
+                var tag = buf.readVarint32(), // Throws on OOB
+                    wireType = tag & 0x07,
+                    id = tag >> 3;
+                switch (wireType) {
+                    case ProtoBuf.WIRE_TYPES.VARINT:
+                        do tag = buf.readUint8();
+                        while ((tag & 0x80) === 0x80);
+                        break;
+                    case ProtoBuf.WIRE_TYPES.BITS64:
+                        buf.offset += 8;
+                        break;
+                    case ProtoBuf.WIRE_TYPES.LDELIM:
+                        tag = buf.readVarint32(); // reads the varint
+                        buf.offset += tag;        // skips n bytes
+                        break;
+                    case ProtoBuf.WIRE_TYPES.STARTGROUP:
+                        skipTillGroupEnd(id, buf);
+                        break;
+                    case ProtoBuf.WIRE_TYPES.ENDGROUP:
+                        if (id === expectedId)
+                            return false;
+                        else
+                            throw(new Error("Illegal GROUPEND after unknown group: "+id+" ("+expectedId+" expected)"));
+                    case ProtoBuf.WIRE_TYPES.BITS32:
+                        buf.offset += 4;
+                        break;
+                    default:
+                        throw(new Error("Illegal wire type in unknown group "+expectedId+": "+wireType));
+                }
+                return true;
+            }
+
+            /**
+             * Decodes an encoded message and returns the decoded message.
+             * @param {ByteBuffer} buffer ByteBuffer to decode from
+             * @param {number=} length Message length. Defaults to decode all the available data.
+             * @param {number=} expectedGroupEndId Expected GROUPEND id if this is a legacy group
+             * @return {ProtoBuf.Builder.Message} Decoded message
+             * @throws {Error} If the message cannot be decoded
+             * @expose
+             */
+            Message.prototype.decode = function(buffer, length, expectedGroupEndId) {
+                length = typeof length === 'number' ? length : -1;
+                var start = buffer.offset;
+                var msg = new (this.clazz)();
+                var tag, wireType, id;
+                while (buffer.offset < start+length || (length == -1 && buffer.remaining() > 0)) {
+                    tag = buffer.readVarint32();
+                    wireType = tag & 0x07;
+                    id = tag >> 3;
+                    if (wireType === ProtoBuf.WIRE_TYPES.ENDGROUP) {
+                        if (id !== expectedGroupEndId)
+                            throw(new Error("Illegal group end indicator for "+this.toString(true)+": "+id+" ("+(expectedGroupEndId ? expectedGroupEndId+" expected" : "not a group")+")"));
+                        break;
+                    }
+                    var field = this.getChild(id); // Message.Field only
+                    if (!field) {
+                        // "messages created by your new code can be parsed by your old code: old binaries simply ignore the new field when parsing."
+                        switch (wireType) {
+                            case ProtoBuf.WIRE_TYPES.VARINT:
+                                buffer.readVarint32();
+                                break;
+                            case ProtoBuf.WIRE_TYPES.BITS32:
+                                buffer.offset += 4;
+                                break;
+                            case ProtoBuf.WIRE_TYPES.BITS64:
+                                buffer.offset += 8;
+                                break;
+                            case ProtoBuf.WIRE_TYPES.LDELIM:
+                                var len = buffer.readVarint32();
+                                buffer.offset += len;
+                                break;
+                            case ProtoBuf.WIRE_TYPES.STARTGROUP:
+                                while (skipTillGroupEnd(id, buffer)) {}
+                                break;
+                            default:
+                                throw(new Error("Illegal wire type for unknown field "+id+" in "+this.toString(true)+"#decode: "+wireType));
+                        }
+                        continue;
+                    }
+                    if (field.repeated && !field.options["packed"]) {
+                        msg.$add(field.name, field.decode(wireType, buffer), true);
+                    } else {
+                        msg.$set(field.name, field.decode(wireType, buffer), true);
+                    }
+                }
+
+                // Check if all required fields are present
+                var fields = this.getChildren(ProtoBuf.Reflect.Field);
+                for (var i=0; i<fields.length; i++) {
+                    if (fields[i].required && msg[fields[i].name] === null) {
+                        var err = new Error("Missing at least one required field for "+this.toString(true)+": "+fields[i].name);
+                        err["decoded"] = msg; // Still expose what we got
+                        throw(err);
+                    }
+                }
+                return msg;
+            };
+
+            /**
+             * @alias ProtoBuf.Reflect.Message
+             * @expose
+             */
+            Reflect.Message = Message;
+
+            /**
+             * Constructs a new Message Field.
+             * @exports ProtoBuf.Reflect.Message.Field
+             * @param {ProtoBuf.Reflect.Message} message Message reference
+             * @param {string} rule Rule, one of requried, optional, repeated
+             * @param {string} type Data type, e.g. int32
+             * @param {string} name Field name
+             * @param {number} id Unique field id
+             * @param {Object.<string.*>=} options Options
+             * @constructor
+             * @extends ProtoBuf.Reflect.T
+             */
+            var Field = function(message, rule, type, name, id, options) {
+                T.call(this, message, name);
+
+                /**
+                 * @override
+                 */
+                this.className = "Message.Field";
+
+                /**
+                 * Message field required flag.
+                 * @type {boolean}
+                 * @expose
+                 */
+                this.required = rule == "required";
+
+                /**
+                 * Message field repeated flag.
+                 * @type {boolean}
+                 * @expose
+                 */
+                this.repeated = rule == "repeated";
+
+                /**
+                 * Message field type. Type reference string if unresolved, protobuf type if resolved.
+                 * @type {string|{name: string, wireType: number}}
+                 * @expose
+                 */
+                this.type = type;
+
+                /**
+                 * Resolved type reference inside the global namespace.
+                 * @type {ProtoBuf.Reflect.T|null}
+                 * @expose
+                 */
+                this.resolvedType = null;
+
+                /**
+                 * Unique message field id.
+                 * @type {number}
+                 * @expose
+                 */
+                this.id = id;
+
+                /**
+                 * Message field options.
+                 * @type {!Object.<string,*>}
+                 * @dict
+                 * @expose
+                 */
+                this.options = options || {};
+
+                /**
+                 * Original field name.
+                 * @type {string}
+                 * @expose
+                 */
+                this.originalName = this.name; // Used to revert camelcase transformation on naming collisions
+
+                // Convert field names to camel case notation if the override is set
+                if (ProtoBuf.convertFieldsToCamelCase) {
+                    this.name = this.name.replace(/_([a-zA-Z])/g, function($0, $1) {
+                        return $1.toUpperCase();
+                    });
+                }
+            };
+
+            // Extends T
+            Field.prototype = Object.create(T.prototype);
+
+            /**
+             * Makes a Long from a value.
+             * @param {{low: number, high: number, unsigned: boolean}|string|number} value Value
+             * @param {boolean=} unsigned Whether unsigned or not, defaults to reuse it from Long-like objects or to signed for
+             *  strings and numbers
+             * @returns {!Long}
+             * @throws {Error} If the value cannot be converted to a Long
+             * @inner
+             */
+            function mkLong(value, unsigned) {
+                if (value && typeof value.low === 'number' && typeof value.high === 'number' && typeof value.unsigned === 'boolean')
+                    return new ProtoBuf.Long(value.low, value.high, typeof unsigned === 'undefined' ? value.unsigned : unsigned);
+                if (typeof value === 'string')
+                    return ProtoBuf.Long.fromString(value, unsigned || false, 10);
+                if (typeof value === 'number')
+                    return ProtoBuf.Long.fromNumber(value, unsigned || false);
+                throw(new Error("not convertible to Long"));
+            }
+
+            /**
+             * Checks if the given value can be set for this field.
+             * @param {*} value Value to check
+             * @param {boolean=} skipRepeated Whether to skip the repeated value check or not. Defaults to false.
+             * @return {*} Verified, maybe adjusted, value
+             * @throws {Error} If the value cannot be set for this field
+             * @expose
+             */
+            Field.prototype.verifyValue = function(value, skipRepeated) {
+                skipRepeated = skipRepeated || false;
+                if (value === null) { // NULL values for optional fields
+                    if (this.required) {
+                        throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (required)"));
+                    }
+                    return null;
+                }
+                var i;
+                if (this.repeated && !skipRepeated) { // Repeated values as arrays
+                    if (!ProtoBuf.Util.isArray(value)) {
+                        value = [value];
+                    }
+                    var res = [];
+                    for (i=0; i<value.length; i++) {
+                        res.push(this.verifyValue(value[i], true));
+                    }
+                    return res;
+                }
+                // All non-repeated fields expect no array
+                if (!this.repeated && ProtoBuf.Util.isArray(value)) {
+                    throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (no array expected)"));
+                }
+
+                switch (this.type) {
+                    // Signed 32bit
+                    case ProtoBuf.TYPES["int32"]:
+                    case ProtoBuf.TYPES["sint32"]:
+                    case ProtoBuf.TYPES["sfixed32"]:
+                        // Do not cast NaN as it'd become 0
+                        return isNaN(i = parseInt(value, 10)) ? i : i | 0;
+
+                    // Unsigned 32bit
+                    case ProtoBuf.TYPES["uint32"]:
+                    case ProtoBuf.TYPES["fixed32"]:
+                        // Do not cast NaN as it'd become 0
+                        return isNaN(i = parseInt(value, 10)) ? i : i >>> 0;
+
+                    // Signed 64bit
+                    case ProtoBuf.TYPES["int64"]:
+                    case ProtoBuf.TYPES["sint64"]:
+                    case ProtoBuf.TYPES["sfixed64"]: {
+                        if (ProtoBuf.Long) {
+                            try {
+                                return mkLong(value, false);
+                            } catch (e) {
+                                throw(new Error("Illegal value for "+this.toString(true)+": "+value+" ("+e.message+")"));
+                            }
+                        }
+                    }
+
+                    // Unsigned 64bit
+                    case ProtoBuf.TYPES["uint64"]:
+                    case ProtoBuf.TYPES["fixed64"]: {
+                        if (ProtoBuf.Long) {
+                            try {
+                                return mkLong(value, true);
+                            } catch (e) {
+                                throw(new Error("Illegal value for "+this.toString(true)+": "+value+" ("+e.message+")"));
+                            }
+                        }
+                    }
+
+                    // Bool
+                    case ProtoBuf.TYPES["bool"]:
+                        return typeof value === 'string'
+                            ? value === 'true'
+                            : !!value;
+
+                    // Float
+                    case ProtoBuf.TYPES["float"]:
+                    case ProtoBuf.TYPES["double"]:
+                        // May also become NaN, +Infinity, -Infinity
+                        return parseFloat(value);
+
+                    // Length-delimited string
+                    case ProtoBuf.TYPES["string"]:
+                        return ""+value;
+
+                    // Length-delimited bytes
+                    case ProtoBuf.TYPES["bytes"]:
+                        return value && value instanceof ByteBuffer
+                            ? value
+                            : ByteBuffer.wrap(value);
+
+                    // Constant enum value
+                    case ProtoBuf.TYPES["enum"]: {
+                        var values = this.resolvedType.getChildren(Enum.Value);
+                        for (i=0; i<values.length; i++) {
+                            if (values[i].name == value) {
+                                return values[i].id;
+                            } else if (values[i].id == value) {
+                                return values[i].id;
+                            }
+                        }
+                        throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (not a valid enum value)"));
+                    }
+                    // Embedded message
+                    case ProtoBuf.TYPES["group"]:
+                    case ProtoBuf.TYPES["message"]: {
+                        if (typeof value !== 'object') {
+                            throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (object expected)"));
+                        }
+                        if (value instanceof this.resolvedType.clazz) {
+                            return value;
+                        }
+                        // Else let's try to construct one from a key-value object
+                        return new (this.resolvedType.clazz)(value); // May throw for a hundred of reasons
+                    }
+                }
+
+                // We should never end here
+                throw(new Error("[INTERNAL] Illegal value for "+this.toString(true)+": "+value+" (undefined type "+this.type+")"));
+            };
+
+            /**
+             * Encodes the specified field value to the specified buffer.
+             * @param {*} value Field value
+             * @param {ByteBuffer} buffer ByteBuffer to encode to
+             * @return {ByteBuffer} The ByteBuffer for chaining
+             * @throws {Error} If the field cannot be encoded
+             * @expose
+             */
+            Field.prototype.encode = function(value, buffer) {
+                value = this.verifyValue(value); // May throw
+                if (this.type === null || typeof this.type !== 'object')
+                    throw(new Error("[INTERNAL] Unresolved type in "+this.toString(true)+": "+this.type));
+                if (value === null || (this.repeated && value.length == 0)) return buffer; // Optional omitted
+                try {
+                    if (this.repeated) {
+                        var i;
+                        // "Only repeated fields of primitive numeric types (types which use the varint, 32-bit, or 64-bit wire
+                        // types) can be declared 'packed'."
+                        if (this.options["packed"] && ProtoBuf.PACKABLE_WIRE_TYPES.indexOf(this.type.wireType) >= 0) {
+                            // "All of the elements of the field are packed into a single key-value pair with wire type 2
+                            // (length-delimited). Each element is encoded the same way it would be normally, except without a
+                            // tag preceding it."
+                            buffer.writeVarint32((this.id << 3) | ProtoBuf.WIRE_TYPES.LDELIM);
+                            buffer.ensureCapacity(buffer.offset += 1); // We do not know the length yet, so let's assume a varint of length 1
+                            var start = buffer.offset; // Remember where the contents begin
+                            for (i=0; i<value.length; i++) {
+                                this.encodeValue(value[i], buffer);
+                            }
+                            var len = buffer.offset-start;
+                            var varintLen = ByteBuffer.calculateVarint32(len);
+                            if (varintLen > 1) { // We need to move the contents
+                                var contents = buffer.slice(start, buffer.offset);
+                                start += varintLen-1;
+                                buffer.offset = start;
+                                buffer.append(contents);
+                            }
+                            buffer.writeVarint32(len, start-varintLen);
+                        } else {
+                            // "If your message definition has repeated elements (without the [packed=true] option), the encoded
+                            // message has zero or more key-value pairs with the same tag number"
+                            for (i=0; i<value.length; i++) {
+                                buffer.writeVarint32((this.id << 3) | this.type.wireType);
+                                this.encodeValue(value[i], buffer);
+                            }
+                        }
+                    } else {
+                        buffer.writeVarint32((this.id << 3) | this.type.wireType);
+                        this.encodeValue(value, buffer);
+                    }
+                } catch (e) {
+                    throw(new Error("Illegal value for "+this.toString(true)+": "+value+" ("+e+")"));
+                }
+                return buffer;
+            };
+
+            /**
+             * Encodes a value to the specified buffer. Does not encode the key.
+             * @param {*} value Field value
+             * @param {ByteBuffer} buffer ByteBuffer to encode to
+             * @return {ByteBuffer} The ByteBuffer for chaining
+             * @throws {Error} If the value cannot be encoded
+             * @expose
+             */
+            Field.prototype.encodeValue = function(value, buffer) {
+                if (value === null) return; // Nothing to encode
+                // Tag has already been written
+
+                switch (this.type) {
+                    // 32bit signed varint
+                    case ProtoBuf.TYPES["int32"]: {
+                        // "If you use int32 or int64 as the type for a negative number, the resulting varint is always ten bytes
+                        // long – it is, effectively, treated like a very large unsigned integer." (see #122)
+                        if (value < 0)
+                            buffer.writeVarint64(value);
+                        else
+                            buffer.writeVarint32(value);
+                        break;
+                    }
+
+                    // 32bit unsigned varint
+                    case ProtoBuf.TYPES["uint32"]:
+                        buffer.writeVarint32(value);
+                        break;
+
+                    // 32bit varint zig-zag
+                    case ProtoBuf.TYPES["sint32"]:
+                        buffer.writeVarint32ZigZag(value);
+                        break;
+
+                    // Fixed unsigned 32bit
+                    case ProtoBuf.TYPES["fixed32"]:
+                        buffer.writeUint32(value);
+                        break;
+
+                    // Fixed signed 32bit
+                    case ProtoBuf.TYPES["sfixed32"]:
+                        buffer.writeInt32(value);
+                        break;
+
+                    // 64bit varint as-is
+                    case ProtoBuf.TYPES["int64"]:
+                    case ProtoBuf.TYPES["uint64"]:
+                        buffer.writeVarint64(value); // throws
+                        break;
+
+                    // 64bit varint zig-zag
+                    case ProtoBuf.TYPES["sint64"]:
+                        buffer.writeVarint64ZigZag(value); // throws
+                        break;
+
+                    // Fixed unsigned 64bit
+                    case ProtoBuf.TYPES["fixed64"]:
+                        buffer.writeUint64(value); // throws
+                        break;
+
+                    // Fixed signed 64bit
+                    case ProtoBuf.TYPES["sfixed64"]:
+                        buffer.writeInt64(value); // throws
+                        break;
+
+                    // Bool
+                    case ProtoBuf.TYPES["bool"]: {
+                        if (typeof value === 'string')
+                            buffer.writeVarint32(value.toLowerCase() === 'false' ? 0 : !!value);
+                        else
+                            buffer.writeVarint32(value ? 1 : 0);
+                        break;
+                    }
+
+                    // Constant enum value
+                    case ProtoBuf.TYPES["enum"]:
+                        buffer.writeVarint32(value);
+                        break;
+
+                    // 32bit float
+                    case ProtoBuf.TYPES["float"]:
+                        buffer.writeFloat32(value);
+                        break;
+
+                    // 64bit float
+                    case ProtoBuf.TYPES["double"]:
+                        buffer.writeFloat64(value);
+                        break;
+
+                    // Length-delimited string
+                    case ProtoBuf.TYPES["string"]:
+                        buffer.writeVString(value);
+                        break;
+
+                    // Length-delimited bytes
+                    case ProtoBuf.TYPES["bytes"]: {
+                        if (value.offset > value.length) { // Forgot to flip?
+                            // TODO: This is actually dangerous as it might lead to a condition where data is included that isn't
+                            // meant to be transmitted. Shall we remove this?
+                            buffer = buffer.clone().flip();
+                        }
+                        var prevOffset = value.offset;
+                        buffer.writeVarint32(value.remaining());
+                        buffer.append(value);
+                        value.offset = prevOffset;
+                        break;
+                    }
+
+                    // Embedded message
+                    case ProtoBuf.TYPES["message"]: {
+                        var bb = new ByteBuffer().LE();
+                        this.resolvedType.encode(value, bb);
+                        buffer.writeVarint32(bb.offset);
+                        buffer.append(bb.flip());
+                        break;
+                    }
+
+                    // Legacy group
+                    case ProtoBuf.TYPES["group"]: {
+                        this.resolvedType.encode(value, buffer);
+                        buffer.writeVarint32((this.id << 3) | ProtoBuf.WIRE_TYPES.ENDGROUP);
+                        break;
+                    }
+
+                    default:
+                        // We should never end here
+                        throw(new Error("[INTERNAL] Illegal value to encode in "+this.toString(true)+": "+value+" (unknown type)"));
+                }
+                return buffer;
+            };
+
+            /**
+             * Decode the field value from the specified buffer.
+             * @param {number} wireType Leading wire type
+             * @param {ByteBuffer} buffer ByteBuffer to decode from
+             * @param {boolean=} skipRepeated Whether to skip the repeated check or not. Defaults to false.
+             * @return {*} Decoded value
+             * @throws {Error} If the field cannot be decoded
+             * @expose
+             */
+            Field.prototype.decode = function(wireType, buffer, skipRepeated) {
+                var value, nBytes;
+                if (wireType != this.type.wireType && (skipRepeated || (wireType != ProtoBuf.WIRE_TYPES.LDELIM || !this.repeated))) {
+                    throw(new Error("Illegal wire type for field "+this.toString(true)+": "+wireType+" ("+this.type.wireType+" expected)"));
+                }
+                if (wireType == ProtoBuf.WIRE_TYPES.LDELIM && this.repeated && this.options["packed"]) {
+                    if (!skipRepeated) {
+                        nBytes = buffer.readVarint32();
+                        nBytes = buffer.offset + nBytes; // Limit
+                        var values = [];
+                        while (buffer.offset < nBytes) {
+                            values.push(this.decode(this.type.wireType, buffer, true));
+                        }
+                        return values;
+                    }
+                    // Read the next value otherwise...
+                }
+                switch (this.type) {
+                    // 32bit signed varint
+                    case ProtoBuf.TYPES["int32"]:
+                        return buffer.readVarint32() | 0;
+
+                    // 32bit unsigned varint
+                    case ProtoBuf.TYPES["uint32"]:
+                        return buffer.readVarint32() >>> 0;
+
+                    // 32bit signed varint zig-zag
+                    case ProtoBuf.TYPES["sint32"]:
+                        return buffer.readVarint32ZigZag() | 0;
+
+                    // Fixed 32bit unsigned
+                    case ProtoBuf.TYPES["fixed32"]:
+                        return buffer.readUint32() >>> 0;
+
+                    case ProtoBuf.TYPES["sfixed32"]:
+                        return buffer.readInt32() | 0;
+
+                    // 64bit signed varint
+                    case ProtoBuf.TYPES["int64"]:
+                        return buffer.readVarint64();
+
+                    // 64bit unsigned varint
+                    case ProtoBuf.TYPES["uint64"]:
+                        return buffer.readVarint64().toUnsigned();
+
+                    // 64bit signed varint zig-zag
+                    case ProtoBuf.TYPES["sint64"]:
+                        return buffer.readVarint64ZigZag();
+
+                    // Fixed 64bit unsigned
+                    case ProtoBuf.TYPES["fixed64"]:
+                        return buffer.readUint64();
+
+                    // Fixed 64bit signed
+                    case ProtoBuf.TYPES["sfixed64"]:
+                        return buffer.readInt64();
+
+                    // Bool varint
+                    case ProtoBuf.TYPES["bool"]:
+                        return !!buffer.readVarint32();
+
+                    // Constant enum value (varint)
+                    case ProtoBuf.TYPES["enum"]:
+                        // The following Builder.Message#set will already throw
+                        return buffer.readVarint32();
+
+                    // 32bit float
+                    case ProtoBuf.TYPES["float"]:
+                        return buffer.readFloat();
+
+                    // 64bit float
+                    case ProtoBuf.TYPES["double"]:
+                        return buffer.readDouble();
+
+                    // Length-delimited string
+                    case ProtoBuf.TYPES["string"]:
+                        return buffer.readVString();
+
+                    // Length-delimited bytes
+                    case ProtoBuf.TYPES["bytes"]: {
+                        nBytes = buffer.readVarint32();
+                        if (buffer.remaining() < nBytes) {
+                            throw(new Error("Illegal number of bytes for "+this.toString(true)+": "+nBytes+" required but got only "+buffer.remaining()));
+                        }
+                        value = buffer.clone(); // Offset already set
+                        value.limit = value.offset+nBytes;
+                        buffer.offset += nBytes;
+                        return value;
+                    }
+
+                    // Length-delimited embedded message
+                    case ProtoBuf.TYPES["message"]: {
+                        nBytes = buffer.readVarint32();
+                        return this.resolvedType.decode(buffer, nBytes);
+                    }
+
+                    // Legacy group
+                    case ProtoBuf.TYPES["group"]:
+                        return this.resolvedType.decode(buffer, -1, this.id);
+                }
+
+                // We should never end here
+                throw(new Error("[INTERNAL] Illegal wire type for "+this.toString(true)+": "+wireType));
+            }
+
+            /**
+             * @alias ProtoBuf.Reflect.Message.Field
+             * @expose
+             */
+            Reflect.Message.Field = Field;
+
+            /**
+             * Constructs a new Enum.
+             * @exports ProtoBuf.Reflect.Enum
+             * @param {!ProtoBuf.Reflect.T} parent Parent Reflect object
+             * @param {string} name Enum name
+             * @param {Object.<string.*>=} options Enum options
+             * @constructor
+             * @extends ProtoBuf.Reflect.Namespace
+             */
+            var Enum = function(parent, name, options) {
+                Namespace.call(this, parent, name, options);
+
+                /**
+                 * @override
+                 */
+                this.className = "Enum";
+
+                /**
+                 * Runtime enum object.
+                 * @type {Object.<string,number>|null}
+                 * @expose
+                 */
+                this.object = null;
+            };
+
+            // Extends Namespace
+            Enum.prototype = Object.create(Namespace.prototype);
+
+            /**
+             * Builds this enum and returns the runtime counterpart.
+             * @return {Object<string,*>}
+             * @expose
+             */
+            Enum.prototype.build = function() {
+                var enm = {};
+                var values = this.getChildren(Enum.Value);
+                for (var i=0; i<values.length; i++) {
+                    enm[values[i]['name']] = values[i]['id'];
+                }
+                if (Object.defineProperty) {
+                    Object.defineProperty(enm, '$options', {
+                        'value': this.buildOpt(),
+                        'enumerable': false,
+                        'configurable': false,
+                        'writable': false
+                    });
+                }
+                return this.object = enm;
+            };
+
+            /**
+             * @alias ProtoBuf.Reflect.Enum
+             * @expose
+             */
+            Reflect.Enum = Enum;
+
+            /**
+             * Constructs a new Enum Value.
+             * @exports ProtoBuf.Reflect.Enum.Value
+             * @param {!ProtoBuf.Reflect.Enum} enm Enum reference
+             * @param {string} name Field name
+             * @param {number} id Unique field id
+             * @constructor
+             * @extends ProtoBuf.Reflect.T
+             */
+            var Value = function(enm, name, id) {
+                T.call(this, enm, name);
+
+                /**
+                 * @override
+                 */
+                this.className = "Enum.Value";
+
+                /**
+                 * Unique enum value id.
+                 * @type {number}
+                 * @expose
+                 */
+                this.id = id;
+            };
+
+            // Extends T
+            Value.prototype = Object.create(T.prototype);
+
+            /**
+             * @alias ProtoBuf.Reflect.Enum.Value
+             * @expose
+             */
+            Reflect.Enum.Value = Value;
+
+            /**
+             * Constructs a new Service.
+             * @exports ProtoBuf.Reflect.Service
+             * @param {!ProtoBuf.Reflect.Namespace} root Root
+             * @param {string} name Service name
+             * @param {Object.<string,*>=} options Options
+             * @constructor
+             * @extends ProtoBuf.Reflect.Namespace
+             */
+            var Service = function(root, name, options) {
+                Namespace.call(this, root, name, options);
+
+                /**
+                 * @override
+                 */
+                this.className = "Service";
+
+                /**
+                 * Built runtime service class.
+                 * @type {?function(new:ProtoBuf.Builder.Service)}
+                 */
+                this.clazz = null;
+            };
+
+            // Extends Namespace
+            Service.prototype = Object.create(Namespace.prototype);
+
+            /**
+             * Builds the service and returns the runtime counterpart, which is a fully functional class.
+             * @see ProtoBuf.Builder.Service
+             * @param {boolean=} rebuild Whether to rebuild or not
+             * @return {Function} Service class
+             * @throws {Error} If the message cannot be built
+             * @expose
+             */
+            Service.prototype.build = function(rebuild) {
+                if (this.clazz && !rebuild) return this.clazz;
+                return this.clazz = (function(ProtoBuf, T) {
+
+                    /**
+                     * Constructs a new runtime Service.
+                     * @name ProtoBuf.Builder.Service
+                     * @param {function(string, ProtoBuf.Builder.Message, function(Error, ProtoBuf.Builder.Message=))=} rpcImpl RPC implementation receiving the method name and the message
+                     * @class Barebone of all runtime services.
+                     * @constructor
+                     * @throws {Error} If the service cannot be created
+                     */
+                    var Service = function(rpcImpl) {
+                        ProtoBuf.Builder.Service.call(this);
+
+                        /**
+                         * Service implementation.
+                         * @name ProtoBuf.Builder.Service#rpcImpl
+                         * @type {!function(string, ProtoBuf.Builder.Message, function(Error, ProtoBuf.Builder.Message=))}
+                         * @expose
+                         */
+                        this.rpcImpl = rpcImpl || function(name, msg, callback) {
+                            // This is what a user has to implement: A function receiving the method name, the actual message to
+                            // send (type checked) and the callback that's either provided with the error as its first
+                            // argument or null and the actual response message.
+                            setTimeout(callback.bind(this, new Error("Not implemented, see: https://github.com/dcodeIO/ProtoBuf.js/wiki/Services")), 0); // Must be async!
+                        };
+                    };
+
+                    // Extends ProtoBuf.Builder.Service
+                    Service.prototype = Object.create(ProtoBuf.Builder.Service.prototype);
+
+                    if (Object.defineProperty) {
+                        Object.defineProperty(Service, "$options", {
+                            "value": T.buildOpt(),
+                            "enumerable": false,
+                            "configurable": false,
+                            "writable": false
+                        });
+                        Object.defineProperty(Service.prototype, "$options", {
+                            "value": Service["$options"],
+                            "enumerable": false,
+                            "configurable": false,
+                            "writable": false
+                        });
+                    }
+
+                    /**
+                     * Asynchronously performs an RPC call using the given RPC implementation.
+                     * @name ProtoBuf.Builder.Service.[Method]
+                     * @function
+                     * @param {!function(string, ProtoBuf.Builder.Message, function(Error, ProtoBuf.Builder.Message=))} rpcImpl RPC implementation
+                     * @param {ProtoBuf.Builder.Message} req Request
+                     * @param {function(Error, (ProtoBuf.Builder.Message|ByteBuffer|Buffer|string)=)} callback Callback receiving
+                     *  the error if any and the response either as a pre-parsed message or as its raw bytes
+                     * @abstract
+                     */
+
+                    /**
+                     * Asynchronously performs an RPC call using the instance's RPC implementation.
+                     * @name ProtoBuf.Builder.Service#[Method]
+                     * @function
+                     * @param {ProtoBuf.Builder.Message} req Request
+                     * @param {function(Error, (ProtoBuf.Builder.Message|ByteBuffer|Buffer|string)=)} callback Callback receiving
+                     *  the error if any and the response either as a pre-parsed message or as its raw bytes
+                     * @abstract
+                     */
+
+                    var rpc = T.getChildren(ProtoBuf.Reflect.Service.RPCMethod);
+                    for (var i=0; i<rpc.length; i++) {
+                        (function(method) {
+
+                            // service#Method(message, callback)
+                            Service.prototype[method.name] = function(req, callback) {
+                                try {
+                                    if (!req || !(req instanceof method.resolvedRequestType.clazz)) {
+                                        setTimeout(callback.bind(this, new Error("Illegal request type provided to service method "+T.name+"#"+method.name)), 0);
+                                    }
+                                    this.rpcImpl(method.fqn(), req, function(err, res) { // Assumes that this is properly async
+                                        if (err) {
+                                            callback(err);
+                                            return;
+                                        }
+                                        try { res = method.resolvedResponseType.clazz.decode(res); } catch (notABuffer) {}
+                                        if (!res || !(res instanceof method.resolvedResponseType.clazz)) {
+                                            callback(new Error("Illegal response type received in service method "+ T.name+"#"+method.name));
+                                            return;
+                                        }
+                                        callback(null, res);
+                                    });
+                                } catch (err) {
+                                    setTimeout(callback.bind(this, err), 0);
+                                }
+                            };
+
+                            // Service.Method(rpcImpl, message, callback)
+                            Service[method.name] = function(rpcImpl, req, callback) {
+                                new Service(rpcImpl)[method.name](req, callback);
+                            };
+
+                            if (Object.defineProperty) {
+                                Object.defineProperty(Service[method.name], "$options", {
+                                    "value": method.buildOpt(),
+                                    "enumerable": false,
+                                    "configurable": false,
+                                    "writable": false
+                                });
+                                Object.defineProperty(Service.prototype[method.name], "$options", {
+                                    "value": Service[method.name]["$options"],
+                                    "enumerable": false,
+                                    "configurable": false,
+                                    "writable": false
+                                });
+                            }
+                        })(rpc[i]);
+                    }
+
+                    return Service;
+
+                })(ProtoBuf, this);
+            };
+
+            /**
+             * @alias ProtoBuf.Reflect.Service
+             * @expose
+             */
+            Reflect.Service = Service;
+
+            /**
+             * Abstract service method.
+             * @exports ProtoBuf.Reflect.Service.Method
+             * @param {!ProtoBuf.Reflect.Service} svc Service
+             * @param {string} name Method name
+             * @param {Object.<string,*>=} options Options
+             * @constructor
+             * @extends ProtoBuf.Reflect.T
+             */
+            var Method = function(svc, name, options) {
+                T.call(this, svc, name);
+
+                /**
+                 * @override
+                 */
+                this.className = "Service.Method";
+
+                /**
+                 * Options.
+                 * @type {Object.<string, *>}
+                 * @expose
+                 */
+                this.options = options || {};
+            };
+
+            // Extends T
+            Method.prototype = Object.create(T.prototype);
+
+            /**
+             * Builds the method's '$options' property.
+             * @name ProtoBuf.Reflect.Service.Method#buildOpt
+             * @function
+             * @return {Object.<string,*>}
+             */
+            Method.prototype.buildOpt = Namespace.prototype.buildOpt;
+
+            /**
+             * @alias ProtoBuf.Reflect.Service.Method
+             * @expose
+             */
+            Reflect.Service.Method = Method;
+
+            /**
+             * RPC service method.
+             * @exports ProtoBuf.Reflect.Service.RPCMethod
+             * @param {!ProtoBuf.Reflect.Service} svc Service
+             * @param {string} name Method name
+             * @param {string} request Request message name
+             * @param {string} response Response message name
+             * @param {Object.<string,*>=} options Options
+             * @constructor
+             * @extends ProtoBuf.Reflect.Service.Method
+             */
+            var RPCMethod = function(svc, name, request, response, options) {
+                Method.call(this, svc, name, options);
+
+                /**
+                 * @override
+                 */
+                this.className = "Service.RPCMethod";
+
+                /**
+                 * Request message name.
+                 * @type {string}
+                 * @expose
+                 */
+                this.requestName = request;
+
+                /**
+                 * Response message name.
+                 * @type {string}
+                 * @expose
+                 */
+                this.responseName = response;
+
+                /**
+                 * Resolved request message type.
+                 * @type {ProtoBuf.Reflect.Message}
+                 * @expose
+                 */
+                this.resolvedRequestType = null;
+
+                /**
+                 * Resolved response message type.
+                 * @type {ProtoBuf.Reflect.Message}
+                 * @expose
+                 */
+                this.resolvedResponseType = null;
+            };
+
+            // Extends Method
+            RPCMethod.prototype = Object.create(Method.prototype);
+
+            /**
+             * @alias ProtoBuf.Reflect.Service.RPCMethod
+             * @expose
+             */
+            Reflect.Service.RPCMethod = RPCMethod;
+
+            return Reflect;
+        })(ProtoBuf);
+
+        /**
+         * @alias ProtoBuf.Builder
+         * @expose
+         */
+        ProtoBuf.Builder = (function(ProtoBuf, Lang, Reflect) {
+            "use strict";
+
+            /**
+             * Constructs a new Builder.
+             * @exports ProtoBuf.Builder
+             * @class Provides the functionality to build protocol messages.
+             * @constructor
+             */
+            var Builder = function() {
+
+                /**
+                 * Namespace.
+                 * @type {ProtoBuf.Reflect.Namespace}
+                 * @expose
+                 */
+                this.ns = new Reflect.Namespace(null, ""); // Global namespace
+
+                /**
+                 * Namespace pointer.
+                 * @type {ProtoBuf.Reflect.T}
+                 * @expose
+                 */
+                this.ptr = this.ns;
+
+                /**
+                 * Resolved flag.
+                 * @type {boolean}
+                 * @expose
+                 */
+                this.resolved = false;
+
+                /**
+                 * The current building result.
+                 * @type {Object.<string,ProtoBuf.Builder.Message|Object>|null}
+                 * @expose
+                 */
+                this.result = null;
+
+                /**
+                 * Imported files.
+                 * @type {Array.<string>}
+                 * @expose
+                 */
+                this.files = {};
+
+                /**
+                 * Import root override.
+                 * @type {?string}
+                 * @expose
+                 */
+                this.importRoot = null;
+            };
+
+            /**
+             * Resets the pointer to the root namespace.
+             * @expose
+             */
+            Builder.prototype.reset = function() {
+                this.ptr = this.ns;
+            };
+
+            /**
+             * Defines a package on top of the current pointer position and places the pointer on it.
+             * @param {string} pkg
+             * @param {Object.<string,*>=} options
+             * @return {ProtoBuf.Builder} this
+             * @throws {Error} If the package name is invalid
+             * @expose
+             */
+            Builder.prototype.define = function(pkg, options) {
+                if (typeof pkg !== 'string' || !Lang.TYPEREF.test(pkg)) {
+                    throw(new Error("Illegal package name: "+pkg));
+                }
+                var part = pkg.split("."), i;
+                for (i=0; i<part.length; i++) { // To be absolutely sure
+                    if (!Lang.NAME.test(part[i])) {
+                        throw(new Error("Illegal package name: "+part[i]));
+                    }
+                }
+                for (i=0; i<part.length; i++) {
+                    if (!this.ptr.hasChild(part[i])) { // Keep existing namespace
+                        this.ptr.addChild(new Reflect.Namespace(this.ptr, part[i], options));
+                    }
+                    this.ptr = this.ptr.getChild(part[i]);
+                }
+                return this;
+            };
+
+            /**
+             * Tests if a definition is a valid message definition.
+             * @param {Object.<string,*>} def Definition
+             * @return {boolean} true if valid, else false
+             * @expose
+             */
+            Builder.isValidMessage = function(def) {
+                // Messages require a string name
+                if (typeof def["name"] !== 'string' || !Lang.NAME.test(def["name"])) {
+                    return false;
+                }
+                // Messages must not contain values (that'd be an enum) or methods (that'd be a service)
+                if (typeof def["values"] !== 'undefined' || typeof def["rpc"] !== 'undefined') {
+                    return false;
+                }
+                // Fields, enums and messages are arrays if provided
+                var i;
+                if (typeof def["fields"] !== 'undefined') {
+                    if (!ProtoBuf.Util.isArray(def["fields"])) {
+                        return false;
+                    }
+                    var ids = [], id; // IDs must be unique
+                    for (i=0; i<def["fields"].length; i++) {
+                        if (!Builder.isValidMessageField(def["fields"][i])) {
+                            return false;
+                        }
+                        id = parseInt(def["fields"][i]["id"], 10);
+                        if (ids.indexOf(id) >= 0) {
+                            return false;
+                        }
+                        ids.push(id);
+                    }
+                    ids = null;
+                }
+                if (typeof def["enums"] !== 'undefined') {
+                    if (!ProtoBuf.Util.isArray(def["enums"])) {
+                        return false;
+                    }
+                    for (i=0; i<def["enums"].length; i++) {
+                        if (!Builder.isValidEnum(def["enums"][i])) {
+                            return false;
+                        }
+                    }
+                }
+                if (typeof def["messages"] !== 'undefined') {
+                    if (!ProtoBuf.Util.isArray(def["messages"])) {
+                        return false;
+                    }
+                    for (i=0; i<def["messages"].length; i++) {
+                        if (!Builder.isValidMessage(def["messages"][i]) && !Builder.isValidExtend(def["messages"][i])) {
+                            return false;
+                        }
+                    }
+                }
+                if (typeof def["extensions"] !== 'undefined') {
+                    if (!ProtoBuf.Util.isArray(def["extensions"]) || def["extensions"].length !== 2 || typeof def["extensions"][0] !== 'number' || typeof def["extensions"][1] !== 'number') {
+                        return false;
+                    }
+                }
+                return true;
+            };
+
+            /**
+             * Tests if a definition is a valid message field definition.
+             * @param {Object} def Definition
+             * @return {boolean} true if valid, else false
+             * @expose
+             */
+            Builder.isValidMessageField = function(def) {
+                // Message fields require a string rule, name and type and an id
+                if (typeof def["rule"] !== 'string' || typeof def["name"] !== 'string' || typeof def["type"] !== 'string' || typeof def["id"] === 'undefined') {
+                    return false;
+                }
+                if (!Lang.RULE.test(def["rule"]) || !Lang.NAME.test(def["name"]) || !Lang.TYPEREF.test(def["type"]) || !Lang.ID.test(""+def["id"])) {
+                    return false;
+                }
+                if (typeof def["options"] !== 'undefined') {
+                    // Options are objects
+                    if (typeof def["options"] !== 'object') {
+                        return false;
+                    }
+                    // Options are <string,string|number|boolean>
+                    var keys = Object.keys(def["options"]);
+                    for (var i=0, key; i<keys.length; i++)
+                        if (typeof (key = keys[i]) !== 'string' || (typeof def["options"][key] !== 'string' && typeof def["options"][key] !== 'number' && typeof def["options"][key] !== 'boolean'))
+                            return false;
+                }
+                return true;
+            };
+
+            /**
+             * Tests if a definition is a valid enum definition.
+             * @param {Object} def Definition
+             * @return {boolean} true if valid, else false
+             * @expose
+             */
+            Builder.isValidEnum = function(def) {
+                // Enums require a string name
+                if (typeof def["name"] !== 'string' || !Lang.NAME.test(def["name"])) {
+                    return false;
+                }
+                // Enums require at least one value
+                if (typeof def["values"] === 'undefined' || !ProtoBuf.Util.isArray(def["values"]) || def["values"].length == 0) {
+                    return false;
+                }
+                for (var i=0; i<def["values"].length; i++) {
+                    // Values are objects
+                    if (typeof def["values"][i] != "object") {
+                        return false;
+                    }
+                    // Values require a string name and an id
+                    if (typeof def["values"][i]["name"] !== 'string' || typeof def["values"][i]["id"] === 'undefined') {
+                        return false;
+                    }
+                    if (!Lang.NAME.test(def["values"][i]["name"]) || !Lang.NEGID.test(""+def["values"][i]["id"])) {
+                        return false;
+                    }
+                }
+                // It's not important if there are other fields because ["values"] is already unique
+                return true;
+            };
+
+            /**
+             * Creates ths specified protocol types at the current pointer position.
+             * @param {Array.<Object.<string,*>>} defs Messages, enums or services to create
+             * @return {ProtoBuf.Builder} this
+             * @throws {Error} If a message definition is invalid
+             * @expose
+             */
+            Builder.prototype.create = function(defs) {
+                if (!defs) return; // Nothing to create
+                if (!ProtoBuf.Util.isArray(defs)) {
+                    defs = [defs];
+                }
+                if (defs.length == 0) return;
+
+                // It's quite hard to keep track of scopes and memory here, so let's do this iteratively.
+                var stack = [], def, obj, subObj, i, j;
+                stack.push(defs); // One level [a, b, c]
+                while (stack.length > 0) {
+                    defs = stack.pop();
+                    if (ProtoBuf.Util.isArray(defs)) { // Stack always contains entire namespaces
+                        while (defs.length > 0) {
+                            def = defs.shift(); // Namespace always contains an array of messages, enums and services
+                            if (Builder.isValidMessage(def)) {
+                                obj = new Reflect.Message(this.ptr, def["name"], def["options"], def["isGroup"]);
+                                // Create fields
+                                if (def["fields"] && def["fields"].length > 0) {
+                                    for (i=0; i<def["fields"].length; i++) { // i=Fields
+                                        if (obj.hasChild(def['fields'][i]['id'])) {
+                                            throw(new Error("Duplicate field id in message "+obj.name+": "+def['fields'][i]['id']));
+                                        }
+                                        if (def["fields"][i]["options"]) {
+                                            subObj = Object.keys(def["fields"][i]["options"]);
+                                            for (j=0; j<subObj.length; j++) { // j=Option names
+                                                if (typeof subObj[j] !== 'string')
+                                                    throw(new Error("Illegal field option name in message "+obj.name+"#"+def["fields"][i]["name"]+": "+subObj[j]));
+                                                if (typeof def["fields"][i]["options"][subObj[j]] !== 'string' && typeof def["fields"][i]["options"][subObj[j]] !== 'number' && typeof def["fields"][i]["options"][subObj[j]] !== 'boolean')
+                                                    throw(new Error("Illegal field option value in message "+obj.name+"#"+def["fields"][i]["name"]+"#"+subObj[j]+": "+def["fields"][i]["options"][subObj[j]]));
+                                            }
+                                            subObj = null;
+                                        }
+                                        obj.addChild(new Reflect.Message.Field(obj, def["fields"][i]["rule"], def["fields"][i]["type"], def["fields"][i]["name"], def["fields"][i]["id"], def["fields"][i]["options"]));
+                                    }
+                                }
+                                // Push enums and messages to stack
+                                subObj = [];
+                                if (typeof def["enums"] !== 'undefined' && def['enums'].length > 0) {
+                                    for (i=0; i<def["enums"].length; i++) {
+                                        subObj.push(def["enums"][i]);
+                                    }
+                                }
+                                if (def["messages"] && def["messages"].length > 0) {
+                                    for (i=0; i<def["messages"].length; i++) {
+                                        subObj.push(def["messages"][i]);
+                                    }
+                                }
+                                // Set extension range
+                                if (def["extensions"]) {
+                                    obj.extensions = def["extensions"];
+                                    if (obj.extensions[0] < ProtoBuf.ID_MIN) {
+                                        obj.extensions[0] = ProtoBuf.ID_MIN;
+                                    }
+                                    if (obj.extensions[1] > ProtoBuf.ID_MAX) {
+                                        obj.extensions[1] = ProtoBuf.ID_MAX;
+                                    }
+                                }
+                                this.ptr.addChild(obj); // Add to current namespace
+                                if (subObj.length > 0) {
+                                    stack.push(defs); // Push the current level back
+                                    defs = subObj; // Continue processing sub level
+                                    subObj = null;
+                                    this.ptr = obj; // And move the pointer to this namespace
+                                    obj = null;
+                                    continue;
+                                }
+                                subObj = null;
+                                obj = null;
+                            } else if (Builder.isValidEnum(def)) {
+                                obj = new Reflect.Enum(this.ptr, def["name"], def["options"]);
+                                for (i=0; i<def["values"].length; i++) {
+                                    obj.addChild(new Reflect.Enum.Value(obj, def["values"][i]["name"], def["values"][i]["id"]));
+                                }
+                                this.ptr.addChild(obj);
+                                obj = null;
+                            } else if (Builder.isValidService(def)) {
+                                obj = new Reflect.Service(this.ptr, def["name"], def["options"]);
+                                for (i in def["rpc"]) {
+                                    if (def["rpc"].hasOwnProperty(i)) {
+                                        obj.addChild(new Reflect.Service.RPCMethod(obj, i, def["rpc"][i]["request"], def["rpc"][i]["response"], def["rpc"][i]["options"]));
+                                    }
+                                }
+                                this.ptr.addChild(obj);
+                                obj = null;
+                            } else if (Builder.isValidExtend(def)) {
+                                obj = this.ptr.resolve(def["ref"]);
+                                if (obj) {
+                                    for (i=0; i<def["fields"].length; i++) { // i=Fields
+                                        if (obj.hasChild(def['fields'][i]['id'])) {
+                                            throw(new Error("Duplicate extended field id in message "+obj.name+": "+def['fields'][i]['id']));
+                                        }
+                                        if (def['fields'][i]['id'] < obj.extensions[0] || def['fields'][i]['id'] > obj.extensions[1]) {
+                                            throw(new Error("Illegal extended field id in message "+obj.name+": "+def['fields'][i]['id']+" ("+obj.extensions.join(' to ')+" expected)"));
+                                        }
+                                        obj.addChild(new Reflect.Message.Field(obj, def["fields"][i]["rule"], def["fields"][i]["type"], def["fields"][i]["name"], def["fields"][i]["id"], def["fields"][i]["options"]));
+                                    }
+                                    /* if (this.ptr instanceof Reflect.Message) {
+                                        this.ptr.addChild(obj); // Reference the extended message here to enable proper lookups
+                                    } */
+                                } else {
+                                    if (!/\.?google\.protobuf\./.test(def["ref"])) { // Silently skip internal extensions
+                                        throw(new Error("Extended message "+def["ref"]+" is not defined"));
+                                    }
+                                }
+                            } else {
+                                throw(new Error("Not a valid message, enum, service or extend definition: "+JSON.stringify(def)));
+                            }
+                            def = null;
+                        }
+                        // Break goes here
+                    } else {
+                        throw(new Error("Not a valid namespace definition: "+JSON.stringify(defs)));
+                    }
+                    defs = null;
+                    this.ptr = this.ptr.parent; // This namespace is s done
+                }
+                this.resolved = false; // Require re-resolve
+                this.result = null; // Require re-build
+                return this;
+            };
+
+            /**
+             * Tests if the specified file is a valid import.
+             * @param {string} filename
+             * @returns {boolean} true if valid, false if it should be skipped
+             * @expose
+             */
+            Builder.isValidImport = function(filename) {
+                // Ignore google/protobuf/descriptor.proto (for example) as it makes use of low-level
+                // bootstrapping directives that are not required and therefore cannot be parsed by ProtoBuf.js.
+                return !(/google\/protobuf\//.test(filename));
+            };
+
+            /**
+             * Imports another definition into this builder.
+             * @param {Object.<string,*>} json Parsed import
+             * @param {(string|{root: string, file: string})=} filename Imported file name
+             * @return {ProtoBuf.Builder} this
+             * @throws {Error} If the definition or file cannot be imported
+             * @expose
+             */
+            Builder.prototype["import"] = function(json, filename) {
+                if (typeof filename === 'string') {
+                    if (ProtoBuf.Util.IS_NODE) {
+                        var path = require("path");
+                        filename = path.resolve(filename);
+                    }
+                    if (!!this.files[filename]) {
+                        this.reset();
+                        return this; // Skip duplicate imports
+                    }
+                    this.files[filename] = true;
+                }
+                if (!!json['imports'] && json['imports'].length > 0) {
+                    var importRoot, delim = '/', resetRoot = false;
+                    if (typeof filename === 'object') { // If an import root is specified, override
+                        this.importRoot = filename["root"]; resetRoot = true; // ... and reset afterwards
+                        importRoot = this.importRoot;
+                        filename = filename["file"];
+                        if (importRoot.indexOf("\\") >= 0 || filename.indexOf("\\") >= 0) delim = '\\';
+                    } else if (typeof filename === 'string') {
+                        if (this.importRoot) { // If import root is overridden, use it
+                            importRoot = this.importRoot;
+                        } else { // Otherwise compute from filename
+                            if (filename.indexOf("/") >= 0) { // Unix
+                                importRoot = filename.replace(/\/[^\/]*$/, "");
+                                if (/* /file.proto */ importRoot === "") importRoot = "/";
+                            } else if (filename.indexOf("\\") >= 0) { // Windows
+                                importRoot = filename.replace(/\\[^\\]*$/, ""); delim = '\\';
+                            } else {
+                                importRoot = ".";
+                            }
+                        }
+                    } else {
+                        importRoot = null;
+                    }
+
+                    for (var i=0; i<json['imports'].length; i++) {
+                        if (typeof json['imports'][i] === 'string') { // Import file
+                            if (!importRoot) {
+                                throw(new Error("Cannot determine import root: File name is unknown"));
+                            }
+                            var importFilename = importRoot+delim+json['imports'][i];
+                            if (!Builder.isValidImport(importFilename)) continue; // e.g. google/protobuf/*
+                            if (/\.proto$/i.test(importFilename) && !ProtoBuf.DotProto) {     // If this is a NOPARSE build
+                                importFilename = importFilename.replace(/\.proto$/, ".json"); // always load the JSON file
+                            }
+                            var contents = ProtoBuf.Util.fetch(importFilename);
+                            if (contents === null) {
+                                throw(new Error("Failed to import '"+importFilename+"' in '"+filename+"': File not found"));
+                            }
+                            if (/\.json$/i.test(importFilename)) { // Always possible
+                                this["import"](JSON.parse(contents+""), importFilename); // May throw
+                            } else {
+                                this["import"]((new ProtoBuf.DotProto.Parser(contents+"")).parse(), importFilename); // May throw
+                            }
+                        } else { // Import structure
+                            if (!filename) {
+                                this["import"](json['imports'][i]);
+                            } else if (/\.(\w+)$/.test(filename)) { // With extension: Append _importN to the name portion to make it unique
+                                this["import"](json['imports'][i], filename.replace(/^(.+)\.(\w+)$/, function($0, $1, $2) { return $1+"_import"+i+"."+$2; }));
+                            } else { // Without extension: Append _importN to make it unique
+                                this["import"](json['imports'][i], filename+"_import"+i);
+                            }
+                        }
+                    }
+                    if (resetRoot) { // Reset import root override when all imports are done
+                        this.importRoot = null;
+                    }
+                }
+                if (!!json['messages']) {
+                    if (!!json['package']) this.define(json['package'], json["options"]);
+                    this.create(json['messages']);
+                    this.reset();
+                }
+                if (!!json['enums']) {
+                    if (!!json['package']) this.define(json['package'], json["options"]);
+                    this.create(json['enums']);
+                    this.reset();
+                }
+                if (!!json['services']) {
+                    if (!!json['package']) this.define(json['package'], json["options"]);
+                    this.create(json['services']);
+                    this.reset();
+                }
+                if (!!json['extends']) {
+                    if (!!json['package']) this.define(json['package'], json["options"]);
+                    this.create(json['extends']);
+                    this.reset();
+                }
+                return this;
+            };
+
+            /**
+             * Tests if a definition is a valid service definition.
+             * @param {Object} def Definition
+             * @return {boolean} true if valid, else false
+             * @expose
+             */
+            Builder.isValidService = function(def) {
+                // Services require a string name and an rpc object
+                return !(typeof def["name"] !== 'string' || !Lang.NAME.test(def["name"]) || typeof def["rpc"] !== 'object');
+            };
+
+            /**
+             * Tests if a definition is a valid extension.
+             * @param {Object} def Definition
+             * @returns {boolean} true if valid, else false
+             * @expose
+            */
+            Builder.isValidExtend = function(def) {
+                if (typeof def["ref"] !== 'string' || !Lang.TYPEREF.test(def["name"])) {
+                    return false;
+                }
+                var i;
+                if (typeof def["fields"] !== 'undefined') {
+                    if (!ProtoBuf.Util.isArray(def["fields"])) {
+                        return false;
+                    }
+                    var ids = [], id; // IDs must be unique (does not yet test for the extended message's ids)
+                    for (i=0; i<def["fields"].length; i++) {
+                        if (!Builder.isValidMessageField(def["fields"][i])) {
+                            return false;
+                        }
+                        id = parseInt(def["id"], 10);
+                        if (ids.indexOf(id) >= 0) {
+                            return false;
+                        }
+                        ids.push(id);
+                    }
+                    ids = null;
+                }
+                return true;
+            };
+
+            /**
+             * Resolves all namespace objects.
+             * @throws {Error} If a type cannot be resolved
+             * @expose
+             */
+            Builder.prototype.resolveAll = function() {
+                // Resolve all reflected objects
+                var res;
+                if (this.ptr == null || typeof this.ptr.type === 'object') return; // Done (already resolved)
+                if (this.ptr instanceof Reflect.Namespace) {
+                    // Build all children
+                    var children = this.ptr.getChildren();
+                    for (var i=0; i<children.length; i++) {
+                        this.ptr = children[i];
+                        this.resolveAll();
+                    }
+                } else if (this.ptr instanceof Reflect.Message.Field) {
+                    if (!Lang.TYPE.test(this.ptr.type)) { // Resolve type...
+                        if (!Lang.TYPEREF.test(this.ptr.type)) {
+                            throw(new Error("Illegal type reference in "+this.ptr.toString(true)+": "+this.ptr.type));
+                        }
+                        res = this.ptr.parent.resolve(this.ptr.type, true);
+                        if (!res) {
+                            throw(new Error("Unresolvable type reference in "+this.ptr.toString(true)+": "+this.ptr.type));
+                        }
+                        this.ptr.resolvedType = res;
+                        if (res instanceof Reflect.Enum) {
+                            this.ptr.type = ProtoBuf.TYPES["enum"];
+                        } else if (res instanceof Reflect.Message) {
+                            this.ptr.type = res.isGroup ? ProtoBuf.TYPES["group"] : ProtoBuf.TYPES["message"];
+                        } else {
+                            throw(new Error("Illegal type reference in "+this.ptr.toString(true)+": "+this.ptr.type));
+                        }
+                    } else {
+                        this.ptr.type = ProtoBuf.TYPES[this.ptr.type];
+                    }
+                } else if (this.ptr instanceof ProtoBuf.Reflect.Enum.Value) {
+                    // No need to build enum values (built in enum)
+                } else if (this.ptr instanceof ProtoBuf.Reflect.Service.Method) {
+                    if (this.ptr instanceof ProtoBuf.Reflect.Service.RPCMethod) {
+                        res = this.ptr.parent.resolve(this.ptr.requestName);
+                        if (!res || !(res instanceof ProtoBuf.Reflect.Message)) {
+                            throw(new Error("Illegal request type reference in "+this.ptr.toString(true)+": "+this.ptr.requestName));
+                        }
+                        this.ptr.resolvedRequestType = res;
+                        res = this.ptr.parent.resolve(this.ptr.responseName);
+                        if (!res || !(res instanceof ProtoBuf.Reflect.Message)) {
+                            throw(new Error("Illegal response type reference in "+this.ptr.toString(true)+": "+this.ptr.responseName));
+                        }
+                        this.ptr.resolvedResponseType = res;
+                    } else {
+                        // Should not happen as nothing else is implemented
+                        throw(new Error("Illegal service method type in "+this.ptr.toString(true)));
+                    }
+                } else {
+                    throw(new Error("Illegal object type in namespace: "+typeof(this.ptr)+":"+this.ptr));
+                }
+                this.reset();
+            };
+
+            /**
+             * Builds the protocol. This will first try to resolve all definitions and, if this has been successful,
+             * return the built package.
+             * @param {string=} path Specifies what to return. If omitted, the entire namespace will be returned.
+             * @return {ProtoBuf.Builder.Message|Object.<string,*>}
+             * @throws {Error} If a type could not be resolved
+             * @expose
+             */
+            Builder.prototype.build = function(path) {
+                this.reset();
+                if (!this.resolved) {
+                    this.resolveAll();
+                    this.resolved = true;
+                    this.result = null; // Require re-build
+                }
+                if (this.result == null) { // (Re-)Build
+                    this.result = this.ns.build();
+                }
+                if (!path) {
+                    return this.result;
+                } else {
+                    var part = path.split(".");
+                    var ptr = this.result; // Build namespace pointer (no hasChild etc.)
+                    for (var i=0; i<part.length; i++) {
+                        if (ptr[part[i]]) {
+                            ptr = ptr[part[i]];
+                        } else {
+                            ptr = null;
+                            break;
+                        }
+                    }
+                    return ptr;
+                }
+            };
+
+            /**
+             * Similar to {@link ProtoBuf.Builder#build}, but looks up the internal reflection descriptor.
+             * @param {string=} path Specifies what to return. If omitted, the entire namespace wiil be returned.
+             * @return {ProtoBuf.Reflect.T} Reflection descriptor or `null` if not found
+             */
+            Builder.prototype.lookup = function(path) {
+                return path ? this.ns.resolve(path) : this.ns;
+            };
+
+            /**
+             * Returns a string representation of this object.
+             * @return {string} String representation as of "Builder"
+             * @expose
+             */
+            Builder.prototype.toString = function() {
+                return "Builder";
+            };
+
+            // Pseudo types documented in Reflect.js.
+            // Exist for the sole purpose of being able to "... instanceof ProtoBuf.Builder.Message" etc.
+            Builder.Message = function() {};
+            Builder.Service = function() {};
+
+            return Builder;
+
+        })(ProtoBuf, ProtoBuf.Lang, ProtoBuf.Reflect);
+
+
+        /**
+         * Loads a .proto string and returns the Builder.
+         * @param {string} proto .proto file contents
+         * @param {(ProtoBuf.Builder|string|{root: string, file: string})=} builder Builder to append to. Will create a new one if omitted.
+         * @param {(string|{root: string, file: string})=} filename The corresponding file name if known. Must be specified for imports.
+         * @return {ProtoBuf.Builder} Builder to create new messages
+         * @throws {Error} If the definition cannot be parsed or built
+         * @expose
+         */
+        ProtoBuf.loadProto = function(proto, builder, filename) {
+            if (typeof builder == 'string' || (builder && typeof builder["file"] === 'string' && typeof builder["root"] === 'string')) {
+                filename = builder;
+                builder = null;
+            }
+            return ProtoBuf.loadJson((new ProtoBuf.DotProto.Parser(proto+"")).parse(), builder, filename);
+        };
+
+        /**
+         * Loads a .proto string and returns the Builder. This is an alias of {@link ProtoBuf.loadProto}.
+         * @function
+         * @param {string} proto .proto file contents
+         * @param {(ProtoBuf.Builder|string)=} builder Builder to append to. Will create a new one if omitted.
+         * @param {(string|{root: string, file: string})=} filename The corresponding file name if known. Must be specified for imports.
+         * @return {ProtoBuf.Builder} Builder to create new messages
+         * @throws {Error} If the definition cannot be parsed or built
+         * @expose
+         */
+        ProtoBuf.protoFromString = ProtoBuf.loadProto; // Legacy
+
+        /**
+         * Loads a .proto file and returns the Builder.
+         * @param {string|{root: string, file: string}} filename Path to proto file or an object specifying 'file' with
+         *  an overridden 'root' path for all imported files.
+         * @param {function(ProtoBuf.Builder)=} callback Callback that will receive the Builder as its first argument.
+         *   If the request has failed, builder will be NULL. If omitted, the file will be read synchronously and this
+         *   function will return the Builder or NULL if the request has failed.
+         * @param {ProtoBuf.Builder=} builder Builder to append to. Will create a new one if omitted.
+         * @return {?ProtoBuf.Builder|undefined} The Builder if synchronous (no callback specified, will be NULL if the
+         *   request has failed), else undefined
+         * @expose
+         */
+        ProtoBuf.loadProtoFile = function(filename, callback, builder) {
+            if (callback && typeof callback === 'object') {
+                builder = callback;
+                callback = null;
+            } else if (!callback || typeof callback !== 'function') {
+                callback = null;
+            }
+            if (callback) {
+                ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename, function(contents) {
+                    callback(ProtoBuf.loadProto(contents, builder, filename));
+                });
+            } else {
+                var contents = ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename);
+                return contents !== null ? ProtoBuf.protoFromString(contents, builder, filename) : null;
+            }
+        };
+
+        /**
+         * Loads a .proto file and returns the Builder. This is an alias of {@link ProtoBuf.loadProtoFile}.
+         * @function
+         * @param {string|{root: string, file: string}} filename Path to proto file or an object specifying 'file' with
+         *  an overridden 'root' path for all imported files.
+         * @param {function(ProtoBuf.Builder)=} callback Callback that will receive the Builder as its first argument.
+         *   If the request has failed, builder will be NULL. If omitted, the file will be read synchronously and this
+         *   function will return the Builder or NULL if the request has failed.
+         * @param {ProtoBuf.Builder=} builder Builder to append to. Will create a new one if omitted.
+         * @return {?ProtoBuf.Builder|undefined} The Builder if synchronous (no callback specified, will be NULL if the
+         *   request has failed), else undefined
+         * @expose
+         */
+        ProtoBuf.protoFromFile = ProtoBuf.loadProtoFile; // Legacy
+
+
+        /**
+         * Constructs a new Builder with the specified package defined.
+         * @param {string=} pkg Package name as fully qualified name, e.g. "My.Game". If no package is specified, the
+         * builder will only contain a global namespace.
+         * @param {Object.<string,*>=} options Top level options
+         * @return {ProtoBuf.Builder} New Builder
+         * @expose
+         */
+        ProtoBuf.newBuilder = function(pkg, options) {
+            var builder = new ProtoBuf.Builder();
+            if (typeof pkg !== 'undefined' && pkg !== null) {
+                builder.define(pkg, options);
+            }
+            return builder;
+        };
+
+        /**
+         * Loads a .json definition and returns the Builder.
+         * @param {!*|string} json JSON definition
+         * @param {(ProtoBuf.Builder|string|{root: string, file: string})=} builder Builder to append to. Will create a new one if omitted.
+         * @param {(string|{root: string, file: string})=} filename The corresponding file name if known. Must be specified for imports.
+         * @return {ProtoBuf.Builder} Builder to create new messages
+         * @throws {Error} If the definition cannot be parsed or built
+         * @expose
+         */
+        ProtoBuf.loadJson = function(json, builder, filename) {
+            if (typeof builder === 'string' || (builder && typeof builder["file"] === 'string' && typeof builder["root"] === 'string')) {
+                filename = builder;
+                builder = null;
+            }
+            if (!builder || typeof builder !== 'object') builder = ProtoBuf.newBuilder();
+            if (typeof json === 'string') json = JSON.parse(json);
+            builder["import"](json, filename);
+            builder.resolveAll();
+            builder.build();
+            return builder;
+        };
+
+        /**
+         * Loads a .json file and returns the Builder.
+         * @param {string|{root: string, file: string}} filename Path to json file or an object specifying 'file' with
+         *  an overridden 'root' path for all imported files.
+         * @param {function(ProtoBuf.Builder)=} callback Callback that will receive the Builder as its first argument.
+         *   If the request has failed, builder will be NULL. If omitted, the file will be read synchronously and this
+         *   function will return the Builder or NULL if the request has failed.
+         * @param {ProtoBuf.Builder=} builder Builder to append to. Will create a new one if omitted.
+         * @return {?ProtoBuf.Builder|undefined} The Builder if synchronous (no callback specified, will be NULL if the
+         *   request has failed), else undefined
+         * @expose
+         */
+        ProtoBuf.loadJsonFile = function(filename, callback, builder) {
+            if (callback && typeof callback === 'object') {
+                builder = callback;
+                callback = null;
+            } else if (!callback || typeof callback !== 'function') {
+                callback = null;
+            }
+            if (callback) {
+                ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename, function(contents) {
+                    try {
+                        callback(ProtoBuf.loadJson(JSON.parse(contents), builder, filename));
+                    } catch (err) {
+                        callback(err);
+                    }
+                });
+            } else {
+                var contents = ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename);
+                return contents !== null ? ProtoBuf.loadJson(JSON.parse(contents), builder, filename) : null;
+            }
+        };
+
+        return ProtoBuf;
+    }
+
+    // Enable module loading if available
+    if (typeof module !== 'undefined' && module["exports"]) { // CommonJS
+        module["exports"] = loadProtoBuf(require("bytebuffer"));
+    } else if (typeof define === 'function' && define["amd"]) { // AMD
+        define("ProtoBuf", ["ByteBuffer"], loadProtoBuf);
+    } else { // Otherwise install globally
+        if (!global["dcodeIO"])
+            global["dcodeIO"] = {};
+        global["dcodeIO"]["ProtoBuf"] = loadProtoBuf(global["dcodeIO"]["ByteBuffer"]);
+    }
+
+})(this);
+
+},{"bytebuffer":93,"fs":111,"path":209}],93:[function(require,module,exports){
+/*
+ ByteBuffer.js (c) 2013-2014 Daniel Wirtz <dcode@dcode.io>
+ This version of ByteBuffer.js uses an ArrayBuffer (AB) as its backing buffer and is compatible with modern browsers.
+ Released under the Apache License, Version 2.0
+ see: https://github.com/dcodeIO/ByteBuffer.js for details
+*/
+(function(r){function s(l){function d(a,b,c){"undefined"===typeof a&&(a=d.DEFAULT_CAPACITY);"undefined"===typeof b&&(b=d.DEFAULT_ENDIAN);"undefined"===typeof c&&(c=d.DEFAULT_NOASSERT);if(!c){a|=0;if(0>a)throw new RangeError("Illegal capacity: 0 <= "+a);if("boolean"!==typeof b)throw new TypeError("Illegal littleEndian: Not a boolean");if("boolean"!==typeof c)throw new TypeError("Illegal noAssert: Not a boolean");}this.buffer=0===a?r:new ArrayBuffer(a);this.view=0===a?null:new DataView(this.buffer);
+this.offset=0;this.markedOffset=-1;this.limit=a;this.littleEndian="undefined"!==typeof b?!!b:!1;this.noAssert=!!c}d.VERSION="3.1.1";d.LITTLE_ENDIAN=!0;d.BIG_ENDIAN=!1;d.DEFAULT_CAPACITY=16;d.DEFAULT_ENDIAN=d.BIG_ENDIAN;d.DEFAULT_NOASSERT=!1;d.Long=l||null;var r=new ArrayBuffer(0);d.allocate=function(a,b,c){return new d(a,b,c)};d.concat=function(a,b,c,e){if("boolean"===typeof b||"string"!==typeof b)e=c,c=b,b=void 0;for(var h=0,f=0,g=a.length,n;f<g;++f)d.isByteBuffer(a[f])||(a[f]=d.wrap(a[f],b)),n=
+a[f].limit-a[f].offset,0<n&&(h+=n);if(0===h)return new d(0,c,e);b=new d(h,c,e);e=new Uint8Array(b.buffer);for(f=0;f<g;)c=a[f++],n=c.limit-c.offset,0>=n||(e.set((new Uint8Array(c.buffer)).subarray(c.offset,c.limit),b.offset),b.offset+=n);b.limit=b.offset;b.offset=0;return b};d.isByteBuffer=function(a){return a&&a instanceof d};d.type=function(){return ArrayBuffer};d.wrap=function(a,b,c,e){"string"!==typeof b&&(e=c,c=b,b=void 0);if("string"===typeof a)switch("undefined"===typeof b&&(b="utf8"),b){case "base64":return d.fromBase64(a,
+c);case "hex":return d.fromHex(a,c);case "binary":return d.fromBinary(a,c);case "utf8":return d.fromUTF8(a,c);case "debug":return d.fromDebug(a,c);default:throw new TypeError("Unsupported encoding: "+b);}if(null===a||"object"!==typeof a)throw new TypeError("Illegal buffer: null or non-object");if(d.isByteBuffer(a))return b=d.prototype.clone.call(a),b.markedOffset=-1,b;if(a instanceof Uint8Array)b=new d(0,c,e),0<a.length&&(b.buffer=a.buffer,b.offset=a.byteOffset,b.limit=a.byteOffset+a.length,b.view=
+0<a.length?new DataView(a.buffer):null);else if(a instanceof ArrayBuffer)b=new d(0,c,e),0<a.byteLength&&(b.buffer=a,b.offset=0,b.limit=a.byteLength,b.view=0<a.byteLength?new DataView(a):null);else if("[object Array]"===Object.prototype.toString.call(a))for(b=new d(a.length,c,e),b.limit=a.length,i=0;i<a.length;++i)b.view.setUint8(i,a[i]);else throw new TypeError("Illegal buffer");return b};d.prototype.writeInt8=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==
+typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=1;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setInt8(b-1,a);c&&(this.offset+=1);return this};d.prototype.writeByte=d.prototype.writeInt8;d.prototype.readInt8=function(a){var b=
+"undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}a=this.view.getInt8(a);b&&(this.offset+=1);return a};d.prototype.readByte=d.prototype.readInt8;d.prototype.writeUint8=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||
+0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=1;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setUint8(b-1,a);c&&(this.offset+=1);return this};d.prototype.readUint8=function(a){var b="undefined"===typeof a;b&&(a=this.offset);
+if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}a=this.view.getUint8(a);b&&(this.offset+=1);return a};d.prototype.writeInt16=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==
+typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=2;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setInt16(b-2,a,this.littleEndian);c&&(this.offset+=2);return this};d.prototype.writeShort=d.prototype.writeInt16;d.prototype.readInt16=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==
+typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+2>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+2) <= "+this.buffer.byteLength);}a=this.view.getInt16(a,this.littleEndian);b&&(this.offset+=2);return a};d.prototype.readShort=d.prototype.readInt16;d.prototype.writeUint16=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");
+a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=2;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setUint16(b-2,a,this.littleEndian);c&&(this.offset+=2);return this};d.prototype.readUint16=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%
+1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+2>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+2) <= "+this.buffer.byteLength);}a=this.view.getUint16(a,this.littleEndian);b&&(this.offset+=2);return a};d.prototype.writeInt32=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=4;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setInt32(b-4,a,this.littleEndian);c&&(this.offset+=4);return this};d.prototype.writeInt=d.prototype.writeInt32;d.prototype.readInt32=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+
+a+" (not an integer)");a>>>=0;if(0>a||a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}a=this.view.getInt32(a,this.littleEndian);b&&(this.offset+=4);return a};d.prototype.readInt=d.prototype.readInt32;d.prototype.writeUint32=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=4;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setUint32(b-4,a,this.littleEndian);c&&(this.offset+=4);return this};d.prototype.readUint32=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||
+a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}a=this.view.getUint32(a,this.littleEndian);b&&(this.offset+=4);return a};l&&(d.prototype.writeInt64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"===typeof a)a=l.fromNumber(a);else if(!(a&&a instanceof l))throw new TypeError("Illegal value: "+a+" (not an integer or Long)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}"number"===typeof a&&(a=l.fromNumber(a));b+=8;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);b-=8;this.littleEndian?(this.view.setInt32(b,a.low,!0),this.view.setInt32(b+4,a.high,!0)):(this.view.setInt32(b,a.high,!1),this.view.setInt32(b+4,a.low,!1));c&&(this.offset+=8);return this},d.prototype.writeLong=d.prototype.writeInt64,d.prototype.readInt64=
+function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+8>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+8) <= "+this.buffer.byteLength);}a=this.littleEndian?new l(this.view.getInt32(a,!0),this.view.getInt32(a+4,!0),!1):new l(this.view.getInt32(a+4,!1),this.view.getInt32(a,!1),!1);b&&(this.offset+=8);return a},d.prototype.readLong=d.prototype.readInt64,
+d.prototype.writeUint64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"===typeof a)a=l.fromNumber(a);else if(!(a&&a instanceof l))throw new TypeError("Illegal value: "+a+" (not an integer or Long)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}"number"===typeof a&&(a=l.fromNumber(a));
+b+=8;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);b-=8;this.littleEndian?(this.view.setInt32(b,a.low,!0),this.view.setInt32(b+4,a.high,!0)):(this.view.setInt32(b,a.high,!1),this.view.setInt32(b+4,a.low,!1));c&&(this.offset+=8);return this},d.prototype.readUint64=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+8>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+
+a+" (+8) <= "+this.buffer.byteLength);}a=this.littleEndian?new l(this.view.getInt32(a,!0),this.view.getInt32(a+4,!0),!0):new l(this.view.getInt32(a+4,!1),this.view.getInt32(a,!1),!0);b&&(this.offset+=8);return a});d.prototype.writeFloat32=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a)throw new TypeError("Illegal value: "+a+" (not a number)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=
+0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=4;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setFloat32(b-4,a,this.littleEndian);c&&(this.offset+=4);return this};d.prototype.writeFloat=d.prototype.writeFloat32;d.prototype.readFloat32=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");
+a>>>=0;if(0>a||a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}a=this.view.getFloat32(a,this.littleEndian);b&&(this.offset+=4);return a};d.prototype.readFloat=d.prototype.readFloat32;d.prototype.writeFloat64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a)throw new TypeError("Illegal value: "+a+" (not a number)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=8;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setFloat64(b-8,a,this.littleEndian);c&&(this.offset+=8);return this};d.prototype.writeDouble=d.prototype.writeFloat64;d.prototype.readFloat64=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+
+a+" (not an integer)");a>>>=0;if(0>a||a+8>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+8) <= "+this.buffer.byteLength);}a=this.view.getFloat64(a,this.littleEndian);b&&(this.offset+=8);return a};d.prototype.readDouble=d.prototype.readFloat64;d.MAX_VARINT32_BYTES=5;d.calculateVarint32=function(a){a>>>=0;return 128>a?1:16384>a?2:2097152>a?3:268435456>a?4:5};d.zigZagEncode32=function(a){return((a|=0)<<1^a>>31)>>>0};d.zigZagDecode32=function(a){return a>>>1^-(a&1)|0};d.prototype.writeVarint32=
+function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}var e=d.calculateVarint32(a);b+=e;var h=this.buffer.byteLength;b>h&&this.resize((h*=2)>b?h:b);b-=e;this.view.setUint8(b,
+e=a|128);a>>>=0;128<=a?(e=a>>7|128,this.view.setUint8(b+1,e),16384<=a?(e=a>>14|128,this.view.setUint8(b+2,e),2097152<=a?(e=a>>21|128,this.view.setUint8(b+3,e),268435456<=a?(this.view.setUint8(b+4,a>>28&15),e=5):(this.view.setUint8(b+3,e&127),e=4)):(this.view.setUint8(b+2,e&127),e=3)):(this.view.setUint8(b+1,e&127),e=2)):(this.view.setUint8(b,e&127),e=1);return c?(this.offset+=e,this):e};d.prototype.writeVarint32ZigZag=function(a,b){return this.writeVarint32(d.zigZagEncode32(a),b)};d.prototype.readVarint32=
+function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=0,e=0,d;do d=this.view.getUint8(a+c),5>c&&(e|=(d&127)<<7*c>>>0),++c;while(128===(d&128));e|=0;return b?(this.offset+=c,e):{value:e,length:c}};d.prototype.readVarint32ZigZag=function(a){a=this.readVarint32(a);
+"object"===typeof a?a.value=d.zigZagDecode32(a.value):a=d.zigZagDecode32(a);return a};l&&(d.MAX_VARINT64_BYTES=10,d.calculateVarint64=function(a){"number"===typeof a&&(a=l.fromNumber(a));var b=a.toInt()>>>0,c=a.shiftRightUnsigned(28).toInt()>>>0;a=a.shiftRightUnsigned(56).toInt()>>>0;return 0==a?0==c?16384>b?128>b?1:2:2097152>b?3:4:16384>c?128>c?5:6:2097152>c?7:8:128>a?9:10},d.zigZagEncode64=function(a){"number"===typeof a?a=l.fromNumber(a,!1):!1!==a.unsigned&&(a=a.toSigned());return a.shiftLeft(1).xor(a.shiftRight(63)).toUnsigned()},
+d.zigZagDecode64=function(a){"number"===typeof a?a=l.fromNumber(a,!1):!1!==a.unsigned&&(a=a.toSigned());return a.shiftRightUnsigned(1).xor(a.and(l.ONE).toSigned().negate()).toSigned()},d.prototype.writeVarint64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"===typeof a)a=l.fromNumber(a);else if(!(a&&a instanceof l))throw new TypeError("Illegal value: "+a+" (not an integer or Long)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}"number"===typeof a?a=l.fromNumber(a,!1):!1!==a.unsigned&&(a=a.toSigned());var e=d.calculateVarint64(a),h=a.toInt()>>>0,f=a.shiftRightUnsigned(28).toInt()>>>0,g=a.shiftRightUnsigned(56).toInt()>>>0;b+=e;var n=this.buffer.byteLength;b>n&&this.resize((n*=2)>b?n:b);b-=e;switch(e){case 10:this.view.setUint8(b+9,g>>>7&1);case 9:this.view.setUint8(b+8,9!==
+e?g|128:g&127);case 8:this.view.setUint8(b+7,8!==e?f>>>21|128:f>>>21&127);case 7:this.view.setUint8(b+6,7!==e?f>>>14|128:f>>>14&127);case 6:this.view.setUint8(b+5,6!==e?f>>>7|128:f>>>7&127);case 5:this.view.setUint8(b+4,5!==e?f|128:f&127);case 4:this.view.setUint8(b+3,4!==e?h>>>21|128:h>>>21&127);case 3:this.view.setUint8(b+2,3!==e?h>>>14|128:h>>>14&127);case 2:this.view.setUint8(b+1,2!==e?h>>>7|128:h>>>7&127);case 1:this.view.setUint8(b,1!==e?h|128:h&127)}return c?(this.offset+=e,this):e},d.prototype.writeVarint64ZigZag=
+function(a,b){return this.writeVarint64(d.zigZagEncode64(a),b)},d.prototype.readVarint64=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=a,e=0,d=0,f=0,g=0,g=this.view.getUint8(a++),e=g&127;if(g&128&&(g=this.view.getUint8(a++),e|=(g&127)<<7,g&128&&
+(g=this.view.getUint8(a++),e|=(g&127)<<14,g&128&&(g=this.view.getUint8(a++),e|=(g&127)<<21,g&128&&(g=this.view.getUint8(a++),d=g&127,g&128&&(g=this.view.getUint8(a++),d|=(g&127)<<7,g&128&&(g=this.view.getUint8(a++),d|=(g&127)<<14,g&128&&(g=this.view.getUint8(a++),d|=(g&127)<<21,g&128&&(g=this.view.getUint8(a++),f=g&127,g&128&&(g=this.view.getUint8(a++),f|=(g&127)<<7,g&128))))))))))throw Error("Data must be corrupt: Buffer overrun");e=l.fromBits(e|d<<28,d>>>4|f<<24,!1);return b?(this.offset=a,e):{value:e,
+length:a-c}},d.prototype.readVarint64ZigZag=function(a){(a=this.readVarint64(a))&&a.value instanceof l?a.value=d.zigZagDecode64(a.value):a=d.zigZagDecode64(a);return a});d.prototype.writeCString=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);var e,d=a.length;if(!this.noAssert){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");for(e=0;e<d;++e)if(0===a.charCodeAt(e))throw new RangeError("Illegal str: Contains NULL-characters");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}e=b;d=k.b(k.a(a))[1];b+=d+1;var f=this.buffer.byteLength;b>f&&this.resize((f*=2)>b?f:b);b-=d+1;k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));this.view.setUint8(b++,0);return c?(this.offset=b-e,this):d};d.prototype.readCString=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+
+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=a,e,d=-1;k.d(function(){if(0===d)return null;if(a>=this.limit)throw RangeError("Illegal range: Truncated data, "+a+" < "+this.limit);return 0===(d=this.view.getUint8(a++))?null:d}.bind(this),e=k.c(),!0);return b?(this.offset=a,e()):{string:e(),length:a-c}};d.prototype.writeIString=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("string"!==
+typeof a)throw new TypeError("Illegal str: Not a string");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}var e=b,d;d=k.b(k.a(a),this.noAssert)[1];b+=4+d;var f=this.buffer.byteLength;b>f&&this.resize((f*=2)>b?f:b);b-=4+d;this.view.setUint32(b,d,this.littleEndian);b+=4;k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));
+if(b!==e+4+d)throw new RangeError("Illegal range: Truncated data, "+b+" == "+(b+4+d));return c?(this.offset=b,this):b-e};d.prototype.readIString=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}var c=0,e=a,c=this.view.getUint32(a,this.littleEndian);a+=
+4;var d=a+c;k.d(function(){return a<d?this.view.getUint8(a++):null}.bind(this),c=k.c(),this.noAssert);c=c();return b?(this.offset=a,c):{string:c,length:a-e}};d.METRICS_CHARS="c";d.METRICS_BYTES="b";d.prototype.writeUTF8String=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+
+this.buffer.byteLength);}var e,d=b;e=k.b(k.a(a))[1];b+=e;var f=this.buffer.byteLength;b>f&&this.resize((f*=2)>b?f:b);b-=e;k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));return c?(this.offset=b,this):b-d};d.prototype.writeString=d.prototype.writeUTF8String;d.calculateUTF8Chars=function(a){return k.b(k.a(a))[0]};d.calculateUTF8Bytes=function(a){return k.b(k.a(a))[1]};d.prototype.readUTF8String=function(a,b,c){"number"===typeof b&&(c=b,b=void 0);var e="undefined"===typeof c;e&&(c=this.offset);
+"undefined"===typeof b&&(b=d.METRICS_CHARS);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal length: "+a+" (not an integer)");a|=0;if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+0) <= "+this.buffer.byteLength);}var h=0,f=c,g;if(b===d.METRICS_CHARS){g=k.c();k.i(function(){return h<a&&c<this.limit?this.view.getUint8(c++):null}.bind(this),
+function(a){++h;k.g(a,g)}.bind(this));if(h!==a)throw new RangeError("Illegal range: Truncated data, "+h+" == "+a);return e?(this.offset=c,g()):{string:g(),length:c-f}}if(b===d.METRICS_BYTES){if(!this.noAssert){if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+a>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+"+a+") <= "+this.buffer.byteLength);}var n=c+a;k.d(function(){return c<n?this.view.getUint8(c++):null}.bind(this),
+g=k.c(),this.noAssert);if(c!==n)throw new RangeError("Illegal range: Truncated data, "+c+" == "+n);return e?(this.offset=c,g()):{string:g(),length:c-f}}throw new TypeError("Unsupported metrics: "+b);};d.prototype.readString=d.prototype.readUTF8String;d.prototype.writeVString=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+
+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}var e=b,h,f;h=k.b(k.a(a),this.noAssert)[1];f=d.calculateVarint32(h);b+=f+h;var g=this.buffer.byteLength;b>g&&this.resize((g*=2)>b?g:b);b-=f+h;b+=this.writeVarint32(h,b);k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));if(b!==e+h+f)throw new RangeError("Illegal range: Truncated data, "+b+" == "+(b+h+f));return c?(this.offset=b,this):b-e};d.prototype.readVString=
+function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=this.readVarint32(a),e=a;a+=c.length;var c=c.value,d=a+c,c=k.c();k.d(function(){return a<d?this.view.getUint8(a++):null}.bind(this),c,this.noAssert);c=c();return b?(this.offset=a,c):{string:c,length:a-
+e}};d.prototype.append=function(a,b,c){if("number"===typeof b||"string"!==typeof b)c=b,b=void 0;var e="undefined"===typeof c;e&&(c=this.offset);if(!this.noAssert){if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+0) <= "+this.buffer.byteLength);}a instanceof d||(a=d.wrap(a,b));b=a.limit-a.offset;if(0>=b)return this;c+=b;var h=this.buffer.byteLength;c>h&&this.resize((h*=
+2)>c?h:c);(new Uint8Array(this.buffer,c-b)).set((new Uint8Array(a.buffer)).subarray(a.offset,a.limit));a.offset+=b;e&&(this.offset+=b);return this};d.prototype.appendTo=function(a,b){a.append(this,b);return this};d.prototype.assert=function(a){this.noAssert=!a;return this};d.prototype.capacity=function(){return this.buffer.byteLength};d.prototype.clear=function(){this.offset=0;this.limit=this.buffer.byteLength;this.markedOffset=-1;return this};d.prototype.clone=function(a){var b=new d(0,this.littleEndian,
+this.noAssert);a?(a=new ArrayBuffer(this.buffer.byteLength),(new Uint8Array(a)).set(this.buffer),b.buffer=a,b.view=new DataView(a)):(b.buffer=this.buffer,b.view=this.view);b.offset=this.offset;b.markedOffset=this.markedOffset;b.limit=this.limit;return b};d.prototype.compact=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||
+0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}if(0===a&&b===this.buffer.byteLength)return this;var c=b-a;if(0===c)return this.buffer=r,this.view=null,0<=this.markedOffset&&(this.markedOffset-=a),this.limit=this.offset=0,this;var e=new ArrayBuffer(c);(new Uint8Array(e)).set((new Uint8Array(this.buffer)).subarray(a,b));this.buffer=e;this.view=new DataView(e);
+0<=this.markedOffset&&(this.markedOffset-=a);this.offset=0;this.limit=c;return this};d.prototype.copy=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);
+}if(a===b)return new d(0,this.littleEndian,this.noAssert);var c=b-a,e=new d(c,this.littleEndian,this.noAssert);e.offset=0;e.limit=c;0<=e.markedOffset&&(e.markedOffset-=a);this.copyTo(e,0,a,b);return e};d.prototype.copyTo=function(a,b,c,e){var h,f;if(!this.noAssert&&!d.isByteBuffer(a))throw new TypeError("Illegal target: Not a ByteBuffer");b=(f="undefined"===typeof b)?a.offset:b|0;c=(h="undefined"===typeof c)?this.offset:c|0;e="undefined"===typeof e?this.limit:e|0;if(0>b||b>a.buffer.byteLength)throw new RangeError("Illegal target range: 0 <= "+
+b+" <= "+a.buffer.byteLength);if(0>c||e>this.buffer.byteLength)throw new RangeError("Illegal source range: 0 <= "+c+" <= "+this.buffer.byteLength);var g=e-c;if(0===g)return a;a.ensureCapacity(b+g);(new Uint8Array(a.buffer)).set((new Uint8Array(this.buffer)).subarray(c,e),b);h&&(this.offset+=g);f&&(a.offset+=g);return this};d.prototype.ensureCapacity=function(a){var b=this.buffer.byteLength;return b<a?this.resize((b*=2)>a?b:a):this};d.prototype.fill=function(a,b,c){var e="undefined"===typeof b;e&&
+(b=this.offset);"string"===typeof a&&0<a.length&&(a=a.charCodeAt(0));"undefined"===typeof b&&(b=this.offset);"undefined"===typeof c&&(c=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal begin: Not an integer");b>>>=0;if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal end: Not an integer");c>>>=0;if(0>b||b>c||c>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+
+b+" <= "+c+" <= "+this.buffer.byteLength);}if(b>=c)return this;for(;b<c;)this.view.setUint8(b++,a);e&&(this.offset=b);return this};d.prototype.flip=function(){this.limit=this.offset;this.offset=0;return this};d.prototype.mark=function(a){a="undefined"===typeof a?this.offset:a;if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+0) <= "+this.buffer.byteLength);
+}this.markedOffset=a;return this};d.prototype.order=function(a){if(!this.noAssert&&"boolean"!==typeof a)throw new TypeError("Illegal littleEndian: Not a boolean");this.littleEndian=!!a;return this};d.prototype.LE=function(a){this.littleEndian="undefined"!==typeof a?!!a:!0;return this};d.prototype.BE=function(a){this.littleEndian="undefined"!==typeof a?!a:!1;return this};d.prototype.prepend=function(a,b,c){if("number"===typeof b||"string"!==typeof b)c=b,b=void 0;var e="undefined"===typeof c;e&&(c=
+this.offset);if(!this.noAssert){if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+0) <= "+this.buffer.byteLength);}a instanceof d||(a=d.wrap(a,b));b=a.limit-a.offset;if(0>=b)return this;var h=b-c,f;if(0<h){var g=new ArrayBuffer(this.buffer.byteLength+h);f=new Uint8Array(g);f.set((new Uint8Array(this.buffer)).subarray(c,this.buffer.byteLength),b);this.buffer=g;this.view=
+new DataView(g);this.offset+=h;0<=this.markedOffset&&(this.markedOffset+=h);this.limit+=h;c+=h}else f=new Uint8Array(this.buffer);f.set((new Uint8Array(a.buffer)).subarray(a.offset,a.limit),c-b);a.offset=a.limit;e&&(this.offset-=b);return this};d.prototype.prependTo=function(a,b){a.prepend(this,b);return this};d.prototype.printDebug=function(a){"function"!==typeof a&&(a=console.log.bind(console));a(this.toString()+"\n-------------------------------------------------------------------\n"+this.toDebug(!0))};
+d.prototype.remaining=function(){return this.limit-this.offset};d.prototype.reset=function(){0<=this.markedOffset?(this.offset=this.markedOffset,this.markedOffset=-1):this.offset=0;return this};d.prototype.resize=function(a){if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal capacity: "+a+" (not an integer)");a|=0;if(0>a)throw new RangeError("Illegal capacity: 0 <= "+a);}this.buffer.byteLength<a&&(a=new ArrayBuffer(a),(new Uint8Array(a)).set(new Uint8Array(this.buffer)),
+this.buffer=a,this.view=new DataView(a));return this};d.prototype.reverse=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}if(a===b)return this;
+Array.prototype.reverse.call((new Uint8Array(this.buffer)).subarray(a,b));this.view=new DataView(this.buffer);return this};d.prototype.skip=function(a){if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal length: "+a+" (not an integer)");a|=0}var b=this.offset+a;if(!this.noAssert&&(0>b||b>this.buffer.byteLength))throw new RangeError("Illegal length: 0 <= "+this.offset+" + "+a+" <= "+this.buffer.byteLength);this.offset=b;return this};d.prototype.slice=function(a,b){"undefined"===
+typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}var c=this.clone();c.offset=a;c.limit=b;return c};d.prototype.toBuffer=function(a){var b=this.offset,c=this.limit;
+if(b>c)var e=b,b=c,c=e;if(!this.noAssert){if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: Not an integer");b>>>=0;if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal limit: Not an integer");c>>>=0;if(0>b||b>c||c>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+b+" <= "+c+" <= "+this.buffer.byteLength);}if(!a&&0===b&&c===this.buffer.byteLength)return this.buffer;if(b===c)return r;a=new ArrayBuffer(c-b);(new Uint8Array(a)).set((new Uint8Array(this.buffer)).subarray(b,
+c),0);return a};d.prototype.toArrayBuffer=d.prototype.toBuffer;d.prototype.toString=function(a){if("undefined"===typeof a)return"ByteBufferAB(offset="+this.offset+",markedOffset="+this.markedOffset+",limit="+this.limit+",capacity="+this.capacity()+")";switch(a){case "utf8":return this.toUTF8();case "base64":return this.toBase64();case "hex":return this.toHex();case "binary":return this.toBinary();case "debug":return this.toDebug();case "columns":return this.m();default:throw Error("Unsupported encoding: "+
+a);}};var m="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",m=m+"";d.prototype.toBase64=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+
+this.buffer.byteLength);}if(a===b)return"";for(var c,e,d,f,g,k,l="";a<b;)c=this.view.getUint8(a++),e=(f=a<b)?this.view.getUint8(a++):0,d=(g=a<b)?this.view.getUint8(a++):0,k=c>>2,c=(c&3)<<4|e>>4,e=(e&15)<<2|d>>6,d&=63,g||(d=64,f||(e=64)),l+=m.charAt(k)+m.charAt(c)+m.charAt(e)+m.charAt(d);return l};d.fromBase64=function(a,b,c){if(!c){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");if(0!==a.length%4)throw new TypeError("Illegal str: Length not a multiple of 4");}var e=a.length,
+h=0,f;for(f=a.length-1;0<=f;--f)if("="===a.charAt(f))h++;else break;if(2<h)throw new TypeError("Illegal str: Suffix is too large");if(0===e)return new d(0,b,c);var g,k,l,p=new d(e/4*3-h,b,c);for(b=f=0;f<e;){h=m.indexOf(a.charAt(f++));g=f<e?m.indexOf(a.charAt(f++)):0;k=f<e?m.indexOf(a.charAt(f++)):0;l=f<e?m.indexOf(a.charAt(f++)):0;if(!c&&(0>h||0>g||0>k||0>l))throw new TypeError("Illegal str: Contains non-base64 characters");p.view.setUint8(b++,h<<2|g>>4);64!==k&&(p.view.setUint8(b++,g<<4&240|k>>2,
+b),64!==l&&p.view.setUint8(b++,k<<6&192|l))}p.limit=b;return p};d.btoa=function(a){return d.fromBinary(a).toBase64()};d.atob=function(a){return d.fromBase64(a).toBinary()};d.prototype.toBinary=function(a,b){a="undefined"===typeof a?this.offset:a;b="undefined"===typeof b?this.limit:b;if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+
+a+" <= "+b+" <= "+this.buffer.byteLength);}if(a===b)return"";for(var c=[];a<b;)c.push(this.view.getUint8(a++));return String.fromCharCode.apply(String,c)};d.fromBinary=function(a,b,c){if(!c&&"string"!==typeof a)throw new TypeError("Illegal str: Not a string");for(var e=0,h=a.length,f=new d(h,b,c);e<h;){b=a.charCodeAt(e);if(!c&&255<b)throw new TypeError("Illegal charCode at "+e+": 0 <= "+b+" <= 255");f.view.setUint8(e++,b)}f.limit=h;return f};d.prototype.toDebug=function(a){for(var b=-1,c=this.buffer.byteLength,
+e,d="",f="",g="";b<c;){-1!==b&&(e=this.view.getUint8(b),d=16>e?d+("0"+e.toString(16).toUpperCase()):d+e.toString(16).toUpperCase(),a&&(f+=32<e&&127>e?String.fromCharCode(e):"."));++b;if(a&&0<b&&0===b%16&&b!==c){for(;51>d.length;)d+=" ";g+=d+f+"\n";d=f=""}d=b===this.offset&&b===this.limit?d+(b===this.markedOffset?"!":"|"):b===this.offset?d+(b===this.markedOffset?"[":"<"):b===this.limit?d+(b===this.markedOffset?"]":">"):d+(b===this.markedOffset?"'":a||0!==b&&b!==c?" ":"")}if(a&&" "!==d){for(;51>d.length;)d+=
+" ";g+=d+f+"\n"}return a?g:d};d.fromDebug=function(a,b,c){var e=a.length;b=new d((e+1)/3|0,b,c);for(var h=0,f=0,g,k=!1,l=!1,p=!1,m=!1,q=!1;h<e;){switch(g=a.charAt(h++)){case "!":if(!c){if(l||p||m){q=!0;break}l=p=m=!0}b.offset=b.markedOffset=b.limit=f;k=!1;break;case "|":if(!c){if(l||m){q=!0;break}l=m=!0}b.offset=b.limit=f;k=!1;break;case "[":if(!c){if(l||p){q=!0;break}l=p=!0}b.offset=b.markedOffset=f;k=!1;break;case "<":if(!c){if(l){q=!0;break}l=!0}b.offset=f;k=!1;break;case "]":if(!c){if(m||p){q=
+!0;break}m=p=!0}b.limit=b.markedOffset=f;k=!1;break;case ">":if(!c){if(m){q=!0;break}m=!0}b.limit=f;k=!1;break;case "'":if(!c){if(p){q=!0;break}p=!0}b.markedOffset=f;k=!1;break;case " ":k=!1;break;default:if(!c&&k){q=!0;break}g=parseInt(g+a.charAt(h++),16);if(!c&&(isNaN(g)||0>g||255<g))throw new TypeError("Illegal str: Not a debug encoded string");b.view.setUint8(f++,g);k=!0}if(q)throw new TypeError("Illegal str: Invalid symbol at "+h);}if(!c){if(!l||!m)throw new TypeError("Illegal str: Missing offset or limit");
+if(f<b.buffer.byteLength)throw new TypeError("Illegal str: Not a debug encoded string (is it hex?) "+f+" < "+e);}return b};d.prototype.toHex=function(a,b){a="undefined"===typeof a?this.offset:a;b="undefined"===typeof b?this.limit:b;if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+
+a+" <= "+b+" <= "+this.buffer.byteLength);}for(var c=Array(b-a),e;a<b;)e=this.view.getUint8(a++),16>e?c.push("0",e.toString(16)):c.push(e.toString(16));return c.join("")};d.fromHex=function(a,b,c){if(!c){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");if(0!==a.length%2)throw new TypeError("Illegal str: Length not a multiple of 2");}var e=a.length;b=new d(e/2|0,b);for(var h,f=0,g=0;f<e;f+=2){h=parseInt(a.substring(f,f+2),16);if(!c&&(!isFinite(h)||0>h||255<h))throw new TypeError("Illegal str: Contains non-hex characters");
+b.view.setUint8(g++,h)}b.limit=g;return b};var k=function(){var a={k:1114111,j:function(a,c){var e=null;"number"===typeof a&&(e=a,a=function(){return null});for(;null!==e||null!==(e=a());)128>e?c(e&127):(2048>e?c(e>>6&31|192):(65536>e?c(e>>12&15|224):(c(e>>18&7|240),c(e>>12&63|128)),c(e>>6&63|128)),c(e&63|128)),e=null},i:function(a,c){function e(a){a=a.slice(0,a.indexOf(null));var b=Error(a.toString());b.name="TruncatedError";b.bytes=a;throw b;}for(var d,f,g,k;null!==(d=a());)if(0===(d&128))c(d);
+else if(192===(d&224))null===(f=a())&&e([d,f]),c((d&31)<<6|f&63);else if(224===(d&240))null!==(f=a())&&null!==(g=a())||e([d,f,g]),c((d&15)<<12|(f&63)<<6|g&63);else if(240===(d&248))null!==(f=a())&&null!==(g=a())&&null!==(k=a())||e([d,f,g,k]),c((d&7)<<18|(f&63)<<12|(g&63)<<6|k&63);else throw RangeError("Illegal starting byte: "+d);},f:function(a,c){for(var e,d=null;null!==(e=null!==d?d:a());)55296<=e&&57343>=e&&null!==(d=a())&&56320<=d&&57343>=d?(c(1024*(e-55296)+d-56320+65536),d=null):c(e);null!==
+d&&c(d)},g:function(a,c){var e=null;"number"===typeof a&&(e=a,a=function(){return null});for(;null!==e||null!==(e=a());)65535>=e?c(e):(e-=65536,c((e>>10)+55296),c(e%1024+56320)),e=null},e:function(b,c){a.f(b,function(b){a.j(b,c)})},d:function(b,c){a.i(b,function(b){a.g(b,c)})},h:function(a){return 128>a?1:2048>a?2:65536>a?3:4},l:function(b){for(var c,d=0;null!==(c=b());)d+=a.h(c);return d},b:function(b){var c=0,d=0;a.f(b,function(b){++c;d+=a.h(b)});return[c,d]}};return a}(),s=String.fromCharCode;
+k.a=function(a){var b=0;return function(){return b<a.length?a.charCodeAt(b++):null}};k.c=function(){var a=[],b=[];return function(){if(0===arguments.length)return b.join("")+s.apply(String,a);1024<a.length+arguments.length&&(b.push(s.apply(String,a)),a.length=0);Array.prototype.push.apply(a,arguments)}};d.prototype.toUTF8=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");
+a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}var c=this,d;try{k.d(function(){return a<b?c.view.getUint8(a++):null},d=k.c())}catch(h){if(a!==b)throw new RangeError("Illegal range: Truncated data, "+a+" != "+b);}return d()};d.fromUTF8=function(a,b,c){if(!c&&"string"!==typeof a)throw new TypeError("Illegal str: Not a string");
+var e=new d(k.b(k.a(a),!0)[1],b,c),h=0;k.e(k.a(a),function(a){e.view.setUint8(h++,a)});e.limit=h;return e};return d}"undefined"!=typeof module&&module.exports?module.exports=s(require("long")):"undefined"!==typeof define&&define.amd?define("ByteBuffer",["Math/Long"],function(l){return s(l)}):(r.dcodeIO||(r.dcodeIO={}),r.dcodeIO.ByteBuffer=s(r.dcodeIO.Long))})(this);
+
+},{"long":95}],94:[function(require,module,exports){
+/*
+ Copyright 2013 Daniel Wirtz <dcode@dcode.io>
+ Copyright 2009 The Closure Library Authors. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS-IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+/**
+ * @license Long.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
+ * Released under the Apache License, Version 2.0
+ * Derived from goog.math.Long from the Closure Library
+ * see: https://github.com/dcodeIO/Long.js for details
+ */
+(function(global) {
+    "use strict";
+
+    /**
+     * Constructs a 64-bit two's-complement integer, given its low and high 32-bit
+     * values as *signed* integers.  See the from* functions below for more
+     * convenient ways of constructing Longs.
+     *
+     * The internal representation of a long is the two given signed, 32-bit values.
+     * We use 32-bit pieces because these are the size of integers on which
+     * Javascript performs bit-operations.  For operations like addition and
+     * multiplication, we split each number into 16-bit pieces, which can easily be
+     * multiplied within Javascript's floating-point representation without overflow
+     * or change in sign.
+     *
+     * In the algorithms below, we frequently reduce the negative case to the
+     * positive case by negating the input(s) and then post-processing the result.
+     * Note that we must ALWAYS check specially whether those values are MIN_VALUE
+     * (-2^63) because -MIN_VALUE == MIN_VALUE (since 2^63 cannot be represented as
+     * a positive number, it overflows back into a negative).  Not handling this
+     * case would often result in infinite recursion.
+     * 
+     * @exports Long
+     * @class A Long class for representing a 64-bit two's-complement integer value.
+     * @param {number|!{low: number, high: number, unsigned: boolean}} low The low (signed) 32 bits of the long.
+     *  Optionally accepts a Long-like object as the first parameter.
+     * @param {number=} high The high (signed) 32 bits of the long.
+     * @param {boolean=} unsigned Whether unsigned or not. Defaults to `false` (signed).
+     * @constructor
+     */
+    var Long = function(low, high, unsigned) {
+        if (low && typeof low === 'object') {
+            high = low.high;
+            unsigned = low.unsigned;
+            low = low.low;
+        }
+        
+        /**
+         * The low 32 bits as a signed value.
+         * @type {number}
+         * @expose
+         */
+        this.low = low | 0;
+
+        /**
+         * The high 32 bits as a signed value.
+         * @type {number}
+         * @expose
+         */
+        this.high = high | 0;
+
+        /**
+         * Whether unsigned or not.
+         * @type {boolean}
+         * @expose
+         */
+        this.unsigned = !!unsigned;
+    };
+
+    // NOTE: Common constant values ZERO, ONE, NEG_ONE, etc. are defined below the from* methods on which they depend.
+
+    // NOTE: The following cache variables are used internally only and are therefore not exposed as properties of the
+    // Long class.
+    
+    /**
+     * A cache of the Long representations of small integer values.
+     * @type {!Object}
+     */
+    var INT_CACHE = {};
+
+    /**
+     * A cache of the Long representations of small unsigned integer values.
+     * @type {!Object}
+     */
+    var UINT_CACHE = {};
+
+    /**
+     * Returns a Long representing the given (32-bit) integer value.
+     * @param {number} value The 32-bit integer in question.
+     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
+     * @return {!Long} The corresponding Long value.
+     * @expose
+     */
+    Long.fromInt = function(value, unsigned) {
+        var obj, cachedObj;
+        if (!unsigned) {
+            value = value | 0;
+            if (-128 <= value && value < 128) {
+                cachedObj = INT_CACHE[value];
+                if (cachedObj) return cachedObj;
+            }
+            obj = new Long(value, value < 0 ? -1 : 0, false);
+            if (-128 <= value && value < 128) {
+                INT_CACHE[value] = obj;
+            }
+            return obj;
+        } else {
+            value = value >>> 0;
+            if (0 <= value && value < 256) {
+                cachedObj = UINT_CACHE[value];
+                if (cachedObj) return cachedObj;
+            }
+            obj = new Long(value, (value | 0) < 0 ? -1 : 0, true);
+            if (0 <= value && value < 256) {
+                UINT_CACHE[value] = obj;
+            }
+            return obj;
+        }
+    };
+
+    /**
+     * Returns a Long representing the given value, provided that it is a finite
+     * number.  Otherwise, zero is returned.
+     * @param {number} value The number in question.
+     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
+     * @return {!Long} The corresponding Long value.
+     * @expose
+     */
+    Long.fromNumber = function(value, unsigned) {
+        unsigned = !!unsigned;
+        if (isNaN(value) || !isFinite(value)) {
+            return Long.ZERO;
+        } else if (!unsigned && value <= -TWO_PWR_63_DBL) {
+            return Long.MIN_SIGNED_VALUE;
+        } else if (!unsigned && value + 1 >= TWO_PWR_63_DBL) {
+            return Long.MAX_SIGNED_VALUE;
+        } else if (unsigned && value >= TWO_PWR_64_DBL) {
+            return Long.MAX_UNSIGNED_VALUE;
+        } else if (value < 0) {
+            return Long.fromNumber(-value, unsigned).negate();
+        } else {
+            return new Long((value % TWO_PWR_32_DBL) | 0, (value / TWO_PWR_32_DBL) | 0, unsigned);
+        }
+    };
+
+    /**
+     * Returns a Long representing the 64bit integer that comes by concatenating the given low and high bits. Each is
+     *  assumed to use 32 bits.
+     * @param {number} lowBits The low 32 bits.
+     * @param {number} highBits The high 32 bits.
+     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
+     * @return {!Long} The corresponding Long value.
+     * @expose
+     */
+    Long.fromBits = function(lowBits, highBits, unsigned) {
+        return new Long(lowBits, highBits, unsigned);
+    };
+
+    /**
+     * Returns a Long representing the 64bit integer that comes by concatenating the given low, middle and high bits.
+     * Each is assumed to use 28 bits.
+     * @param {number} part0 The low 28 bits
+     * @param {number} part1 The middle 28 bits
+     * @param {number} part2 The high 28 (8) bits
+     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
+     * @return {!Long}
+     * @expose
+     */
+    Long.from28Bits = function(part0, part1, part2, unsigned) {
+        // 00000000000000000000000000001111 11111111111111111111111122222222 2222222222222
+        // LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+        return Long.fromBits(part0 | (part1 << 28), (part1 >>> 4) | (part2) << 24, unsigned);
+    };
+
+    /**
+     * Returns a Long representation of the given string, written using the given radix.
+     * @param {string} str The textual representation of the Long.
+     * @param {(boolean|number)=} unsigned Whether unsigned or not. Defaults to false (signed).
+     * @param {number=} radix The radix in which the text is written.
+     * @return {!Long} The corresponding Long value.
+     * @expose
+     */
+    Long.fromString = function(str, unsigned, radix) {
+        if (str.length === 0)
+            throw Error('number format error: empty string');
+        if (str === "NaN" || str === "Infinity" || str === "+Infinity" || str === "-Infinity")
+            return Long.ZERO;
+        if (typeof unsigned === 'number') { // For goog.math.Long compatibility
+            radix = unsigned;
+            unsigned = false;
+        }
+        radix = radix || 10;
+        if (radix < 2 || 36 < radix)
+            throw Error('radix out of range: ' + radix);
+
+        var p;
+        if ((p = str.indexOf('-')) > 0)
+            throw Error('number format error: interior "-" character: ' + str);
+        else if (p === 0)
+            return Long.fromString(str.substring(1), unsigned, radix).negate();
+
+        // Do several (8) digits each time through the loop, so as to
+        // minimize the calls to the very expensive emulated div.
+        var radixToPower = Long.fromNumber(Math.pow(radix, 8));
+
+        var result = Long.ZERO;
+        for (var i = 0; i < str.length; i += 8) {
+            var size = Math.min(8, str.length - i);
+            var value = parseInt(str.substring(i, i + size), radix);
+            if (size < 8) {
+                var power = Long.fromNumber(Math.pow(radix, size));
+                result = result.multiply(power).add(Long.fromNumber(value));
+            } else {
+                result = result.multiply(radixToPower);
+                result = result.add(Long.fromNumber(value));
+            }
+        }
+        result.unsigned = unsigned;
+        return result;
+    };
+
+    // NOTE: the compiler should inline these constant values below and then remove these variables, so there should be
+    // no runtime penalty for these.
+    
+    // NOTE: The following constant values are used internally only and are therefore not exposed as properties of the
+    // Long class.
+
+    /**
+     * @type {number}
+     */
+    var TWO_PWR_16_DBL = 1 << 16;
+
+    /**
+     * @type {number}
+     */
+    var TWO_PWR_24_DBL = 1 << 24;
+
+    /**
+     * @type {number}
+     */
+    var TWO_PWR_32_DBL = TWO_PWR_16_DBL * TWO_PWR_16_DBL;
+
+    /**
+     * @type {number}
+     */
+    var TWO_PWR_31_DBL = TWO_PWR_32_DBL / 2;
+
+    /**
+     * @type {number}
+     */
+    var TWO_PWR_48_DBL = TWO_PWR_32_DBL * TWO_PWR_16_DBL;
+
+    /**
+     * @type {number}
+     */
+    var TWO_PWR_64_DBL = TWO_PWR_32_DBL * TWO_PWR_32_DBL;
+
+    /**
+     * @type {number}
+     */
+    var TWO_PWR_63_DBL = TWO_PWR_64_DBL / 2;
+
+    /**
+     * @type {!Long}
+     */
+    var TWO_PWR_24 = Long.fromInt(1 << 24);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.ZERO = Long.fromInt(0);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.UZERO = Long.fromInt(0, true);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.ONE = Long.fromInt(1);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.UONE = Long.fromInt(1, true);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.NEG_ONE = Long.fromInt(-1);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.MAX_SIGNED_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0x7FFFFFFF | 0, false);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.MAX_UNSIGNED_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0xFFFFFFFF | 0, true);
+
+    /**
+     * Alias of {@link Long.MAX_SIGNED_VALUE} for goog.math.Long compatibility.
+     * @type {!Long}
+     * @expose
+     */
+    Long.MAX_VALUE = Long.MAX_SIGNED_VALUE;
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.MIN_SIGNED_VALUE = Long.fromBits(0, 0x80000000 | 0, false);
+
+    /**
+     * @type {!Long}
+     * @expose
+     */
+    Long.MIN_UNSIGNED_VALUE = Long.fromBits(0, 0, true);
+
+    /**
+     * Alias of {@link Long.MIN_SIGNED_VALUE}  for goog.math.Long compatibility.
+     * @type {!Long}
+     * @expose
+     */
+    Long.MIN_VALUE = Long.MIN_SIGNED_VALUE;
+
+    /**
+     * @return {number} The value, assuming it is a 32-bit integer.
+     * @expose
+     */
+    Long.prototype.toInt = function() {
+        return this.unsigned ? this.low >>> 0 : this.low;
+    };
+
+    /**
+     * @return {number} The closest floating-point representation to this value.
+     * @expose
+     */
+    Long.prototype.toNumber = function() {
+        if (this.unsigned) {
+            return ((this.high >>> 0) * TWO_PWR_32_DBL) + (this.low >>> 0);
+        }
+        return this.high * TWO_PWR_32_DBL + (this.low >>> 0);
+    };
+
+    /**
+     * @param {number=} radix The radix in which the text should be written.
+     * @return {string} The textual representation of this value.
+     * @override
+     * @expose
+     */
+    Long.prototype.toString = function(radix) {
+        radix = radix || 10;
+        if (radix < 2 || 36 < radix) {
+            throw(new Error('radix out of range: ' + radix));
+        }
+        if (this.isZero()) {
+            return '0';
+        }
+        var rem;
+        if (this.isNegative()) { // Unsigned Longs are never negative
+            if (this.equals(Long.MIN_SIGNED_VALUE)) {
+                // We need to change the Long value before it can be negated, so we remove
+                // the bottom-most digit in this base and then recurse to do the rest.
+                var radixLong = Long.fromNumber(radix);
+                var div = this.div(radixLong);
+                rem = div.multiply(radixLong).subtract(this);
+                return div.toString(radix) + rem.toInt().toString(radix);
+            } else {
+                return '-' + this.negate().toString(radix);
+            }
+        }
+
+        // Do several (6) digits each time through the loop, so as to
+        // minimize the calls to the very expensive emulated div.
+        var radixToPower = Long.fromNumber(Math.pow(radix, 6), this.unsigned);
+        rem = this;
+        var result = '';
+        while (true) {
+            var remDiv = rem.div(radixToPower);
+            var intval = rem.subtract(remDiv.multiply(radixToPower)).toInt() >>> 0;
+            var digits = intval.toString(radix);
+            rem = remDiv;
+            if (rem.isZero()) {
+                return digits + result;
+            } else {
+                while (digits.length < 6) {
+                    digits = '0' + digits;
+                }
+                result = '' + digits + result;
+            }
+        }
+    };
+
+    /**
+     * @return {number} The high 32 bits as a signed value.
+     * @expose
+     */
+    Long.prototype.getHighBits = function() {
+        return this.high;
+    };
+
+    /**
+     * @return {number} The high 32 bits as an unsigned value.
+     * @expose
+     */
+    Long.prototype.getHighBitsUnsigned = function() {
+        return this.high >>> 0;
+    };
+
+    /**
+     * @return {number} The low 32 bits as a signed value.
+     * @expose
+     */
+    Long.prototype.getLowBits = function() {
+        return this.low;
+    };
+
+    /**
+     * @return {number} The low 32 bits as an unsigned value.
+     * @expose
+     */
+    Long.prototype.getLowBitsUnsigned = function() {
+        return this.low >>> 0;
+    };
+
+    /**
+     * @return {number} Returns the number of bits needed to represent the absolute
+     *     value of this Long.
+     * @expose
+     */
+    Long.prototype.getNumBitsAbs = function() {
+        if (this.isNegative()) { // Unsigned Longs are never negative
+            if (this.equals(Long.MIN_SIGNED_VALUE)) {
+                return 64;
+            } else {
+                return this.negate().getNumBitsAbs();
+            }
+        } else {
+            var val = this.high != 0 ? this.high : this.low;
+            for (var bit = 31; bit > 0; bit--) {
+                if ((val & (1 << bit)) != 0) {
+                    break;
+                }
+            }
+            return this.high != 0 ? bit + 33 : bit + 1;
+        }
+    };
+
+    /**
+     * @return {boolean} Whether this value is zero.
+     * @expose
+     */
+    Long.prototype.isZero = function() {
+        return this.high == 0 && this.low == 0;
+    };
+
+    /**
+     * @return {boolean} Whether this value is negative.
+     * @expose
+     */
+    Long.prototype.isNegative = function() {
+        return !this.unsigned && this.high < 0;
+    };
+
+    /**
+     * @return {boolean} Whether this value is odd.
+     * @expose
+     */
+    Long.prototype.isOdd = function() {
+        return (this.low & 1) == 1;
+    };
+
+    /**
+     * @return {boolean} Whether this value is even.
+     */
+    Long.prototype.isEven = function() {
+        return (this.low & 1) == 0;
+    };
+
+    /**
+     * @param {Long} other Long to compare against.
+     * @return {boolean} Whether this Long equals the other.
+     * @expose
+     */
+    Long.prototype.equals = function(other) {
+        if (this.unsigned != other.unsigned && (this.high >>> 31) != (other.high >>> 31)) return false;
+        return (this.high == other.high) && (this.low == other.low);
+    };
+
+    /**
+     * @param {Long} other Long to compare against.
+     * @return {boolean} Whether this Long does not equal the other.
+     * @expose
+     */
+    Long.prototype.notEquals = function(other) {
+        return !this.equals(other);
+    };
+
+    /**
+     * @param {Long} other Long to compare against.
+     * @return {boolean} Whether this Long is less than the other.
+     * @expose
+     */
+    Long.prototype.lessThan = function(other) {
+        return this.compare(other) < 0;
+    };
+
+    /**
+     * @param {Long} other Long to compare against.
+     * @return {boolean} Whether this Long is less than or equal to the other.
+     * @expose
+     */
+    Long.prototype.lessThanOrEqual = function(other) {
+        return this.compare(other) <= 0;
+    };
+
+    /**
+     * @param {Long} other Long to compare against.
+     * @return {boolean} Whether this Long is greater than the other.
+     * @expose
+     */
+    Long.prototype.greaterThan = function(other) {
+        return this.compare(other) > 0;
+    };
+
+    /**
+     * @param {Long} other Long to compare against.
+     * @return {boolean} Whether this Long is greater than or equal to the other.
+     * @expose
+     */
+    Long.prototype.greaterThanOrEqual = function(other) {
+        return this.compare(other) >= 0;
+    };
+
+    /**
+     * Compares this Long with the given one.
+     * @param {Long} other Long to compare against.
+     * @return {number} 0 if they are the same, 1 if the this is greater, and -1
+     *     if the given one is greater.
+     * @expose
+     */
+    Long.prototype.compare = function(other) {
+        if (this.equals(other)) {
+            return 0;
+        }
+        var thisNeg = this.isNegative();
+        var otherNeg = other.isNegative();
+        if (thisNeg && !otherNeg) return -1;
+        if (!thisNeg && otherNeg) return 1;
+        if (!this.unsigned) {
+            // At this point the signs are the same
+            return this.subtract(other).isNegative() ? -1 : 1;
+        } else {
+            // Both are positive if at least one is unsigned
+            return (other.high >>> 0) > (this.high >>> 0) || (other.high == this.high && (other.low >>> 0) > (this.low >>> 0)) ? -1 : 1;
+        }
+    };
+
+    /**
+     * @return {!Long} The negation of this value.
+     * @expose
+     */
+    Long.prototype.negate = function() {
+        if (!this.unsigned && this.equals(Long.MIN_SIGNED_VALUE)) {
+            return Long.MIN_SIGNED_VALUE;
+        }
+        return this.not().add(Long.ONE);
+    };
+
+    /**
+     * Returns the sum of this and the given Long.
+     * @param {Long} other Long to add to this one.
+     * @return {!Long} The sum of this and the given Long.
+     * @expose
+     */
+    Long.prototype.add = function(other) {
+        // Divide each number into 4 chunks of 16 bits, and then sum the chunks.
+        
+        var a48 = this.high >>> 16;
+        var a32 = this.high & 0xFFFF;
+        var a16 = this.low >>> 16;
+        var a00 = this.low & 0xFFFF;
+
+        var b48 = other.high >>> 16;
+        var b32 = other.high & 0xFFFF;
+        var b16 = other.low >>> 16;
+        var b00 = other.low & 0xFFFF;
+
+        var c48 = 0, c32 = 0, c16 = 0, c00 = 0;
+        c00 += a00 + b00;
+        c16 += c00 >>> 16;
+        c00 &= 0xFFFF;
+        c16 += a16 + b16;
+        c32 += c16 >>> 16;
+        c16 &= 0xFFFF;
+        c32 += a32 + b32;
+        c48 += c32 >>> 16;
+        c32 &= 0xFFFF;
+        c48 += a48 + b48;
+        c48 &= 0xFFFF;
+        return Long.fromBits((c16 << 16) | c00, (c48 << 16) | c32, this.unsigned);
+    };
+
+    /**
+     * Returns the difference of this and the given Long.
+     * @param {Long} other Long to subtract from this.
+     * @return {!Long} The difference of this and the given Long.
+     * @expose
+     */
+    Long.prototype.subtract = function(other) {
+        return this.add(other.negate());
+    };
+
+    /**
+     * Returns the product of this and the given long.
+     * @param {Long} other Long to multiply with this.
+     * @return {!Long} The product of this and the other.
+     * @expose
+     */
+    Long.prototype.multiply = function(other) {
+        if (this.isZero()) {
+            return Long.ZERO;
+        } else if (other.isZero()) {
+            return Long.ZERO;
+        }
+
+        if (this.equals(Long.MIN_VALUE)) {
+            return other.isOdd() ? Long.MIN_VALUE : Long.ZERO;
+        } else if (other.equals(Long.MIN_VALUE)) {
+            return this.isOdd() ? Long.MIN_VALUE : Long.ZERO;
+        }
+
+        if (this.isNegative()) {
+            if (other.isNegative()) {
+                return this.negate().multiply(other.negate());
+            } else {
+                return this.negate().multiply(other).negate();
+            }
+        } else if (other.isNegative()) {
+            return this.multiply(other.negate()).negate();
+        }
+        // If both longs are small, use float multiplication
+        if (this.lessThan(TWO_PWR_24) &&
+            other.lessThan(TWO_PWR_24)) {
+            return Long.fromNumber(this.toNumber() * other.toNumber(), this.unsigned);
+        }
+
+        // Divide each long into 4 chunks of 16 bits, and then add up 4x4 products.
+        // We can skip products that would overflow.
+        
+        var a48 = this.high >>> 16;
+        var a32 = this.high & 0xFFFF;
+        var a16 = this.low >>> 16;
+        var a00 = this.low & 0xFFFF;
+
+        var b48 = other.high >>> 16;
+        var b32 = other.high & 0xFFFF;
+        var b16 = other.low >>> 16;
+        var b00 = other.low & 0xFFFF;
+
+        var c48 = 0, c32 = 0, c16 = 0, c00 = 0;
+        c00 += a00 * b00;
+        c16 += c00 >>> 16;
+        c00 &= 0xFFFF;
+        c16 += a16 * b00;
+        c32 += c16 >>> 16;
+        c16 &= 0xFFFF;
+        c16 += a00 * b16;
+        c32 += c16 >>> 16;
+        c16 &= 0xFFFF;
+        c32 += a32 * b00;
+        c48 += c32 >>> 16;
+        c32 &= 0xFFFF;
+        c32 += a16 * b16;
+        c48 += c32 >>> 16;
+        c32 &= 0xFFFF;
+        c32 += a00 * b32;
+        c48 += c32 >>> 16;
+        c32 &= 0xFFFF;
+        c48 += a48 * b00 + a32 * b16 + a16 * b32 + a00 * b48;
+        c48 &= 0xFFFF;
+        return Long.fromBits((c16 << 16) | c00, (c48 << 16) | c32, this.unsigned);
+    };
+
+    /**
+     * Returns this Long divided by the given one.
+     * @param {Long} other Long by which to divide.
+     * @return {!Long} This Long divided by the given one.
+     * @expose
+     */
+    Long.prototype.div = function(other) {
+        if (other.isZero()) {
+            throw(new Error('division by zero'));
+        } else if (this.isZero()) {
+            return this.unsigned ? Long.UZERO : Long.ZERO;
+        }
+        var approx, rem, res;
+        if (this.equals(Long.MIN_SIGNED_VALUE)) {
+            if (other.equals(Long.ONE) || other.equals(Long.NEG_ONE)) {
+                return Long.MIN_SIGNED_VALUE;  // recall that -MIN_VALUE == MIN_VALUE
+            } else if (other.equals(Long.MIN_SIGNED_VALUE)) {
+                return Long.ONE;
+            } else {
+                // At this point, we have |other| >= 2, so |this/other| < |MIN_VALUE|.
+                var halfThis = this.shiftRight(1);
+                approx = halfThis.div(other).shiftLeft(1);
+                if (approx.equals(Long.ZERO)) {
+                    return other.isNegative() ? Long.ONE : Long.NEG_ONE;
+                } else {
+                    rem = this.subtract(other.multiply(approx));
+                    res = approx.add(rem.div(other));
+                    return res;
+                }
+            }
+        } else if (other.equals(Long.MIN_SIGNED_VALUE)) {
+            return this.unsigned ? Long.UZERO : Long.ZERO;
+        }
+        if (this.isNegative()) {
+            if (other.isNegative()) {
+                return this.negate().div(other.negate());
+            } else {
+                return this.negate().div(other).negate();
+            }
+        } else if (other.isNegative()) {
+            return this.div(other.negate()).negate();
+        }
+        
+        // Repeat the following until the remainder is less than other:  find a
+        // floating-point that approximates remainder / other *from below*, add this
+        // into the result, and subtract it from the remainder.  It is critical that
+        // the approximate value is less than or equal to the real value so that the
+        // remainder never becomes negative.
+        res = Long.ZERO;
+        rem = this;
+        while (rem.greaterThanOrEqual(other)) {
+            // Approximate the result of division. This may be a little greater or
+            // smaller than the actual value.
+            approx = Math.max(1, Math.floor(rem.toNumber() / other.toNumber()));
+
+            // We will tweak the approximate result by changing it in the 48-th digit or
+            // the smallest non-fractional digit, whichever is larger.
+            var log2 = Math.ceil(Math.log(approx) / Math.LN2);
+            var delta = (log2 <= 48) ? 1 : Math.pow(2, log2 - 48);
+
+            // Decrease the approximation until it is smaller than the remainder.  Note
+            // that if it is too large, the product overflows and is negative.
+            var approxRes = Long.fromNumber(approx);
+            var approxRem = approxRes.multiply(other);
+            while (approxRem.isNegative() || approxRem.greaterThan(rem)) {
+                approx -= delta;
+                approxRes = Long.fromNumber(approx, this.unsigned);
+                approxRem = approxRes.multiply(other);
+            }
+
+            // We know the answer can't be zero... and actually, zero would cause
+            // infinite recursion since we would make no progress.
+            if (approxRes.isZero()) {
+                approxRes = Long.ONE;
+            }
+
+            res = res.add(approxRes);
+            rem = rem.subtract(approxRem);
+        }
+        return res;
+    };
+
+    /**
+     * Returns this Long modulo the given one.
+     * @param {Long} other Long by which to mod.
+     * @return {!Long} This Long modulo the given one.
+     * @expose
+     */
+    Long.prototype.modulo = function(other) {
+        return this.subtract(this.div(other).multiply(other));
+    };
+
+    /**
+     * @return {!Long} The bitwise-NOT of this value.
+     * @expose
+     */
+    Long.prototype.not = function() {
+        return Long.fromBits(~this.low, ~this.high, this.unsigned);
+    };
+
+    /**
+     * Returns the bitwise-AND of this Long and the given one.
+     * @param {Long} other The Long with which to AND.
+     * @return {!Long} The bitwise-AND of this and the other.
+     * @expose
+     */
+    Long.prototype.and = function(other) {
+        return Long.fromBits(this.low & other.low, this.high & other.high, this.unsigned);
+    };
+
+    /**
+     * Returns the bitwise-OR of this Long and the given one.
+     * @param {Long} other The Long with which to OR.
+     * @return {!Long} The bitwise-OR of this and the other.
+     * @expose
+     */
+    Long.prototype.or = function(other) {
+        return Long.fromBits(this.low | other.low, this.high | other.high, this.unsigned);
+    };
+
+    /**
+     * Returns the bitwise-XOR of this Long and the given one.
+     * @param {Long} other The Long with which to XOR.
+     * @return {!Long} The bitwise-XOR of this and the other.
+     * @expose
+     */
+    Long.prototype.xor = function(other) {
+        return Long.fromBits(this.low ^ other.low, this.high ^ other.high, this.unsigned);
+    };
+
+    /**
+     * Returns this Long with bits shifted to the left by the given amount.
+     * @param {number} numBits The number of bits by which to shift.
+     * @return {!Long} This shifted to the left by the given amount.
+     * @expose
+     */
+    Long.prototype.shiftLeft = function(numBits) {
+        if ((numBits &= 63) === 0)
+            return this;
+        else if (numBits < 32)
+            return Long.fromBits(this.low << numBits, (this.high << numBits) | (this.low >>> (32 - numBits)), this.unsigned);
+        else
+            return Long.fromBits(0, this.low << (numBits - 32), this.unsigned);
+    };
+
+    /**
+     * Returns this Long with bits shifted to the right by the given amount.
+     * @param {number} numBits The number of bits by which to shift.
+     * @return {!Long} This shifted to the right by the given amount.
+     * @expose
+     */
+    Long.prototype.shiftRight = function(numBits) {
+        if ((numBits &= 63) === 0)
+            return this;
+        else if (numBits < 32)
+            return Long.fromBits((this.low >>> numBits) | (this.high << (32 - numBits)), this.high >> numBits, this.unsigned);
+        else
+            return Long.fromBits(this.high >> (numBits - 32), this.high >= 0 ? 0 : -1, this.unsigned);
+    };
+
+    /**
+     * Returns this Long with bits shifted to the right by the given amount, with
+     * the new top bits matching the current sign bit.
+     * @param {number} numBits The number of bits by which to shift.
+     * @return {!Long} This shifted to the right by the given amount, with
+     *     zeros placed into the new leading bits.
+     * @expose
+     */
+    Long.prototype.shiftRightUnsigned = function(numBits) {
+        numBits &= 63;
+        if (numBits == 0) {
+            return this;
+        } else {
+            var high = this.high;
+            if (numBits < 32) {
+                var low = this.low;
+                return Long.fromBits((low >>> numBits) | (high << (32 - numBits)), high >>> numBits, this.unsigned);
+            } else if (numBits == 32) {
+                return Long.fromBits(high, 0, this.unsigned);
+            } else {
+                return Long.fromBits(high >>> (numBits - 32), 0, this.unsigned);
+            }
+        }
+    };
+
+    /**
+     * @return {!Long} Signed long
+     * @expose
+     */
+    Long.prototype.toSigned = function() {
+        var l = this.clone();
+        l.unsigned = false;
+        return l;
+    };
+
+    /**
+     * @return {!Long} Unsigned long
+     * @expose
+     */
+    Long.prototype.toUnsigned = function() {
+        var l = this.clone();
+        l.unsigned = true;
+        return l;
+    };
+    
+    /**
+     * @return {Long} Cloned instance with the same low/high bits and unsigned flag.
+     * @expose
+     */
+    Long.prototype.clone = function() {
+        return new Long(this.low, this.high, this.unsigned);
+    };
+
+    // Enable module loading if available
+    if (typeof module != 'undefined' && module["exports"]) { // CommonJS
+        module["exports"] = Long;
+    } else if (typeof define != 'undefined' && define["amd"]) { // AMD
+        define("Math/Long", [], function() { return Long; });
+    } else { // Shim
+        if (!global["dcodeIO"]) {
+            global["dcodeIO"] = {};
+        }
+        global["dcodeIO"]["Long"] = Long;
+    }
+
+})(this);
+
+},{}],95:[function(require,module,exports){
+/*
+ Copyright 2013 Daniel Wirtz <dcode@dcode.io>
+ Copyright 2009 The Closure Library Authors. All Rights Reserved.
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS-IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+ */
+
+module.exports = require("./dist/Long.js");
+
+},{"./dist/Long.js":94}],96:[function(require,module,exports){
+(function (Buffer){
+var WordArray = require('./word-array')
+
+var Base = (function () {
+  function F() {}
+
+  return {
+    /**
+     * Creates a new object that inherits from this object.
+     *
+     * @param {Object} overrides Properties to copy into the new object.
+     *
+     * @return {Object} The new object.
+     *
+     * @static
+     *
+     * @example
+     *
+     *     var MyType = CryptoJS.lib.Base.extend({
+     *         field: 'value',
+     *
+     *         method: function () {
+     *         }
+     *     });
+     */
+    extend: function (overrides) {
+      // Spawn
+      F.prototype = this;
+      var subtype = new F();
+
+      // Augment
+      if (overrides) {
+        subtype.mixIn(overrides);
+      }
+
+      // Create default initializer
+      if (!subtype.hasOwnProperty('init')) {
+        subtype.init = function () {
+          subtype.$super.init.apply(this, arguments);
+        };
+      }
+
+      // Initializer's prototype is the subtype object
+      subtype.init.prototype = subtype;
+
+      // Reference supertype
+      subtype.$super = this;
+
+      return subtype;
+    },
+
+    /**
+     * Extends this object and runs the init method.
+     * Arguments to create() will be passed to init().
+     *
+     * @return {Object} The new object.
+     *
+     * @static
+     *
+     * @example
+     *
+     *     var instance = MyType.create();
+     */
+    create: function () {
+      var instance = this.extend();
+      instance.init.apply(instance, arguments);
+
+      return instance;
+    },
+
+    /**
+     * Initializes a newly created object.
+     * Override this method to add some logic when your objects are created.
+     *
+     * @example
+     *
+     *     var MyType = CryptoJS.lib.Base.extend({
+     *         init: function () {
+     *             // ...
+     *         }
+     *     });
+     */
+      init: function () {
+    },
+
+
+    mixIn: function (properties) {
+      for (var propertyName in properties) {
+        if (properties.hasOwnProperty(propertyName)) {
+          this[propertyName] = properties[propertyName];
+        }
+      }
+
+      // IE won't copy toString using the loop above
+      if (properties.hasOwnProperty('toString')) {
+        this.toString = properties.toString;
+      }
+    },
+
+
+    clone: function () {
+      return this.init.prototype.extend(this);
+    }
+  };
+}());
+
+
+/**
+ * Abstract buffered block algorithm template.
+ *
+ * The property blockSize must be implemented in a concrete subtype.
+ *
+ * @property {number} _minBufferSize The number of blocks that should be kept unprocessed in the buffer. Default: 0
+ */
+var BufferedBlockAlgorithm = Base.extend({
+  /**
+   * Resets this block algorithm's data buffer to its initial state.
+   *
+   * @example
+   *
+   *     bufferedBlockAlgorithm.reset();
+   */
+    reset: function () {
+      // Initial values
+      this._data = new WordArray();
+      this._nDataBytes = 0;
+    },
+
+    /**
+     * Adds new data to this block algorithm's buffer.
+     *
+     * @param {WordArray|string} data The data to append. Strings are converted to a WordArray using UTF-8.
+     *
+     * @example
+     *
+     *     bufferedBlockAlgorithm._append('data');
+     *     bufferedBlockAlgorithm._append(wordArray);
+     */
+    _append: function (data) {
+      //console.dir(data)
+
+      if (Buffer.isBuffer(data)) {
+        data = WordArray.fromBuffer(data)
+      }
+
+      // Append
+      this._data.concat(data);
+      this._nDataBytes += data.sigBytes;
+    },
+
+    /**
+     * Processes available data blocks.
+     *
+     * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
+     *
+     * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
+     *
+     * @return {WordArray} The processed data.
+     *
+     * @example
+     *
+     *     var processedData = bufferedBlockAlgorithm._process();
+     *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
+     */
+    _process: function (doFlush) {
+      // Shortcuts
+      var data = this._data;
+      var dataWords = data.words;
+      var dataSigBytes = data.sigBytes;
+      var blockSize = this.blockSize;
+      var blockSizeBytes = blockSize * 4;
+
+      // Count blocks ready
+      var nBlocksReady = dataSigBytes / blockSizeBytes;
+      if (doFlush) {
+          // Round up to include partial blocks
+          nBlocksReady = Math.ceil(nBlocksReady);
+      } else {
+          // Round down to include only full blocks,
+          // less the number of blocks that must remain in the buffer
+          nBlocksReady = Math.max((nBlocksReady | 0) - this._minBufferSize, 0);
+      }
+
+      // Count words ready
+      var nWordsReady = nBlocksReady * blockSize;
+
+      // Count bytes ready
+      var nBytesReady = Math.min(nWordsReady * 4, dataSigBytes);
+
+      // Process blocks
+      if (nWordsReady) {
+        for (var offset = 0; offset < nWordsReady; offset += blockSize) {
+          // Perform concrete-algorithm logic
+          this._doProcessBlock(dataWords, offset);
+        }
+
+        // Remove processed words
+        var processedWords = dataWords.splice(0, nWordsReady);
+        data.sigBytes -= nBytesReady;
+      }
+
+      // Return processed words
+      return new WordArray(processedWords, nBytesReady);
+    },
+
+    /**
+     * Creates a copy of this object.
+     * @example
+     *
+     *     var clone = bufferedBlockAlgorithm.clone();
+     */
+    clone: function () {
+      var clone = Base.clone.call(this);
+      clone._data = this._data.clone();
+
+      return clone;
+    },
+
+      _minBufferSize: 0
+    });
+
+/**
+ * Abstract hasher template.
+ *
+ * @property {number} blockSize The number of 32-bit words this hasher operates on. Default: 16 (512 bits)
+ */
+var Hasher = BufferedBlockAlgorithm.extend({
+  /**
+   * Configuration options.
+   */
+  cfg: Base.extend(),
+
+  /**
+   * Initializes a newly created hasher.
+   * @example
+   *
+   *     var hasher = CryptoJS.algo.SHA256.create();
+   */
+  init: function (cfg) {
+    // Apply config defaults
+    this.cfg = this.cfg.extend(cfg);
+
+    // Set initial values
+    this.reset();
+  },
+
+  reset: function () {
+    // Reset data buffer
+    BufferedBlockAlgorithm.reset.call(this);
+
+    // Perform concrete-hasher logic
+    this._doReset();
+  },
+
+  update: function (messageUpdate) {
+    if (typeof messageUpdate == 'string')
+      messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
+
+    if (Buffer.isBuffer(messageUpdate))
+      messageUpdate = WordArray.fromBuffer(messageUpdate)
+
+    // Append
+    this._append(messageUpdate);
+
+    // Update the hash
+    this._process();
+
+    // Chainable
+    return this;
+  },
+
+  finalize: function (messageUpdate) {
+    if (typeof messageUpdate == 'string')
+      messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
+
+    if (Buffer.isBuffer(messageUpdate))
+      messageUpdate = WordArray.fromBuffer(messageUpdate)
+
+
+    // Final message update
+    if (messageUpdate) {
+      this._append(messageUpdate);
+    }
+
+    // Perform concrete-hasher logic
+    var hash = this._doFinalize();
+
+    return hash.toBuffer()
+  },
+
+  blockSize: 512/32,
+
+  /** TODO: DELETE
+   * Creates a shortcut function to a hasher's object interface.
+   * @example
+   *
+   *     var SHA256 = CryptoJS.lib.Hasher._createHelper(CryptoJS.algo.SHA256);
+   */
+  _createHelper: function (hasher) {
+    return function (message, cfg) {
+      return new hasher.init(cfg).finalize(message);
+    };
+  }
+
+});
+
+module.exports.Hasher = Hasher
+
+
+
+}).call(this,require("buffer").Buffer)
+},{"./word-array":100,"buffer":114}],97:[function(require,module,exports){
+(function (Buffer){
+var sha512 = require('./sha512').sha512
+var WordArray = require('./word-array')
+
+function HMAC(key) {
+  if (!(this instanceof HMAC))
+    return new HMAC(key)
+
+  // Init hasher
+  var hasher = this._hasher = new sha512.init()//new hasher.init();
+
+  // Convert string to WordArray, else assume WordArray already
+  if (typeof key == 'string') {
+    key = WordArray.fromBuffer(new Buffer(key, 'utf8'));
+  }
+
+  if (Buffer.isBuffer(key)) {
+    key = WordArray.fromBuffer(key)
+  }
+
+  // Shortcuts
+  var hasherBlockSize = hasher.blockSize;
+  var hasherBlockSizeBytes = hasherBlockSize * 4;
+
+  // Allow arbitrary length keys
+  if (key.sigBytes > hasherBlockSizeBytes) {
+      key = hasher.finalize(key);
+  }
+
+  // Clamp excess bits
+  key.clamp();
+
+  // Clone key for inner and outer pads
+  var oKey = this._oKey = key.clone();
+  var iKey = this._iKey = key.clone();
+
+  // Shortcuts
+  var oKeyWords = oKey.words;
+  var iKeyWords = iKey.words;
+
+  // XOR keys with pad constants
+  for (var i = 0; i < hasherBlockSize; i++) {
+    oKeyWords[i] ^= 0x5c5c5c5c;
+    iKeyWords[i] ^= 0x36363636;
+  }
+  oKey.sigBytes = iKey.sigBytes = hasherBlockSizeBytes;
+
+  // Set initial values
+  this.reset();
+}
+
+HMAC.prototype.reset = function () {
+  // Shortcut
+  var hasher = this._hasher;
+
+  // Reset
+  hasher.reset();
+  hasher.update(this._iKey);
+}
+
+HMAC.prototype.update = function (messageUpdate) {
+  if (typeof messageUpdate == 'string')
+    messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
+
+  if (Buffer.isBuffer(messageUpdate))
+    messageUpdate = WordArray.fromBuffer(messageUpdate)
+
+  this._hasher.update(messageUpdate);
+
+  // Chainable
+  return this;
+}
+
+HMAC.prototype.finalize = function (messageUpdate) {
+   if (typeof messageUpdate == 'string')
+    messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
+
+  if (Buffer.isBuffer(messageUpdate))
+    messageUpdate = WordArray.fromBuffer(messageUpdate)
+
+  // Shortcut
+  var hasher = this._hasher;
+
+  // Compute HMAC
+  var innerHash = hasher.finalize(messageUpdate);
+  hasher.reset();
+  var hmac = hasher.finalize(this._oKey.clone().concat(innerHash));
+
+  return hmac;
+}
+  
+
+module.exports = HMAC
+
+}).call(this,require("buffer").Buffer)
+},{"./sha512":99,"./word-array":100,"buffer":114}],98:[function(require,module,exports){
+module.exports = require('./sha512')
+module.exports.hmac = require('./hmac')
+},{"./hmac":97,"./sha512":99}],99:[function(require,module,exports){
+
+var Hasher = require('./cryptojs').Hasher 
+
+var C_x64 = require('./x64')
+var X64Word = C_x64.Word;
+var X64WordArray = C_x64.WordArray;
+
+// Constants
+var K = [
+  X64Word(0x428a2f98, 0xd728ae22), X64Word(0x71374491, 0x23ef65cd),
+  X64Word(0xb5c0fbcf, 0xec4d3b2f), X64Word(0xe9b5dba5, 0x8189dbbc),
+  X64Word(0x3956c25b, 0xf348b538), X64Word(0x59f111f1, 0xb605d019),
+  X64Word(0x923f82a4, 0xaf194f9b), X64Word(0xab1c5ed5, 0xda6d8118),
+  X64Word(0xd807aa98, 0xa3030242), X64Word(0x12835b01, 0x45706fbe),
+  X64Word(0x243185be, 0x4ee4b28c), X64Word(0x550c7dc3, 0xd5ffb4e2),
+  X64Word(0x72be5d74, 0xf27b896f), X64Word(0x80deb1fe, 0x3b1696b1),
+  X64Word(0x9bdc06a7, 0x25c71235), X64Word(0xc19bf174, 0xcf692694),
+  X64Word(0xe49b69c1, 0x9ef14ad2), X64Word(0xefbe4786, 0x384f25e3),
+  X64Word(0x0fc19dc6, 0x8b8cd5b5), X64Word(0x240ca1cc, 0x77ac9c65),
+  X64Word(0x2de92c6f, 0x592b0275), X64Word(0x4a7484aa, 0x6ea6e483),
+  X64Word(0x5cb0a9dc, 0xbd41fbd4), X64Word(0x76f988da, 0x831153b5),
+  X64Word(0x983e5152, 0xee66dfab), X64Word(0xa831c66d, 0x2db43210),
+  X64Word(0xb00327c8, 0x98fb213f), X64Word(0xbf597fc7, 0xbeef0ee4),
+  X64Word(0xc6e00bf3, 0x3da88fc2), X64Word(0xd5a79147, 0x930aa725),
+  X64Word(0x06ca6351, 0xe003826f), X64Word(0x14292967, 0x0a0e6e70),
+  X64Word(0x27b70a85, 0x46d22ffc), X64Word(0x2e1b2138, 0x5c26c926),
+  X64Word(0x4d2c6dfc, 0x5ac42aed), X64Word(0x53380d13, 0x9d95b3df),
+  X64Word(0x650a7354, 0x8baf63de), X64Word(0x766a0abb, 0x3c77b2a8),
+  X64Word(0x81c2c92e, 0x47edaee6), X64Word(0x92722c85, 0x1482353b),
+  X64Word(0xa2bfe8a1, 0x4cf10364), X64Word(0xa81a664b, 0xbc423001),
+  X64Word(0xc24b8b70, 0xd0f89791), X64Word(0xc76c51a3, 0x0654be30),
+  X64Word(0xd192e819, 0xd6ef5218), X64Word(0xd6990624, 0x5565a910),
+  X64Word(0xf40e3585, 0x5771202a), X64Word(0x106aa070, 0x32bbd1b8),
+  X64Word(0x19a4c116, 0xb8d2d0c8), X64Word(0x1e376c08, 0x5141ab53),
+  X64Word(0x2748774c, 0xdf8eeb99), X64Word(0x34b0bcb5, 0xe19b48a8),
+  X64Word(0x391c0cb3, 0xc5c95a63), X64Word(0x4ed8aa4a, 0xe3418acb),
+  X64Word(0x5b9cca4f, 0x7763e373), X64Word(0x682e6ff3, 0xd6b2b8a3),
+  X64Word(0x748f82ee, 0x5defb2fc), X64Word(0x78a5636f, 0x43172f60),
+  X64Word(0x84c87814, 0xa1f0ab72), X64Word(0x8cc70208, 0x1a6439ec),
+  X64Word(0x90befffa, 0x23631e28), X64Word(0xa4506ceb, 0xde82bde9),
+  X64Word(0xbef9a3f7, 0xb2c67915), X64Word(0xc67178f2, 0xe372532b),
+  X64Word(0xca273ece, 0xea26619c), X64Word(0xd186b8c7, 0x21c0c207),
+  X64Word(0xeada7dd6, 0xcde0eb1e), X64Word(0xf57d4f7f, 0xee6ed178),
+  X64Word(0x06f067aa, 0x72176fba), X64Word(0x0a637dc5, 0xa2c898a6),
+  X64Word(0x113f9804, 0xbef90dae), X64Word(0x1b710b35, 0x131c471b),
+  X64Word(0x28db77f5, 0x23047d84), X64Word(0x32caab7b, 0x40c72493),
+  X64Word(0x3c9ebe0a, 0x15c9bebc), X64Word(0x431d67c4, 0x9c100d4c),
+  X64Word(0x4cc5d4be, 0xcb3e42b6), X64Word(0x597f299c, 0xfc657e2a),
+  X64Word(0x5fcb6fab, 0x3ad6faec), X64Word(0x6c44198c, 0x4a475817)
+];
+
+// Reusable objects
+var W = [];
+(function () {
+  for (var i = 0; i < 80; i++) {
+    W[i] = X64Word();
+  }
+}());
+
+/**
+ * SHA-512 hash algorithm.
+ */
+var SHA512 = Hasher.extend({
+  _doReset: function () {
+    this._hash = new X64WordArray([
+      X64Word(0x6a09e667, 0xf3bcc908), X64Word(0xbb67ae85, 0x84caa73b),
+      X64Word(0x3c6ef372, 0xfe94f82b), X64Word(0xa54ff53a, 0x5f1d36f1),
+      X64Word(0x510e527f, 0xade682d1), X64Word(0x9b05688c, 0x2b3e6c1f),
+      X64Word(0x1f83d9ab, 0xfb41bd6b), X64Word(0x5be0cd19, 0x137e2179)
+    ]);
+  },
+
+  _doProcessBlock: function (M, offset) {
+    // Shortcuts
+    var H = this._hash.words;
+
+    var H0 = H[0]; var H1 = H[1]; var H2 = H[2];
+    var H3 = H[3]; var H4 = H[4]; var H5 = H[5];
+    var H6 = H[6]; var H7 = H[7];
+
+    var H0h = H0.high; var H0l = H0.low;
+    var H1h = H1.high; var H1l = H1.low;
+    var H2h = H2.high; var H2l = H2.low;
+    var H3h = H3.high; var H3l = H3.low;
+    var H4h = H4.high; var H4l = H4.low;
+    var H5h = H5.high; var H5l = H5.low;
+    var H6h = H6.high; var H6l = H6.low;
+    var H7h = H7.high; var H7l = H7.low;
+
+    // Working variables
+    var ah = H0h; var al = H0l;
+    var bh = H1h; var bl = H1l;
+    var ch = H2h; var cl = H2l;
+    var dh = H3h; var dl = H3l;
+    var eh = H4h; var el = H4l;
+    var fh = H5h; var fl = H5l;
+    var gh = H6h; var gl = H6l;
+    var hh = H7h; var hl = H7l;
+
+    // Rounds
+    for (var i = 0; i < 80; i++) {
+      // Shortcut
+      var Wi = W[i];
+
+      // Extend message
+      if (i < 16) {
+        var Wih = Wi.high = M[offset + i * 2]     | 0;
+        var Wil = Wi.low  = M[offset + i * 2 + 1] | 0;
+      } else {
+        // Gamma0
+        var gamma0x  = W[i - 15];
+        var gamma0xh = gamma0x.high;
+        var gamma0xl = gamma0x.low;
+        var gamma0h  = ((gamma0xh >>> 1) | (gamma0xl << 31)) ^ ((gamma0xh >>> 8) | (gamma0xl << 24)) ^ (gamma0xh >>> 7);
+        var gamma0l  = ((gamma0xl >>> 1) | (gamma0xh << 31)) ^ ((gamma0xl >>> 8) | (gamma0xh << 24)) ^ ((gamma0xl >>> 7) | (gamma0xh << 25));
+
+        // Gamma1
+        var gamma1x  = W[i - 2];
+        var gamma1xh = gamma1x.high;
+        var gamma1xl = gamma1x.low;
+        var gamma1h  = ((gamma1xh >>> 19) | (gamma1xl << 13)) ^ ((gamma1xh << 3) | (gamma1xl >>> 29)) ^ (gamma1xh >>> 6);
+        var gamma1l  = ((gamma1xl >>> 19) | (gamma1xh << 13)) ^ ((gamma1xl << 3) | (gamma1xh >>> 29)) ^ ((gamma1xl >>> 6) | (gamma1xh << 26));
+
+        // W[i] = gamma0 + W[i - 7] + gamma1 + W[i - 16]
+        var Wi7  = W[i - 7];
+        var Wi7h = Wi7.high;
+        var Wi7l = Wi7.low;
+
+        var Wi16  = W[i - 16];
+        var Wi16h = Wi16.high;
+        var Wi16l = Wi16.low;
+
+        var Wil = gamma0l + Wi7l;
+        var Wih = gamma0h + Wi7h + ((Wil >>> 0) < (gamma0l >>> 0) ? 1 : 0);
+        var Wil = Wil + gamma1l;
+        var Wih = Wih + gamma1h + ((Wil >>> 0) < (gamma1l >>> 0) ? 1 : 0);
+        var Wil = Wil + Wi16l;
+        var Wih = Wih + Wi16h + ((Wil >>> 0) < (Wi16l >>> 0) ? 1 : 0);
+
+        Wi.high = Wih;
+        Wi.low  = Wil;
+      }
+
+      var chh  = (eh & fh) ^ (~eh & gh);
+      var chl  = (el & fl) ^ (~el & gl);
+      var majh = (ah & bh) ^ (ah & ch) ^ (bh & ch);
+      var majl = (al & bl) ^ (al & cl) ^ (bl & cl);
+
+      var sigma0h = ((ah >>> 28) | (al << 4))  ^ ((ah << 30)  | (al >>> 2)) ^ ((ah << 25) | (al >>> 7));
+      var sigma0l = ((al >>> 28) | (ah << 4))  ^ ((al << 30)  | (ah >>> 2)) ^ ((al << 25) | (ah >>> 7));
+      var sigma1h = ((eh >>> 14) | (el << 18)) ^ ((eh >>> 18) | (el << 14)) ^ ((eh << 23) | (el >>> 9));
+      var sigma1l = ((el >>> 14) | (eh << 18)) ^ ((el >>> 18) | (eh << 14)) ^ ((el << 23) | (eh >>> 9));
+
+      // t1 = h + sigma1 + ch + K[i] + W[i]
+      var Ki  = K[i];
+      var Kih = Ki.high;
+      var Kil = Ki.low;
+
+      var t1l = hl + sigma1l;
+      var t1h = hh + sigma1h + ((t1l >>> 0) < (hl >>> 0) ? 1 : 0);
+      var t1l = t1l + chl;
+      var t1h = t1h + chh + ((t1l >>> 0) < (chl >>> 0) ? 1 : 0);
+      var t1l = t1l + Kil;
+      var t1h = t1h + Kih + ((t1l >>> 0) < (Kil >>> 0) ? 1 : 0);
+      var t1l = t1l + Wil;
+      var t1h = t1h + Wih + ((t1l >>> 0) < (Wil >>> 0) ? 1 : 0);
+
+      // t2 = sigma0 + maj
+      var t2l = sigma0l + majl;
+      var t2h = sigma0h + majh + ((t2l >>> 0) < (sigma0l >>> 0) ? 1 : 0);
+
+      // Update working variables
+      hh = gh; hl = gl;
+      gh = fh; gl = fl;
+      fh = eh; fl = el;
+      el = (dl + t1l) | 0;
+      eh = (dh + t1h + ((el >>> 0) < (dl >>> 0) ? 1 : 0)) | 0;
+      dh = ch; dl = cl;
+      ch = bh; cl = bl;
+      bh = ah; bl = al;
+      al = (t1l + t2l) | 0;
+      ah = (t1h + t2h + ((al >>> 0) < (t1l >>> 0) ? 1 : 0)) | 0;
+    }
+
+    // Intermediate hash value
+    H0l = H0.low  = (H0l + al);
+    H0.high = (H0h + ah + ((H0l >>> 0) < (al >>> 0) ? 1 : 0));
+    H1l = H1.low  = (H1l + bl);
+    H1.high = (H1h + bh + ((H1l >>> 0) < (bl >>> 0) ? 1 : 0));
+    H2l = H2.low  = (H2l + cl);
+    H2.high = (H2h + ch + ((H2l >>> 0) < (cl >>> 0) ? 1 : 0));
+    H3l = H3.low  = (H3l + dl);
+    H3.high = (H3h + dh + ((H3l >>> 0) < (dl >>> 0) ? 1 : 0));
+    H4l = H4.low  = (H4l + el);
+    H4.high = (H4h + eh + ((H4l >>> 0) < (el >>> 0) ? 1 : 0));
+    H5l = H5.low  = (H5l + fl);
+    H5.high = (H5h + fh + ((H5l >>> 0) < (fl >>> 0) ? 1 : 0));
+    H6l = H6.low  = (H6l + gl);
+    H6.high = (H6h + gh + ((H6l >>> 0) < (gl >>> 0) ? 1 : 0));
+    H7l = H7.low  = (H7l + hl);
+    H7.high = (H7h + hh + ((H7l >>> 0) < (hl >>> 0) ? 1 : 0));
+  },
+
+  _doFinalize: function () {
+    // Shortcuts
+    var data = this._data;
+    var dataWords = data.words;
+
+    var nBitsTotal = this._nDataBytes * 8;
+    var nBitsLeft = data.sigBytes * 8;
+
+    // Add padding
+    dataWords[nBitsLeft >>> 5] |= 0x80 << (24 - nBitsLeft % 32);
+    dataWords[(((nBitsLeft + 128) >>> 10) << 5) + 30] = Math.floor(nBitsTotal / 0x100000000);
+    dataWords[(((nBitsLeft + 128) >>> 10) << 5) + 31] = nBitsTotal;
+    data.sigBytes = dataWords.length * 4;
+
+    // Hash final blocks
+    this._process();
+
+    // Convert hash to 32-bit word array before returning
+    var hash = this._hash.toX32();
+
+    // Return final computed hash
+    return hash;
+  },
+
+  clone: function () {
+    var clone = Hasher.clone.call(this);
+    clone._hash = this._hash.clone();
+
+    return clone;
+  },
+
+  blockSize: 1024/32
+});
+
+
+module.exports = Hasher._createHelper(SHA512);
+module.exports.sha512 = SHA512
+
+
+},{"./cryptojs":96,"./x64":101}],100:[function(require,module,exports){
+(function (process,Buffer){
+module.exports = WordArray
+
+/** An array of 32-bit words. */
+function WordArray(words, sigBytes) {
+  this.words = words || [];
+
+  if (sigBytes != undefined) {
+      this.sigBytes = sigBytes;
+  } else {
+      this.sigBytes = this.words.length * 4;
+  }
+}
+
+/**
+ * Concatenates a word array to this word array.
+ *
+ * @param {WordArray} wordArray The word array to append.
+ *
+ * @return {WordArray} This word array.
+ *
+ * @example
+ *
+ *     wordArray1.concat(wordArray2);
+ */
+WordArray.prototype.concat = function (wordArray) {
+  if (Buffer.isBuffer(wordArray))
+    wordArray = WordArray.fromBuffer(wordArray)
+
+        // Shortcuts
+        var thisWords = this.words;
+        var thatWords = wordArray.words;
+        var thisSigBytes = this.sigBytes;
+        var thatSigBytes = wordArray.sigBytes;
+
+        // Clamp excess bits
+        this.clamp();
+
+        // Concat
+        if (thisSigBytes % 4) {
+            // Copy one byte at a time
+            for (var i = 0; i < thatSigBytes; i++) {
+                var thatByte = (thatWords[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xff;
+                thisWords[(thisSigBytes + i) >>> 2] |= thatByte << (24 - ((thisSigBytes + i) % 4) * 8);
+            }
+        } else if (thatWords.length > 0xffff) {
+            // Copy one word at a time
+            for (var i = 0; i < thatSigBytes; i += 4) {
+                thisWords[(thisSigBytes + i) >>> 2] = thatWords[i >>> 2];
+            }
+        } else {
+            // Copy all words at once
+            thisWords.push.apply(thisWords, thatWords);
+        }
+        this.sigBytes += thatSigBytes;
+
+        // Chainable
+        return this;
+}
+
+/**
+ * Removes insignificant bits.
+ *
+ */
+WordArray.prototype.clamp = function () {
+  // Shortcuts
+  var words = this.words;
+  var sigBytes = this.sigBytes;
+
+  // Clamp
+  words[sigBytes >>> 2] &= 0xffffffff << (32 - (sigBytes % 4) * 8);
+  words.length = Math.ceil(sigBytes / 4);
+}
+
+WordArray.prototype.clone = function() {
+  var wa = new WordArray(this.words.slice(0))
+  return wa
+}
+
+WordArray.prototype.toBuffer = function() {
+  var buf = new Buffer(this.words.length * 4)
+  for (var i = 0; i < this.words.length; ++i) {
+    var w = this.words[i]
+    buf.writeUInt32BE(w, i*4, true)
+  }
+  return buf 
+}
+
+WordArray.fromBuffer = function(buf) {
+  var len = buf.length
+  var dif = len % 4
+  var w = []
+
+  if (!process.browser) {
+    for (var i = 0; i < len; i += 4) {
+      var n = buf.readUInt32BE(i, true) 
+      w.push(n)
+    }
+    return new WordArray(w, buf.length)
+  } else { //bug in browserify / buffer
+    for (var i = 0; i < len - dif; i += 4) {
+      var n = buf.readUInt32BE(i)
+      w.push(n)
+    }
+    var lw = 0x0
+    var off = len - dif
+    for (var j = 0; j < dif; j += 1) {
+      lw |=  (buf.readUInt8(off + j) << ((3-j)*8))
+    }
+    if (dif > 0)
+      w.push(lw)
+    return new WordArray(w, buf.length)
+  } 
+}
+
+
+
+}).call(this,require('_process'),require("buffer").Buffer)
+},{"_process":210,"buffer":114}],101:[function(require,module,exports){
+var X32WordArray = require('./word-array')
+
+
+function X64Word(high, low) {
+  if (!(this instanceof X64Word)) return new X64Word(high, low)
+  this.high = high
+  this.low = low
+}
+
+function X64WordArray (words) {
+  this.words = words || [];
+}
+
+/**
+ * Converts this 64-bit word array to a 32-bit word array.
+ */
+X64WordArray.prototype.toX32 = function () {
+  // Shortcuts
+  var x64Words = this.words;
+  var x64WordsLength = x64Words.length;
+
+  // Convert
+  var x32Words = [];
+  for (var i = 0; i < x64WordsLength; i++) {
+      var x64Word = x64Words[i];
+      x32Words.push(x64Word.high);
+      x32Words.push(x64Word.low);
+  }
+
+  return new X32WordArray(x32Words, this.sigBytes);
+}
+
+
+module.exports.Word = X64Word
+module.exports.WordArray = X64WordArray
+
+
+},{"./word-array":100}],102:[function(require,module,exports){
+(function (Buffer){
+/**
+ * @author Matthew Caruana Galizia <m@m.cg>
+ * @license MIT
+ * @copyright Copyright (c) 2013, Matthew Caruana Galizia
+ * @preserve
+ *
+ * Portions of this code are copyright (c) 2011 Valentin Háloiu, redistributed and modified under the following license (MIT).
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ */
+
+'use strict';
+
+/*jshint node:true*/
+
+var net = require('net');
+var EventEmitter = require('events').EventEmitter;
+var inherits = require('util').inherits;
+
+var htons = require('network-byte-order').htons;
+var ipv6 = require('ipv6').v6;
+
+module.exports = exports = Socks5ClientSocket;
+
+exports.createConnection = function(options) {
+	var socksSocket, socksHost, socksPort;
+
+	socksHost = options.socksHost || 'localhost';
+	socksPort = options.socksPort || 1080;
+	socksSocket = new Socks5ClientSocket(socksHost, socksPort);
+
+	return socksSocket.connect(options.port, options.host);
+};
+
+function Socks5ClientSocket(socksHost, socksPort) {
+	var self = this;
+
+	EventEmitter.call(self);
+
+	self.socket = new net.Socket();
+	self.socksHost = socksHost;
+	self.socksPort = socksPort;
+
+	self.socket.on('error', function(err) {
+		self.emit('error', err);
+	});
+
+	self.on('error', function(err) {
+		if (!self.socket.destroyed) {
+			self.socket.destroy();
+		}
+	});
+}
+
+inherits(Socks5ClientSocket, EventEmitter);
+
+Socks5ClientSocket.prototype.setTimeout = function(msecs, callback) {
+	return this.socket.setTimeout(msecs, callback);
+};
+
+Socks5ClientSocket.prototype.setNoDelay = function() {
+	return this.socket.setNoDelay();
+};
+
+Socks5ClientSocket.prototype.setKeepAlive = function(setting, msecs) {
+	return this.socket.setKeepAlive(setting, msecs);
+};
+
+Socks5ClientSocket.prototype.address = function() {
+	return this.socket.address();
+};
+
+Socks5ClientSocket.prototype.pause = function() {
+	return this.socket.pause();
+};
+
+Socks5ClientSocket.prototype.resume = function() {
+	return this.socket.resume();
+};
+
+Socks5ClientSocket.prototype.end = function(data, encoding) {
+	return this.socket.end(data, encoding);
+};
+
+Socks5ClientSocket.prototype.destroy = function(exception) {
+	return this.socket.destroy(exception);
+};
+
+Socks5ClientSocket.prototype.destroySoon = function() {
+	var ret = this.socket.destroySoon();
+
+	this.writable = false; // node's http library asserts writable to be false after destroySoon
+
+	return ret;
+};
+
+Socks5ClientSocket.prototype.setEncoding = function(encoding) {
+	return this.socket.setEncoding(encoding);
+};
+
+Socks5ClientSocket.prototype.write = function(data, arg1, arg2) {
+	return this.socket.write(data, arg1, arg2);
+};
+
+Socks5ClientSocket.prototype.connect = function(port, host) {
+	var self = this;
+
+	self.socket.connect(self.socksPort, self.socksHost, function() {
+		self.establishSocksConnection(host, port);
+	});
+
+	return self;
+};
+
+Socks5ClientSocket.prototype.handleSocksConnectToHost = function() {
+	var self = this;
+
+	self.socket.on('close', function(hadError) {
+		self.emit('close', hadError);
+	});
+
+	self.socket.on('end', function() {
+		self.emit('end');
+	});
+
+	self.socket.on('data', function(data) {
+		self.emit('data', data);
+	});
+
+	self.socket._httpMessage = self._httpMessage;
+	self.socket.parser = self.parser;
+	self.socket.ondata = self.ondata;
+	self.writable = true;
+	self.readable = true;
+	self.emit('connect');
+};
+
+Socks5ClientSocket.prototype.establishSocksConnection = function(host, port) {
+	var self = this;
+
+	self.authenticateWithSocks(function() {
+		self.connectSocksToHost(host, port, function() {
+			self.handleSocksConnectToHost();
+		});
+	});
+};
+
+Socks5ClientSocket.prototype.authenticateWithSocks = function(cb) {
+	var request, self = this;
+
+	self.socket.ondata = function(d, start, end) {
+		var error;
+
+		if (end - start !== 2) {
+			error = new Error('SOCKS authentication failed. Unexpected number of bytes received.');
+		} else if (d[start] !== 0x05) {
+			error = new Error('SOCKS authentication failed. Unexpected SOCKS version number: ' + d[start] + '.');
+		} else if (d[start + 1] !== 0x00) {
+			error = new Error('SOCKS authentication failed. Unexpected SOCKS authentication method: ' + d[start+1] + '.');
+		}
+
+		if (error) {
+			self.emit('error', error);
+			return;
+		}
+
+		if (cb) {
+			cb();
+		}
+	};
+
+	request = new Buffer(3);
+	request[0] = 0x05;  // SOCKS version
+	request[1] = 0x01;  // number of authentication methods
+	request[2] = 0x00;  // no authentication
+	self.socket.write(request);
+};
+
+Socks5ClientSocket.prototype.connectSocksToHost = function(host, port, cb) {
+	var buffer, request, self = this;
+
+	this.socket.ondata = function(d, start, end) {
+		var i, address, addressLength, error;
+
+		if (d[start] !== 0x05) {
+			error = new Error('SOCKS connection failed. Unexpected SOCKS version number: ' + d[start] + '.');
+		} else if (d[start + 1] !== 0x00) {
+			error = new Error('SOCKS connection failed. ' + getErrorMessage(d[start + 1]) + '.');
+		} else if (d[start + 2] !== 0x00) {
+			error = new Error('SOCKS connection failed. The reserved byte must be 0x00.');
+		}
+
+		if (error) {
+			self.emit('error', error);
+			return;
+		}
+
+		address = '';
+		addressLength = 0;
+
+		switch (d[start + 3]) {
+			case 1:
+				address = d[start + 4] + '.' + d[start + 5] + '.' + d[start + 6] + '.' + d[start + 7];
+				addressLength = 4;
+				break;
+			case 3:
+				addressLength = d[start + 4] + 1;
+				for (i = start + 5; i < start + addressLength; i++) {
+					address += String.fromCharCode(d[i]);
+				}
+				break;
+			case 4:
+				addressLength = 16;
+				break;
+			default:
+				self.emit('error', new Error('SOCKS connection failed. Unknown addres type: ' + d[start + 3] + '.'));
+				return;
+		}
+
+		if (cb) {
+			cb();
+		}
+	};
+
+	buffer = [];
+	buffer.push(0x05); // SOCKS version
+	buffer.push(0x01); // Command code: establish a TCP/IP stream connection
+	buffer.push(0x00); // Reserved - myst be 0x00
+
+	switch (net.isIP(host)) {
+		case 0:
+			buffer.push(0x03);
+			parseDomainName(host, buffer);
+			break;
+		case 4:
+			buffer.push(0x01);
+			parseIPv4(host, buffer);
+			break;
+		case 6:
+			buffer.push(0x04);
+			if (parseIPv6(host, buffer) === false) {
+				self.emit('error', new Error('IPv6 host parsing failed. Invalid address.'));
+				return;
+			}
+			break;
+	}
+
+	parsePort(port, buffer);
+
+	request = new Buffer(buffer);
+	this.socket.write(request);
+};
+
+function parseIPv4(host, buffer) {
+	var i, ip, groups = host.split('.');
+
+	for (i = 0; i < groups.length; i++) {
+		ip = parseInt(groups[i], 10);
+		buffer.push(ip);
+	}
+}
+
+function parseIPv6(host, buffer) {
+	var i, b1, b2, part1, part2, address, groups;
+
+	address = new ipv6.Address(host).canonicalForm();
+	if (!address) {
+		return false;
+	}
+
+	groups = address.split(':');
+
+	for (i = 0; i < groups.length; i++) {
+		part1 = groups[i].substr(0,2);
+		part2 = groups[i].substr(2,2);
+
+		b1 = parseInt(part1, 16);
+		b2 = parseInt(part2, 16);
+
+		buffer.push(b1);
+		buffer.push(b2);
+	}
+
+	return true;
+}
+
+function parseDomainName(host, buffer) {
+	var i, c;
+
+	buffer.push(host.length);
+	for (i = 0; i < host.length; i++) {
+		c = host.charCodeAt(i);
+		buffer.push(c);
+	}
+}
+
+function parsePort(port, buffer) {
+	htons(buffer, buffer.length, port);
+}
+
+function getErrorMessage(code) {
+	switch (code) {
+		case 1:
+			return 'General SOCKS server failure';
+		case 2:
+			return 'Connection not allowed by ruleset';
+		case 3:
+			return 'Network unreachable';
+		case 4:
+			return 'Host unreachable';
+		case 5:
+			return 'Connection refused';
+		case 6:
+			return 'TTL expired';
+		case 7:
+			return 'Command not supported';
+		case 8:
+			return 'Address type not supported';
+		default:
+			return 'Unknown status code ' + code;
+	}
+}
+
+}).call(this,require("buffer").Buffer)
+},{"buffer":114,"events":207,"ipv6":103,"net":111,"network-byte-order":107,"util":232}],103:[function(require,module,exports){
+exports = module.exports = require('./ipv6.js');
+},{"./ipv6.js":104}],104:[function(require,module,exports){
+if (typeof exports !== 'undefined') {
+  var sprintf = require('sprintf').sprintf;
+  var BigInteger = require('./lib/node/bigint').BigInteger;
+}
+
+var v4 = this.v4 = {};
+var v6 = this.v6 = {};
+
+v4.GROUPS = 4;
+v6.GROUPS = 8;
+
+v4.BITS = 32;
+v6.BITS = 128;
+
+v6.SCOPES = {
+  0: 'Reserved',
+  1: 'Interface local',
+  2: 'Link local',
+  4: 'Admin local',
+  5: 'Site local',
+  8: 'Organization local',
+  15: 'Global',
+  16: 'Reserved'
+};
+
+v4.RE_ADDRESS = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/g;
+v4.RE_SUBNET_STRING = /\/\d{1,2}$/;
+
+v6.RE_BAD_CHARACTERS = /([^0-9a-f:\/%])/ig;
+v6.RE_BAD_ADDRESS = /([0-9a-f]{5,}|:{3,}|[^:]:$|^:[^:]|\/$)/ig;
+
+v6.RE_SUBNET_STRING = /\/\d{1,3}(?=%|$)/;
+v6.RE_ZONE_STRING = /%.*$/;
+
+v6.RE_URL = new RegExp(/([0-9a-f:]+)/);
+v6.RE_URL_WITH_PORT = new RegExp(/\[([0-9a-f:]+)\]:([0-9]{1,5})/);
+
+// Convenience functions
+function map(array, fn) {
+  var results = [];
+  var i;
+
+  for (i = 0; i < array.length; i++) {
+    results.push(fn(array[i], i));
+  }
+
+  return results;
+}
+
+function repeatString(s, n) {
+  var result = '';
+  var i;
+
+  for (i = 0; i < n; i++) {
+    result += s;
+  }
+
+  return result;
+}
+
+function addCommas(number) {
+  var r = /(\d+)(\d{3})/;
+
+  while (r.test(number)) {
+    number = number.replace(r, '$1,$2');
+  }
+
+  return number;
+}
+
+function spanLeadingZeroesSimple(group) {
+  return group.replace(/^(0+)/, '<span class="zero">$1</span>');
+}
+
+function spanLeadingZeroes4(n) {
+  n = n.replace(/^(0{1,})([1-9]+)$/, '<span class="parse-error">$1</span>$2');
+  n = n.replace(/^(0{1,})(0)$/, '<span class="parse-error">$1</span>$2');
+
+  return n;
+}
+
+function simpleRegularExpression(addressArray) {
+  var output = [];
+  var i;
+
+  for (i = 0; i < addressArray.length; i++) {
+    var segment = addressArray[i];
+
+    if (segment.length < 4) {
+      output.push(sprintf('0{0,%d}%s', 4 - segment.length, segment));
+    } else {
+      output.push(segment);
+    }
+  }
+
+  return output.join(':');
+}
+
+function zeroPad(s, n) {
+  return String(repeatString(0, n) + s).slice(n * -1);
+}
+
+function isInSubnet(address) {
+  // XXX: This is a hunch
+  if (this.subnetMask < address.subnetMask) {
+    return false;
+  }
+
+  if (this.mask(address.subnetMask) === address.mask()) {
+    return true;
+  }
+
+  return false;
+}
+
+/*
+ * Instantiates an IPv4 address
+ */
+v4.Address = function (address) {
+  this.valid = false;
+  this.address = address;
+  this.groups = v4.GROUPS;
+
+  this.v4 = true;
+
+  this.subnet = '/32';
+  this.subnetMask = 32;
+
+  var subnet = v4.RE_SUBNET_STRING.exec(address);
+
+  if (subnet) {
+    this.parsedSubnet = subnet[0].replace('/', '');
+    this.subnetMask = parseInt(this.parsedSubnet, 10);
+    this.subnet = '/' + this.subnetMask;
+
+    if (this.subnetMask < 0 || this.subnetMask > v4.BITS) {
+      this.valid = false;
+      this.error = "Invalid subnet mask.";
+
+      return;
+    }
+
+    address = address.replace(v4.RE_SUBNET_STRING, '');
+  }
+
+  this.addressMinusSuffix = address;
+
+  this.parsedAddress = this.parse(address);
+};
+
+/*
+ * Parses a v4 address
+ */
+v4.Address.prototype.parse = function (address) {
+  var groups = address.split('.');
+
+  if (address.match(v4.RE_ADDRESS)) {
+    this.valid = true;
+  } else {
+    this.error = 'Invalid IPv4 address.';
+  }
+
+  return groups;
+};
+
+/*
+ * Returns true if the address is valid
+ */
+v4.Address.prototype.isValid = function () {
+  return this.valid;
+};
+
+/*
+ * Returns the correct form of an address
+ */
+v4.Address.prototype.correctForm = function () {
+  return this.parsedAddress.map(function (part) {
+    return parseInt(part, 10);
+  }).join('.');
+};
+
+/*
+ * Returns true if the address is correct, false otherwise
+ */
+v4.Address.prototype.isCorrect = function () {
+  return this.addressMinusSuffix === this.correctForm() &&
+    (this.subnetMask === 32 ||
+      this.parsedSubnet === String(this.subnet.replace('/')));
+};
+
+/*
+ * Converts a hex string to an IPv4 address object
+ */
+v4.Address.fromHex = function (hex) {
+  var padded = zeroPad(hex.replace(/:/g, ''), 8);
+  var groups = [];
+  var i;
+
+  for (i = 0; i < 8; i += 2) {
+    var h = padded.slice(i, i + 2);
+
+    groups.push(parseInt(h, 16));
+  }
+
+  return new v4.Address(groups.join('.'));
+};
+
+/*
+ * Converts an integer into a IPv4 address object
+ */
+v4.Address.fromInteger = function (integer) {
+  return v4.Address.fromHex(integer.toString(16));
+};
+
+/*
+ * Converts an IPv4 address object to a hex string
+ */
+v4.Address.prototype.toHex = function () {
+  return this.parsedAddress.map(function (part) {
+    return sprintf('%02x', parseInt(part, 10));
+  }).join(':');
+};
+
+/*
+ * Converts an IPv4 address object to an array of bytes
+ */
+v4.Address.prototype.toArray = function () {
+  return this.parsedAddress.map(function (part) {
+    return parseInt(part, 10);
+  });
+};
+
+/*
+ * Converts an IPv4 address object to an IPv6 address group
+ */
+v4.Address.prototype.toV6Group = function () {
+  var output = [];
+  var i;
+
+  for (i = 0; i < v4.GROUPS; i += 2) {
+    var hex = sprintf('%02x%02x',
+      parseInt(this.parsedAddress[i], 10),
+      parseInt(this.parsedAddress[i + 1], 10));
+
+    output.push(sprintf('%x', parseInt(hex, 16)));
+  }
+
+  return output.join(':');
+};
+
+/*
+ * Returns the address as a BigInteger
+ */
+v4.Address.prototype.bigInteger = function () {
+  if (!this.valid) {
+    return;
+  }
+
+  return new BigInteger(map(this.parsedAddress, function (n) {
+    return sprintf("%02x", parseInt(n, 10));
+  }).join(''), 16);
+};
+
+/*
+ * The first address in the range given by this address' subnet.
+ * Often referred to as the Network Address.
+ */
+v4.Address.prototype.startAddress = function () {
+  var startAddress = new BigInteger(this.mask() + repeatString(0,
+    v4.BITS - this.subnetMask), 2);
+
+  return v4.Address.fromBigInteger(startAddress);
+};
+
+/*
+ * The last address in the range given by this address' subnet
+ * Often referred to as the Broadcast
+ */
+v4.Address.prototype.endAddress = function () {
+  var endAddress = new BigInteger(this.mask() + repeatString(1,
+    v4.BITS - this.subnetMask), 2);
+
+  return v4.Address.fromBigInteger(endAddress);
+};
+
+/*
+ * Converts a BigInteger to a v4 address object
+ */
+v4.Address.fromBigInteger = function (bigInteger) {
+  return v4.Address.fromInteger(parseInt(bigInteger.toString(), 10));
+};
+
+/*
+ * Returns the first n bits of the address, defaulting to the
+ * subnet mask
+ */
+v4.Address.prototype.mask = function (opt_mask) {
+  if (opt_mask === undefined) {
+    opt_mask = this.subnetMask;
+  }
+
+  return this.getBitsBase2(0, opt_mask);
+};
+
+/*
+ * Returns the bits in the given range as a base-2 string
+ */
+v4.Address.prototype.getBitsBase2 = function (start, end) {
+  return this.binaryZeroPad().slice(start, end);
+};
+
+/*
+ * Returns true if the given address is in the subnet of the current address
+ */
+v4.Address.prototype.isInSubnet = isInSubnet;
+
+/*
+ * Returns a zero-padded base-2 string representation of the address
+ */
+v4.Address.prototype.binaryZeroPad = function () {
+  return zeroPad(this.bigInteger().toString(2), v4.BITS);
+};
+
+/*
+ * Instantiates an IPv6 address
+ */
+v6.Address = function (address, opt_groups) {
+  if (opt_groups === undefined) {
+    this.groups = v6.GROUPS;
+  } else {
+    this.groups = opt_groups;
+  }
+
+  this.v4 = false;
+
+  this.subnet = '/128';
+  this.subnetMask = 128;
+
+  this.zone = '';
+
+  this.address = address;
+
+  var subnet = v6.RE_SUBNET_STRING.exec(address);
+
+  if (subnet) {
+    this.parsedSubnet = subnet[0].replace('/', '');
+    this.subnetMask = parseInt(this.parsedSubnet, 10);
+    this.subnet = '/' + this.subnetMask;
+
+    if (isNaN(this.subnetMask) ||
+      this.subnetMask < 0 ||
+      this.subnetMask > v6.BITS) {
+      this.valid = false;
+      this.error = "Invalid subnet mask.";
+
+      return;
+    }
+
+    address = address.replace(v6.RE_SUBNET_STRING, '');
+  } else if (/\//.test(address)) {
+    this.valid = false;
+    this.error = "Invalid subnet mask.";
+
+    return;
+  }
+
+  var zone = v6.RE_ZONE_STRING.exec(address);
+
+  if (zone) {
+    this.zone = zone[0];
+
+    address = address.replace(v6.RE_ZONE_STRING, '');
+  }
+
+  this.addressMinusSuffix = address;
+
+  this.parsedAddress = this.parse(this.addressMinusSuffix);
+};
+
+/*
+ * Converts a BigInteger to a v6 address object
+ */
+v6.Address.fromBigInteger = function (bigInteger) {
+  var hex = zeroPad(bigInteger.toString(16), 32);
+  var groups = [];
+  var i;
+
+  for (i = 0; i < 8; i++) {
+    groups.push(hex.slice(i * 4, (i + 1) * 4));
+  }
+
+  return new v6.Address(groups.join(':'));
+};
+
+/*
+ * Converts a URL (optional port number) to an address object
+ */
+v6.Address.fromURL = function (url) {
+  var host;
+  var port;
+  var result;
+
+  // If we have brackets parse them and find a port
+  if (url.indexOf('[') !== -1 && url.indexOf(']') !== -1) {
+    result = v6.RE_URL_WITH_PORT.exec(url);
+
+    if (result === null) {
+      return {
+        error: 'failed to parse address with port',
+        address: null,
+        port: null
+      };
+    }
+
+    host = result[1];
+    port = result[2];
+  // If there's a URL extract the address
+  } else if (url.indexOf('/') !== -1) {
+    // Remove the protocol prefix
+    url = url.replace(/^[a-z0-9]+:\/\//, '');
+
+    // Parse the address
+    result = v6.RE_URL.exec(url);
+
+    if (result === null) {
+      return {
+        error: 'failed to parse address from URL',
+        address: null,
+        port: null
+      };
+    }
+
+    host = result[1];
+  // Otherwise just assign the URL to the host and let the library parse it
+  } else {
+    host = url;
+  }
+
+  // If there's a port convert it to an integer
+  if (port) {
+    port = parseInt(port, 10);
+
+    //squelch out of range ports
+    if (port < 0 || port > 65536) {
+      port = null;
+    }
+  } else {
+    // Standardize `undefined` to `null`
+    port = null;
+  }
+
+  return {
+    address: new v6.Address(host),
+    port: port
+  };
+};
+
+/*
+ * A helper function to compact an array
+ */
+v6.Address.compact = function (address, slice) {
+  var s1 = [];
+  var s2 = [];
+  var i;
+
+  for (i = 0; i < address.length; i++) {
+    if (i < slice[0]) {
+      s1.push(address[i]);
+    } else if (i > slice[1]) {
+      s2.push(address[i]);
+    }
+  }
+
+  return s1.concat(['compact']).concat(s2);
+};
+
+/*
+ * Returns true if the address is valid, false otherwise
+ */
+v6.Address.prototype.isValid = function () {
+  return this.valid;
+};
+
+/*
+ * Returns true if the address is correct, false otherwise
+ */
+v6.Address.prototype.isCorrect = function () {
+  return this.addressMinusSuffix === this.correctForm() &&
+    (this.subnetMask === 128 ||
+      this.parsedSubnet === String(this.subnet.replace('/')));
+};
+
+/*
+ * Returns true if the address is a link local address, false otherwise
+ */
+v6.Address.prototype.isLinkLocal = function () {
+  // Zeroes are required, i.e. we can't check isInSubnet with 'fe80::/10'
+  if (this.getBitsBase2(0, 64) ===
+    "1111111010000000000000000000000000000000000000000000000000000000") {
+    return true;
+  }
+
+  return false;
+};
+
+/*
+ * Returns true if the address is in the canonical form, false otherwise
+ */
+v6.Address.prototype.isCanonical = function () {
+  return this.addressMinusSuffix === this.canonicalForm();
+};
+
+/*
+ * Returns true if the address is a multicast address, false otherwise
+ */
+v6.Address.prototype.isMulticast = function () {
+  return this.getType() === 'Multicast';
+};
+
+/*
+ * Returns true if the address is a v4-in-v6 address, false otherwise
+ */
+v6.Address.prototype.is4 = function () {
+  return this.v4;
+};
+
+/*
+ * Returns true if the address is a Teredo address, false otherwise
+ */
+v6.Address.prototype.isTeredo = function () {
+  if (this.isInSubnet(new v6.Address('2001::/32'))) {
+    return true;
+  }
+
+  return false;
+};
+
+/*
+ * Returns true if the address is a 6to4 address, false otherwise
+ */
+v6.Address.prototype.is6to4 = function () {
+  if (this.isInSubnet(new v6.Address('2002::/16'))) {
+    return true;
+  }
+
+  return false;
+};
+
+/*
+ * Returns true if the address is a loopback address, false otherwise
+ */
+v6.Address.prototype.isLoopback = function () {
+  return this.getType() === 'Loopback';
+};
+
+/*
+ * Returns the Microsoft UNC transcription of the address
+ */
+v6.Address.prototype.microsoftTranscription = function () {
+  return sprintf('%s.ipv6-literal.net',
+    this.correctForm().replace(/:/g, '-'));
+};
+
+/*
+ * Returns the address in link form with a default port of 80
+ */
+v6.Address.prototype.href = function (opt_port) {
+  if (opt_port === undefined) {
+    opt_port = '';
+  } else {
+    opt_port = sprintf(':%s', opt_port);
+  }
+
+  return sprintf('http://[%s]%s/', this.correctForm(), opt_port);
+};
+
+/*
+ * Returns the first n bits of the address, defaulting to the
+ * subnet mask
+ */
+v6.Address.prototype.mask = function (opt_mask) {
+  if (opt_mask === undefined) {
+    opt_mask = this.subnetMask;
+  }
+
+  return this.getBitsBase2(0, opt_mask);
+};
+
+/*
+ * Returns a link suitable for conveying the address via a URL hash
+ */
+v6.Address.prototype.link = function (options) {
+  if (!options) {
+    options = {};
+  }
+
+  if (options.className === undefined) {
+    options.className = '';
+  }
+
+  if (options.prefix === undefined) {
+    options.prefix = '/#address=';
+  }
+
+  if (options.v4 === undefined) {
+    options.v4 = false;
+  }
+
+  var formFunction = this.correctForm;
+
+  if (options.v4) {
+    formFunction = this.v4inv6;
+  }
+
+  if (options.className) {
+    return sprintf('<a href="%1$s%2$s" class="%3$s">%2$s</a>',
+      options.prefix, formFunction.call(this), options.className);
+  }
+
+  return sprintf('<a href="%1$s%2$s">%2$s</a>', options.prefix,
+    formFunction.call(this));
+};
+
+/*
+ * Returns the number of possible subnets of a given size in the address
+ */
+v6.Address.prototype.possibleAddresses = function (opt_subnetSize) {
+  if (opt_subnetSize === undefined) {
+    opt_subnetSize = 0;
+  }
+
+  return addCommas(new BigInteger('2', 10).pow((v6.BITS - this.subnetMask) -
+    (v6.BITS - opt_subnetSize)).toString(10));
+};
+
+/*
+ * Returns true if the given address is in the subnet of the current address
+ */
+v6.Address.prototype.isInSubnet = isInSubnet;
+
+/*
+ * Create an IPv6-mapped address given an IPv4 address
+ */
+v6.Address.fromAddress4 = function (address4) {
+  return new v6.Address('::ffff:' + address4);
+};
+
+/*
+ * The first address in the range given by this address' subnet
+ */
+v6.Address.prototype.startAddress = function () {
+  var startAddress = new BigInteger(this.mask() + repeatString(0,
+    v6.BITS - this.subnetMask), 2);
+
+  return v6.Address.fromBigInteger(startAddress);
+};
+
+/*
+ * The last address in the range given by this address' subnet
+ */
+v6.Address.prototype.endAddress = function () {
+  var endAddress = new BigInteger(this.mask() + repeatString(1,
+    v6.BITS - this.subnetMask), 2);
+
+  return v6.Address.fromBigInteger(endAddress);
+};
+
+/*
+ * Returns the scope of the address
+ */
+v6.Address.prototype.getScope = function () {
+  var scope = v6.SCOPES[this.getBits(12, 16)];
+
+  if (this.getType() === "Global unicast") {
+    if (scope !== "Link local") {
+      scope = "Global";
+    }
+  }
+
+  return scope;
+};
+
+/*
+ * Returns the type of the address
+ */
+v6.Address.prototype.getType = function () {
+  // TODO: Refactor this
+  // TODO: Add ff0x::fb, etc. for multicast DNS
+  var TYPES = {
+    'ff01::1/128': 'Multicast (All nodes on this interface)',
+    'ff01::2/128': 'Multicast (All routers on this interface)',
+    'ff02::1/128': 'Multicast (All nodes on this link)',
+    'ff02::2/128': 'Multicast (All routers on this link)',
+    'ff05::2/128': 'Multicast (All routers in this site)',
+    'ff02::5/128': 'Multicast (OSPFv3 AllSPF routers)',
+    'ff02::6/128': 'Multicast (OSPFv3 AllDR routers)',
+    'ff02::9/128': 'Multicast (RIP routers)',
+    'ff02::a/128': 'Multicast (EIGRP routers)',
+    'ff02::d/128': 'Multicast (PIM routers)',
+    'ff02::16/128': 'Multicast (MLDv2 reports)',
+    'ff01::fb/128': 'Multicast (mDNSv6)',
+    'ff02::fb/128': 'Multicast (mDNSv6)',
+    'ff05::fb/128': 'Multicast (mDNSv6)',
+    'ff02::1:2/128': 'Multicast (All DHCP servers and relay agents on this link)',
+    'ff05::1:2/128': 'Multicast (All DHCP servers and relay agents in this site)',
+    'ff02::1:3/128': 'Multicast (All DHCP servers on this link)',
+    'ff05::1:3/128': 'Multicast (All DHCP servers in this site)',
+    '::/128': 'Unspecified',
+    '::1/128': 'Loopback',
+    'ff00::/8': 'Multicast',
+    'fe80::/10': 'Link-local unicast'
+  };
+
+  var type = 'Global unicast';
+  var p;
+
+  for (p in TYPES) {
+    if (TYPES.hasOwnProperty(p)) {
+      if (this.isInSubnet(new v6.Address(p))) {
+        type = TYPES[p];
+
+        break;
+      }
+    }
+  }
+
+  return type;
+};
+
+/*
+ * Returns the bits in the given range as a BigInteger
+ */
+v6.Address.prototype.getBits = function (start, end) {
+  return new BigInteger(this.getBitsBase2(start, end), 2);
+};
+
+/*
+ * Returns the bits in the given range as a base-2 string
+ */
+v6.Address.prototype.getBitsBase2 = function (start, end) {
+  return this.binaryZeroPad().slice(start, end);
+};
+
+/*
+ * Returns the bits in the given range as a base-16 string
+ */
+v6.Address.prototype.getBitsBase16 = function (start, end) {
+  var length = end - start;
+
+  if (length % 4 !== 0) {
+    return;
+  }
+
+  return zeroPad(this.getBits(start, end).toString(16), length / 4);
+};
+
+/*
+ * Returns the bits that are set past the subnet mask length
+ */
+v6.Address.prototype.getBitsPastSubnet = function () {
+  return this.getBitsBase2(this.subnetMask, v6.BITS);
+};
+
+/*
+ * Returns the string with each character contained in a <span>
+ */
+v6.Address.spanAll = function (s, opt_offset) {
+  if (opt_offset === undefined) {
+    opt_offset = 0;
+  }
+
+  var letters = s.split('');
+
+  return map(letters, function (n, i) {
+    return sprintf('<span class="digit value-%s position-%d">%s</span>', n,
+      i + opt_offset,
+      v6.Address.spanAllZeroes(n)); // XXX Use #base-2 .value-0 instead?
+  }).join('');
+};
+
+/*
+ * Returns the string with all zeroes contained in a <span>
+ */
+v6.Address.spanAllZeroes = function (s) {
+  return s.replace(/(0+)/g, '<span class="zero">$1</span>');
+};
+
+/*
+ * Returns the string with leading zeroes contained in a <span>
+ */
+v6.Address.spanLeadingZeroes = function (address) {
+  var groups = address.split(':');
+
+  groups = map(groups, function (g) {
+    return spanLeadingZeroesSimple(g);
+  });
+
+  return groups.join(':');
+};
+
+/*
+ * Groups an address
+ */
+v6.Address.simpleGroup = function (addressString, offset) {
+  var groups = addressString.split(':');
+
+  if (!offset) {
+    offset = 0;
+  }
+
+  groups = map(groups, function (g, i) {
+    if (/group-v4/.test(g)) {
+      return g;
+    }
+
+    return sprintf('<span class="hover-group group-%d">%s</span>',
+      i + offset,
+      spanLeadingZeroesSimple(g));
+  });
+
+  return groups.join(':');
+};
+
+/*
+ * Groups an address
+ */
+v6.Address.group = function (addressString) {
+  var address6 = new v6.Address(addressString);
+  var address4 = address6.address.match(v4.RE_ADDRESS);
+  var i;
+
+  if (address4) {
+    // The IPv4 case
+    var segments = address4[0].split('.');
+
+    address6.address = address6.address.replace(v4.RE_ADDRESS,
+      sprintf('<span class="hover-group group-v4 group-6">%s</span>' +
+        '.' +
+        '<span class="hover-group group-v4 group-7">%s</span>',
+        segments.slice(0, 2).join('.'),
+        segments.slice(2, 4).join('.')));
+  }
+
+  if (address6.elidedGroups === 0) {
+    // The simple case
+    return v6.Address.simpleGroup(address6.address);
+  }
+
+  // The elided case
+  var output = [];
+
+  var halves = address6.address.split('::');
+
+  if (halves[0].length) {
+    output.push(v6.Address.simpleGroup(halves[0]));
+  } else {
+    output.push('');
+  }
+
+  var classes = ['hover-group'];
+
+  for (i = address6.elisionBegin; i < address6.elisionBegin +
+    address6.elidedGroups; i++) {
+    classes.push(sprintf('group-%d', i));
+  }
+
+  output.push(sprintf('<span class="%s"></span>', classes.join(' ')));
+
+  if (halves[1].length) {
+    output.push(v6.Address.simpleGroup(halves[1], address6.elisionEnd));
+  } else {
+    output.push('');
+  }
+
+  return output.join(':');
+};
+
+/*
+ * Returns the reversed ip6.arpa form of the address
+ */
+v6.Address.prototype.reverseForm = function () {
+  var characters = Math.floor(this.subnetMask / 4);
+
+  var reversed = this.canonicalForm()
+    .replace(/:/g, '')
+    .split('')
+    .slice(0, characters)
+    .reverse()
+    .join('.');
+
+  if (characters > 0) {
+    return sprintf("%s.ip6.arpa.", reversed);
+  }
+
+  return 'ip6.arpa.';
+};
+
+/*
+ * Returns the correct form of the address
+ */
+v6.Address.prototype.correctForm = function () {
+  if (!this.parsedAddress) {
+    return;
+  }
+
+  var i;
+  var groups = [];
+
+  var zeroCounter = 0;
+  var zeroes = [];
+
+  for (i = 0; i < this.parsedAddress.length; i++) {
+    var value = parseInt(this.parsedAddress[i], 16);
+
+    if (value === 0) {
+      zeroCounter++;
+    }
+
+    if (value !== 0 && zeroCounter > 0) {
+      if (zeroCounter > 1) {
+        zeroes.push([i - zeroCounter, i - 1]);
+      }
+
+      zeroCounter = 0;
+    }
+  }
+
+  // Do we end with a string of zeroes?
+  if (zeroCounter > 1) {
+    zeroes.push([this.parsedAddress.length - zeroCounter,
+      this.parsedAddress.length - 1]);
+  }
+
+  var zeroLengths = map(zeroes, function (n) {
+    return (n[1] - n[0]) + 1;
+  });
+
+  if (zeroes.length > 0) {
+    var max = Math.max.apply(Math, zeroLengths);
+    var index = zeroLengths.indexOf(max);
+
+    groups = v6.Address.compact(this.parsedAddress, zeroes[index]);
+  } else {
+    groups = this.parsedAddress;
+  }
+
+  for (i = 0; i < groups.length; i++) {
+    if (groups[i] !== 'compact') {
+      groups[i] = parseInt(groups[i], 16).toString(16);
+    }
+  }
+
+  var correct = groups.join(':');
+
+  correct = correct.replace(/^compact$/, '::');
+  correct = correct.replace(/^compact|compact$/, ':');
+  correct = correct.replace(/compact/, '');
+
+  return correct;
+};
+
+/*
+ * Returns a zero-padded base-2 string representation of the address
+ */
+v6.Address.prototype.binaryZeroPad = function () {
+  return zeroPad(this.bigInteger().toString(2), v6.BITS);
+};
+
+// TODO: Improve the semantics of this helper function
+v6.Address.prototype.parse4in6 = function (address) {
+  var groups = address.split(':');
+  var lastGroup = groups.slice(-1)[0];
+
+  var address4 = lastGroup.match(v4.RE_ADDRESS);
+
+  if (address4) {
+    var temp4 = new v4.Address(address4[0]);
+
+    for (var i = 0; i < temp4.groups; i++) {
+      if (/^0[0-9]+/.test(temp4.parsedAddress[i])) {
+        this.valid = false;
+        this.error = 'IPv4 addresses can not have leading zeroes.';
+
+        this.parseError = address.replace(v4.RE_ADDRESS,
+          map(temp4.parsedAddress, spanLeadingZeroes4).join('.'));
+
+        return;
+      }
+    }
+
+    this.v4 = true;
+
+    groups[groups.length - 1] = temp4.toV6Group();
+
+    address = groups.join(':');
+  }
+
+  return address;
+};
+
+// TODO: Make private?
+v6.Address.prototype.parse = function (address) {
+  address = this.parse4in6(address);
+
+  if (this.error) {
+    return;
+  }
+
+  var badCharacters = address.match(v6.RE_BAD_CHARACTERS);
+
+  if (badCharacters) {
+    this.valid = false;
+    this.error = sprintf("Bad character%s detected in address: %s",
+      badCharacters.length > 1 ? 's' : '', badCharacters.join(''));
+
+    this.parseError = address.replace(v6.RE_BAD_CHARACTERS,
+      '<span class="parse-error">$1</span>');
+
+    return;
+  }
+
+  var badAddress = address.match(v6.RE_BAD_ADDRESS);
+
+  if (badAddress) {
+    this.valid = false;
+    this.error = sprintf("Address failed regex: %s", badAddress.join(''));
+
+    this.parseError = address.replace(v6.RE_BAD_ADDRESS,
+      '<span class="parse-error">$1</span>');
+
+    return;
+  }
+
+  var groups = [];
+
+  var halves = address.split('::');
+
+  if (halves.length === 2) {
+    var first = halves[0].split(':');
+    var last = halves[1].split(':');
+
+    if (first.length === 1 &&
+      first[0] === '') {
+      first = [];
+    }
+
+    if (last.length === 1 &&
+      last[0] === '') {
+      last = [];
+    }
+
+    var remaining = this.groups - (first.length + last.length);
+
+    if (!remaining) {
+      this.valid = false;
+      this.error = "Error parsing groups";
+
+      return;
+    }
+
+    this.elidedGroups = remaining;
+
+    this.elisionBegin = first.length;
+    this.elisionEnd = first.length + this.elidedGroups;
+
+    first.forEach(function (group) {
+      groups.push(group);
+    });
+
+    for (var i = 0; i < remaining; i++) {
+      groups.push(0);
+    }
+
+    last.forEach(function (group) {
+      groups.push(group);
+    });
+  } else if (halves.length === 1) {
+    groups = address.split(':');
+
+    this.elidedGroups = 0;
+  } else {
+    this.valid = false;
+    this.error = "Too many :: groups found";
+
+    return;
+  }
+
+  groups = map(groups, function (g) {
+    return sprintf('%x', parseInt(g, 16));
+  });
+
+  if (groups.length !== this.groups) {
+    this.valid = false;
+    this.error = "Incorrect number of groups found";
+
+    return;
+  }
+
+  groups.forEach(function (group, i) {
+    if (groups.length > 4 && !this.v4) {
+      this.valid = false;
+      this.error = sprintf("Group %d is too long", i + 1);
+
+      return;
+    }
+  });
+
+  this.valid = true;
+
+  return groups;
+};
+
+/*
+ * Generate a regular expression string that can be used to find or validate all
+ * variations of this address.
+ */
+v6.Address.prototype.regularExpressionString = function (opt_subString) {
+  if (opt_subString === undefined) {
+    opt_subString = false;
+  }
+
+  var i;
+  var output = [];
+
+  var address6 = new v6.Address(this.correctForm());
+
+  if (address6.elidedGroups === 0) {
+    // The simple case
+    output = simpleRegularExpression(address6.parsedAddress);
+  } else if (address6.elidedGroups === 8) {
+    output.push('::|');
+
+    // TODO: Validate this
+    for (i = 0; i < address6.elidedGroups; i++) {
+      var pipe = '|';
+
+      if (i === address6.elidedGroups - 1) {
+        pipe = '';
+      }
+
+      output.push(sprintf('(0{1,4}:){%d}:%s', address6.elidedGroups, pipe));
+    }
+  } else {
+    // The elided case
+
+    // TODO: Allow sloppy elision
+    // TODO: Compute all possible elisions
+    var halves = address6.address.split('::');
+
+    if (halves[0].length) {
+      output = output.concat(simpleRegularExpression(halves[0].split(':')));
+      output.push(':');
+    }
+
+    output.push(sprintf('((0{1,4}:){%d}|:)', address6.elidedGroups));
+
+    if (halves[1].length) {
+      output = output.concat(simpleRegularExpression(halves[1].split(':')));
+    }
+  }
+
+  if (!opt_subString) {
+    output = [].concat('\\b', output, '\\b');
+  }
+
+  return output.join('');
+};
+
+/*
+ * Generate a regular expression that can be used to find or validate all
+ * variations of this address.
+ */
+v6.Address.prototype.regularExpression = function () {
+  return new RegExp(this.regularExpressionString(), 'i');
+};
+
+/*
+ * Returns the canonical form of the address
+ */
+v6.Address.prototype.canonicalForm = function () {
+  if (!this.valid) {
+    return;
+  }
+
+  return map(this.parsedAddress, function (n) {
+    return sprintf("%04x", parseInt(n, 16));
+  }).join(':');
+};
+
+/*
+ * Returns the decimal form of the address
+ */
+v6.Address.prototype.decimal = function () {
+  if (!this.valid) {
+    return;
+  }
+
+  return map(this.parsedAddress, function (n) {
+    return sprintf("%05d", parseInt(n, 16));
+  }).join(':');
+};
+
+/*
+ * Returns the address as a BigInteger
+ */
+v6.Address.prototype.bigInteger = function () {
+  if (!this.valid) {
+    return;
+  }
+
+  return new BigInteger(map(this.parsedAddress, function (n) {
+    return sprintf("%04x", parseInt(n, 16));
+  }).join(''), 16);
+};
+
+/*
+ * Returns the v4-in-v6 form of the address
+ */
+v6.Address.prototype.v4inv6 = function () {
+  var binary = this.binaryZeroPad().split('');
+
+  var address4 = v4.Address.fromHex(new BigInteger(binary.slice(96, 128)
+    .join(''), 2).toString(16));
+  var address6 = new v6.Address(this.parsedAddress.slice(0, 6).join(':'), 6);
+
+  var correct = address6.correctForm();
+
+  var infix = '';
+
+  if (!/:$/.test(correct)) {
+    infix = ':';
+  }
+
+  return address6.correctForm() + infix + address4.address;
+};
+
+/*
+ * Returns an object containing the Teredo properties of the address
+ */
+v6.Address.prototype.teredo = function () {
+  /*
+  - Bits 0 to 31 are set to the Teredo prefix (normally 2001:0000::/32).
+  - Bits 32 to 63 embed the primary IPv4 address of the Teredo server that
+  is used.
+  - Bits 64 to 79 can be used to define some flags. Currently only the
+  higher order bit is used; it is set to 1 if the Teredo client is
+  located behind a cone NAT, 0 otherwise. For Microsoft's Windows Vista
+  and Windows Server 2008 implementations, more bits are used. In those
+  implementations, the format for these 16 bits is "CRAAAAUG AAAAAAAA",
+  where "C" remains the "Cone" flag. The "R" bit is reserved for future
+  use. The "U" bit is for the Universal/Local flag (set to 0). The "G" bit
+  is Individual/Group flag (set to 0). The A bits are set to a 12-bit
+  randomly generated number chosen by the Teredo client to introduce
+  additional protection for the Teredo node against IPv6-based scanning
+  attacks.
+  - Bits 80 to 95 contains the obfuscated UDP port number. This is the
+  port number that is mapped by the NAT to the Teredo client with all
+  bits inverted.
+  - Bits 96 to 127 contains the obfuscated IPv4 address. This is the
+  public IPv4 address of the NAT with all bits inverted.
+  */
+
+  var prefix = this.getBitsBase16(0, 32);
+
+  var udpPort = this.getBits(80, 96).xor(new BigInteger('ffff', 16)).toString();
+
+  var server4 = v4.Address.fromHex(this.getBitsBase16(32, 64));
+  var client4 = v4.Address.fromHex(this.getBits(96, 128)
+    .xor(new BigInteger('ffffffff', 16)).toString(16));
+
+  var flags = this.getBits(64, 80);
+  var flagsBase2 = this.getBitsBase2(64, 80);
+
+  var coneNat = flags.testBit(15);
+  var reserved = flags.testBit(14);
+  var groupIndividual = flags.testBit(8);
+  var universalLocal = flags.testBit(9);
+  var nonce = new BigInteger(flagsBase2.slice(2, 6) +
+    flagsBase2.slice(8, 16), 2).toString(10);
+
+  return {
+    prefix: sprintf('%s:%s', prefix.slice(0, 4), prefix.slice(4, 8)),
+    server4: server4.address,
+    client4: client4.address,
+    flags: flagsBase2,
+    coneNat: coneNat,
+    microsoft: {
+      reserved: reserved,
+      universalLocal: universalLocal,
+      groupIndividual: groupIndividual,
+      nonce: nonce
+    },
+    udpPort: udpPort
+  };
+};
+
+/*
+ * Returns an object containing the 6to4 properties of the address
+ */
+v6.Address.prototype.six2four = function () {
+  /*
+  - Bits 0 to 15 are set to the 6to4 prefix (2002::/16).
+  - Bits 16 to 48 embed the IPv4 address of the 6to4 gateway that is used.
+  */
+
+  var prefix = this.getBitsBase16(0, 16);
+
+  var gateway = v4.Address.fromHex(this.getBitsBase16(16, 48));
+
+  return {
+    prefix: sprintf('%s', prefix.slice(0, 4)),
+    gateway: gateway.address
+  };
+};
+
+},{"./lib/node/bigint":105,"sprintf":106}],105:[function(require,module,exports){
+/**
+ * copped from https://github.com/joyent/node/blob/master/deps/v8/benchmarks/crypto.js (under same license).
+ * 
+ * Copyright (c) 2003-2005  Tom Wu
+ * All Rights Reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining
+ * a copy of this software and associated documentation files (the
+ * "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
+ * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * IN NO EVENT SHALL TOM WU BE LIABLE FOR ANY SPECIAL, INCIDENTAL,
+ * INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER
+ * RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF
+ * THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT
+ * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ *
+ * In addition, the following condition applies:
+ *
+ * All redistributions must retain an intact copy of this copyright notice
+ * and disclaimer.
+ */
+
+// V8 optimized constants.
+var dbits = 26
+var BI_DB = dbits;
+var BI_DM = ((1<<dbits)-1);
+var BI_DV = (1<<dbits);
+
+var BI_FP = 52;
+var BI_FV = Math.pow(2,BI_FP);
+var BI_F1 = BI_FP-dbits;
+var BI_F2 = 2*dbits-BI_FP;
+
+BigInteger = module.exports.BigInteger = function(a,b,c) {
+  this.array = new Array();
+  if(a != null)
+    if("number" == typeof a) this.fromNumber(a,b,c);
+    else if(b == null && "string" != typeof a) this.fromString(a,256);
+    else this.fromString(a,b);
+}
+
+// return new, unset BigInteger
+function nbi() { return new BigInteger(null); }
+
+// am: Compute w_j += (x*this_i), propagate carries,
+// c is initial carry, returns final carry.
+// c < 3*dvalue, x < 2*dvalue, this_i < dvalue
+// We need to select the fastest one that works in this environment.
+
+// This is tailored to VMs with 2-bit tagging. It makes sure
+// that all the computations stay within the 29 bits available.
+function am4(i,x,w,j,c,n) {
+  var this_array = this.array;
+  var w_array    = w.array;
+
+  var xl = x&0x1fff, xh = x>>13;
+  while(--n >= 0) {
+    var l = this_array[i]&0x1fff;
+    var h = this_array[i++]>>13;
+    var m = xh*l+h*xl;
+    l = xl*l+((m&0x1fff)<<13)+w_array[j]+c;
+    c = (l>>26)+(m>>13)+xh*h;
+    w_array[j++] = l&0x3ffffff;
+  }
+  return c;
+}
+
+// Digit conversions
+var BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
+var BI_RC = new Array();
+var rr,vv;
+rr = "0".charCodeAt(0);
+for(vv = 0; vv <= 9; ++vv) BI_RC[rr++] = vv;
+rr = "a".charCodeAt(0);
+for(vv = 10; vv < 36; ++vv) BI_RC[rr++] = vv;
+rr = "A".charCodeAt(0);
+for(vv = 10; vv < 36; ++vv) BI_RC[rr++] = vv;
+
+function int2char(n) { return BI_RM.charAt(n); }
+function intAt(s,i) {
+  var c = BI_RC[s.charCodeAt(i)];
+  return (c==null)?-1:c;
+}
+
+// (protected) copy this to r
+function bnpCopyTo(r) {
+  var this_array = this.array;
+  var r_array    = r.array;
+
+  for(var i = this.t-1; i >= 0; --i) r_array[i] = this_array[i];
+  r.t = this.t;
+  r.s = this.s;
+}
+
+// (protected) set from integer value x, -DV <= x < DV
+function bnpFromInt(x) {
+  var this_array = this.array;
+  this.t = 1;
+  this.s = (x<0)?-1:0;
+  if(x > 0) this_array[0] = x;
+  else if(x < -1) this_array[0] = x+DV; // WTH is DV?  BI_DV maybe?
+  else this.t = 0;
+}
+
+// return bigint initialized to value
+function nbv(i) { var r = nbi(); r.fromInt(i); return r; }
+
+// (protected) set from string and radix
+function bnpFromString(s,b) {
+  var this_array = this.array;
+  var k;
+  if(b == 16) k = 4;
+  else if(b == 8) k = 3;
+  else if(b == 256) k = 8; // byte array
+  else if(b == 2) k = 1;
+  else if(b == 32) k = 5;
+  else if(b == 4) k = 2;
+  else { this.fromRadix(s,b); return; }
+  this.t = 0;
+  this.s = 0;
+  var i = s.length, mi = false, sh = 0;
+  while(--i >= 0) {
+    var x = (k==8)?s[i]&0xff:intAt(s,i);
+    if(x < 0) {
+      if(s.charAt(i) == "-") mi = true;
+      continue;
+    }
+    mi = false;
+    if(sh == 0)
+      this_array[this.t++] = x;
+    else if(sh+k > BI_DB) {
+      this_array[this.t-1] |= (x&((1<<(BI_DB-sh))-1))<<sh;
+      this_array[this.t++] = (x>>(BI_DB-sh));
+    }
+    else
+      this_array[this.t-1] |= x<<sh;
+    sh += k;
+    if(sh >= BI_DB) sh -= BI_DB;
+  }
+  if(k == 8 && (s[0]&0x80) != 0) {
+    this.s = -1;
+    if(sh > 0) this_array[this.t-1] |= ((1<<(BI_DB-sh))-1)<<sh;
+  }
+  this.clamp();
+  if(mi) BigInteger.ZERO.subTo(this,this);
+}
+
+// (protected) clamp off excess high words
+function bnpClamp() {
+  var this_array = this.array;
+  var c = this.s&BI_DM;
+  while(this.t > 0 && this_array[this.t-1] == c) --this.t;
+}
+
+// (public) return string representation in given radix
+function bnToString(b) {
+  var this_array = this.array;
+  if(this.s < 0) return "-"+this.negate().toString(b);
+  var k;
+  if(b == 16) k = 4;
+  else if(b == 8) k = 3;
+  else if(b == 2) k = 1;
+  else if(b == 32) k = 5;
+  else if(b == 4) k = 2;
+  else return this.toRadix(b);
+  var km = (1<<k)-1, d, m = false, r = "", i = this.t;
+  var p = BI_DB-(i*BI_DB)%k;
+  if(i-- > 0) {
+    if(p < BI_DB && (d = this_array[i]>>p) > 0) { m = true; r = int2char(d); }
+    while(i >= 0) {
+      if(p < k) {
+        d = (this_array[i]&((1<<p)-1))<<(k-p);
+        d |= this_array[--i]>>(p+=BI_DB-k);
+      }
+      else {
+        d = (this_array[i]>>(p-=k))&km;
+        if(p <= 0) { p += BI_DB; --i; }
+      }
+      if(d > 0) m = true;
+      if(m) r += int2char(d);
+    }
+  }
+  return m?r:"0";
+}
+
+// (public) -this
+function bnNegate() { var r = nbi(); BigInteger.ZERO.subTo(this,r); return r; }
+
+// (public) |this|
+function bnAbs() { return (this.s<0)?this.negate():this; }
+
+// (public) return + if this > a, - if this < a, 0 if equal
+function bnCompareTo(a) {
+  var this_array = this.array;
+  var a_array = a.array;
+
+  var r = this.s-a.s;
+  if(r != 0) return r;
+  var i = this.t;
+  r = i-a.t;
+  if(r != 0) return r;
+  while(--i >= 0) if((r=this_array[i]-a_array[i]) != 0) return r;
+  return 0;
+}
+
+// returns bit length of the integer x
+function nbits(x) {
+  var r = 1, t;
+  if((t=x>>>16) != 0) { x = t; r += 16; }
+  if((t=x>>8) != 0) { x = t; r += 8; }
+  if((t=x>>4) != 0) { x = t; r += 4; }
+  if((t=x>>2) != 0) { x = t; r += 2; }
+  if((t=x>>1) != 0) { x = t; r += 1; }
+  return r;
+}
+
+// (public) return the number of bits in "this"
+function bnBitLength() {
+  var this_array = this.array;
+  if(this.t <= 0) return 0;
+  return BI_DB*(this.t-1)+nbits(this_array[this.t-1]^(this.s&BI_DM));
+}
+
+// (protected) r = this << n*DB
+function bnpDLShiftTo(n,r) {
+  var this_array = this.array;
+  var r_array = r.array;
+  var i;
+  for(i = this.t-1; i >= 0; --i) r_array[i+n] = this_array[i];
+  for(i = n-1; i >= 0; --i) r_array[i] = 0;
+  r.t = this.t+n;
+  r.s = this.s;
+}
+
+// (protected) r = this >> n*DB
+function bnpDRShiftTo(n,r) {
+  var this_array = this.array;
+  var r_array = r.array;
+  for(var i = n; i < this.t; ++i) r_array[i-n] = this_array[i];
+  r.t = Math.max(this.t-n,0);
+  r.s = this.s;
+}
+
+// (protected) r = this << n
+function bnpLShiftTo(n,r) {
+  var this_array = this.array;
+  var r_array = r.array;
+  var bs = n%BI_DB;
+  var cbs = BI_DB-bs;
+  var bm = (1<<cbs)-1;
+  var ds = Math.floor(n/BI_DB), c = (this.s<<bs)&BI_DM, i;
+  for(i = this.t-1; i >= 0; --i) {
+    r_array[i+ds+1] = (this_array[i]>>cbs)|c;
+    c = (this_array[i]&bm)<<bs;
+  }
+  for(i = ds-1; i >= 0; --i) r_array[i] = 0;
+  r_array[ds] = c;
+  r.t = this.t+ds+1;
+  r.s = this.s;
+  r.clamp();
+}
+
+// (protected) r = this >> n
+function bnpRShiftTo(n,r) {
+  var this_array = this.array;
+  var r_array = r.array;
+  r.s = this.s;
+  var ds = Math.floor(n/BI_DB);
+  if(ds >= this.t) { r.t = 0; return; }
+  var bs = n%BI_DB;
+  var cbs = BI_DB-bs;
+  var bm = (1<<bs)-1;
+  r_array[0] = this_array[ds]>>bs;
+  for(var i = ds+1; i < this.t; ++i) {
+    r_array[i-ds-1] |= (this_array[i]&bm)<<cbs;
+    r_array[i-ds] = this_array[i]>>bs;
+  }
+  if(bs > 0) r_array[this.t-ds-1] |= (this.s&bm)<<cbs;
+  r.t = this.t-ds;
+  r.clamp();
+}
+
+// (protected) r = this - a
+function bnpSubTo(a,r) {
+  var this_array = this.array;
+  var r_array = r.array;
+  var a_array = a.array;
+  var i = 0, c = 0, m = Math.min(a.t,this.t);
+  while(i < m) {
+    c += this_array[i]-a_array[i];
+    r_array[i++] = c&BI_DM;
+    c >>= BI_DB;
+  }
+  if(a.t < this.t) {
+    c -= a.s;
+    while(i < this.t) {
+      c += this_array[i];
+      r_array[i++] = c&BI_DM;
+      c >>= BI_DB;
+    }
+    c += this.s;
+  }
+  else {
+    c += this.s;
+    while(i < a.t) {
+      c -= a_array[i];
+      r_array[i++] = c&BI_DM;
+      c >>= BI_DB;
+    }
+    c -= a.s;
+  }
+  r.s = (c<0)?-1:0;
+  if(c < -1) r_array[i++] = BI_DV+c;
+  else if(c > 0) r_array[i++] = c;
+  r.t = i;
+  r.clamp();
+}
+
+// (protected) r = this * a, r != this,a (HAC 14.12)
+// "this" should be the larger one if appropriate.
+function bnpMultiplyTo(a,r) {
+  var this_array = this.array; // Unused local var?
+  var r_array = r.array;
+  var x = this.abs(), y = a.abs();
+  var y_array = y.array;
+
+  var i = x.t;
+  r.t = i+y.t;
+  while(--i >= 0) r_array[i] = 0;
+  for(i = 0; i < y.t; ++i) r_array[i+x.t] = x.am(0,y_array[i],r,i,0,x.t);
+  r.s = 0;
+  r.clamp();
+  if(this.s != a.s) BigInteger.ZERO.subTo(r,r);
+}
+
+// (protected) r = this^2, r != this (HAC 14.16)
+function bnpSquareTo(r) {
+  var x = this.abs();
+  var x_array = x.array;
+  var r_array = r.array;
+
+  var i = r.t = 2*x.t;
+  while(--i >= 0) r_array[i] = 0;
+  for(i = 0; i < x.t-1; ++i) {
+    var c = x.am(i,x_array[i],r,2*i,0,1);
+    if((r_array[i+x.t]+=x.am(i+1,2*x_array[i],r,2*i+1,c,x.t-i-1)) >= BI_DV) {
+      r_array[i+x.t] -= BI_DV;
+      r_array[i+x.t+1] = 1;
+    }
+  }
+  if(r.t > 0) r_array[r.t-1] += x.am(i,x_array[i],r,2*i,0,1);
+  r.s = 0;
+  r.clamp();
+}
+
+// (protected) divide this by m, quotient and remainder to q, r (HAC 14.20)
+// r != q, this != m.  q or r may be null.
+function bnpDivRemTo(m,q,r) {
+  var pm = m.abs();
+  if(pm.t <= 0) return;
+  var pt = this.abs();
+  if(pt.t < pm.t) {
+    if(q != null) q.fromInt(0);
+    if(r != null) this.copyTo(r);
+    return;
+  }
+  if(r == null) r = nbi();
+  var y = nbi(), ts = this.s, ms = m.s;
+  var pm_array = pm.array;
+  var nsh = BI_DB-nbits(pm_array[pm.t-1]);	// normalize modulus
+  if(nsh > 0) { pm.lShiftTo(nsh,y); pt.lShiftTo(nsh,r); }
+  else { pm.copyTo(y); pt.copyTo(r); }
+  var ys = y.t;
+
+  var y_array = y.array;
+  var y0 = y_array[ys-1];
+  if(y0 == 0) return;
+  var yt = y0*(1<<BI_F1)+((ys>1)?y_array[ys-2]>>BI_F2:0);
+  var d1 = BI_FV/yt, d2 = (1<<BI_F1)/yt, e = 1<<BI_F2;
+  var i = r.t, j = i-ys, t = (q==null)?nbi():q;
+  y.dlShiftTo(j,t);
+
+  var r_array = r.array;
+  if(r.compareTo(t) >= 0) {
+    r_array[r.t++] = 1;
+    r.subTo(t,r);
+  }
+  BigInteger.ONE.dlShiftTo(ys,t);
+  t.subTo(y,y);	// "negative" y so we can replace sub with am later
+  while(y.t < ys) y_array[y.t++] = 0;
+  while(--j >= 0) {
+    // Estimate quotient digit
+    var qd = (r_array[--i]==y0)?BI_DM:Math.floor(r_array[i]*d1+(r_array[i-1]+e)*d2);
+    if((r_array[i]+=y.am(0,qd,r,j,0,ys)) < qd) {	// Try it out
+      y.dlShiftTo(j,t);
+      r.subTo(t,r);
+      while(r_array[i] < --qd) r.subTo(t,r);
+    }
+  }
+  if(q != null) {
+    r.drShiftTo(ys,q);
+    if(ts != ms) BigInteger.ZERO.subTo(q,q);
+  }
+  r.t = ys;
+  r.clamp();
+  if(nsh > 0) r.rShiftTo(nsh,r);	// Denormalize remainder
+  if(ts < 0) BigInteger.ZERO.subTo(r,r);
+}
+
+// (public) this mod a
+function bnMod(a) {
+  var r = nbi();
+  this.abs().divRemTo(a,null,r);
+  if(this.s < 0 && r.compareTo(BigInteger.ZERO) > 0) a.subTo(r,r);
+  return r;
+}
+
+// Modular reduction using "classic" algorithm
+function Classic(m) { this.m = m; }
+function cConvert(x) {
+  if(x.s < 0 || x.compareTo(this.m) >= 0) return x.mod(this.m);
+  else return x;
+}
+function cRevert(x) { return x; }
+function cReduce(x) { x.divRemTo(this.m,null,x); }
+function cMulTo(x,y,r) { x.multiplyTo(y,r); this.reduce(r); }
+function cSqrTo(x,r) { x.squareTo(r); this.reduce(r); }
+
+Classic.prototype.convert = cConvert;
+Classic.prototype.revert = cRevert;
+Classic.prototype.reduce = cReduce;
+Classic.prototype.mulTo = cMulTo;
+Classic.prototype.sqrTo = cSqrTo;
+
+// (protected) return "-1/this % 2^DB"; useful for Mont. reduction
+// justification:
+//         xy == 1 (mod m)
+//         xy =  1+km
+//   xy(2-xy) = (1+km)(1-km)
+// x[y(2-xy)] = 1-k^2m^2
+// x[y(2-xy)] == 1 (mod m^2)
+// if y is 1/x mod m, then y(2-xy) is 1/x mod m^2
+// should reduce x and y(2-xy) by m^2 at each step to keep size bounded.
+// JS multiply "overflows" differently from C/C++, so care is needed here.
+function bnpInvDigit() {
+  var this_array = this.array;
+  if(this.t < 1) return 0;
+  var x = this_array[0];
+  if((x&1) == 0) return 0;
+  var y = x&3;		// y == 1/x mod 2^2
+  y = (y*(2-(x&0xf)*y))&0xf;	// y == 1/x mod 2^4
+  y = (y*(2-(x&0xff)*y))&0xff;	// y == 1/x mod 2^8
+  y = (y*(2-(((x&0xffff)*y)&0xffff)))&0xffff;	// y == 1/x mod 2^16
+  // last step - calculate inverse mod DV directly;
+  // assumes 16 < DB <= 32 and assumes ability to handle 48-bit ints
+  y = (y*(2-x*y%BI_DV))%BI_DV;		// y == 1/x mod 2^dbits
+  // we really want the negative inverse, and -DV < y < DV
+  return (y>0)?BI_DV-y:-y;
+}
+
+// Montgomery reduction
+function Montgomery(m) {
+  this.m = m;
+  this.mp = m.invDigit();
+  this.mpl = this.mp&0x7fff;
+  this.mph = this.mp>>15;
+  this.um = (1<<(BI_DB-15))-1;
+  this.mt2 = 2*m.t;
+}
+
+// xR mod m
+function montConvert(x) {
+  var r = nbi();
+  x.abs().dlShiftTo(this.m.t,r);
+  r.divRemTo(this.m,null,r);
+  if(x.s < 0 && r.compareTo(BigInteger.ZERO) > 0) this.m.subTo(r,r);
+  return r;
+}
+
+// x/R mod m
+function montRevert(x) {
+  var r = nbi();
+  x.copyTo(r);
+  this.reduce(r);
+  return r;
+}
+
+// x = x/R mod m (HAC 14.32)
+function montReduce(x) {
+  var x_array = x.array;
+  while(x.t <= this.mt2)	// pad x so am has enough room later
+    x_array[x.t++] = 0;
+  for(var i = 0; i < this.m.t; ++i) {
+    // faster way of calculating u0 = x[i]*mp mod DV
+    var j = x_array[i]&0x7fff;
+    var u0 = (j*this.mpl+(((j*this.mph+(x_array[i]>>15)*this.mpl)&this.um)<<15))&BI_DM;
+    // use am to combine the multiply-shift-add into one call
+    j = i+this.m.t;
+    x_array[j] += this.m.am(0,u0,x,i,0,this.m.t);
+    // propagate carry
+    while(x_array[j] >= BI_DV) { x_array[j] -= BI_DV; x_array[++j]++; }
+  }
+  x.clamp();
+  x.drShiftTo(this.m.t,x);
+  if(x.compareTo(this.m) >= 0) x.subTo(this.m,x);
+}
+
+// r = "x^2/R mod m"; x != r
+function montSqrTo(x,r) { x.squareTo(r); this.reduce(r); }
+
+// r = "xy/R mod m"; x,y != r
+function montMulTo(x,y,r) { x.multiplyTo(y,r); this.reduce(r); }
+
+Montgomery.prototype.convert = montConvert;
+Montgomery.prototype.revert = montRevert;
+Montgomery.prototype.reduce = montReduce;
+Montgomery.prototype.mulTo = montMulTo;
+Montgomery.prototype.sqrTo = montSqrTo;
+
+// (protected) true iff this is even
+function bnpIsEven() {
+  var this_array = this.array;
+  return ((this.t>0)?(this_array[0]&1):this.s) == 0;
+}
+
+// (protected) this^e, e < 2^32, doing sqr and mul with "r" (HAC 14.79)
+function bnpExp(e,z) {
+  if(e > 0xffffffff || e < 1) return BigInteger.ONE;
+  var r = nbi(), r2 = nbi(), g = z.convert(this), i = nbits(e)-1;
+  g.copyTo(r);
+  while(--i >= 0) {
+    z.sqrTo(r,r2);
+    if((e&(1<<i)) > 0) z.mulTo(r2,g,r);
+    else { var t = r; r = r2; r2 = t; }
+  }
+  return z.revert(r);
+}
+
+// (public) this^e % m, 0 <= e < 2^32
+function bnModPowInt(e,m) {
+  var z;
+  if(e < 256 || m.isEven()) z = new Classic(m); else z = new Montgomery(m);
+  return this.exp(e,z);
+}
+
+// protected
+BigInteger.prototype.copyTo = bnpCopyTo;
+BigInteger.prototype.fromInt = bnpFromInt;
+BigInteger.prototype.fromString = bnpFromString;
+BigInteger.prototype.clamp = bnpClamp;
+BigInteger.prototype.dlShiftTo = bnpDLShiftTo;
+BigInteger.prototype.drShiftTo = bnpDRShiftTo;
+BigInteger.prototype.lShiftTo = bnpLShiftTo;
+BigInteger.prototype.rShiftTo = bnpRShiftTo;
+BigInteger.prototype.subTo = bnpSubTo;
+BigInteger.prototype.multiplyTo = bnpMultiplyTo;
+BigInteger.prototype.squareTo = bnpSquareTo;
+BigInteger.prototype.divRemTo = bnpDivRemTo;
+BigInteger.prototype.invDigit = bnpInvDigit;
+BigInteger.prototype.isEven = bnpIsEven;
+BigInteger.prototype.exp = bnpExp;
+
+// public
+BigInteger.prototype.toString = bnToString;
+BigInteger.prototype.negate = bnNegate;
+BigInteger.prototype.abs = bnAbs;
+BigInteger.prototype.compareTo = bnCompareTo;
+BigInteger.prototype.bitLength = bnBitLength;
+BigInteger.prototype.mod = bnMod;
+BigInteger.prototype.modPowInt = bnModPowInt;
+
+// "constants"
+BigInteger.ZERO = nbv(0);
+BigInteger.ONE = nbv(1);
+// Copyright (c) 2005  Tom Wu
+// All Rights Reserved.
+// See "LICENSE" for details.
+
+// Extended JavaScript BN functions, required for RSA private ops.
+
+// (public)
+function bnClone() { var r = nbi(); this.copyTo(r); return r; }
+
+// (public) return value as integer
+function bnIntValue() {
+  var this_array = this.array;
+  if(this.s < 0) {
+    if(this.t == 1) return this_array[0]-BI_DV;
+    else if(this.t == 0) return -1;
+  }
+  else if(this.t == 1) return this_array[0];
+  else if(this.t == 0) return 0;
+  // assumes 16 < DB < 32
+  return ((this_array[1]&((1<<(32-BI_DB))-1))<<BI_DB)|this_array[0];
+}
+
+// (public) return value as byte
+function bnByteValue() {
+  var this_array = this.array;
+  return (this.t==0)?this.s:(this_array[0]<<24)>>24;
+}
+
+// (public) return value as short (assumes DB>=16)
+function bnShortValue() {
+  var this_array = this.array;
+  return (this.t==0)?this.s:(this_array[0]<<16)>>16;
+}
+
+// (protected) return x s.t. r^x < DV
+function bnpChunkSize(r) { return Math.floor(Math.LN2*BI_DB/Math.log(r)); }
+
+// (public) 0 if this == 0, 1 if this > 0
+function bnSigNum() {
+  var this_array = this.array;
+  if(this.s < 0) return -1;
+  else if(this.t <= 0 || (this.t == 1 && this_array[0] <= 0)) return 0;
+  else return 1;
+}
+
+// (protected) convert to radix string
+function bnpToRadix(b) {
+  if(b == null) b = 10;
+  if(this.signum() == 0 || b < 2 || b > 36) return "0";
+  var cs = this.chunkSize(b);
+  var a = Math.pow(b,cs);
+  var d = nbv(a), y = nbi(), z = nbi(), r = "";
+  this.divRemTo(d,y,z);
+  while(y.signum() > 0) {
+    r = (a+z.intValue()).toString(b).substr(1) + r;
+    y.divRemTo(d,y,z);
+  }
+  return z.intValue().toString(b) + r;
+}
+
+// (protected) convert from radix string
+function bnpFromRadix(s,b) {
+  this.fromInt(0);
+  if(b == null) b = 10;
+  var cs = this.chunkSize(b);
+  var d = Math.pow(b,cs), mi = false, j = 0, w = 0;
+  for(var i = 0; i < s.length; ++i) {
+    var x = intAt(s,i);
+    if(x < 0) {
+      if(s.charAt(i) == "-" && this.signum() == 0) mi = true;
+      continue;
+    }
+    w = b*w+x;
+    if(++j >= cs) {
+      this.dMultiply(d);
+      this.dAddOffset(w,0);
+      j = 0;
+      w = 0;
+    }
+  }
+  if(j > 0) {
+    this.dMultiply(Math.pow(b,j));
+    this.dAddOffset(w,0);
+  }
+  if(mi) BigInteger.ZERO.subTo(this,this);
+}
+
+// (protected) alternate constructor
+function bnpFromNumber(a,b,c) {
+  if("number" == typeof b) {
+    // new BigInteger(int,int,RNG)
+    if(a < 2) this.fromInt(1);
+    else {
+      this.fromNumber(a,c);
+      if(!this.testBit(a-1))	// force MSB set
+        this.bitwiseTo(BigInteger.ONE.shiftLeft(a-1),op_or,this);
+      if(this.isEven()) this.dAddOffset(1,0); // force odd
+      while(!this.isProbablePrime(b)) {
+        this.dAddOffset(2,0);
+        if(this.bitLength() > a) this.subTo(BigInteger.ONE.shiftLeft(a-1),this);
+      }
+    }
+  }
+  else {
+    // todo: we don't need this.
+    // new BigInteger(int,RNG)
+    var x = new Array(), t = a&7;
+    x.length = (a>>3)+1;
+    b.nextBytes(x);
+    if(t > 0) x[0] &= ((1<<t)-1); else x[0] = 0;
+    this.fromString(x,256);
+  }
+}
+
+// (public) convert to bigendian byte array
+function bnToByteArray() {
+  var this_array = this.array;
+  var i = this.t, r = new Array();
+  r[0] = this.s;
+  var p = BI_DB-(i*BI_DB)%8, d, k = 0;
+  if(i-- > 0) {
+    if(p < BI_DB && (d = this_array[i]>>p) != (this.s&BI_DM)>>p)
+      r[k++] = d|(this.s<<(BI_DB-p));
+    while(i >= 0) {
+      if(p < 8) {
+        d = (this_array[i]&((1<<p)-1))<<(8-p);
+        d |= this_array[--i]>>(p+=BI_DB-8);
+      }
+      else {
+        d = (this_array[i]>>(p-=8))&0xff;
+        if(p <= 0) { p += BI_DB; --i; }
+      }
+      if((d&0x80) != 0) d |= -256;
+      if(k == 0 && (this.s&0x80) != (d&0x80)) ++k;
+      if(k > 0 || d != this.s) r[k++] = d;
+    }
+  }
+  return r;
+}
+
+function bnEquals(a) { return(this.compareTo(a)==0); }
+function bnMin(a) { return(this.compareTo(a)<0)?this:a; }
+function bnMax(a) { return(this.compareTo(a)>0)?this:a; }
+
+// (protected) r = this op a (bitwise)
+function bnpBitwiseTo(a,op,r) {
+  var this_array = this.array;
+  var a_array    = a.array;
+  var r_array    = r.array;
+  var i, f, m = Math.min(a.t,this.t);
+  for(i = 0; i < m; ++i) r_array[i] = op(this_array[i],a_array[i]);
+  if(a.t < this.t) {
+    f = a.s&BI_DM;
+    for(i = m; i < this.t; ++i) r_array[i] = op(this_array[i],f);
+    r.t = this.t;
+  }
+  else {
+    f = this.s&BI_DM;
+    for(i = m; i < a.t; ++i) r_array[i] = op(f,a_array[i]);
+    r.t = a.t;
+  }
+  r.s = op(this.s,a.s);
+  r.clamp();
+}
+
+// (public) this & a
+function op_and(x,y) { return x&y; }
+function bnAnd(a) { var r = nbi(); this.bitwiseTo(a,op_and,r); return r; }
+
+// (public) this | a
+function op_or(x,y) { return x|y; }
+function bnOr(a) { var r = nbi(); this.bitwiseTo(a,op_or,r); return r; }
+
+// (public) this ^ a
+function op_xor(x,y) { return x^y; }
+function bnXor(a) { var r = nbi(); this.bitwiseTo(a,op_xor,r); return r; }
+
+// (public) this & ~a
+function op_andnot(x,y) { return x&~y; }
+function bnAndNot(a) { var r = nbi(); this.bitwiseTo(a,op_andnot,r); return r; }
+
+// (public) ~this
+function bnNot() {
+  var this_array = this.array;
+  var r = nbi();
+  var r_array = r.array;
+
+  for(var i = 0; i < this.t; ++i) r_array[i] = BI_DM&~this_array[i];
+  r.t = this.t;
+  r.s = ~this.s;
+  return r;
+}
+
+// (public) this << n
+function bnShiftLeft(n) {
+  var r = nbi();
+  if(n < 0) this.rShiftTo(-n,r); else this.lShiftTo(n,r);
+  return r;
+}
+
+// (public) this >> n
+function bnShiftRight(n) {
+  var r = nbi();
+  if(n < 0) this.lShiftTo(-n,r); else this.rShiftTo(n,r);
+  return r;
+}
+
+// return index of lowest 1-bit in x, x < 2^31
+function lbit(x) {
+  if(x == 0) return -1;
+  var r = 0;
+  if((x&0xffff) == 0) { x >>= 16; r += 16; }
+  if((x&0xff) == 0) { x >>= 8; r += 8; }
+  if((x&0xf) == 0) { x >>= 4; r += 4; }
+  if((x&3) == 0) { x >>= 2; r += 2; }
+  if((x&1) == 0) ++r;
+  return r;
+}
+
+// (public) returns index of lowest 1-bit (or -1 if none)
+function bnGetLowestSetBit() {
+  var this_array = this.array;
+  for(var i = 0; i < this.t; ++i)
+    if(this_array[i] != 0) return i*BI_DB+lbit(this_array[i]);
+  if(this.s < 0) return this.t*BI_DB;
+  return -1;
+}
+
+// return number of 1 bits in x
+function cbit(x) {
+  var r = 0;
+  while(x != 0) { x &= x-1; ++r; }
+  return r;
+}
+
+// (public) return number of set bits
+function bnBitCount() {
+  var this_array = this.array;
+  var r = 0, x = this.s&BI_DM;
+  for(var i = 0; i < this.t; ++i) r += cbit(this_array[i]^x);
+  return r;
+}
+
+// (public) true iff nth bit is set
+function bnTestBit(n) {
+  var this_array = this.array;
+  var j = Math.floor(n/BI_DB);
+  if(j >= this.t) return(this.s!=0);
+  return((this_array[j]&(1<<(n%BI_DB)))!=0);
+}
+
+// (protected) this op (1<<n)
+function bnpChangeBit(n,op) {
+  var r = BigInteger.ONE.shiftLeft(n);
+  this.bitwiseTo(r,op,r);
+  return r;
+}
+
+// (public) this | (1<<n)
+function bnSetBit(n) { return this.changeBit(n,op_or); }
+
+// (public) this & ~(1<<n)
+function bnClearBit(n) { return this.changeBit(n,op_andnot); }
+
+// (public) this ^ (1<<n)
+function bnFlipBit(n) { return this.changeBit(n,op_xor); }
+
+// (protected) r = this + a
+function bnpAddTo(a,r) {
+  var this_array = this.array;
+  var a_array = a.array;
+  var r_array = r.array;
+  var i = 0, c = 0, m = Math.min(a.t,this.t);
+  while(i < m) {
+    c += this_array[i]+a_array[i];
+    r_array[i++] = c&BI_DM;
+    c >>= BI_DB;
+  }
+  if(a.t < this.t) {
+    c += a.s;
+    while(i < this.t) {
+      c += this_array[i];
+      r_array[i++] = c&BI_DM;
+      c >>= BI_DB;
+    }
+    c += this.s;
+  }
+  else {
+    c += this.s;
+    while(i < a.t) {
+      c += a_array[i];
+      r_array[i++] = c&BI_DM;
+      c >>= BI_DB;
+    }
+    c += a.s;
+  }
+  r.s = (c<0)?-1:0;
+  if(c > 0) r_array[i++] = c;
+  else if(c < -1) r_array[i++] = BI_DV+c;
+  r.t = i;
+  r.clamp();
+}
+
+// (public) this + a
+function bnAdd(a) { var r = nbi(); this.addTo(a,r); return r; }
+
+// (public) this - a
+function bnSubtract(a) { var r = nbi(); this.subTo(a,r); return r; }
+
+// (public) this * a
+function bnMultiply(a) { var r = nbi(); this.multiplyTo(a,r); return r; }
+
+// (public) this / a
+function bnDivide(a) { var r = nbi(); this.divRemTo(a,r,null); return r; }
+
+// (public) this % a
+function bnRemainder(a) { var r = nbi(); this.divRemTo(a,null,r); return r; }
+
+// (public) [this/a,this%a]
+function bnDivideAndRemainder(a) {
+  var q = nbi(), r = nbi();
+  this.divRemTo(a,q,r);
+  return new Array(q,r);
+}
+
+// (protected) this *= n, this >= 0, 1 < n < DV
+function bnpDMultiply(n) {
+  var this_array = this.array;
+  this_array[this.t] = this.am(0,n-1,this,0,0,this.t);
+  ++this.t;
+  this.clamp();
+}
+
+// (protected) this += n << w words, this >= 0
+function bnpDAddOffset(n,w) {
+  var this_array = this.array;
+  while(this.t <= w) this_array[this.t++] = 0;
+  this_array[w] += n;
+  while(this_array[w] >= BI_DV) {
+    this_array[w] -= BI_DV;
+    if(++w >= this.t) this_array[this.t++] = 0;
+    ++this_array[w];
+  }
+}
+
+// A "null" reducer
+function NullExp() {}
+function nNop(x) { return x; }
+function nMulTo(x,y,r) { x.multiplyTo(y,r); }
+function nSqrTo(x,r) { x.squareTo(r); }
+
+NullExp.prototype.convert = nNop;
+NullExp.prototype.revert = nNop;
+NullExp.prototype.mulTo = nMulTo;
+NullExp.prototype.sqrTo = nSqrTo;
+
+// (public) this^e
+function bnPow(e) { return this.exp(e,new NullExp()); }
+
+// (protected) r = lower n words of "this * a", a.t <= n
+// "this" should be the larger one if appropriate.
+function bnpMultiplyLowerTo(a,n,r) {
+  var r_array = r.array;
+  var a_array = a.array;
+  var i = Math.min(this.t+a.t,n);
+  r.s = 0; // assumes a,this >= 0
+  r.t = i;
+  while(i > 0) r_array[--i] = 0;
+  var j;
+  for(j = r.t-this.t; i < j; ++i) r_array[i+this.t] = this.am(0,a_array[i],r,i,0,this.t);
+  for(j = Math.min(a.t,n); i < j; ++i) this.am(0,a_array[i],r,i,0,n-i);
+  r.clamp();
+}
+
+// (protected) r = "this * a" without lower n words, n > 0
+// "this" should be the larger one if appropriate.
+function bnpMultiplyUpperTo(a,n,r) {
+  var r_array = r.array;
+  var a_array = a.array;
+  --n;
+  var i = r.t = this.t+a.t-n;
+  r.s = 0; // assumes a,this >= 0
+  while(--i >= 0) r_array[i] = 0;
+  for(i = Math.max(n-this.t,0); i < a.t; ++i)
+    r_array[this.t+i-n] = this.am(n-i,a_array[i],r,0,0,this.t+i-n);
+  r.clamp();
+  r.drShiftTo(1,r);
+}
+
+// Barrett modular reduction
+function Barrett(m) {
+  // setup Barrett
+  this.r2 = nbi();
+  this.q3 = nbi();
+  BigInteger.ONE.dlShiftTo(2*m.t,this.r2);
+  this.mu = this.r2.divide(m);
+  this.m = m;
+}
+
+function barrettConvert(x) {
+  if(x.s < 0 || x.t > 2*this.m.t) return x.mod(this.m);
+  else if(x.compareTo(this.m) < 0) return x;
+  else { var r = nbi(); x.copyTo(r); this.reduce(r); return r; }
+}
+
+function barrettRevert(x) { return x; }
+
+// x = x mod m (HAC 14.42)
+function barrettReduce(x) {
+  x.drShiftTo(this.m.t-1,this.r2);
+  if(x.t > this.m.t+1) { x.t = this.m.t+1; x.clamp(); }
+  this.mu.multiplyUpperTo(this.r2,this.m.t+1,this.q3);
+  this.m.multiplyLowerTo(this.q3,this.m.t+1,this.r2);
+  while(x.compareTo(this.r2) < 0) x.dAddOffset(1,this.m.t+1);
+  x.subTo(this.r2,x);
+  while(x.compareTo(this.m) >= 0) x.subTo(this.m,x);
+}
+
+// r = x^2 mod m; x != r
+function barrettSqrTo(x,r) { x.squareTo(r); this.reduce(r); }
+
+// r = x*y mod m; x,y != r
+function barrettMulTo(x,y,r) { x.multiplyTo(y,r); this.reduce(r); }
+
+Barrett.prototype.convert = barrettConvert;
+Barrett.prototype.revert = barrettRevert;
+Barrett.prototype.reduce = barrettReduce;
+Barrett.prototype.mulTo = barrettMulTo;
+Barrett.prototype.sqrTo = barrettSqrTo;
+
+// (public) this^e % m (HAC 14.85)
+function bnModPow(e,m) {
+  var e_array = e.array;
+  var i = e.bitLength(), k, r = nbv(1), z;
+  if(i <= 0) return r;
+  else if(i < 18) k = 1;
+  else if(i < 48) k = 3;
+  else if(i < 144) k = 4;
+  else if(i < 768) k = 5;
+  else k = 6;
+  if(i < 8)
+    z = new Classic(m);
+  else if(m.isEven())
+    z = new Barrett(m);
+  else
+    z = new Montgomery(m);
+
+  // precomputation
+  var g = new Array(), n = 3, k1 = k-1, km = (1<<k)-1;
+  g[1] = z.convert(this);
+  if(k > 1) {
+    var g2 = nbi();
+    z.sqrTo(g[1],g2);
+    while(n <= km) {
+      g[n] = nbi();
+      z.mulTo(g2,g[n-2],g[n]);
+      n += 2;
+    }
+  }
+
+  var j = e.t-1, w, is1 = true, r2 = nbi(), t;
+  i = nbits(e_array[j])-1;
+  while(j >= 0) {
+    if(i >= k1) w = (e_array[j]>>(i-k1))&km;
+    else {
+      w = (e_array[j]&((1<<(i+1))-1))<<(k1-i);
+      if(j > 0) w |= e_array[j-1]>>(BI_DB+i-k1);
+    }
+
+    n = k;
+    while((w&1) == 0) { w >>= 1; --n; }
+    if((i -= n) < 0) { i += BI_DB; --j; }
+    if(is1) {	// ret == 1, don't bother squaring or multiplying it
+      g[w].copyTo(r);
+      is1 = false;
+    }
+    else {
+      while(n > 1) { z.sqrTo(r,r2); z.sqrTo(r2,r); n -= 2; }
+      if(n > 0) z.sqrTo(r,r2); else { t = r; r = r2; r2 = t; }
+      z.mulTo(r2,g[w],r);
+    }
+
+    while(j >= 0 && (e_array[j]&(1<<i)) == 0) {
+      z.sqrTo(r,r2); t = r; r = r2; r2 = t;
+      if(--i < 0) { i = BI_DB-1; --j; }
+    }
+  }
+  return z.revert(r);
+}
+
+// (public) gcd(this,a) (HAC 14.54)
+function bnGCD(a) {
+  var x = (this.s<0)?this.negate():this.clone();
+  var y = (a.s<0)?a.negate():a.clone();
+  if(x.compareTo(y) < 0) { var t = x; x = y; y = t; }
+  var i = x.getLowestSetBit(), g = y.getLowestSetBit();
+  if(g < 0) return x;
+  if(i < g) g = i;
+  if(g > 0) {
+    x.rShiftTo(g,x);
+    y.rShiftTo(g,y);
+  }
+  while(x.signum() > 0) {
+    if((i = x.getLowestSetBit()) > 0) x.rShiftTo(i,x);
+    if((i = y.getLowestSetBit()) > 0) y.rShiftTo(i,y);
+    if(x.compareTo(y) >= 0) {
+      x.subTo(y,x);
+      x.rShiftTo(1,x);
+    }
+    else {
+      y.subTo(x,y);
+      y.rShiftTo(1,y);
+    }
+  }
+  if(g > 0) y.lShiftTo(g,y);
+  return y;
+}
+
+// (protected) this % n, n < 2^26
+function bnpModInt(n) {
+  var this_array = this.array;
+  if(n <= 0) return 0;
+  var d = BI_DV%n, r = (this.s<0)?n-1:0;
+  if(this.t > 0)
+    if(d == 0) r = this_array[0]%n;
+    else for(var i = this.t-1; i >= 0; --i) r = (d*r+this_array[i])%n;
+  return r;
+}
+
+// (public) 1/this % m (HAC 14.61)
+function bnModInverse(m) {
+  var ac = m.isEven();
+  if((this.isEven() && ac) || m.signum() == 0) return BigInteger.ZERO;
+  var u = m.clone(), v = this.clone();
+  var a = nbv(1), b = nbv(0), c = nbv(0), d = nbv(1);
+  while(u.signum() != 0) {
+    while(u.isEven()) {
+      u.rShiftTo(1,u);
+      if(ac) {
+        if(!a.isEven() || !b.isEven()) { a.addTo(this,a); b.subTo(m,b); }
+        a.rShiftTo(1,a);
+      }
+      else if(!b.isEven()) b.subTo(m,b);
+      b.rShiftTo(1,b);
+    }
+    while(v.isEven()) {
+      v.rShiftTo(1,v);
+      if(ac) {
+        if(!c.isEven() || !d.isEven()) { c.addTo(this,c); d.subTo(m,d); }
+        c.rShiftTo(1,c);
+      }
+      else if(!d.isEven()) d.subTo(m,d);
+      d.rShiftTo(1,d);
+    }
+    if(u.compareTo(v) >= 0) {
+      u.subTo(v,u);
+      if(ac) a.subTo(c,a);
+      b.subTo(d,b);
+    }
+    else {
+      v.subTo(u,v);
+      if(ac) c.subTo(a,c);
+      d.subTo(b,d);
+    }
+  }
+  if(v.compareTo(BigInteger.ONE) != 0) return BigInteger.ZERO;
+  if(d.compareTo(m) >= 0) return d.subtract(m);
+  if(d.signum() < 0) d.addTo(m,d); else return d;
+  if(d.signum() < 0) return d.add(m); else return d;
+}
+
+var lowprimes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509];
+var lplim = (1<<26)/lowprimes[lowprimes.length-1];
+
+// (public) test primality with certainty >= 1-.5^t
+function bnIsProbablePrime(t) {
+  var i, x = this.abs();
+  var x_array = x.array;
+  if(x.t == 1 && x_array[0] <= lowprimes[lowprimes.length-1]) {
+    for(i = 0; i < lowprimes.length; ++i)
+      if(x_array[0] == lowprimes[i]) return true;
+    return false;
+  }
+  if(x.isEven()) return false;
+  i = 1;
+  while(i < lowprimes.length) {
+    var m = lowprimes[i], j = i+1;
+    while(j < lowprimes.length && m < lplim) m *= lowprimes[j++];
+    m = x.modInt(m);
+    while(i < j) if(m%lowprimes[i++] == 0) return false;
+  }
+  return x.millerRabin(t);
+}
+
+// (protected) true if probably prime (HAC 4.24, Miller-Rabin)
+function bnpMillerRabin(t) {
+  var n1 = this.subtract(BigInteger.ONE);
+  var k = n1.getLowestSetBit();
+  if(k <= 0) return false;
+  var r = n1.shiftRight(k);
+  t = (t+1)>>1;
+  if(t > lowprimes.length) t = lowprimes.length;
+  var a = nbi();
+  for(var i = 0; i < t; ++i) {
+    a.fromInt(lowprimes[i]);
+    var y = a.modPow(r,this);
+    if(y.compareTo(BigInteger.ONE) != 0 && y.compareTo(n1) != 0) {
+      var j = 1;
+      while(j++ < k && y.compareTo(n1) != 0) {
+        y = y.modPowInt(2,this);
+        if(y.compareTo(BigInteger.ONE) == 0) return false;
+      }
+      if(y.compareTo(n1) != 0) return false;
+    }
+  }
+  return true;
+};
+
+// protected
+BigInteger.prototype.chunkSize = bnpChunkSize;
+BigInteger.prototype.toRadix = bnpToRadix;
+BigInteger.prototype.fromRadix = bnpFromRadix;
+BigInteger.prototype.fromNumber = bnpFromNumber;
+BigInteger.prototype.bitwiseTo = bnpBitwiseTo;
+BigInteger.prototype.changeBit = bnpChangeBit;
+BigInteger.prototype.addTo = bnpAddTo;
+BigInteger.prototype.dMultiply = bnpDMultiply;
+BigInteger.prototype.dAddOffset = bnpDAddOffset;
+BigInteger.prototype.multiplyLowerTo = bnpMultiplyLowerTo;
+BigInteger.prototype.multiplyUpperTo = bnpMultiplyUpperTo;
+BigInteger.prototype.modInt = bnpModInt;
+BigInteger.prototype.millerRabin = bnpMillerRabin;
+
+// public
+BigInteger.prototype.clone = bnClone;
+BigInteger.prototype.intValue = bnIntValue;
+BigInteger.prototype.byteValue = bnByteValue;
+BigInteger.prototype.shortValue = bnShortValue;
+BigInteger.prototype.signum = bnSigNum;
+BigInteger.prototype.toByteArray = bnToByteArray;
+BigInteger.prototype.equals = bnEquals;
+BigInteger.prototype.min = bnMin;
+BigInteger.prototype.max = bnMax;
+BigInteger.prototype.and = bnAnd;
+BigInteger.prototype.or = bnOr;
+BigInteger.prototype.xor = bnXor;
+BigInteger.prototype.andNot = bnAndNot;
+BigInteger.prototype.not = bnNot;
+BigInteger.prototype.shiftLeft = bnShiftLeft;
+BigInteger.prototype.shiftRight = bnShiftRight;
+BigInteger.prototype.getLowestSetBit = bnGetLowestSetBit;
+BigInteger.prototype.bitCount = bnBitCount;
+BigInteger.prototype.testBit = bnTestBit;
+BigInteger.prototype.setBit = bnSetBit;
+BigInteger.prototype.clearBit = bnClearBit;
+BigInteger.prototype.flipBit = bnFlipBit;
+BigInteger.prototype.add = bnAdd;
+BigInteger.prototype.subtract = bnSubtract;
+BigInteger.prototype.multiply = bnMultiply;
+BigInteger.prototype.divide = bnDivide;
+BigInteger.prototype.remainder = bnRemainder;
+BigInteger.prototype.divideAndRemainder = bnDivideAndRemainder;
+BigInteger.prototype.modPow = bnModPow;
+BigInteger.prototype.modInverse = bnModInverse;
+BigInteger.prototype.pow = bnPow;
+BigInteger.prototype.gcd = bnGCD;
+BigInteger.prototype.isProbablePrime = bnIsProbablePrime;
+BigInteger.prototype.am = am4;
+
+// end of stuff copied from github.
+},{}],106:[function(require,module,exports){
+/**
+sprintf() for JavaScript 0.7-beta1
+http://www.diveintojavascript.com/projects/javascript-sprintf
+
+Copyright (c) Alexandru Marasteanu <alexaholic [at) gmail (dot] com>
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+    * Neither the name of sprintf() for JavaScript nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL Alexandru Marasteanu BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+Changelog:
+2010.11.07 - 0.7-beta1-node
+  - converted it to a node.js compatible module
+
+2010.09.06 - 0.7-beta1
+  - features: vsprintf, support for named placeholders
+  - enhancements: format cache, reduced global namespace pollution
+
+2010.05.22 - 0.6:
+ - reverted to 0.4 and fixed the bug regarding the sign of the number 0
+ Note:
+ Thanks to Raphael Pigulla <raph (at] n3rd [dot) org> (http://www.n3rd.org/)
+ who warned me about a bug in 0.5, I discovered that the last update was
+ a regress. I appologize for that.
+
+2010.05.09 - 0.5:
+ - bug fix: 0 is now preceeded with a + sign
+ - bug fix: the sign was not at the right position on padded results (Kamal Abdali)
+ - switched from GPL to BSD license
+
+2007.10.21 - 0.4:
+ - unit test and patch (David Baird)
+
+2007.09.17 - 0.3:
+ - bug fix: no longer throws exception on empty paramenters (Hans Pufal)
+
+2007.09.11 - 0.2:
+ - feature: added argument swapping
+
+2007.04.03 - 0.1:
+ - initial release
+**/
+
+var sprintf = (function() {
+	function get_type(variable) {
+		return Object.prototype.toString.call(variable).slice(8, -1).toLowerCase();
+	}
+	function str_repeat(input, multiplier) {
+		for (var output = []; multiplier > 0; output[--multiplier] = input) {/* do nothing */}
+		return output.join('');
+	}
+
+	var str_format = function() {
+		if (!str_format.cache.hasOwnProperty(arguments[0])) {
+			str_format.cache[arguments[0]] = str_format.parse(arguments[0]);
+		}
+		return str_format.format.call(null, str_format.cache[arguments[0]], arguments);
+	};
+
+	// convert object to simple one line string without indentation or
+	// newlines. Note that this implementation does not print array
+	// values to their actual place for sparse arrays. 
+	//
+	// For example sparse array like this
+	//    l = []
+	//    l[4] = 1
+	// Would be printed as "[1]" instead of "[, , , , 1]"
+	// 
+	// If argument 'seen' is not null and array the function will check for 
+	// circular object references from argument.
+	str_format.object_stringify = function(obj, depth, maxdepth, seen) {
+		var str = '';
+		if (obj != null) {
+			switch( typeof(obj) ) {
+			case 'function': 
+				return '[Function' + (obj.name ? ': '+obj.name : '') + ']';
+			    break;
+			case 'object':
+				if ( obj instanceof Error) { return '[' + obj.toString() + ']' };
+				if (depth >= maxdepth) return '[Object]'
+				if (seen) {
+					// add object to seen list
+					seen = seen.slice(0)
+					seen.push(obj);
+				}
+				if (obj.length != null) { //array
+					str += '[';
+					var arr = []
+					for (var i in obj) {
+						if (seen && seen.indexOf(obj[i]) >= 0) arr.push('[Circular]');
+						else arr.push(str_format.object_stringify(obj[i], depth+1, maxdepth, seen));
+					}
+					str += arr.join(', ') + ']';
+				} else if ('getMonth' in obj) { // date
+					return 'Date(' + obj + ')';
+				} else { // object
+					str += '{';
+					var arr = []
+					for (var k in obj) { 
+						if(obj.hasOwnProperty(k)) {
+							if (seen && seen.indexOf(obj[k]) >= 0) arr.push(k + ': [Circular]');
+							else arr.push(k +': ' +str_format.object_stringify(obj[k], depth+1, maxdepth, seen)); 
+						}
+					}
+					str += arr.join(', ') + '}';
+				}
+				return str;
+				break;
+			case 'string':				
+				return '"' + obj + '"';
+				break
+			}
+		}
+		return '' + obj;
+	}
+
+	str_format.format = function(parse_tree, argv) {
+		var cursor = 1, tree_length = parse_tree.length, node_type = '', arg, output = [], i, k, match, pad, pad_character, pad_length;
+		for (i = 0; i < tree_length; i++) {
+			node_type = get_type(parse_tree[i]);
+			if (node_type === 'string') {
+				output.push(parse_tree[i]);
+			}
+			else if (node_type === 'array') {
+				match = parse_tree[i]; // convenience purposes only
+				if (match[2]) { // keyword argument
+					arg = argv[cursor];
+					for (k = 0; k < match[2].length; k++) {
+						if (!arg.hasOwnProperty(match[2][k])) {
+							throw new Error(sprintf('[sprintf] property "%s" does not exist', match[2][k]));
+						}
+						arg = arg[match[2][k]];
+					}
+				}
+				else if (match[1]) { // positional argument (explicit)
+					arg = argv[match[1]];
+				}
+				else { // positional argument (implicit)
+					arg = argv[cursor++];
+				}
+
+				if (/[^sO]/.test(match[8]) && (get_type(arg) != 'number')) {
+					throw new Error(sprintf('[sprintf] expecting number but found %s "' + arg + '"', get_type(arg)));
+				}
+				switch (match[8]) {
+					case 'b': arg = arg.toString(2); break;
+					case 'c': arg = String.fromCharCode(arg); break;
+					case 'd': arg = parseInt(arg, 10); break;
+					case 'e': arg = match[7] ? arg.toExponential(match[7]) : arg.toExponential(); break;
+					case 'f': arg = match[7] ? parseFloat(arg).toFixed(match[7]) : parseFloat(arg); break;
+				    case 'O': arg = str_format.object_stringify(arg, 0, parseInt(match[7]) || 5); break;
+					case 'o': arg = arg.toString(8); break;
+					case 's': arg = ((arg = String(arg)) && match[7] ? arg.substring(0, match[7]) : arg); break;
+					case 'u': arg = Math.abs(arg); break;
+					case 'x': arg = arg.toString(16); break;
+					case 'X': arg = arg.toString(16).toUpperCase(); break;
+				}
+				arg = (/[def]/.test(match[8]) && match[3] && arg >= 0 ? '+'+ arg : arg);
+				pad_character = match[4] ? match[4] == '0' ? '0' : match[4].charAt(1) : ' ';
+				pad_length = match[6] - String(arg).length;
+				pad = match[6] ? str_repeat(pad_character, pad_length) : '';
+				output.push(match[5] ? arg + pad : pad + arg);
+			}
+		}
+		return output.join('');
+	};
+
+	str_format.cache = {};
+
+	str_format.parse = function(fmt) {
+		var _fmt = fmt, match = [], parse_tree = [], arg_names = 0;
+		while (_fmt) {
+			if ((match = /^[^\x25]+/.exec(_fmt)) !== null) {
+				parse_tree.push(match[0]);
+			}
+			else if ((match = /^\x25{2}/.exec(_fmt)) !== null) {
+				parse_tree.push('%');
+			}
+			else if ((match = /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosOuxX])/.exec(_fmt)) !== null) {
+				if (match[2]) {
+					arg_names |= 1;
+					var field_list = [], replacement_field = match[2], field_match = [];
+					if ((field_match = /^([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
+						field_list.push(field_match[1]);
+						while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
+							if ((field_match = /^\.([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
+								field_list.push(field_match[1]);
+							}
+							else if ((field_match = /^\[(\d+)\]/.exec(replacement_field)) !== null) {
+								field_list.push(field_match[1]);
+							}
+							else {
+								throw new Error('[sprintf] ' + replacement_field);
+							}
+						}
+					}
+					else {
+                        throw new Error('[sprintf] ' + replacement_field);
+					}
+					match[2] = field_list;
+				}
+				else {
+					arg_names |= 2;
+				}
+				if (arg_names === 3) {
+					throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported');
+				}
+				parse_tree.push(match);
+			}
+			else {
+				throw new Error('[sprintf] ' + _fmt);
+			}
+			_fmt = _fmt.substring(match[0].length);
+		}
+		return parse_tree;
+	};
+
+	return str_format;
+})();
+
+var vsprintf = function(fmt, argv) {
+	var argvClone = argv.slice();
+	argvClone.unshift(fmt);
+	return sprintf.apply(null, argvClone);
+};
+
+module.exports = sprintf;
+sprintf.sprintf = sprintf;
+sprintf.vsprintf = vsprintf;
+
+},{}],107:[function(require,module,exports){
+/* Copyright 2010 Membase, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+'use strict';
+
+/*jshint node:true*/
+
+
+/**
+ * Convert a 16-bit quantity (short integer) from host byte order to network byte order (Little-Endian to Big-Endian).
+ *
+ * @param {Array|Buffer} b Array of octets or a nodejs Buffer
+ * @param {number} i Zero-based index at which to write into b
+ * @param {number} v Value to convert
+ */
+exports.htons = function(b, i, v) {
+	b[i] = (0xff & (v >> 8));
+	b[i + 1] = (0xff & (v));
+};
+
+
+/**
+ * Convert a 16-bit quantity (short integer) from network byte order to host byte order (Big-Endian to Little-Endian).
+ *
+ * @param {Array|Buffer} b Array of octets or a nodejs Buffer to read value from
+ * @param {number} i Zero-based index at which to read from b
+ * @returns {number}
+ */
+exports.ntohs = function(b, i) {
+	return ((0xff & b[i]) << 8) | 
+	       ((0xff & b[i + 1]));
+};
+
+
+/**
+ * Convert a 16-bit quantity (short integer) from network byte order to host byte order (Big-Endian to Little-Endian).
+ *
+ * @param {string} s String to read value from
+ * @param {number} i Zero-based index at which to read from s
+ * @returns {number}
+ */
+exports.ntohsStr = function(s, i) {
+	return ((0xff & s.charCodeAt(i)) << 8) |
+	       ((0xff & s.charCodeAt(i + 1)));
+};
+
+
+/**
+ * Convert a 32-bit quantity (long integer) from host byte order to network byte order (Little-Endian to Big-Endian).
+ *
+ * @param {Array|Buffer} b Array of octets or a nodejs Buffer
+ * @param {number} i Zero-based index at which to write into b
+ * @param {number} v Value to convert
+ */
+exports.htonl = function(b, i, v) {
+	b[i] = (0xff & (v >> 24));
+	b[i + 1] = (0xff & (v >> 16));
+	b[i + 2] = (0xff & (v >> 8));
+	b[i + 3] = (0xff & (v));
+};
+
+
+/**
+ * Convert a 32-bit quantity (long integer) from network byte order to host byte order (Big-Endian to Little-Endian).
+ *
+ * @param {Array|Buffer} b Array of octets or a nodejs Buffer to read value from
+ * @param {number} i Zero-based index at which to read from b
+ * @returns {number}
+ */
+exports.ntohl = function(b, i) {
+	return ((0xff & b[i]) << 24) |
+	       ((0xff & b[i + 1]) << 16) |
+	       ((0xff & b[i + 2]) << 8) |
+	       ((0xff & b[i + 3]));
+};
+
+
+/**
+ * Convert a 32-bit quantity (long integer) from network byte order to host byte order (Big-Endian to Little-Endian).
+ *
+ * @param {string} s String to read value from
+ * @param {number} i Zero-based index at which to read from s
+ * @returns {number}
+ */
+exports.ntohlStr = function(s, i) {
+	return ((0xff & s.charCodeAt(i)) << 24) |
+	       ((0xff & s.charCodeAt(i + 1)) << 16) |
+	       ((0xff & s.charCodeAt(i + 2)) << 8) |
+	       ((0xff & s.charCodeAt(i + 3)));
+};
+
+},{}],108:[function(require,module,exports){
+module.exports={
+  "name": "bitcore",
+  "version": "0.8.6",
+  "description": "A pure and powerful JavaScript Bitcoin library.",
+  "author": {
+    "name": "BitPay",
+    "email": "dev@bitpay.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "coverage": "gulp coverage",
+    "build": "gulp",
+    "postinstall": "node ./lib/errors/build.js"
+  },
+  "contributors": [
+    {
+      "name": "Daniel Cousens",
+      "email": "bitcoin@dcousens.com"
+    },
+    {
+      "name": "Esteban Ordano",
+      "email": "eordano@gmail.com"
+    },
+    {
+      "name": "Gordon Hall",
+      "email": "gordon@bitpay.com"
+    },
+    {
+      "name": "Jeff Garzik",
+      "email": "jgarzik@bitpay.com"
+    },
+    {
+      "name": "Kyle Drake",
+      "email": "kyle@kyledrake.net"
+    },
+    {
+      "name": "Manuel Araoz",
+      "email": "manuelaraoz@gmail.com"
+    },
+    {
+      "name": "Matias Alejo Garcia",
+      "email": "ematiu@gmail.com"
+    },
+    {
+      "name": "Ryan X. Charles",
+      "email": "ryanxcharles@gmail.com"
+    },
+    {
+      "name": "Stefan Thomas",
+      "email": "moon@justmoon.net"
+    },
+    {
+      "name": "Stephen Pair",
+      "email": "stephen@bitpay.com"
+    },
+    {
+      "name": "Wei Lu",
+      "email": "luwei.here@gmail.com"
+    }
+  ],
+  "keywords": [
+    "bitcoin",
+    "bip32",
+    "bip37",
+    "bip70",
+    "merge",
+    "multisig"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitpay/bitcore.git"
+  },
+  "browser": {
+    "request": "browser-request"
+  },
+  "dependencies": {
+    "asn1.js": "=0.4.1",
+    "bn.js": "=0.16.1",
+    "browser-request": "^0.3.3",
+    "bs58": "=2.0.0",
+    "bufferput": "^0.1.2",
+    "buffers": "^0.1.1",
+    "elliptic": "=0.16.0",
+    "hash.js": "=0.3.2",
+    "inherits": "=2.0.1",
+    "jsrsasign": "=0.0.3",
+    "lodash": "=2.4.1",
+    "protobufjs": "=3.0.0",
+    "request": "^2.51.0",
+    "sha512": "=0.0.1",
+    "socks5-client": "^0.3.6"
+  },
+  "devDependencies": {
+    "brfs": "1.2.0",
+    "browserify": "~6.3.3",
+    "chai": "~1.10.0",
+    "closure-compiler-jar": "git://github.com/eordano/closure-compiler-jar.git",
+    "gulp": "^3.8.10",
+    "gulp-bump": "^0.1.11",
+    "gulp-closure-compiler": "^0.2.9",
+    "gulp-coveralls": "^0.1.3",
+    "gulp-git": "^0.5.5",
+    "gulp-jshint": "^1.9.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-shell": "^0.2.10",
+    "gulp-uglify": "^1.0.2",
+    "gulp-util": "=3.0.1",
+    "istanbul": "^0.3.5",
+    "jsdoc": "^3.3.0-alpha11",
+    "jsdoc-to-markdown": "=0.5.9",
+    "karma": "^0.12.28",
+    "karma-chrome-launcher": "^0.1.7",
+    "karma-detect-browsers": "^0.1.3",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-mocha": "^0.1.9",
+    "mocha": "~2.0.1",
+    "more-fs": "=0.5.0",
+    "plato": "^1.3.0",
+    "run-sequence": "^1.0.2",
+    "sinon": "^1.12.2",
+    "through2": "=0.6.3",
+    "zuul": "1.16.3"
+  },
+  "license": "MIT",
+  "gitHead": "8089b0c765e7d73a959b89177554b7eef4e53cec",
+  "readme": "Bitcore\n=======\n\n[![NPM Package](https://img.shields.io/npm/v/bitcore.svg?style=flat-square)](https://www.npmjs.org/package/bitcore)\n[![Build Status](https://img.shields.io/travis/bitpay/bitcore.svg?branch=master&style=flat-square)](https://travis-ci.org/bitpay/bitcore)\n[![Coverage Status](https://img.shields.io/coveralls/bitpay/bitcore.svg?style=flat-square)](https://coveralls.io/r/bitpay/bitcore)\n\n[![Sauce Test Status](https://saucelabs.com/browser-matrix/maraoz.svg)](https://saucelabs.com/u/maraoz)\n\nA pure and powerful JavaScript Bitcoin library.\n\n## Principles\n\nBitcoin is a powerful new peer-to-peer platform for the next generation of financial technology. The decentralized nature of the Bitcoin network allows for highly resilient bitcoin infrastructure, and the developer community needs reliable, open-source tools to implement bitcoin apps and services.\n\n## Get Started\n\n```\nnpm install bitcore\n```\n\nUsing it in Node.js:\n\n```javascript\nvar bitcore = require('bitcore');\n\nassert(bitcore.Address.isValid('126vMmY1fyznpZiFTTnty3cm1Rw8wuheev'));\nvar simpleTx = new bitcore.Transaction();\nvar simpleTx.from(unspent).to(address, amount);\nsimpleTx.sign(privateKey);\n```\n\n## Documentation\n\nThe complete docs are hosted here: [bitcore documentation](http://bitcore.io/guide/). There's also a [bitcore API reference](http://bitcore.io/api/) available generated from the JSDocs of the project, where you'll find low-level details on each bitcore utility.\n\n[Read the Developer Guide](http://bitcore.io/guide/)\n\n[Read the API Reference](http://bitcore.io/api/)\n\nTo get community assistance and ask for help with implementation questions, please use our [community forums](http://bitpaylabs.com/c/bitcore).\n\n## Security\n\nWe're using Bitcore in production, as are [many others](http://bitcore.io#projects), but please use common sense when doing anything related to finances! We take no responsibility for your implementation decisions.\n\nIf you find a security issue, please email security@bitpay.com.\n\n## Contributing\n\nPlease send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/bitpay/bitcore/blob/master/CONTRIBUTING.md) file. \n\n## Building the Browser Bundle\n\nTo build bitcore full bundle for the browser:\n\n```sh\ngulp browser\n```\n\nThis will generate files named `browser/bitcore.js` and `browser/bitcore.min.js`.\n\n## Tests\n\nRun all the tests:\n\n```sh\ngulp test\n```\n\nRun the NodeJS tests with mocha:\n\n```sh\ngulp test:node\n```\n\nRun the browser tests with karma:\n\n```sh\ngulp test:browser\n```\n\nCreate a test coverage report (you can open `coverage/lcov-report/index.html` to visualize it):\n\n```sh\ngulp coverage\n```\n\n## License\n\nCode released under [the MIT license](https://github.com/bitpay/bitcore/blob/master/LICENSE).\n\nCopyright 2013-2015 BitPay, Inc. Bitcore is a trademark maintained by BitPay, Inc.\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/bitpay/bitcore/issues"
+  },
+  "homepage": "https://github.com/bitpay/bitcore",
+  "_id": "bitcore@0.8.6",
+  "_shasum": "0762ba7685fd606af0d352177e81a09789c326c1",
+  "_from": "../../../../var/folders/xv/p942hz8d0cj3rzyz735hdk_80000gn/T/npm-49590-80951427/1420921999570-0.7964283043984324/8089b0c765e7d73a959b89177554b7eef4e53cec",
+  "_resolved": "git://github.com/bitpay/bitcore.git#8089b0c765e7d73a959b89177554b7eef4e53cec"
+}
+
+},{}],109:[function(require,module,exports){
+if (typeof Object.create === 'function') {
+  // implementation from standard node.js 'util' module
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    ctor.prototype = Object.create(superCtor.prototype, {
+      constructor: {
+        value: ctor,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+  };
+} else {
+  // old school shim for old browsers
+  module.exports = function inherits(ctor, superCtor) {
+    ctor.super_ = superCtor
+    var TempCtor = function () {}
+    TempCtor.prototype = superCtor.prototype
+    ctor.prototype = new TempCtor()
+    ctor.prototype.constructor = ctor
+  }
+}
+
+},{}],110:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -29406,9366 +38713,9 @@ exports.jws = KJUR.jws;
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],95:[function(require,module,exports){
-/*
- Copyright 2013 Daniel Wirtz <dcode@dcode.io>
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-/**
- * @license ProtoBuf.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
- * Released under the Apache License, Version 2.0
- * see: https://github.com/dcodeIO/ProtoBuf.js for details
- */
-(function(global) {
-    "use strict";
-
-    function loadProtoBuf(ByteBuffer) {
-
-        if (!ByteBuffer || !ByteBuffer.VERSION || ByteBuffer.VERSION.split(".")[0] < 3)
-            throw Error("ProtoBuf.js requires ByteBuffer.js >=3");
-
-        /**
-         * The ProtoBuf namespace.
-         * @exports ProtoBuf
-         * @namespace
-         * @expose
-         */
-        var ProtoBuf = {};
-
-        /**
-         * ProtoBuf.js version.
-         * @type {string}
-         * @const
-         * @expose
-         */
-        ProtoBuf.VERSION = "3.0.0";
-
-        /**
-         * Wire types.
-         * @type {Object.<string,number>}
-         * @const
-         * @expose
-         */
-        ProtoBuf.WIRE_TYPES = {};
-
-        /**
-         * Varint wire type.
-         * @type {number}
-         * @expose
-         */
-        ProtoBuf.WIRE_TYPES.VARINT = 0;
-
-        /**
-         * Fixed 64 bits wire type.
-         * @type {number}
-         * @const
-         * @expose
-         */
-        ProtoBuf.WIRE_TYPES.BITS64 = 1;
-
-        /**
-         * Length delimited wire type.
-         * @type {number}
-         * @const
-         * @expose
-         */
-        ProtoBuf.WIRE_TYPES.LDELIM = 2;
-
-        /**
-         * Start group wire type.
-         * @type {number}
-         * @const
-         * @expose
-         */
-        ProtoBuf.WIRE_TYPES.STARTGROUP = 3;
-
-        /**
-         * End group wire type.
-         * @type {number}
-         * @const
-         * @expose
-         */
-        ProtoBuf.WIRE_TYPES.ENDGROUP = 4;
-
-        /**
-         * Fixed 32 bits wire type.
-         * @type {number}
-         * @const
-         * @expose
-         */
-        ProtoBuf.WIRE_TYPES.BITS32 = 5;
-
-        /**
-         * Packable wire types.
-         * @type {!Array.<number>}
-         * @const
-         * @expose
-         */
-        ProtoBuf.PACKABLE_WIRE_TYPES =  [
-            ProtoBuf.WIRE_TYPES.VARINT,
-            ProtoBuf.WIRE_TYPES.BITS64,
-            ProtoBuf.WIRE_TYPES.BITS32
-        ];
-
-        /**
-         * Types.
-         * @dict
-         * @type {Object.<string,{name: string, wireType: number}>}
-         * @const
-         * @expose
-         */
-        ProtoBuf.TYPES = {
-            // According to the protobuf spec.
-            "int32": {
-                name: "int32",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "uint32": {
-                name: "uint32",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "sint32": {
-                name: "sint32",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "int64": {
-                name: "int64",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "uint64": {
-                name: "uint64",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "sint64": {
-                name: "sint64",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "bool": {
-                name: "bool",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "double": {
-                name: "double",
-                wireType: ProtoBuf.WIRE_TYPES.BITS64
-            },
-            "string": {
-                name: "string",
-                wireType: ProtoBuf.WIRE_TYPES.LDELIM
-            },
-            "bytes": {
-                name: "bytes",
-                wireType: ProtoBuf.WIRE_TYPES.LDELIM
-            },
-            "fixed32": {
-                name: "fixed32",
-                wireType: ProtoBuf.WIRE_TYPES.BITS32
-            },
-            "sfixed32": {
-                name: "sfixed32",
-                wireType: ProtoBuf.WIRE_TYPES.BITS32
-            },
-            "fixed64": {
-                name: "fixed64",
-                wireType: ProtoBuf.WIRE_TYPES.BITS64
-            },
-            "sfixed64": {
-                name: "sfixed64",
-                wireType: ProtoBuf.WIRE_TYPES.BITS64
-            },
-            "float": {
-                name: "float",
-                wireType: ProtoBuf.WIRE_TYPES.BITS32
-            },
-            "enum": {
-                name: "enum",
-                wireType: ProtoBuf.WIRE_TYPES.VARINT
-            },
-            "message": {
-                name: "message",
-                wireType: ProtoBuf.WIRE_TYPES.LDELIM
-            },
-            "group": {
-                name: "group",
-                wireType: ProtoBuf.WIRE_TYPES.STARTGROUP
-            }
-        };
-
-        /**
-         * Minimum field id.
-         * @type {number}
-         * @const
-         * @expose
-         */
-        ProtoBuf.ID_MIN = 1;
-
-        /**
-         * Maximum field id.
-         * @type {number}
-         * @const
-         * @expose
-         */
-        ProtoBuf.ID_MAX = 0x1FFFFFFF;
-
-        /**
-         * @type {!function(new: ByteBuffer, ...[*])}
-         * @expose
-         */
-        ProtoBuf.ByteBuffer = ByteBuffer;
-
-        /**
-         * @type {?function(new: Long, ...[*])}
-         * @expose
-         */
-        ProtoBuf.Long = ByteBuffer.Long || null;
-
-        /**
-         * If set to `true`, field names will be converted from underscore notation to camel case. Defaults to `false`.
-         *  Must be set prior to parsing.
-         * @type {boolean}
-         * @expose
-         */
-        ProtoBuf.convertFieldsToCamelCase = false;
-
-        /**
-         * @alias ProtoBuf.Util
-         * @expose
-         */
-        ProtoBuf.Util = (function() {
-            "use strict";
-
-            // Object.create polyfill
-            // ref: https://developer.mozilla.org/de/docs/JavaScript/Reference/Global_Objects/Object/create
-            if (!Object.create) {
-                /** @expose */
-                Object.create = function (o) {
-                    if (arguments.length > 1) {
-                        throw new Error('Object.create implementation only accepts the first parameter.');
-                    }
-                    function F() {}
-                    F.prototype = o;
-                    return new F();
-                };
-            }
-
-            /**
-             * ProtoBuf utilities.
-             * @exports ProtoBuf.Util
-             * @namespace
-             */
-            var Util = {};
-
-            /**
-             * Flag if running in node (fs is available) or not.
-             * @type {boolean}
-             * @const
-             * @expose
-             */
-            Util.IS_NODE = false;
-            try {
-                // There is no reliable way to detect node.js as an environment, so our
-                // best bet is to feature-detect what we actually need.
-                Util.IS_NODE =
-                    typeof require === 'function' &&
-                    typeof require("fs").readFileSync === 'function' &&
-                    typeof require("path").resolve === 'function';
-            } catch (e) {}
-
-            /**
-             * Constructs a XMLHttpRequest object.
-             * @return {XMLHttpRequest}
-             * @throws {Error} If XMLHttpRequest is not supported
-             * @expose
-             */
-            Util.XHR = function() {
-                // No dependencies please, ref: http://www.quirksmode.org/js/xmlhttp.html
-                var XMLHttpFactories = [
-                    function () {return new XMLHttpRequest()},
-                    function () {return new ActiveXObject("Msxml2.XMLHTTP")},
-                    function () {return new ActiveXObject("Msxml3.XMLHTTP")},
-                    function () {return new ActiveXObject("Microsoft.XMLHTTP")}
-                ];
-                /** @type {?XMLHttpRequest} */
-                var xhr = null;
-                for (var i=0;i<XMLHttpFactories.length;i++) {
-                    try { xhr = XMLHttpFactories[i](); }
-                    catch (e) { continue; }
-                    break;
-                }
-                if (!xhr) throw(new Error("XMLHttpRequest is not supported"));
-                return xhr;
-            };
-
-            /**
-             * Fetches a resource.
-             * @param {string} path Resource path
-             * @param {function(?string)=} callback Callback receiving the resource's contents. If omitted the resource will
-             *   be fetched synchronously. If the request failed, contents will be null.
-             * @return {?string|undefined} Resource contents if callback is omitted (null if the request failed), else undefined.
-             * @expose
-             */
-            Util.fetch = function(path, callback) {
-                if (callback && typeof callback != 'function') callback = null;
-                if (Util.IS_NODE) {
-                    if (callback) {
-                        require("fs").readFile(path, function(err, data) {
-                            if (err) {
-                                callback(null);
-                            }
-                            else callback(""+data);
-                        });
-                    } else {
-                        try {
-                            return require("fs").readFileSync(path);
-                        } catch (e) {
-                            return null;
-                        }
-                    }
-                } else {
-                    var xhr = Util.XHR();
-                    xhr.open('GET', path, callback ? true : false);
-                    // xhr.setRequestHeader('User-Agent', 'XMLHTTP/1.0');
-                    xhr.setRequestHeader('Accept', 'text/plain');
-                    if (typeof xhr.overrideMimeType === 'function') xhr.overrideMimeType('text/plain');
-                    if (callback) {
-                        xhr.onreadystatechange = function() {
-                            if (xhr.readyState != 4) return;
-                            if (/* remote */ xhr.status == 200 || /* local */ (xhr.status == 0 && typeof xhr.responseText === 'string')) {
-                                callback(xhr.responseText);
-                            } else {
-                                callback(null);
-                            }
-                        };
-                        if (xhr.readyState == 4) return;
-                        xhr.send(null);
-                    } else {
-                        xhr.send(null);
-                        if (/* remote */ xhr.status == 200 || /* local */ (xhr.status == 0 && typeof xhr.responseText === 'string')) {
-                            return xhr.responseText;
-                        }
-                        return null;
-                    }
-                }
-            };
-
-            /**
-             * Tests if an object is an array.
-             * @param {*} obj Object to test
-             * @returns {boolean} true if it is an array, else false
-             * @expose
-             */
-            Util.isArray = function(obj) {
-                if (!obj) return false;
-                if (obj instanceof Array) return true;
-                if (Array.isArray) return Array.isArray(obj);
-                return Object.prototype.toString.call(obj) === "[object Array]";
-            };
-
-            return Util;
-        })();
-
-        /**
-         * Language expressions.
-         * @exports ProtoBuf.Lang
-         * @type {Object.<string,string|RegExp>}
-         * @namespace
-         * @expose
-         */
-        ProtoBuf.Lang = {
-            OPEN: "{",
-            CLOSE: "}",
-            OPTOPEN: "[",
-            OPTCLOSE: "]",
-            OPTEND: ",",
-            EQUAL: "=",
-            END: ";",
-            STRINGOPEN: '"',
-            STRINGCLOSE: '"',
-            STRINGOPEN_SQ: "'",
-            STRINGCLOSE_SQ: "'",
-            COPTOPEN: '(',
-            COPTCLOSE: ')',
-            DELIM: /[\s\{\}=;\[\],'"\(\)]/g,
-            // KEYWORD: /^(?:package|option|import|message|enum|extend|service|syntax|extensions|group)$/,
-            RULE: /^(?:required|optional|repeated)$/,
-            TYPE: /^(?:double|float|int32|uint32|sint32|int64|uint64|sint64|fixed32|sfixed32|fixed64|sfixed64|bool|string|bytes)$/,
-            NAME: /^[a-zA-Z_][a-zA-Z_0-9]*$/,
-            TYPEDEF: /^[a-zA-Z][a-zA-Z_0-9]*$/,
-            TYPEREF: /^(?:\.?[a-zA-Z_][a-zA-Z_0-9]*)+$/,
-            FQTYPEREF: /^(?:\.[a-zA-Z][a-zA-Z_0-9]*)+$/,
-            NUMBER: /^-?(?:[1-9][0-9]*|0|0x[0-9a-fA-F]+|0[0-7]+|([0-9]*\.[0-9]+([Ee][+-]?[0-9]+)?))$/,
-            NUMBER_DEC: /^(?:[1-9][0-9]*|0)$/,
-            NUMBER_HEX: /^0x[0-9a-fA-F]+$/,
-            NUMBER_OCT: /^0[0-7]+$/,
-            NUMBER_FLT: /^[0-9]*\.[0-9]+([Ee][+-]?[0-9]+)?$/,
-            ID: /^(?:[1-9][0-9]*|0|0x[0-9a-fA-F]+|0[0-7]+)$/,
-            NEGID: /^\-?(?:[1-9][0-9]*|0|0x[0-9a-fA-F]+|0[0-7]+)$/,
-            WHITESPACE: /\s/,
-            STRING: /['"]([^'"\\]*(\\.[^"\\]*)*)['"]/g,
-            BOOL: /^(?:true|false)$/i
-        };
-
-        /**
-         * @alias ProtoBuf.DotProto
-         * @expose
-         */
-        ProtoBuf.DotProto = (function(ProtoBuf, Lang) {
-            "use strict";
-
-            /**
-             * Utilities to parse .proto files.
-             * @exports ProtoBuf.DotProto
-             * @namespace
-             */
-            var DotProto = {};
-
-            /**
-             * Constructs a new Tokenizer.
-             * @exports ProtoBuf.DotProto.Tokenizer
-             * @class .proto tokenizer
-             * @param {string} proto Proto to tokenize
-             * @constructor
-             */
-            var Tokenizer = function(proto) {
-
-                /**
-                 * Source to parse.
-                 * @type {string}
-                 * @expose
-                 */
-                this.source = ""+proto;
-
-                /**
-                 * Current index.
-                 * @type {number}
-                 * @expose
-                 */
-                this.index = 0;
-
-                /**
-                 * Current line.
-                 * @type {number}
-                 * @expose
-                 */
-                this.line = 1;
-
-                /**
-                 * Stacked values.
-                 * @type {Array}
-                 * @expose
-                 */
-                this.stack = [];
-
-                /**
-                 * Whether currently reading a string or not.
-                 * @type {boolean}
-                 * @expose
-                 */
-                this.readingString = false;
-
-                /**
-                 * Whatever character ends the string. Either a single or double quote character.
-                 * @type {string}
-                 * @expose
-                 */
-                this.stringEndsWith = Lang.STRINGCLOSE;
-            };
-
-            /**
-             * Reads a string beginning at the current index.
-             * @return {string} The string
-             * @throws {Error} If it's not a valid string
-             * @private
-             */
-            Tokenizer.prototype._readString = function() {
-                Lang.STRING.lastIndex = this.index-1; // Include the open quote
-                var match;
-                if ((match = Lang.STRING.exec(this.source)) !== null) {
-                    var s = match[1];
-                    this.index = Lang.STRING.lastIndex;
-                    this.stack.push(this.stringEndsWith);
-                    return s;
-                }
-                throw(new Error("Illegal string value at line "+this.line+", index "+this.index));
-            };
-
-            /**
-             * Gets the next token and advances by one.
-             * @return {?string} Token or `null` on EOF
-             * @throws {Error} If it's not a valid proto file
-             * @expose
-             */
-            Tokenizer.prototype.next = function() {
-                if (this.stack.length > 0) {
-                    return this.stack.shift();
-                }
-                if (this.index >= this.source.length) {
-                    return null; // No more tokens
-                }
-                if (this.readingString) {
-                    this.readingString = false;
-                    return this._readString();
-                }
-                var repeat, last;
-                do {
-                    repeat = false;
-                    // Strip white spaces
-                    while (Lang.WHITESPACE.test(last = this.source.charAt(this.index))) {
-                        this.index++;
-                        if (last === "\n") this.line++;
-                        if (this.index === this.source.length) return null;
-                    }
-                    // Strip comments
-                    if (this.source.charAt(this.index) === '/') {
-                        if (this.source.charAt(++this.index) === '/') { // Single line
-                            while (this.source.charAt(this.index) !== "\n") {
-                                this.index++;
-                                if (this.index == this.source.length) return null;
-                            }
-                            this.index++;
-                            this.line++;
-                            repeat = true;
-                        } else if (this.source.charAt(this.index) === '*') { /* Block */
-                            last = '';
-                            while (last+(last=this.source.charAt(this.index)) !== '*/') {
-                                this.index++;
-                                if (last === "\n") this.line++;
-                                if (this.index === this.source.length) return null;
-                            }
-                            this.index++;
-                            repeat = true;
-                        } else {
-                            throw(new Error("Invalid comment at line "+this.line+": /"+this.source.charAt(this.index)+" ('/' or '*' expected)"));
-                        }
-                    }
-                } while (repeat);
-                if (this.index === this.source.length) return null;
-
-                // Read the next token
-                var end = this.index;
-                Lang.DELIM.lastIndex = 0;
-                var delim = Lang.DELIM.test(this.source.charAt(end));
-                if (!delim) {
-                    end++;
-                    while(end < this.source.length && !Lang.DELIM.test(this.source.charAt(end))) {
-                        end++;
-                    }
-                } else {
-                    end++;
-                }
-                var token = this.source.substring(this.index, this.index = end);
-                if (token === Lang.STRINGOPEN) {
-                    this.readingString = true;
-                    this.stringEndsWith = Lang.STRINGCLOSE;
-                } else if (token === Lang.STRINGOPEN_SQ) {
-                    this.readingString = true;
-                    this.stringEndsWith = Lang.STRINGCLOSE_SQ;
-                }
-                return token;
-            };
-
-            /**
-             * Peeks for the next token.
-             * @return {?string} Token or `null` on EOF
-             * @throws {Error} If it's not a valid proto file
-             * @expose
-             */
-            Tokenizer.prototype.peek = function() {
-                if (this.stack.length === 0) {
-                    var token = this.next();
-                    if (token === null) return null;
-                    this.stack.push(token);
-                }
-                return this.stack[0];
-            };
-
-            /**
-             * Returns a string representation of this object.
-             * @return {string} String representation as of "Tokenizer(index/length)"
-             * @expose
-             */
-            Tokenizer.prototype.toString = function() {
-                return "Tokenizer("+this.index+"/"+this.source.length+" at line "+this.line+")";
-            };
-
-            /**
-             * @alias ProtoBuf.DotProto.Tokenizer
-             * @expose
-             */
-            DotProto.Tokenizer = Tokenizer;
-
-            /**
-             * Constructs a new Parser.
-             * @exports ProtoBuf.DotProto.Parser
-             * @class .proto parser
-             * @param {string} proto Protocol source
-             * @constructor
-             */
-            var Parser = function(proto) {
-
-                /**
-                 * Tokenizer.
-                 * @type {ProtoBuf.DotProto.Tokenizer}
-                 * @expose
-                 */
-                this.tn = new Tokenizer(proto);
-            };
-
-            /**
-             * Runs the parser.
-             * @return {{package: string|null, messages: Array.<object>, enums: Array.<object>, imports: Array.<string>, options: object<string,*>}}
-             * @throws {Error} If the source cannot be parsed
-             * @expose
-             */
-            Parser.prototype.parse = function() {
-                var topLevel = {
-                    "name": "[ROOT]", // temporary
-                    "package": null,
-                    "messages": [],
-                    "enums": [],
-                    "imports": [],
-                    "options": {},
-                    "services": []
-                };
-                var token, header = true;
-                while(token = this.tn.next()) {
-                    switch (token) {
-                        case 'package': {
-                            if (!header)
-                                throw(new Error("Illegal package definition at line "+this.tn.line+": Must be declared before the first message or enum"));
-                            if (topLevel["package"] !== null)
-                                throw(new Error("Illegal package definition at line "+this.tn.line+": Package already declared"));
-                            topLevel["package"] = this._parsePackage(token);
-                            break;
-                        }
-
-                        case 'import': {
-                            if (!header)
-                                throw(new Error("Illegal import definition at line "+this.tn.line+": Must be declared before the first message or enum"));
-                            topLevel.imports.push(this._parseImport(token));
-                            break;
-                        }
-
-                        case 'message': {
-                            this._parseMessage(topLevel, null, token);
-                            header = false;
-                            break;
-                        }
-
-                        case 'enum': {
-                            this._parseEnum(topLevel, token);
-                            header = false;
-                            break;
-                        }
-
-                        case 'option': {
-                            if (!header)
-                                throw(new Error("Illegal option definition at line "+this.tn.line+": Must be declared before the first message or enum"));
-                            this._parseOption(topLevel, token);
-                            break;
-                        }
-
-                        case 'service':
-                            this._parseService(topLevel, token);
-                            break;
-
-                        case 'extend':
-                            this._parseExtend(topLevel, token);
-                            break;
-
-                        case 'syntax':
-                            this._parseIgnoredStatement(topLevel, token);
-                            break;
-
-                        default:
-                            throw(new Error("Illegal top level declaration at line "+this.tn.line+": "+token));
-                    }
-                }
-                delete topLevel["name"];
-                return topLevel;
-            };
-
-            /**
-             * Parses a number value.
-             * @param {string} val Number value to parse
-             * @return {number} Number
-             * @throws {Error} If the number value is invalid
-             * @private
-             */
-            Parser.prototype._parseNumber = function(val) {
-                var sign = 1;
-                if (val.charAt(0) == '-') {
-                    sign = -1; val = val.substring(1);
-                }
-                if (Lang.NUMBER_DEC.test(val)) {
-                    return sign*parseInt(val, 10);
-                } else if (Lang.NUMBER_HEX.test(val)) {
-                    return sign*parseInt(val.substring(2), 16);
-                } else if (Lang.NUMBER_OCT.test(val)) {
-                    return sign*parseInt(val.substring(1), 8);
-                } else if (Lang.NUMBER_FLT.test(val)) {
-                    return sign*parseFloat(val);
-                }
-                throw(new Error("Illegal number value at line "+this.tn.line+": "+(sign < 0 ? '-' : '')+val));
-            };
-
-            /**
-             * Parses an ID value.
-             * @param {string} val ID value to parse
-             * @param {boolean=} neg Whether the ID may be negative, defaults to `false`
-             * @returns {number} ID
-             * @throws {Error} If the ID value is invalid
-             * @private
-             */
-            Parser.prototype._parseId = function(val, neg) {
-                var id = -1;
-                var sign = 1;
-                if (val.charAt(0) == '-') {
-                    sign = -1; val = val.substring(1);
-                }
-                if (Lang.NUMBER_DEC.test(val)) {
-                    id = parseInt(val);
-                } else if (Lang.NUMBER_HEX.test(val)) {
-                    id = parseInt(val.substring(2), 16);
-                } else if (Lang.NUMBER_OCT.test(val)) {
-                    id = parseInt(val.substring(1), 8);
-                } else {
-                    throw(new Error("Illegal ID value at line "+this.tn.line+": "+(sign < 0 ? '-' : '')+val));
-                }
-                id = (sign*id)|0; // Force to 32bit
-                if (!neg && id < 0) {
-                    throw(new Error("Illegal ID range at line "+this.tn.line+": "+(sign < 0 ? '-' : '')+val));
-                }
-                return id;
-            };
-
-            /**
-             * Parses the package definition.
-             * @param {string} token Initial token
-             * @return {string} Package name
-             * @throws {Error} If the package definition cannot be parsed
-             * @private
-             */
-            Parser.prototype._parsePackage = function(token) {
-                token = this.tn.next();
-                if (!Lang.TYPEREF.test(token)) {
-                    throw(new Error("Illegal package name at line "+this.tn.line+": "+token));
-                }
-                var pkg = token;
-                token = this.tn.next();
-                if (token != Lang.END) {
-                    throw(new Error("Illegal end of package definition at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
-                }
-                return pkg;
-            };
-
-            /**
-             * Parses an import definition.
-             * @param {string} token Initial token
-             * @return {string} Import file name
-             * @throws {Error} If the import definition cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseImport = function(token) {
-                token = this.tn.next();
-                if (token === "public") {
-                    token = this.tn.next();
-                }
-                if (token !== Lang.STRINGOPEN && token !== Lang.STRINGOPEN_SQ) {
-                    throw(new Error("Illegal begin of import value at line "+this.tn.line+": "+token+" ('"+Lang.STRINGOPEN+"' or '"+Lang.STRINGOPEN_SQ+"' expected)"));
-                }
-                var imported = this.tn.next();
-                token = this.tn.next();
-                if (token !== this.tn.stringEndsWith) {
-                    throw(new Error("Illegal end of import value at line "+this.tn.line+": "+token+" ('"+this.tn.stringEndsWith+"' expected)"));
-                }
-                token = this.tn.next();
-                if (token !== Lang.END) {
-                    throw(new Error("Illegal end of import definition at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
-                }
-                return imported;
-            };
-
-            /**
-             * Parses a namespace option.
-             * @param {Object} parent Parent definition
-             * @param {string} token Initial token
-             * @throws {Error} If the option cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseOption = function(parent, token) {
-                token = this.tn.next();
-                var custom = false;
-                if (token == Lang.COPTOPEN) {
-                    custom = true;
-                    token = this.tn.next();
-                }
-                if (!Lang.TYPEREF.test(token)) {
-                    // we can allow options of the form google.protobuf.* since they will just get ignored anyways
-                    if (!/google\.protobuf\./.test(token)) {
-                        throw(new Error("Illegal option name in message "+parent.name+" at line "+this.tn.line+": "+token));
-                    }
-                }
-                var name = token;
-                token = this.tn.next();
-                if (custom) { // (my_method_option).foo, (my_method_option), some_method_option, (foo.my_option).bar
-                    if (token !== Lang.COPTCLOSE) {
-                        throw(new Error("Illegal custom option name delimiter in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTCLOSE+"' expected)"));
-                    }
-                    name = '('+name+')';
-                    token = this.tn.next();
-                    if (Lang.FQTYPEREF.test(token)) {
-                        name += token;
-                        token = this.tn.next();
-                    }
-                }
-                if (token !== Lang.EQUAL) {
-                    throw(new Error("Illegal option operator in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
-                }
-                var value;
-                token = this.tn.next();
-                if (token === Lang.STRINGOPEN || token === Lang.STRINGOPEN_SQ) {
-                    value = this.tn.next();
-                    token = this.tn.next();
-                    if (token !== this.tn.stringEndsWith) {
-                        throw(new Error("Illegal end of option value in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+this.tn.stringEndsWith+"' expected)"));
-                    }
-                } else {
-                    if (Lang.NUMBER.test(token)) {
-                        value = this._parseNumber(token, true);
-                    } else if (Lang.TYPEREF.test(token)) {
-                        value = token;
-                    } else {
-                        throw(new Error("Illegal option value in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token));
-                    }
-                }
-                token = this.tn.next();
-                if (token !== Lang.END) {
-                    throw(new Error("Illegal end of option in message "+parent.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
-                }
-                parent["options"][name] = value;
-            };
-
-            /**
-             * Parses an ignored block of the form ['keyword', 'typeref', '{' ... '}'].
-             * @param {Object} parent Parent definition
-             * @param {string} keyword Initial token
-             * @throws {Error} If the directive cannot be parsed
-             * @private
-             */
-            /* Parser.prototype._parseIgnoredBlock = function(parent, keyword) {
-                var token = this.tn.next();
-                if (!Lang.TYPEREF.test(token)) {
-                    throw(new Error("Illegal "+keyword+" type in "+parent.name+": "+token));
-                }
-                var name = token;
-                token = this.tn.next();
-                if (token !== Lang.OPEN) {
-                    throw(new Error("Illegal OPEN in "+parent.name+" after "+keyword+" "+name+" at line "+this.tn.line+": "+token));
-                }
-                var depth = 1;
-                do {
-                    token = this.tn.next();
-                    if (token === null) {
-                        throw(new Error("Unexpected EOF in "+parent.name+", "+keyword+" (ignored) at line "+this.tn.line+": "+name));
-                    }
-                    if (token === Lang.OPEN) {
-                        depth++;
-                    } else if (token === Lang.CLOSE) {
-                        token = this.tn.peek();
-                        if (token === Lang.END) this.tn.next();
-                        depth--;
-                        if (depth === 0) {
-                            break;
-                        }
-                    }
-                } while(true);
-            }; */
-
-            /**
-             * Parses an ignored statement of the form ['keyword', ..., ';'].
-             * @param {Object} parent Parent definition
-             * @param {string} keyword Initial token
-             * @throws {Error} If the directive cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseIgnoredStatement = function(parent, keyword) {
-                var token;
-                do {
-                    token = this.tn.next();
-                    if (token === null) {
-                        throw(new Error("Unexpected EOF in "+parent.name+", "+keyword+" (ignored) at line "+this.tn.line));
-                    }
-                    if (token === Lang.END) break;
-                } while (true);
-            };
-
-            /**
-             * Parses a service definition.
-             * @param {Object} parent Parent definition
-             * @param {string} keyword Initial token
-             * @throws {Error} If the service cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseService = function(parent, keyword) {
-                var token = this.tn.next();
-                if (!Lang.NAME.test(token)) {
-                    throw(new Error("Illegal service name at line "+this.tn.line+": "+token));
-                }
-                var name = token;
-                var svc = {
-                    "name": name,
-                    "rpc": {},
-                    "options": {}
-                };
-                token = this.tn.next();
-                if (token !== Lang.OPEN) {
-                    throw(new Error("Illegal OPEN after service "+name+" at line "+this.tn.line+": "+token+" ('"+Lang.OPEN+"' expected)"));
-                }
-                do {
-                    token = this.tn.next();
-                    if (token === "option") {
-                        this._parseOption(svc, token);
-                    } else if (token === 'rpc') {
-                        this._parseServiceRPC(svc, token);
-                    } else if (token !== Lang.CLOSE) {
-                        throw(new Error("Illegal type for service "+name+" at line "+this.tn.line+": "+token));
-                    }
-                } while (token !== Lang.CLOSE);
-                parent["services"].push(svc);
-            };
-
-            /**
-             * Parses a RPC service definition of the form ['rpc', name, (request), 'returns', (response)].
-             * @param {Object} svc Parent definition
-             * @param {string} token Initial token
-             * @private
-             */
-            Parser.prototype._parseServiceRPC = function(svc, token) {
-                var type = token;
-                token = this.tn.next();
-                if (!Lang.NAME.test(token)) {
-                    throw(new Error("Illegal RPC method name in service "+svc["name"]+" at line "+this.tn.line+": "+token));
-                }
-                var name = token;
-                var method = {
-                    "request": null,
-                    "response": null,
-                    "options": {}
-                };
-                token = this.tn.next();
-                if (token !== Lang.COPTOPEN) {
-                    throw(new Error("Illegal start of request type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTOPEN+"' expected)"));
-                }
-                token = this.tn.next();
-                if (!Lang.TYPEREF.test(token)) {
-                    throw(new Error("Illegal request type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token));
-                }
-                method["request"] = token;
-                token = this.tn.next();
-                if (token != Lang.COPTCLOSE) {
-                    throw(new Error("Illegal end of request type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTCLOSE+"' expected)"))
-                }
-                token = this.tn.next();
-                if (token.toLowerCase() !== "returns") {
-                    throw(new Error("Illegal request/response delimiter in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('returns' expected)"));
-                }
-                token = this.tn.next();
-                if (token != Lang.COPTOPEN) {
-                    throw(new Error("Illegal start of response type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTOPEN+"' expected)"));
-                }
-                token = this.tn.next();
-                method["response"] = token;
-                token = this.tn.next();
-                if (token !== Lang.COPTCLOSE) {
-                    throw(new Error("Illegal end of response type in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.COPTCLOSE+"' expected)"))
-                }
-                token = this.tn.next();
-                if (token === Lang.OPEN) {
-                    do {
-                        token = this.tn.next();
-                        if (token === 'option') {
-                            this._parseOption(method, token); // <- will fail for the custom-options example
-                        } else if (token !== Lang.CLOSE) {
-                            throw(new Error("Illegal start of option in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('option' expected)"));
-                        }
-                    } while (token !== Lang.CLOSE);
-                    if (this.tn.peek() === Lang.END) this.tn.next();
-                } else if (token !== Lang.END) {
-                    throw(new Error("Illegal method delimiter in RPC service "+svc["name"]+"#"+name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' or '"+Lang.OPEN+"' expected)"));
-                }
-                if (typeof svc[type] === 'undefined') svc[type] = {};
-                svc[type][name] = method;
-            };
-
-            /**
-             * Parses a message definition.
-             * @param {Object} parent Parent definition
-             * @param {Object} fld Field definition if this is a group, otherwise `null`
-             * @param {string} token First token
-             * @return {Object}
-             * @throws {Error} If the message cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseMessage = function(parent, fld, token) {
-                /** @dict */
-                var msg = {}; // Note: At some point we might want to exclude the parser, so we need a dict.
-                var isGroup = token === "group";
-                token = this.tn.next();
-                if (!Lang.NAME.test(token)) {
-                    throw(new Error("Illegal "+(isGroup ? "group" : "message")+" name"+(parent ? " in message "+parent["name"] : "")+" at line "+this.tn.line+": "+token));
-                }
-                msg["name"] = token;
-                if (isGroup) {
-                    token = this.tn.next();
-                    if (token !== Lang.EQUAL)
-                        throw(new Error("Illegal id assignment after group "+msg.name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
-                    token = this.tn.next();
-                    try {
-                        fld["id"] = this._parseId(token);
-                    } catch (e) {
-                        throw(new Error("Illegal field id value for group "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
-                    }
-                    msg["isGroup"] = true;
-                }
-                msg["fields"] = []; // Note: Using arrays to support also browser that cannot preserve order of object keys.
-                msg["enums"] = [];
-                msg["messages"] = [];
-                msg["options"] = {};
-                token = this.tn.next();
-                if (token === Lang.OPTOPEN && fld) {
-                    this._parseFieldOptions(msg, fld, token);
-                    token = this.tn.next();
-                }
-                if (token !== Lang.OPEN)
-                    throw(new Error("Illegal OPEN after "+(isGroup ? "group" : "message")+" "+msg.name+" at line "+this.tn.line+": "+token+" ('"+Lang.OPEN+"' expected)"));
-                // msg["extensions"] = undefined
-                do {
-                    token = this.tn.next();
-                    if (token === Lang.CLOSE) {
-                        token = this.tn.peek();
-                        if (token === Lang.END) this.tn.next();
-                        break;
-                    } else if (Lang.RULE.test(token)) {
-                        this._parseMessageField(msg, token);
-                    } else if (token === "enum") {
-                        this._parseEnum(msg, token);
-                    } else if (token === "message") {
-                        this._parseMessage(msg, null, token);
-                    } else if (token === "option") {
-                        this._parseOption(msg, token);
-                    } else if (token === "extensions") {
-                        msg["extensions"] = this._parseExtensions(msg, token);
-                    } else if (token === "extend") {
-                        this._parseExtend(msg, token);
-                    } else {
-                        throw(new Error("Illegal token in message "+msg.name+" at line "+this.tn.line+": "+token+" (type or '"+Lang.CLOSE+"' expected)"));
-                    }
-                } while (true);
-                parent["messages"].push(msg);
-                return msg;
-            };
-
-            /**
-             * Parses a message field.
-             * @param {Object} msg Message definition
-             * @param {string} token Initial token
-             * @throws {Error} If the message field cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseMessageField = function(msg, token) {
-                /** @dict */
-                var fld = {}, grp = null;
-                fld["rule"] = token;
-                /** @dict */
-                fld["options"] = {};
-                token = this.tn.next();
-                if (token === "group") {
-                    // "A [legacy] group simply combines a nested message type and a field into a single declaration. In your
-                    // code, you can treat this message just as if it had a Result type field called result (the latter name is
-                    // converted to lower-case so that it does not conflict with the former)."
-                    grp = this._parseMessage(msg, fld, token);
-                    if (!/^[A-Z]/.test(grp["name"])) {
-                        throw(new Error('Group names must start with a capital letter'));
-                    }
-                    fld["type"] = grp["name"];
-                    fld["name"] = grp["name"].toLowerCase();
-
-                    token = this.tn.peek();
-                    if (token === Lang.END)
-                        this.tn.next();
-                } else {
-                    if (!Lang.TYPE.test(token) && !Lang.TYPEREF.test(token)) {
-                        throw(new Error("Illegal field type in message "+msg.name+" at line "+this.tn.line+": "+token));
-                    }
-                    fld["type"] = token;
-                    token = this.tn.next();
-                    if (!Lang.NAME.test(token)) {
-                        throw(new Error("Illegal field name in message "+msg.name+" at line "+this.tn.line+": "+token));
-                    }
-                    fld["name"] = token;
-                    token = this.tn.next();
-                    if (token !== Lang.EQUAL) {
-                        throw(new Error("Illegal field id assignment in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
-                    }
-                    token = this.tn.next();
-                    try {
-                        fld["id"] = this._parseId(token);
-                    } catch (e) {
-                        throw(new Error("Illegal field id value in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
-                    }
-                    token = this.tn.next();
-                    if (token === Lang.OPTOPEN) {
-                        this._parseFieldOptions(msg, fld, token);
-                        token = this.tn.next();
-                    }
-                    if (token !== Lang.END) {
-                        throw(new Error("Illegal field delimiter in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
-                    }
-                }
-                msg["fields"].push(fld);
-            };
-
-            /**
-             * Parses a set of field option definitions.
-             * @param {Object} msg Message definition
-             * @param {Object} fld Field definition
-             * @param {string} token Initial token
-             * @throws {Error} If the message field options cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseFieldOptions = function(msg, fld, token) {
-                var first = true;
-                do {
-                    token = this.tn.next();
-                    if (token === Lang.OPTCLOSE) {
-                        break;
-                    } else if (token === Lang.OPTEND) {
-                        if (first) {
-                            throw(new Error("Illegal start of message field options in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
-                        }
-                        token = this.tn.next();
-                    }
-                    this._parseFieldOption(msg, fld, token);
-                    first = false;
-                } while (true);
-            };
-
-            /**
-             * Parses a single field option.
-             * @param {Object} msg Message definition
-             * @param {Object} fld Field definition
-             * @param {string} token Initial token
-             * @throws {Error} If the mesage field option cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseFieldOption = function(msg, fld, token) {
-                var custom = false;
-                if (token === Lang.COPTOPEN) {
-                    token = this.tn.next();
-                    custom = true;
-                }
-                if (!Lang.TYPEREF.test(token)) {
-                    throw(new Error("Illegal field option in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token));
-                }
-                var name = token;
-                token = this.tn.next();
-                if (custom) {
-                    if (token !== Lang.COPTCLOSE) {
-                        throw(new Error("Illegal custom field option name delimiter in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" (')' expected)"));
-                    }
-                    name = '('+name+')';
-                    token = this.tn.next();
-                    if (Lang.FQTYPEREF.test(token)) {
-                        name += token;
-                        token = this.tn.next();
-                    }
-                }
-                if (token !== Lang.EQUAL) {
-                    throw(new Error("Illegal field option operation in message "+msg.name+"#"+fld.name+" at line "+this.tn.line+": "+token+" ('=' expected)"));
-                }
-                var value;
-                token = this.tn.next();
-                if (token === Lang.STRINGOPEN || token === Lang.STRINGOPEN_SQ) {
-                    value = this.tn.next();
-                    token = this.tn.next();
-                    if (token != this.tn.stringEndsWith) {
-                        throw(new Error("Illegal end of field value in message "+msg.name+"#"+fld.name+", option "+name+" at line "+this.tn.line+": "+token+" ('"+this.tn.stringEndsWith+"' expected)"));
-                    }
-                } else if (Lang.NUMBER.test(token, true)) {
-                    value = this._parseNumber(token, true);
-                } else if (Lang.BOOL.test(token)) {
-                    value = token.toLowerCase() === 'true';
-                } else if (Lang.TYPEREF.test(token)) {
-                    value = token; // TODO: Resolve?
-                } else {
-                    throw(new Error("Illegal field option value in message "+msg.name+"#"+fld.name+", option "+name+" at line "+this.tn.line+": "+token));
-                }
-                fld["options"][name] = value;
-            };
-
-            /**
-             * Parses an enum.
-             * @param {Object} msg Message definition
-             * @param {string} token Initial token
-             * @throws {Error} If the enum cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseEnum = function(msg, token) {
-                /** @dict */
-                var enm = {};
-                token = this.tn.next();
-                if (!Lang.NAME.test(token)) {
-                    throw(new Error("Illegal enum name in message "+msg.name+" at line "+this.tn.line+": "+token));
-                }
-                enm["name"] = token;
-                token = this.tn.next();
-                if (token !== Lang.OPEN) {
-                    throw(new Error("Illegal OPEN after enum "+enm.name+" at line "+this.tn.line+": "+token));
-                }
-                enm["values"] = [];
-                enm["options"] = {};
-                do {
-                    token = this.tn.next();
-                    if (token === Lang.CLOSE) {
-                        token = this.tn.peek();
-                        if (token === Lang.END) this.tn.next();
-                        break;
-                    }
-                    if (token == 'option') {
-                        this._parseOption(enm, token);
-                    } else {
-                        if (!Lang.NAME.test(token)) {
-                            throw(new Error("Illegal enum value name in enum "+enm.name+" at line "+this.tn.line+": "+token));
-                        }
-                        this._parseEnumValue(enm, token);
-                    }
-                } while (true);
-                msg["enums"].push(enm);
-            };
-
-            /**
-             * Parses an enum value.
-             * @param {Object} enm Enum definition
-             * @param {string} token Initial token
-             * @throws {Error} If the enum value cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseEnumValue = function(enm, token) {
-                /** @dict */
-                var val = {};
-                val["name"] = token;
-                token = this.tn.next();
-                if (token !== Lang.EQUAL) {
-                    throw(new Error("Illegal enum value operator in enum "+enm.name+" at line "+this.tn.line+": "+token+" ('"+Lang.EQUAL+"' expected)"));
-                }
-                token = this.tn.next();
-                try {
-                    val["id"] = this._parseId(token, true);
-                } catch (e) {
-                    throw(new Error("Illegal enum value id in enum "+enm.name+" at line "+this.tn.line+": "+token));
-                }
-                enm["values"].push(val);
-                token = this.tn.next();
-                if (token === Lang.OPTOPEN) {
-                    var opt = { 'options' : {} }; // TODO: Actually expose them somehow.
-                    this._parseFieldOptions(enm, opt, token);
-                    token = this.tn.next();
-                }
-                if (token !== Lang.END) {
-                    throw(new Error("Illegal enum value delimiter in enum "+enm.name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
-                }
-            };
-
-            /**
-             * Parses an extensions statement.
-             * @param {Object} msg Message object
-             * @param {string} token Initial token
-             * @throws {Error} If the extensions statement cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseExtensions = function(msg, token) {
-                /** @type {Array.<number>} */
-                var range = [];
-                token = this.tn.next();
-                if (token === "min") { // FIXME: Does the official implementation support this?
-                    range.push(ProtoBuf.ID_MIN);
-                } else if (token === "max") {
-                    range.push(ProtoBuf.ID_MAX);
-                } else {
-                    range.push(this._parseNumber(token));
-                }
-                token = this.tn.next();
-                if (token !== 'to') {
-                    throw("Illegal extensions delimiter in message "+msg.name+" at line "+this.tn.line+" ('to' expected)");
-                }
-                token = this.tn.next();
-                if (token === "min") {
-                    range.push(ProtoBuf.ID_MIN);
-                } else if (token === "max") {
-                    range.push(ProtoBuf.ID_MAX);
-                } else {
-                    range.push(this._parseNumber(token));
-                }
-                token = this.tn.next();
-                if (token !== Lang.END) {
-                    throw(new Error("Illegal extension delimiter in message "+msg.name+" at line "+this.tn.line+": "+token+" ('"+Lang.END+"' expected)"));
-                }
-                return range;
-            };
-
-            /**
-             * Parses an extend block.
-             * @param {Object} parent Parent object
-             * @param {string} token Initial token
-             * @throws {Error} If the extend block cannot be parsed
-             * @private
-             */
-            Parser.prototype._parseExtend = function(parent, token) {
-                token = this.tn.next();
-                if (!Lang.TYPEREF.test(token)) {
-                    throw(new Error("Illegal extended message name at line "+this.tn.line+": "+token));
-                }
-                /** @dict */
-                var ext = {};
-                ext["ref"] = token;
-                ext["fields"] = [];
-                token = this.tn.next();
-                if (token !== Lang.OPEN) {
-                    throw(new Error("Illegal OPEN in extend "+ext.name+" at line "+this.tn.line+": "+token+" ('"+Lang.OPEN+"' expected)"));
-                }
-                do {
-                    token = this.tn.next();
-                    if (token === Lang.CLOSE) {
-                        token = this.tn.peek();
-                        if (token == Lang.END) this.tn.next();
-                        break;
-                    } else if (Lang.RULE.test(token)) {
-                        this._parseMessageField(ext, token);
-                    } else {
-                        throw(new Error("Illegal token in extend "+ext.name+" at line "+this.tn.line+": "+token+" (rule or '"+Lang.CLOSE+"' expected)"));
-                    }
-                } while (true);
-                parent["messages"].push(ext);
-                return ext;
-            };
-
-            /**
-             * Returns a string representation of this object.
-             * @returns {string} String representation as of "Parser"
-             */
-            Parser.prototype.toString = function() {
-                return "Parser";
-            };
-
-            /**
-             * @alias ProtoBuf.DotProto.Parser
-             * @expose
-             */
-            DotProto.Parser = Parser;
-
-            return DotProto;
-
-        })(ProtoBuf, ProtoBuf.Lang);
-
-        /**
-         * @alias ProtoBuf.Reflect
-         * @expose
-         */
-        ProtoBuf.Reflect = (function(ProtoBuf) {
-            "use strict";
-
-            /**
-             * Reflection types.
-             * @exports ProtoBuf.Reflect
-             * @namespace
-             */
-            var Reflect = {};
-
-            /**
-             * Constructs a Reflect base class.
-             * @exports ProtoBuf.Reflect.T
-             * @constructor
-             * @abstract
-             * @param {ProtoBuf.Reflect.T} parent Parent object
-             * @param {string} name Object name
-             */
-            var T = function(parent, name) {
-
-                /**
-                 * Parent object.
-                 * @type {ProtoBuf.Reflect.T|null}
-                 * @expose
-                 */
-                this.parent = parent;
-
-                /**
-                 * Object name in namespace.
-                 * @type {string}
-                 * @expose
-                 */
-                this.name = name;
-
-                /**
-                 * Fully qualified class name
-                 * @type {string}
-                 * @expose
-                 */
-                this.className;
-            };
-
-            /**
-             * Returns the fully qualified name of this object.
-             * @returns {string} Fully qualified name as of ".PATH.TO.THIS"
-             * @expose
-             */
-            T.prototype.fqn = function() {
-                var name = this.name,
-                    ptr = this;
-                do {
-                    ptr = ptr.parent;
-                    if (ptr == null) break;
-                    name = ptr.name+"."+name;
-                } while (true);
-                return name;
-            };
-
-            /**
-             * Returns a string representation of this Reflect object (its fully qualified name).
-             * @param {boolean=} includeClass Set to true to include the class name. Defaults to false.
-             * @return String representation
-             * @expose
-             */
-            T.prototype.toString = function(includeClass) {
-                var pfx = includeClass
-                    ? this.className + " "
-                    : "";
-                return pfx + this.fqn();
-            };
-
-            /**
-             * Builds this type.
-             * @throws {Error} If this type cannot be built directly
-             * @expose
-             */
-            T.prototype.build = function() {
-                throw(new Error(this.toString(true)+" cannot be built directly"));
-            };
-
-            /**
-             * @alias ProtoBuf.Reflect.T
-             * @expose
-             */
-            Reflect.T = T;
-
-            /**
-             * Constructs a new Namespace.
-             * @exports ProtoBuf.Reflect.Namespace
-             * @param {ProtoBuf.Reflect.Namespace|null} parent Namespace parent
-             * @param {string} name Namespace name
-             * @param {Object.<string,*>} options Namespace options
-             * @constructor
-             * @extends ProtoBuf.Reflect.T
-             */
-            var Namespace = function(parent, name, options) {
-                T.call(this, parent, name);
-
-                /**
-                 * @override
-                 */
-                this.className = "Namespace";
-
-                /**
-                 * Children inside the namespace.
-                 * @type {Array.<ProtoBuf.Reflect.T>}
-                 */
-                this.children = [];
-
-                /**
-                 * Options.
-                 * @type {Object.<string, *>}
-                 */
-                this.options = options || {};
-            };
-
-            // Extends T
-            Namespace.prototype = Object.create(T.prototype);
-
-            /**
-             * Returns an array of the namespace's children.
-             * @param {ProtoBuf.Reflect.T=} type Filter type (returns instances of this type only). Defaults to null (all children).
-             * @return {Array.<ProtoBuf.Reflect.T>}
-             * @expose
-             */
-            Namespace.prototype.getChildren = function(type) {
-                type = type || null;
-                if (type == null) {
-                    return this.children.slice();
-                }
-                var children = [];
-                for (var i=0; i<this.children.length; i++) {
-                    if (this.children[i] instanceof type) {
-                        children.push(this.children[i]);
-                    }
-                }
-                return children;
-            };
-
-            /**
-             * Adds a child to the namespace.
-             * @param {ProtoBuf.Reflect.T} child Child
-             * @throws {Error} If the child cannot be added (duplicate)
-             * @expose
-             */
-            Namespace.prototype.addChild = function(child) {
-                var other;
-                if (other = this.getChild(child.name)) {
-                    // Try to revert camelcase transformation on collision
-                    if (other instanceof Message.Field && other.name !== other.originalName && !this.hasChild(other.originalName)) {
-                        other.name = other.originalName; // Revert previous first (effectively keeps both originals)
-                    } else if (child instanceof Message.Field && child.name !== child.originalName && !this.hasChild(child.originalName)) {
-                        child.name = child.originalName;
-                    } else {
-                        throw(new Error("Duplicate name in namespace "+this.toString(true)+": "+child.name));
-                    }
-                }
-                this.children.push(child);
-            };
-
-            /**
-             * Tests if this namespace has a child with the specified name.
-             * @param {string|number} nameOrId Child name or id
-             * @returns {boolean} true if there is one, else false
-             * @expose
-             */
-            Namespace.prototype.hasChild = function(nameOrId) {
-                return this._indexOf(nameOrId) > -1;
-            };
-
-            /**
-             * Gets a child by its name.
-             * @param {string|number} nameOrId Child name or id
-             * @return {?ProtoBuf.Reflect.T} The child or null if not found
-             * @expose
-             */
-            Namespace.prototype.getChild = function(nameOrId) {
-                var index = this._indexOf(nameOrId);
-                return index > -1 ? this.children[index] : null;
-            };
-
-            /**
-             * Returns child index by its name or id.
-             * @param {string|number} nameOrId Child name or id
-             * @return {Number} The child index
-             * @private
-             */
-            Namespace.prototype._indexOf = function(nameOrId) {
-                var key = (typeof nameOrId == 'number')
-                    ? 'id'
-                    : 'name';
-                for (var i=0; i<this.children.length; i++)
-                    if (typeof this.children[i][key] !== 'undefined' && this.children[i][key] == nameOrId)
-                        return i;
-                return -1;
-            };
-
-            /**
-             * Resolves a reflect object inside of this namespace.
-             * @param {string} qn Qualified name to resolve
-             * @param {boolean=} excludeFields Excludes fields, defaults to `false`
-             * @return {ProtoBuf.Reflect.Namespace|null} The resolved type or null if not found
-             * @expose
-             */
-            Namespace.prototype.resolve = function(qn, excludeFields) {
-                var part = qn.split(".");
-                var ptr = this, i=0;
-                if (part[i] == "") { // Fully qualified name, e.g. ".My.Message'
-                    while (ptr.parent != null) {
-                        ptr = ptr.parent;
-                    }
-                    i++;
-                }
-                var child;
-                do {
-                    do {
-                        child = ptr.getChild(part[i]);
-                        if (!child || !(child instanceof Reflect.T) || (excludeFields && child instanceof Reflect.Message.Field)) {
-                            ptr = null;
-                            break;
-                        }
-                        ptr = child; i++;
-                    } while (i < part.length);
-                    if (ptr != null) break; // Found
-                    // Else search the parent
-                    if (this.parent !== null) {
-                        return this.parent.resolve(qn, excludeFields);
-                    }
-                } while (ptr != null);
-                return ptr;
-            };
-
-            /**
-             * Builds the namespace and returns the runtime counterpart.
-             * @return {Object.<string,Function|Object>} Runtime namespace
-             * @expose
-             */
-            Namespace.prototype.build = function() {
-                /** @dict */
-                var ns = {};
-                var children = this.getChildren(), child;
-                for (var i=0; i<children.length; i++) {
-                    child = children[i];
-                    if (child instanceof Namespace) {
-                        ns[child.name] = child.build();
-                    }
-                }
-                if (Object.defineProperty) {
-                    Object.defineProperty(ns, "$options", {
-                        "value": this.buildOpt(),
-                        "enumerable": false,
-                        "configurable": false,
-                        "writable": false
-                    });
-                }
-                return ns;
-            };
-
-            /**
-             * Builds the namespace's '$options' property.
-             * @return {Object.<string,*>}
-             */
-            Namespace.prototype.buildOpt = function() {
-                var opt = {};
-                var keys = Object.keys(this.options);
-                for (var i=0; i<keys.length; i++) {
-                    var key = keys[i],
-                        val = this.options[keys[i]];
-                    // TODO: Options are not resolved, yet.
-                    // if (val instanceof Namespace) {
-                    //     opt[key] = val.build();
-                    // } else {
-                    opt[key] = val;
-                    // }
-                }
-                return opt;
-            };
-
-            /**
-             * Gets the value assigned to the option with the specified name.
-             * @param {string=} name Returns the option value if specified, otherwise all options are returned.
-             * @return {*|Object.<string,*>}null} Option value or NULL if there is no such option
-             */
-            Namespace.prototype.getOption = function(name) {
-                if (typeof name == 'undefined') {
-                    return this.options;
-                }
-                return typeof this.options[name] != 'undefined' ? this.options[name] : null;
-            };
-
-            /**
-             * @alias ProtoBuf.Reflect.Namespace
-             * @expose
-             */
-            Reflect.Namespace = Namespace;
-
-            /**
-             * Constructs a new Message.
-             * @exports ProtoBuf.Reflect.Message
-             * @param {ProtoBuf.Reflect.Namespace} parent Parent message or namespace
-             * @param {string} name Message name
-             * @param {Object.<string,*>} options Message options
-             * @param {boolean=} isGroup `true` if this is a legacy group
-             * @constructor
-             * @extends ProtoBuf.Reflect.Namespace
-             */
-            var Message = function(parent, name, options, isGroup) {
-                Namespace.call(this, parent, name, options);
-
-                /**
-                 * @override
-                 */
-                this.className = "Message";
-
-                /**
-                 * Extensions range.
-                 * @type {!Array.<number>}
-                 * @expose
-                 */
-                this.extensions = [ProtoBuf.ID_MIN, ProtoBuf.ID_MAX];
-
-                /**
-                 * Runtime message class.
-                 * @type {?function(new:ProtoBuf.Builder.Message)}
-                 * @expose
-                 */
-                this.clazz = null;
-
-                /**
-                 * Whether this is a legacy group or not.
-                 * @type {boolean}
-                 * @expose
-                 */
-                this.isGroup = !!isGroup;
-            };
-
-            // Extends Namespace
-            Message.prototype = Object.create(Namespace.prototype);
-
-            /**
-             * Builds the message and returns the runtime counterpart, which is a fully functional class.
-             * @see ProtoBuf.Builder.Message
-             * @param {boolean=} rebuild Whether to rebuild or not, defaults to false
-             * @return {ProtoBuf.Reflect.Message} Message class
-             * @throws {Error} If the message cannot be built
-             * @expose
-             */
-            Message.prototype.build = function(rebuild) {
-                if (this.clazz && !rebuild) return this.clazz;
-
-                // We need to create a prototyped Message class in an isolated scope
-                var clazz = (function(ProtoBuf, T) {
-
-                    var fields = T.getChildren(ProtoBuf.Reflect.Message.Field);
-
-                    /**
-                     * Constructs a new runtime Message.
-                     * @name ProtoBuf.Builder.Message
-                     * @class Barebone of all runtime messages.
-                     * @param {Object.<string,*>|...[string]} values Preset values
-                     * @constructor
-                     * @throws {Error} If the message cannot be created
-                     */
-                    var Message = function(values) {
-                        ProtoBuf.Builder.Message.call(this);
-                        var i, field;
-
-                        // Create fields on the object itself to allow setting and getting through Message#fieldname
-                        for (i=0; i<fields.length; i++) {
-                            field = fields[i];
-                            this[field.name] = (field.repeated) ? [] : null;
-                        }
-                        // Set the default values
-                        for (i=0; i<fields.length; i++) {
-                            field = fields[i];
-                            if (typeof field.options['default'] != 'undefined') {
-                                try {
-                                    this.$set(field.name, field.options['default']); // Should not throw
-                                } catch (e) {
-                                    throw(new Error("[INTERNAL] "+e));
-                                }
-                            }
-                        }
-                        // Set field values from a values object
-                        if (arguments.length == 1 && typeof values == 'object' &&
-                            /* not another Message */ typeof values.encode != 'function' &&
-                            /* not a repeated field */ !ProtoBuf.Util.isArray(values) &&
-                            /* not a ByteBuffer */ !(values instanceof ByteBuffer) &&
-                            /* not an ArrayBuffer */ !(values instanceof ArrayBuffer) &&
-                            /* not a Long */ !(ProtoBuf.Long && values instanceof ProtoBuf.Long)) {
-                            var keys = Object.keys(values);
-                            for (i=0; i<keys.length; i++) {
-                                this.$set(keys[i], values[keys[i]]); // May throw
-                            }
-                            // Else set field values from arguments, in correct order
-                        } else {
-                            for (i=0; i<arguments.length; i++) {
-                                if (i<fields.length) {
-                                    this.$set(fields[i].name, arguments[i]); // May throw
-                                }
-                            }
-                        }
-                    };
-
-                    // Extends ProtoBuf.Builder.Message
-                    Message.prototype = Object.create(ProtoBuf.Builder.Message.prototype);
-
-                    /**
-                     * Adds a value to a repeated field.
-                     * @name ProtoBuf.Builder.Message#add
-                     * @function
-                     * @param {string} key Field name
-                     * @param {*} value Value to add
-                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
-                     * @throws {Error} If the value cannot be added
-                     * @expose
-                     */
-                    Message.prototype.add = function(key, value, noAssert) {
-                        var field = T.getChild(key);
-                        if (!field) {
-                            throw(new Error(this+"#"+key+" is undefined"));
-                        }
-                        if (!(field instanceof ProtoBuf.Reflect.Message.Field)) {
-                            throw(new Error(this+"#"+key+" is not a field: "+field.toString(true))); // May throw if it's an enum or embedded message
-                        }
-                        if (!field.repeated) {
-                            throw(new Error(this+"#"+key+" is not a repeated field"));
-                        }
-                        if (this[field.name] === null) this[field.name] = [];
-                        this[field.name].push(noAssert ? value : field.verifyValue(value, true));
-                    };
-
-                    /**
-                     * Adds a value to a repeated field. This is an alias for {@link ProtoBuf.Builder.Message#add}.
-                     * @name ProtoBuf.Builder.Message#$add
-                     * @function
-                     * @param {string} key Field name
-                     * @param {*} value Value to add
-                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
-                     * @throws {Error} If the value cannot be added
-                     * @expose
-                     */
-                    Message.prototype.$add = Message.prototype.add;
-
-                    /**
-                     * Sets a field's value.
-                     * @name ProtoBuf.Builder.Message#set
-                     * @function
-                     * @param {string} key Key
-                     * @param {*} value Value to set
-                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
-                     * @throws {Error} If the value cannot be set
-                     * @expose
-                     */
-                    Message.prototype.set = function(key, value, noAssert) {
-                        var field = T.getChild(key);
-                        if (!field) {
-                            throw(new Error(this+"#"+key+" is not a field: undefined"));
-                        }
-                        if (!(field instanceof ProtoBuf.Reflect.Message.Field)) {
-                            throw(new Error(this+"#"+key+" is not a field: "+field.toString(true)));
-                        }
-                        this[field.name] = noAssert ? value : field.verifyValue(value); // May throw
-                    };
-
-                    /**
-                     * Sets a field's value. This is an alias for [@link ProtoBuf.Builder.Message#set}.
-                     * @name ProtoBuf.Builder.Message#$set
-                     * @function
-                     * @param {string} key Key
-                     * @param {*} value Value to set
-                     * @param {boolean=} noAssert Whether to assert the value or not (asserts by default)
-                     * @throws {Error} If the value cannot be set
-                     * @expose
-                     */
-                    Message.prototype.$set = Message.prototype.set;
-
-                    /**
-                     * Gets a field's value.
-                     * @name ProtoBuf.Builder.Message#get
-                     * @function
-                     * @param {string} key Key
-                     * @return {*} Value
-                     * @throws {Error} If there is no such field
-                     * @expose
-                     */
-                    Message.prototype.get = function(key) {
-                        var field = T.getChild(key);
-                        if (!field || !(field instanceof ProtoBuf.Reflect.Message.Field)) {
-                            throw(new Error(this+"#"+key+" is not a field: undefined"));
-                        }
-                        if (!(field instanceof ProtoBuf.Reflect.Message.Field)) {
-                            throw(new Error(this+"#"+key+" is not a field: "+field.toString(true)));
-                        }
-                        return this[field.name];
-                    };
-
-                    /**
-                     * Gets a field's value. This is an alias for {@link ProtoBuf.Builder.Message#$get}.
-                     * @name ProtoBuf.Builder.Message#$get
-                     * @function
-                     * @param {string} key Key
-                     * @return {*} Value
-                     * @throws {Error} If there is no such field
-                     * @expose
-                     */
-                    Message.prototype.$get = Message.prototype.get;
-
-                    // Getters and setters
-
-                    for (var i=0; i<fields.length; i++) {
-                        var field = fields[i];
-
-                        (function(field) {
-                            // set/get[SomeValue]
-                            var Name = field.originalName.replace(/(_[a-zA-Z])/g,
-                                function(match) {
-                                    return match.toUpperCase().replace('_','');
-                                }
-                            );
-                            Name = Name.substring(0,1).toUpperCase()+Name.substring(1);
-
-                            // set/get_[some_value]
-                            var name = field.originalName.replace(/([A-Z])/g,
-                                function(match) {
-                                    return "_"+match;
-                                }
-                            );
-
-                            /**
-                             * Sets a value. This method is present for each field, but only if there is no name conflict with
-                             * another field.
-                             * @name ProtoBuf.Builder.Message#set[SomeField]
-                             * @function
-                             * @param {*} value Value to set
-                             * @abstract
-                             * @throws {Error} If the value cannot be set
-                             */
-                            if (!T.hasChild("set"+Name)) {
-                                Message.prototype["set"+Name] = function(value) {
-                                    this.$set(field.name, value);
-                                }
-                            }
-
-                            /**
-                             * Sets a value. This method is present for each field, but only if there is no name conflict with
-                             * another field.
-                             * @name ProtoBuf.Builder.Message#set_[some_field]
-                             * @function
-                             * @param {*} value Value to set
-                             * @abstract
-                             * @throws {Error} If the value cannot be set
-                             */
-                            if (!T.hasChild("set_"+name)) {
-                                Message.prototype["set_"+name] = function(value) {
-                                    this.$set(field.name, value);
-                                };
-                            }
-
-                            /**
-                             * Gets a value. This method is present for each field, but only if there is no name conflict with
-                             * another field.
-                             * @name ProtoBuf.Builder.Message#get[SomeField]
-                             * @function
-                             * @abstract
-                             * @return {*} The value
-                             */
-                            if (!T.hasChild("get"+Name)) {
-                                Message.prototype["get"+Name] = function() {
-                                    return this.$get(field.name); // Does not throw, field exists
-                                }
-                            }
-
-                            /**
-                             * Gets a value. This method is present for each field, but only if there is no name conflict with
-                             * another field.
-                             * @name ProtoBuf.Builder.Message#get_[some_field]
-                             * @function
-                             * @return {*} The value
-                             * @abstract
-                             */
-                            if (!T.hasChild("get_"+name)) {
-                                Message.prototype["get_"+name] = function() {
-                                    return this.$get(field.name); // Does not throw, field exists
-                                };
-                            }
-
-                        })(field);
-                    }
-
-                    // En-/decoding
-
-                    /**
-                     * Encodes the message.
-                     * @name ProtoBuf.Builder.Message#$encode
-                     * @function
-                     * @param {(!ByteBuffer|boolean)=} buffer ByteBuffer to encode to. Will create a new one and flip it if omitted.
-                     * @return {!ByteBuffer} Encoded message as a ByteBuffer
-                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
-                     *  returns the encoded ByteBuffer in the `encoded` property on the error.
-                     * @expose
-                     * @see ProtoBuf.Builder.Message#encode64
-                     * @see ProtoBuf.Builder.Message#encodeHex
-                     * @see ProtoBuf.Builder.Message#encodeAB
-                     */
-                    Message.prototype.encode = function(buffer) {
-                        var isNew = false;
-                        if (!buffer) {
-                            buffer = new ByteBuffer();
-                            isNew = true;
-                        }
-                        var le = buffer.littleEndian;
-                        try {
-                            T.encode(this, buffer.LE());
-                            return (isNew ? buffer.flip() : buffer).LE(le);
-                        } catch (e) {
-                            buffer.LE(le);
-                            throw(e);
-                        }
-                    };
-
-                    /**
-                     * Encodes the varint32 length-delimited message.
-                     * @name ProtoBuf.Builder.Message#encodeDelimited
-                     * @function
-                     * @param {(!ByteBuffer|boolean)=} buffer ByteBuffer to encode to. Will create a new one and flip it if omitted.
-                     * @return {!ByteBuffer} Encoded message as a ByteBuffer
-                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
-                     *  returns the encoded ByteBuffer in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.encodeDelimited = function(buffer) {
-                        var isNew = false;
-                        if (!buffer) {
-                            buffer = new ByteBuffer();
-                            isNew = true;
-                        }
-                        // var le = buffer.littleEndian;
-                        try {
-                            var enc = new ByteBuffer().LE();
-                            T.encode(this, enc).flip();
-                            buffer.writeVarint32(enc.remaining());
-                            buffer.append(enc);
-                            return isNew ? buffer.flip() : buffer;
-                        } catch (e) {
-                            // buffer.LE(le);
-                            throw(e);
-                        }
-                    };
-
-                    /**
-                     * Directly encodes the message to an ArrayBuffer.
-                     * @name ProtoBuf.Builder.Message#encodeAB
-                     * @function
-                     * @return {ArrayBuffer} Encoded message as ArrayBuffer
-                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
-                     *  returns the encoded ArrayBuffer in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.encodeAB = function() {
-                        try {
-                            return this.encode().toArrayBuffer();
-                        } catch (err) {
-                            if (err["encoded"]) err["encoded"] = err["encoded"].toArrayBuffer();
-                            throw(err);
-                        }
-                    };
-
-                    /**
-                     * Returns the message as an ArrayBuffer. This is an alias for {@link ProtoBuf.Builder.Message#encodeAB}.
-                     * @name ProtoBuf.Builder.Message#toArrayBuffer
-                     * @function
-                     * @return {ArrayBuffer} Encoded message as ArrayBuffer
-                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
-                     *  returns the encoded ArrayBuffer in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.toArrayBuffer = Message.prototype.encodeAB;
-
-                    /**
-                     * Directly encodes the message to a node Buffer.
-                     * @name ProtoBuf.Builder.Message#encodeNB
-                     * @function
-                     * @return {!Buffer}
-                     * @throws {Error} If the message cannot be encoded, not running under node.js or if required fields are
-                     *  missing. The later still returns the encoded node Buffer in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.encodeNB = function() {
-                        try {
-                            return this.encode().toBuffer();
-                        } catch (err) {
-                            if (err["encoded"]) err["encoded"] = err["encoded"].toBuffer();
-                            throw(err);
-                        }
-                    };
-
-                    /**
-                     * Returns the message as a node Buffer. This is an alias for {@link ProtoBuf.Builder.Message#encodeNB}.
-                     * @name ProtoBuf.Builder.Message#toBuffer
-                     * @function
-                     * @return {!Buffer}
-                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
-                     *  returns the encoded node Buffer in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.toBuffer = Message.prototype.encodeNB;
-
-                    /**
-                     * Directly encodes the message to a base64 encoded string.
-                     * @name ProtoBuf.Builder.Message#encode64
-                     * @function
-                     * @return {string} Base64 encoded string
-                     * @throws {Error} If the underlying buffer cannot be encoded or if required fields are missing. The later
-                     *  still returns the encoded base64 string in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.encode64 = function() {
-                        try {
-                            return this.encode().toBase64();
-                        } catch (err) {
-                            if (err["encoded"]) err["encoded"] = err["encoded"].toBase64();
-                            throw(err);
-                        }
-                    };
-
-                    /**
-                     * Returns the message as a base64 encoded string. This is an alias for {@link ProtoBuf.Builder.Message#encode64}.
-                     * @name ProtoBuf.Builder.Message#toBase64
-                     * @function
-                     * @return {string} Base64 encoded string
-                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
-                     *  returns the encoded base64 string in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.toBase64 = Message.prototype.encode64;
-
-                    /**
-                     * Directly encodes the message to a hex encoded string.
-                     * @name ProtoBuf.Builder.Message#encodeHex
-                     * @function
-                     * @return {string} Hex encoded string
-                     * @throws {Error} If the underlying buffer cannot be encoded or if required fields are missing. The later
-                     *  still returns the encoded hex string in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.encodeHex = function() {
-                        try {
-                            return this.encode().toHex();
-                        } catch (err) {
-                            if (err["encoded"]) err["encoded"] = err["encoded"].toHex();
-                            throw(err);
-                        }
-                    };
-
-                    /**
-                     * Returns the message as a hex encoded string. This is an alias for {@link ProtoBuf.Builder.Message#encodeHex}.
-                     * @name ProtoBuf.Builder.Message#toHex
-                     * @function
-                     * @return {string} Hex encoded string
-                     * @throws {Error} If the message cannot be encoded or if required fields are missing. The later still
-                     *  returns the encoded hex string in the `encoded` property on the error.
-                     * @expose
-                     */
-                    Message.prototype.toHex = Message.prototype.encodeHex;
-
-                    /**
-                     * Clones a message object to a raw object.
-                     * @param {*} obj Object to clone
-                     * @param {boolean} includeBuffers Whether to include native buffer data or not
-                     * @returns {*} Cloned object
-                     * @inner
-                     */
-                    function cloneRaw(obj, includeBuffers) {
-                        var clone = {};
-                        for (var i in obj)
-                            if (obj.hasOwnProperty(i)) {
-                                if (obj[i] === null || typeof obj[i] !== 'object') {
-                                    clone[i] = obj[i];
-                                } else if (obj[i] instanceof ByteBuffer) {
-                                    if (includeBuffers)
-                                        clone[i] = obj.toBuffer();
-                                } else { // is a non-null object
-                                    clone[i] = cloneRaw(obj[i], includeBuffers);
-                                }
-                            }
-                        return clone;
-                    }
-
-                    /**
-                     * Returns the message's raw payload.
-                     * @param {boolean=} includeBuffers Whether to include native buffer data or not, defaults to `false`
-                     * @returns {Object.<string,*>} Raw payload
-                     * @expose
-                     */
-                    Message.prototype.toRaw = function(includeBuffers) {
-                        return cloneRaw(this, !!includeBuffers);
-                    };
-
-                    /**
-                     * Decodes a message from the specified buffer or string.
-                     * @name ProtoBuf.Builder.Message.decode
-                     * @function
-                     * @param {!ByteBuffer|!ArrayBuffer|!Buffer|string} buffer Buffer to decode from
-                     * @param {string=} enc Encoding if buffer is a string: hex, utf8 (not recommended), defaults to base64
-                     * @return {!ProtoBuf.Builder.Message} Decoded message
-                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
-                     *  returns the decoded message with missing fields in the `decoded` property on the error.
-                     * @expose
-                     * @see ProtoBuf.Builder.Message.decode64
-                     * @see ProtoBuf.Builder.Message.decodeHex
-                     */
-                    Message.decode = function(buffer, enc) {
-                        if (buffer === null) throw(new Error("buffer must not be null"));
-                        if (typeof buffer === 'string') {
-                            buffer = ByteBuffer.wrap(buffer, enc ? enc : "base64");
-                        }
-                        buffer = buffer instanceof ByteBuffer ? buffer : ByteBuffer.wrap(buffer); // May throw
-                        var le = buffer.littleEndian;
-                        try {
-                            var msg = T.decode(buffer.LE());
-                            buffer.LE(le);
-                            return msg;
-                        } catch (e) {
-                            buffer.LE(le);
-                            throw(e);
-                        }
-                    };
-
-                    /**
-                     * Decodes a varint32 length-delimited message from the specified buffer or string.
-                     * @name ProtoBuf.Builder.Message.decodeDelimited
-                     * @function
-                     * @param {!ByteBuffer|!ArrayBuffer|!Buffer|string} buffer Buffer to decode from
-                     * @param {string=} enc Encoding if buffer is a string: hex, utf8 (not recommended), defaults to base64
-                     * @return {!ProtoBuf.Builder.Message} Decoded message
-                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
-                     *  returns the decoded message with missing fields in the `decoded` property on the error.
-                     * @expose
-                     */
-                    Message.decodeDelimited = function(buffer, enc) {
-                        if (buffer === null) throw(new Error("buffer must not be null"));
-                        if (typeof buffer === 'string') {
-                            buffer = ByteBuffer.wrap(buffer, enc ? enc : "base64");
-                        }
-                        buffer = buffer instanceof ByteBuffer ? buffer : ByteBuffer.wrap(buffer); // May throw
-                        var len = buffer.readVarint32();
-                        var msg = T.decode(buffer.slice(buffer.offset, buffer.offset + len).LE());
-                        buffer.offset += len;
-                        return msg;
-                    };
-
-                    /**
-                     * Decodes the message from the specified base64 encoded string.
-                     * @name ProtoBuf.Builder.Message.decode64
-                     * @function
-                     * @param {string} str String to decode from
-                     * @return {!ProtoBuf.Builder.Message} Decoded message
-                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
-                     *  returns the decoded message with missing fields in the `decoded` property on the error.
-                     * @expose
-                     */
-                    Message.decode64 = function(str) {
-                        return Message.decode(str, "base64");
-                    };
-
-                    /**
-                     * Decodes the message from the specified hex encoded string.
-                     * @name ProtoBuf.Builder.Message.decodeHex
-                     * @function
-                     * @param {string} str String to decode from
-                     * @return {!ProtoBuf.Builder.Message} Decoded message
-                     * @throws {Error} If the message cannot be decoded or if required fields are missing. The later still
-                     *  returns the decoded message with missing fields in the `decoded` property on the error.
-                     * @expose
-                     */
-                    Message.decodeHex = function(str) {
-                        return Message.decode(str, "hex");
-                    };
-
-                    // Utility
-
-                    /**
-                     * Returns a string representation of this Message.
-                     * @name ProtoBuf.Builder.Message#toString
-                     * @function
-                     * @return {string} String representation as of ".Fully.Qualified.MessageName"
-                     * @expose
-                     */
-                    Message.prototype.toString = function() {
-                        return T.toString();
-                    };
-
-                    // Static
-
-                    /**
-                     * Options.
-                     * @name ProtoBuf.Builder.Message.$options
-                     * @type {Object.<string,*>}
-                     * @expose
-                     */
-                    var $options; // for cc
-
-                    if (Object.defineProperty) {
-                        Object.defineProperty(Message, '$options', {
-                            'value': T.buildOpt(),
-                            'enumerable': false,
-                            'configurable': false,
-                            'writable': false
-                        });
-                    }
-
-                    return Message;
-
-                })(ProtoBuf, this);
-
-                // Static enums and prototyped sub-messages
-                var children = this.getChildren();
-                for (var i=0; i<children.length; i++) {
-                    if (children[i] instanceof Enum) {
-                        clazz[children[i]['name']] = children[i].build();
-                    } else if (children[i] instanceof Message) {
-                        clazz[children[i]['name']] = children[i].build();
-                    } else if (children[i] instanceof Message.Field) {
-                        // Ignore
-                    } else {
-                        throw(new Error("Illegal reflect child of "+this.toString(true)+": "+children[i].toString(true)));
-                    }
-                }
-                return this.clazz = clazz;
-            };
-
-            /**
-             * Encodes a runtime message's contents to the specified buffer.
-             * @param {ProtoBuf.Builder.Message} message Runtime message to encode
-             * @param {ByteBuffer} buffer ByteBuffer to write to
-             * @return {ByteBuffer} The ByteBuffer for chaining
-             * @throws {Error} If required fields are missing or the message cannot be encoded for another reason
-             * @expose
-             */
-            Message.prototype.encode = function(message, buffer) {
-                var fields = this.getChildren(Message.Field),
-                    fieldMissing = null;
-                for (var i=0; i<fields.length; i++) {
-                    var val = message.$get(fields[i].name);
-                    if (fields[i].required && val === null) {
-                        if (fieldMissing === null) fieldMissing = fields[i];
-                    } else {
-                        fields[i].encode(val, buffer);
-                    }
-                }
-                if (fieldMissing !== null) {
-                    var err = new Error("Missing at least one required field for "+this.toString(true)+": "+fieldMissing);
-                    err["encoded"] = buffer; // Still expose what we got
-                    throw(err);
-                }
-                return buffer;
-            };
-
-            /**
-             * Skips all data until the end of the specified group has been reached.
-             * @param {number} expectedId Expected GROUPEND id
-             * @param {!ByteBuffer} buf ByteBuffer
-             * @returns {boolean} `true` if a value as been skipped, `false` if the end has been reached
-             * @throws {Error} If it wasn't possible to find the end of the group (buffer overrun or end tag mismatch)
-             * @inner
-             */
-            function skipTillGroupEnd(expectedId, buf) {
-                var tag = buf.readVarint32(), // Throws on OOB
-                    wireType = tag & 0x07,
-                    id = tag >> 3;
-                switch (wireType) {
-                    case ProtoBuf.WIRE_TYPES.VARINT:
-                        do tag = buf.readUint8();
-                        while ((tag & 0x80) === 0x80);
-                        break;
-                    case ProtoBuf.WIRE_TYPES.BITS64:
-                        buf.offset += 8;
-                        break;
-                    case ProtoBuf.WIRE_TYPES.LDELIM:
-                        tag = buf.readVarint32(); // reads the varint
-                        buf.offset += tag;        // skips n bytes
-                        break;
-                    case ProtoBuf.WIRE_TYPES.STARTGROUP:
-                        skipTillGroupEnd(id, buf);
-                        break;
-                    case ProtoBuf.WIRE_TYPES.ENDGROUP:
-                        if (id === expectedId)
-                            return false;
-                        else
-                            throw(new Error("Illegal GROUPEND after unknown group: "+id+" ("+expectedId+" expected)"));
-                    case ProtoBuf.WIRE_TYPES.BITS32:
-                        buf.offset += 4;
-                        break;
-                    default:
-                        throw(new Error("Illegal wire type in unknown group "+expectedId+": "+wireType));
-                }
-                return true;
-            }
-
-            /**
-             * Decodes an encoded message and returns the decoded message.
-             * @param {ByteBuffer} buffer ByteBuffer to decode from
-             * @param {number=} length Message length. Defaults to decode all the available data.
-             * @param {number=} expectedGroupEndId Expected GROUPEND id if this is a legacy group
-             * @return {ProtoBuf.Builder.Message} Decoded message
-             * @throws {Error} If the message cannot be decoded
-             * @expose
-             */
-            Message.prototype.decode = function(buffer, length, expectedGroupEndId) {
-                length = typeof length === 'number' ? length : -1;
-                var start = buffer.offset;
-                var msg = new (this.clazz)();
-                var tag, wireType, id;
-                while (buffer.offset < start+length || (length == -1 && buffer.remaining() > 0)) {
-                    tag = buffer.readVarint32();
-                    wireType = tag & 0x07;
-                    id = tag >> 3;
-                    if (wireType === ProtoBuf.WIRE_TYPES.ENDGROUP) {
-                        if (id !== expectedGroupEndId)
-                            throw(new Error("Illegal group end indicator for "+this.toString(true)+": "+id+" ("+(expectedGroupEndId ? expectedGroupEndId+" expected" : "not a group")+")"));
-                        break;
-                    }
-                    var field = this.getChild(id); // Message.Field only
-                    if (!field) {
-                        // "messages created by your new code can be parsed by your old code: old binaries simply ignore the new field when parsing."
-                        switch (wireType) {
-                            case ProtoBuf.WIRE_TYPES.VARINT:
-                                buffer.readVarint32();
-                                break;
-                            case ProtoBuf.WIRE_TYPES.BITS32:
-                                buffer.offset += 4;
-                                break;
-                            case ProtoBuf.WIRE_TYPES.BITS64:
-                                buffer.offset += 8;
-                                break;
-                            case ProtoBuf.WIRE_TYPES.LDELIM:
-                                var len = buffer.readVarint32();
-                                buffer.offset += len;
-                                break;
-                            case ProtoBuf.WIRE_TYPES.STARTGROUP:
-                                while (skipTillGroupEnd(id, buffer)) {}
-                                break;
-                            default:
-                                throw(new Error("Illegal wire type for unknown field "+id+" in "+this.toString(true)+"#decode: "+wireType));
-                        }
-                        continue;
-                    }
-                    if (field.repeated && !field.options["packed"]) {
-                        msg.$add(field.name, field.decode(wireType, buffer), true);
-                    } else {
-                        msg.$set(field.name, field.decode(wireType, buffer), true);
-                    }
-                }
-
-                // Check if all required fields are present
-                var fields = this.getChildren(ProtoBuf.Reflect.Field);
-                for (var i=0; i<fields.length; i++) {
-                    if (fields[i].required && msg[fields[i].name] === null) {
-                        var err = new Error("Missing at least one required field for "+this.toString(true)+": "+fields[i].name);
-                        err["decoded"] = msg; // Still expose what we got
-                        throw(err);
-                    }
-                }
-                return msg;
-            };
-
-            /**
-             * @alias ProtoBuf.Reflect.Message
-             * @expose
-             */
-            Reflect.Message = Message;
-
-            /**
-             * Constructs a new Message Field.
-             * @exports ProtoBuf.Reflect.Message.Field
-             * @param {ProtoBuf.Reflect.Message} message Message reference
-             * @param {string} rule Rule, one of requried, optional, repeated
-             * @param {string} type Data type, e.g. int32
-             * @param {string} name Field name
-             * @param {number} id Unique field id
-             * @param {Object.<string.*>=} options Options
-             * @constructor
-             * @extends ProtoBuf.Reflect.T
-             */
-            var Field = function(message, rule, type, name, id, options) {
-                T.call(this, message, name);
-
-                /**
-                 * @override
-                 */
-                this.className = "Message.Field";
-
-                /**
-                 * Message field required flag.
-                 * @type {boolean}
-                 * @expose
-                 */
-                this.required = rule == "required";
-
-                /**
-                 * Message field repeated flag.
-                 * @type {boolean}
-                 * @expose
-                 */
-                this.repeated = rule == "repeated";
-
-                /**
-                 * Message field type. Type reference string if unresolved, protobuf type if resolved.
-                 * @type {string|{name: string, wireType: number}}
-                 * @expose
-                 */
-                this.type = type;
-
-                /**
-                 * Resolved type reference inside the global namespace.
-                 * @type {ProtoBuf.Reflect.T|null}
-                 * @expose
-                 */
-                this.resolvedType = null;
-
-                /**
-                 * Unique message field id.
-                 * @type {number}
-                 * @expose
-                 */
-                this.id = id;
-
-                /**
-                 * Message field options.
-                 * @type {!Object.<string,*>}
-                 * @dict
-                 * @expose
-                 */
-                this.options = options || {};
-
-                /**
-                 * Original field name.
-                 * @type {string}
-                 * @expose
-                 */
-                this.originalName = this.name; // Used to revert camelcase transformation on naming collisions
-
-                // Convert field names to camel case notation if the override is set
-                if (ProtoBuf.convertFieldsToCamelCase) {
-                    this.name = this.name.replace(/_([a-zA-Z])/g, function($0, $1) {
-                        return $1.toUpperCase();
-                    });
-                }
-            };
-
-            // Extends T
-            Field.prototype = Object.create(T.prototype);
-
-            /**
-             * Makes a Long from a value.
-             * @param {{low: number, high: number, unsigned: boolean}|string|number} value Value
-             * @param {boolean=} unsigned Whether unsigned or not, defaults to reuse it from Long-like objects or to signed for
-             *  strings and numbers
-             * @returns {!Long}
-             * @throws {Error} If the value cannot be converted to a Long
-             * @inner
-             */
-            function mkLong(value, unsigned) {
-                if (value && typeof value.low === 'number' && typeof value.high === 'number' && typeof value.unsigned === 'boolean')
-                    return new ProtoBuf.Long(value.low, value.high, typeof unsigned === 'undefined' ? value.unsigned : unsigned);
-                if (typeof value === 'string')
-                    return ProtoBuf.Long.fromString(value, unsigned || false, 10);
-                if (typeof value === 'number')
-                    return ProtoBuf.Long.fromNumber(value, unsigned || false);
-                throw(new Error("not convertible to Long"));
-            }
-
-            /**
-             * Checks if the given value can be set for this field.
-             * @param {*} value Value to check
-             * @param {boolean=} skipRepeated Whether to skip the repeated value check or not. Defaults to false.
-             * @return {*} Verified, maybe adjusted, value
-             * @throws {Error} If the value cannot be set for this field
-             * @expose
-             */
-            Field.prototype.verifyValue = function(value, skipRepeated) {
-                skipRepeated = skipRepeated || false;
-                if (value === null) { // NULL values for optional fields
-                    if (this.required) {
-                        throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (required)"));
-                    }
-                    return null;
-                }
-                var i;
-                if (this.repeated && !skipRepeated) { // Repeated values as arrays
-                    if (!ProtoBuf.Util.isArray(value)) {
-                        value = [value];
-                    }
-                    var res = [];
-                    for (i=0; i<value.length; i++) {
-                        res.push(this.verifyValue(value[i], true));
-                    }
-                    return res;
-                }
-                // All non-repeated fields expect no array
-                if (!this.repeated && ProtoBuf.Util.isArray(value)) {
-                    throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (no array expected)"));
-                }
-
-                switch (this.type) {
-                    // Signed 32bit
-                    case ProtoBuf.TYPES["int32"]:
-                    case ProtoBuf.TYPES["sint32"]:
-                    case ProtoBuf.TYPES["sfixed32"]:
-                        // Do not cast NaN as it'd become 0
-                        return isNaN(i = parseInt(value, 10)) ? i : i | 0;
-
-                    // Unsigned 32bit
-                    case ProtoBuf.TYPES["uint32"]:
-                    case ProtoBuf.TYPES["fixed32"]:
-                        // Do not cast NaN as it'd become 0
-                        return isNaN(i = parseInt(value, 10)) ? i : i >>> 0;
-
-                    // Signed 64bit
-                    case ProtoBuf.TYPES["int64"]:
-                    case ProtoBuf.TYPES["sint64"]:
-                    case ProtoBuf.TYPES["sfixed64"]: {
-                        if (ProtoBuf.Long) {
-                            try {
-                                return mkLong(value, false);
-                            } catch (e) {
-                                throw(new Error("Illegal value for "+this.toString(true)+": "+value+" ("+e.message+")"));
-                            }
-                        }
-                    }
-
-                    // Unsigned 64bit
-                    case ProtoBuf.TYPES["uint64"]:
-                    case ProtoBuf.TYPES["fixed64"]: {
-                        if (ProtoBuf.Long) {
-                            try {
-                                return mkLong(value, true);
-                            } catch (e) {
-                                throw(new Error("Illegal value for "+this.toString(true)+": "+value+" ("+e.message+")"));
-                            }
-                        }
-                    }
-
-                    // Bool
-                    case ProtoBuf.TYPES["bool"]:
-                        return typeof value === 'string'
-                            ? value === 'true'
-                            : !!value;
-
-                    // Float
-                    case ProtoBuf.TYPES["float"]:
-                    case ProtoBuf.TYPES["double"]:
-                        // May also become NaN, +Infinity, -Infinity
-                        return parseFloat(value);
-
-                    // Length-delimited string
-                    case ProtoBuf.TYPES["string"]:
-                        return ""+value;
-
-                    // Length-delimited bytes
-                    case ProtoBuf.TYPES["bytes"]:
-                        return value && value instanceof ByteBuffer
-                            ? value
-                            : ByteBuffer.wrap(value);
-
-                    // Constant enum value
-                    case ProtoBuf.TYPES["enum"]: {
-                        var values = this.resolvedType.getChildren(Enum.Value);
-                        for (i=0; i<values.length; i++) {
-                            if (values[i].name == value) {
-                                return values[i].id;
-                            } else if (values[i].id == value) {
-                                return values[i].id;
-                            }
-                        }
-                        throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (not a valid enum value)"));
-                    }
-                    // Embedded message
-                    case ProtoBuf.TYPES["group"]:
-                    case ProtoBuf.TYPES["message"]: {
-                        if (typeof value !== 'object') {
-                            throw(new Error("Illegal value for "+this.toString(true)+": "+value+" (object expected)"));
-                        }
-                        if (value instanceof this.resolvedType.clazz) {
-                            return value;
-                        }
-                        // Else let's try to construct one from a key-value object
-                        return new (this.resolvedType.clazz)(value); // May throw for a hundred of reasons
-                    }
-                }
-
-                // We should never end here
-                throw(new Error("[INTERNAL] Illegal value for "+this.toString(true)+": "+value+" (undefined type "+this.type+")"));
-            };
-
-            /**
-             * Encodes the specified field value to the specified buffer.
-             * @param {*} value Field value
-             * @param {ByteBuffer} buffer ByteBuffer to encode to
-             * @return {ByteBuffer} The ByteBuffer for chaining
-             * @throws {Error} If the field cannot be encoded
-             * @expose
-             */
-            Field.prototype.encode = function(value, buffer) {
-                value = this.verifyValue(value); // May throw
-                if (this.type === null || typeof this.type !== 'object')
-                    throw(new Error("[INTERNAL] Unresolved type in "+this.toString(true)+": "+this.type));
-                if (value === null || (this.repeated && value.length == 0)) return buffer; // Optional omitted
-                try {
-                    if (this.repeated) {
-                        var i;
-                        // "Only repeated fields of primitive numeric types (types which use the varint, 32-bit, or 64-bit wire
-                        // types) can be declared 'packed'."
-                        if (this.options["packed"] && ProtoBuf.PACKABLE_WIRE_TYPES.indexOf(this.type.wireType) >= 0) {
-                            // "All of the elements of the field are packed into a single key-value pair with wire type 2
-                            // (length-delimited). Each element is encoded the same way it would be normally, except without a
-                            // tag preceding it."
-                            buffer.writeVarint32((this.id << 3) | ProtoBuf.WIRE_TYPES.LDELIM);
-                            buffer.ensureCapacity(buffer.offset += 1); // We do not know the length yet, so let's assume a varint of length 1
-                            var start = buffer.offset; // Remember where the contents begin
-                            for (i=0; i<value.length; i++) {
-                                this.encodeValue(value[i], buffer);
-                            }
-                            var len = buffer.offset-start;
-                            var varintLen = ByteBuffer.calculateVarint32(len);
-                            if (varintLen > 1) { // We need to move the contents
-                                var contents = buffer.slice(start, buffer.offset);
-                                start += varintLen-1;
-                                buffer.offset = start;
-                                buffer.append(contents);
-                            }
-                            buffer.writeVarint32(len, start-varintLen);
-                        } else {
-                            // "If your message definition has repeated elements (without the [packed=true] option), the encoded
-                            // message has zero or more key-value pairs with the same tag number"
-                            for (i=0; i<value.length; i++) {
-                                buffer.writeVarint32((this.id << 3) | this.type.wireType);
-                                this.encodeValue(value[i], buffer);
-                            }
-                        }
-                    } else {
-                        buffer.writeVarint32((this.id << 3) | this.type.wireType);
-                        this.encodeValue(value, buffer);
-                    }
-                } catch (e) {
-                    throw(new Error("Illegal value for "+this.toString(true)+": "+value+" ("+e+")"));
-                }
-                return buffer;
-            };
-
-            /**
-             * Encodes a value to the specified buffer. Does not encode the key.
-             * @param {*} value Field value
-             * @param {ByteBuffer} buffer ByteBuffer to encode to
-             * @return {ByteBuffer} The ByteBuffer for chaining
-             * @throws {Error} If the value cannot be encoded
-             * @expose
-             */
-            Field.prototype.encodeValue = function(value, buffer) {
-                if (value === null) return; // Nothing to encode
-                // Tag has already been written
-
-                switch (this.type) {
-                    // 32bit signed varint
-                    case ProtoBuf.TYPES["int32"]: {
-                        // "If you use int32 or int64 as the type for a negative number, the resulting varint is always ten bytes
-                        // long – it is, effectively, treated like a very large unsigned integer." (see #122)
-                        if (value < 0)
-                            buffer.writeVarint64(value);
-                        else
-                            buffer.writeVarint32(value);
-                        break;
-                    }
-
-                    // 32bit unsigned varint
-                    case ProtoBuf.TYPES["uint32"]:
-                        buffer.writeVarint32(value);
-                        break;
-
-                    // 32bit varint zig-zag
-                    case ProtoBuf.TYPES["sint32"]:
-                        buffer.writeVarint32ZigZag(value);
-                        break;
-
-                    // Fixed unsigned 32bit
-                    case ProtoBuf.TYPES["fixed32"]:
-                        buffer.writeUint32(value);
-                        break;
-
-                    // Fixed signed 32bit
-                    case ProtoBuf.TYPES["sfixed32"]:
-                        buffer.writeInt32(value);
-                        break;
-
-                    // 64bit varint as-is
-                    case ProtoBuf.TYPES["int64"]:
-                    case ProtoBuf.TYPES["uint64"]:
-                        buffer.writeVarint64(value); // throws
-                        break;
-
-                    // 64bit varint zig-zag
-                    case ProtoBuf.TYPES["sint64"]:
-                        buffer.writeVarint64ZigZag(value); // throws
-                        break;
-
-                    // Fixed unsigned 64bit
-                    case ProtoBuf.TYPES["fixed64"]:
-                        buffer.writeUint64(value); // throws
-                        break;
-
-                    // Fixed signed 64bit
-                    case ProtoBuf.TYPES["sfixed64"]:
-                        buffer.writeInt64(value); // throws
-                        break;
-
-                    // Bool
-                    case ProtoBuf.TYPES["bool"]: {
-                        if (typeof value === 'string')
-                            buffer.writeVarint32(value.toLowerCase() === 'false' ? 0 : !!value);
-                        else
-                            buffer.writeVarint32(value ? 1 : 0);
-                        break;
-                    }
-
-                    // Constant enum value
-                    case ProtoBuf.TYPES["enum"]:
-                        buffer.writeVarint32(value);
-                        break;
-
-                    // 32bit float
-                    case ProtoBuf.TYPES["float"]:
-                        buffer.writeFloat32(value);
-                        break;
-
-                    // 64bit float
-                    case ProtoBuf.TYPES["double"]:
-                        buffer.writeFloat64(value);
-                        break;
-
-                    // Length-delimited string
-                    case ProtoBuf.TYPES["string"]:
-                        buffer.writeVString(value);
-                        break;
-
-                    // Length-delimited bytes
-                    case ProtoBuf.TYPES["bytes"]: {
-                        if (value.offset > value.length) { // Forgot to flip?
-                            // TODO: This is actually dangerous as it might lead to a condition where data is included that isn't
-                            // meant to be transmitted. Shall we remove this?
-                            buffer = buffer.clone().flip();
-                        }
-                        var prevOffset = value.offset;
-                        buffer.writeVarint32(value.remaining());
-                        buffer.append(value);
-                        value.offset = prevOffset;
-                        break;
-                    }
-
-                    // Embedded message
-                    case ProtoBuf.TYPES["message"]: {
-                        var bb = new ByteBuffer().LE();
-                        this.resolvedType.encode(value, bb);
-                        buffer.writeVarint32(bb.offset);
-                        buffer.append(bb.flip());
-                        break;
-                    }
-
-                    // Legacy group
-                    case ProtoBuf.TYPES["group"]: {
-                        this.resolvedType.encode(value, buffer);
-                        buffer.writeVarint32((this.id << 3) | ProtoBuf.WIRE_TYPES.ENDGROUP);
-                        break;
-                    }
-
-                    default:
-                        // We should never end here
-                        throw(new Error("[INTERNAL] Illegal value to encode in "+this.toString(true)+": "+value+" (unknown type)"));
-                }
-                return buffer;
-            };
-
-            /**
-             * Decode the field value from the specified buffer.
-             * @param {number} wireType Leading wire type
-             * @param {ByteBuffer} buffer ByteBuffer to decode from
-             * @param {boolean=} skipRepeated Whether to skip the repeated check or not. Defaults to false.
-             * @return {*} Decoded value
-             * @throws {Error} If the field cannot be decoded
-             * @expose
-             */
-            Field.prototype.decode = function(wireType, buffer, skipRepeated) {
-                var value, nBytes;
-                if (wireType != this.type.wireType && (skipRepeated || (wireType != ProtoBuf.WIRE_TYPES.LDELIM || !this.repeated))) {
-                    throw(new Error("Illegal wire type for field "+this.toString(true)+": "+wireType+" ("+this.type.wireType+" expected)"));
-                }
-                if (wireType == ProtoBuf.WIRE_TYPES.LDELIM && this.repeated && this.options["packed"]) {
-                    if (!skipRepeated) {
-                        nBytes = buffer.readVarint32();
-                        nBytes = buffer.offset + nBytes; // Limit
-                        var values = [];
-                        while (buffer.offset < nBytes) {
-                            values.push(this.decode(this.type.wireType, buffer, true));
-                        }
-                        return values;
-                    }
-                    // Read the next value otherwise...
-                }
-                switch (this.type) {
-                    // 32bit signed varint
-                    case ProtoBuf.TYPES["int32"]:
-                        return buffer.readVarint32() | 0;
-
-                    // 32bit unsigned varint
-                    case ProtoBuf.TYPES["uint32"]:
-                        return buffer.readVarint32() >>> 0;
-
-                    // 32bit signed varint zig-zag
-                    case ProtoBuf.TYPES["sint32"]:
-                        return buffer.readVarint32ZigZag() | 0;
-
-                    // Fixed 32bit unsigned
-                    case ProtoBuf.TYPES["fixed32"]:
-                        return buffer.readUint32() >>> 0;
-
-                    case ProtoBuf.TYPES["sfixed32"]:
-                        return buffer.readInt32() | 0;
-
-                    // 64bit signed varint
-                    case ProtoBuf.TYPES["int64"]:
-                        return buffer.readVarint64();
-
-                    // 64bit unsigned varint
-                    case ProtoBuf.TYPES["uint64"]:
-                        return buffer.readVarint64().toUnsigned();
-
-                    // 64bit signed varint zig-zag
-                    case ProtoBuf.TYPES["sint64"]:
-                        return buffer.readVarint64ZigZag();
-
-                    // Fixed 64bit unsigned
-                    case ProtoBuf.TYPES["fixed64"]:
-                        return buffer.readUint64();
-
-                    // Fixed 64bit signed
-                    case ProtoBuf.TYPES["sfixed64"]:
-                        return buffer.readInt64();
-
-                    // Bool varint
-                    case ProtoBuf.TYPES["bool"]:
-                        return !!buffer.readVarint32();
-
-                    // Constant enum value (varint)
-                    case ProtoBuf.TYPES["enum"]:
-                        // The following Builder.Message#set will already throw
-                        return buffer.readVarint32();
-
-                    // 32bit float
-                    case ProtoBuf.TYPES["float"]:
-                        return buffer.readFloat();
-
-                    // 64bit float
-                    case ProtoBuf.TYPES["double"]:
-                        return buffer.readDouble();
-
-                    // Length-delimited string
-                    case ProtoBuf.TYPES["string"]:
-                        return buffer.readVString();
-
-                    // Length-delimited bytes
-                    case ProtoBuf.TYPES["bytes"]: {
-                        nBytes = buffer.readVarint32();
-                        if (buffer.remaining() < nBytes) {
-                            throw(new Error("Illegal number of bytes for "+this.toString(true)+": "+nBytes+" required but got only "+buffer.remaining()));
-                        }
-                        value = buffer.clone(); // Offset already set
-                        value.limit = value.offset+nBytes;
-                        buffer.offset += nBytes;
-                        return value;
-                    }
-
-                    // Length-delimited embedded message
-                    case ProtoBuf.TYPES["message"]: {
-                        nBytes = buffer.readVarint32();
-                        return this.resolvedType.decode(buffer, nBytes);
-                    }
-
-                    // Legacy group
-                    case ProtoBuf.TYPES["group"]:
-                        return this.resolvedType.decode(buffer, -1, this.id);
-                }
-
-                // We should never end here
-                throw(new Error("[INTERNAL] Illegal wire type for "+this.toString(true)+": "+wireType));
-            }
-
-            /**
-             * @alias ProtoBuf.Reflect.Message.Field
-             * @expose
-             */
-            Reflect.Message.Field = Field;
-
-            /**
-             * Constructs a new Enum.
-             * @exports ProtoBuf.Reflect.Enum
-             * @param {!ProtoBuf.Reflect.T} parent Parent Reflect object
-             * @param {string} name Enum name
-             * @param {Object.<string.*>=} options Enum options
-             * @constructor
-             * @extends ProtoBuf.Reflect.Namespace
-             */
-            var Enum = function(parent, name, options) {
-                Namespace.call(this, parent, name, options);
-
-                /**
-                 * @override
-                 */
-                this.className = "Enum";
-
-                /**
-                 * Runtime enum object.
-                 * @type {Object.<string,number>|null}
-                 * @expose
-                 */
-                this.object = null;
-            };
-
-            // Extends Namespace
-            Enum.prototype = Object.create(Namespace.prototype);
-
-            /**
-             * Builds this enum and returns the runtime counterpart.
-             * @return {Object<string,*>}
-             * @expose
-             */
-            Enum.prototype.build = function() {
-                var enm = {};
-                var values = this.getChildren(Enum.Value);
-                for (var i=0; i<values.length; i++) {
-                    enm[values[i]['name']] = values[i]['id'];
-                }
-                if (Object.defineProperty) {
-                    Object.defineProperty(enm, '$options', {
-                        'value': this.buildOpt(),
-                        'enumerable': false,
-                        'configurable': false,
-                        'writable': false
-                    });
-                }
-                return this.object = enm;
-            };
-
-            /**
-             * @alias ProtoBuf.Reflect.Enum
-             * @expose
-             */
-            Reflect.Enum = Enum;
-
-            /**
-             * Constructs a new Enum Value.
-             * @exports ProtoBuf.Reflect.Enum.Value
-             * @param {!ProtoBuf.Reflect.Enum} enm Enum reference
-             * @param {string} name Field name
-             * @param {number} id Unique field id
-             * @constructor
-             * @extends ProtoBuf.Reflect.T
-             */
-            var Value = function(enm, name, id) {
-                T.call(this, enm, name);
-
-                /**
-                 * @override
-                 */
-                this.className = "Enum.Value";
-
-                /**
-                 * Unique enum value id.
-                 * @type {number}
-                 * @expose
-                 */
-                this.id = id;
-            };
-
-            // Extends T
-            Value.prototype = Object.create(T.prototype);
-
-            /**
-             * @alias ProtoBuf.Reflect.Enum.Value
-             * @expose
-             */
-            Reflect.Enum.Value = Value;
-
-            /**
-             * Constructs a new Service.
-             * @exports ProtoBuf.Reflect.Service
-             * @param {!ProtoBuf.Reflect.Namespace} root Root
-             * @param {string} name Service name
-             * @param {Object.<string,*>=} options Options
-             * @constructor
-             * @extends ProtoBuf.Reflect.Namespace
-             */
-            var Service = function(root, name, options) {
-                Namespace.call(this, root, name, options);
-
-                /**
-                 * @override
-                 */
-                this.className = "Service";
-
-                /**
-                 * Built runtime service class.
-                 * @type {?function(new:ProtoBuf.Builder.Service)}
-                 */
-                this.clazz = null;
-            };
-
-            // Extends Namespace
-            Service.prototype = Object.create(Namespace.prototype);
-
-            /**
-             * Builds the service and returns the runtime counterpart, which is a fully functional class.
-             * @see ProtoBuf.Builder.Service
-             * @param {boolean=} rebuild Whether to rebuild or not
-             * @return {Function} Service class
-             * @throws {Error} If the message cannot be built
-             * @expose
-             */
-            Service.prototype.build = function(rebuild) {
-                if (this.clazz && !rebuild) return this.clazz;
-                return this.clazz = (function(ProtoBuf, T) {
-
-                    /**
-                     * Constructs a new runtime Service.
-                     * @name ProtoBuf.Builder.Service
-                     * @param {function(string, ProtoBuf.Builder.Message, function(Error, ProtoBuf.Builder.Message=))=} rpcImpl RPC implementation receiving the method name and the message
-                     * @class Barebone of all runtime services.
-                     * @constructor
-                     * @throws {Error} If the service cannot be created
-                     */
-                    var Service = function(rpcImpl) {
-                        ProtoBuf.Builder.Service.call(this);
-
-                        /**
-                         * Service implementation.
-                         * @name ProtoBuf.Builder.Service#rpcImpl
-                         * @type {!function(string, ProtoBuf.Builder.Message, function(Error, ProtoBuf.Builder.Message=))}
-                         * @expose
-                         */
-                        this.rpcImpl = rpcImpl || function(name, msg, callback) {
-                            // This is what a user has to implement: A function receiving the method name, the actual message to
-                            // send (type checked) and the callback that's either provided with the error as its first
-                            // argument or null and the actual response message.
-                            setTimeout(callback.bind(this, new Error("Not implemented, see: https://github.com/dcodeIO/ProtoBuf.js/wiki/Services")), 0); // Must be async!
-                        };
-                    };
-
-                    // Extends ProtoBuf.Builder.Service
-                    Service.prototype = Object.create(ProtoBuf.Builder.Service.prototype);
-
-                    if (Object.defineProperty) {
-                        Object.defineProperty(Service, "$options", {
-                            "value": T.buildOpt(),
-                            "enumerable": false,
-                            "configurable": false,
-                            "writable": false
-                        });
-                        Object.defineProperty(Service.prototype, "$options", {
-                            "value": Service["$options"],
-                            "enumerable": false,
-                            "configurable": false,
-                            "writable": false
-                        });
-                    }
-
-                    /**
-                     * Asynchronously performs an RPC call using the given RPC implementation.
-                     * @name ProtoBuf.Builder.Service.[Method]
-                     * @function
-                     * @param {!function(string, ProtoBuf.Builder.Message, function(Error, ProtoBuf.Builder.Message=))} rpcImpl RPC implementation
-                     * @param {ProtoBuf.Builder.Message} req Request
-                     * @param {function(Error, (ProtoBuf.Builder.Message|ByteBuffer|Buffer|string)=)} callback Callback receiving
-                     *  the error if any and the response either as a pre-parsed message or as its raw bytes
-                     * @abstract
-                     */
-
-                    /**
-                     * Asynchronously performs an RPC call using the instance's RPC implementation.
-                     * @name ProtoBuf.Builder.Service#[Method]
-                     * @function
-                     * @param {ProtoBuf.Builder.Message} req Request
-                     * @param {function(Error, (ProtoBuf.Builder.Message|ByteBuffer|Buffer|string)=)} callback Callback receiving
-                     *  the error if any and the response either as a pre-parsed message or as its raw bytes
-                     * @abstract
-                     */
-
-                    var rpc = T.getChildren(ProtoBuf.Reflect.Service.RPCMethod);
-                    for (var i=0; i<rpc.length; i++) {
-                        (function(method) {
-
-                            // service#Method(message, callback)
-                            Service.prototype[method.name] = function(req, callback) {
-                                try {
-                                    if (!req || !(req instanceof method.resolvedRequestType.clazz)) {
-                                        setTimeout(callback.bind(this, new Error("Illegal request type provided to service method "+T.name+"#"+method.name)), 0);
-                                    }
-                                    this.rpcImpl(method.fqn(), req, function(err, res) { // Assumes that this is properly async
-                                        if (err) {
-                                            callback(err);
-                                            return;
-                                        }
-                                        try { res = method.resolvedResponseType.clazz.decode(res); } catch (notABuffer) {}
-                                        if (!res || !(res instanceof method.resolvedResponseType.clazz)) {
-                                            callback(new Error("Illegal response type received in service method "+ T.name+"#"+method.name));
-                                            return;
-                                        }
-                                        callback(null, res);
-                                    });
-                                } catch (err) {
-                                    setTimeout(callback.bind(this, err), 0);
-                                }
-                            };
-
-                            // Service.Method(rpcImpl, message, callback)
-                            Service[method.name] = function(rpcImpl, req, callback) {
-                                new Service(rpcImpl)[method.name](req, callback);
-                            };
-
-                            if (Object.defineProperty) {
-                                Object.defineProperty(Service[method.name], "$options", {
-                                    "value": method.buildOpt(),
-                                    "enumerable": false,
-                                    "configurable": false,
-                                    "writable": false
-                                });
-                                Object.defineProperty(Service.prototype[method.name], "$options", {
-                                    "value": Service[method.name]["$options"],
-                                    "enumerable": false,
-                                    "configurable": false,
-                                    "writable": false
-                                });
-                            }
-                        })(rpc[i]);
-                    }
-
-                    return Service;
-
-                })(ProtoBuf, this);
-            };
-
-            /**
-             * @alias ProtoBuf.Reflect.Service
-             * @expose
-             */
-            Reflect.Service = Service;
-
-            /**
-             * Abstract service method.
-             * @exports ProtoBuf.Reflect.Service.Method
-             * @param {!ProtoBuf.Reflect.Service} svc Service
-             * @param {string} name Method name
-             * @param {Object.<string,*>=} options Options
-             * @constructor
-             * @extends ProtoBuf.Reflect.T
-             */
-            var Method = function(svc, name, options) {
-                T.call(this, svc, name);
-
-                /**
-                 * @override
-                 */
-                this.className = "Service.Method";
-
-                /**
-                 * Options.
-                 * @type {Object.<string, *>}
-                 * @expose
-                 */
-                this.options = options || {};
-            };
-
-            // Extends T
-            Method.prototype = Object.create(T.prototype);
-
-            /**
-             * Builds the method's '$options' property.
-             * @name ProtoBuf.Reflect.Service.Method#buildOpt
-             * @function
-             * @return {Object.<string,*>}
-             */
-            Method.prototype.buildOpt = Namespace.prototype.buildOpt;
-
-            /**
-             * @alias ProtoBuf.Reflect.Service.Method
-             * @expose
-             */
-            Reflect.Service.Method = Method;
-
-            /**
-             * RPC service method.
-             * @exports ProtoBuf.Reflect.Service.RPCMethod
-             * @param {!ProtoBuf.Reflect.Service} svc Service
-             * @param {string} name Method name
-             * @param {string} request Request message name
-             * @param {string} response Response message name
-             * @param {Object.<string,*>=} options Options
-             * @constructor
-             * @extends ProtoBuf.Reflect.Service.Method
-             */
-            var RPCMethod = function(svc, name, request, response, options) {
-                Method.call(this, svc, name, options);
-
-                /**
-                 * @override
-                 */
-                this.className = "Service.RPCMethod";
-
-                /**
-                 * Request message name.
-                 * @type {string}
-                 * @expose
-                 */
-                this.requestName = request;
-
-                /**
-                 * Response message name.
-                 * @type {string}
-                 * @expose
-                 */
-                this.responseName = response;
-
-                /**
-                 * Resolved request message type.
-                 * @type {ProtoBuf.Reflect.Message}
-                 * @expose
-                 */
-                this.resolvedRequestType = null;
-
-                /**
-                 * Resolved response message type.
-                 * @type {ProtoBuf.Reflect.Message}
-                 * @expose
-                 */
-                this.resolvedResponseType = null;
-            };
-
-            // Extends Method
-            RPCMethod.prototype = Object.create(Method.prototype);
-
-            /**
-             * @alias ProtoBuf.Reflect.Service.RPCMethod
-             * @expose
-             */
-            Reflect.Service.RPCMethod = RPCMethod;
-
-            return Reflect;
-        })(ProtoBuf);
-
-        /**
-         * @alias ProtoBuf.Builder
-         * @expose
-         */
-        ProtoBuf.Builder = (function(ProtoBuf, Lang, Reflect) {
-            "use strict";
-
-            /**
-             * Constructs a new Builder.
-             * @exports ProtoBuf.Builder
-             * @class Provides the functionality to build protocol messages.
-             * @constructor
-             */
-            var Builder = function() {
-
-                /**
-                 * Namespace.
-                 * @type {ProtoBuf.Reflect.Namespace}
-                 * @expose
-                 */
-                this.ns = new Reflect.Namespace(null, ""); // Global namespace
-
-                /**
-                 * Namespace pointer.
-                 * @type {ProtoBuf.Reflect.T}
-                 * @expose
-                 */
-                this.ptr = this.ns;
-
-                /**
-                 * Resolved flag.
-                 * @type {boolean}
-                 * @expose
-                 */
-                this.resolved = false;
-
-                /**
-                 * The current building result.
-                 * @type {Object.<string,ProtoBuf.Builder.Message|Object>|null}
-                 * @expose
-                 */
-                this.result = null;
-
-                /**
-                 * Imported files.
-                 * @type {Array.<string>}
-                 * @expose
-                 */
-                this.files = {};
-
-                /**
-                 * Import root override.
-                 * @type {?string}
-                 * @expose
-                 */
-                this.importRoot = null;
-            };
-
-            /**
-             * Resets the pointer to the root namespace.
-             * @expose
-             */
-            Builder.prototype.reset = function() {
-                this.ptr = this.ns;
-            };
-
-            /**
-             * Defines a package on top of the current pointer position and places the pointer on it.
-             * @param {string} pkg
-             * @param {Object.<string,*>=} options
-             * @return {ProtoBuf.Builder} this
-             * @throws {Error} If the package name is invalid
-             * @expose
-             */
-            Builder.prototype.define = function(pkg, options) {
-                if (typeof pkg !== 'string' || !Lang.TYPEREF.test(pkg)) {
-                    throw(new Error("Illegal package name: "+pkg));
-                }
-                var part = pkg.split("."), i;
-                for (i=0; i<part.length; i++) { // To be absolutely sure
-                    if (!Lang.NAME.test(part[i])) {
-                        throw(new Error("Illegal package name: "+part[i]));
-                    }
-                }
-                for (i=0; i<part.length; i++) {
-                    if (!this.ptr.hasChild(part[i])) { // Keep existing namespace
-                        this.ptr.addChild(new Reflect.Namespace(this.ptr, part[i], options));
-                    }
-                    this.ptr = this.ptr.getChild(part[i]);
-                }
-                return this;
-            };
-
-            /**
-             * Tests if a definition is a valid message definition.
-             * @param {Object.<string,*>} def Definition
-             * @return {boolean} true if valid, else false
-             * @expose
-             */
-            Builder.isValidMessage = function(def) {
-                // Messages require a string name
-                if (typeof def["name"] !== 'string' || !Lang.NAME.test(def["name"])) {
-                    return false;
-                }
-                // Messages must not contain values (that'd be an enum) or methods (that'd be a service)
-                if (typeof def["values"] !== 'undefined' || typeof def["rpc"] !== 'undefined') {
-                    return false;
-                }
-                // Fields, enums and messages are arrays if provided
-                var i;
-                if (typeof def["fields"] !== 'undefined') {
-                    if (!ProtoBuf.Util.isArray(def["fields"])) {
-                        return false;
-                    }
-                    var ids = [], id; // IDs must be unique
-                    for (i=0; i<def["fields"].length; i++) {
-                        if (!Builder.isValidMessageField(def["fields"][i])) {
-                            return false;
-                        }
-                        id = parseInt(def["fields"][i]["id"], 10);
-                        if (ids.indexOf(id) >= 0) {
-                            return false;
-                        }
-                        ids.push(id);
-                    }
-                    ids = null;
-                }
-                if (typeof def["enums"] !== 'undefined') {
-                    if (!ProtoBuf.Util.isArray(def["enums"])) {
-                        return false;
-                    }
-                    for (i=0; i<def["enums"].length; i++) {
-                        if (!Builder.isValidEnum(def["enums"][i])) {
-                            return false;
-                        }
-                    }
-                }
-                if (typeof def["messages"] !== 'undefined') {
-                    if (!ProtoBuf.Util.isArray(def["messages"])) {
-                        return false;
-                    }
-                    for (i=0; i<def["messages"].length; i++) {
-                        if (!Builder.isValidMessage(def["messages"][i]) && !Builder.isValidExtend(def["messages"][i])) {
-                            return false;
-                        }
-                    }
-                }
-                if (typeof def["extensions"] !== 'undefined') {
-                    if (!ProtoBuf.Util.isArray(def["extensions"]) || def["extensions"].length !== 2 || typeof def["extensions"][0] !== 'number' || typeof def["extensions"][1] !== 'number') {
-                        return false;
-                    }
-                }
-                return true;
-            };
-
-            /**
-             * Tests if a definition is a valid message field definition.
-             * @param {Object} def Definition
-             * @return {boolean} true if valid, else false
-             * @expose
-             */
-            Builder.isValidMessageField = function(def) {
-                // Message fields require a string rule, name and type and an id
-                if (typeof def["rule"] !== 'string' || typeof def["name"] !== 'string' || typeof def["type"] !== 'string' || typeof def["id"] === 'undefined') {
-                    return false;
-                }
-                if (!Lang.RULE.test(def["rule"]) || !Lang.NAME.test(def["name"]) || !Lang.TYPEREF.test(def["type"]) || !Lang.ID.test(""+def["id"])) {
-                    return false;
-                }
-                if (typeof def["options"] !== 'undefined') {
-                    // Options are objects
-                    if (typeof def["options"] !== 'object') {
-                        return false;
-                    }
-                    // Options are <string,string|number|boolean>
-                    var keys = Object.keys(def["options"]);
-                    for (var i=0, key; i<keys.length; i++)
-                        if (typeof (key = keys[i]) !== 'string' || (typeof def["options"][key] !== 'string' && typeof def["options"][key] !== 'number' && typeof def["options"][key] !== 'boolean'))
-                            return false;
-                }
-                return true;
-            };
-
-            /**
-             * Tests if a definition is a valid enum definition.
-             * @param {Object} def Definition
-             * @return {boolean} true if valid, else false
-             * @expose
-             */
-            Builder.isValidEnum = function(def) {
-                // Enums require a string name
-                if (typeof def["name"] !== 'string' || !Lang.NAME.test(def["name"])) {
-                    return false;
-                }
-                // Enums require at least one value
-                if (typeof def["values"] === 'undefined' || !ProtoBuf.Util.isArray(def["values"]) || def["values"].length == 0) {
-                    return false;
-                }
-                for (var i=0; i<def["values"].length; i++) {
-                    // Values are objects
-                    if (typeof def["values"][i] != "object") {
-                        return false;
-                    }
-                    // Values require a string name and an id
-                    if (typeof def["values"][i]["name"] !== 'string' || typeof def["values"][i]["id"] === 'undefined') {
-                        return false;
-                    }
-                    if (!Lang.NAME.test(def["values"][i]["name"]) || !Lang.NEGID.test(""+def["values"][i]["id"])) {
-                        return false;
-                    }
-                }
-                // It's not important if there are other fields because ["values"] is already unique
-                return true;
-            };
-
-            /**
-             * Creates ths specified protocol types at the current pointer position.
-             * @param {Array.<Object.<string,*>>} defs Messages, enums or services to create
-             * @return {ProtoBuf.Builder} this
-             * @throws {Error} If a message definition is invalid
-             * @expose
-             */
-            Builder.prototype.create = function(defs) {
-                if (!defs) return; // Nothing to create
-                if (!ProtoBuf.Util.isArray(defs)) {
-                    defs = [defs];
-                }
-                if (defs.length == 0) return;
-
-                // It's quite hard to keep track of scopes and memory here, so let's do this iteratively.
-                var stack = [], def, obj, subObj, i, j;
-                stack.push(defs); // One level [a, b, c]
-                while (stack.length > 0) {
-                    defs = stack.pop();
-                    if (ProtoBuf.Util.isArray(defs)) { // Stack always contains entire namespaces
-                        while (defs.length > 0) {
-                            def = defs.shift(); // Namespace always contains an array of messages, enums and services
-                            if (Builder.isValidMessage(def)) {
-                                obj = new Reflect.Message(this.ptr, def["name"], def["options"], def["isGroup"]);
-                                // Create fields
-                                if (def["fields"] && def["fields"].length > 0) {
-                                    for (i=0; i<def["fields"].length; i++) { // i=Fields
-                                        if (obj.hasChild(def['fields'][i]['id'])) {
-                                            throw(new Error("Duplicate field id in message "+obj.name+": "+def['fields'][i]['id']));
-                                        }
-                                        if (def["fields"][i]["options"]) {
-                                            subObj = Object.keys(def["fields"][i]["options"]);
-                                            for (j=0; j<subObj.length; j++) { // j=Option names
-                                                if (typeof subObj[j] !== 'string')
-                                                    throw(new Error("Illegal field option name in message "+obj.name+"#"+def["fields"][i]["name"]+": "+subObj[j]));
-                                                if (typeof def["fields"][i]["options"][subObj[j]] !== 'string' && typeof def["fields"][i]["options"][subObj[j]] !== 'number' && typeof def["fields"][i]["options"][subObj[j]] !== 'boolean')
-                                                    throw(new Error("Illegal field option value in message "+obj.name+"#"+def["fields"][i]["name"]+"#"+subObj[j]+": "+def["fields"][i]["options"][subObj[j]]));
-                                            }
-                                            subObj = null;
-                                        }
-                                        obj.addChild(new Reflect.Message.Field(obj, def["fields"][i]["rule"], def["fields"][i]["type"], def["fields"][i]["name"], def["fields"][i]["id"], def["fields"][i]["options"]));
-                                    }
-                                }
-                                // Push enums and messages to stack
-                                subObj = [];
-                                if (typeof def["enums"] !== 'undefined' && def['enums'].length > 0) {
-                                    for (i=0; i<def["enums"].length; i++) {
-                                        subObj.push(def["enums"][i]);
-                                    }
-                                }
-                                if (def["messages"] && def["messages"].length > 0) {
-                                    for (i=0; i<def["messages"].length; i++) {
-                                        subObj.push(def["messages"][i]);
-                                    }
-                                }
-                                // Set extension range
-                                if (def["extensions"]) {
-                                    obj.extensions = def["extensions"];
-                                    if (obj.extensions[0] < ProtoBuf.ID_MIN) {
-                                        obj.extensions[0] = ProtoBuf.ID_MIN;
-                                    }
-                                    if (obj.extensions[1] > ProtoBuf.ID_MAX) {
-                                        obj.extensions[1] = ProtoBuf.ID_MAX;
-                                    }
-                                }
-                                this.ptr.addChild(obj); // Add to current namespace
-                                if (subObj.length > 0) {
-                                    stack.push(defs); // Push the current level back
-                                    defs = subObj; // Continue processing sub level
-                                    subObj = null;
-                                    this.ptr = obj; // And move the pointer to this namespace
-                                    obj = null;
-                                    continue;
-                                }
-                                subObj = null;
-                                obj = null;
-                            } else if (Builder.isValidEnum(def)) {
-                                obj = new Reflect.Enum(this.ptr, def["name"], def["options"]);
-                                for (i=0; i<def["values"].length; i++) {
-                                    obj.addChild(new Reflect.Enum.Value(obj, def["values"][i]["name"], def["values"][i]["id"]));
-                                }
-                                this.ptr.addChild(obj);
-                                obj = null;
-                            } else if (Builder.isValidService(def)) {
-                                obj = new Reflect.Service(this.ptr, def["name"], def["options"]);
-                                for (i in def["rpc"]) {
-                                    if (def["rpc"].hasOwnProperty(i)) {
-                                        obj.addChild(new Reflect.Service.RPCMethod(obj, i, def["rpc"][i]["request"], def["rpc"][i]["response"], def["rpc"][i]["options"]));
-                                    }
-                                }
-                                this.ptr.addChild(obj);
-                                obj = null;
-                            } else if (Builder.isValidExtend(def)) {
-                                obj = this.ptr.resolve(def["ref"]);
-                                if (obj) {
-                                    for (i=0; i<def["fields"].length; i++) { // i=Fields
-                                        if (obj.hasChild(def['fields'][i]['id'])) {
-                                            throw(new Error("Duplicate extended field id in message "+obj.name+": "+def['fields'][i]['id']));
-                                        }
-                                        if (def['fields'][i]['id'] < obj.extensions[0] || def['fields'][i]['id'] > obj.extensions[1]) {
-                                            throw(new Error("Illegal extended field id in message "+obj.name+": "+def['fields'][i]['id']+" ("+obj.extensions.join(' to ')+" expected)"));
-                                        }
-                                        obj.addChild(new Reflect.Message.Field(obj, def["fields"][i]["rule"], def["fields"][i]["type"], def["fields"][i]["name"], def["fields"][i]["id"], def["fields"][i]["options"]));
-                                    }
-                                    /* if (this.ptr instanceof Reflect.Message) {
-                                        this.ptr.addChild(obj); // Reference the extended message here to enable proper lookups
-                                    } */
-                                } else {
-                                    if (!/\.?google\.protobuf\./.test(def["ref"])) { // Silently skip internal extensions
-                                        throw(new Error("Extended message "+def["ref"]+" is not defined"));
-                                    }
-                                }
-                            } else {
-                                throw(new Error("Not a valid message, enum, service or extend definition: "+JSON.stringify(def)));
-                            }
-                            def = null;
-                        }
-                        // Break goes here
-                    } else {
-                        throw(new Error("Not a valid namespace definition: "+JSON.stringify(defs)));
-                    }
-                    defs = null;
-                    this.ptr = this.ptr.parent; // This namespace is s done
-                }
-                this.resolved = false; // Require re-resolve
-                this.result = null; // Require re-build
-                return this;
-            };
-
-            /**
-             * Tests if the specified file is a valid import.
-             * @param {string} filename
-             * @returns {boolean} true if valid, false if it should be skipped
-             * @expose
-             */
-            Builder.isValidImport = function(filename) {
-                // Ignore google/protobuf/descriptor.proto (for example) as it makes use of low-level
-                // bootstrapping directives that are not required and therefore cannot be parsed by ProtoBuf.js.
-                return !(/google\/protobuf\//.test(filename));
-            };
-
-            /**
-             * Imports another definition into this builder.
-             * @param {Object.<string,*>} json Parsed import
-             * @param {(string|{root: string, file: string})=} filename Imported file name
-             * @return {ProtoBuf.Builder} this
-             * @throws {Error} If the definition or file cannot be imported
-             * @expose
-             */
-            Builder.prototype["import"] = function(json, filename) {
-                if (typeof filename === 'string') {
-                    if (ProtoBuf.Util.IS_NODE) {
-                        var path = require("path");
-                        filename = path.resolve(filename);
-                    }
-                    if (!!this.files[filename]) {
-                        this.reset();
-                        return this; // Skip duplicate imports
-                    }
-                    this.files[filename] = true;
-                }
-                if (!!json['imports'] && json['imports'].length > 0) {
-                    var importRoot, delim = '/', resetRoot = false;
-                    if (typeof filename === 'object') { // If an import root is specified, override
-                        this.importRoot = filename["root"]; resetRoot = true; // ... and reset afterwards
-                        importRoot = this.importRoot;
-                        filename = filename["file"];
-                        if (importRoot.indexOf("\\") >= 0 || filename.indexOf("\\") >= 0) delim = '\\';
-                    } else if (typeof filename === 'string') {
-                        if (this.importRoot) { // If import root is overridden, use it
-                            importRoot = this.importRoot;
-                        } else { // Otherwise compute from filename
-                            if (filename.indexOf("/") >= 0) { // Unix
-                                importRoot = filename.replace(/\/[^\/]*$/, "");
-                                if (/* /file.proto */ importRoot === "") importRoot = "/";
-                            } else if (filename.indexOf("\\") >= 0) { // Windows
-                                importRoot = filename.replace(/\\[^\\]*$/, ""); delim = '\\';
-                            } else {
-                                importRoot = ".";
-                            }
-                        }
-                    } else {
-                        importRoot = null;
-                    }
-
-                    for (var i=0; i<json['imports'].length; i++) {
-                        if (typeof json['imports'][i] === 'string') { // Import file
-                            if (!importRoot) {
-                                throw(new Error("Cannot determine import root: File name is unknown"));
-                            }
-                            var importFilename = importRoot+delim+json['imports'][i];
-                            if (!Builder.isValidImport(importFilename)) continue; // e.g. google/protobuf/*
-                            if (/\.proto$/i.test(importFilename) && !ProtoBuf.DotProto) {     // If this is a NOPARSE build
-                                importFilename = importFilename.replace(/\.proto$/, ".json"); // always load the JSON file
-                            }
-                            var contents = ProtoBuf.Util.fetch(importFilename);
-                            if (contents === null) {
-                                throw(new Error("Failed to import '"+importFilename+"' in '"+filename+"': File not found"));
-                            }
-                            if (/\.json$/i.test(importFilename)) { // Always possible
-                                this["import"](JSON.parse(contents+""), importFilename); // May throw
-                            } else {
-                                this["import"]((new ProtoBuf.DotProto.Parser(contents+"")).parse(), importFilename); // May throw
-                            }
-                        } else { // Import structure
-                            if (!filename) {
-                                this["import"](json['imports'][i]);
-                            } else if (/\.(\w+)$/.test(filename)) { // With extension: Append _importN to the name portion to make it unique
-                                this["import"](json['imports'][i], filename.replace(/^(.+)\.(\w+)$/, function($0, $1, $2) { return $1+"_import"+i+"."+$2; }));
-                            } else { // Without extension: Append _importN to make it unique
-                                this["import"](json['imports'][i], filename+"_import"+i);
-                            }
-                        }
-                    }
-                    if (resetRoot) { // Reset import root override when all imports are done
-                        this.importRoot = null;
-                    }
-                }
-                if (!!json['messages']) {
-                    if (!!json['package']) this.define(json['package'], json["options"]);
-                    this.create(json['messages']);
-                    this.reset();
-                }
-                if (!!json['enums']) {
-                    if (!!json['package']) this.define(json['package'], json["options"]);
-                    this.create(json['enums']);
-                    this.reset();
-                }
-                if (!!json['services']) {
-                    if (!!json['package']) this.define(json['package'], json["options"]);
-                    this.create(json['services']);
-                    this.reset();
-                }
-                if (!!json['extends']) {
-                    if (!!json['package']) this.define(json['package'], json["options"]);
-                    this.create(json['extends']);
-                    this.reset();
-                }
-                return this;
-            };
-
-            /**
-             * Tests if a definition is a valid service definition.
-             * @param {Object} def Definition
-             * @return {boolean} true if valid, else false
-             * @expose
-             */
-            Builder.isValidService = function(def) {
-                // Services require a string name and an rpc object
-                return !(typeof def["name"] !== 'string' || !Lang.NAME.test(def["name"]) || typeof def["rpc"] !== 'object');
-            };
-
-            /**
-             * Tests if a definition is a valid extension.
-             * @param {Object} def Definition
-             * @returns {boolean} true if valid, else false
-             * @expose
-            */
-            Builder.isValidExtend = function(def) {
-                if (typeof def["ref"] !== 'string' || !Lang.TYPEREF.test(def["name"])) {
-                    return false;
-                }
-                var i;
-                if (typeof def["fields"] !== 'undefined') {
-                    if (!ProtoBuf.Util.isArray(def["fields"])) {
-                        return false;
-                    }
-                    var ids = [], id; // IDs must be unique (does not yet test for the extended message's ids)
-                    for (i=0; i<def["fields"].length; i++) {
-                        if (!Builder.isValidMessageField(def["fields"][i])) {
-                            return false;
-                        }
-                        id = parseInt(def["id"], 10);
-                        if (ids.indexOf(id) >= 0) {
-                            return false;
-                        }
-                        ids.push(id);
-                    }
-                    ids = null;
-                }
-                return true;
-            };
-
-            /**
-             * Resolves all namespace objects.
-             * @throws {Error} If a type cannot be resolved
-             * @expose
-             */
-            Builder.prototype.resolveAll = function() {
-                // Resolve all reflected objects
-                var res;
-                if (this.ptr == null || typeof this.ptr.type === 'object') return; // Done (already resolved)
-                if (this.ptr instanceof Reflect.Namespace) {
-                    // Build all children
-                    var children = this.ptr.getChildren();
-                    for (var i=0; i<children.length; i++) {
-                        this.ptr = children[i];
-                        this.resolveAll();
-                    }
-                } else if (this.ptr instanceof Reflect.Message.Field) {
-                    if (!Lang.TYPE.test(this.ptr.type)) { // Resolve type...
-                        if (!Lang.TYPEREF.test(this.ptr.type)) {
-                            throw(new Error("Illegal type reference in "+this.ptr.toString(true)+": "+this.ptr.type));
-                        }
-                        res = this.ptr.parent.resolve(this.ptr.type, true);
-                        if (!res) {
-                            throw(new Error("Unresolvable type reference in "+this.ptr.toString(true)+": "+this.ptr.type));
-                        }
-                        this.ptr.resolvedType = res;
-                        if (res instanceof Reflect.Enum) {
-                            this.ptr.type = ProtoBuf.TYPES["enum"];
-                        } else if (res instanceof Reflect.Message) {
-                            this.ptr.type = res.isGroup ? ProtoBuf.TYPES["group"] : ProtoBuf.TYPES["message"];
-                        } else {
-                            throw(new Error("Illegal type reference in "+this.ptr.toString(true)+": "+this.ptr.type));
-                        }
-                    } else {
-                        this.ptr.type = ProtoBuf.TYPES[this.ptr.type];
-                    }
-                } else if (this.ptr instanceof ProtoBuf.Reflect.Enum.Value) {
-                    // No need to build enum values (built in enum)
-                } else if (this.ptr instanceof ProtoBuf.Reflect.Service.Method) {
-                    if (this.ptr instanceof ProtoBuf.Reflect.Service.RPCMethod) {
-                        res = this.ptr.parent.resolve(this.ptr.requestName);
-                        if (!res || !(res instanceof ProtoBuf.Reflect.Message)) {
-                            throw(new Error("Illegal request type reference in "+this.ptr.toString(true)+": "+this.ptr.requestName));
-                        }
-                        this.ptr.resolvedRequestType = res;
-                        res = this.ptr.parent.resolve(this.ptr.responseName);
-                        if (!res || !(res instanceof ProtoBuf.Reflect.Message)) {
-                            throw(new Error("Illegal response type reference in "+this.ptr.toString(true)+": "+this.ptr.responseName));
-                        }
-                        this.ptr.resolvedResponseType = res;
-                    } else {
-                        // Should not happen as nothing else is implemented
-                        throw(new Error("Illegal service method type in "+this.ptr.toString(true)));
-                    }
-                } else {
-                    throw(new Error("Illegal object type in namespace: "+typeof(this.ptr)+":"+this.ptr));
-                }
-                this.reset();
-            };
-
-            /**
-             * Builds the protocol. This will first try to resolve all definitions and, if this has been successful,
-             * return the built package.
-             * @param {string=} path Specifies what to return. If omitted, the entire namespace will be returned.
-             * @return {ProtoBuf.Builder.Message|Object.<string,*>}
-             * @throws {Error} If a type could not be resolved
-             * @expose
-             */
-            Builder.prototype.build = function(path) {
-                this.reset();
-                if (!this.resolved) {
-                    this.resolveAll();
-                    this.resolved = true;
-                    this.result = null; // Require re-build
-                }
-                if (this.result == null) { // (Re-)Build
-                    this.result = this.ns.build();
-                }
-                if (!path) {
-                    return this.result;
-                } else {
-                    var part = path.split(".");
-                    var ptr = this.result; // Build namespace pointer (no hasChild etc.)
-                    for (var i=0; i<part.length; i++) {
-                        if (ptr[part[i]]) {
-                            ptr = ptr[part[i]];
-                        } else {
-                            ptr = null;
-                            break;
-                        }
-                    }
-                    return ptr;
-                }
-            };
-
-            /**
-             * Similar to {@link ProtoBuf.Builder#build}, but looks up the internal reflection descriptor.
-             * @param {string=} path Specifies what to return. If omitted, the entire namespace wiil be returned.
-             * @return {ProtoBuf.Reflect.T} Reflection descriptor or `null` if not found
-             */
-            Builder.prototype.lookup = function(path) {
-                return path ? this.ns.resolve(path) : this.ns;
-            };
-
-            /**
-             * Returns a string representation of this object.
-             * @return {string} String representation as of "Builder"
-             * @expose
-             */
-            Builder.prototype.toString = function() {
-                return "Builder";
-            };
-
-            // Pseudo types documented in Reflect.js.
-            // Exist for the sole purpose of being able to "... instanceof ProtoBuf.Builder.Message" etc.
-            Builder.Message = function() {};
-            Builder.Service = function() {};
-
-            return Builder;
-
-        })(ProtoBuf, ProtoBuf.Lang, ProtoBuf.Reflect);
-
-
-        /**
-         * Loads a .proto string and returns the Builder.
-         * @param {string} proto .proto file contents
-         * @param {(ProtoBuf.Builder|string|{root: string, file: string})=} builder Builder to append to. Will create a new one if omitted.
-         * @param {(string|{root: string, file: string})=} filename The corresponding file name if known. Must be specified for imports.
-         * @return {ProtoBuf.Builder} Builder to create new messages
-         * @throws {Error} If the definition cannot be parsed or built
-         * @expose
-         */
-        ProtoBuf.loadProto = function(proto, builder, filename) {
-            if (typeof builder == 'string' || (builder && typeof builder["file"] === 'string' && typeof builder["root"] === 'string')) {
-                filename = builder;
-                builder = null;
-            }
-            return ProtoBuf.loadJson((new ProtoBuf.DotProto.Parser(proto+"")).parse(), builder, filename);
-        };
-
-        /**
-         * Loads a .proto string and returns the Builder. This is an alias of {@link ProtoBuf.loadProto}.
-         * @function
-         * @param {string} proto .proto file contents
-         * @param {(ProtoBuf.Builder|string)=} builder Builder to append to. Will create a new one if omitted.
-         * @param {(string|{root: string, file: string})=} filename The corresponding file name if known. Must be specified for imports.
-         * @return {ProtoBuf.Builder} Builder to create new messages
-         * @throws {Error} If the definition cannot be parsed or built
-         * @expose
-         */
-        ProtoBuf.protoFromString = ProtoBuf.loadProto; // Legacy
-
-        /**
-         * Loads a .proto file and returns the Builder.
-         * @param {string|{root: string, file: string}} filename Path to proto file or an object specifying 'file' with
-         *  an overridden 'root' path for all imported files.
-         * @param {function(ProtoBuf.Builder)=} callback Callback that will receive the Builder as its first argument.
-         *   If the request has failed, builder will be NULL. If omitted, the file will be read synchronously and this
-         *   function will return the Builder or NULL if the request has failed.
-         * @param {ProtoBuf.Builder=} builder Builder to append to. Will create a new one if omitted.
-         * @return {?ProtoBuf.Builder|undefined} The Builder if synchronous (no callback specified, will be NULL if the
-         *   request has failed), else undefined
-         * @expose
-         */
-        ProtoBuf.loadProtoFile = function(filename, callback, builder) {
-            if (callback && typeof callback === 'object') {
-                builder = callback;
-                callback = null;
-            } else if (!callback || typeof callback !== 'function') {
-                callback = null;
-            }
-            if (callback) {
-                ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename, function(contents) {
-                    callback(ProtoBuf.loadProto(contents, builder, filename));
-                });
-            } else {
-                var contents = ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename);
-                return contents !== null ? ProtoBuf.protoFromString(contents, builder, filename) : null;
-            }
-        };
-
-        /**
-         * Loads a .proto file and returns the Builder. This is an alias of {@link ProtoBuf.loadProtoFile}.
-         * @function
-         * @param {string|{root: string, file: string}} filename Path to proto file or an object specifying 'file' with
-         *  an overridden 'root' path for all imported files.
-         * @param {function(ProtoBuf.Builder)=} callback Callback that will receive the Builder as its first argument.
-         *   If the request has failed, builder will be NULL. If omitted, the file will be read synchronously and this
-         *   function will return the Builder or NULL if the request has failed.
-         * @param {ProtoBuf.Builder=} builder Builder to append to. Will create a new one if omitted.
-         * @return {?ProtoBuf.Builder|undefined} The Builder if synchronous (no callback specified, will be NULL if the
-         *   request has failed), else undefined
-         * @expose
-         */
-        ProtoBuf.protoFromFile = ProtoBuf.loadProtoFile; // Legacy
-
-
-        /**
-         * Constructs a new Builder with the specified package defined.
-         * @param {string=} pkg Package name as fully qualified name, e.g. "My.Game". If no package is specified, the
-         * builder will only contain a global namespace.
-         * @param {Object.<string,*>=} options Top level options
-         * @return {ProtoBuf.Builder} New Builder
-         * @expose
-         */
-        ProtoBuf.newBuilder = function(pkg, options) {
-            var builder = new ProtoBuf.Builder();
-            if (typeof pkg !== 'undefined' && pkg !== null) {
-                builder.define(pkg, options);
-            }
-            return builder;
-        };
-
-        /**
-         * Loads a .json definition and returns the Builder.
-         * @param {!*|string} json JSON definition
-         * @param {(ProtoBuf.Builder|string|{root: string, file: string})=} builder Builder to append to. Will create a new one if omitted.
-         * @param {(string|{root: string, file: string})=} filename The corresponding file name if known. Must be specified for imports.
-         * @return {ProtoBuf.Builder} Builder to create new messages
-         * @throws {Error} If the definition cannot be parsed or built
-         * @expose
-         */
-        ProtoBuf.loadJson = function(json, builder, filename) {
-            if (typeof builder === 'string' || (builder && typeof builder["file"] === 'string' && typeof builder["root"] === 'string')) {
-                filename = builder;
-                builder = null;
-            }
-            if (!builder || typeof builder !== 'object') builder = ProtoBuf.newBuilder();
-            if (typeof json === 'string') json = JSON.parse(json);
-            builder["import"](json, filename);
-            builder.resolveAll();
-            builder.build();
-            return builder;
-        };
-
-        /**
-         * Loads a .json file and returns the Builder.
-         * @param {string|{root: string, file: string}} filename Path to json file or an object specifying 'file' with
-         *  an overridden 'root' path for all imported files.
-         * @param {function(ProtoBuf.Builder)=} callback Callback that will receive the Builder as its first argument.
-         *   If the request has failed, builder will be NULL. If omitted, the file will be read synchronously and this
-         *   function will return the Builder or NULL if the request has failed.
-         * @param {ProtoBuf.Builder=} builder Builder to append to. Will create a new one if omitted.
-         * @return {?ProtoBuf.Builder|undefined} The Builder if synchronous (no callback specified, will be NULL if the
-         *   request has failed), else undefined
-         * @expose
-         */
-        ProtoBuf.loadJsonFile = function(filename, callback, builder) {
-            if (callback && typeof callback === 'object') {
-                builder = callback;
-                callback = null;
-            } else if (!callback || typeof callback !== 'function') {
-                callback = null;
-            }
-            if (callback) {
-                ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename, function(contents) {
-                    try {
-                        callback(ProtoBuf.loadJson(JSON.parse(contents), builder, filename));
-                    } catch (err) {
-                        callback(err);
-                    }
-                });
-            } else {
-                var contents = ProtoBuf.Util.fetch(typeof filename === 'object' ? filename["root"]+"/"+filename["file"] : filename);
-                return contents !== null ? ProtoBuf.loadJson(JSON.parse(contents), builder, filename) : null;
-            }
-        };
-
-        return ProtoBuf;
-    }
-
-    // Enable module loading if available
-    if (typeof module !== 'undefined' && module["exports"]) { // CommonJS
-        module["exports"] = loadProtoBuf(require("bytebuffer"));
-    } else if (typeof define === 'function' && define["amd"]) { // AMD
-        define("ProtoBuf", ["ByteBuffer"], loadProtoBuf);
-    } else { // Otherwise install globally
-        if (!global["dcodeIO"])
-            global["dcodeIO"] = {};
-        global["dcodeIO"]["ProtoBuf"] = loadProtoBuf(global["dcodeIO"]["ByteBuffer"]);
-    }
-
-})(this);
-
-},{"bytebuffer":96,"fs":112,"path":210}],96:[function(require,module,exports){
-/*
- ByteBuffer.js (c) 2013-2014 Daniel Wirtz <dcode@dcode.io>
- This version of ByteBuffer.js uses an ArrayBuffer (AB) as its backing buffer and is compatible with modern browsers.
- Released under the Apache License, Version 2.0
- see: https://github.com/dcodeIO/ByteBuffer.js for details
-*/
-(function(r){function s(l){function d(a,b,c){"undefined"===typeof a&&(a=d.DEFAULT_CAPACITY);"undefined"===typeof b&&(b=d.DEFAULT_ENDIAN);"undefined"===typeof c&&(c=d.DEFAULT_NOASSERT);if(!c){a|=0;if(0>a)throw new RangeError("Illegal capacity: 0 <= "+a);if("boolean"!==typeof b)throw new TypeError("Illegal littleEndian: Not a boolean");if("boolean"!==typeof c)throw new TypeError("Illegal noAssert: Not a boolean");}this.buffer=0===a?r:new ArrayBuffer(a);this.view=0===a?null:new DataView(this.buffer);
-this.offset=0;this.markedOffset=-1;this.limit=a;this.littleEndian="undefined"!==typeof b?!!b:!1;this.noAssert=!!c}d.VERSION="3.1.1";d.LITTLE_ENDIAN=!0;d.BIG_ENDIAN=!1;d.DEFAULT_CAPACITY=16;d.DEFAULT_ENDIAN=d.BIG_ENDIAN;d.DEFAULT_NOASSERT=!1;d.Long=l||null;var r=new ArrayBuffer(0);d.allocate=function(a,b,c){return new d(a,b,c)};d.concat=function(a,b,c,e){if("boolean"===typeof b||"string"!==typeof b)e=c,c=b,b=void 0;for(var h=0,f=0,g=a.length,n;f<g;++f)d.isByteBuffer(a[f])||(a[f]=d.wrap(a[f],b)),n=
-a[f].limit-a[f].offset,0<n&&(h+=n);if(0===h)return new d(0,c,e);b=new d(h,c,e);e=new Uint8Array(b.buffer);for(f=0;f<g;)c=a[f++],n=c.limit-c.offset,0>=n||(e.set((new Uint8Array(c.buffer)).subarray(c.offset,c.limit),b.offset),b.offset+=n);b.limit=b.offset;b.offset=0;return b};d.isByteBuffer=function(a){return a&&a instanceof d};d.type=function(){return ArrayBuffer};d.wrap=function(a,b,c,e){"string"!==typeof b&&(e=c,c=b,b=void 0);if("string"===typeof a)switch("undefined"===typeof b&&(b="utf8"),b){case "base64":return d.fromBase64(a,
-c);case "hex":return d.fromHex(a,c);case "binary":return d.fromBinary(a,c);case "utf8":return d.fromUTF8(a,c);case "debug":return d.fromDebug(a,c);default:throw new TypeError("Unsupported encoding: "+b);}if(null===a||"object"!==typeof a)throw new TypeError("Illegal buffer: null or non-object");if(d.isByteBuffer(a))return b=d.prototype.clone.call(a),b.markedOffset=-1,b;if(a instanceof Uint8Array)b=new d(0,c,e),0<a.length&&(b.buffer=a.buffer,b.offset=a.byteOffset,b.limit=a.byteOffset+a.length,b.view=
-0<a.length?new DataView(a.buffer):null);else if(a instanceof ArrayBuffer)b=new d(0,c,e),0<a.byteLength&&(b.buffer=a,b.offset=0,b.limit=a.byteLength,b.view=0<a.byteLength?new DataView(a):null);else if("[object Array]"===Object.prototype.toString.call(a))for(b=new d(a.length,c,e),b.limit=a.length,i=0;i<a.length;++i)b.view.setUint8(i,a[i]);else throw new TypeError("Illegal buffer");return b};d.prototype.writeInt8=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==
-typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=1;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setInt8(b-1,a);c&&(this.offset+=1);return this};d.prototype.writeByte=d.prototype.writeInt8;d.prototype.readInt8=function(a){var b=
-"undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}a=this.view.getInt8(a);b&&(this.offset+=1);return a};d.prototype.readByte=d.prototype.readInt8;d.prototype.writeUint8=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||
-0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=1;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setUint8(b-1,a);c&&(this.offset+=1);return this};d.prototype.readUint8=function(a){var b="undefined"===typeof a;b&&(a=this.offset);
-if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}a=this.view.getUint8(a);b&&(this.offset+=1);return a};d.prototype.writeInt16=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==
-typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=2;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setInt16(b-2,a,this.littleEndian);c&&(this.offset+=2);return this};d.prototype.writeShort=d.prototype.writeInt16;d.prototype.readInt16=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==
-typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+2>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+2) <= "+this.buffer.byteLength);}a=this.view.getInt16(a,this.littleEndian);b&&(this.offset+=2);return a};d.prototype.readShort=d.prototype.readInt16;d.prototype.writeUint16=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");
-a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=2;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setUint16(b-2,a,this.littleEndian);c&&(this.offset+=2);return this};d.prototype.readUint16=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%
-1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+2>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+2) <= "+this.buffer.byteLength);}a=this.view.getUint16(a,this.littleEndian);b&&(this.offset+=2);return a};d.prototype.writeInt32=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
-b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=4;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setInt32(b-4,a,this.littleEndian);c&&(this.offset+=4);return this};d.prototype.writeInt=d.prototype.writeInt32;d.prototype.readInt32=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+
-a+" (not an integer)");a>>>=0;if(0>a||a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}a=this.view.getInt32(a,this.littleEndian);b&&(this.offset+=4);return a};d.prototype.readInt=d.prototype.readInt32;d.prototype.writeUint32=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
-b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=4;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setUint32(b-4,a,this.littleEndian);c&&(this.offset+=4);return this};d.prototype.readUint32=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||
-a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}a=this.view.getUint32(a,this.littleEndian);b&&(this.offset+=4);return a};l&&(d.prototype.writeInt64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"===typeof a)a=l.fromNumber(a);else if(!(a&&a instanceof l))throw new TypeError("Illegal value: "+a+" (not an integer or Long)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
-b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}"number"===typeof a&&(a=l.fromNumber(a));b+=8;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);b-=8;this.littleEndian?(this.view.setInt32(b,a.low,!0),this.view.setInt32(b+4,a.high,!0)):(this.view.setInt32(b,a.high,!1),this.view.setInt32(b+4,a.low,!1));c&&(this.offset+=8);return this},d.prototype.writeLong=d.prototype.writeInt64,d.prototype.readInt64=
-function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+8>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+8) <= "+this.buffer.byteLength);}a=this.littleEndian?new l(this.view.getInt32(a,!0),this.view.getInt32(a+4,!0),!1):new l(this.view.getInt32(a+4,!1),this.view.getInt32(a,!1),!1);b&&(this.offset+=8);return a},d.prototype.readLong=d.prototype.readInt64,
-d.prototype.writeUint64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"===typeof a)a=l.fromNumber(a);else if(!(a&&a instanceof l))throw new TypeError("Illegal value: "+a+" (not an integer or Long)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}"number"===typeof a&&(a=l.fromNumber(a));
-b+=8;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);b-=8;this.littleEndian?(this.view.setInt32(b,a.low,!0),this.view.setInt32(b+4,a.high,!0)):(this.view.setInt32(b,a.high,!1),this.view.setInt32(b+4,a.low,!1));c&&(this.offset+=8);return this},d.prototype.readUint64=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+8>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+
-a+" (+8) <= "+this.buffer.byteLength);}a=this.littleEndian?new l(this.view.getInt32(a,!0),this.view.getInt32(a+4,!0),!0):new l(this.view.getInt32(a+4,!1),this.view.getInt32(a,!1),!0);b&&(this.offset+=8);return a});d.prototype.writeFloat32=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a)throw new TypeError("Illegal value: "+a+" (not a number)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=
-0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=4;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setFloat32(b-4,a,this.littleEndian);c&&(this.offset+=4);return this};d.prototype.writeFloat=d.prototype.writeFloat32;d.prototype.readFloat32=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");
-a>>>=0;if(0>a||a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}a=this.view.getFloat32(a,this.littleEndian);b&&(this.offset+=4);return a};d.prototype.readFloat=d.prototype.readFloat32;d.prototype.writeFloat64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a)throw new TypeError("Illegal value: "+a+" (not a number)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
-b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}b+=8;var e=this.buffer.byteLength;b>e&&this.resize((e*=2)>b?e:b);this.view.setFloat64(b-8,a,this.littleEndian);c&&(this.offset+=8);return this};d.prototype.writeDouble=d.prototype.writeFloat64;d.prototype.readFloat64=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+
-a+" (not an integer)");a>>>=0;if(0>a||a+8>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+8) <= "+this.buffer.byteLength);}a=this.view.getFloat64(a,this.littleEndian);b&&(this.offset+=8);return a};d.prototype.readDouble=d.prototype.readFloat64;d.MAX_VARINT32_BYTES=5;d.calculateVarint32=function(a){a>>>=0;return 128>a?1:16384>a?2:2097152>a?3:268435456>a?4:5};d.zigZagEncode32=function(a){return((a|=0)<<1^a>>31)>>>0};d.zigZagDecode32=function(a){return a>>>1^-(a&1)|0};d.prototype.writeVarint32=
-function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}var e=d.calculateVarint32(a);b+=e;var h=this.buffer.byteLength;b>h&&this.resize((h*=2)>b?h:b);b-=e;this.view.setUint8(b,
-e=a|128);a>>>=0;128<=a?(e=a>>7|128,this.view.setUint8(b+1,e),16384<=a?(e=a>>14|128,this.view.setUint8(b+2,e),2097152<=a?(e=a>>21|128,this.view.setUint8(b+3,e),268435456<=a?(this.view.setUint8(b+4,a>>28&15),e=5):(this.view.setUint8(b+3,e&127),e=4)):(this.view.setUint8(b+2,e&127),e=3)):(this.view.setUint8(b+1,e&127),e=2)):(this.view.setUint8(b,e&127),e=1);return c?(this.offset+=e,this):e};d.prototype.writeVarint32ZigZag=function(a,b){return this.writeVarint32(d.zigZagEncode32(a),b)};d.prototype.readVarint32=
-function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=0,e=0,d;do d=this.view.getUint8(a+c),5>c&&(e|=(d&127)<<7*c>>>0),++c;while(128===(d&128));e|=0;return b?(this.offset+=c,e):{value:e,length:c}};d.prototype.readVarint32ZigZag=function(a){a=this.readVarint32(a);
-"object"===typeof a?a.value=d.zigZagDecode32(a.value):a=d.zigZagDecode32(a);return a};l&&(d.MAX_VARINT64_BYTES=10,d.calculateVarint64=function(a){"number"===typeof a&&(a=l.fromNumber(a));var b=a.toInt()>>>0,c=a.shiftRightUnsigned(28).toInt()>>>0;a=a.shiftRightUnsigned(56).toInt()>>>0;return 0==a?0==c?16384>b?128>b?1:2:2097152>b?3:4:16384>c?128>c?5:6:2097152>c?7:8:128>a?9:10},d.zigZagEncode64=function(a){"number"===typeof a?a=l.fromNumber(a,!1):!1!==a.unsigned&&(a=a.toSigned());return a.shiftLeft(1).xor(a.shiftRight(63)).toUnsigned()},
-d.zigZagDecode64=function(a){"number"===typeof a?a=l.fromNumber(a,!1):!1!==a.unsigned&&(a=a.toSigned());return a.shiftRightUnsigned(1).xor(a.and(l.ONE).toSigned().negate()).toSigned()},d.prototype.writeVarint64=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"===typeof a)a=l.fromNumber(a);else if(!(a&&a instanceof l))throw new TypeError("Illegal value: "+a+" (not an integer or Long)");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
-b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}"number"===typeof a?a=l.fromNumber(a,!1):!1!==a.unsigned&&(a=a.toSigned());var e=d.calculateVarint64(a),h=a.toInt()>>>0,f=a.shiftRightUnsigned(28).toInt()>>>0,g=a.shiftRightUnsigned(56).toInt()>>>0;b+=e;var n=this.buffer.byteLength;b>n&&this.resize((n*=2)>b?n:b);b-=e;switch(e){case 10:this.view.setUint8(b+9,g>>>7&1);case 9:this.view.setUint8(b+8,9!==
-e?g|128:g&127);case 8:this.view.setUint8(b+7,8!==e?f>>>21|128:f>>>21&127);case 7:this.view.setUint8(b+6,7!==e?f>>>14|128:f>>>14&127);case 6:this.view.setUint8(b+5,6!==e?f>>>7|128:f>>>7&127);case 5:this.view.setUint8(b+4,5!==e?f|128:f&127);case 4:this.view.setUint8(b+3,4!==e?h>>>21|128:h>>>21&127);case 3:this.view.setUint8(b+2,3!==e?h>>>14|128:h>>>14&127);case 2:this.view.setUint8(b+1,2!==e?h>>>7|128:h>>>7&127);case 1:this.view.setUint8(b,1!==e?h|128:h&127)}return c?(this.offset+=e,this):e},d.prototype.writeVarint64ZigZag=
-function(a,b){return this.writeVarint64(d.zigZagEncode64(a),b)},d.prototype.readVarint64=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=a,e=0,d=0,f=0,g=0,g=this.view.getUint8(a++),e=g&127;if(g&128&&(g=this.view.getUint8(a++),e|=(g&127)<<7,g&128&&
-(g=this.view.getUint8(a++),e|=(g&127)<<14,g&128&&(g=this.view.getUint8(a++),e|=(g&127)<<21,g&128&&(g=this.view.getUint8(a++),d=g&127,g&128&&(g=this.view.getUint8(a++),d|=(g&127)<<7,g&128&&(g=this.view.getUint8(a++),d|=(g&127)<<14,g&128&&(g=this.view.getUint8(a++),d|=(g&127)<<21,g&128&&(g=this.view.getUint8(a++),f=g&127,g&128&&(g=this.view.getUint8(a++),f|=(g&127)<<7,g&128))))))))))throw Error("Data must be corrupt: Buffer overrun");e=l.fromBits(e|d<<28,d>>>4|f<<24,!1);return b?(this.offset=a,e):{value:e,
-length:a-c}},d.prototype.readVarint64ZigZag=function(a){(a=this.readVarint64(a))&&a.value instanceof l?a.value=d.zigZagDecode64(a.value):a=d.zigZagDecode64(a);return a});d.prototype.writeCString=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);var e,d=a.length;if(!this.noAssert){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");for(e=0;e<d;++e)if(0===a.charCodeAt(e))throw new RangeError("Illegal str: Contains NULL-characters");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+
-b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}e=b;d=k.b(k.a(a))[1];b+=d+1;var f=this.buffer.byteLength;b>f&&this.resize((f*=2)>b?f:b);b-=d+1;k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));this.view.setUint8(b++,0);return c?(this.offset=b-e,this):d};d.prototype.readCString=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+
-a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=a,e,d=-1;k.d(function(){if(0===d)return null;if(a>=this.limit)throw RangeError("Illegal range: Truncated data, "+a+" < "+this.limit);return 0===(d=this.view.getUint8(a++))?null:d}.bind(this),e=k.c(),!0);return b?(this.offset=a,e()):{string:e(),length:a-c}};d.prototype.writeIString=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("string"!==
-typeof a)throw new TypeError("Illegal str: Not a string");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}var e=b,d;d=k.b(k.a(a),this.noAssert)[1];b+=4+d;var f=this.buffer.byteLength;b>f&&this.resize((f*=2)>b?f:b);b-=4+d;this.view.setUint32(b,d,this.littleEndian);b+=4;k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));
-if(b!==e+4+d)throw new RangeError("Illegal range: Truncated data, "+b+" == "+(b+4+d));return c?(this.offset=b,this):b-e};d.prototype.readIString=function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+4>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+4) <= "+this.buffer.byteLength);}var c=0,e=a,c=this.view.getUint32(a,this.littleEndian);a+=
-4;var d=a+c;k.d(function(){return a<d?this.view.getUint8(a++):null}.bind(this),c=k.c(),this.noAssert);c=c();return b?(this.offset=a,c):{string:c,length:a-e}};d.METRICS_CHARS="c";d.METRICS_BYTES="b";d.prototype.writeUTF8String=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+
-this.buffer.byteLength);}var e,d=b;e=k.b(k.a(a))[1];b+=e;var f=this.buffer.byteLength;b>f&&this.resize((f*=2)>b?f:b);b-=e;k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));return c?(this.offset=b,this):b-d};d.prototype.writeString=d.prototype.writeUTF8String;d.calculateUTF8Chars=function(a){return k.b(k.a(a))[0]};d.calculateUTF8Bytes=function(a){return k.b(k.a(a))[1]};d.prototype.readUTF8String=function(a,b,c){"number"===typeof b&&(c=b,b=void 0);var e="undefined"===typeof c;e&&(c=this.offset);
-"undefined"===typeof b&&(b=d.METRICS_CHARS);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal length: "+a+" (not an integer)");a|=0;if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+0) <= "+this.buffer.byteLength);}var h=0,f=c,g;if(b===d.METRICS_CHARS){g=k.c();k.i(function(){return h<a&&c<this.limit?this.view.getUint8(c++):null}.bind(this),
-function(a){++h;k.g(a,g)}.bind(this));if(h!==a)throw new RangeError("Illegal range: Truncated data, "+h+" == "+a);return e?(this.offset=c,g()):{string:g(),length:c-f}}if(b===d.METRICS_BYTES){if(!this.noAssert){if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+a>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+"+a+") <= "+this.buffer.byteLength);}var n=c+a;k.d(function(){return c<n?this.view.getUint8(c++):null}.bind(this),
-g=k.c(),this.noAssert);if(c!==n)throw new RangeError("Illegal range: Truncated data, "+c+" == "+n);return e?(this.offset=c,g()):{string:g(),length:c-f}}throw new TypeError("Unsupported metrics: "+b);};d.prototype.readString=d.prototype.readUTF8String;d.prototype.writeVString=function(a,b){var c="undefined"===typeof b;c&&(b=this.offset);if(!this.noAssert){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: "+b+
-" (not an integer)");b>>>=0;if(0>b||b+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+b+" (+0) <= "+this.buffer.byteLength);}var e=b,h,f;h=k.b(k.a(a),this.noAssert)[1];f=d.calculateVarint32(h);b+=f+h;var g=this.buffer.byteLength;b>g&&this.resize((g*=2)>b?g:b);b-=f+h;b+=this.writeVarint32(h,b);k.e(k.a(a),function(a){this.view.setUint8(b++,a)}.bind(this));if(b!==e+h+f)throw new RangeError("Illegal range: Truncated data, "+b+" == "+(b+h+f));return c?(this.offset=b,this):b-e};d.prototype.readVString=
-function(a){var b="undefined"===typeof a;b&&(a=this.offset);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+1>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+1) <= "+this.buffer.byteLength);}var c=this.readVarint32(a),e=a;a+=c.length;var c=c.value,d=a+c,c=k.c();k.d(function(){return a<d?this.view.getUint8(a++):null}.bind(this),c,this.noAssert);c=c();return b?(this.offset=a,c):{string:c,length:a-
-e}};d.prototype.append=function(a,b,c){if("number"===typeof b||"string"!==typeof b)c=b,b=void 0;var e="undefined"===typeof c;e&&(c=this.offset);if(!this.noAssert){if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+0) <= "+this.buffer.byteLength);}a instanceof d||(a=d.wrap(a,b));b=a.limit-a.offset;if(0>=b)return this;c+=b;var h=this.buffer.byteLength;c>h&&this.resize((h*=
-2)>c?h:c);(new Uint8Array(this.buffer,c-b)).set((new Uint8Array(a.buffer)).subarray(a.offset,a.limit));a.offset+=b;e&&(this.offset+=b);return this};d.prototype.appendTo=function(a,b){a.append(this,b);return this};d.prototype.assert=function(a){this.noAssert=!a;return this};d.prototype.capacity=function(){return this.buffer.byteLength};d.prototype.clear=function(){this.offset=0;this.limit=this.buffer.byteLength;this.markedOffset=-1;return this};d.prototype.clone=function(a){var b=new d(0,this.littleEndian,
-this.noAssert);a?(a=new ArrayBuffer(this.buffer.byteLength),(new Uint8Array(a)).set(this.buffer),b.buffer=a,b.view=new DataView(a)):(b.buffer=this.buffer,b.view=this.view);b.offset=this.offset;b.markedOffset=this.markedOffset;b.limit=this.limit;return b};d.prototype.compact=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||
-0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}if(0===a&&b===this.buffer.byteLength)return this;var c=b-a;if(0===c)return this.buffer=r,this.view=null,0<=this.markedOffset&&(this.markedOffset-=a),this.limit=this.offset=0,this;var e=new ArrayBuffer(c);(new Uint8Array(e)).set((new Uint8Array(this.buffer)).subarray(a,b));this.buffer=e;this.view=new DataView(e);
-0<=this.markedOffset&&(this.markedOffset-=a);this.offset=0;this.limit=c;return this};d.prototype.copy=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);
-}if(a===b)return new d(0,this.littleEndian,this.noAssert);var c=b-a,e=new d(c,this.littleEndian,this.noAssert);e.offset=0;e.limit=c;0<=e.markedOffset&&(e.markedOffset-=a);this.copyTo(e,0,a,b);return e};d.prototype.copyTo=function(a,b,c,e){var h,f;if(!this.noAssert&&!d.isByteBuffer(a))throw new TypeError("Illegal target: Not a ByteBuffer");b=(f="undefined"===typeof b)?a.offset:b|0;c=(h="undefined"===typeof c)?this.offset:c|0;e="undefined"===typeof e?this.limit:e|0;if(0>b||b>a.buffer.byteLength)throw new RangeError("Illegal target range: 0 <= "+
-b+" <= "+a.buffer.byteLength);if(0>c||e>this.buffer.byteLength)throw new RangeError("Illegal source range: 0 <= "+c+" <= "+this.buffer.byteLength);var g=e-c;if(0===g)return a;a.ensureCapacity(b+g);(new Uint8Array(a.buffer)).set((new Uint8Array(this.buffer)).subarray(c,e),b);h&&(this.offset+=g);f&&(a.offset+=g);return this};d.prototype.ensureCapacity=function(a){var b=this.buffer.byteLength;return b<a?this.resize((b*=2)>a?b:a):this};d.prototype.fill=function(a,b,c){var e="undefined"===typeof b;e&&
-(b=this.offset);"string"===typeof a&&0<a.length&&(a=a.charCodeAt(0));"undefined"===typeof b&&(b=this.offset);"undefined"===typeof c&&(c=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal value: "+a+" (not an integer)");a|=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal begin: Not an integer");b>>>=0;if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal end: Not an integer");c>>>=0;if(0>b||b>c||c>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+
-b+" <= "+c+" <= "+this.buffer.byteLength);}if(b>=c)return this;for(;b<c;)this.view.setUint8(b++,a);e&&(this.offset=b);return this};d.prototype.flip=function(){this.limit=this.offset;this.offset=0;return this};d.prototype.mark=function(a){a="undefined"===typeof a?this.offset:a;if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal offset: "+a+" (not an integer)");a>>>=0;if(0>a||a+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+a+" (+0) <= "+this.buffer.byteLength);
-}this.markedOffset=a;return this};d.prototype.order=function(a){if(!this.noAssert&&"boolean"!==typeof a)throw new TypeError("Illegal littleEndian: Not a boolean");this.littleEndian=!!a;return this};d.prototype.LE=function(a){this.littleEndian="undefined"!==typeof a?!!a:!0;return this};d.prototype.BE=function(a){this.littleEndian="undefined"!==typeof a?!a:!1;return this};d.prototype.prepend=function(a,b,c){if("number"===typeof b||"string"!==typeof b)c=b,b=void 0;var e="undefined"===typeof c;e&&(c=
-this.offset);if(!this.noAssert){if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal offset: "+c+" (not an integer)");c>>>=0;if(0>c||c+0>this.buffer.byteLength)throw new RangeError("Illegal offset: 0 <= "+c+" (+0) <= "+this.buffer.byteLength);}a instanceof d||(a=d.wrap(a,b));b=a.limit-a.offset;if(0>=b)return this;var h=b-c,f;if(0<h){var g=new ArrayBuffer(this.buffer.byteLength+h);f=new Uint8Array(g);f.set((new Uint8Array(this.buffer)).subarray(c,this.buffer.byteLength),b);this.buffer=g;this.view=
-new DataView(g);this.offset+=h;0<=this.markedOffset&&(this.markedOffset+=h);this.limit+=h;c+=h}else f=new Uint8Array(this.buffer);f.set((new Uint8Array(a.buffer)).subarray(a.offset,a.limit),c-b);a.offset=a.limit;e&&(this.offset-=b);return this};d.prototype.prependTo=function(a,b){a.prepend(this,b);return this};d.prototype.printDebug=function(a){"function"!==typeof a&&(a=console.log.bind(console));a(this.toString()+"\n-------------------------------------------------------------------\n"+this.toDebug(!0))};
-d.prototype.remaining=function(){return this.limit-this.offset};d.prototype.reset=function(){0<=this.markedOffset?(this.offset=this.markedOffset,this.markedOffset=-1):this.offset=0;return this};d.prototype.resize=function(a){if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal capacity: "+a+" (not an integer)");a|=0;if(0>a)throw new RangeError("Illegal capacity: 0 <= "+a);}this.buffer.byteLength<a&&(a=new ArrayBuffer(a),(new Uint8Array(a)).set(new Uint8Array(this.buffer)),
-this.buffer=a,this.view=new DataView(a));return this};d.prototype.reverse=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}if(a===b)return this;
-Array.prototype.reverse.call((new Uint8Array(this.buffer)).subarray(a,b));this.view=new DataView(this.buffer);return this};d.prototype.skip=function(a){if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal length: "+a+" (not an integer)");a|=0}var b=this.offset+a;if(!this.noAssert&&(0>b||b>this.buffer.byteLength))throw new RangeError("Illegal length: 0 <= "+this.offset+" + "+a+" <= "+this.buffer.byteLength);this.offset=b;return this};d.prototype.slice=function(a,b){"undefined"===
-typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}var c=this.clone();c.offset=a;c.limit=b;return c};d.prototype.toBuffer=function(a){var b=this.offset,c=this.limit;
-if(b>c)var e=b,b=c,c=e;if(!this.noAssert){if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal offset: Not an integer");b>>>=0;if("number"!==typeof c||0!==c%1)throw new TypeError("Illegal limit: Not an integer");c>>>=0;if(0>b||b>c||c>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+b+" <= "+c+" <= "+this.buffer.byteLength);}if(!a&&0===b&&c===this.buffer.byteLength)return this.buffer;if(b===c)return r;a=new ArrayBuffer(c-b);(new Uint8Array(a)).set((new Uint8Array(this.buffer)).subarray(b,
-c),0);return a};d.prototype.toArrayBuffer=d.prototype.toBuffer;d.prototype.toString=function(a){if("undefined"===typeof a)return"ByteBufferAB(offset="+this.offset+",markedOffset="+this.markedOffset+",limit="+this.limit+",capacity="+this.capacity()+")";switch(a){case "utf8":return this.toUTF8();case "base64":return this.toBase64();case "hex":return this.toHex();case "binary":return this.toBinary();case "debug":return this.toDebug();case "columns":return this.m();default:throw Error("Unsupported encoding: "+
-a);}};var m="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",m=m+"";d.prototype.toBase64=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+
-this.buffer.byteLength);}if(a===b)return"";for(var c,e,d,f,g,k,l="";a<b;)c=this.view.getUint8(a++),e=(f=a<b)?this.view.getUint8(a++):0,d=(g=a<b)?this.view.getUint8(a++):0,k=c>>2,c=(c&3)<<4|e>>4,e=(e&15)<<2|d>>6,d&=63,g||(d=64,f||(e=64)),l+=m.charAt(k)+m.charAt(c)+m.charAt(e)+m.charAt(d);return l};d.fromBase64=function(a,b,c){if(!c){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");if(0!==a.length%4)throw new TypeError("Illegal str: Length not a multiple of 4");}var e=a.length,
-h=0,f;for(f=a.length-1;0<=f;--f)if("="===a.charAt(f))h++;else break;if(2<h)throw new TypeError("Illegal str: Suffix is too large");if(0===e)return new d(0,b,c);var g,k,l,p=new d(e/4*3-h,b,c);for(b=f=0;f<e;){h=m.indexOf(a.charAt(f++));g=f<e?m.indexOf(a.charAt(f++)):0;k=f<e?m.indexOf(a.charAt(f++)):0;l=f<e?m.indexOf(a.charAt(f++)):0;if(!c&&(0>h||0>g||0>k||0>l))throw new TypeError("Illegal str: Contains non-base64 characters");p.view.setUint8(b++,h<<2|g>>4);64!==k&&(p.view.setUint8(b++,g<<4&240|k>>2,
-b),64!==l&&p.view.setUint8(b++,k<<6&192|l))}p.limit=b;return p};d.btoa=function(a){return d.fromBinary(a).toBase64()};d.atob=function(a){return d.fromBase64(a).toBinary()};d.prototype.toBinary=function(a,b){a="undefined"===typeof a?this.offset:a;b="undefined"===typeof b?this.limit:b;if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+
-a+" <= "+b+" <= "+this.buffer.byteLength);}if(a===b)return"";for(var c=[];a<b;)c.push(this.view.getUint8(a++));return String.fromCharCode.apply(String,c)};d.fromBinary=function(a,b,c){if(!c&&"string"!==typeof a)throw new TypeError("Illegal str: Not a string");for(var e=0,h=a.length,f=new d(h,b,c);e<h;){b=a.charCodeAt(e);if(!c&&255<b)throw new TypeError("Illegal charCode at "+e+": 0 <= "+b+" <= 255");f.view.setUint8(e++,b)}f.limit=h;return f};d.prototype.toDebug=function(a){for(var b=-1,c=this.buffer.byteLength,
-e,d="",f="",g="";b<c;){-1!==b&&(e=this.view.getUint8(b),d=16>e?d+("0"+e.toString(16).toUpperCase()):d+e.toString(16).toUpperCase(),a&&(f+=32<e&&127>e?String.fromCharCode(e):"."));++b;if(a&&0<b&&0===b%16&&b!==c){for(;51>d.length;)d+=" ";g+=d+f+"\n";d=f=""}d=b===this.offset&&b===this.limit?d+(b===this.markedOffset?"!":"|"):b===this.offset?d+(b===this.markedOffset?"[":"<"):b===this.limit?d+(b===this.markedOffset?"]":">"):d+(b===this.markedOffset?"'":a||0!==b&&b!==c?" ":"")}if(a&&" "!==d){for(;51>d.length;)d+=
-" ";g+=d+f+"\n"}return a?g:d};d.fromDebug=function(a,b,c){var e=a.length;b=new d((e+1)/3|0,b,c);for(var h=0,f=0,g,k=!1,l=!1,p=!1,m=!1,q=!1;h<e;){switch(g=a.charAt(h++)){case "!":if(!c){if(l||p||m){q=!0;break}l=p=m=!0}b.offset=b.markedOffset=b.limit=f;k=!1;break;case "|":if(!c){if(l||m){q=!0;break}l=m=!0}b.offset=b.limit=f;k=!1;break;case "[":if(!c){if(l||p){q=!0;break}l=p=!0}b.offset=b.markedOffset=f;k=!1;break;case "<":if(!c){if(l){q=!0;break}l=!0}b.offset=f;k=!1;break;case "]":if(!c){if(m||p){q=
-!0;break}m=p=!0}b.limit=b.markedOffset=f;k=!1;break;case ">":if(!c){if(m){q=!0;break}m=!0}b.limit=f;k=!1;break;case "'":if(!c){if(p){q=!0;break}p=!0}b.markedOffset=f;k=!1;break;case " ":k=!1;break;default:if(!c&&k){q=!0;break}g=parseInt(g+a.charAt(h++),16);if(!c&&(isNaN(g)||0>g||255<g))throw new TypeError("Illegal str: Not a debug encoded string");b.view.setUint8(f++,g);k=!0}if(q)throw new TypeError("Illegal str: Invalid symbol at "+h);}if(!c){if(!l||!m)throw new TypeError("Illegal str: Missing offset or limit");
-if(f<b.buffer.byteLength)throw new TypeError("Illegal str: Not a debug encoded string (is it hex?) "+f+" < "+e);}return b};d.prototype.toHex=function(a,b){a="undefined"===typeof a?this.offset:a;b="undefined"===typeof b?this.limit:b;if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+
-a+" <= "+b+" <= "+this.buffer.byteLength);}for(var c=Array(b-a),e;a<b;)e=this.view.getUint8(a++),16>e?c.push("0",e.toString(16)):c.push(e.toString(16));return c.join("")};d.fromHex=function(a,b,c){if(!c){if("string"!==typeof a)throw new TypeError("Illegal str: Not a string");if(0!==a.length%2)throw new TypeError("Illegal str: Length not a multiple of 2");}var e=a.length;b=new d(e/2|0,b);for(var h,f=0,g=0;f<e;f+=2){h=parseInt(a.substring(f,f+2),16);if(!c&&(!isFinite(h)||0>h||255<h))throw new TypeError("Illegal str: Contains non-hex characters");
-b.view.setUint8(g++,h)}b.limit=g;return b};var k=function(){var a={k:1114111,j:function(a,c){var e=null;"number"===typeof a&&(e=a,a=function(){return null});for(;null!==e||null!==(e=a());)128>e?c(e&127):(2048>e?c(e>>6&31|192):(65536>e?c(e>>12&15|224):(c(e>>18&7|240),c(e>>12&63|128)),c(e>>6&63|128)),c(e&63|128)),e=null},i:function(a,c){function e(a){a=a.slice(0,a.indexOf(null));var b=Error(a.toString());b.name="TruncatedError";b.bytes=a;throw b;}for(var d,f,g,k;null!==(d=a());)if(0===(d&128))c(d);
-else if(192===(d&224))null===(f=a())&&e([d,f]),c((d&31)<<6|f&63);else if(224===(d&240))null!==(f=a())&&null!==(g=a())||e([d,f,g]),c((d&15)<<12|(f&63)<<6|g&63);else if(240===(d&248))null!==(f=a())&&null!==(g=a())&&null!==(k=a())||e([d,f,g,k]),c((d&7)<<18|(f&63)<<12|(g&63)<<6|k&63);else throw RangeError("Illegal starting byte: "+d);},f:function(a,c){for(var e,d=null;null!==(e=null!==d?d:a());)55296<=e&&57343>=e&&null!==(d=a())&&56320<=d&&57343>=d?(c(1024*(e-55296)+d-56320+65536),d=null):c(e);null!==
-d&&c(d)},g:function(a,c){var e=null;"number"===typeof a&&(e=a,a=function(){return null});for(;null!==e||null!==(e=a());)65535>=e?c(e):(e-=65536,c((e>>10)+55296),c(e%1024+56320)),e=null},e:function(b,c){a.f(b,function(b){a.j(b,c)})},d:function(b,c){a.i(b,function(b){a.g(b,c)})},h:function(a){return 128>a?1:2048>a?2:65536>a?3:4},l:function(b){for(var c,d=0;null!==(c=b());)d+=a.h(c);return d},b:function(b){var c=0,d=0;a.f(b,function(b){++c;d+=a.h(b)});return[c,d]}};return a}(),s=String.fromCharCode;
-k.a=function(a){var b=0;return function(){return b<a.length?a.charCodeAt(b++):null}};k.c=function(){var a=[],b=[];return function(){if(0===arguments.length)return b.join("")+s.apply(String,a);1024<a.length+arguments.length&&(b.push(s.apply(String,a)),a.length=0);Array.prototype.push.apply(a,arguments)}};d.prototype.toUTF8=function(a,b){"undefined"===typeof a&&(a=this.offset);"undefined"===typeof b&&(b=this.limit);if(!this.noAssert){if("number"!==typeof a||0!==a%1)throw new TypeError("Illegal begin: Not an integer");
-a>>>=0;if("number"!==typeof b||0!==b%1)throw new TypeError("Illegal end: Not an integer");b>>>=0;if(0>a||a>b||b>this.buffer.byteLength)throw new RangeError("Illegal range: 0 <= "+a+" <= "+b+" <= "+this.buffer.byteLength);}var c=this,d;try{k.d(function(){return a<b?c.view.getUint8(a++):null},d=k.c())}catch(h){if(a!==b)throw new RangeError("Illegal range: Truncated data, "+a+" != "+b);}return d()};d.fromUTF8=function(a,b,c){if(!c&&"string"!==typeof a)throw new TypeError("Illegal str: Not a string");
-var e=new d(k.b(k.a(a),!0)[1],b,c),h=0;k.e(k.a(a),function(a){e.view.setUint8(h++,a)});e.limit=h;return e};return d}"undefined"!=typeof module&&module.exports?module.exports=s(require("long")):"undefined"!==typeof define&&define.amd?define("ByteBuffer",["Math/Long"],function(l){return s(l)}):(r.dcodeIO||(r.dcodeIO={}),r.dcodeIO.ByteBuffer=s(r.dcodeIO.Long))})(this);
-
-},{"long":98}],97:[function(require,module,exports){
-/*
- Copyright 2013 Daniel Wirtz <dcode@dcode.io>
- Copyright 2009 The Closure Library Authors. All Rights Reserved.
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS-IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-/**
- * @license Long.js (c) 2013 Daniel Wirtz <dcode@dcode.io>
- * Released under the Apache License, Version 2.0
- * Derived from goog.math.Long from the Closure Library
- * see: https://github.com/dcodeIO/Long.js for details
- */
-(function(global) {
-    "use strict";
-
-    /**
-     * Constructs a 64-bit two's-complement integer, given its low and high 32-bit
-     * values as *signed* integers.  See the from* functions below for more
-     * convenient ways of constructing Longs.
-     *
-     * The internal representation of a long is the two given signed, 32-bit values.
-     * We use 32-bit pieces because these are the size of integers on which
-     * Javascript performs bit-operations.  For operations like addition and
-     * multiplication, we split each number into 16-bit pieces, which can easily be
-     * multiplied within Javascript's floating-point representation without overflow
-     * or change in sign.
-     *
-     * In the algorithms below, we frequently reduce the negative case to the
-     * positive case by negating the input(s) and then post-processing the result.
-     * Note that we must ALWAYS check specially whether those values are MIN_VALUE
-     * (-2^63) because -MIN_VALUE == MIN_VALUE (since 2^63 cannot be represented as
-     * a positive number, it overflows back into a negative).  Not handling this
-     * case would often result in infinite recursion.
-     * 
-     * @exports Long
-     * @class A Long class for representing a 64-bit two's-complement integer value.
-     * @param {number|!{low: number, high: number, unsigned: boolean}} low The low (signed) 32 bits of the long.
-     *  Optionally accepts a Long-like object as the first parameter.
-     * @param {number=} high The high (signed) 32 bits of the long.
-     * @param {boolean=} unsigned Whether unsigned or not. Defaults to `false` (signed).
-     * @constructor
-     */
-    var Long = function(low, high, unsigned) {
-        if (low && typeof low === 'object') {
-            high = low.high;
-            unsigned = low.unsigned;
-            low = low.low;
-        }
-        
-        /**
-         * The low 32 bits as a signed value.
-         * @type {number}
-         * @expose
-         */
-        this.low = low | 0;
-
-        /**
-         * The high 32 bits as a signed value.
-         * @type {number}
-         * @expose
-         */
-        this.high = high | 0;
-
-        /**
-         * Whether unsigned or not.
-         * @type {boolean}
-         * @expose
-         */
-        this.unsigned = !!unsigned;
-    };
-
-    // NOTE: Common constant values ZERO, ONE, NEG_ONE, etc. are defined below the from* methods on which they depend.
-
-    // NOTE: The following cache variables are used internally only and are therefore not exposed as properties of the
-    // Long class.
-    
-    /**
-     * A cache of the Long representations of small integer values.
-     * @type {!Object}
-     */
-    var INT_CACHE = {};
-
-    /**
-     * A cache of the Long representations of small unsigned integer values.
-     * @type {!Object}
-     */
-    var UINT_CACHE = {};
-
-    /**
-     * Returns a Long representing the given (32-bit) integer value.
-     * @param {number} value The 32-bit integer in question.
-     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
-     * @return {!Long} The corresponding Long value.
-     * @expose
-     */
-    Long.fromInt = function(value, unsigned) {
-        var obj, cachedObj;
-        if (!unsigned) {
-            value = value | 0;
-            if (-128 <= value && value < 128) {
-                cachedObj = INT_CACHE[value];
-                if (cachedObj) return cachedObj;
-            }
-            obj = new Long(value, value < 0 ? -1 : 0, false);
-            if (-128 <= value && value < 128) {
-                INT_CACHE[value] = obj;
-            }
-            return obj;
-        } else {
-            value = value >>> 0;
-            if (0 <= value && value < 256) {
-                cachedObj = UINT_CACHE[value];
-                if (cachedObj) return cachedObj;
-            }
-            obj = new Long(value, (value | 0) < 0 ? -1 : 0, true);
-            if (0 <= value && value < 256) {
-                UINT_CACHE[value] = obj;
-            }
-            return obj;
-        }
-    };
-
-    /**
-     * Returns a Long representing the given value, provided that it is a finite
-     * number.  Otherwise, zero is returned.
-     * @param {number} value The number in question.
-     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
-     * @return {!Long} The corresponding Long value.
-     * @expose
-     */
-    Long.fromNumber = function(value, unsigned) {
-        unsigned = !!unsigned;
-        if (isNaN(value) || !isFinite(value)) {
-            return Long.ZERO;
-        } else if (!unsigned && value <= -TWO_PWR_63_DBL) {
-            return Long.MIN_SIGNED_VALUE;
-        } else if (!unsigned && value + 1 >= TWO_PWR_63_DBL) {
-            return Long.MAX_SIGNED_VALUE;
-        } else if (unsigned && value >= TWO_PWR_64_DBL) {
-            return Long.MAX_UNSIGNED_VALUE;
-        } else if (value < 0) {
-            return Long.fromNumber(-value, unsigned).negate();
-        } else {
-            return new Long((value % TWO_PWR_32_DBL) | 0, (value / TWO_PWR_32_DBL) | 0, unsigned);
-        }
-    };
-
-    /**
-     * Returns a Long representing the 64bit integer that comes by concatenating the given low and high bits. Each is
-     *  assumed to use 32 bits.
-     * @param {number} lowBits The low 32 bits.
-     * @param {number} highBits The high 32 bits.
-     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
-     * @return {!Long} The corresponding Long value.
-     * @expose
-     */
-    Long.fromBits = function(lowBits, highBits, unsigned) {
-        return new Long(lowBits, highBits, unsigned);
-    };
-
-    /**
-     * Returns a Long representing the 64bit integer that comes by concatenating the given low, middle and high bits.
-     * Each is assumed to use 28 bits.
-     * @param {number} part0 The low 28 bits
-     * @param {number} part1 The middle 28 bits
-     * @param {number} part2 The high 28 (8) bits
-     * @param {boolean=} unsigned Whether unsigned or not. Defaults to false (signed).
-     * @return {!Long}
-     * @expose
-     */
-    Long.from28Bits = function(part0, part1, part2, unsigned) {
-        // 00000000000000000000000000001111 11111111111111111111111122222222 2222222222222
-        // LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-        return Long.fromBits(part0 | (part1 << 28), (part1 >>> 4) | (part2) << 24, unsigned);
-    };
-
-    /**
-     * Returns a Long representation of the given string, written using the given radix.
-     * @param {string} str The textual representation of the Long.
-     * @param {(boolean|number)=} unsigned Whether unsigned or not. Defaults to false (signed).
-     * @param {number=} radix The radix in which the text is written.
-     * @return {!Long} The corresponding Long value.
-     * @expose
-     */
-    Long.fromString = function(str, unsigned, radix) {
-        if (str.length === 0)
-            throw Error('number format error: empty string');
-        if (str === "NaN" || str === "Infinity" || str === "+Infinity" || str === "-Infinity")
-            return Long.ZERO;
-        if (typeof unsigned === 'number') { // For goog.math.Long compatibility
-            radix = unsigned;
-            unsigned = false;
-        }
-        radix = radix || 10;
-        if (radix < 2 || 36 < radix)
-            throw Error('radix out of range: ' + radix);
-
-        var p;
-        if ((p = str.indexOf('-')) > 0)
-            throw Error('number format error: interior "-" character: ' + str);
-        else if (p === 0)
-            return Long.fromString(str.substring(1), unsigned, radix).negate();
-
-        // Do several (8) digits each time through the loop, so as to
-        // minimize the calls to the very expensive emulated div.
-        var radixToPower = Long.fromNumber(Math.pow(radix, 8));
-
-        var result = Long.ZERO;
-        for (var i = 0; i < str.length; i += 8) {
-            var size = Math.min(8, str.length - i);
-            var value = parseInt(str.substring(i, i + size), radix);
-            if (size < 8) {
-                var power = Long.fromNumber(Math.pow(radix, size));
-                result = result.multiply(power).add(Long.fromNumber(value));
-            } else {
-                result = result.multiply(radixToPower);
-                result = result.add(Long.fromNumber(value));
-            }
-        }
-        result.unsigned = unsigned;
-        return result;
-    };
-
-    // NOTE: the compiler should inline these constant values below and then remove these variables, so there should be
-    // no runtime penalty for these.
-    
-    // NOTE: The following constant values are used internally only and are therefore not exposed as properties of the
-    // Long class.
-
-    /**
-     * @type {number}
-     */
-    var TWO_PWR_16_DBL = 1 << 16;
-
-    /**
-     * @type {number}
-     */
-    var TWO_PWR_24_DBL = 1 << 24;
-
-    /**
-     * @type {number}
-     */
-    var TWO_PWR_32_DBL = TWO_PWR_16_DBL * TWO_PWR_16_DBL;
-
-    /**
-     * @type {number}
-     */
-    var TWO_PWR_31_DBL = TWO_PWR_32_DBL / 2;
-
-    /**
-     * @type {number}
-     */
-    var TWO_PWR_48_DBL = TWO_PWR_32_DBL * TWO_PWR_16_DBL;
-
-    /**
-     * @type {number}
-     */
-    var TWO_PWR_64_DBL = TWO_PWR_32_DBL * TWO_PWR_32_DBL;
-
-    /**
-     * @type {number}
-     */
-    var TWO_PWR_63_DBL = TWO_PWR_64_DBL / 2;
-
-    /**
-     * @type {!Long}
-     */
-    var TWO_PWR_24 = Long.fromInt(1 << 24);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.ZERO = Long.fromInt(0);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.UZERO = Long.fromInt(0, true);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.ONE = Long.fromInt(1);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.UONE = Long.fromInt(1, true);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.NEG_ONE = Long.fromInt(-1);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.MAX_SIGNED_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0x7FFFFFFF | 0, false);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.MAX_UNSIGNED_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0xFFFFFFFF | 0, true);
-
-    /**
-     * Alias of {@link Long.MAX_SIGNED_VALUE} for goog.math.Long compatibility.
-     * @type {!Long}
-     * @expose
-     */
-    Long.MAX_VALUE = Long.MAX_SIGNED_VALUE;
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.MIN_SIGNED_VALUE = Long.fromBits(0, 0x80000000 | 0, false);
-
-    /**
-     * @type {!Long}
-     * @expose
-     */
-    Long.MIN_UNSIGNED_VALUE = Long.fromBits(0, 0, true);
-
-    /**
-     * Alias of {@link Long.MIN_SIGNED_VALUE}  for goog.math.Long compatibility.
-     * @type {!Long}
-     * @expose
-     */
-    Long.MIN_VALUE = Long.MIN_SIGNED_VALUE;
-
-    /**
-     * @return {number} The value, assuming it is a 32-bit integer.
-     * @expose
-     */
-    Long.prototype.toInt = function() {
-        return this.unsigned ? this.low >>> 0 : this.low;
-    };
-
-    /**
-     * @return {number} The closest floating-point representation to this value.
-     * @expose
-     */
-    Long.prototype.toNumber = function() {
-        if (this.unsigned) {
-            return ((this.high >>> 0) * TWO_PWR_32_DBL) + (this.low >>> 0);
-        }
-        return this.high * TWO_PWR_32_DBL + (this.low >>> 0);
-    };
-
-    /**
-     * @param {number=} radix The radix in which the text should be written.
-     * @return {string} The textual representation of this value.
-     * @override
-     * @expose
-     */
-    Long.prototype.toString = function(radix) {
-        radix = radix || 10;
-        if (radix < 2 || 36 < radix) {
-            throw(new Error('radix out of range: ' + radix));
-        }
-        if (this.isZero()) {
-            return '0';
-        }
-        var rem;
-        if (this.isNegative()) { // Unsigned Longs are never negative
-            if (this.equals(Long.MIN_SIGNED_VALUE)) {
-                // We need to change the Long value before it can be negated, so we remove
-                // the bottom-most digit in this base and then recurse to do the rest.
-                var radixLong = Long.fromNumber(radix);
-                var div = this.div(radixLong);
-                rem = div.multiply(radixLong).subtract(this);
-                return div.toString(radix) + rem.toInt().toString(radix);
-            } else {
-                return '-' + this.negate().toString(radix);
-            }
-        }
-
-        // Do several (6) digits each time through the loop, so as to
-        // minimize the calls to the very expensive emulated div.
-        var radixToPower = Long.fromNumber(Math.pow(radix, 6), this.unsigned);
-        rem = this;
-        var result = '';
-        while (true) {
-            var remDiv = rem.div(radixToPower);
-            var intval = rem.subtract(remDiv.multiply(radixToPower)).toInt() >>> 0;
-            var digits = intval.toString(radix);
-            rem = remDiv;
-            if (rem.isZero()) {
-                return digits + result;
-            } else {
-                while (digits.length < 6) {
-                    digits = '0' + digits;
-                }
-                result = '' + digits + result;
-            }
-        }
-    };
-
-    /**
-     * @return {number} The high 32 bits as a signed value.
-     * @expose
-     */
-    Long.prototype.getHighBits = function() {
-        return this.high;
-    };
-
-    /**
-     * @return {number} The high 32 bits as an unsigned value.
-     * @expose
-     */
-    Long.prototype.getHighBitsUnsigned = function() {
-        return this.high >>> 0;
-    };
-
-    /**
-     * @return {number} The low 32 bits as a signed value.
-     * @expose
-     */
-    Long.prototype.getLowBits = function() {
-        return this.low;
-    };
-
-    /**
-     * @return {number} The low 32 bits as an unsigned value.
-     * @expose
-     */
-    Long.prototype.getLowBitsUnsigned = function() {
-        return this.low >>> 0;
-    };
-
-    /**
-     * @return {number} Returns the number of bits needed to represent the absolute
-     *     value of this Long.
-     * @expose
-     */
-    Long.prototype.getNumBitsAbs = function() {
-        if (this.isNegative()) { // Unsigned Longs are never negative
-            if (this.equals(Long.MIN_SIGNED_VALUE)) {
-                return 64;
-            } else {
-                return this.negate().getNumBitsAbs();
-            }
-        } else {
-            var val = this.high != 0 ? this.high : this.low;
-            for (var bit = 31; bit > 0; bit--) {
-                if ((val & (1 << bit)) != 0) {
-                    break;
-                }
-            }
-            return this.high != 0 ? bit + 33 : bit + 1;
-        }
-    };
-
-    /**
-     * @return {boolean} Whether this value is zero.
-     * @expose
-     */
-    Long.prototype.isZero = function() {
-        return this.high == 0 && this.low == 0;
-    };
-
-    /**
-     * @return {boolean} Whether this value is negative.
-     * @expose
-     */
-    Long.prototype.isNegative = function() {
-        return !this.unsigned && this.high < 0;
-    };
-
-    /**
-     * @return {boolean} Whether this value is odd.
-     * @expose
-     */
-    Long.prototype.isOdd = function() {
-        return (this.low & 1) == 1;
-    };
-
-    /**
-     * @return {boolean} Whether this value is even.
-     */
-    Long.prototype.isEven = function() {
-        return (this.low & 1) == 0;
-    };
-
-    /**
-     * @param {Long} other Long to compare against.
-     * @return {boolean} Whether this Long equals the other.
-     * @expose
-     */
-    Long.prototype.equals = function(other) {
-        if (this.unsigned != other.unsigned && (this.high >>> 31) != (other.high >>> 31)) return false;
-        return (this.high == other.high) && (this.low == other.low);
-    };
-
-    /**
-     * @param {Long} other Long to compare against.
-     * @return {boolean} Whether this Long does not equal the other.
-     * @expose
-     */
-    Long.prototype.notEquals = function(other) {
-        return !this.equals(other);
-    };
-
-    /**
-     * @param {Long} other Long to compare against.
-     * @return {boolean} Whether this Long is less than the other.
-     * @expose
-     */
-    Long.prototype.lessThan = function(other) {
-        return this.compare(other) < 0;
-    };
-
-    /**
-     * @param {Long} other Long to compare against.
-     * @return {boolean} Whether this Long is less than or equal to the other.
-     * @expose
-     */
-    Long.prototype.lessThanOrEqual = function(other) {
-        return this.compare(other) <= 0;
-    };
-
-    /**
-     * @param {Long} other Long to compare against.
-     * @return {boolean} Whether this Long is greater than the other.
-     * @expose
-     */
-    Long.prototype.greaterThan = function(other) {
-        return this.compare(other) > 0;
-    };
-
-    /**
-     * @param {Long} other Long to compare against.
-     * @return {boolean} Whether this Long is greater than or equal to the other.
-     * @expose
-     */
-    Long.prototype.greaterThanOrEqual = function(other) {
-        return this.compare(other) >= 0;
-    };
-
-    /**
-     * Compares this Long with the given one.
-     * @param {Long} other Long to compare against.
-     * @return {number} 0 if they are the same, 1 if the this is greater, and -1
-     *     if the given one is greater.
-     * @expose
-     */
-    Long.prototype.compare = function(other) {
-        if (this.equals(other)) {
-            return 0;
-        }
-        var thisNeg = this.isNegative();
-        var otherNeg = other.isNegative();
-        if (thisNeg && !otherNeg) return -1;
-        if (!thisNeg && otherNeg) return 1;
-        if (!this.unsigned) {
-            // At this point the signs are the same
-            return this.subtract(other).isNegative() ? -1 : 1;
-        } else {
-            // Both are positive if at least one is unsigned
-            return (other.high >>> 0) > (this.high >>> 0) || (other.high == this.high && (other.low >>> 0) > (this.low >>> 0)) ? -1 : 1;
-        }
-    };
-
-    /**
-     * @return {!Long} The negation of this value.
-     * @expose
-     */
-    Long.prototype.negate = function() {
-        if (!this.unsigned && this.equals(Long.MIN_SIGNED_VALUE)) {
-            return Long.MIN_SIGNED_VALUE;
-        }
-        return this.not().add(Long.ONE);
-    };
-
-    /**
-     * Returns the sum of this and the given Long.
-     * @param {Long} other Long to add to this one.
-     * @return {!Long} The sum of this and the given Long.
-     * @expose
-     */
-    Long.prototype.add = function(other) {
-        // Divide each number into 4 chunks of 16 bits, and then sum the chunks.
-        
-        var a48 = this.high >>> 16;
-        var a32 = this.high & 0xFFFF;
-        var a16 = this.low >>> 16;
-        var a00 = this.low & 0xFFFF;
-
-        var b48 = other.high >>> 16;
-        var b32 = other.high & 0xFFFF;
-        var b16 = other.low >>> 16;
-        var b00 = other.low & 0xFFFF;
-
-        var c48 = 0, c32 = 0, c16 = 0, c00 = 0;
-        c00 += a00 + b00;
-        c16 += c00 >>> 16;
-        c00 &= 0xFFFF;
-        c16 += a16 + b16;
-        c32 += c16 >>> 16;
-        c16 &= 0xFFFF;
-        c32 += a32 + b32;
-        c48 += c32 >>> 16;
-        c32 &= 0xFFFF;
-        c48 += a48 + b48;
-        c48 &= 0xFFFF;
-        return Long.fromBits((c16 << 16) | c00, (c48 << 16) | c32, this.unsigned);
-    };
-
-    /**
-     * Returns the difference of this and the given Long.
-     * @param {Long} other Long to subtract from this.
-     * @return {!Long} The difference of this and the given Long.
-     * @expose
-     */
-    Long.prototype.subtract = function(other) {
-        return this.add(other.negate());
-    };
-
-    /**
-     * Returns the product of this and the given long.
-     * @param {Long} other Long to multiply with this.
-     * @return {!Long} The product of this and the other.
-     * @expose
-     */
-    Long.prototype.multiply = function(other) {
-        if (this.isZero()) {
-            return Long.ZERO;
-        } else if (other.isZero()) {
-            return Long.ZERO;
-        }
-
-        if (this.equals(Long.MIN_VALUE)) {
-            return other.isOdd() ? Long.MIN_VALUE : Long.ZERO;
-        } else if (other.equals(Long.MIN_VALUE)) {
-            return this.isOdd() ? Long.MIN_VALUE : Long.ZERO;
-        }
-
-        if (this.isNegative()) {
-            if (other.isNegative()) {
-                return this.negate().multiply(other.negate());
-            } else {
-                return this.negate().multiply(other).negate();
-            }
-        } else if (other.isNegative()) {
-            return this.multiply(other.negate()).negate();
-        }
-        // If both longs are small, use float multiplication
-        if (this.lessThan(TWO_PWR_24) &&
-            other.lessThan(TWO_PWR_24)) {
-            return Long.fromNumber(this.toNumber() * other.toNumber(), this.unsigned);
-        }
-
-        // Divide each long into 4 chunks of 16 bits, and then add up 4x4 products.
-        // We can skip products that would overflow.
-        
-        var a48 = this.high >>> 16;
-        var a32 = this.high & 0xFFFF;
-        var a16 = this.low >>> 16;
-        var a00 = this.low & 0xFFFF;
-
-        var b48 = other.high >>> 16;
-        var b32 = other.high & 0xFFFF;
-        var b16 = other.low >>> 16;
-        var b00 = other.low & 0xFFFF;
-
-        var c48 = 0, c32 = 0, c16 = 0, c00 = 0;
-        c00 += a00 * b00;
-        c16 += c00 >>> 16;
-        c00 &= 0xFFFF;
-        c16 += a16 * b00;
-        c32 += c16 >>> 16;
-        c16 &= 0xFFFF;
-        c16 += a00 * b16;
-        c32 += c16 >>> 16;
-        c16 &= 0xFFFF;
-        c32 += a32 * b00;
-        c48 += c32 >>> 16;
-        c32 &= 0xFFFF;
-        c32 += a16 * b16;
-        c48 += c32 >>> 16;
-        c32 &= 0xFFFF;
-        c32 += a00 * b32;
-        c48 += c32 >>> 16;
-        c32 &= 0xFFFF;
-        c48 += a48 * b00 + a32 * b16 + a16 * b32 + a00 * b48;
-        c48 &= 0xFFFF;
-        return Long.fromBits((c16 << 16) | c00, (c48 << 16) | c32, this.unsigned);
-    };
-
-    /**
-     * Returns this Long divided by the given one.
-     * @param {Long} other Long by which to divide.
-     * @return {!Long} This Long divided by the given one.
-     * @expose
-     */
-    Long.prototype.div = function(other) {
-        if (other.isZero()) {
-            throw(new Error('division by zero'));
-        } else if (this.isZero()) {
-            return this.unsigned ? Long.UZERO : Long.ZERO;
-        }
-        var approx, rem, res;
-        if (this.equals(Long.MIN_SIGNED_VALUE)) {
-            if (other.equals(Long.ONE) || other.equals(Long.NEG_ONE)) {
-                return Long.MIN_SIGNED_VALUE;  // recall that -MIN_VALUE == MIN_VALUE
-            } else if (other.equals(Long.MIN_SIGNED_VALUE)) {
-                return Long.ONE;
-            } else {
-                // At this point, we have |other| >= 2, so |this/other| < |MIN_VALUE|.
-                var halfThis = this.shiftRight(1);
-                approx = halfThis.div(other).shiftLeft(1);
-                if (approx.equals(Long.ZERO)) {
-                    return other.isNegative() ? Long.ONE : Long.NEG_ONE;
-                } else {
-                    rem = this.subtract(other.multiply(approx));
-                    res = approx.add(rem.div(other));
-                    return res;
-                }
-            }
-        } else if (other.equals(Long.MIN_SIGNED_VALUE)) {
-            return this.unsigned ? Long.UZERO : Long.ZERO;
-        }
-        if (this.isNegative()) {
-            if (other.isNegative()) {
-                return this.negate().div(other.negate());
-            } else {
-                return this.negate().div(other).negate();
-            }
-        } else if (other.isNegative()) {
-            return this.div(other.negate()).negate();
-        }
-        
-        // Repeat the following until the remainder is less than other:  find a
-        // floating-point that approximates remainder / other *from below*, add this
-        // into the result, and subtract it from the remainder.  It is critical that
-        // the approximate value is less than or equal to the real value so that the
-        // remainder never becomes negative.
-        res = Long.ZERO;
-        rem = this;
-        while (rem.greaterThanOrEqual(other)) {
-            // Approximate the result of division. This may be a little greater or
-            // smaller than the actual value.
-            approx = Math.max(1, Math.floor(rem.toNumber() / other.toNumber()));
-
-            // We will tweak the approximate result by changing it in the 48-th digit or
-            // the smallest non-fractional digit, whichever is larger.
-            var log2 = Math.ceil(Math.log(approx) / Math.LN2);
-            var delta = (log2 <= 48) ? 1 : Math.pow(2, log2 - 48);
-
-            // Decrease the approximation until it is smaller than the remainder.  Note
-            // that if it is too large, the product overflows and is negative.
-            var approxRes = Long.fromNumber(approx);
-            var approxRem = approxRes.multiply(other);
-            while (approxRem.isNegative() || approxRem.greaterThan(rem)) {
-                approx -= delta;
-                approxRes = Long.fromNumber(approx, this.unsigned);
-                approxRem = approxRes.multiply(other);
-            }
-
-            // We know the answer can't be zero... and actually, zero would cause
-            // infinite recursion since we would make no progress.
-            if (approxRes.isZero()) {
-                approxRes = Long.ONE;
-            }
-
-            res = res.add(approxRes);
-            rem = rem.subtract(approxRem);
-        }
-        return res;
-    };
-
-    /**
-     * Returns this Long modulo the given one.
-     * @param {Long} other Long by which to mod.
-     * @return {!Long} This Long modulo the given one.
-     * @expose
-     */
-    Long.prototype.modulo = function(other) {
-        return this.subtract(this.div(other).multiply(other));
-    };
-
-    /**
-     * @return {!Long} The bitwise-NOT of this value.
-     * @expose
-     */
-    Long.prototype.not = function() {
-        return Long.fromBits(~this.low, ~this.high, this.unsigned);
-    };
-
-    /**
-     * Returns the bitwise-AND of this Long and the given one.
-     * @param {Long} other The Long with which to AND.
-     * @return {!Long} The bitwise-AND of this and the other.
-     * @expose
-     */
-    Long.prototype.and = function(other) {
-        return Long.fromBits(this.low & other.low, this.high & other.high, this.unsigned);
-    };
-
-    /**
-     * Returns the bitwise-OR of this Long and the given one.
-     * @param {Long} other The Long with which to OR.
-     * @return {!Long} The bitwise-OR of this and the other.
-     * @expose
-     */
-    Long.prototype.or = function(other) {
-        return Long.fromBits(this.low | other.low, this.high | other.high, this.unsigned);
-    };
-
-    /**
-     * Returns the bitwise-XOR of this Long and the given one.
-     * @param {Long} other The Long with which to XOR.
-     * @return {!Long} The bitwise-XOR of this and the other.
-     * @expose
-     */
-    Long.prototype.xor = function(other) {
-        return Long.fromBits(this.low ^ other.low, this.high ^ other.high, this.unsigned);
-    };
-
-    /**
-     * Returns this Long with bits shifted to the left by the given amount.
-     * @param {number} numBits The number of bits by which to shift.
-     * @return {!Long} This shifted to the left by the given amount.
-     * @expose
-     */
-    Long.prototype.shiftLeft = function(numBits) {
-        if ((numBits &= 63) === 0)
-            return this;
-        else if (numBits < 32)
-            return Long.fromBits(this.low << numBits, (this.high << numBits) | (this.low >>> (32 - numBits)), this.unsigned);
-        else
-            return Long.fromBits(0, this.low << (numBits - 32), this.unsigned);
-    };
-
-    /**
-     * Returns this Long with bits shifted to the right by the given amount.
-     * @param {number} numBits The number of bits by which to shift.
-     * @return {!Long} This shifted to the right by the given amount.
-     * @expose
-     */
-    Long.prototype.shiftRight = function(numBits) {
-        if ((numBits &= 63) === 0)
-            return this;
-        else if (numBits < 32)
-            return Long.fromBits((this.low >>> numBits) | (this.high << (32 - numBits)), this.high >> numBits, this.unsigned);
-        else
-            return Long.fromBits(this.high >> (numBits - 32), this.high >= 0 ? 0 : -1, this.unsigned);
-    };
-
-    /**
-     * Returns this Long with bits shifted to the right by the given amount, with
-     * the new top bits matching the current sign bit.
-     * @param {number} numBits The number of bits by which to shift.
-     * @return {!Long} This shifted to the right by the given amount, with
-     *     zeros placed into the new leading bits.
-     * @expose
-     */
-    Long.prototype.shiftRightUnsigned = function(numBits) {
-        numBits &= 63;
-        if (numBits == 0) {
-            return this;
-        } else {
-            var high = this.high;
-            if (numBits < 32) {
-                var low = this.low;
-                return Long.fromBits((low >>> numBits) | (high << (32 - numBits)), high >>> numBits, this.unsigned);
-            } else if (numBits == 32) {
-                return Long.fromBits(high, 0, this.unsigned);
-            } else {
-                return Long.fromBits(high >>> (numBits - 32), 0, this.unsigned);
-            }
-        }
-    };
-
-    /**
-     * @return {!Long} Signed long
-     * @expose
-     */
-    Long.prototype.toSigned = function() {
-        var l = this.clone();
-        l.unsigned = false;
-        return l;
-    };
-
-    /**
-     * @return {!Long} Unsigned long
-     * @expose
-     */
-    Long.prototype.toUnsigned = function() {
-        var l = this.clone();
-        l.unsigned = true;
-        return l;
-    };
-    
-    /**
-     * @return {Long} Cloned instance with the same low/high bits and unsigned flag.
-     * @expose
-     */
-    Long.prototype.clone = function() {
-        return new Long(this.low, this.high, this.unsigned);
-    };
-
-    // Enable module loading if available
-    if (typeof module != 'undefined' && module["exports"]) { // CommonJS
-        module["exports"] = Long;
-    } else if (typeof define != 'undefined' && define["amd"]) { // AMD
-        define("Math/Long", [], function() { return Long; });
-    } else { // Shim
-        if (!global["dcodeIO"]) {
-            global["dcodeIO"] = {};
-        }
-        global["dcodeIO"]["Long"] = Long;
-    }
-
-})(this);
-
-},{}],98:[function(require,module,exports){
-/*
- Copyright 2013 Daniel Wirtz <dcode@dcode.io>
- Copyright 2009 The Closure Library Authors. All Rights Reserved.
-
- Licensed under the Apache License, Version 2.0 (the "License");
- you may not use this file except in compliance with the License.
- You may obtain a copy of the License at
-
- http://www.apache.org/licenses/LICENSE-2.0
-
- Unless required by applicable law or agreed to in writing, software
- distributed under the License is distributed on an "AS-IS" BASIS,
- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- See the License for the specific language governing permissions and
- limitations under the License.
- */
-
-module.exports = require("./dist/Long.js");
-
-},{"./dist/Long.js":97}],99:[function(require,module,exports){
-(function (Buffer){
-var WordArray = require('./word-array')
-
-var Base = (function () {
-  function F() {}
-
-  return {
-    /**
-     * Creates a new object that inherits from this object.
-     *
-     * @param {Object} overrides Properties to copy into the new object.
-     *
-     * @return {Object} The new object.
-     *
-     * @static
-     *
-     * @example
-     *
-     *     var MyType = CryptoJS.lib.Base.extend({
-     *         field: 'value',
-     *
-     *         method: function () {
-     *         }
-     *     });
-     */
-    extend: function (overrides) {
-      // Spawn
-      F.prototype = this;
-      var subtype = new F();
-
-      // Augment
-      if (overrides) {
-        subtype.mixIn(overrides);
-      }
-
-      // Create default initializer
-      if (!subtype.hasOwnProperty('init')) {
-        subtype.init = function () {
-          subtype.$super.init.apply(this, arguments);
-        };
-      }
-
-      // Initializer's prototype is the subtype object
-      subtype.init.prototype = subtype;
-
-      // Reference supertype
-      subtype.$super = this;
-
-      return subtype;
-    },
-
-    /**
-     * Extends this object and runs the init method.
-     * Arguments to create() will be passed to init().
-     *
-     * @return {Object} The new object.
-     *
-     * @static
-     *
-     * @example
-     *
-     *     var instance = MyType.create();
-     */
-    create: function () {
-      var instance = this.extend();
-      instance.init.apply(instance, arguments);
-
-      return instance;
-    },
-
-    /**
-     * Initializes a newly created object.
-     * Override this method to add some logic when your objects are created.
-     *
-     * @example
-     *
-     *     var MyType = CryptoJS.lib.Base.extend({
-     *         init: function () {
-     *             // ...
-     *         }
-     *     });
-     */
-      init: function () {
-    },
-
-
-    mixIn: function (properties) {
-      for (var propertyName in properties) {
-        if (properties.hasOwnProperty(propertyName)) {
-          this[propertyName] = properties[propertyName];
-        }
-      }
-
-      // IE won't copy toString using the loop above
-      if (properties.hasOwnProperty('toString')) {
-        this.toString = properties.toString;
-      }
-    },
-
-
-    clone: function () {
-      return this.init.prototype.extend(this);
-    }
-  };
-}());
-
-
-/**
- * Abstract buffered block algorithm template.
- *
- * The property blockSize must be implemented in a concrete subtype.
- *
- * @property {number} _minBufferSize The number of blocks that should be kept unprocessed in the buffer. Default: 0
- */
-var BufferedBlockAlgorithm = Base.extend({
-  /**
-   * Resets this block algorithm's data buffer to its initial state.
-   *
-   * @example
-   *
-   *     bufferedBlockAlgorithm.reset();
-   */
-    reset: function () {
-      // Initial values
-      this._data = new WordArray();
-      this._nDataBytes = 0;
-    },
-
-    /**
-     * Adds new data to this block algorithm's buffer.
-     *
-     * @param {WordArray|string} data The data to append. Strings are converted to a WordArray using UTF-8.
-     *
-     * @example
-     *
-     *     bufferedBlockAlgorithm._append('data');
-     *     bufferedBlockAlgorithm._append(wordArray);
-     */
-    _append: function (data) {
-      //console.dir(data)
-
-      if (Buffer.isBuffer(data)) {
-        data = WordArray.fromBuffer(data)
-      }
-
-      // Append
-      this._data.concat(data);
-      this._nDataBytes += data.sigBytes;
-    },
-
-    /**
-     * Processes available data blocks.
-     *
-     * This method invokes _doProcessBlock(offset), which must be implemented by a concrete subtype.
-     *
-     * @param {boolean} doFlush Whether all blocks and partial blocks should be processed.
-     *
-     * @return {WordArray} The processed data.
-     *
-     * @example
-     *
-     *     var processedData = bufferedBlockAlgorithm._process();
-     *     var processedData = bufferedBlockAlgorithm._process(!!'flush');
-     */
-    _process: function (doFlush) {
-      // Shortcuts
-      var data = this._data;
-      var dataWords = data.words;
-      var dataSigBytes = data.sigBytes;
-      var blockSize = this.blockSize;
-      var blockSizeBytes = blockSize * 4;
-
-      // Count blocks ready
-      var nBlocksReady = dataSigBytes / blockSizeBytes;
-      if (doFlush) {
-          // Round up to include partial blocks
-          nBlocksReady = Math.ceil(nBlocksReady);
-      } else {
-          // Round down to include only full blocks,
-          // less the number of blocks that must remain in the buffer
-          nBlocksReady = Math.max((nBlocksReady | 0) - this._minBufferSize, 0);
-      }
-
-      // Count words ready
-      var nWordsReady = nBlocksReady * blockSize;
-
-      // Count bytes ready
-      var nBytesReady = Math.min(nWordsReady * 4, dataSigBytes);
-
-      // Process blocks
-      if (nWordsReady) {
-        for (var offset = 0; offset < nWordsReady; offset += blockSize) {
-          // Perform concrete-algorithm logic
-          this._doProcessBlock(dataWords, offset);
-        }
-
-        // Remove processed words
-        var processedWords = dataWords.splice(0, nWordsReady);
-        data.sigBytes -= nBytesReady;
-      }
-
-      // Return processed words
-      return new WordArray(processedWords, nBytesReady);
-    },
-
-    /**
-     * Creates a copy of this object.
-     * @example
-     *
-     *     var clone = bufferedBlockAlgorithm.clone();
-     */
-    clone: function () {
-      var clone = Base.clone.call(this);
-      clone._data = this._data.clone();
-
-      return clone;
-    },
-
-      _minBufferSize: 0
-    });
-
-/**
- * Abstract hasher template.
- *
- * @property {number} blockSize The number of 32-bit words this hasher operates on. Default: 16 (512 bits)
- */
-var Hasher = BufferedBlockAlgorithm.extend({
-  /**
-   * Configuration options.
-   */
-  cfg: Base.extend(),
-
-  /**
-   * Initializes a newly created hasher.
-   * @example
-   *
-   *     var hasher = CryptoJS.algo.SHA256.create();
-   */
-  init: function (cfg) {
-    // Apply config defaults
-    this.cfg = this.cfg.extend(cfg);
-
-    // Set initial values
-    this.reset();
-  },
-
-  reset: function () {
-    // Reset data buffer
-    BufferedBlockAlgorithm.reset.call(this);
-
-    // Perform concrete-hasher logic
-    this._doReset();
-  },
-
-  update: function (messageUpdate) {
-    if (typeof messageUpdate == 'string')
-      messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
-
-    if (Buffer.isBuffer(messageUpdate))
-      messageUpdate = WordArray.fromBuffer(messageUpdate)
-
-    // Append
-    this._append(messageUpdate);
-
-    // Update the hash
-    this._process();
-
-    // Chainable
-    return this;
-  },
-
-  finalize: function (messageUpdate) {
-    if (typeof messageUpdate == 'string')
-      messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
-
-    if (Buffer.isBuffer(messageUpdate))
-      messageUpdate = WordArray.fromBuffer(messageUpdate)
-
-
-    // Final message update
-    if (messageUpdate) {
-      this._append(messageUpdate);
-    }
-
-    // Perform concrete-hasher logic
-    var hash = this._doFinalize();
-
-    return hash.toBuffer()
-  },
-
-  blockSize: 512/32,
-
-  /** TODO: DELETE
-   * Creates a shortcut function to a hasher's object interface.
-   * @example
-   *
-   *     var SHA256 = CryptoJS.lib.Hasher._createHelper(CryptoJS.algo.SHA256);
-   */
-  _createHelper: function (hasher) {
-    return function (message, cfg) {
-      return new hasher.init(cfg).finalize(message);
-    };
-  }
-
-});
-
-module.exports.Hasher = Hasher
-
-
-
-}).call(this,require("buffer").Buffer)
-},{"./word-array":103,"buffer":115}],100:[function(require,module,exports){
-(function (Buffer){
-var sha512 = require('./sha512').sha512
-var WordArray = require('./word-array')
-
-function HMAC(key) {
-  if (!(this instanceof HMAC))
-    return new HMAC(key)
-
-  // Init hasher
-  var hasher = this._hasher = new sha512.init()//new hasher.init();
-
-  // Convert string to WordArray, else assume WordArray already
-  if (typeof key == 'string') {
-    key = WordArray.fromBuffer(new Buffer(key, 'utf8'));
-  }
-
-  if (Buffer.isBuffer(key)) {
-    key = WordArray.fromBuffer(key)
-  }
-
-  // Shortcuts
-  var hasherBlockSize = hasher.blockSize;
-  var hasherBlockSizeBytes = hasherBlockSize * 4;
-
-  // Allow arbitrary length keys
-  if (key.sigBytes > hasherBlockSizeBytes) {
-      key = hasher.finalize(key);
-  }
-
-  // Clamp excess bits
-  key.clamp();
-
-  // Clone key for inner and outer pads
-  var oKey = this._oKey = key.clone();
-  var iKey = this._iKey = key.clone();
-
-  // Shortcuts
-  var oKeyWords = oKey.words;
-  var iKeyWords = iKey.words;
-
-  // XOR keys with pad constants
-  for (var i = 0; i < hasherBlockSize; i++) {
-    oKeyWords[i] ^= 0x5c5c5c5c;
-    iKeyWords[i] ^= 0x36363636;
-  }
-  oKey.sigBytes = iKey.sigBytes = hasherBlockSizeBytes;
-
-  // Set initial values
-  this.reset();
-}
-
-HMAC.prototype.reset = function () {
-  // Shortcut
-  var hasher = this._hasher;
-
-  // Reset
-  hasher.reset();
-  hasher.update(this._iKey);
-}
-
-HMAC.prototype.update = function (messageUpdate) {
-  if (typeof messageUpdate == 'string')
-    messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
-
-  if (Buffer.isBuffer(messageUpdate))
-    messageUpdate = WordArray.fromBuffer(messageUpdate)
-
-  this._hasher.update(messageUpdate);
-
-  // Chainable
-  return this;
-}
-
-HMAC.prototype.finalize = function (messageUpdate) {
-   if (typeof messageUpdate == 'string')
-    messageUpdate = WordArray.fromBuffer(new Buffer(messageUpdate, 'utf8'))
-
-  if (Buffer.isBuffer(messageUpdate))
-    messageUpdate = WordArray.fromBuffer(messageUpdate)
-
-  // Shortcut
-  var hasher = this._hasher;
-
-  // Compute HMAC
-  var innerHash = hasher.finalize(messageUpdate);
-  hasher.reset();
-  var hmac = hasher.finalize(this._oKey.clone().concat(innerHash));
-
-  return hmac;
-}
-  
-
-module.exports = HMAC
-
-}).call(this,require("buffer").Buffer)
-},{"./sha512":102,"./word-array":103,"buffer":115}],101:[function(require,module,exports){
-module.exports = require('./sha512')
-module.exports.hmac = require('./hmac')
-},{"./hmac":100,"./sha512":102}],102:[function(require,module,exports){
-
-var Hasher = require('./cryptojs').Hasher 
-
-var C_x64 = require('./x64')
-var X64Word = C_x64.Word;
-var X64WordArray = C_x64.WordArray;
-
-// Constants
-var K = [
-  X64Word(0x428a2f98, 0xd728ae22), X64Word(0x71374491, 0x23ef65cd),
-  X64Word(0xb5c0fbcf, 0xec4d3b2f), X64Word(0xe9b5dba5, 0x8189dbbc),
-  X64Word(0x3956c25b, 0xf348b538), X64Word(0x59f111f1, 0xb605d019),
-  X64Word(0x923f82a4, 0xaf194f9b), X64Word(0xab1c5ed5, 0xda6d8118),
-  X64Word(0xd807aa98, 0xa3030242), X64Word(0x12835b01, 0x45706fbe),
-  X64Word(0x243185be, 0x4ee4b28c), X64Word(0x550c7dc3, 0xd5ffb4e2),
-  X64Word(0x72be5d74, 0xf27b896f), X64Word(0x80deb1fe, 0x3b1696b1),
-  X64Word(0x9bdc06a7, 0x25c71235), X64Word(0xc19bf174, 0xcf692694),
-  X64Word(0xe49b69c1, 0x9ef14ad2), X64Word(0xefbe4786, 0x384f25e3),
-  X64Word(0x0fc19dc6, 0x8b8cd5b5), X64Word(0x240ca1cc, 0x77ac9c65),
-  X64Word(0x2de92c6f, 0x592b0275), X64Word(0x4a7484aa, 0x6ea6e483),
-  X64Word(0x5cb0a9dc, 0xbd41fbd4), X64Word(0x76f988da, 0x831153b5),
-  X64Word(0x983e5152, 0xee66dfab), X64Word(0xa831c66d, 0x2db43210),
-  X64Word(0xb00327c8, 0x98fb213f), X64Word(0xbf597fc7, 0xbeef0ee4),
-  X64Word(0xc6e00bf3, 0x3da88fc2), X64Word(0xd5a79147, 0x930aa725),
-  X64Word(0x06ca6351, 0xe003826f), X64Word(0x14292967, 0x0a0e6e70),
-  X64Word(0x27b70a85, 0x46d22ffc), X64Word(0x2e1b2138, 0x5c26c926),
-  X64Word(0x4d2c6dfc, 0x5ac42aed), X64Word(0x53380d13, 0x9d95b3df),
-  X64Word(0x650a7354, 0x8baf63de), X64Word(0x766a0abb, 0x3c77b2a8),
-  X64Word(0x81c2c92e, 0x47edaee6), X64Word(0x92722c85, 0x1482353b),
-  X64Word(0xa2bfe8a1, 0x4cf10364), X64Word(0xa81a664b, 0xbc423001),
-  X64Word(0xc24b8b70, 0xd0f89791), X64Word(0xc76c51a3, 0x0654be30),
-  X64Word(0xd192e819, 0xd6ef5218), X64Word(0xd6990624, 0x5565a910),
-  X64Word(0xf40e3585, 0x5771202a), X64Word(0x106aa070, 0x32bbd1b8),
-  X64Word(0x19a4c116, 0xb8d2d0c8), X64Word(0x1e376c08, 0x5141ab53),
-  X64Word(0x2748774c, 0xdf8eeb99), X64Word(0x34b0bcb5, 0xe19b48a8),
-  X64Word(0x391c0cb3, 0xc5c95a63), X64Word(0x4ed8aa4a, 0xe3418acb),
-  X64Word(0x5b9cca4f, 0x7763e373), X64Word(0x682e6ff3, 0xd6b2b8a3),
-  X64Word(0x748f82ee, 0x5defb2fc), X64Word(0x78a5636f, 0x43172f60),
-  X64Word(0x84c87814, 0xa1f0ab72), X64Word(0x8cc70208, 0x1a6439ec),
-  X64Word(0x90befffa, 0x23631e28), X64Word(0xa4506ceb, 0xde82bde9),
-  X64Word(0xbef9a3f7, 0xb2c67915), X64Word(0xc67178f2, 0xe372532b),
-  X64Word(0xca273ece, 0xea26619c), X64Word(0xd186b8c7, 0x21c0c207),
-  X64Word(0xeada7dd6, 0xcde0eb1e), X64Word(0xf57d4f7f, 0xee6ed178),
-  X64Word(0x06f067aa, 0x72176fba), X64Word(0x0a637dc5, 0xa2c898a6),
-  X64Word(0x113f9804, 0xbef90dae), X64Word(0x1b710b35, 0x131c471b),
-  X64Word(0x28db77f5, 0x23047d84), X64Word(0x32caab7b, 0x40c72493),
-  X64Word(0x3c9ebe0a, 0x15c9bebc), X64Word(0x431d67c4, 0x9c100d4c),
-  X64Word(0x4cc5d4be, 0xcb3e42b6), X64Word(0x597f299c, 0xfc657e2a),
-  X64Word(0x5fcb6fab, 0x3ad6faec), X64Word(0x6c44198c, 0x4a475817)
-];
-
-// Reusable objects
-var W = [];
-(function () {
-  for (var i = 0; i < 80; i++) {
-    W[i] = X64Word();
-  }
-}());
-
-/**
- * SHA-512 hash algorithm.
- */
-var SHA512 = Hasher.extend({
-  _doReset: function () {
-    this._hash = new X64WordArray([
-      X64Word(0x6a09e667, 0xf3bcc908), X64Word(0xbb67ae85, 0x84caa73b),
-      X64Word(0x3c6ef372, 0xfe94f82b), X64Word(0xa54ff53a, 0x5f1d36f1),
-      X64Word(0x510e527f, 0xade682d1), X64Word(0x9b05688c, 0x2b3e6c1f),
-      X64Word(0x1f83d9ab, 0xfb41bd6b), X64Word(0x5be0cd19, 0x137e2179)
-    ]);
-  },
-
-  _doProcessBlock: function (M, offset) {
-    // Shortcuts
-    var H = this._hash.words;
-
-    var H0 = H[0]; var H1 = H[1]; var H2 = H[2];
-    var H3 = H[3]; var H4 = H[4]; var H5 = H[5];
-    var H6 = H[6]; var H7 = H[7];
-
-    var H0h = H0.high; var H0l = H0.low;
-    var H1h = H1.high; var H1l = H1.low;
-    var H2h = H2.high; var H2l = H2.low;
-    var H3h = H3.high; var H3l = H3.low;
-    var H4h = H4.high; var H4l = H4.low;
-    var H5h = H5.high; var H5l = H5.low;
-    var H6h = H6.high; var H6l = H6.low;
-    var H7h = H7.high; var H7l = H7.low;
-
-    // Working variables
-    var ah = H0h; var al = H0l;
-    var bh = H1h; var bl = H1l;
-    var ch = H2h; var cl = H2l;
-    var dh = H3h; var dl = H3l;
-    var eh = H4h; var el = H4l;
-    var fh = H5h; var fl = H5l;
-    var gh = H6h; var gl = H6l;
-    var hh = H7h; var hl = H7l;
-
-    // Rounds
-    for (var i = 0; i < 80; i++) {
-      // Shortcut
-      var Wi = W[i];
-
-      // Extend message
-      if (i < 16) {
-        var Wih = Wi.high = M[offset + i * 2]     | 0;
-        var Wil = Wi.low  = M[offset + i * 2 + 1] | 0;
-      } else {
-        // Gamma0
-        var gamma0x  = W[i - 15];
-        var gamma0xh = gamma0x.high;
-        var gamma0xl = gamma0x.low;
-        var gamma0h  = ((gamma0xh >>> 1) | (gamma0xl << 31)) ^ ((gamma0xh >>> 8) | (gamma0xl << 24)) ^ (gamma0xh >>> 7);
-        var gamma0l  = ((gamma0xl >>> 1) | (gamma0xh << 31)) ^ ((gamma0xl >>> 8) | (gamma0xh << 24)) ^ ((gamma0xl >>> 7) | (gamma0xh << 25));
-
-        // Gamma1
-        var gamma1x  = W[i - 2];
-        var gamma1xh = gamma1x.high;
-        var gamma1xl = gamma1x.low;
-        var gamma1h  = ((gamma1xh >>> 19) | (gamma1xl << 13)) ^ ((gamma1xh << 3) | (gamma1xl >>> 29)) ^ (gamma1xh >>> 6);
-        var gamma1l  = ((gamma1xl >>> 19) | (gamma1xh << 13)) ^ ((gamma1xl << 3) | (gamma1xh >>> 29)) ^ ((gamma1xl >>> 6) | (gamma1xh << 26));
-
-        // W[i] = gamma0 + W[i - 7] + gamma1 + W[i - 16]
-        var Wi7  = W[i - 7];
-        var Wi7h = Wi7.high;
-        var Wi7l = Wi7.low;
-
-        var Wi16  = W[i - 16];
-        var Wi16h = Wi16.high;
-        var Wi16l = Wi16.low;
-
-        var Wil = gamma0l + Wi7l;
-        var Wih = gamma0h + Wi7h + ((Wil >>> 0) < (gamma0l >>> 0) ? 1 : 0);
-        var Wil = Wil + gamma1l;
-        var Wih = Wih + gamma1h + ((Wil >>> 0) < (gamma1l >>> 0) ? 1 : 0);
-        var Wil = Wil + Wi16l;
-        var Wih = Wih + Wi16h + ((Wil >>> 0) < (Wi16l >>> 0) ? 1 : 0);
-
-        Wi.high = Wih;
-        Wi.low  = Wil;
-      }
-
-      var chh  = (eh & fh) ^ (~eh & gh);
-      var chl  = (el & fl) ^ (~el & gl);
-      var majh = (ah & bh) ^ (ah & ch) ^ (bh & ch);
-      var majl = (al & bl) ^ (al & cl) ^ (bl & cl);
-
-      var sigma0h = ((ah >>> 28) | (al << 4))  ^ ((ah << 30)  | (al >>> 2)) ^ ((ah << 25) | (al >>> 7));
-      var sigma0l = ((al >>> 28) | (ah << 4))  ^ ((al << 30)  | (ah >>> 2)) ^ ((al << 25) | (ah >>> 7));
-      var sigma1h = ((eh >>> 14) | (el << 18)) ^ ((eh >>> 18) | (el << 14)) ^ ((eh << 23) | (el >>> 9));
-      var sigma1l = ((el >>> 14) | (eh << 18)) ^ ((el >>> 18) | (eh << 14)) ^ ((el << 23) | (eh >>> 9));
-
-      // t1 = h + sigma1 + ch + K[i] + W[i]
-      var Ki  = K[i];
-      var Kih = Ki.high;
-      var Kil = Ki.low;
-
-      var t1l = hl + sigma1l;
-      var t1h = hh + sigma1h + ((t1l >>> 0) < (hl >>> 0) ? 1 : 0);
-      var t1l = t1l + chl;
-      var t1h = t1h + chh + ((t1l >>> 0) < (chl >>> 0) ? 1 : 0);
-      var t1l = t1l + Kil;
-      var t1h = t1h + Kih + ((t1l >>> 0) < (Kil >>> 0) ? 1 : 0);
-      var t1l = t1l + Wil;
-      var t1h = t1h + Wih + ((t1l >>> 0) < (Wil >>> 0) ? 1 : 0);
-
-      // t2 = sigma0 + maj
-      var t2l = sigma0l + majl;
-      var t2h = sigma0h + majh + ((t2l >>> 0) < (sigma0l >>> 0) ? 1 : 0);
-
-      // Update working variables
-      hh = gh; hl = gl;
-      gh = fh; gl = fl;
-      fh = eh; fl = el;
-      el = (dl + t1l) | 0;
-      eh = (dh + t1h + ((el >>> 0) < (dl >>> 0) ? 1 : 0)) | 0;
-      dh = ch; dl = cl;
-      ch = bh; cl = bl;
-      bh = ah; bl = al;
-      al = (t1l + t2l) | 0;
-      ah = (t1h + t2h + ((al >>> 0) < (t1l >>> 0) ? 1 : 0)) | 0;
-    }
-
-    // Intermediate hash value
-    H0l = H0.low  = (H0l + al);
-    H0.high = (H0h + ah + ((H0l >>> 0) < (al >>> 0) ? 1 : 0));
-    H1l = H1.low  = (H1l + bl);
-    H1.high = (H1h + bh + ((H1l >>> 0) < (bl >>> 0) ? 1 : 0));
-    H2l = H2.low  = (H2l + cl);
-    H2.high = (H2h + ch + ((H2l >>> 0) < (cl >>> 0) ? 1 : 0));
-    H3l = H3.low  = (H3l + dl);
-    H3.high = (H3h + dh + ((H3l >>> 0) < (dl >>> 0) ? 1 : 0));
-    H4l = H4.low  = (H4l + el);
-    H4.high = (H4h + eh + ((H4l >>> 0) < (el >>> 0) ? 1 : 0));
-    H5l = H5.low  = (H5l + fl);
-    H5.high = (H5h + fh + ((H5l >>> 0) < (fl >>> 0) ? 1 : 0));
-    H6l = H6.low  = (H6l + gl);
-    H6.high = (H6h + gh + ((H6l >>> 0) < (gl >>> 0) ? 1 : 0));
-    H7l = H7.low  = (H7l + hl);
-    H7.high = (H7h + hh + ((H7l >>> 0) < (hl >>> 0) ? 1 : 0));
-  },
-
-  _doFinalize: function () {
-    // Shortcuts
-    var data = this._data;
-    var dataWords = data.words;
-
-    var nBitsTotal = this._nDataBytes * 8;
-    var nBitsLeft = data.sigBytes * 8;
-
-    // Add padding
-    dataWords[nBitsLeft >>> 5] |= 0x80 << (24 - nBitsLeft % 32);
-    dataWords[(((nBitsLeft + 128) >>> 10) << 5) + 30] = Math.floor(nBitsTotal / 0x100000000);
-    dataWords[(((nBitsLeft + 128) >>> 10) << 5) + 31] = nBitsTotal;
-    data.sigBytes = dataWords.length * 4;
-
-    // Hash final blocks
-    this._process();
-
-    // Convert hash to 32-bit word array before returning
-    var hash = this._hash.toX32();
-
-    // Return final computed hash
-    return hash;
-  },
-
-  clone: function () {
-    var clone = Hasher.clone.call(this);
-    clone._hash = this._hash.clone();
-
-    return clone;
-  },
-
-  blockSize: 1024/32
-});
-
-
-module.exports = Hasher._createHelper(SHA512);
-module.exports.sha512 = SHA512
-
-
-},{"./cryptojs":99,"./x64":104}],103:[function(require,module,exports){
-(function (process,Buffer){
-module.exports = WordArray
-
-/** An array of 32-bit words. */
-function WordArray(words, sigBytes) {
-  this.words = words || [];
-
-  if (sigBytes != undefined) {
-      this.sigBytes = sigBytes;
-  } else {
-      this.sigBytes = this.words.length * 4;
-  }
-}
-
-/**
- * Concatenates a word array to this word array.
- *
- * @param {WordArray} wordArray The word array to append.
- *
- * @return {WordArray} This word array.
- *
- * @example
- *
- *     wordArray1.concat(wordArray2);
- */
-WordArray.prototype.concat = function (wordArray) {
-  if (Buffer.isBuffer(wordArray))
-    wordArray = WordArray.fromBuffer(wordArray)
-
-        // Shortcuts
-        var thisWords = this.words;
-        var thatWords = wordArray.words;
-        var thisSigBytes = this.sigBytes;
-        var thatSigBytes = wordArray.sigBytes;
-
-        // Clamp excess bits
-        this.clamp();
-
-        // Concat
-        if (thisSigBytes % 4) {
-            // Copy one byte at a time
-            for (var i = 0; i < thatSigBytes; i++) {
-                var thatByte = (thatWords[i >>> 2] >>> (24 - (i % 4) * 8)) & 0xff;
-                thisWords[(thisSigBytes + i) >>> 2] |= thatByte << (24 - ((thisSigBytes + i) % 4) * 8);
-            }
-        } else if (thatWords.length > 0xffff) {
-            // Copy one word at a time
-            for (var i = 0; i < thatSigBytes; i += 4) {
-                thisWords[(thisSigBytes + i) >>> 2] = thatWords[i >>> 2];
-            }
-        } else {
-            // Copy all words at once
-            thisWords.push.apply(thisWords, thatWords);
-        }
-        this.sigBytes += thatSigBytes;
-
-        // Chainable
-        return this;
-}
-
-/**
- * Removes insignificant bits.
- *
- */
-WordArray.prototype.clamp = function () {
-  // Shortcuts
-  var words = this.words;
-  var sigBytes = this.sigBytes;
-
-  // Clamp
-  words[sigBytes >>> 2] &= 0xffffffff << (32 - (sigBytes % 4) * 8);
-  words.length = Math.ceil(sigBytes / 4);
-}
-
-WordArray.prototype.clone = function() {
-  var wa = new WordArray(this.words.slice(0))
-  return wa
-}
-
-WordArray.prototype.toBuffer = function() {
-  var buf = new Buffer(this.words.length * 4)
-  for (var i = 0; i < this.words.length; ++i) {
-    var w = this.words[i]
-    buf.writeUInt32BE(w, i*4, true)
-  }
-  return buf 
-}
-
-WordArray.fromBuffer = function(buf) {
-  var len = buf.length
-  var dif = len % 4
-  var w = []
-
-  if (!process.browser) {
-    for (var i = 0; i < len; i += 4) {
-      var n = buf.readUInt32BE(i, true) 
-      w.push(n)
-    }
-    return new WordArray(w, buf.length)
-  } else { //bug in browserify / buffer
-    for (var i = 0; i < len - dif; i += 4) {
-      var n = buf.readUInt32BE(i)
-      w.push(n)
-    }
-    var lw = 0x0
-    var off = len - dif
-    for (var j = 0; j < dif; j += 1) {
-      lw |=  (buf.readUInt8(off + j) << ((3-j)*8))
-    }
-    if (dif > 0)
-      w.push(lw)
-    return new WordArray(w, buf.length)
-  } 
-}
-
-
-
-}).call(this,require('_process'),require("buffer").Buffer)
-},{"_process":211,"buffer":115}],104:[function(require,module,exports){
-var X32WordArray = require('./word-array')
-
-
-function X64Word(high, low) {
-  if (!(this instanceof X64Word)) return new X64Word(high, low)
-  this.high = high
-  this.low = low
-}
-
-function X64WordArray (words) {
-  this.words = words || [];
-}
-
-/**
- * Converts this 64-bit word array to a 32-bit word array.
- */
-X64WordArray.prototype.toX32 = function () {
-  // Shortcuts
-  var x64Words = this.words;
-  var x64WordsLength = x64Words.length;
-
-  // Convert
-  var x32Words = [];
-  for (var i = 0; i < x64WordsLength; i++) {
-      var x64Word = x64Words[i];
-      x32Words.push(x64Word.high);
-      x32Words.push(x64Word.low);
-  }
-
-  return new X32WordArray(x32Words, this.sigBytes);
-}
-
-
-module.exports.Word = X64Word
-module.exports.WordArray = X64WordArray
-
-
-},{"./word-array":103}],105:[function(require,module,exports){
-(function (Buffer){
-/**
- * @author Matthew Caruana Galizia <m@m.cg>
- * @license MIT
- * @copyright Copyright (c) 2013, Matthew Caruana Galizia
- * @preserve
- *
- * Portions of this code are copyright (c) 2011 Valentin Háloiu, redistributed and modified under the following license (MIT).
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- *
- */
-
-'use strict';
-
-/*jshint node:true*/
-
-var net = require('net');
-var EventEmitter = require('events').EventEmitter;
-var inherits = require('util').inherits;
-
-var htons = require('network-byte-order').htons;
-var ipv6 = require('ipv6').v6;
-
-module.exports = exports = Socks5ClientSocket;
-
-exports.createConnection = function(options) {
-	var socksSocket, socksHost, socksPort;
-
-	socksHost = options.socksHost || 'localhost';
-	socksPort = options.socksPort || 1080;
-	socksSocket = new Socks5ClientSocket(socksHost, socksPort);
-
-	return socksSocket.connect(options.port, options.host);
-};
-
-function Socks5ClientSocket(socksHost, socksPort) {
-	var self = this;
-
-	EventEmitter.call(self);
-
-	self.socket = new net.Socket();
-	self.socksHost = socksHost;
-	self.socksPort = socksPort;
-
-	self.socket.on('error', function(err) {
-		self.emit('error', err);
-	});
-
-	self.on('error', function(err) {
-		if (!self.socket.destroyed) {
-			self.socket.destroy();
-		}
-	});
-}
-
-inherits(Socks5ClientSocket, EventEmitter);
-
-Socks5ClientSocket.prototype.setTimeout = function(msecs, callback) {
-	return this.socket.setTimeout(msecs, callback);
-};
-
-Socks5ClientSocket.prototype.setNoDelay = function() {
-	return this.socket.setNoDelay();
-};
-
-Socks5ClientSocket.prototype.setKeepAlive = function(setting, msecs) {
-	return this.socket.setKeepAlive(setting, msecs);
-};
-
-Socks5ClientSocket.prototype.address = function() {
-	return this.socket.address();
-};
-
-Socks5ClientSocket.prototype.pause = function() {
-	return this.socket.pause();
-};
-
-Socks5ClientSocket.prototype.resume = function() {
-	return this.socket.resume();
-};
-
-Socks5ClientSocket.prototype.end = function(data, encoding) {
-	return this.socket.end(data, encoding);
-};
-
-Socks5ClientSocket.prototype.destroy = function(exception) {
-	return this.socket.destroy(exception);
-};
-
-Socks5ClientSocket.prototype.destroySoon = function() {
-	var ret = this.socket.destroySoon();
-
-	this.writable = false; // node's http library asserts writable to be false after destroySoon
-
-	return ret;
-};
-
-Socks5ClientSocket.prototype.setEncoding = function(encoding) {
-	return this.socket.setEncoding(encoding);
-};
-
-Socks5ClientSocket.prototype.write = function(data, arg1, arg2) {
-	return this.socket.write(data, arg1, arg2);
-};
-
-Socks5ClientSocket.prototype.connect = function(port, host) {
-	var self = this;
-
-	self.socket.connect(self.socksPort, self.socksHost, function() {
-		self.establishSocksConnection(host, port);
-	});
-
-	return self;
-};
-
-Socks5ClientSocket.prototype.handleSocksConnectToHost = function() {
-	var self = this;
-
-	self.socket.on('close', function(hadError) {
-		self.emit('close', hadError);
-	});
-
-	self.socket.on('end', function() {
-		self.emit('end');
-	});
-
-	self.socket.on('data', function(data) {
-		self.emit('data', data);
-	});
-
-	self.socket._httpMessage = self._httpMessage;
-	self.socket.parser = self.parser;
-	self.socket.ondata = self.ondata;
-	self.writable = true;
-	self.readable = true;
-	self.emit('connect');
-};
-
-Socks5ClientSocket.prototype.establishSocksConnection = function(host, port) {
-	var self = this;
-
-	self.authenticateWithSocks(function() {
-		self.connectSocksToHost(host, port, function() {
-			self.handleSocksConnectToHost();
-		});
-	});
-};
-
-Socks5ClientSocket.prototype.authenticateWithSocks = function(cb) {
-	var request, self = this;
-
-	self.socket.ondata = function(d, start, end) {
-		var error;
-
-		if (end - start !== 2) {
-			error = new Error('SOCKS authentication failed. Unexpected number of bytes received.');
-		} else if (d[start] !== 0x05) {
-			error = new Error('SOCKS authentication failed. Unexpected SOCKS version number: ' + d[start] + '.');
-		} else if (d[start + 1] !== 0x00) {
-			error = new Error('SOCKS authentication failed. Unexpected SOCKS authentication method: ' + d[start+1] + '.');
-		}
-
-		if (error) {
-			self.emit('error', error);
-			return;
-		}
-
-		if (cb) {
-			cb();
-		}
-	};
-
-	request = new Buffer(3);
-	request[0] = 0x05;  // SOCKS version
-	request[1] = 0x01;  // number of authentication methods
-	request[2] = 0x00;  // no authentication
-	self.socket.write(request);
-};
-
-Socks5ClientSocket.prototype.connectSocksToHost = function(host, port, cb) {
-	var buffer, request, self = this;
-
-	this.socket.ondata = function(d, start, end) {
-		var i, address, addressLength, error;
-
-		if (d[start] !== 0x05) {
-			error = new Error('SOCKS connection failed. Unexpected SOCKS version number: ' + d[start] + '.');
-		} else if (d[start + 1] !== 0x00) {
-			error = new Error('SOCKS connection failed. ' + getErrorMessage(d[start + 1]) + '.');
-		} else if (d[start + 2] !== 0x00) {
-			error = new Error('SOCKS connection failed. The reserved byte must be 0x00.');
-		}
-
-		if (error) {
-			self.emit('error', error);
-			return;
-		}
-
-		address = '';
-		addressLength = 0;
-
-		switch (d[start + 3]) {
-			case 1:
-				address = d[start + 4] + '.' + d[start + 5] + '.' + d[start + 6] + '.' + d[start + 7];
-				addressLength = 4;
-				break;
-			case 3:
-				addressLength = d[start + 4] + 1;
-				for (i = start + 5; i < start + addressLength; i++) {
-					address += String.fromCharCode(d[i]);
-				}
-				break;
-			case 4:
-				addressLength = 16;
-				break;
-			default:
-				self.emit('error', new Error('SOCKS connection failed. Unknown addres type: ' + d[start + 3] + '.'));
-				return;
-		}
-
-		if (cb) {
-			cb();
-		}
-	};
-
-	buffer = [];
-	buffer.push(0x05); // SOCKS version
-	buffer.push(0x01); // Command code: establish a TCP/IP stream connection
-	buffer.push(0x00); // Reserved - myst be 0x00
-
-	switch (net.isIP(host)) {
-		case 0:
-			buffer.push(0x03);
-			parseDomainName(host, buffer);
-			break;
-		case 4:
-			buffer.push(0x01);
-			parseIPv4(host, buffer);
-			break;
-		case 6:
-			buffer.push(0x04);
-			if (parseIPv6(host, buffer) === false) {
-				self.emit('error', new Error('IPv6 host parsing failed. Invalid address.'));
-				return;
-			}
-			break;
-	}
-
-	parsePort(port, buffer);
-
-	request = new Buffer(buffer);
-	this.socket.write(request);
-};
-
-function parseIPv4(host, buffer) {
-	var i, ip, groups = host.split('.');
-
-	for (i = 0; i < groups.length; i++) {
-		ip = parseInt(groups[i], 10);
-		buffer.push(ip);
-	}
-}
-
-function parseIPv6(host, buffer) {
-	var i, b1, b2, part1, part2, address, groups;
-
-	address = new ipv6.Address(host).canonicalForm();
-	if (!address) {
-		return false;
-	}
-
-	groups = address.split(':');
-
-	for (i = 0; i < groups.length; i++) {
-		part1 = groups[i].substr(0,2);
-		part2 = groups[i].substr(2,2);
-
-		b1 = parseInt(part1, 16);
-		b2 = parseInt(part2, 16);
-
-		buffer.push(b1);
-		buffer.push(b2);
-	}
-
-	return true;
-}
-
-function parseDomainName(host, buffer) {
-	var i, c;
-
-	buffer.push(host.length);
-	for (i = 0; i < host.length; i++) {
-		c = host.charCodeAt(i);
-		buffer.push(c);
-	}
-}
-
-function parsePort(port, buffer) {
-	htons(buffer, buffer.length, port);
-}
-
-function getErrorMessage(code) {
-	switch (code) {
-		case 1:
-			return 'General SOCKS server failure';
-		case 2:
-			return 'Connection not allowed by ruleset';
-		case 3:
-			return 'Network unreachable';
-		case 4:
-			return 'Host unreachable';
-		case 5:
-			return 'Connection refused';
-		case 6:
-			return 'TTL expired';
-		case 7:
-			return 'Command not supported';
-		case 8:
-			return 'Address type not supported';
-		default:
-			return 'Unknown status code ' + code;
-	}
-}
-
-}).call(this,require("buffer").Buffer)
-},{"buffer":115,"events":208,"ipv6":106,"net":112,"network-byte-order":110,"util":233}],106:[function(require,module,exports){
-exports = module.exports = require('./ipv6.js');
-},{"./ipv6.js":107}],107:[function(require,module,exports){
-if (typeof exports !== 'undefined') {
-  var sprintf = require('sprintf').sprintf;
-  var BigInteger = require('./lib/node/bigint').BigInteger;
-}
-
-var v4 = this.v4 = {};
-var v6 = this.v6 = {};
-
-v4.GROUPS = 4;
-v6.GROUPS = 8;
-
-v4.BITS = 32;
-v6.BITS = 128;
-
-v6.SCOPES = {
-  0: 'Reserved',
-  1: 'Interface local',
-  2: 'Link local',
-  4: 'Admin local',
-  5: 'Site local',
-  8: 'Organization local',
-  15: 'Global',
-  16: 'Reserved'
-};
-
-v4.RE_ADDRESS = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/g;
-v4.RE_SUBNET_STRING = /\/\d{1,2}$/;
-
-v6.RE_BAD_CHARACTERS = /([^0-9a-f:\/%])/ig;
-v6.RE_BAD_ADDRESS = /([0-9a-f]{5,}|:{3,}|[^:]:$|^:[^:]|\/$)/ig;
-
-v6.RE_SUBNET_STRING = /\/\d{1,3}(?=%|$)/;
-v6.RE_ZONE_STRING = /%.*$/;
-
-v6.RE_URL = new RegExp(/([0-9a-f:]+)/);
-v6.RE_URL_WITH_PORT = new RegExp(/\[([0-9a-f:]+)\]:([0-9]{1,5})/);
-
-// Convenience functions
-function map(array, fn) {
-  var results = [];
-  var i;
-
-  for (i = 0; i < array.length; i++) {
-    results.push(fn(array[i], i));
-  }
-
-  return results;
-}
-
-function repeatString(s, n) {
-  var result = '';
-  var i;
-
-  for (i = 0; i < n; i++) {
-    result += s;
-  }
-
-  return result;
-}
-
-function addCommas(number) {
-  var r = /(\d+)(\d{3})/;
-
-  while (r.test(number)) {
-    number = number.replace(r, '$1,$2');
-  }
-
-  return number;
-}
-
-function spanLeadingZeroesSimple(group) {
-  return group.replace(/^(0+)/, '<span class="zero">$1</span>');
-}
-
-function spanLeadingZeroes4(n) {
-  n = n.replace(/^(0{1,})([1-9]+)$/, '<span class="parse-error">$1</span>$2');
-  n = n.replace(/^(0{1,})(0)$/, '<span class="parse-error">$1</span>$2');
-
-  return n;
-}
-
-function simpleRegularExpression(addressArray) {
-  var output = [];
-  var i;
-
-  for (i = 0; i < addressArray.length; i++) {
-    var segment = addressArray[i];
-
-    if (segment.length < 4) {
-      output.push(sprintf('0{0,%d}%s', 4 - segment.length, segment));
-    } else {
-      output.push(segment);
-    }
-  }
-
-  return output.join(':');
-}
-
-function zeroPad(s, n) {
-  return String(repeatString(0, n) + s).slice(n * -1);
-}
-
-function isInSubnet(address) {
-  // XXX: This is a hunch
-  if (this.subnetMask < address.subnetMask) {
-    return false;
-  }
-
-  if (this.mask(address.subnetMask) === address.mask()) {
-    return true;
-  }
-
-  return false;
-}
-
-/*
- * Instantiates an IPv4 address
- */
-v4.Address = function (address) {
-  this.valid = false;
-  this.address = address;
-  this.groups = v4.GROUPS;
-
-  this.v4 = true;
-
-  this.subnet = '/32';
-  this.subnetMask = 32;
-
-  var subnet = v4.RE_SUBNET_STRING.exec(address);
-
-  if (subnet) {
-    this.parsedSubnet = subnet[0].replace('/', '');
-    this.subnetMask = parseInt(this.parsedSubnet, 10);
-    this.subnet = '/' + this.subnetMask;
-
-    if (this.subnetMask < 0 || this.subnetMask > v4.BITS) {
-      this.valid = false;
-      this.error = "Invalid subnet mask.";
-
-      return;
-    }
-
-    address = address.replace(v4.RE_SUBNET_STRING, '');
-  }
-
-  this.addressMinusSuffix = address;
-
-  this.parsedAddress = this.parse(address);
-};
-
-/*
- * Parses a v4 address
- */
-v4.Address.prototype.parse = function (address) {
-  var groups = address.split('.');
-
-  if (address.match(v4.RE_ADDRESS)) {
-    this.valid = true;
-  } else {
-    this.error = 'Invalid IPv4 address.';
-  }
-
-  return groups;
-};
-
-/*
- * Returns true if the address is valid
- */
-v4.Address.prototype.isValid = function () {
-  return this.valid;
-};
-
-/*
- * Returns the correct form of an address
- */
-v4.Address.prototype.correctForm = function () {
-  return this.parsedAddress.map(function (part) {
-    return parseInt(part, 10);
-  }).join('.');
-};
-
-/*
- * Returns true if the address is correct, false otherwise
- */
-v4.Address.prototype.isCorrect = function () {
-  return this.addressMinusSuffix === this.correctForm() &&
-    (this.subnetMask === 32 ||
-      this.parsedSubnet === String(this.subnet.replace('/')));
-};
-
-/*
- * Converts a hex string to an IPv4 address object
- */
-v4.Address.fromHex = function (hex) {
-  var padded = zeroPad(hex.replace(/:/g, ''), 8);
-  var groups = [];
-  var i;
-
-  for (i = 0; i < 8; i += 2) {
-    var h = padded.slice(i, i + 2);
-
-    groups.push(parseInt(h, 16));
-  }
-
-  return new v4.Address(groups.join('.'));
-};
-
-/*
- * Converts an integer into a IPv4 address object
- */
-v4.Address.fromInteger = function (integer) {
-  return v4.Address.fromHex(integer.toString(16));
-};
-
-/*
- * Converts an IPv4 address object to a hex string
- */
-v4.Address.prototype.toHex = function () {
-  return this.parsedAddress.map(function (part) {
-    return sprintf('%02x', parseInt(part, 10));
-  }).join(':');
-};
-
-/*
- * Converts an IPv4 address object to an array of bytes
- */
-v4.Address.prototype.toArray = function () {
-  return this.parsedAddress.map(function (part) {
-    return parseInt(part, 10);
-  });
-};
-
-/*
- * Converts an IPv4 address object to an IPv6 address group
- */
-v4.Address.prototype.toV6Group = function () {
-  var output = [];
-  var i;
-
-  for (i = 0; i < v4.GROUPS; i += 2) {
-    var hex = sprintf('%02x%02x',
-      parseInt(this.parsedAddress[i], 10),
-      parseInt(this.parsedAddress[i + 1], 10));
-
-    output.push(sprintf('%x', parseInt(hex, 16)));
-  }
-
-  return output.join(':');
-};
-
-/*
- * Returns the address as a BigInteger
- */
-v4.Address.prototype.bigInteger = function () {
-  if (!this.valid) {
-    return;
-  }
-
-  return new BigInteger(map(this.parsedAddress, function (n) {
-    return sprintf("%02x", parseInt(n, 10));
-  }).join(''), 16);
-};
-
-/*
- * The first address in the range given by this address' subnet.
- * Often referred to as the Network Address.
- */
-v4.Address.prototype.startAddress = function () {
-  var startAddress = new BigInteger(this.mask() + repeatString(0,
-    v4.BITS - this.subnetMask), 2);
-
-  return v4.Address.fromBigInteger(startAddress);
-};
-
-/*
- * The last address in the range given by this address' subnet
- * Often referred to as the Broadcast
- */
-v4.Address.prototype.endAddress = function () {
-  var endAddress = new BigInteger(this.mask() + repeatString(1,
-    v4.BITS - this.subnetMask), 2);
-
-  return v4.Address.fromBigInteger(endAddress);
-};
-
-/*
- * Converts a BigInteger to a v4 address object
- */
-v4.Address.fromBigInteger = function (bigInteger) {
-  return v4.Address.fromInteger(parseInt(bigInteger.toString(), 10));
-};
-
-/*
- * Returns the first n bits of the address, defaulting to the
- * subnet mask
- */
-v4.Address.prototype.mask = function (opt_mask) {
-  if (opt_mask === undefined) {
-    opt_mask = this.subnetMask;
-  }
-
-  return this.getBitsBase2(0, opt_mask);
-};
-
-/*
- * Returns the bits in the given range as a base-2 string
- */
-v4.Address.prototype.getBitsBase2 = function (start, end) {
-  return this.binaryZeroPad().slice(start, end);
-};
-
-/*
- * Returns true if the given address is in the subnet of the current address
- */
-v4.Address.prototype.isInSubnet = isInSubnet;
-
-/*
- * Returns a zero-padded base-2 string representation of the address
- */
-v4.Address.prototype.binaryZeroPad = function () {
-  return zeroPad(this.bigInteger().toString(2), v4.BITS);
-};
-
-/*
- * Instantiates an IPv6 address
- */
-v6.Address = function (address, opt_groups) {
-  if (opt_groups === undefined) {
-    this.groups = v6.GROUPS;
-  } else {
-    this.groups = opt_groups;
-  }
-
-  this.v4 = false;
-
-  this.subnet = '/128';
-  this.subnetMask = 128;
-
-  this.zone = '';
-
-  this.address = address;
-
-  var subnet = v6.RE_SUBNET_STRING.exec(address);
-
-  if (subnet) {
-    this.parsedSubnet = subnet[0].replace('/', '');
-    this.subnetMask = parseInt(this.parsedSubnet, 10);
-    this.subnet = '/' + this.subnetMask;
-
-    if (isNaN(this.subnetMask) ||
-      this.subnetMask < 0 ||
-      this.subnetMask > v6.BITS) {
-      this.valid = false;
-      this.error = "Invalid subnet mask.";
-
-      return;
-    }
-
-    address = address.replace(v6.RE_SUBNET_STRING, '');
-  } else if (/\//.test(address)) {
-    this.valid = false;
-    this.error = "Invalid subnet mask.";
-
-    return;
-  }
-
-  var zone = v6.RE_ZONE_STRING.exec(address);
-
-  if (zone) {
-    this.zone = zone[0];
-
-    address = address.replace(v6.RE_ZONE_STRING, '');
-  }
-
-  this.addressMinusSuffix = address;
-
-  this.parsedAddress = this.parse(this.addressMinusSuffix);
-};
-
-/*
- * Converts a BigInteger to a v6 address object
- */
-v6.Address.fromBigInteger = function (bigInteger) {
-  var hex = zeroPad(bigInteger.toString(16), 32);
-  var groups = [];
-  var i;
-
-  for (i = 0; i < 8; i++) {
-    groups.push(hex.slice(i * 4, (i + 1) * 4));
-  }
-
-  return new v6.Address(groups.join(':'));
-};
-
-/*
- * Converts a URL (optional port number) to an address object
- */
-v6.Address.fromURL = function (url) {
-  var host;
-  var port;
-  var result;
-
-  // If we have brackets parse them and find a port
-  if (url.indexOf('[') !== -1 && url.indexOf(']') !== -1) {
-    result = v6.RE_URL_WITH_PORT.exec(url);
-
-    if (result === null) {
-      return {
-        error: 'failed to parse address with port',
-        address: null,
-        port: null
-      };
-    }
-
-    host = result[1];
-    port = result[2];
-  // If there's a URL extract the address
-  } else if (url.indexOf('/') !== -1) {
-    // Remove the protocol prefix
-    url = url.replace(/^[a-z0-9]+:\/\//, '');
-
-    // Parse the address
-    result = v6.RE_URL.exec(url);
-
-    if (result === null) {
-      return {
-        error: 'failed to parse address from URL',
-        address: null,
-        port: null
-      };
-    }
-
-    host = result[1];
-  // Otherwise just assign the URL to the host and let the library parse it
-  } else {
-    host = url;
-  }
-
-  // If there's a port convert it to an integer
-  if (port) {
-    port = parseInt(port, 10);
-
-    //squelch out of range ports
-    if (port < 0 || port > 65536) {
-      port = null;
-    }
-  } else {
-    // Standardize `undefined` to `null`
-    port = null;
-  }
-
-  return {
-    address: new v6.Address(host),
-    port: port
-  };
-};
-
-/*
- * A helper function to compact an array
- */
-v6.Address.compact = function (address, slice) {
-  var s1 = [];
-  var s2 = [];
-  var i;
-
-  for (i = 0; i < address.length; i++) {
-    if (i < slice[0]) {
-      s1.push(address[i]);
-    } else if (i > slice[1]) {
-      s2.push(address[i]);
-    }
-  }
-
-  return s1.concat(['compact']).concat(s2);
-};
-
-/*
- * Returns true if the address is valid, false otherwise
- */
-v6.Address.prototype.isValid = function () {
-  return this.valid;
-};
-
-/*
- * Returns true if the address is correct, false otherwise
- */
-v6.Address.prototype.isCorrect = function () {
-  return this.addressMinusSuffix === this.correctForm() &&
-    (this.subnetMask === 128 ||
-      this.parsedSubnet === String(this.subnet.replace('/')));
-};
-
-/*
- * Returns true if the address is a link local address, false otherwise
- */
-v6.Address.prototype.isLinkLocal = function () {
-  // Zeroes are required, i.e. we can't check isInSubnet with 'fe80::/10'
-  if (this.getBitsBase2(0, 64) ===
-    "1111111010000000000000000000000000000000000000000000000000000000") {
-    return true;
-  }
-
-  return false;
-};
-
-/*
- * Returns true if the address is in the canonical form, false otherwise
- */
-v6.Address.prototype.isCanonical = function () {
-  return this.addressMinusSuffix === this.canonicalForm();
-};
-
-/*
- * Returns true if the address is a multicast address, false otherwise
- */
-v6.Address.prototype.isMulticast = function () {
-  return this.getType() === 'Multicast';
-};
-
-/*
- * Returns true if the address is a v4-in-v6 address, false otherwise
- */
-v6.Address.prototype.is4 = function () {
-  return this.v4;
-};
-
-/*
- * Returns true if the address is a Teredo address, false otherwise
- */
-v6.Address.prototype.isTeredo = function () {
-  if (this.isInSubnet(new v6.Address('2001::/32'))) {
-    return true;
-  }
-
-  return false;
-};
-
-/*
- * Returns true if the address is a 6to4 address, false otherwise
- */
-v6.Address.prototype.is6to4 = function () {
-  if (this.isInSubnet(new v6.Address('2002::/16'))) {
-    return true;
-  }
-
-  return false;
-};
-
-/*
- * Returns true if the address is a loopback address, false otherwise
- */
-v6.Address.prototype.isLoopback = function () {
-  return this.getType() === 'Loopback';
-};
-
-/*
- * Returns the Microsoft UNC transcription of the address
- */
-v6.Address.prototype.microsoftTranscription = function () {
-  return sprintf('%s.ipv6-literal.net',
-    this.correctForm().replace(/:/g, '-'));
-};
-
-/*
- * Returns the address in link form with a default port of 80
- */
-v6.Address.prototype.href = function (opt_port) {
-  if (opt_port === undefined) {
-    opt_port = '';
-  } else {
-    opt_port = sprintf(':%s', opt_port);
-  }
-
-  return sprintf('http://[%s]%s/', this.correctForm(), opt_port);
-};
-
-/*
- * Returns the first n bits of the address, defaulting to the
- * subnet mask
- */
-v6.Address.prototype.mask = function (opt_mask) {
-  if (opt_mask === undefined) {
-    opt_mask = this.subnetMask;
-  }
-
-  return this.getBitsBase2(0, opt_mask);
-};
-
-/*
- * Returns a link suitable for conveying the address via a URL hash
- */
-v6.Address.prototype.link = function (options) {
-  if (!options) {
-    options = {};
-  }
-
-  if (options.className === undefined) {
-    options.className = '';
-  }
-
-  if (options.prefix === undefined) {
-    options.prefix = '/#address=';
-  }
-
-  if (options.v4 === undefined) {
-    options.v4 = false;
-  }
-
-  var formFunction = this.correctForm;
-
-  if (options.v4) {
-    formFunction = this.v4inv6;
-  }
-
-  if (options.className) {
-    return sprintf('<a href="%1$s%2$s" class="%3$s">%2$s</a>',
-      options.prefix, formFunction.call(this), options.className);
-  }
-
-  return sprintf('<a href="%1$s%2$s">%2$s</a>', options.prefix,
-    formFunction.call(this));
-};
-
-/*
- * Returns the number of possible subnets of a given size in the address
- */
-v6.Address.prototype.possibleAddresses = function (opt_subnetSize) {
-  if (opt_subnetSize === undefined) {
-    opt_subnetSize = 0;
-  }
-
-  return addCommas(new BigInteger('2', 10).pow((v6.BITS - this.subnetMask) -
-    (v6.BITS - opt_subnetSize)).toString(10));
-};
-
-/*
- * Returns true if the given address is in the subnet of the current address
- */
-v6.Address.prototype.isInSubnet = isInSubnet;
-
-/*
- * Create an IPv6-mapped address given an IPv4 address
- */
-v6.Address.fromAddress4 = function (address4) {
-  return new v6.Address('::ffff:' + address4);
-};
-
-/*
- * The first address in the range given by this address' subnet
- */
-v6.Address.prototype.startAddress = function () {
-  var startAddress = new BigInteger(this.mask() + repeatString(0,
-    v6.BITS - this.subnetMask), 2);
-
-  return v6.Address.fromBigInteger(startAddress);
-};
-
-/*
- * The last address in the range given by this address' subnet
- */
-v6.Address.prototype.endAddress = function () {
-  var endAddress = new BigInteger(this.mask() + repeatString(1,
-    v6.BITS - this.subnetMask), 2);
-
-  return v6.Address.fromBigInteger(endAddress);
-};
-
-/*
- * Returns the scope of the address
- */
-v6.Address.prototype.getScope = function () {
-  var scope = v6.SCOPES[this.getBits(12, 16)];
-
-  if (this.getType() === "Global unicast") {
-    if (scope !== "Link local") {
-      scope = "Global";
-    }
-  }
-
-  return scope;
-};
-
-/*
- * Returns the type of the address
- */
-v6.Address.prototype.getType = function () {
-  // TODO: Refactor this
-  // TODO: Add ff0x::fb, etc. for multicast DNS
-  var TYPES = {
-    'ff01::1/128': 'Multicast (All nodes on this interface)',
-    'ff01::2/128': 'Multicast (All routers on this interface)',
-    'ff02::1/128': 'Multicast (All nodes on this link)',
-    'ff02::2/128': 'Multicast (All routers on this link)',
-    'ff05::2/128': 'Multicast (All routers in this site)',
-    'ff02::5/128': 'Multicast (OSPFv3 AllSPF routers)',
-    'ff02::6/128': 'Multicast (OSPFv3 AllDR routers)',
-    'ff02::9/128': 'Multicast (RIP routers)',
-    'ff02::a/128': 'Multicast (EIGRP routers)',
-    'ff02::d/128': 'Multicast (PIM routers)',
-    'ff02::16/128': 'Multicast (MLDv2 reports)',
-    'ff01::fb/128': 'Multicast (mDNSv6)',
-    'ff02::fb/128': 'Multicast (mDNSv6)',
-    'ff05::fb/128': 'Multicast (mDNSv6)',
-    'ff02::1:2/128': 'Multicast (All DHCP servers and relay agents on this link)',
-    'ff05::1:2/128': 'Multicast (All DHCP servers and relay agents in this site)',
-    'ff02::1:3/128': 'Multicast (All DHCP servers on this link)',
-    'ff05::1:3/128': 'Multicast (All DHCP servers in this site)',
-    '::/128': 'Unspecified',
-    '::1/128': 'Loopback',
-    'ff00::/8': 'Multicast',
-    'fe80::/10': 'Link-local unicast'
-  };
-
-  var type = 'Global unicast';
-  var p;
-
-  for (p in TYPES) {
-    if (TYPES.hasOwnProperty(p)) {
-      if (this.isInSubnet(new v6.Address(p))) {
-        type = TYPES[p];
-
-        break;
-      }
-    }
-  }
-
-  return type;
-};
-
-/*
- * Returns the bits in the given range as a BigInteger
- */
-v6.Address.prototype.getBits = function (start, end) {
-  return new BigInteger(this.getBitsBase2(start, end), 2);
-};
-
-/*
- * Returns the bits in the given range as a base-2 string
- */
-v6.Address.prototype.getBitsBase2 = function (start, end) {
-  return this.binaryZeroPad().slice(start, end);
-};
-
-/*
- * Returns the bits in the given range as a base-16 string
- */
-v6.Address.prototype.getBitsBase16 = function (start, end) {
-  var length = end - start;
-
-  if (length % 4 !== 0) {
-    return;
-  }
-
-  return zeroPad(this.getBits(start, end).toString(16), length / 4);
-};
-
-/*
- * Returns the bits that are set past the subnet mask length
- */
-v6.Address.prototype.getBitsPastSubnet = function () {
-  return this.getBitsBase2(this.subnetMask, v6.BITS);
-};
-
-/*
- * Returns the string with each character contained in a <span>
- */
-v6.Address.spanAll = function (s, opt_offset) {
-  if (opt_offset === undefined) {
-    opt_offset = 0;
-  }
-
-  var letters = s.split('');
-
-  return map(letters, function (n, i) {
-    return sprintf('<span class="digit value-%s position-%d">%s</span>', n,
-      i + opt_offset,
-      v6.Address.spanAllZeroes(n)); // XXX Use #base-2 .value-0 instead?
-  }).join('');
-};
-
-/*
- * Returns the string with all zeroes contained in a <span>
- */
-v6.Address.spanAllZeroes = function (s) {
-  return s.replace(/(0+)/g, '<span class="zero">$1</span>');
-};
-
-/*
- * Returns the string with leading zeroes contained in a <span>
- */
-v6.Address.spanLeadingZeroes = function (address) {
-  var groups = address.split(':');
-
-  groups = map(groups, function (g) {
-    return spanLeadingZeroesSimple(g);
-  });
-
-  return groups.join(':');
-};
-
-/*
- * Groups an address
- */
-v6.Address.simpleGroup = function (addressString, offset) {
-  var groups = addressString.split(':');
-
-  if (!offset) {
-    offset = 0;
-  }
-
-  groups = map(groups, function (g, i) {
-    if (/group-v4/.test(g)) {
-      return g;
-    }
-
-    return sprintf('<span class="hover-group group-%d">%s</span>',
-      i + offset,
-      spanLeadingZeroesSimple(g));
-  });
-
-  return groups.join(':');
-};
-
-/*
- * Groups an address
- */
-v6.Address.group = function (addressString) {
-  var address6 = new v6.Address(addressString);
-  var address4 = address6.address.match(v4.RE_ADDRESS);
-  var i;
-
-  if (address4) {
-    // The IPv4 case
-    var segments = address4[0].split('.');
-
-    address6.address = address6.address.replace(v4.RE_ADDRESS,
-      sprintf('<span class="hover-group group-v4 group-6">%s</span>' +
-        '.' +
-        '<span class="hover-group group-v4 group-7">%s</span>',
-        segments.slice(0, 2).join('.'),
-        segments.slice(2, 4).join('.')));
-  }
-
-  if (address6.elidedGroups === 0) {
-    // The simple case
-    return v6.Address.simpleGroup(address6.address);
-  }
-
-  // The elided case
-  var output = [];
-
-  var halves = address6.address.split('::');
-
-  if (halves[0].length) {
-    output.push(v6.Address.simpleGroup(halves[0]));
-  } else {
-    output.push('');
-  }
-
-  var classes = ['hover-group'];
-
-  for (i = address6.elisionBegin; i < address6.elisionBegin +
-    address6.elidedGroups; i++) {
-    classes.push(sprintf('group-%d', i));
-  }
-
-  output.push(sprintf('<span class="%s"></span>', classes.join(' ')));
-
-  if (halves[1].length) {
-    output.push(v6.Address.simpleGroup(halves[1], address6.elisionEnd));
-  } else {
-    output.push('');
-  }
-
-  return output.join(':');
-};
-
-/*
- * Returns the reversed ip6.arpa form of the address
- */
-v6.Address.prototype.reverseForm = function () {
-  var characters = Math.floor(this.subnetMask / 4);
-
-  var reversed = this.canonicalForm()
-    .replace(/:/g, '')
-    .split('')
-    .slice(0, characters)
-    .reverse()
-    .join('.');
-
-  if (characters > 0) {
-    return sprintf("%s.ip6.arpa.", reversed);
-  }
-
-  return 'ip6.arpa.';
-};
-
-/*
- * Returns the correct form of the address
- */
-v6.Address.prototype.correctForm = function () {
-  if (!this.parsedAddress) {
-    return;
-  }
-
-  var i;
-  var groups = [];
-
-  var zeroCounter = 0;
-  var zeroes = [];
-
-  for (i = 0; i < this.parsedAddress.length; i++) {
-    var value = parseInt(this.parsedAddress[i], 16);
-
-    if (value === 0) {
-      zeroCounter++;
-    }
-
-    if (value !== 0 && zeroCounter > 0) {
-      if (zeroCounter > 1) {
-        zeroes.push([i - zeroCounter, i - 1]);
-      }
-
-      zeroCounter = 0;
-    }
-  }
-
-  // Do we end with a string of zeroes?
-  if (zeroCounter > 1) {
-    zeroes.push([this.parsedAddress.length - zeroCounter,
-      this.parsedAddress.length - 1]);
-  }
-
-  var zeroLengths = map(zeroes, function (n) {
-    return (n[1] - n[0]) + 1;
-  });
-
-  if (zeroes.length > 0) {
-    var max = Math.max.apply(Math, zeroLengths);
-    var index = zeroLengths.indexOf(max);
-
-    groups = v6.Address.compact(this.parsedAddress, zeroes[index]);
-  } else {
-    groups = this.parsedAddress;
-  }
-
-  for (i = 0; i < groups.length; i++) {
-    if (groups[i] !== 'compact') {
-      groups[i] = parseInt(groups[i], 16).toString(16);
-    }
-  }
-
-  var correct = groups.join(':');
-
-  correct = correct.replace(/^compact$/, '::');
-  correct = correct.replace(/^compact|compact$/, ':');
-  correct = correct.replace(/compact/, '');
-
-  return correct;
-};
-
-/*
- * Returns a zero-padded base-2 string representation of the address
- */
-v6.Address.prototype.binaryZeroPad = function () {
-  return zeroPad(this.bigInteger().toString(2), v6.BITS);
-};
-
-// TODO: Improve the semantics of this helper function
-v6.Address.prototype.parse4in6 = function (address) {
-  var groups = address.split(':');
-  var lastGroup = groups.slice(-1)[0];
-
-  var address4 = lastGroup.match(v4.RE_ADDRESS);
-
-  if (address4) {
-    var temp4 = new v4.Address(address4[0]);
-
-    for (var i = 0; i < temp4.groups; i++) {
-      if (/^0[0-9]+/.test(temp4.parsedAddress[i])) {
-        this.valid = false;
-        this.error = 'IPv4 addresses can not have leading zeroes.';
-
-        this.parseError = address.replace(v4.RE_ADDRESS,
-          map(temp4.parsedAddress, spanLeadingZeroes4).join('.'));
-
-        return;
-      }
-    }
-
-    this.v4 = true;
-
-    groups[groups.length - 1] = temp4.toV6Group();
-
-    address = groups.join(':');
-  }
-
-  return address;
-};
-
-// TODO: Make private?
-v6.Address.prototype.parse = function (address) {
-  address = this.parse4in6(address);
-
-  if (this.error) {
-    return;
-  }
-
-  var badCharacters = address.match(v6.RE_BAD_CHARACTERS);
-
-  if (badCharacters) {
-    this.valid = false;
-    this.error = sprintf("Bad character%s detected in address: %s",
-      badCharacters.length > 1 ? 's' : '', badCharacters.join(''));
-
-    this.parseError = address.replace(v6.RE_BAD_CHARACTERS,
-      '<span class="parse-error">$1</span>');
-
-    return;
-  }
-
-  var badAddress = address.match(v6.RE_BAD_ADDRESS);
-
-  if (badAddress) {
-    this.valid = false;
-    this.error = sprintf("Address failed regex: %s", badAddress.join(''));
-
-    this.parseError = address.replace(v6.RE_BAD_ADDRESS,
-      '<span class="parse-error">$1</span>');
-
-    return;
-  }
-
-  var groups = [];
-
-  var halves = address.split('::');
-
-  if (halves.length === 2) {
-    var first = halves[0].split(':');
-    var last = halves[1].split(':');
-
-    if (first.length === 1 &&
-      first[0] === '') {
-      first = [];
-    }
-
-    if (last.length === 1 &&
-      last[0] === '') {
-      last = [];
-    }
-
-    var remaining = this.groups - (first.length + last.length);
-
-    if (!remaining) {
-      this.valid = false;
-      this.error = "Error parsing groups";
-
-      return;
-    }
-
-    this.elidedGroups = remaining;
-
-    this.elisionBegin = first.length;
-    this.elisionEnd = first.length + this.elidedGroups;
-
-    first.forEach(function (group) {
-      groups.push(group);
-    });
-
-    for (var i = 0; i < remaining; i++) {
-      groups.push(0);
-    }
-
-    last.forEach(function (group) {
-      groups.push(group);
-    });
-  } else if (halves.length === 1) {
-    groups = address.split(':');
-
-    this.elidedGroups = 0;
-  } else {
-    this.valid = false;
-    this.error = "Too many :: groups found";
-
-    return;
-  }
-
-  groups = map(groups, function (g) {
-    return sprintf('%x', parseInt(g, 16));
-  });
-
-  if (groups.length !== this.groups) {
-    this.valid = false;
-    this.error = "Incorrect number of groups found";
-
-    return;
-  }
-
-  groups.forEach(function (group, i) {
-    if (groups.length > 4 && !this.v4) {
-      this.valid = false;
-      this.error = sprintf("Group %d is too long", i + 1);
-
-      return;
-    }
-  });
-
-  this.valid = true;
-
-  return groups;
-};
-
-/*
- * Generate a regular expression string that can be used to find or validate all
- * variations of this address.
- */
-v6.Address.prototype.regularExpressionString = function (opt_subString) {
-  if (opt_subString === undefined) {
-    opt_subString = false;
-  }
-
-  var i;
-  var output = [];
-
-  var address6 = new v6.Address(this.correctForm());
-
-  if (address6.elidedGroups === 0) {
-    // The simple case
-    output = simpleRegularExpression(address6.parsedAddress);
-  } else if (address6.elidedGroups === 8) {
-    output.push('::|');
-
-    // TODO: Validate this
-    for (i = 0; i < address6.elidedGroups; i++) {
-      var pipe = '|';
-
-      if (i === address6.elidedGroups - 1) {
-        pipe = '';
-      }
-
-      output.push(sprintf('(0{1,4}:){%d}:%s', address6.elidedGroups, pipe));
-    }
-  } else {
-    // The elided case
-
-    // TODO: Allow sloppy elision
-    // TODO: Compute all possible elisions
-    var halves = address6.address.split('::');
-
-    if (halves[0].length) {
-      output = output.concat(simpleRegularExpression(halves[0].split(':')));
-      output.push(':');
-    }
-
-    output.push(sprintf('((0{1,4}:){%d}|:)', address6.elidedGroups));
-
-    if (halves[1].length) {
-      output = output.concat(simpleRegularExpression(halves[1].split(':')));
-    }
-  }
-
-  if (!opt_subString) {
-    output = [].concat('\\b', output, '\\b');
-  }
-
-  return output.join('');
-};
-
-/*
- * Generate a regular expression that can be used to find or validate all
- * variations of this address.
- */
-v6.Address.prototype.regularExpression = function () {
-  return new RegExp(this.regularExpressionString(), 'i');
-};
-
-/*
- * Returns the canonical form of the address
- */
-v6.Address.prototype.canonicalForm = function () {
-  if (!this.valid) {
-    return;
-  }
-
-  return map(this.parsedAddress, function (n) {
-    return sprintf("%04x", parseInt(n, 16));
-  }).join(':');
-};
-
-/*
- * Returns the decimal form of the address
- */
-v6.Address.prototype.decimal = function () {
-  if (!this.valid) {
-    return;
-  }
-
-  return map(this.parsedAddress, function (n) {
-    return sprintf("%05d", parseInt(n, 16));
-  }).join(':');
-};
-
-/*
- * Returns the address as a BigInteger
- */
-v6.Address.prototype.bigInteger = function () {
-  if (!this.valid) {
-    return;
-  }
-
-  return new BigInteger(map(this.parsedAddress, function (n) {
-    return sprintf("%04x", parseInt(n, 16));
-  }).join(''), 16);
-};
-
-/*
- * Returns the v4-in-v6 form of the address
- */
-v6.Address.prototype.v4inv6 = function () {
-  var binary = this.binaryZeroPad().split('');
-
-  var address4 = v4.Address.fromHex(new BigInteger(binary.slice(96, 128)
-    .join(''), 2).toString(16));
-  var address6 = new v6.Address(this.parsedAddress.slice(0, 6).join(':'), 6);
-
-  var correct = address6.correctForm();
-
-  var infix = '';
-
-  if (!/:$/.test(correct)) {
-    infix = ':';
-  }
-
-  return address6.correctForm() + infix + address4.address;
-};
-
-/*
- * Returns an object containing the Teredo properties of the address
- */
-v6.Address.prototype.teredo = function () {
-  /*
-  - Bits 0 to 31 are set to the Teredo prefix (normally 2001:0000::/32).
-  - Bits 32 to 63 embed the primary IPv4 address of the Teredo server that
-  is used.
-  - Bits 64 to 79 can be used to define some flags. Currently only the
-  higher order bit is used; it is set to 1 if the Teredo client is
-  located behind a cone NAT, 0 otherwise. For Microsoft's Windows Vista
-  and Windows Server 2008 implementations, more bits are used. In those
-  implementations, the format for these 16 bits is "CRAAAAUG AAAAAAAA",
-  where "C" remains the "Cone" flag. The "R" bit is reserved for future
-  use. The "U" bit is for the Universal/Local flag (set to 0). The "G" bit
-  is Individual/Group flag (set to 0). The A bits are set to a 12-bit
-  randomly generated number chosen by the Teredo client to introduce
-  additional protection for the Teredo node against IPv6-based scanning
-  attacks.
-  - Bits 80 to 95 contains the obfuscated UDP port number. This is the
-  port number that is mapped by the NAT to the Teredo client with all
-  bits inverted.
-  - Bits 96 to 127 contains the obfuscated IPv4 address. This is the
-  public IPv4 address of the NAT with all bits inverted.
-  */
-
-  var prefix = this.getBitsBase16(0, 32);
-
-  var udpPort = this.getBits(80, 96).xor(new BigInteger('ffff', 16)).toString();
-
-  var server4 = v4.Address.fromHex(this.getBitsBase16(32, 64));
-  var client4 = v4.Address.fromHex(this.getBits(96, 128)
-    .xor(new BigInteger('ffffffff', 16)).toString(16));
-
-  var flags = this.getBits(64, 80);
-  var flagsBase2 = this.getBitsBase2(64, 80);
-
-  var coneNat = flags.testBit(15);
-  var reserved = flags.testBit(14);
-  var groupIndividual = flags.testBit(8);
-  var universalLocal = flags.testBit(9);
-  var nonce = new BigInteger(flagsBase2.slice(2, 6) +
-    flagsBase2.slice(8, 16), 2).toString(10);
-
-  return {
-    prefix: sprintf('%s:%s', prefix.slice(0, 4), prefix.slice(4, 8)),
-    server4: server4.address,
-    client4: client4.address,
-    flags: flagsBase2,
-    coneNat: coneNat,
-    microsoft: {
-      reserved: reserved,
-      universalLocal: universalLocal,
-      groupIndividual: groupIndividual,
-      nonce: nonce
-    },
-    udpPort: udpPort
-  };
-};
-
-/*
- * Returns an object containing the 6to4 properties of the address
- */
-v6.Address.prototype.six2four = function () {
-  /*
-  - Bits 0 to 15 are set to the 6to4 prefix (2002::/16).
-  - Bits 16 to 48 embed the IPv4 address of the 6to4 gateway that is used.
-  */
-
-  var prefix = this.getBitsBase16(0, 16);
-
-  var gateway = v4.Address.fromHex(this.getBitsBase16(16, 48));
-
-  return {
-    prefix: sprintf('%s', prefix.slice(0, 4)),
-    gateway: gateway.address
-  };
-};
-
-},{"./lib/node/bigint":108,"sprintf":109}],108:[function(require,module,exports){
-/**
- * copped from https://github.com/joyent/node/blob/master/deps/v8/benchmarks/crypto.js (under same license).
- * 
- * Copyright (c) 2003-2005  Tom Wu
- * All Rights Reserved.
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the
- * "Software"), to deal in the Software without restriction, including
- * without limitation the rights to use, copy, modify, merge, publish,
- * distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to
- * the following conditions:
- *
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS-IS" AND WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS, IMPLIED OR OTHERWISE, INCLUDING WITHOUT LIMITATION, ANY
- * WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
- *
- * IN NO EVENT SHALL TOM WU BE LIABLE FOR ANY SPECIAL, INCIDENTAL,
- * INDIRECT OR CONSEQUENTIAL DAMAGES OF ANY KIND, OR ANY DAMAGES WHATSOEVER
- * RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER OR NOT ADVISED OF
- * THE POSSIBILITY OF DAMAGE, AND ON ANY THEORY OF LIABILITY, ARISING OUT
- * OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
- *
- * In addition, the following condition applies:
- *
- * All redistributions must retain an intact copy of this copyright notice
- * and disclaimer.
- */
-
-// V8 optimized constants.
-var dbits = 26
-var BI_DB = dbits;
-var BI_DM = ((1<<dbits)-1);
-var BI_DV = (1<<dbits);
-
-var BI_FP = 52;
-var BI_FV = Math.pow(2,BI_FP);
-var BI_F1 = BI_FP-dbits;
-var BI_F2 = 2*dbits-BI_FP;
-
-BigInteger = module.exports.BigInteger = function(a,b,c) {
-  this.array = new Array();
-  if(a != null)
-    if("number" == typeof a) this.fromNumber(a,b,c);
-    else if(b == null && "string" != typeof a) this.fromString(a,256);
-    else this.fromString(a,b);
-}
-
-// return new, unset BigInteger
-function nbi() { return new BigInteger(null); }
-
-// am: Compute w_j += (x*this_i), propagate carries,
-// c is initial carry, returns final carry.
-// c < 3*dvalue, x < 2*dvalue, this_i < dvalue
-// We need to select the fastest one that works in this environment.
-
-// This is tailored to VMs with 2-bit tagging. It makes sure
-// that all the computations stay within the 29 bits available.
-function am4(i,x,w,j,c,n) {
-  var this_array = this.array;
-  var w_array    = w.array;
-
-  var xl = x&0x1fff, xh = x>>13;
-  while(--n >= 0) {
-    var l = this_array[i]&0x1fff;
-    var h = this_array[i++]>>13;
-    var m = xh*l+h*xl;
-    l = xl*l+((m&0x1fff)<<13)+w_array[j]+c;
-    c = (l>>26)+(m>>13)+xh*h;
-    w_array[j++] = l&0x3ffffff;
-  }
-  return c;
-}
-
-// Digit conversions
-var BI_RM = "0123456789abcdefghijklmnopqrstuvwxyz";
-var BI_RC = new Array();
-var rr,vv;
-rr = "0".charCodeAt(0);
-for(vv = 0; vv <= 9; ++vv) BI_RC[rr++] = vv;
-rr = "a".charCodeAt(0);
-for(vv = 10; vv < 36; ++vv) BI_RC[rr++] = vv;
-rr = "A".charCodeAt(0);
-for(vv = 10; vv < 36; ++vv) BI_RC[rr++] = vv;
-
-function int2char(n) { return BI_RM.charAt(n); }
-function intAt(s,i) {
-  var c = BI_RC[s.charCodeAt(i)];
-  return (c==null)?-1:c;
-}
-
-// (protected) copy this to r
-function bnpCopyTo(r) {
-  var this_array = this.array;
-  var r_array    = r.array;
-
-  for(var i = this.t-1; i >= 0; --i) r_array[i] = this_array[i];
-  r.t = this.t;
-  r.s = this.s;
-}
-
-// (protected) set from integer value x, -DV <= x < DV
-function bnpFromInt(x) {
-  var this_array = this.array;
-  this.t = 1;
-  this.s = (x<0)?-1:0;
-  if(x > 0) this_array[0] = x;
-  else if(x < -1) this_array[0] = x+DV; // WTH is DV?  BI_DV maybe?
-  else this.t = 0;
-}
-
-// return bigint initialized to value
-function nbv(i) { var r = nbi(); r.fromInt(i); return r; }
-
-// (protected) set from string and radix
-function bnpFromString(s,b) {
-  var this_array = this.array;
-  var k;
-  if(b == 16) k = 4;
-  else if(b == 8) k = 3;
-  else if(b == 256) k = 8; // byte array
-  else if(b == 2) k = 1;
-  else if(b == 32) k = 5;
-  else if(b == 4) k = 2;
-  else { this.fromRadix(s,b); return; }
-  this.t = 0;
-  this.s = 0;
-  var i = s.length, mi = false, sh = 0;
-  while(--i >= 0) {
-    var x = (k==8)?s[i]&0xff:intAt(s,i);
-    if(x < 0) {
-      if(s.charAt(i) == "-") mi = true;
-      continue;
-    }
-    mi = false;
-    if(sh == 0)
-      this_array[this.t++] = x;
-    else if(sh+k > BI_DB) {
-      this_array[this.t-1] |= (x&((1<<(BI_DB-sh))-1))<<sh;
-      this_array[this.t++] = (x>>(BI_DB-sh));
-    }
-    else
-      this_array[this.t-1] |= x<<sh;
-    sh += k;
-    if(sh >= BI_DB) sh -= BI_DB;
-  }
-  if(k == 8 && (s[0]&0x80) != 0) {
-    this.s = -1;
-    if(sh > 0) this_array[this.t-1] |= ((1<<(BI_DB-sh))-1)<<sh;
-  }
-  this.clamp();
-  if(mi) BigInteger.ZERO.subTo(this,this);
-}
-
-// (protected) clamp off excess high words
-function bnpClamp() {
-  var this_array = this.array;
-  var c = this.s&BI_DM;
-  while(this.t > 0 && this_array[this.t-1] == c) --this.t;
-}
-
-// (public) return string representation in given radix
-function bnToString(b) {
-  var this_array = this.array;
-  if(this.s < 0) return "-"+this.negate().toString(b);
-  var k;
-  if(b == 16) k = 4;
-  else if(b == 8) k = 3;
-  else if(b == 2) k = 1;
-  else if(b == 32) k = 5;
-  else if(b == 4) k = 2;
-  else return this.toRadix(b);
-  var km = (1<<k)-1, d, m = false, r = "", i = this.t;
-  var p = BI_DB-(i*BI_DB)%k;
-  if(i-- > 0) {
-    if(p < BI_DB && (d = this_array[i]>>p) > 0) { m = true; r = int2char(d); }
-    while(i >= 0) {
-      if(p < k) {
-        d = (this_array[i]&((1<<p)-1))<<(k-p);
-        d |= this_array[--i]>>(p+=BI_DB-k);
-      }
-      else {
-        d = (this_array[i]>>(p-=k))&km;
-        if(p <= 0) { p += BI_DB; --i; }
-      }
-      if(d > 0) m = true;
-      if(m) r += int2char(d);
-    }
-  }
-  return m?r:"0";
-}
-
-// (public) -this
-function bnNegate() { var r = nbi(); BigInteger.ZERO.subTo(this,r); return r; }
-
-// (public) |this|
-function bnAbs() { return (this.s<0)?this.negate():this; }
-
-// (public) return + if this > a, - if this < a, 0 if equal
-function bnCompareTo(a) {
-  var this_array = this.array;
-  var a_array = a.array;
-
-  var r = this.s-a.s;
-  if(r != 0) return r;
-  var i = this.t;
-  r = i-a.t;
-  if(r != 0) return r;
-  while(--i >= 0) if((r=this_array[i]-a_array[i]) != 0) return r;
-  return 0;
-}
-
-// returns bit length of the integer x
-function nbits(x) {
-  var r = 1, t;
-  if((t=x>>>16) != 0) { x = t; r += 16; }
-  if((t=x>>8) != 0) { x = t; r += 8; }
-  if((t=x>>4) != 0) { x = t; r += 4; }
-  if((t=x>>2) != 0) { x = t; r += 2; }
-  if((t=x>>1) != 0) { x = t; r += 1; }
-  return r;
-}
-
-// (public) return the number of bits in "this"
-function bnBitLength() {
-  var this_array = this.array;
-  if(this.t <= 0) return 0;
-  return BI_DB*(this.t-1)+nbits(this_array[this.t-1]^(this.s&BI_DM));
-}
-
-// (protected) r = this << n*DB
-function bnpDLShiftTo(n,r) {
-  var this_array = this.array;
-  var r_array = r.array;
-  var i;
-  for(i = this.t-1; i >= 0; --i) r_array[i+n] = this_array[i];
-  for(i = n-1; i >= 0; --i) r_array[i] = 0;
-  r.t = this.t+n;
-  r.s = this.s;
-}
-
-// (protected) r = this >> n*DB
-function bnpDRShiftTo(n,r) {
-  var this_array = this.array;
-  var r_array = r.array;
-  for(var i = n; i < this.t; ++i) r_array[i-n] = this_array[i];
-  r.t = Math.max(this.t-n,0);
-  r.s = this.s;
-}
-
-// (protected) r = this << n
-function bnpLShiftTo(n,r) {
-  var this_array = this.array;
-  var r_array = r.array;
-  var bs = n%BI_DB;
-  var cbs = BI_DB-bs;
-  var bm = (1<<cbs)-1;
-  var ds = Math.floor(n/BI_DB), c = (this.s<<bs)&BI_DM, i;
-  for(i = this.t-1; i >= 0; --i) {
-    r_array[i+ds+1] = (this_array[i]>>cbs)|c;
-    c = (this_array[i]&bm)<<bs;
-  }
-  for(i = ds-1; i >= 0; --i) r_array[i] = 0;
-  r_array[ds] = c;
-  r.t = this.t+ds+1;
-  r.s = this.s;
-  r.clamp();
-}
-
-// (protected) r = this >> n
-function bnpRShiftTo(n,r) {
-  var this_array = this.array;
-  var r_array = r.array;
-  r.s = this.s;
-  var ds = Math.floor(n/BI_DB);
-  if(ds >= this.t) { r.t = 0; return; }
-  var bs = n%BI_DB;
-  var cbs = BI_DB-bs;
-  var bm = (1<<bs)-1;
-  r_array[0] = this_array[ds]>>bs;
-  for(var i = ds+1; i < this.t; ++i) {
-    r_array[i-ds-1] |= (this_array[i]&bm)<<cbs;
-    r_array[i-ds] = this_array[i]>>bs;
-  }
-  if(bs > 0) r_array[this.t-ds-1] |= (this.s&bm)<<cbs;
-  r.t = this.t-ds;
-  r.clamp();
-}
-
-// (protected) r = this - a
-function bnpSubTo(a,r) {
-  var this_array = this.array;
-  var r_array = r.array;
-  var a_array = a.array;
-  var i = 0, c = 0, m = Math.min(a.t,this.t);
-  while(i < m) {
-    c += this_array[i]-a_array[i];
-    r_array[i++] = c&BI_DM;
-    c >>= BI_DB;
-  }
-  if(a.t < this.t) {
-    c -= a.s;
-    while(i < this.t) {
-      c += this_array[i];
-      r_array[i++] = c&BI_DM;
-      c >>= BI_DB;
-    }
-    c += this.s;
-  }
-  else {
-    c += this.s;
-    while(i < a.t) {
-      c -= a_array[i];
-      r_array[i++] = c&BI_DM;
-      c >>= BI_DB;
-    }
-    c -= a.s;
-  }
-  r.s = (c<0)?-1:0;
-  if(c < -1) r_array[i++] = BI_DV+c;
-  else if(c > 0) r_array[i++] = c;
-  r.t = i;
-  r.clamp();
-}
-
-// (protected) r = this * a, r != this,a (HAC 14.12)
-// "this" should be the larger one if appropriate.
-function bnpMultiplyTo(a,r) {
-  var this_array = this.array; // Unused local var?
-  var r_array = r.array;
-  var x = this.abs(), y = a.abs();
-  var y_array = y.array;
-
-  var i = x.t;
-  r.t = i+y.t;
-  while(--i >= 0) r_array[i] = 0;
-  for(i = 0; i < y.t; ++i) r_array[i+x.t] = x.am(0,y_array[i],r,i,0,x.t);
-  r.s = 0;
-  r.clamp();
-  if(this.s != a.s) BigInteger.ZERO.subTo(r,r);
-}
-
-// (protected) r = this^2, r != this (HAC 14.16)
-function bnpSquareTo(r) {
-  var x = this.abs();
-  var x_array = x.array;
-  var r_array = r.array;
-
-  var i = r.t = 2*x.t;
-  while(--i >= 0) r_array[i] = 0;
-  for(i = 0; i < x.t-1; ++i) {
-    var c = x.am(i,x_array[i],r,2*i,0,1);
-    if((r_array[i+x.t]+=x.am(i+1,2*x_array[i],r,2*i+1,c,x.t-i-1)) >= BI_DV) {
-      r_array[i+x.t] -= BI_DV;
-      r_array[i+x.t+1] = 1;
-    }
-  }
-  if(r.t > 0) r_array[r.t-1] += x.am(i,x_array[i],r,2*i,0,1);
-  r.s = 0;
-  r.clamp();
-}
-
-// (protected) divide this by m, quotient and remainder to q, r (HAC 14.20)
-// r != q, this != m.  q or r may be null.
-function bnpDivRemTo(m,q,r) {
-  var pm = m.abs();
-  if(pm.t <= 0) return;
-  var pt = this.abs();
-  if(pt.t < pm.t) {
-    if(q != null) q.fromInt(0);
-    if(r != null) this.copyTo(r);
-    return;
-  }
-  if(r == null) r = nbi();
-  var y = nbi(), ts = this.s, ms = m.s;
-  var pm_array = pm.array;
-  var nsh = BI_DB-nbits(pm_array[pm.t-1]);	// normalize modulus
-  if(nsh > 0) { pm.lShiftTo(nsh,y); pt.lShiftTo(nsh,r); }
-  else { pm.copyTo(y); pt.copyTo(r); }
-  var ys = y.t;
-
-  var y_array = y.array;
-  var y0 = y_array[ys-1];
-  if(y0 == 0) return;
-  var yt = y0*(1<<BI_F1)+((ys>1)?y_array[ys-2]>>BI_F2:0);
-  var d1 = BI_FV/yt, d2 = (1<<BI_F1)/yt, e = 1<<BI_F2;
-  var i = r.t, j = i-ys, t = (q==null)?nbi():q;
-  y.dlShiftTo(j,t);
-
-  var r_array = r.array;
-  if(r.compareTo(t) >= 0) {
-    r_array[r.t++] = 1;
-    r.subTo(t,r);
-  }
-  BigInteger.ONE.dlShiftTo(ys,t);
-  t.subTo(y,y);	// "negative" y so we can replace sub with am later
-  while(y.t < ys) y_array[y.t++] = 0;
-  while(--j >= 0) {
-    // Estimate quotient digit
-    var qd = (r_array[--i]==y0)?BI_DM:Math.floor(r_array[i]*d1+(r_array[i-1]+e)*d2);
-    if((r_array[i]+=y.am(0,qd,r,j,0,ys)) < qd) {	// Try it out
-      y.dlShiftTo(j,t);
-      r.subTo(t,r);
-      while(r_array[i] < --qd) r.subTo(t,r);
-    }
-  }
-  if(q != null) {
-    r.drShiftTo(ys,q);
-    if(ts != ms) BigInteger.ZERO.subTo(q,q);
-  }
-  r.t = ys;
-  r.clamp();
-  if(nsh > 0) r.rShiftTo(nsh,r);	// Denormalize remainder
-  if(ts < 0) BigInteger.ZERO.subTo(r,r);
-}
-
-// (public) this mod a
-function bnMod(a) {
-  var r = nbi();
-  this.abs().divRemTo(a,null,r);
-  if(this.s < 0 && r.compareTo(BigInteger.ZERO) > 0) a.subTo(r,r);
-  return r;
-}
-
-// Modular reduction using "classic" algorithm
-function Classic(m) { this.m = m; }
-function cConvert(x) {
-  if(x.s < 0 || x.compareTo(this.m) >= 0) return x.mod(this.m);
-  else return x;
-}
-function cRevert(x) { return x; }
-function cReduce(x) { x.divRemTo(this.m,null,x); }
-function cMulTo(x,y,r) { x.multiplyTo(y,r); this.reduce(r); }
-function cSqrTo(x,r) { x.squareTo(r); this.reduce(r); }
-
-Classic.prototype.convert = cConvert;
-Classic.prototype.revert = cRevert;
-Classic.prototype.reduce = cReduce;
-Classic.prototype.mulTo = cMulTo;
-Classic.prototype.sqrTo = cSqrTo;
-
-// (protected) return "-1/this % 2^DB"; useful for Mont. reduction
-// justification:
-//         xy == 1 (mod m)
-//         xy =  1+km
-//   xy(2-xy) = (1+km)(1-km)
-// x[y(2-xy)] = 1-k^2m^2
-// x[y(2-xy)] == 1 (mod m^2)
-// if y is 1/x mod m, then y(2-xy) is 1/x mod m^2
-// should reduce x and y(2-xy) by m^2 at each step to keep size bounded.
-// JS multiply "overflows" differently from C/C++, so care is needed here.
-function bnpInvDigit() {
-  var this_array = this.array;
-  if(this.t < 1) return 0;
-  var x = this_array[0];
-  if((x&1) == 0) return 0;
-  var y = x&3;		// y == 1/x mod 2^2
-  y = (y*(2-(x&0xf)*y))&0xf;	// y == 1/x mod 2^4
-  y = (y*(2-(x&0xff)*y))&0xff;	// y == 1/x mod 2^8
-  y = (y*(2-(((x&0xffff)*y)&0xffff)))&0xffff;	// y == 1/x mod 2^16
-  // last step - calculate inverse mod DV directly;
-  // assumes 16 < DB <= 32 and assumes ability to handle 48-bit ints
-  y = (y*(2-x*y%BI_DV))%BI_DV;		// y == 1/x mod 2^dbits
-  // we really want the negative inverse, and -DV < y < DV
-  return (y>0)?BI_DV-y:-y;
-}
-
-// Montgomery reduction
-function Montgomery(m) {
-  this.m = m;
-  this.mp = m.invDigit();
-  this.mpl = this.mp&0x7fff;
-  this.mph = this.mp>>15;
-  this.um = (1<<(BI_DB-15))-1;
-  this.mt2 = 2*m.t;
-}
-
-// xR mod m
-function montConvert(x) {
-  var r = nbi();
-  x.abs().dlShiftTo(this.m.t,r);
-  r.divRemTo(this.m,null,r);
-  if(x.s < 0 && r.compareTo(BigInteger.ZERO) > 0) this.m.subTo(r,r);
-  return r;
-}
-
-// x/R mod m
-function montRevert(x) {
-  var r = nbi();
-  x.copyTo(r);
-  this.reduce(r);
-  return r;
-}
-
-// x = x/R mod m (HAC 14.32)
-function montReduce(x) {
-  var x_array = x.array;
-  while(x.t <= this.mt2)	// pad x so am has enough room later
-    x_array[x.t++] = 0;
-  for(var i = 0; i < this.m.t; ++i) {
-    // faster way of calculating u0 = x[i]*mp mod DV
-    var j = x_array[i]&0x7fff;
-    var u0 = (j*this.mpl+(((j*this.mph+(x_array[i]>>15)*this.mpl)&this.um)<<15))&BI_DM;
-    // use am to combine the multiply-shift-add into one call
-    j = i+this.m.t;
-    x_array[j] += this.m.am(0,u0,x,i,0,this.m.t);
-    // propagate carry
-    while(x_array[j] >= BI_DV) { x_array[j] -= BI_DV; x_array[++j]++; }
-  }
-  x.clamp();
-  x.drShiftTo(this.m.t,x);
-  if(x.compareTo(this.m) >= 0) x.subTo(this.m,x);
-}
-
-// r = "x^2/R mod m"; x != r
-function montSqrTo(x,r) { x.squareTo(r); this.reduce(r); }
-
-// r = "xy/R mod m"; x,y != r
-function montMulTo(x,y,r) { x.multiplyTo(y,r); this.reduce(r); }
-
-Montgomery.prototype.convert = montConvert;
-Montgomery.prototype.revert = montRevert;
-Montgomery.prototype.reduce = montReduce;
-Montgomery.prototype.mulTo = montMulTo;
-Montgomery.prototype.sqrTo = montSqrTo;
-
-// (protected) true iff this is even
-function bnpIsEven() {
-  var this_array = this.array;
-  return ((this.t>0)?(this_array[0]&1):this.s) == 0;
-}
-
-// (protected) this^e, e < 2^32, doing sqr and mul with "r" (HAC 14.79)
-function bnpExp(e,z) {
-  if(e > 0xffffffff || e < 1) return BigInteger.ONE;
-  var r = nbi(), r2 = nbi(), g = z.convert(this), i = nbits(e)-1;
-  g.copyTo(r);
-  while(--i >= 0) {
-    z.sqrTo(r,r2);
-    if((e&(1<<i)) > 0) z.mulTo(r2,g,r);
-    else { var t = r; r = r2; r2 = t; }
-  }
-  return z.revert(r);
-}
-
-// (public) this^e % m, 0 <= e < 2^32
-function bnModPowInt(e,m) {
-  var z;
-  if(e < 256 || m.isEven()) z = new Classic(m); else z = new Montgomery(m);
-  return this.exp(e,z);
-}
-
-// protected
-BigInteger.prototype.copyTo = bnpCopyTo;
-BigInteger.prototype.fromInt = bnpFromInt;
-BigInteger.prototype.fromString = bnpFromString;
-BigInteger.prototype.clamp = bnpClamp;
-BigInteger.prototype.dlShiftTo = bnpDLShiftTo;
-BigInteger.prototype.drShiftTo = bnpDRShiftTo;
-BigInteger.prototype.lShiftTo = bnpLShiftTo;
-BigInteger.prototype.rShiftTo = bnpRShiftTo;
-BigInteger.prototype.subTo = bnpSubTo;
-BigInteger.prototype.multiplyTo = bnpMultiplyTo;
-BigInteger.prototype.squareTo = bnpSquareTo;
-BigInteger.prototype.divRemTo = bnpDivRemTo;
-BigInteger.prototype.invDigit = bnpInvDigit;
-BigInteger.prototype.isEven = bnpIsEven;
-BigInteger.prototype.exp = bnpExp;
-
-// public
-BigInteger.prototype.toString = bnToString;
-BigInteger.prototype.negate = bnNegate;
-BigInteger.prototype.abs = bnAbs;
-BigInteger.prototype.compareTo = bnCompareTo;
-BigInteger.prototype.bitLength = bnBitLength;
-BigInteger.prototype.mod = bnMod;
-BigInteger.prototype.modPowInt = bnModPowInt;
-
-// "constants"
-BigInteger.ZERO = nbv(0);
-BigInteger.ONE = nbv(1);
-// Copyright (c) 2005  Tom Wu
-// All Rights Reserved.
-// See "LICENSE" for details.
-
-// Extended JavaScript BN functions, required for RSA private ops.
-
-// (public)
-function bnClone() { var r = nbi(); this.copyTo(r); return r; }
-
-// (public) return value as integer
-function bnIntValue() {
-  var this_array = this.array;
-  if(this.s < 0) {
-    if(this.t == 1) return this_array[0]-BI_DV;
-    else if(this.t == 0) return -1;
-  }
-  else if(this.t == 1) return this_array[0];
-  else if(this.t == 0) return 0;
-  // assumes 16 < DB < 32
-  return ((this_array[1]&((1<<(32-BI_DB))-1))<<BI_DB)|this_array[0];
-}
-
-// (public) return value as byte
-function bnByteValue() {
-  var this_array = this.array;
-  return (this.t==0)?this.s:(this_array[0]<<24)>>24;
-}
-
-// (public) return value as short (assumes DB>=16)
-function bnShortValue() {
-  var this_array = this.array;
-  return (this.t==0)?this.s:(this_array[0]<<16)>>16;
-}
-
-// (protected) return x s.t. r^x < DV
-function bnpChunkSize(r) { return Math.floor(Math.LN2*BI_DB/Math.log(r)); }
-
-// (public) 0 if this == 0, 1 if this > 0
-function bnSigNum() {
-  var this_array = this.array;
-  if(this.s < 0) return -1;
-  else if(this.t <= 0 || (this.t == 1 && this_array[0] <= 0)) return 0;
-  else return 1;
-}
-
-// (protected) convert to radix string
-function bnpToRadix(b) {
-  if(b == null) b = 10;
-  if(this.signum() == 0 || b < 2 || b > 36) return "0";
-  var cs = this.chunkSize(b);
-  var a = Math.pow(b,cs);
-  var d = nbv(a), y = nbi(), z = nbi(), r = "";
-  this.divRemTo(d,y,z);
-  while(y.signum() > 0) {
-    r = (a+z.intValue()).toString(b).substr(1) + r;
-    y.divRemTo(d,y,z);
-  }
-  return z.intValue().toString(b) + r;
-}
-
-// (protected) convert from radix string
-function bnpFromRadix(s,b) {
-  this.fromInt(0);
-  if(b == null) b = 10;
-  var cs = this.chunkSize(b);
-  var d = Math.pow(b,cs), mi = false, j = 0, w = 0;
-  for(var i = 0; i < s.length; ++i) {
-    var x = intAt(s,i);
-    if(x < 0) {
-      if(s.charAt(i) == "-" && this.signum() == 0) mi = true;
-      continue;
-    }
-    w = b*w+x;
-    if(++j >= cs) {
-      this.dMultiply(d);
-      this.dAddOffset(w,0);
-      j = 0;
-      w = 0;
-    }
-  }
-  if(j > 0) {
-    this.dMultiply(Math.pow(b,j));
-    this.dAddOffset(w,0);
-  }
-  if(mi) BigInteger.ZERO.subTo(this,this);
-}
-
-// (protected) alternate constructor
-function bnpFromNumber(a,b,c) {
-  if("number" == typeof b) {
-    // new BigInteger(int,int,RNG)
-    if(a < 2) this.fromInt(1);
-    else {
-      this.fromNumber(a,c);
-      if(!this.testBit(a-1))	// force MSB set
-        this.bitwiseTo(BigInteger.ONE.shiftLeft(a-1),op_or,this);
-      if(this.isEven()) this.dAddOffset(1,0); // force odd
-      while(!this.isProbablePrime(b)) {
-        this.dAddOffset(2,0);
-        if(this.bitLength() > a) this.subTo(BigInteger.ONE.shiftLeft(a-1),this);
-      }
-    }
-  }
-  else {
-    // todo: we don't need this.
-    // new BigInteger(int,RNG)
-    var x = new Array(), t = a&7;
-    x.length = (a>>3)+1;
-    b.nextBytes(x);
-    if(t > 0) x[0] &= ((1<<t)-1); else x[0] = 0;
-    this.fromString(x,256);
-  }
-}
-
-// (public) convert to bigendian byte array
-function bnToByteArray() {
-  var this_array = this.array;
-  var i = this.t, r = new Array();
-  r[0] = this.s;
-  var p = BI_DB-(i*BI_DB)%8, d, k = 0;
-  if(i-- > 0) {
-    if(p < BI_DB && (d = this_array[i]>>p) != (this.s&BI_DM)>>p)
-      r[k++] = d|(this.s<<(BI_DB-p));
-    while(i >= 0) {
-      if(p < 8) {
-        d = (this_array[i]&((1<<p)-1))<<(8-p);
-        d |= this_array[--i]>>(p+=BI_DB-8);
-      }
-      else {
-        d = (this_array[i]>>(p-=8))&0xff;
-        if(p <= 0) { p += BI_DB; --i; }
-      }
-      if((d&0x80) != 0) d |= -256;
-      if(k == 0 && (this.s&0x80) != (d&0x80)) ++k;
-      if(k > 0 || d != this.s) r[k++] = d;
-    }
-  }
-  return r;
-}
-
-function bnEquals(a) { return(this.compareTo(a)==0); }
-function bnMin(a) { return(this.compareTo(a)<0)?this:a; }
-function bnMax(a) { return(this.compareTo(a)>0)?this:a; }
-
-// (protected) r = this op a (bitwise)
-function bnpBitwiseTo(a,op,r) {
-  var this_array = this.array;
-  var a_array    = a.array;
-  var r_array    = r.array;
-  var i, f, m = Math.min(a.t,this.t);
-  for(i = 0; i < m; ++i) r_array[i] = op(this_array[i],a_array[i]);
-  if(a.t < this.t) {
-    f = a.s&BI_DM;
-    for(i = m; i < this.t; ++i) r_array[i] = op(this_array[i],f);
-    r.t = this.t;
-  }
-  else {
-    f = this.s&BI_DM;
-    for(i = m; i < a.t; ++i) r_array[i] = op(f,a_array[i]);
-    r.t = a.t;
-  }
-  r.s = op(this.s,a.s);
-  r.clamp();
-}
-
-// (public) this & a
-function op_and(x,y) { return x&y; }
-function bnAnd(a) { var r = nbi(); this.bitwiseTo(a,op_and,r); return r; }
-
-// (public) this | a
-function op_or(x,y) { return x|y; }
-function bnOr(a) { var r = nbi(); this.bitwiseTo(a,op_or,r); return r; }
-
-// (public) this ^ a
-function op_xor(x,y) { return x^y; }
-function bnXor(a) { var r = nbi(); this.bitwiseTo(a,op_xor,r); return r; }
-
-// (public) this & ~a
-function op_andnot(x,y) { return x&~y; }
-function bnAndNot(a) { var r = nbi(); this.bitwiseTo(a,op_andnot,r); return r; }
-
-// (public) ~this
-function bnNot() {
-  var this_array = this.array;
-  var r = nbi();
-  var r_array = r.array;
-
-  for(var i = 0; i < this.t; ++i) r_array[i] = BI_DM&~this_array[i];
-  r.t = this.t;
-  r.s = ~this.s;
-  return r;
-}
-
-// (public) this << n
-function bnShiftLeft(n) {
-  var r = nbi();
-  if(n < 0) this.rShiftTo(-n,r); else this.lShiftTo(n,r);
-  return r;
-}
-
-// (public) this >> n
-function bnShiftRight(n) {
-  var r = nbi();
-  if(n < 0) this.lShiftTo(-n,r); else this.rShiftTo(n,r);
-  return r;
-}
-
-// return index of lowest 1-bit in x, x < 2^31
-function lbit(x) {
-  if(x == 0) return -1;
-  var r = 0;
-  if((x&0xffff) == 0) { x >>= 16; r += 16; }
-  if((x&0xff) == 0) { x >>= 8; r += 8; }
-  if((x&0xf) == 0) { x >>= 4; r += 4; }
-  if((x&3) == 0) { x >>= 2; r += 2; }
-  if((x&1) == 0) ++r;
-  return r;
-}
-
-// (public) returns index of lowest 1-bit (or -1 if none)
-function bnGetLowestSetBit() {
-  var this_array = this.array;
-  for(var i = 0; i < this.t; ++i)
-    if(this_array[i] != 0) return i*BI_DB+lbit(this_array[i]);
-  if(this.s < 0) return this.t*BI_DB;
-  return -1;
-}
-
-// return number of 1 bits in x
-function cbit(x) {
-  var r = 0;
-  while(x != 0) { x &= x-1; ++r; }
-  return r;
-}
-
-// (public) return number of set bits
-function bnBitCount() {
-  var this_array = this.array;
-  var r = 0, x = this.s&BI_DM;
-  for(var i = 0; i < this.t; ++i) r += cbit(this_array[i]^x);
-  return r;
-}
-
-// (public) true iff nth bit is set
-function bnTestBit(n) {
-  var this_array = this.array;
-  var j = Math.floor(n/BI_DB);
-  if(j >= this.t) return(this.s!=0);
-  return((this_array[j]&(1<<(n%BI_DB)))!=0);
-}
-
-// (protected) this op (1<<n)
-function bnpChangeBit(n,op) {
-  var r = BigInteger.ONE.shiftLeft(n);
-  this.bitwiseTo(r,op,r);
-  return r;
-}
-
-// (public) this | (1<<n)
-function bnSetBit(n) { return this.changeBit(n,op_or); }
-
-// (public) this & ~(1<<n)
-function bnClearBit(n) { return this.changeBit(n,op_andnot); }
-
-// (public) this ^ (1<<n)
-function bnFlipBit(n) { return this.changeBit(n,op_xor); }
-
-// (protected) r = this + a
-function bnpAddTo(a,r) {
-  var this_array = this.array;
-  var a_array = a.array;
-  var r_array = r.array;
-  var i = 0, c = 0, m = Math.min(a.t,this.t);
-  while(i < m) {
-    c += this_array[i]+a_array[i];
-    r_array[i++] = c&BI_DM;
-    c >>= BI_DB;
-  }
-  if(a.t < this.t) {
-    c += a.s;
-    while(i < this.t) {
-      c += this_array[i];
-      r_array[i++] = c&BI_DM;
-      c >>= BI_DB;
-    }
-    c += this.s;
-  }
-  else {
-    c += this.s;
-    while(i < a.t) {
-      c += a_array[i];
-      r_array[i++] = c&BI_DM;
-      c >>= BI_DB;
-    }
-    c += a.s;
-  }
-  r.s = (c<0)?-1:0;
-  if(c > 0) r_array[i++] = c;
-  else if(c < -1) r_array[i++] = BI_DV+c;
-  r.t = i;
-  r.clamp();
-}
-
-// (public) this + a
-function bnAdd(a) { var r = nbi(); this.addTo(a,r); return r; }
-
-// (public) this - a
-function bnSubtract(a) { var r = nbi(); this.subTo(a,r); return r; }
-
-// (public) this * a
-function bnMultiply(a) { var r = nbi(); this.multiplyTo(a,r); return r; }
-
-// (public) this / a
-function bnDivide(a) { var r = nbi(); this.divRemTo(a,r,null); return r; }
-
-// (public) this % a
-function bnRemainder(a) { var r = nbi(); this.divRemTo(a,null,r); return r; }
-
-// (public) [this/a,this%a]
-function bnDivideAndRemainder(a) {
-  var q = nbi(), r = nbi();
-  this.divRemTo(a,q,r);
-  return new Array(q,r);
-}
-
-// (protected) this *= n, this >= 0, 1 < n < DV
-function bnpDMultiply(n) {
-  var this_array = this.array;
-  this_array[this.t] = this.am(0,n-1,this,0,0,this.t);
-  ++this.t;
-  this.clamp();
-}
-
-// (protected) this += n << w words, this >= 0
-function bnpDAddOffset(n,w) {
-  var this_array = this.array;
-  while(this.t <= w) this_array[this.t++] = 0;
-  this_array[w] += n;
-  while(this_array[w] >= BI_DV) {
-    this_array[w] -= BI_DV;
-    if(++w >= this.t) this_array[this.t++] = 0;
-    ++this_array[w];
-  }
-}
-
-// A "null" reducer
-function NullExp() {}
-function nNop(x) { return x; }
-function nMulTo(x,y,r) { x.multiplyTo(y,r); }
-function nSqrTo(x,r) { x.squareTo(r); }
-
-NullExp.prototype.convert = nNop;
-NullExp.prototype.revert = nNop;
-NullExp.prototype.mulTo = nMulTo;
-NullExp.prototype.sqrTo = nSqrTo;
-
-// (public) this^e
-function bnPow(e) { return this.exp(e,new NullExp()); }
-
-// (protected) r = lower n words of "this * a", a.t <= n
-// "this" should be the larger one if appropriate.
-function bnpMultiplyLowerTo(a,n,r) {
-  var r_array = r.array;
-  var a_array = a.array;
-  var i = Math.min(this.t+a.t,n);
-  r.s = 0; // assumes a,this >= 0
-  r.t = i;
-  while(i > 0) r_array[--i] = 0;
-  var j;
-  for(j = r.t-this.t; i < j; ++i) r_array[i+this.t] = this.am(0,a_array[i],r,i,0,this.t);
-  for(j = Math.min(a.t,n); i < j; ++i) this.am(0,a_array[i],r,i,0,n-i);
-  r.clamp();
-}
-
-// (protected) r = "this * a" without lower n words, n > 0
-// "this" should be the larger one if appropriate.
-function bnpMultiplyUpperTo(a,n,r) {
-  var r_array = r.array;
-  var a_array = a.array;
-  --n;
-  var i = r.t = this.t+a.t-n;
-  r.s = 0; // assumes a,this >= 0
-  while(--i >= 0) r_array[i] = 0;
-  for(i = Math.max(n-this.t,0); i < a.t; ++i)
-    r_array[this.t+i-n] = this.am(n-i,a_array[i],r,0,0,this.t+i-n);
-  r.clamp();
-  r.drShiftTo(1,r);
-}
-
-// Barrett modular reduction
-function Barrett(m) {
-  // setup Barrett
-  this.r2 = nbi();
-  this.q3 = nbi();
-  BigInteger.ONE.dlShiftTo(2*m.t,this.r2);
-  this.mu = this.r2.divide(m);
-  this.m = m;
-}
-
-function barrettConvert(x) {
-  if(x.s < 0 || x.t > 2*this.m.t) return x.mod(this.m);
-  else if(x.compareTo(this.m) < 0) return x;
-  else { var r = nbi(); x.copyTo(r); this.reduce(r); return r; }
-}
-
-function barrettRevert(x) { return x; }
-
-// x = x mod m (HAC 14.42)
-function barrettReduce(x) {
-  x.drShiftTo(this.m.t-1,this.r2);
-  if(x.t > this.m.t+1) { x.t = this.m.t+1; x.clamp(); }
-  this.mu.multiplyUpperTo(this.r2,this.m.t+1,this.q3);
-  this.m.multiplyLowerTo(this.q3,this.m.t+1,this.r2);
-  while(x.compareTo(this.r2) < 0) x.dAddOffset(1,this.m.t+1);
-  x.subTo(this.r2,x);
-  while(x.compareTo(this.m) >= 0) x.subTo(this.m,x);
-}
-
-// r = x^2 mod m; x != r
-function barrettSqrTo(x,r) { x.squareTo(r); this.reduce(r); }
-
-// r = x*y mod m; x,y != r
-function barrettMulTo(x,y,r) { x.multiplyTo(y,r); this.reduce(r); }
-
-Barrett.prototype.convert = barrettConvert;
-Barrett.prototype.revert = barrettRevert;
-Barrett.prototype.reduce = barrettReduce;
-Barrett.prototype.mulTo = barrettMulTo;
-Barrett.prototype.sqrTo = barrettSqrTo;
-
-// (public) this^e % m (HAC 14.85)
-function bnModPow(e,m) {
-  var e_array = e.array;
-  var i = e.bitLength(), k, r = nbv(1), z;
-  if(i <= 0) return r;
-  else if(i < 18) k = 1;
-  else if(i < 48) k = 3;
-  else if(i < 144) k = 4;
-  else if(i < 768) k = 5;
-  else k = 6;
-  if(i < 8)
-    z = new Classic(m);
-  else if(m.isEven())
-    z = new Barrett(m);
-  else
-    z = new Montgomery(m);
-
-  // precomputation
-  var g = new Array(), n = 3, k1 = k-1, km = (1<<k)-1;
-  g[1] = z.convert(this);
-  if(k > 1) {
-    var g2 = nbi();
-    z.sqrTo(g[1],g2);
-    while(n <= km) {
-      g[n] = nbi();
-      z.mulTo(g2,g[n-2],g[n]);
-      n += 2;
-    }
-  }
-
-  var j = e.t-1, w, is1 = true, r2 = nbi(), t;
-  i = nbits(e_array[j])-1;
-  while(j >= 0) {
-    if(i >= k1) w = (e_array[j]>>(i-k1))&km;
-    else {
-      w = (e_array[j]&((1<<(i+1))-1))<<(k1-i);
-      if(j > 0) w |= e_array[j-1]>>(BI_DB+i-k1);
-    }
-
-    n = k;
-    while((w&1) == 0) { w >>= 1; --n; }
-    if((i -= n) < 0) { i += BI_DB; --j; }
-    if(is1) {	// ret == 1, don't bother squaring or multiplying it
-      g[w].copyTo(r);
-      is1 = false;
-    }
-    else {
-      while(n > 1) { z.sqrTo(r,r2); z.sqrTo(r2,r); n -= 2; }
-      if(n > 0) z.sqrTo(r,r2); else { t = r; r = r2; r2 = t; }
-      z.mulTo(r2,g[w],r);
-    }
-
-    while(j >= 0 && (e_array[j]&(1<<i)) == 0) {
-      z.sqrTo(r,r2); t = r; r = r2; r2 = t;
-      if(--i < 0) { i = BI_DB-1; --j; }
-    }
-  }
-  return z.revert(r);
-}
-
-// (public) gcd(this,a) (HAC 14.54)
-function bnGCD(a) {
-  var x = (this.s<0)?this.negate():this.clone();
-  var y = (a.s<0)?a.negate():a.clone();
-  if(x.compareTo(y) < 0) { var t = x; x = y; y = t; }
-  var i = x.getLowestSetBit(), g = y.getLowestSetBit();
-  if(g < 0) return x;
-  if(i < g) g = i;
-  if(g > 0) {
-    x.rShiftTo(g,x);
-    y.rShiftTo(g,y);
-  }
-  while(x.signum() > 0) {
-    if((i = x.getLowestSetBit()) > 0) x.rShiftTo(i,x);
-    if((i = y.getLowestSetBit()) > 0) y.rShiftTo(i,y);
-    if(x.compareTo(y) >= 0) {
-      x.subTo(y,x);
-      x.rShiftTo(1,x);
-    }
-    else {
-      y.subTo(x,y);
-      y.rShiftTo(1,y);
-    }
-  }
-  if(g > 0) y.lShiftTo(g,y);
-  return y;
-}
-
-// (protected) this % n, n < 2^26
-function bnpModInt(n) {
-  var this_array = this.array;
-  if(n <= 0) return 0;
-  var d = BI_DV%n, r = (this.s<0)?n-1:0;
-  if(this.t > 0)
-    if(d == 0) r = this_array[0]%n;
-    else for(var i = this.t-1; i >= 0; --i) r = (d*r+this_array[i])%n;
-  return r;
-}
-
-// (public) 1/this % m (HAC 14.61)
-function bnModInverse(m) {
-  var ac = m.isEven();
-  if((this.isEven() && ac) || m.signum() == 0) return BigInteger.ZERO;
-  var u = m.clone(), v = this.clone();
-  var a = nbv(1), b = nbv(0), c = nbv(0), d = nbv(1);
-  while(u.signum() != 0) {
-    while(u.isEven()) {
-      u.rShiftTo(1,u);
-      if(ac) {
-        if(!a.isEven() || !b.isEven()) { a.addTo(this,a); b.subTo(m,b); }
-        a.rShiftTo(1,a);
-      }
-      else if(!b.isEven()) b.subTo(m,b);
-      b.rShiftTo(1,b);
-    }
-    while(v.isEven()) {
-      v.rShiftTo(1,v);
-      if(ac) {
-        if(!c.isEven() || !d.isEven()) { c.addTo(this,c); d.subTo(m,d); }
-        c.rShiftTo(1,c);
-      }
-      else if(!d.isEven()) d.subTo(m,d);
-      d.rShiftTo(1,d);
-    }
-    if(u.compareTo(v) >= 0) {
-      u.subTo(v,u);
-      if(ac) a.subTo(c,a);
-      b.subTo(d,b);
-    }
-    else {
-      v.subTo(u,v);
-      if(ac) c.subTo(a,c);
-      d.subTo(b,d);
-    }
-  }
-  if(v.compareTo(BigInteger.ONE) != 0) return BigInteger.ZERO;
-  if(d.compareTo(m) >= 0) return d.subtract(m);
-  if(d.signum() < 0) d.addTo(m,d); else return d;
-  if(d.signum() < 0) return d.add(m); else return d;
-}
-
-var lowprimes = [2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461,463,467,479,487,491,499,503,509];
-var lplim = (1<<26)/lowprimes[lowprimes.length-1];
-
-// (public) test primality with certainty >= 1-.5^t
-function bnIsProbablePrime(t) {
-  var i, x = this.abs();
-  var x_array = x.array;
-  if(x.t == 1 && x_array[0] <= lowprimes[lowprimes.length-1]) {
-    for(i = 0; i < lowprimes.length; ++i)
-      if(x_array[0] == lowprimes[i]) return true;
-    return false;
-  }
-  if(x.isEven()) return false;
-  i = 1;
-  while(i < lowprimes.length) {
-    var m = lowprimes[i], j = i+1;
-    while(j < lowprimes.length && m < lplim) m *= lowprimes[j++];
-    m = x.modInt(m);
-    while(i < j) if(m%lowprimes[i++] == 0) return false;
-  }
-  return x.millerRabin(t);
-}
-
-// (protected) true if probably prime (HAC 4.24, Miller-Rabin)
-function bnpMillerRabin(t) {
-  var n1 = this.subtract(BigInteger.ONE);
-  var k = n1.getLowestSetBit();
-  if(k <= 0) return false;
-  var r = n1.shiftRight(k);
-  t = (t+1)>>1;
-  if(t > lowprimes.length) t = lowprimes.length;
-  var a = nbi();
-  for(var i = 0; i < t; ++i) {
-    a.fromInt(lowprimes[i]);
-    var y = a.modPow(r,this);
-    if(y.compareTo(BigInteger.ONE) != 0 && y.compareTo(n1) != 0) {
-      var j = 1;
-      while(j++ < k && y.compareTo(n1) != 0) {
-        y = y.modPowInt(2,this);
-        if(y.compareTo(BigInteger.ONE) == 0) return false;
-      }
-      if(y.compareTo(n1) != 0) return false;
-    }
-  }
-  return true;
-};
-
-// protected
-BigInteger.prototype.chunkSize = bnpChunkSize;
-BigInteger.prototype.toRadix = bnpToRadix;
-BigInteger.prototype.fromRadix = bnpFromRadix;
-BigInteger.prototype.fromNumber = bnpFromNumber;
-BigInteger.prototype.bitwiseTo = bnpBitwiseTo;
-BigInteger.prototype.changeBit = bnpChangeBit;
-BigInteger.prototype.addTo = bnpAddTo;
-BigInteger.prototype.dMultiply = bnpDMultiply;
-BigInteger.prototype.dAddOffset = bnpDAddOffset;
-BigInteger.prototype.multiplyLowerTo = bnpMultiplyLowerTo;
-BigInteger.prototype.multiplyUpperTo = bnpMultiplyUpperTo;
-BigInteger.prototype.modInt = bnpModInt;
-BigInteger.prototype.millerRabin = bnpMillerRabin;
-
-// public
-BigInteger.prototype.clone = bnClone;
-BigInteger.prototype.intValue = bnIntValue;
-BigInteger.prototype.byteValue = bnByteValue;
-BigInteger.prototype.shortValue = bnShortValue;
-BigInteger.prototype.signum = bnSigNum;
-BigInteger.prototype.toByteArray = bnToByteArray;
-BigInteger.prototype.equals = bnEquals;
-BigInteger.prototype.min = bnMin;
-BigInteger.prototype.max = bnMax;
-BigInteger.prototype.and = bnAnd;
-BigInteger.prototype.or = bnOr;
-BigInteger.prototype.xor = bnXor;
-BigInteger.prototype.andNot = bnAndNot;
-BigInteger.prototype.not = bnNot;
-BigInteger.prototype.shiftLeft = bnShiftLeft;
-BigInteger.prototype.shiftRight = bnShiftRight;
-BigInteger.prototype.getLowestSetBit = bnGetLowestSetBit;
-BigInteger.prototype.bitCount = bnBitCount;
-BigInteger.prototype.testBit = bnTestBit;
-BigInteger.prototype.setBit = bnSetBit;
-BigInteger.prototype.clearBit = bnClearBit;
-BigInteger.prototype.flipBit = bnFlipBit;
-BigInteger.prototype.add = bnAdd;
-BigInteger.prototype.subtract = bnSubtract;
-BigInteger.prototype.multiply = bnMultiply;
-BigInteger.prototype.divide = bnDivide;
-BigInteger.prototype.remainder = bnRemainder;
-BigInteger.prototype.divideAndRemainder = bnDivideAndRemainder;
-BigInteger.prototype.modPow = bnModPow;
-BigInteger.prototype.modInverse = bnModInverse;
-BigInteger.prototype.pow = bnPow;
-BigInteger.prototype.gcd = bnGCD;
-BigInteger.prototype.isProbablePrime = bnIsProbablePrime;
-BigInteger.prototype.am = am4;
-
-// end of stuff copied from github.
-},{}],109:[function(require,module,exports){
-/**
-sprintf() for JavaScript 0.7-beta1
-http://www.diveintojavascript.com/projects/javascript-sprintf
-
-Copyright (c) Alexandru Marasteanu <alexaholic [at) gmail (dot] com>
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-    * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
-    * Neither the name of sprintf() for JavaScript nor the
-      names of its contributors may be used to endorse or promote products
-      derived from this software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL Alexandru Marasteanu BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-
-Changelog:
-2010.11.07 - 0.7-beta1-node
-  - converted it to a node.js compatible module
-
-2010.09.06 - 0.7-beta1
-  - features: vsprintf, support for named placeholders
-  - enhancements: format cache, reduced global namespace pollution
-
-2010.05.22 - 0.6:
- - reverted to 0.4 and fixed the bug regarding the sign of the number 0
- Note:
- Thanks to Raphael Pigulla <raph (at] n3rd [dot) org> (http://www.n3rd.org/)
- who warned me about a bug in 0.5, I discovered that the last update was
- a regress. I appologize for that.
-
-2010.05.09 - 0.5:
- - bug fix: 0 is now preceeded with a + sign
- - bug fix: the sign was not at the right position on padded results (Kamal Abdali)
- - switched from GPL to BSD license
-
-2007.10.21 - 0.4:
- - unit test and patch (David Baird)
-
-2007.09.17 - 0.3:
- - bug fix: no longer throws exception on empty paramenters (Hans Pufal)
-
-2007.09.11 - 0.2:
- - feature: added argument swapping
-
-2007.04.03 - 0.1:
- - initial release
-**/
-
-var sprintf = (function() {
-	function get_type(variable) {
-		return Object.prototype.toString.call(variable).slice(8, -1).toLowerCase();
-	}
-	function str_repeat(input, multiplier) {
-		for (var output = []; multiplier > 0; output[--multiplier] = input) {/* do nothing */}
-		return output.join('');
-	}
-
-	var str_format = function() {
-		if (!str_format.cache.hasOwnProperty(arguments[0])) {
-			str_format.cache[arguments[0]] = str_format.parse(arguments[0]);
-		}
-		return str_format.format.call(null, str_format.cache[arguments[0]], arguments);
-	};
-
-	// convert object to simple one line string without indentation or
-	// newlines. Note that this implementation does not print array
-	// values to their actual place for sparse arrays. 
-	//
-	// For example sparse array like this
-	//    l = []
-	//    l[4] = 1
-	// Would be printed as "[1]" instead of "[, , , , 1]"
-	// 
-	// If argument 'seen' is not null and array the function will check for 
-	// circular object references from argument.
-	str_format.object_stringify = function(obj, depth, maxdepth, seen) {
-		var str = '';
-		if (obj != null) {
-			switch( typeof(obj) ) {
-			case 'function': 
-				return '[Function' + (obj.name ? ': '+obj.name : '') + ']';
-			    break;
-			case 'object':
-				if ( obj instanceof Error) { return '[' + obj.toString() + ']' };
-				if (depth >= maxdepth) return '[Object]'
-				if (seen) {
-					// add object to seen list
-					seen = seen.slice(0)
-					seen.push(obj);
-				}
-				if (obj.length != null) { //array
-					str += '[';
-					var arr = []
-					for (var i in obj) {
-						if (seen && seen.indexOf(obj[i]) >= 0) arr.push('[Circular]');
-						else arr.push(str_format.object_stringify(obj[i], depth+1, maxdepth, seen));
-					}
-					str += arr.join(', ') + ']';
-				} else if ('getMonth' in obj) { // date
-					return 'Date(' + obj + ')';
-				} else { // object
-					str += '{';
-					var arr = []
-					for (var k in obj) { 
-						if(obj.hasOwnProperty(k)) {
-							if (seen && seen.indexOf(obj[k]) >= 0) arr.push(k + ': [Circular]');
-							else arr.push(k +': ' +str_format.object_stringify(obj[k], depth+1, maxdepth, seen)); 
-						}
-					}
-					str += arr.join(', ') + '}';
-				}
-				return str;
-				break;
-			case 'string':				
-				return '"' + obj + '"';
-				break
-			}
-		}
-		return '' + obj;
-	}
-
-	str_format.format = function(parse_tree, argv) {
-		var cursor = 1, tree_length = parse_tree.length, node_type = '', arg, output = [], i, k, match, pad, pad_character, pad_length;
-		for (i = 0; i < tree_length; i++) {
-			node_type = get_type(parse_tree[i]);
-			if (node_type === 'string') {
-				output.push(parse_tree[i]);
-			}
-			else if (node_type === 'array') {
-				match = parse_tree[i]; // convenience purposes only
-				if (match[2]) { // keyword argument
-					arg = argv[cursor];
-					for (k = 0; k < match[2].length; k++) {
-						if (!arg.hasOwnProperty(match[2][k])) {
-							throw new Error(sprintf('[sprintf] property "%s" does not exist', match[2][k]));
-						}
-						arg = arg[match[2][k]];
-					}
-				}
-				else if (match[1]) { // positional argument (explicit)
-					arg = argv[match[1]];
-				}
-				else { // positional argument (implicit)
-					arg = argv[cursor++];
-				}
-
-				if (/[^sO]/.test(match[8]) && (get_type(arg) != 'number')) {
-					throw new Error(sprintf('[sprintf] expecting number but found %s "' + arg + '"', get_type(arg)));
-				}
-				switch (match[8]) {
-					case 'b': arg = arg.toString(2); break;
-					case 'c': arg = String.fromCharCode(arg); break;
-					case 'd': arg = parseInt(arg, 10); break;
-					case 'e': arg = match[7] ? arg.toExponential(match[7]) : arg.toExponential(); break;
-					case 'f': arg = match[7] ? parseFloat(arg).toFixed(match[7]) : parseFloat(arg); break;
-				    case 'O': arg = str_format.object_stringify(arg, 0, parseInt(match[7]) || 5); break;
-					case 'o': arg = arg.toString(8); break;
-					case 's': arg = ((arg = String(arg)) && match[7] ? arg.substring(0, match[7]) : arg); break;
-					case 'u': arg = Math.abs(arg); break;
-					case 'x': arg = arg.toString(16); break;
-					case 'X': arg = arg.toString(16).toUpperCase(); break;
-				}
-				arg = (/[def]/.test(match[8]) && match[3] && arg >= 0 ? '+'+ arg : arg);
-				pad_character = match[4] ? match[4] == '0' ? '0' : match[4].charAt(1) : ' ';
-				pad_length = match[6] - String(arg).length;
-				pad = match[6] ? str_repeat(pad_character, pad_length) : '';
-				output.push(match[5] ? arg + pad : pad + arg);
-			}
-		}
-		return output.join('');
-	};
-
-	str_format.cache = {};
-
-	str_format.parse = function(fmt) {
-		var _fmt = fmt, match = [], parse_tree = [], arg_names = 0;
-		while (_fmt) {
-			if ((match = /^[^\x25]+/.exec(_fmt)) !== null) {
-				parse_tree.push(match[0]);
-			}
-			else if ((match = /^\x25{2}/.exec(_fmt)) !== null) {
-				parse_tree.push('%');
-			}
-			else if ((match = /^\x25(?:([1-9]\d*)\$|\(([^\)]+)\))?(\+)?(0|'[^$])?(-)?(\d+)?(?:\.(\d+))?([b-fosOuxX])/.exec(_fmt)) !== null) {
-				if (match[2]) {
-					arg_names |= 1;
-					var field_list = [], replacement_field = match[2], field_match = [];
-					if ((field_match = /^([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
-						field_list.push(field_match[1]);
-						while ((replacement_field = replacement_field.substring(field_match[0].length)) !== '') {
-							if ((field_match = /^\.([a-z_][a-z_\d]*)/i.exec(replacement_field)) !== null) {
-								field_list.push(field_match[1]);
-							}
-							else if ((field_match = /^\[(\d+)\]/.exec(replacement_field)) !== null) {
-								field_list.push(field_match[1]);
-							}
-							else {
-								throw new Error('[sprintf] ' + replacement_field);
-							}
-						}
-					}
-					else {
-                        throw new Error('[sprintf] ' + replacement_field);
-					}
-					match[2] = field_list;
-				}
-				else {
-					arg_names |= 2;
-				}
-				if (arg_names === 3) {
-					throw new Error('[sprintf] mixing positional and named placeholders is not (yet) supported');
-				}
-				parse_tree.push(match);
-			}
-			else {
-				throw new Error('[sprintf] ' + _fmt);
-			}
-			_fmt = _fmt.substring(match[0].length);
-		}
-		return parse_tree;
-	};
-
-	return str_format;
-})();
-
-var vsprintf = function(fmt, argv) {
-	var argvClone = argv.slice();
-	argvClone.unshift(fmt);
-	return sprintf.apply(null, argvClone);
-};
-
-module.exports = sprintf;
-sprintf.sprintf = sprintf;
-sprintf.vsprintf = vsprintf;
-
-},{}],110:[function(require,module,exports){
-/* Copyright 2010 Membase, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-'use strict';
-
-/*jshint node:true*/
-
-
-/**
- * Convert a 16-bit quantity (short integer) from host byte order to network byte order (Little-Endian to Big-Endian).
- *
- * @param {Array|Buffer} b Array of octets or a nodejs Buffer
- * @param {number} i Zero-based index at which to write into b
- * @param {number} v Value to convert
- */
-exports.htons = function(b, i, v) {
-	b[i] = (0xff & (v >> 8));
-	b[i + 1] = (0xff & (v));
-};
-
-
-/**
- * Convert a 16-bit quantity (short integer) from network byte order to host byte order (Big-Endian to Little-Endian).
- *
- * @param {Array|Buffer} b Array of octets or a nodejs Buffer to read value from
- * @param {number} i Zero-based index at which to read from b
- * @returns {number}
- */
-exports.ntohs = function(b, i) {
-	return ((0xff & b[i]) << 8) | 
-	       ((0xff & b[i + 1]));
-};
-
-
-/**
- * Convert a 16-bit quantity (short integer) from network byte order to host byte order (Big-Endian to Little-Endian).
- *
- * @param {string} s String to read value from
- * @param {number} i Zero-based index at which to read from s
- * @returns {number}
- */
-exports.ntohsStr = function(s, i) {
-	return ((0xff & s.charCodeAt(i)) << 8) |
-	       ((0xff & s.charCodeAt(i + 1)));
-};
-
-
-/**
- * Convert a 32-bit quantity (long integer) from host byte order to network byte order (Little-Endian to Big-Endian).
- *
- * @param {Array|Buffer} b Array of octets or a nodejs Buffer
- * @param {number} i Zero-based index at which to write into b
- * @param {number} v Value to convert
- */
-exports.htonl = function(b, i, v) {
-	b[i] = (0xff & (v >> 24));
-	b[i + 1] = (0xff & (v >> 16));
-	b[i + 2] = (0xff & (v >> 8));
-	b[i + 3] = (0xff & (v));
-};
-
-
-/**
- * Convert a 32-bit quantity (long integer) from network byte order to host byte order (Big-Endian to Little-Endian).
- *
- * @param {Array|Buffer} b Array of octets or a nodejs Buffer to read value from
- * @param {number} i Zero-based index at which to read from b
- * @returns {number}
- */
-exports.ntohl = function(b, i) {
-	return ((0xff & b[i]) << 24) |
-	       ((0xff & b[i + 1]) << 16) |
-	       ((0xff & b[i + 2]) << 8) |
-	       ((0xff & b[i + 3]));
-};
-
-
-/**
- * Convert a 32-bit quantity (long integer) from network byte order to host byte order (Big-Endian to Little-Endian).
- *
- * @param {string} s String to read value from
- * @param {number} i Zero-based index at which to read from s
- * @returns {number}
- */
-exports.ntohlStr = function(s, i) {
-	return ((0xff & s.charCodeAt(i)) << 24) |
-	       ((0xff & s.charCodeAt(i + 1)) << 16) |
-	       ((0xff & s.charCodeAt(i + 2)) << 8) |
-	       ((0xff & s.charCodeAt(i + 3)));
-};
-
 },{}],111:[function(require,module,exports){
-module.exports={
-  "name": "bitcore",
-  "version": "0.8.6",
-  "description": "A pure and powerful JavaScript Bitcoin library.",
-  "author": "BitPay <dev@bitpay.com>",
-  "main": "index.js",
-  "scripts": {
-    "lint": "gulp lint",
-    "test": "gulp test",
-    "coverage": "gulp coverage",
-    "build": "gulp",
-    "postinstall": "node ./lib/errors/build.js"
-  },
-  "contributors": [
-    {
-      "name": "Daniel Cousens",
-      "email": "bitcoin@dcousens.com"
-    },
-    {
-      "name": "Esteban Ordano",
-      "email": "eordano@gmail.com"
-    },
-    {
-      "name": "Gordon Hall",
-      "email": "gordon@bitpay.com"
-    },
-    {
-      "name": "Jeff Garzik",
-      "email": "jgarzik@bitpay.com"
-    },
-    {
-      "name": "Kyle Drake",
-      "email": "kyle@kyledrake.net"
-    },
-    {
-      "name": "Manuel Araoz",
-      "email": "manuelaraoz@gmail.com"
-    },
-    {
-      "name": "Matias Alejo Garcia",
-      "email": "ematiu@gmail.com"
-    },
-    {
-      "name": "Ryan X. Charles",
-      "email": "ryanxcharles@gmail.com"
-    },
-    {
-      "name": "Stefan Thomas",
-      "email": "moon@justmoon.net"
-    },
-    {
-      "name": "Stephen Pair",
-      "email": "stephen@bitpay.com"
-    },
-    {
-      "name": "Wei Lu",
-      "email": "luwei.here@gmail.com"
-    }
-  ],
-  "keywords": [
-    "bitcoin",
-    "bip32",
-    "bip37",
-    "bip70",
-    "merge",
-    "multisig"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/bitpay/bitcore.git"
-  },
-  "browser": {
-    "request": "browser-request"
-  },
-  "dependencies": {
-    "asn1.js": "=0.4.1",
-    "bn.js": "=0.16.1",
-    "browser-request": "^0.3.3",
-    "bs58": "=2.0.0",
-    "bufferput": "^0.1.2",
-    "buffers": "^0.1.1",
-    "elliptic": "=0.16.0",
-    "hash.js": "=0.3.2",
-    "inherits": "=2.0.1",
-    "jsrsasign": "=0.0.3",
-    "lodash": "=2.4.1",
-    "protobufjs": "=3.0.0",
-    "request": "^2.51.0",
-    "sha512": "=0.0.1",
-    "socks5-client": "^0.3.6"
-  },
-  "devDependencies": {
-    "brfs": "1.2.0",
-    "browserify": "~6.3.3",
-    "chai": "~1.10.0",
-    "closure-compiler-jar": "git://github.com/eordano/closure-compiler-jar.git",
-    "gulp": "^3.8.10",
-    "gulp-bump": "^0.1.11",
-    "gulp-closure-compiler": "^0.2.9",
-    "gulp-coveralls": "^0.1.3",
-    "gulp-git": "^0.5.5",
-    "gulp-jshint": "^1.9.0",
-    "gulp-mocha": "^2.0.0",
-    "gulp-rename": "^1.2.0",
-    "gulp-shell": "^0.2.10",
-    "gulp-uglify": "^1.0.2",
-    "gulp-util": "=3.0.1",
-    "istanbul": "^0.3.5",
-    "jsdoc": "^3.3.0-alpha11",
-    "jsdoc-to-markdown": "=0.5.9",
-    "karma": "^0.12.28",
-    "karma-chrome-launcher": "^0.1.7",
-    "karma-detect-browsers": "^0.1.3",
-    "karma-firefox-launcher": "^0.1.3",
-    "karma-mocha": "^0.1.9",
-    "mocha": "~2.0.1",
-    "more-fs": "=0.5.0",
-    "plato": "^1.3.0",
-    "run-sequence": "^1.0.2",
-    "sinon": "^1.12.2",
-    "through2": "=0.6.3",
-    "zuul": "1.16.3"
-  },
-  "license": "MIT"
-}
 
 },{}],112:[function(require,module,exports){
-
-},{}],113:[function(require,module,exports){
 // http://wiki.commonjs.org/wiki/Unit_Testing/1.0
 //
 // THIS IS NOT TESTED NOR LIKELY TO WORK OUTSIDE V8!
@@ -39127,9 +39077,9 @@ var objectKeys = Object.keys || function (obj) {
   return keys;
 };
 
-},{"util/":233}],114:[function(require,module,exports){
-module.exports=require(112)
-},{"/usr/local/lib/node_modules/browserify/lib/_empty.js":112}],115:[function(require,module,exports){
+},{"util/":232}],113:[function(require,module,exports){
+module.exports=require(111)
+},{"/usr/local/lib/node_modules/browserify/lib/_empty.js":111}],114:[function(require,module,exports){
 /*!
  * The buffer module from node.js, for the browser.
  *
@@ -40182,7 +40132,7 @@ function decodeUtf8Char (str) {
   }
 }
 
-},{"base64-js":116,"ieee754":117,"is-array":118}],116:[function(require,module,exports){
+},{"base64-js":115,"ieee754":116,"is-array":117}],115:[function(require,module,exports){
 var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 
 ;(function (exports) {
@@ -40304,7 +40254,7 @@ var lookup = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 	exports.fromByteArray = uint8ToBase64
 }(typeof exports === 'undefined' ? (this.base64js = {}) : exports))
 
-},{}],117:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 exports.read = function(buffer, offset, isLE, mLen, nBytes) {
   var e, m,
       eLen = nBytes * 8 - mLen - 1,
@@ -40390,7 +40340,7 @@ exports.write = function(buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128;
 };
 
-},{}],118:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 
 /**
  * isArray
@@ -40425,7 +40375,7 @@ module.exports = isArray || function (val) {
   return !! val && '[object Array]' == str.call(val);
 };
 
-},{}],119:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 (function (Buffer){
 var createHash = require('sha.js')
 
@@ -40511,7 +40461,7 @@ Hash.prototype.digest = function (enc) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./md5":123,"buffer":115,"ripemd160":200,"sha.js":202,"stream":216,"util":233}],120:[function(require,module,exports){
+},{"./md5":122,"buffer":114,"ripemd160":199,"sha.js":201,"stream":215,"util":232}],119:[function(require,module,exports){
 (function (Buffer){
 var createHash = require('./create-hash')
 var Transform = require('stream').Transform;
@@ -40580,7 +40530,7 @@ Hmac.prototype.digest = function (enc) {
 
 
 }).call(this,require("buffer").Buffer)
-},{"./create-hash":119,"buffer":115,"stream":216,"util":233}],121:[function(require,module,exports){
+},{"./create-hash":118,"buffer":114,"stream":215,"util":232}],120:[function(require,module,exports){
 (function (Buffer){
 var intSize = 4;
 var zeroBuffer = new Buffer(intSize); zeroBuffer.fill(0);
@@ -40618,7 +40568,7 @@ function hash(buf, fn, hashSize, bigEndian) {
 module.exports = { hash: hash };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],122:[function(require,module,exports){
+},{"buffer":114}],121:[function(require,module,exports){
 (function (Buffer){
 var rng = require('./rng')
 
@@ -40671,7 +40621,7 @@ each([
 })
 
 }).call(this,require("buffer").Buffer)
-},{"./create-hash":119,"./create-hmac":120,"./pbkdf2":206,"./rng":207,"browserify-aes/inject":129,"browserify-sign/inject":143,"buffer":115,"diffie-hellman/inject":194}],123:[function(require,module,exports){
+},{"./create-hash":118,"./create-hmac":119,"./pbkdf2":205,"./rng":206,"browserify-aes/inject":128,"browserify-sign/inject":142,"buffer":114,"diffie-hellman/inject":193}],122:[function(require,module,exports){
 /*
  * A JavaScript implementation of the RSA Data Security, Inc. MD5 Message
  * Digest Algorithm, as defined in RFC 1321.
@@ -40828,7 +40778,7 @@ module.exports = function md5(buf) {
   return helpers.hash(buf, core_md5, 16);
 };
 
-},{"./helpers":121}],124:[function(require,module,exports){
+},{"./helpers":120}],123:[function(require,module,exports){
 (function (Buffer){
 
 module.exports = function (crypto, password, keyLen, ivLen) {
@@ -40888,7 +40838,7 @@ module.exports = function (crypto, password, keyLen, ivLen) {
   };
 };
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],125:[function(require,module,exports){
+},{"buffer":114}],124:[function(require,module,exports){
 (function (Buffer){
 var uint_max = Math.pow(2, 32);
 function fixup_uint32(x) {
@@ -41087,7 +41037,7 @@ AES.prototype._doCryptBlock = function(M, keySchedule, SUB_MIX, SBOX) {
 
   exports.AES = AES;
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],126:[function(require,module,exports){
+},{"buffer":114}],125:[function(require,module,exports){
 (function (Buffer){
 var Transform = require('stream').Transform;
 var inherits = require('inherits');
@@ -41122,7 +41072,7 @@ CipherBase.prototype.final = function (outputEnc) {
   return outData;
 };
 }).call(this,require("buffer").Buffer)
-},{"buffer":115,"inherits":136,"stream":216}],127:[function(require,module,exports){
+},{"buffer":114,"inherits":135,"stream":215}],126:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes');
 var Transform = require('./cipherBase');
@@ -41243,7 +41193,7 @@ module.exports = function (crypto) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"./EVP_BytesToKey":124,"./aes":125,"./cipherBase":126,"./modes":130,"./modes/cbc":131,"./modes/cfb":132,"./modes/ctr":133,"./modes/ecb":134,"./modes/ofb":135,"./streamCipher":137,"buffer":115,"inherits":136}],128:[function(require,module,exports){
+},{"./EVP_BytesToKey":123,"./aes":124,"./cipherBase":125,"./modes":129,"./modes/cbc":130,"./modes/cfb":131,"./modes/ctr":132,"./modes/ecb":133,"./modes/ofb":134,"./streamCipher":136,"buffer":114,"inherits":135}],127:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes');
 var Transform = require('./cipherBase');
@@ -41355,7 +41305,7 @@ module.exports = function (crypto) {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"./EVP_BytesToKey":124,"./aes":125,"./cipherBase":126,"./modes":130,"./modes/cbc":131,"./modes/cfb":132,"./modes/ctr":133,"./modes/ecb":134,"./modes/ofb":135,"./streamCipher":137,"buffer":115,"inherits":136}],129:[function(require,module,exports){
+},{"./EVP_BytesToKey":123,"./aes":124,"./cipherBase":125,"./modes":129,"./modes/cbc":130,"./modes/cfb":131,"./modes/ctr":132,"./modes/ecb":133,"./modes/ofb":134,"./streamCipher":136,"buffer":114,"inherits":135}],128:[function(require,module,exports){
 module.exports = function (crypto, exports) {
   exports = exports || {};
   var ciphers = require('./encrypter')(crypto);
@@ -41372,7 +41322,7 @@ module.exports = function (crypto, exports) {
 };
 
 
-},{"./decrypter":127,"./encrypter":128,"./modes":130}],130:[function(require,module,exports){
+},{"./decrypter":126,"./encrypter":127,"./modes":129}],129:[function(require,module,exports){
 exports['aes-128-ecb'] = {
   cipher: 'AES',
   key: 128,
@@ -41481,7 +41431,7 @@ exports['aes-256-ctr'] = {
   mode: 'CTR',
   type: 'stream'
 };
-},{}],131:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 var xor = require('../xor');
 exports.encrypt = function (self, block) {
   var data = xor(block, self._prev);
@@ -41494,7 +41444,7 @@ exports.decrypt = function (self, block) {
   var out = self._cipher.decryptBlock(block);
   return xor(out, pad);
 };
-},{"../xor":138}],132:[function(require,module,exports){
+},{"../xor":137}],131:[function(require,module,exports){
 (function (Buffer){
 var xor = require('../xor');
 exports.encrypt = function (self, data, decrypt) {
@@ -41524,7 +41474,7 @@ function encryptStart(self, data, decrypt) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"../xor":138,"buffer":115}],133:[function(require,module,exports){
+},{"../xor":137,"buffer":114}],132:[function(require,module,exports){
 (function (Buffer){
 var xor = require('../xor');
 function getBlock(self) {
@@ -41555,14 +41505,14 @@ function incr32(iv) {
   }
 }
 }).call(this,require("buffer").Buffer)
-},{"../xor":138,"buffer":115}],134:[function(require,module,exports){
+},{"../xor":137,"buffer":114}],133:[function(require,module,exports){
 exports.encrypt = function (self, block) {
   return self._cipher.encryptBlock(block);
 };
 exports.decrypt = function (self, block) {
   return self._cipher.decryptBlock(block);
 };
-},{}],135:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 (function (Buffer){
 var xor = require('../xor');
 function getBlock(self) {
@@ -41578,9 +41528,9 @@ exports.encrypt = function (self, chunk) {
   return xor(chunk, pad);
 };
 }).call(this,require("buffer").Buffer)
-},{"../xor":138,"buffer":115}],136:[function(require,module,exports){
-module.exports=require(92)
-},{"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/inherits/inherits_browser.js":92}],137:[function(require,module,exports){
+},{"../xor":137,"buffer":114}],135:[function(require,module,exports){
+module.exports=require(109)
+},{"/Users/eordano/Code/bitcore-channel/node_modules/inherits/inherits_browser.js":109}],136:[function(require,module,exports){
 (function (Buffer){
 var aes = require('./aes');
 var Transform = require('./cipherBase');
@@ -41609,7 +41559,7 @@ StreamCipher.prototype._flush = function (next) {
   next();
 };
 }).call(this,require("buffer").Buffer)
-},{"./aes":125,"./cipherBase":126,"buffer":115,"inherits":136}],138:[function(require,module,exports){
+},{"./aes":124,"./cipherBase":125,"buffer":114,"inherits":135}],137:[function(require,module,exports){
 (function (Buffer){
 module.exports = xor;
 function xor(a, b) {
@@ -41622,7 +41572,7 @@ function xor(a, b) {
   return out;
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],139:[function(require,module,exports){
+},{"buffer":114}],138:[function(require,module,exports){
 module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.2": "aes-128-cbc",
 "2.16.840.1.101.3.4.1.3": "aes-128-ofb",
@@ -41636,7 +41586,7 @@ module.exports={"2.16.840.1.101.3.4.1.1": "aes-128-ecb",
 "2.16.840.1.101.3.4.1.43": "aes-256-ofb",
 "2.16.840.1.101.3.4.1.44": "aes-256-cfb"
 }
-},{}],140:[function(require,module,exports){
+},{}],139:[function(require,module,exports){
 (function (Buffer){
 exports['RSA-SHA224'] = exports.sha224WithRSAEncryption = {
   sign: 'rsa',
@@ -41669,7 +41619,7 @@ exports['ecdsa-with-SHA1'] = {
 	id: new Buffer(/*'3021300906052b0e03021a05000414'*/'', 'hex')
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],141:[function(require,module,exports){
+},{"buffer":114}],140:[function(require,module,exports){
 // from https://github.com/indutny/self-signed/blob/gh-pages/lib/asn1.js
 // Fedor, you are amazing.
 
@@ -41780,9 +41730,9 @@ var ECPrivateKey2 = asn1.define('ECPrivateKey2', function() {
   );
 });
 exports.ECPrivateKey2 = ECPrivateKey2;
-},{"asn1.js":145,"asn1.js-rfc3280":144}],142:[function(require,module,exports){
+},{"asn1.js":144,"asn1.js-rfc3280":143}],141:[function(require,module,exports){
 require('./inject')(module.exports, require('crypto'));
-},{"./inject":143,"crypto":122}],143:[function(require,module,exports){
+},{"./inject":142,"crypto":121}],142:[function(require,module,exports){
 (function (Buffer){
 var sign = require('./sign');
 var verify = require('./verify');
@@ -41859,13 +41809,13 @@ Verify.prototype.verify = function verifyMethod(key, sig, enc) {
 	return verify(sig, Buffer.concat([this._tag, hash]), key);
 };
 }).call(this,require("buffer").Buffer)
-},{"./algos":140,"./sign":190,"./verify":191,"buffer":115,"inherits":209,"readable-stream":188}],144:[function(require,module,exports){
-arguments[4][66][0].apply(exports,arguments)
-},{"../..":142,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/rfc/3280/index.js":66,"asn1.js":145}],145:[function(require,module,exports){
+},{"./algos":139,"./sign":189,"./verify":190,"buffer":114,"inherits":208,"readable-stream":187}],143:[function(require,module,exports){
+arguments[4][65][0].apply(exports,arguments)
+},{"../..":141,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/rfc/3280/index.js":65,"asn1.js":144}],144:[function(require,module,exports){
+arguments[4][52][0].apply(exports,arguments)
+},{"./asn1/api":145,"./asn1/base":147,"./asn1/constants":151,"./asn1/decoders":153,"./asn1/encoders":155,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1.js":52,"bn.js":156}],145:[function(require,module,exports){
 arguments[4][53][0].apply(exports,arguments)
-},{"./asn1/api":146,"./asn1/base":148,"./asn1/constants":152,"./asn1/decoders":154,"./asn1/encoders":156,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1.js":53,"bn.js":157}],146:[function(require,module,exports){
-arguments[4][54][0].apply(exports,arguments)
-},{"../asn1":145,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1/api.js":54,"util":233,"vm":234}],147:[function(require,module,exports){
+},{"../asn1":144,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1/api.js":53,"util":232,"vm":233}],146:[function(require,module,exports){
 var assert = require('assert');
 var util = require('util');
 var Reporter = require('../base').Reporter;
@@ -41983,9 +41933,9 @@ EncoderBuffer.prototype.join = function join(out, offset) {
   return out;
 };
 
-},{"../base":148,"assert":113,"buffer":115,"util":233}],148:[function(require,module,exports){
-arguments[4][56][0].apply(exports,arguments)
-},{"./buffer":147,"./node":149,"./reporter":150,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1/base/index.js":56}],149:[function(require,module,exports){
+},{"../base":147,"assert":112,"buffer":114,"util":232}],147:[function(require,module,exports){
+arguments[4][55][0].apply(exports,arguments)
+},{"./buffer":146,"./node":148,"./reporter":149,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1/base/index.js":55}],148:[function(require,module,exports){
 var assert = require('assert');
 var Reporter = require('../base').Reporter;
 var EncoderBuffer = require('../base').EncoderBuffer;
@@ -42562,13 +42512,13 @@ Node.prototype._encodePrimitive = function encodePrimitive(tag, data) {
     throw new Error('Unsupported tag: ' + tag);
 };
 
-},{"../base":148,"assert":113}],150:[function(require,module,exports){
+},{"../base":147,"assert":112}],149:[function(require,module,exports){
+module.exports=require(57)
+},{"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1/base/reporter.js":57,"util":232}],150:[function(require,module,exports){
 module.exports=require(58)
-},{"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1/base/reporter.js":58,"util":233}],151:[function(require,module,exports){
+},{"../constants":151,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1/constants/der.js":58}],151:[function(require,module,exports){
 module.exports=require(59)
-},{"../constants":152,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1/constants/der.js":59}],152:[function(require,module,exports){
-module.exports=require(60)
-},{"./der":151,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1/constants/index.js":60}],153:[function(require,module,exports){
+},{"./der":150,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1/constants/index.js":59}],152:[function(require,module,exports){
 var util = require('util');
 
 var asn1 = require('../../asn1');
@@ -42870,9 +42820,9 @@ function derDecodeLen(buf, primitive, fail) {
   return len;
 }
 
-},{"../../asn1":145,"util":233}],154:[function(require,module,exports){
-arguments[4][62][0].apply(exports,arguments)
-},{"./der":153,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1/decoders/index.js":62}],155:[function(require,module,exports){
+},{"../../asn1":144,"util":232}],153:[function(require,module,exports){
+arguments[4][61][0].apply(exports,arguments)
+},{"./der":152,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1/decoders/index.js":61}],154:[function(require,module,exports){
 var util = require('util');
 var Buffer = require('buffer').Buffer;
 
@@ -43144,9 +43094,9 @@ function encodeTag(tag, primitive, cls, reporter) {
   return res;
 }
 
-},{"../../asn1":145,"buffer":115,"util":233}],156:[function(require,module,exports){
-arguments[4][64][0].apply(exports,arguments)
-},{"./der":155,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/asn1.js/lib/asn1/encoders/index.js":64}],157:[function(require,module,exports){
+},{"../../asn1":144,"buffer":114,"util":232}],155:[function(require,module,exports){
+arguments[4][63][0].apply(exports,arguments)
+},{"./der":154,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/asn1.js/lib/asn1/encoders/index.js":63}],156:[function(require,module,exports){
 // Utils
 
 function assert(val, msg) {
@@ -45047,21 +44997,21 @@ Mont.prototype.invm = function invm(a) {
   return res._forceRed(this);
 };
 
-},{}],158:[function(require,module,exports){
+},{}],157:[function(require,module,exports){
+arguments[4][71][0].apply(exports,arguments)
+},{"../package.json":176,"./elliptic/curve":160,"./elliptic/curves":163,"./elliptic/ec":164,"./elliptic/hmac-drbg":167,"./elliptic/utils":168,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic.js":71,"brorand":169}],158:[function(require,module,exports){
 arguments[4][72][0].apply(exports,arguments)
-},{"../package.json":177,"./elliptic/curve":161,"./elliptic/curves":164,"./elliptic/ec":165,"./elliptic/hmac-drbg":168,"./elliptic/utils":169,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic.js":72,"brorand":170}],159:[function(require,module,exports){
+},{"../../elliptic":157,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/base.js":72,"assert":112,"bn.js":156}],159:[function(require,module,exports){
 arguments[4][73][0].apply(exports,arguments)
-},{"../../elliptic":158,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/base.js":73,"assert":113,"bn.js":157}],160:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/edwards.js":73,"assert":112,"bn.js":156,"inherits":208}],160:[function(require,module,exports){
 arguments[4][74][0].apply(exports,arguments)
-},{"../../elliptic":158,"../curve":161,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/edwards.js":74,"assert":113,"bn.js":157,"inherits":209}],161:[function(require,module,exports){
+},{"./base":158,"./edwards":159,"./mont":161,"./short":162,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/index.js":74}],161:[function(require,module,exports){
 arguments[4][75][0].apply(exports,arguments)
-},{"./base":159,"./edwards":160,"./mont":162,"./short":163,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/index.js":75}],162:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/mont.js":75,"assert":112,"bn.js":156,"inherits":208}],162:[function(require,module,exports){
 arguments[4][76][0].apply(exports,arguments)
-},{"../../elliptic":158,"../curve":161,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/mont.js":76,"assert":113,"bn.js":157,"inherits":209}],163:[function(require,module,exports){
+},{"../../elliptic":157,"../curve":160,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/short.js":76,"assert":112,"bn.js":156,"inherits":208}],163:[function(require,module,exports){
 arguments[4][77][0].apply(exports,arguments)
-},{"../../elliptic":158,"../curve":161,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curve/short.js":77,"assert":113,"bn.js":157,"inherits":209}],164:[function(require,module,exports){
-arguments[4][78][0].apply(exports,arguments)
-},{"../elliptic":158,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curves.js":78,"assert":113,"bn.js":157,"hash.js":171}],165:[function(require,module,exports){
+},{"../elliptic":157,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/curves.js":77,"assert":112,"bn.js":156,"hash.js":170}],164:[function(require,module,exports){
 var assert = require('assert');
 var bn = require('bn.js');
 var elliptic = require('../../elliptic');
@@ -45211,15 +45161,15 @@ EC.prototype.verify = function verify(msg, signature, key) {
   return p.getX().mod(this.n).cmp(r) === 0;
 };
 
-},{"../../elliptic":158,"./key":166,"./signature":167,"assert":113,"bn.js":157}],166:[function(require,module,exports){
+},{"../../elliptic":157,"./key":165,"./signature":166,"assert":112,"bn.js":156}],165:[function(require,module,exports){
+arguments[4][79][0].apply(exports,arguments)
+},{"../../elliptic":157,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/ec/key.js":79,"assert":112,"bn.js":156}],166:[function(require,module,exports){
 arguments[4][80][0].apply(exports,arguments)
-},{"../../elliptic":158,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/ec/key.js":80,"assert":113,"bn.js":157}],167:[function(require,module,exports){
+},{"../../elliptic":157,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/ec/signature.js":80,"assert":112,"bn.js":156}],167:[function(require,module,exports){
 arguments[4][81][0].apply(exports,arguments)
-},{"../../elliptic":158,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/ec/signature.js":81,"assert":113,"bn.js":157}],168:[function(require,module,exports){
+},{"../elliptic":157,"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/hmac-drbg.js":81,"assert":112,"hash.js":170}],168:[function(require,module,exports){
 arguments[4][82][0].apply(exports,arguments)
-},{"../elliptic":158,"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/hmac-drbg.js":82,"assert":113,"hash.js":171}],169:[function(require,module,exports){
-arguments[4][83][0].apply(exports,arguments)
-},{"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/elliptic/lib/elliptic/utils.js":83,"assert":113,"bn.js":157}],170:[function(require,module,exports){
+},{"/Users/eordano/Code/bitcore-channel/node_modules/bitcore/node_modules/elliptic/lib/elliptic/utils.js":82,"assert":112,"bn.js":156}],169:[function(require,module,exports){
 var r;
 
 module.exports = function rand(len) {
@@ -45278,7 +45228,7 @@ if (typeof window === 'object') {
   }
 }
 
-},{}],171:[function(require,module,exports){
+},{}],170:[function(require,module,exports){
 var hash = exports;
 
 hash.utils = require('./hash/utils');
@@ -45292,7 +45242,7 @@ hash.sha256 = hash.sha.sha256;
 hash.sha224 = hash.sha.sha224;
 hash.ripemd160 = hash.ripemd.ripemd160;
 
-},{"./hash/common":172,"./hash/hmac":173,"./hash/ripemd":174,"./hash/sha":175,"./hash/utils":176}],172:[function(require,module,exports){
+},{"./hash/common":171,"./hash/hmac":172,"./hash/ripemd":173,"./hash/sha":174,"./hash/utils":175}],171:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -45375,7 +45325,7 @@ BlockHash.prototype._pad = function pad() {
   return res;
 }
 
-},{"../hash":171}],173:[function(require,module,exports){
+},{"../hash":170}],172:[function(require,module,exports){
 var hmac = exports;
 
 var hash = require('../hash');
@@ -45424,7 +45374,7 @@ Hmac.prototype.digest = function digest(enc) {
   return this.hash.outer.digest(enc);
 };
 
-},{"../hash":171}],174:[function(require,module,exports){
+},{"../hash":170}],173:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 
@@ -45569,7 +45519,7 @@ var sh = [
   8, 5, 12, 9, 12, 5, 14, 6, 8, 13, 6, 5, 15, 13, 11, 11
 ];
 
-},{"../hash":171}],175:[function(require,module,exports){
+},{"../hash":170}],174:[function(require,module,exports){
 var hash = require('../hash');
 var utils = hash.utils;
 var assert = utils.assert;
@@ -45710,7 +45660,7 @@ function g1_256(x) {
   return rotr32(x, 17) ^ rotr32(x, 19) ^ (x >>> 10);
 }
 
-},{"../hash":171}],176:[function(require,module,exports){
+},{"../hash":170}],175:[function(require,module,exports){
 var utils = exports;
 
 function toArray(msg, enc) {
@@ -45909,7 +45859,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],177:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 module.exports={
   "name": "elliptic",
   "version": "0.15.14",
@@ -45973,7 +45923,7 @@ module.exports={
   "readme": "ERROR: No README data found!"
 }
 
-},{}],178:[function(require,module,exports){
+},{}],177:[function(require,module,exports){
 exports.strip = function strip(artifact) {
   artifact = artifact.toString()
   var startRegex = /^-----BEGIN (.*)-----\n/;
@@ -46007,7 +45957,7 @@ exports.assemble = function assemble(info) {
   var endLine = "-----END " + tag + "-----";
   return startLine + "\n" + wrap(base64, 64) + "\n" + endLine + "\n";
 }
-},{}],179:[function(require,module,exports){
+},{}],178:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -46100,7 +46050,7 @@ function forEach (xs, f) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_readable":181,"./_stream_writable":183,"_process":211,"core-util-is":184,"inherits":185}],180:[function(require,module,exports){
+},{"./_stream_readable":180,"./_stream_writable":182,"_process":210,"core-util-is":183,"inherits":184}],179:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -46148,7 +46098,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":182,"core-util-is":184,"inherits":185}],181:[function(require,module,exports){
+},{"./_stream_transform":181,"core-util-is":183,"inherits":184}],180:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -47103,7 +47053,7 @@ function indexOf (xs, x) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":179,"_process":211,"buffer":115,"core-util-is":184,"events":208,"inherits":185,"isarray":186,"stream":216,"string_decoder/":187,"util":114}],182:[function(require,module,exports){
+},{"./_stream_duplex":178,"_process":210,"buffer":114,"core-util-is":183,"events":207,"inherits":184,"isarray":185,"stream":215,"string_decoder/":186,"util":113}],181:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -47314,7 +47264,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":179,"core-util-is":184,"inherits":185}],183:[function(require,module,exports){
+},{"./_stream_duplex":178,"core-util-is":183,"inherits":184}],182:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -47795,7 +47745,7 @@ function endWritable(stream, state, cb) {
 }
 
 }).call(this,require('_process'))
-},{"./_stream_duplex":179,"_process":211,"buffer":115,"core-util-is":184,"inherits":185,"stream":216}],184:[function(require,module,exports){
+},{"./_stream_duplex":178,"_process":210,"buffer":114,"core-util-is":183,"inherits":184,"stream":215}],183:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -47905,14 +47855,14 @@ function objectToString(o) {
   return Object.prototype.toString.call(o);
 }
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],185:[function(require,module,exports){
-module.exports=require(92)
-},{"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/inherits/inherits_browser.js":92}],186:[function(require,module,exports){
+},{"buffer":114}],184:[function(require,module,exports){
+module.exports=require(109)
+},{"/Users/eordano/Code/bitcore-channel/node_modules/inherits/inherits_browser.js":109}],185:[function(require,module,exports){
 module.exports = Array.isArray || function (arr) {
   return Object.prototype.toString.call(arr) == '[object Array]';
 };
 
-},{}],187:[function(require,module,exports){
+},{}],186:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -48135,7 +48085,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":115}],188:[function(require,module,exports){
+},{"buffer":114}],187:[function(require,module,exports){
 exports = module.exports = require('./lib/_stream_readable.js');
 exports.Stream = require('stream');
 exports.Readable = exports;
@@ -48144,7 +48094,7 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":179,"./lib/_stream_passthrough.js":180,"./lib/_stream_readable.js":181,"./lib/_stream_transform.js":182,"./lib/_stream_writable.js":183,"stream":216}],189:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":178,"./lib/_stream_passthrough.js":179,"./lib/_stream_readable.js":180,"./lib/_stream_transform.js":181,"./lib/_stream_writable.js":182,"stream":215}],188:[function(require,module,exports){
 (function (Buffer){
 var pemstrip = require('pemstrip');
 var asn1 = require('./asn1');
@@ -48223,7 +48173,7 @@ function decrypt(crypto, data, password) {
   return Buffer.concat(out);
 }
 }).call(this,require("buffer").Buffer)
-},{"./aesid.json":139,"./asn1":141,"buffer":115,"pemstrip":178}],190:[function(require,module,exports){
+},{"./aesid.json":138,"./asn1":140,"buffer":114,"pemstrip":177}],189:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var parseKeys = require('./parseKeys');
@@ -48281,7 +48231,7 @@ function ecSign(hash, priv, crypto) {
   return new Buffer(out.toDER());
 }
 }).call(this,require("buffer").Buffer)
-},{"./parseKeys":189,"bn.js":157,"buffer":115,"elliptic":158}],191:[function(require,module,exports){
+},{"./parseKeys":188,"bn.js":156,"buffer":114,"elliptic":157}],190:[function(require,module,exports){
 (function (Buffer){
 // much of this based on https://github.com/indutny/self-signed/blob/gh-pages/lib/rsa.js
 var parseKeys = require('./parseKeys');
@@ -48318,7 +48268,7 @@ function ecVerify(sig, hash, pub) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"./parseKeys":189,"bn.js":157,"buffer":115,"elliptic":158}],192:[function(require,module,exports){
+},{"./parseKeys":188,"bn.js":156,"buffer":114,"elliptic":157}],191:[function(require,module,exports){
 (function (Buffer){
 var BN = require('bn.js');
 var MillerRabin = require('miller-rabin');
@@ -48478,7 +48428,7 @@ function returnValue(bn, enc) {
 	}
 }
 }).call(this,require("buffer").Buffer)
-},{"./generatePrime":193,"bn.js":195,"buffer":115,"miller-rabin":196}],193:[function(require,module,exports){
+},{"./generatePrime":192,"bn.js":194,"buffer":114,"miller-rabin":195}],192:[function(require,module,exports){
 
 module.exports = findPrime;
 findPrime.simpleSieve = simpleSieve;
@@ -48595,7 +48545,7 @@ function findPrime(bits, gen ,crypto) {
   }
 
 }
-},{"bn.js":195,"miller-rabin":196}],194:[function(require,module,exports){
+},{"bn.js":194,"miller-rabin":195}],193:[function(require,module,exports){
 (function (Buffer){
 var primes = require('./primes.json');
 var DH = require('./dh');
@@ -48634,9 +48584,9 @@ module.exports = function (crypto, exports) {
 	};
 }
 }).call(this,require("buffer").Buffer)
-},{"./dh":192,"./generatePrime":193,"./primes.json":198,"buffer":115}],195:[function(require,module,exports){
-module.exports=require(157)
-},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/bn.js/lib/bn.js":157}],196:[function(require,module,exports){
+},{"./dh":191,"./generatePrime":192,"./primes.json":197,"buffer":114}],194:[function(require,module,exports){
+module.exports=require(156)
+},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/bn.js/lib/bn.js":156}],195:[function(require,module,exports){
 var bn = require('bn.js');
 var brorand = require('brorand');
 
@@ -48752,9 +48702,9 @@ MillerRabin.prototype.getDivisor = function getDivisor(n, k) {
   return prime;
 };
 
-},{"bn.js":195,"brorand":197}],197:[function(require,module,exports){
-module.exports=require(170)
-},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/elliptic/node_modules/brorand/index.js":170}],198:[function(require,module,exports){
+},{"bn.js":194,"brorand":196}],196:[function(require,module,exports){
+module.exports=require(169)
+},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/elliptic/node_modules/brorand/index.js":169}],197:[function(require,module,exports){
 module.exports={
     "modp1": {
         "gen": "02",
@@ -48789,7 +48739,7 @@ module.exports={
         "prime": "ffffffffffffffffc90fdaa22168c234c4c6628b80dc1cd129024e088a67cc74020bbea63b139b22514a08798e3404ddef9519b3cd3a431b302b0a6df25f14374fe1356d6d51c245e485b576625e7ec6f44c42e9a637ed6b0bff5cb6f406b7edee386bfb5a899fa5ae9f24117c4b1fe649286651ece45b3dc2007cb8a163bf0598da48361c55d39a69163fa8fd24cf5f83655d23dca3ad961c62f356208552bb9ed529077096966d670c354e4abc9804f1746c08ca18217c32905e462e36ce3be39e772c180e86039b2783a2ec07a28fb5c55df06f4c52c9de2bcbf6955817183995497cea956ae515d2261898fa051015728e5a8aaac42dad33170d04507a33a85521abdf1cba64ecfb850458dbef0a8aea71575d060c7db3970f85a6e1e4c7abf5ae8cdb0933d71e8c94e04a25619dcee3d2261ad2ee6bf12ffa06d98a0864d87602733ec86a64521f2b18177b200cbbe117577a615d6c770988c0bad946e208e24fa074e5ab3143db5bfce0fd108e4b82d120a92108011a723c12a787e6d788719a10bdba5b2699c327186af4e23c1a946834b6150bda2583e9ca2ad44ce8dbbbc2db04de8ef92e8efc141fbecaa6287c59474e6bc05d99b2964fa090c3a2233ba186515be7ed1f612970cee2d7afb81bdd762170481cd0069127d5b05aa993b4ea988d8fddc186ffb7dc90a6c08f4df435c93402849236c3fab4d27c7026c1d4dcb2602646dec9751e763dba37bdf8ff9406ad9e530ee5db382f413001aeb06a53ed9027d831179727b0865a8918da3edbebcf9b14ed44ce6cbaced4bb1bdb7f1447e6cc254b332051512bd7af426fb8f401378cd2bf5983ca01c64b92ecf032ea15d1721d03f482d7ce6e74fef6d55e702f46980c82b5a84031900b1c9e59e7c97fbec7e8f323a97a7e36cc88be0f1d45b7ff585ac54bd407b22b4154aacc8f6d7ebf48e1d814cc5ed20f8037e0a79715eef29be32806a1d58bb7c5da76f550aa3d8a1fbff0eb19ccb1a313d55cda56c9ec2ef29632387fe8d76e3c0468043e8f663f4860ee12bf2d5b0b7474d6e694f91e6dbe115974a3926f12fee5e438777cb6a932df8cd8bec4d073b931ba3bc832b68d9dd300741fa7bf8afc47ed2576f6936ba424663aab639c5ae4f5683423b4742bf1c978238f16cbe39d652de3fdb8befc848ad922222e04a4037c0713eb57a81a23f0c73473fc646cea306b4bcbc8862f8385ddfa9d4b7fa2c087e879683303ed5bdd3a062b3cf5b3a278a66d2a13f83f44f82ddf310ee074ab6a364597e899a0255dc164f31cc50846851df9ab48195ded7ea1b1d510bd7ee74d73faf36bc31ecfa268359046f4eb879f924009438b481c6cd7889a002ed5ee382bc9190da6fc026e479558e4475677e9aa9e3050e2765694dfc81f56e880b96e7160c980dd98edd3dfffffffffffffffff"
     }
 }
-},{}],199:[function(require,module,exports){
+},{}],198:[function(require,module,exports){
 (function (Buffer){
 module.exports = function(crypto) {
   function pbkdf2(password, salt, iterations, keylen, digest, callback) {
@@ -48877,7 +48827,7 @@ module.exports = function(crypto) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],200:[function(require,module,exports){
+},{"buffer":114}],199:[function(require,module,exports){
 (function (Buffer){
 
 module.exports = ripemd160
@@ -49086,7 +49036,7 @@ function ripemd160(message) {
 
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":115}],201:[function(require,module,exports){
+},{"buffer":114}],200:[function(require,module,exports){
 module.exports = function (Buffer) {
 
   //prototype class for hash functions
@@ -49165,7 +49115,7 @@ module.exports = function (Buffer) {
   return Hash
 }
 
-},{}],202:[function(require,module,exports){
+},{}],201:[function(require,module,exports){
 var exports = module.exports = function (alg) {
   var Alg = exports[alg]
   if(!Alg) throw new Error(alg + ' is not supported (we accept pull requests)')
@@ -49179,7 +49129,7 @@ exports.sha1 = require('./sha1')(Buffer, Hash)
 exports.sha256 = require('./sha256')(Buffer, Hash)
 exports.sha512 = require('./sha512')(Buffer, Hash)
 
-},{"./hash":201,"./sha1":203,"./sha256":204,"./sha512":205,"buffer":115}],203:[function(require,module,exports){
+},{"./hash":200,"./sha1":202,"./sha256":203,"./sha512":204,"buffer":114}],202:[function(require,module,exports){
 /*
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-1, as defined
  * in FIPS PUB 180-1
@@ -49319,7 +49269,7 @@ module.exports = function (Buffer, Hash) {
   return Sha1
 }
 
-},{"util":233}],204:[function(require,module,exports){
+},{"util":232}],203:[function(require,module,exports){
 
 /**
  * A JavaScript implementation of the Secure Hash Algorithm, SHA-256, as defined
@@ -49468,7 +49418,7 @@ module.exports = function (Buffer, Hash) {
 
 }
 
-},{"util":233}],205:[function(require,module,exports){
+},{"util":232}],204:[function(require,module,exports){
 var inherits = require('util').inherits
 
 module.exports = function (Buffer, Hash) {
@@ -49714,7 +49664,7 @@ module.exports = function (Buffer, Hash) {
 
 }
 
-},{"util":233}],206:[function(require,module,exports){
+},{"util":232}],205:[function(require,module,exports){
 var pbkdf2Export = require('pbkdf2-compat/pbkdf2')
 
 module.exports = function (crypto, exports) {
@@ -49728,7 +49678,7 @@ module.exports = function (crypto, exports) {
   return exports
 }
 
-},{"pbkdf2-compat/pbkdf2":199}],207:[function(require,module,exports){
+},{"pbkdf2-compat/pbkdf2":198}],206:[function(require,module,exports){
 (function (global,Buffer){
 (function() {
   var g = ('undefined' === typeof window ? global : window) || {}
@@ -49758,7 +49708,7 @@ module.exports = function (crypto, exports) {
 }())
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"buffer":115,"crypto":114}],208:[function(require,module,exports){
+},{"buffer":114,"crypto":113}],207:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -50061,9 +50011,9 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],209:[function(require,module,exports){
-module.exports=require(92)
-},{"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/inherits/inherits_browser.js":92}],210:[function(require,module,exports){
+},{}],208:[function(require,module,exports){
+module.exports=require(109)
+},{"/Users/eordano/Code/bitcore-channel/node_modules/inherits/inherits_browser.js":109}],209:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -50291,7 +50241,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":211}],211:[function(require,module,exports){
+},{"_process":210}],210:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -50379,7 +50329,7 @@ process.chdir = function (dir) {
     throw new Error('process.chdir is not supported');
 };
 
-},{}],212:[function(require,module,exports){
+},{}],211:[function(require,module,exports){
 (function (global){
 /*! http://mths.be/punycode v1.2.4 by @mathias */
 ;(function(root) {
@@ -50890,7 +50840,7 @@ process.chdir = function (dir) {
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],213:[function(require,module,exports){
+},{}],212:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -50976,7 +50926,7 @@ var isArray = Array.isArray || function (xs) {
   return Object.prototype.toString.call(xs) === '[object Array]';
 };
 
-},{}],214:[function(require,module,exports){
+},{}],213:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -51063,13 +51013,13 @@ var objectKeys = Object.keys || function (obj) {
   return res;
 };
 
-},{}],215:[function(require,module,exports){
+},{}],214:[function(require,module,exports){
 'use strict';
 
 exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
-},{"./decode":213,"./encode":214}],216:[function(require,module,exports){
+},{"./decode":212,"./encode":213}],215:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -51198,39 +51148,39 @@ Stream.prototype.pipe = function(dest, options) {
   return dest;
 };
 
-},{"events":208,"inherits":209,"readable-stream/duplex.js":217,"readable-stream/passthrough.js":227,"readable-stream/readable.js":228,"readable-stream/transform.js":229,"readable-stream/writable.js":230}],217:[function(require,module,exports){
+},{"events":207,"inherits":208,"readable-stream/duplex.js":216,"readable-stream/passthrough.js":226,"readable-stream/readable.js":227,"readable-stream/transform.js":228,"readable-stream/writable.js":229}],216:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":218}],218:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":217}],217:[function(require,module,exports){
+module.exports=require(178)
+},{"./_stream_readable":219,"./_stream_writable":221,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_duplex.js":178,"_process":210,"core-util-is":222,"inherits":223}],218:[function(require,module,exports){
 module.exports=require(179)
-},{"./_stream_readable":220,"./_stream_writable":222,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_duplex.js":179,"_process":211,"core-util-is":223,"inherits":224}],219:[function(require,module,exports){
+},{"./_stream_transform":220,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_passthrough.js":179,"core-util-is":222,"inherits":223}],219:[function(require,module,exports){
 module.exports=require(180)
-},{"./_stream_transform":221,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_passthrough.js":180,"core-util-is":223,"inherits":224}],220:[function(require,module,exports){
+},{"./_stream_duplex":217,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_readable.js":180,"_process":210,"buffer":114,"core-util-is":222,"events":207,"inherits":223,"isarray":224,"stream":215,"string_decoder/":225,"util":113}],220:[function(require,module,exports){
 module.exports=require(181)
-},{"./_stream_duplex":218,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_readable.js":181,"_process":211,"buffer":115,"core-util-is":223,"events":208,"inherits":224,"isarray":225,"stream":216,"string_decoder/":226,"util":114}],221:[function(require,module,exports){
+},{"./_stream_duplex":217,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_transform.js":181,"core-util-is":222,"inherits":223}],221:[function(require,module,exports){
 module.exports=require(182)
-},{"./_stream_duplex":218,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_transform.js":182,"core-util-is":223,"inherits":224}],222:[function(require,module,exports){
+},{"./_stream_duplex":217,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_writable.js":182,"_process":210,"buffer":114,"core-util-is":222,"inherits":223,"stream":215}],222:[function(require,module,exports){
 module.exports=require(183)
-},{"./_stream_duplex":218,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/lib/_stream_writable.js":183,"_process":211,"buffer":115,"core-util-is":223,"inherits":224,"stream":216}],223:[function(require,module,exports){
-module.exports=require(184)
-},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/node_modules/core-util-is/lib/util.js":184,"buffer":115}],224:[function(require,module,exports){
-module.exports=require(92)
-},{"/Users/eordano/Code/paystream/node_modules/bitcore/node_modules/inherits/inherits_browser.js":92}],225:[function(require,module,exports){
+},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/node_modules/core-util-is/lib/util.js":183,"buffer":114}],223:[function(require,module,exports){
+module.exports=require(109)
+},{"/Users/eordano/Code/bitcore-channel/node_modules/inherits/inherits_browser.js":109}],224:[function(require,module,exports){
+module.exports=require(185)
+},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/node_modules/isarray/index.js":185}],225:[function(require,module,exports){
 module.exports=require(186)
-},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/node_modules/isarray/index.js":186}],226:[function(require,module,exports){
-module.exports=require(187)
-},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/node_modules/string_decoder/index.js":187,"buffer":115}],227:[function(require,module,exports){
+},{"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/node_modules/string_decoder/index.js":186,"buffer":114}],226:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":219}],228:[function(require,module,exports){
-module.exports=require(188)
-},{"./lib/_stream_duplex.js":218,"./lib/_stream_passthrough.js":219,"./lib/_stream_readable.js":220,"./lib/_stream_transform.js":221,"./lib/_stream_writable.js":222,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/readable.js":188,"stream":216}],229:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":218}],227:[function(require,module,exports){
+module.exports=require(187)
+},{"./lib/_stream_duplex.js":217,"./lib/_stream_passthrough.js":218,"./lib/_stream_readable.js":219,"./lib/_stream_transform.js":220,"./lib/_stream_writable.js":221,"/usr/local/lib/node_modules/browserify/node_modules/crypto-browserify/node_modules/browserify-sign/node_modules/readable-stream/readable.js":187,"stream":215}],228:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":221}],230:[function(require,module,exports){
+},{"./lib/_stream_transform.js":220}],229:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":222}],231:[function(require,module,exports){
+},{"./lib/_stream_writable.js":221}],230:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -51939,14 +51889,14 @@ function isNullOrUndefined(arg) {
   return  arg == null;
 }
 
-},{"punycode":212,"querystring":215}],232:[function(require,module,exports){
+},{"punycode":211,"querystring":214}],231:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],233:[function(require,module,exports){
+},{}],232:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -52536,7 +52486,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":232,"_process":211,"inherits":209}],234:[function(require,module,exports){
+},{"./support/isBuffer":231,"_process":210,"inherits":208}],233:[function(require,module,exports){
 var indexOf = require('indexof');
 
 var Object_keys = function (obj) {
@@ -52676,7 +52626,7 @@ exports.createContext = Script.createContext = function (context) {
     return copy;
 };
 
-},{"indexof":235}],235:[function(require,module,exports){
+},{"indexof":234}],234:[function(require,module,exports){
 
 var indexOf = [].indexOf;
 
@@ -52687,5 +52637,68 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}]},{},[1])(1)
-});
+},{}],"bitcore":[function(require,module,exports){
+(function (Buffer){
+var bitcore = module.exports;
+
+
+// crypto 
+bitcore.crypto = {};
+bitcore.crypto.BN = require('./lib/crypto/bn');
+bitcore.crypto.ECDSA = require('./lib/crypto/ecdsa');
+bitcore.crypto.Hash = require('./lib/crypto/hash');
+bitcore.crypto.Random = require('./lib/crypto/random');
+bitcore.crypto.Point = require('./lib/crypto/point');
+bitcore.crypto.Signature = require('./lib/crypto/signature');
+
+// encoding
+bitcore.encoding = {};
+bitcore.encoding.Base58 = require('./lib/encoding/base58');
+bitcore.encoding.Base58Check = require('./lib/encoding/base58check');
+bitcore.encoding.BufferReader = require('./lib/encoding/bufferreader');
+bitcore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
+bitcore.encoding.Varint = require('./lib/encoding/varint');
+
+// utilities
+bitcore.util = {};
+bitcore.util.buffer = require('./lib/util/buffer');
+bitcore.util.js = require('./lib/util/js');
+bitcore.util.preconditions = require('./lib/util/preconditions');
+
+// errors thrown by the library
+bitcore.errors = require('./lib/errors');
+
+// main bitcoin library
+bitcore.Address = require('./lib/address');
+bitcore.Block = require('./lib/block');
+bitcore.BlockHeader = require('./lib/blockheader');
+bitcore.HDPrivateKey = require('./lib/hdprivatekey.js');
+bitcore.HDPublicKey = require('./lib/hdpublickey.js');
+bitcore.Networks = require('./lib/networks');
+bitcore.Opcode = require('./lib/opcode');
+bitcore.PaymentProtocol = require('./lib/paymentprotocol');
+bitcore.PrivateKey = require('./lib/privatekey');
+bitcore.PublicKey = require('./lib/publickey');
+bitcore.Script = require('./lib/script');
+bitcore.Transaction = require('./lib/transaction');
+bitcore.URI = require('./lib/uri');
+bitcore.Unit = require('./lib/unit');
+
+// dependencies, subject to change
+bitcore.deps = {};
+bitcore.deps.bnjs = require('bn.js');
+bitcore.deps.bs58 = require('bs58');
+bitcore.deps.Buffer = Buffer;
+bitcore.deps.elliptic = require('elliptic');
+
+// transport
+bitcore.transport = require('./lib/transport');
+
+// Internal usage, exposed for testing/advanced tweaking
+bitcore._HDKeyCache = require('./lib/hdkeycache');
+
+// module information
+bitcore.version = 'v'+require('./package.json').version;
+
+}).call(this,require("buffer").Buffer)
+},{"./lib/address":1,"./lib/block":2,"./lib/blockheader":3,"./lib/crypto/bn":4,"./lib/crypto/ecdsa":5,"./lib/crypto/hash":6,"./lib/crypto/point":7,"./lib/crypto/random":8,"./lib/crypto/signature":9,"./lib/encoding/base58":10,"./lib/encoding/base58check":11,"./lib/encoding/bufferreader":12,"./lib/encoding/bufferwriter":13,"./lib/encoding/varint":14,"./lib/errors":15,"./lib/hdkeycache":16,"./lib/hdprivatekey.js":17,"./lib/hdpublickey.js":18,"./lib/networks":19,"./lib/opcode":20,"./lib/paymentprotocol":23,"./lib/privatekey":27,"./lib/publickey":28,"./lib/script":29,"./lib/transaction":32,"./lib/transport":43,"./lib/unit":47,"./lib/uri":48,"./lib/util/buffer":49,"./lib/util/js":50,"./lib/util/preconditions":51,"./package.json":108,"bn.js":66,"bs58":68,"buffer":114,"elliptic":71}]},{},[]);
