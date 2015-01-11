@@ -611,6 +611,10 @@ strong,
     width: 350px;
     font-size: inherit;
 }
+
+.horizontal-subscribe-form .form-control-feedback{
+	margin-top: 10px;
+}
 /*---------------------------------------
    3.2 SECTION: CLIENTS LIST
 -----------------------------------------*/
