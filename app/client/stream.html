@@ -1,17 +1,49 @@
-<h2>Client Stream</h2>
-<div class="row">
-  <div class="col-md-12">
-    <video width="355" height="200" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+<header>
+  <!-- STICKY NAVIGATION -->
+  <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+
+        <!-- LOGO ON STICKY NAV BAR -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-grid-2x2"></span>
+        </button>
+
+        <!-- LOGO -->
+        <a class="navbar-brand" href="#">
+          <img src="../assets/img/logo-nav.png" alt="">
+        </a>
+      </div>
+
+      <!-- TOP BAR -->
+      <div class="navbar-collapse collapse" id="stamp-navigation">
+
+        <!-- NAVIGATION LINK -->
+
+        <ul class="nav navbar-nav navbar-left main-navigation small-text">
+          <li>
+            <a id="copylink" class="lowercase" data-toggle="tooltip" data-placement="right" title="Share your stream">{{client.getLink()}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- /END CONTAINER -->
+
   </div>
+  <!-- /END STICKY NAVIGATION -->
+
+  <!-- =========================
+	SECTION: Container
+	============================== -->
+</header>
+<div class="container content-pg">
+  <div class="row">
+    <div class="col-md-12" ng-hide="requiresApproval">
+      <video class="col-sm-8 col-sm-offset-2 col-md-6
+        col-md-offset-3 col-xs-12 col-xs-offset-0 stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+    </div>
+  </div>
+
+  <button ng-disabled="established" ng-click="end()" class="btn btn-success">End transmission</button>
 </div>
-
-<form name="end" ng-submit="end()" class="form" role="form">
-  <input type="hidden" ng-model="established" required>
-
-  <div class="form-group">
-      <button
-        type="submit"
-        class="btn btn-success"
-        ng-disabled="form.$invalid">End transmission</button>
-  </div>
-</form>

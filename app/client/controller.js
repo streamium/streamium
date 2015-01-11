@@ -56,7 +56,11 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
 })
 
-.controller('WatchStreamCtrl', function($routeParams, $scope, video, StreamiumClient) {
+.controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient) {
+  if (!StreamiumClient.isReady()) {
+    $location.path('/join/' + $routeParams.streamId);
+    return;
+  }
   StreamiumClient.askForRefund();
   var streamId = $routeParams.streamId;
   var startViewer = function() {
