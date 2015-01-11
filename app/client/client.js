@@ -41,6 +41,7 @@ angular.module('streamium.client.service', [])
     this.peer = new Peer(null, this.config);
     this.status = StreamiumClient.STATUS.connecting;
     this.fundingCallback = callback;
+    this.streamId = streamId;
 
     var self = this;
     this.peer.on('open', function onOpen(connection) {
