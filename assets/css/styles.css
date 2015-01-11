@@ -1272,5 +1272,10 @@ strong,
 	display: block;
 }
 
+.tooltip-inner{
+	width:150px;
+	line-height: 2.4;
+}
+
 
 
