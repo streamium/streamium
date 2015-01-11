@@ -9,10 +9,6 @@ angular.module('streamium.provider.service', [])
   var MILLIS_IN_SECOND = 1000;
   var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
 
-  var Address = bitcore.Address;
-  var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
-  var address = key.toAddress();
-
   function StreamiumProvider() {
     this.network = bitcore.Networks.testnet;
     bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
@@ -39,7 +35,7 @@ angular.module('streamium.provider.service', [])
     if (!streamId || !address || !rate || !callback) return callback('Invalid arguments');
 
     try {
-      address = new Address(address);
+      address = new bitcore.Address(address);
     } catch (e) {
       return callback('Invalid address');
     }
@@ -101,12 +97,11 @@ angular.module('streamium.provider.service', [])
 
     var provider = new Provider({
       network: this.address.network,
-      paymentAddress: this.address,
-      key: key
+      paymentAddress: this.address
     });
 
-    this.mapClientIdToProvider[connection.peer.id] = provider;
-    this.mapClientIdToStatus[connection.peer.id] = StreamiumProvider.STATUS.disconnected;
+    this.mapClientIdToProvider[connection.peer] = provider;
+    this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.disconnected;
 
     connection.send({
       type: 'hello',
@@ -122,8 +117,8 @@ angular.module('streamium.provider.service', [])
 
     // TODO: Assert state
 
-    var provider = this.mapClientIdToProvider[connection.peer.id];
-    var status = this.mapClientIdToStatus[connection.peer.id];
+    var provider = this.mapClientIdToProvider[connection.peer];
+    var status = this.mapClientIdToStatus[connection.peer];
     data = JSON.parse(data);
 
     connection.send({
@@ -141,7 +136,7 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.endBroadcast = function(peer) {
-    Insight.broadcast(this.mapClientIdToProvider[peer.id].paymentTx, function(err) {
+    Insight.broadcast(this.mapClientIdToProvider[peer].paymentTx, function(err) {
       if (err) {
         console.log(err);
       }
@@ -154,7 +149,7 @@ angular.module('streamium.provider.service', [])
     // TODO: Assert state
     // TODO: this looks like duplicated code
  
-    var provider = this.mapClientIdToProvider[connection.peer.id];
+    var provider = this.mapClientIdToProvider[connection.peer];
     data = JSON.parse(data);
 
     var firstPayment = !provider.currentAmount;

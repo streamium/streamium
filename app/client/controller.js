@@ -28,8 +28,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.stream.minutes = $scope.minutes[0];
   $scope.stream.founds = 0;
 
-  console.log('Join stream');
-
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;
 
@@ -52,6 +50,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   });
 
   $scope.submit = function() {
+    StreamiumClient.refundAddress = $scope.changeAddress;
     $location.path('/stream/' + $routeParams.streamId);
   };
 })
@@ -77,7 +76,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
   if (!StreamiumClient.peer) {
     StreamiumClient.connect(streamId, function(err, fundingAddress) {
       if (err) throw err;
-      console.log(fundingAddress);
       startViewer();
     });
   } else {
