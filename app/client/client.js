@@ -10,11 +10,6 @@ angular.module('streamium.client.service', [])
   var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
   var TIMESTEP = 10 * MILLIS_IN_SECOND;
 
-  var fundingKey = bitcore.PrivateKey('cb5dc68fbcaf37f29139b50fa4664b395c03e49deb966e5d49a629af005d0654');
-  var refundKey = bitcore.PrivateKey('b65080da83f59a9bfa03841bc82fd0c0d1e036176b2f2c157eaa9547010a042e');
-  var refundAddress = bitcore.PrivateKey(refundKey).toAddress();
-  var commitmentKey = bitcore.PrivateKey('f1a140dc9d795c0aa537329379f645eb961fe42f27c660e10676c07ddf18777f');
-
   function StreamiumClient() {
     this.peer = this.connection = null;
     this.status = StreamiumClient.STATUS.disconnected;
@@ -78,10 +73,8 @@ angular.module('streamium.client.service', [])
   StreamiumClient.prototype.handlers.hello = function(data) {
     this.rate = data.rate;
     this.stepSatoshis = Math.round(
-      TIMESTEP * bitcore.Unit.fromBTC(this.rate).toSatoshis()
-      / MILLIS_IN_MINUTE
+      TIMESTEP * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE
     );
-    console.log(this.rate);
 
     this.providerKey = data.publicKey;
     this.providerAddress = new bitcore.Address(data.paymentAddress);
@@ -90,10 +83,7 @@ angular.module('streamium.client.service', [])
       network: this.network,
       providerPublicKey: this.providerKey,
       providerAddress: this.providerAddress,
-      fundingKey: fundingKey,
-      commitmentKey: commitmentKey,
-      refundKey: refundKey,
-      refundAddress: refundAddress
+      refundAddress: this.refundAddress
     });
     this.status = StreamiumClient.STATUS.funding;
     this.fundingCallback(null, this.consumer.fundingAddress.toString());
@@ -123,9 +113,6 @@ angular.module('streamium.client.service', [])
     var self = this;
     var satoshis = 2 * this.stepSatoshis;
     this.startTime = new Date().getTime();
-    console.log('Starting at ' + new Date(this.startTime) + ' sending ' + satoshis);
-
-    console.log('Will send again at ' + new Date(this.startTime + TIMESTEP));
 
     this.interval = setInterval(function() {
       self.updatePayment();
@@ -136,10 +123,7 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.updatePayment = function() {
-    console.log('updating');
-
     this.consumer.incrementPaymentBy(this.stepSatoshis);
-    this.consumer.paymentTx._updateChangeOutput();
     this.sendPayment();
   };
 
@@ -159,14 +143,12 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.askForRefund = function() {
-    if (!this.consumer.commitmentTx._inputAmount) {
-      console.log('Error');
-      alert('No funds');
-      return;
-    }
+    bitcore.util.preconditions.checkState(
+      this.consumer.commitmentTx._inputAmount,
+      'Transaction is not funded'
+    );
     this.consumer.commitmentTx._updateChangeOutput();
     var payload = this.consumer.setupRefund().toJSON();
-    console.log(payload);
     this.connection.send({
       type: 'sign',
       payload: payload

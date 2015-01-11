@@ -23,6 +23,7 @@
   <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
 
   <input type="hidden" ng-model="funded" required>
+  <input ng-model="changeAddress" valid-address required>
 
   <div class="form-group">
       <button
