@@ -1,46 +1,670 @@
-<form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
+<div class="text-center">
+  <!-- =========================
+  SECTION: HOME / HEADER
+  ============================== -->
+  <header>
+    <div class="overlay-layer content-pg">
+      <!-- STICKY NAVIGATION -->
+      <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation appear-on-scroll" role="navigation">
+          <div class="container">
+              <div class="navbar-header">
 
-  <div class="bg-danger">{{ stream.error }}</div>
+                  <!-- LOGO ON STICKY NAV BAR -->
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-grid-2x2"></span>
+                  </button>
 
-  <div class="form-group has-feedback">
-    <div class="input-group">
-      <div class="input-group-addon">Streamium.io/app/stream/</div>
-      <input
-        class="form-control"
-        name="name" required
-        ng-model="stream.name"
-        placeholder="Stream name"
-        ng-change="normalizeName()">
-      <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.name.$valid"></span>
+                  <!-- LOGO -->
+                  <a class="navbar-brand" href="#">
+                      <img src="../assets/img/logo-nav.png" alt="">
+                  </a>
+              </div>
+
+              <!-- TOP BAR -->
+              <div class="navbar-collapse collapse" id="stamp-navigation">
+                <!-- NAVIGATION LINK -->
+                <ul class="nav navbar-nav navbar-left main-navigation small-text">
+                    <li><a href="#section2">How it works</a>
+                    </li>
+                    <li><a href="#section5">Benefits</a>
+                    </li>
+                    <li><a href="#section6">Use cases</a>
+                    </li>
+                    <li><a href="#section10">It just works</a>
+                    </li>
+                    <!-- <li><a href="http://example.com" class="external">External Link Example</a></li> -->
+                </ul>
+              </div>
+          </div>
+          <!-- /END CONTAINER -->
+
+        <div class="row">
+          <div class="bg-warning" ng-show="requiresApproval">
+            Please allow Streamium to use the camera.
+          </div>
+          <div class="col-md-12">
+            
+          </div>
+        </div>
+      </div>
+      <!-- /END STICKY NAVIGATION -->
+      <!-- CONTAINER -->
+      <div class="container">
+
+        <!-- ONLY LOGO ON HEADER -->
+        <div class="only-logo">
+            <div class="navbar">
+                <div class="navbar-header">
+                    <img src="../assets/img/logo-2.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+
+            <!-- HEADING AND BUTTONS -->
+            <div class="intro-section">
+
+              <!-- WELCOM MESSAGE -->
+              <h1 class="intro white-text">Create a video streaming channel. Get paid.</h1>
+              <h5 class="white-text">Choose you channel's name, the bitcoin address to receive your funds and how much you want to charge per minute.</h5>
+
+              <!-- CREATE CHANNEL FORM -->
+              <div class="row">
+                <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+                  <div class="horizontal-subscribe-form">
+
+                      <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
+                        <div class="bg-danger">{{ stream.error }}</div>
+
+                        <div class="form-group has-feedback">
+                          <div class="input-group">
+                            <div class="input-group-addon">Streamium.io/app/stream/</div>
+                            <input  id="streamname"
+                              class="form-control"
+                              name="name" required
+                              ng-model="stream.name"
+                              placeholder="Stream name"
+                              ng-change="normalizeName()">
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.name.$valid"></span>
+                          </div>
+                        </div>
+
+                        <div id="createstream" style="display: none">
+                          <div class="form-group has-feedback">
+                              <input
+                                class="form-control"
+                                name="address" required
+                                ng-model="stream.address" valid-address
+                                placeholder="Bitcoin address">
+                              <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.address.$valid"></span>
+                          </div>
+
+                          <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                              <select
+                                name="rate" required
+                                ng-model="stream.rate"
+                                class="form-control col-md-2"
+                                ng-options="'$' + val + ' USD/min' for val in prices"/>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                              <input type="text" class="form-control" id="btc" value="{{stream.rate|USD2BTC}}/min" disabled="disabled">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button
+                              type="submit"
+                              class="btn btn-primary standard-button"
+                              ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Create stream now'}}</button>
+                        </div>
+
+                        <script>
+                            $(document).ready(function(){
+                                $("#streamname").focusin(function() {
+                                    $("#createstream").show();
+                                });
+                            });
+                        </script>
+
+                      </form>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </header>
 
-  <div class="form-group has-feedback">
-      <input
-        class="form-control"
-        name="address" required
-        ng-model="stream.address" valid-address
-        placeholder="Bitcoin address">
-      <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.address.$valid"></span>
-  </div>
+  <!-- =========================
+  SECTION: Container
+  ============================== -->
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-4">
-      <select
-        name="rate" required
-        ng-model="stream.rate"
-        class="form-control col-md-2"
-        ng-options="'$' + val + ' USD/min' for val in prices"/>
+    <!-- =========================
+     SECTION: CLIENTS LOGOs
+    ============================== -->
+    <div class="clients white-bg">
+        <ul class="client-logos">
+            <li>
+                <img src="../assets/img/companies/1.png" alt="">
+                <p style="display:inline"><a href="#">Why we built Streamium?</a></p>
+            </li>
+        </ul>
     </div>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" id="btc" value="{{stream.rate|USD2BTC}}/min" disabled="disabled">
-    </div>
-  </div>
 
-  <div class="form-group">
-      <button
-        type="submit"
-        class="btn btn-success"
-        ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Start'}}</button>
+    <!-- =========================
+     SECTION: SERVICES
+    ============================== -->
+    <section class="services grey-bg" id="section1">
+        <div class="container">
+
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+
+                <div class="small-text-medium uppercase colored-text">
+
+                </div>
+                <h2 class="dark-text">Stream directly to your viewers and <strong>get paid instantly</strong>. No middlemen.</h2>
+                <div class="colored-line">
+                </div>
+                <div class="sub-heading">
+                    
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- SINGLE SERVICE -->
+                <div class="col-md-3 " >
+                    <div class="single-service border-bottom-hover">
+                        <div class="service-icon colored-text">
+                            <span class="icon-arrows-circle-plus"></span>
+                        </div>
+                        <h3 class="colored-text">1. Create</h3>
+                        <p>
+                            Create a stream tied to your bitcoin address.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SINGLE SERVICE -->
+                <div class="col-md-3 " >
+                    <div class="single-service border-bottom-hover">
+                        <div class="service-icon colored-text">
+                            <span class="icon-camera-alt"></span>
+                        </div>
+                        <h3 class="colored-text">2. Start</h3>
+                        <p>
+                            Start streaming and charge your viewers on a per minute basis.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SINGLE SERVICE -->
+                <div class="col-md-3 " >
+                    <div class="single-service border-bottom-hover">
+                        <div class="service-icon colored-text">
+                            <span class="icon-social-share"></span>
+                        </div>
+                        <h3 class="colored-text">3. Share</h3>
+                        <p>
+                            Share the link of your channel with your viewers
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SINGLE SERVICE -->
+                <div class="col-md-3 " >
+                    <div class="single-service border-bottom-hover">
+                        <div class="service-icon colored-text">
+                            <span class="icon-ecommerce-money"></span>
+                        </div>
+                        <h3 class="colored-text">4. Withdraw</h3>
+                        <p>
+                            Withdraw your earned funds, without any service fees.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+     SECTION: BRIEF RIGHT
+    ============================== -->
+    <section class="brief grey-bg text-left" id="section3">
+        <div class="container">
+            <div class="row">
+
+                <!-- BRIEF IMAGE -->
+                <div class="col-md-6 "  >
+                    <div class="brief-image-left">
+                        <img src="../assets/img/imac-ipad.png" alt="">
+                    </div>
+                </div>
+
+                <!-- BRIEF HEADING -->
+                <div class="col-md-6 content-section "  >
+                    <div class="small-text-medium uppercase colored-text">
+                        
+                    </div>
+                    <h2 class="text-left dark-text">For<strong> Free</strong>. No Risks.</h2>
+                    <div class="colored-line-left">
+                    </div>
+                    <p class="text-left">
+                    </p>
+
+                    <!-- FEATUR ACCORDION WITH ICON -->
+                    <div class="panel-group" id="accordion">
+
+                        <!-- SINGLE ACORDIION -->
+                        <div class="panel panel-default">
+
+                            <!-- ACORDIION HEADING / TITLE -->
+                            <div class="panel-heading" id="headingOne">
+                                <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <span class="icon-container color-bg"><span class="icon-ecommerce-dollar white-text"></span></span><span class="title-text">$0 Service Fees</span>
+                        </a>
+                        </h4>
+                            </div>
+
+                            <!-- ACORDIION DESCRIPTION / TEXT -->
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    All the earned bitcoins go directly to you. There’s no middleman to charge fees for the service.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SINGLE ACORDIION -->
+                        <div class="panel panel-default">
+
+                            <!-- ACORDIION HEADING / TITLE -->
+                            <div class="panel-heading" id="headingTwo">
+                                <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <span class="icon-container color-bg"><span class="icon-basic-lock white-text"></span></span><span class="title-text">Completely Private</span>
+                        </a>
+                        </h4>
+                            </div>
+
+                            <!-- ACORDIION DESCRIPTION / TEXT -->
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    Stream directly to your viewers using a p2p connection. Don’t rely on a centralized third party to host the communication.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SINGLE ACORDIION -->
+                        <div class="panel panel-default">
+
+                            <!-- ACORDIION HEADING / TITLE -->
+                            <div class="panel-heading" id="headingThree">
+                                <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <span class="icon-container color-bg"><span class="icon-lightbulb-alt white-text"></span></span><span class="title-text">Get paid as you stream</span>
+                        </a>
+                        </h4>
+                            </div>
+
+                            <!-- ACORDIION DESCRIPTION / TEXT -->
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    Payment is done using bitcoin payment channel, allowing you to charge per minute streamed. Trestle payment and communication.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+     SECTION: BENEFITS
+    ============================== -->
+    <section class="unique-features white-bg" id="section5">
+        <div class="container">
+
+            <!-- SECTION HEADER -->
+            <div class="section-header">
+                <div class="small-text-medium uppercase colored-text">
+                    
+                </div>
+                <h2 class="dark-text">With lots of <strong>possibilities</strong></h2>
+                <div class="colored-line">
+                </div>
+                <div class="sub-heading">
+                   
+                </div>
+            </div>
+
+            <!-- FIRST ROW OF FEATURES -->
+            <div class="row">
+                <div class="col-md-4 "  >
+
+                    <!-- SINGLE FEATURE -->
+                    <div class="feature">
+                        <div class="icon-container">
+                            <span class="icon-basic-book-pencil colored-text"></span>
+                        </div>
+                        <div class="description text-left">
+                            <h4 class="dark-text">Private lessons</h4>
+                            <div class="grey-line-short pull-left">
+                            </div>
+                            <p class="text-left">
+                                Language, instruments, tutoring, etc.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SINGLE FEATURE -->
+                    <div class="feature">
+                        <div class="icon-container">
+                            <span class="icon-basic-world colored-text"></span>
+                        </div>
+                        <div class="description text-left">
+                            <h4 class="dark-text">Sporting events</h4>
+                            <div class="grey-line-short pull-left">
+                            </div>
+                            <p class="text-left">
+                                High school sports, online gaming, etc.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SINGLE FEATURE -->
+                    <div class="feature">
+                        <div class="icon-container">
+                            <span class="icon-laptop colored-text"></span>
+                        </div>
+                        <div class="description text-left">
+                            <h4 class="dark-text">Movies on Demand</h4>
+                            <div class="grey-line-short pull-left">
+                            </div>
+                            <p class="text-left">
+                                Independent filmmakers, web series, reality shows, etc.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IPAD IMAGE -->
+                <div class="col-md-4">
+                    <div class="ipad-image "  >
+                        <img src="../assets/img/ipad-air.png" alt="">
+                    </div>
+                </div>
+
+                <div class="col-md-4 "  >
+
+                    <!-- SINGLE FEATURE -->
+                    <div class="feature">
+                        <div class="icon-container">
+                            <span class="icon-ribbon-alt colored-text"></span>
+                        </div>
+                        <div class="description text-left">
+                            <h4 class="dark-text">Masive Open Online Courses</h4>
+                            <div class="grey-line-short pull-left">
+                            </div>
+                            <p class="text-left">
+                                MOOCs, college courses, etc.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SINGLE FEATURE -->
+                    <div class="feature">
+                        <div class="icon-container">
+                            <span class="icon-easel colored-text"></span>
+                        </div>
+                        <div class="description text-left">
+                            <h4 class="dark-text">Consulting</h4>
+                            <div class="grey-line-short pull-left">
+                            </div>
+                            <p class="text-left">
+                                One-on-one mentoring, troubleshooting, etc.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- SINGLE FEATURE -->
+                    <div class="feature">
+                        <div class="icon-container">
+                            <span class="icon-chat-alt colored-text"></span>
+                        </div>
+                        <div class="description text-left">
+                            <h4 class="dark-text">Webcams</h4>
+                            <div class="grey-line-short pull-left">
+                            </div>
+                            <p class="text-left">
+                                Landscapes, cityscapes, live podcasting, etc.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================
+     SECTION: SOME STATS
+    ============================== -->
+    <!-- =========================
+    <section class="stats" id="section4" data-stellar-background-ratio="0.5">
+        <div class="overlay-layer-2">
+            <div class="container">
+                <div class="row no-gutters">
+
+                    
+                    <div class="col-md-4 col-sm-4 col-xs-4 single-stats border-left-colored border-right-colored " >
+                        <div class="icon-container">
+                            <span class="colored-text icon-basic-message-multiple"></span>
+                        </div>
+                        <h4 class="white-text">1250+</h4>
+                        <p class="uppercase transparent-text small-text">
+                            Streams
+                        </p>
+                    </div>
+
+                    
+                    <div class="col-md-4 col-sm-4 col-xs-4 single-stats " >
+                        <div class="icon-container">
+                            <span class="colored-text icon-ecommerce-money"></span>
+                        </div>
+                        <h4 class="white-text">78+</h4>
+                        <p class="uppercase transparent-text small-text">
+                            bitcoins earned
+                        </p>
+                    </div>
+
+                    
+                    <div class="col-md-4 col-sm-4 col-xs-4 single-stats " >
+                        <div class="icon-container">
+                            <span class="colored-text icon-ecommerce-graph-increase"></span>
+                        </div>
+                        <h4 class="white-text">235%</h4>
+                        <p class="uppercase transparent-text small-text">
+                            Weekly Growth
+                        </p>
+                    </div>
+                </div>
+
+                
+                <div class="stats-footer">
+                    <div class="long-transparent-line">
+                    </div>
+                    <p class="white-text">
+                        We are ready to help you - <a href="#section11" class="strong inpage-scroll">Get Started Now »</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    ============================== -->
+
+
+    <!-- =========================
+     SECTION: TESTIMONIALS
+    ============================== -->
+
+
+    <!-- =========================
+     SECTION: SCREENSHOTS
+    ============================== -->
+    <section class="features" id="section7" data-stellar-background-ratio="0.5">
+        <div class="overlay-layer-2">
+            <div class="container">
+
+                <!-- SECTION HEADER -->
+                <div class="section-header">
+                    <div class="small-text-medium uppercase colored-text">
+                        
+                    </div>
+                    <h2 class="white-text"><span class="strong white-text"></span>No installation needed. It just works.</h2>
+                    <div class="colored-line">
+                    </div>
+                    <div class="sub-heading white-text">
+                        
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <!-- LEFT SIDE ELEMENTS -->
+                    <div class="col-md-3 text-right left-side " >
+
+                        <!-- SINGLE ELEMENT -->
+                        <div class="single-feature border-right-colored">
+                            <h4 class="colored-text">webRTC</h4>
+                            <p class="transparent-text">
+                                WebRTC is a free, open project that enables web browsers with Real-Time Communications (RTC) capabilities via simple JavaScript APIs, to achieve peer-to-peer video conferencing
+                            </p>
+                        </div>
+
+                        <!-- SINGLE ELEMENT -->
+                        <div class="single-feature border-right-colored">
+                            <h4 class="colored-text">Bitcoin</h4>
+                            <p class="transparent-text">
+                                The world’s first and most popular decentralized cryptocurrency and peer-to-peer payment network
+                            </p>
+                        </div>
+
+                        <!-- SINGLE ELEMENT -->
+                        <div class="single-feature border-right-colored">
+                            <h4 class="colored-text">Rapidly-Adjusted Micropayments Channel</h4>
+                            <p class="transparent-text">
+                                A protocol that leverages the “programmable money” nature of bitcoin transactions to create a stream of payments between two parties in a trustless manner.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- SCREENSHOTS -->
+                    <div class="col-md-6">
+                        <div id="screenshots" class="owl-carousel owl-theme">
+
+                            <!-- SINGLE SCREENSHOT -->
+                            <div class="screenshot">
+                                <a href="../assets/img/screenshots/1@2x.png" data-lightbox-gallery="gallery1">
+                                    <img src="../assets/img/screenshots/1.png" alt="" />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <!-- RIGHT SIDE FEATURES -->
+                    <div class="col-md-3 text-left right-side " >
+
+                        <!-- SINGLE ELEMENT -->
+                        <div class="single-feature border-left-colored">
+                            <h4 class="colored-text">Bitcore</h4>
+                            <p class="transparent-text">
+                                A complete, native interface to the Bitcoin network, and provides the core functionality needed to develop apps for bitcoin.
+                            </p>
+                        </div>
+
+                        <!-- SINGLE ELEMENT -->
+                        <div class="single-feature border-left-colored">
+                            <h4 class="colored-text">HTML 5</h4>
+                            <p class="transparent-text">
+                                HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web.
+                            </p>
+                        </div>
+
+                        <!-- SINGLE ELEMENT -->
+                        <div class="single-feature border-left-colored">
+                            <h4 class="colored-text">Love</h4>
+                            <p class="transparent-text">
+                                Yes, Streamium is made with love
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================
+     SECTION: CONTACT INFO
+    ============================== -->
+    <div class="contact-info white-bg">
+        <div class="container">
+
+            <!-- CONTACT INFO -->
+            <div class="row contact-links">
+
+                <div class="col-sm-12">
+                    <div class="icon-container">
+                        <span class="icon-basic-mail colored-text"></span>
+                    </div>
+                    <a href="mailto:hello@streamium.io" class="strong">hello@streamium.io</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- FOOTER -->
+    <footer class="footer grey-bg">
+        Streamium. Source code <a href="https://github.com/streamium/paystream/">on Github</a>
+
+        <!-- OPTIONAL FOOTER LINKS -->
+        <ul class="footer-links small-text">
+            <li><a href="" class="dark-text">About</a>
+            </li>
+            <li><a href="" class="dark-text">Terms</a>
+            </li>
+            <li><a href="" class="dark-text">Privacy</a>
+            </li>
+        </ul>
+
+        <!-- SOCIAL ICONS -->
+        <ul class="social-icons">
+            <li><a href="https://www.facebook.com/streamiumio"><span class="icon-social-facebook transparent-text-dark"></span></a>
+            </li>
+            <li><a href="https://twitter.com/streamiumio"><span class="icon-social-twitter transparent-text-dark"></span></a>
+            </li>
+        </ul>
+
+    </footer>
   </div>
-</form>
+</div>
+
+

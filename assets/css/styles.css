@@ -85,6 +85,7 @@ body {
 	overflow-x: hidden !important;
 	margin: auto !important;
     background: url(../img/background-images/1.jpg) no-repeat center top fixed;
+    background-size: 100% 100%;
 }
 
 /*---------------------------------------
@@ -507,8 +508,8 @@ strong,
     background-size: cover;
 }
 
-.header .overlay-layer {
-    padding-top: 84px;
+.overlay-layer {
+    padding-bottom: 84px;
     height: auto;
 }
 
