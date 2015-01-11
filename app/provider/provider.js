@@ -2,8 +2,12 @@
 
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore, channel, events, inherits) {
+.service('StreamiumProvider', function(bitcore, channel, events, inherits, Insight) {
   var Provider = channel.Provider;
+
+  var SECONDS_IN_MINUTE = 60;
+  var MILLIS_IN_SECOND = 1000;
+  var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
 
   var Address = bitcore.Address;
   var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
@@ -43,6 +47,7 @@ angular.module('streamium.provider.service', [])
     this.streamId = streamId;
     this.address = address;
     this.rate = rate;
+    this.rateSatoshis = bitcore.Unit.fromBTC(rate).toSatoshis();
     this.clientConnections = [];
 
     this.peer = new Peer(this.streamId, this.config);
@@ -119,52 +124,69 @@ angular.module('streamium.provider.service', [])
 
     var provider = this.mapClientIdToProvider[connection.peer.id];
     var status = this.mapClientIdToStatus[connection.peer.id];
-    var data = JSON.parse(data);
+    data = JSON.parse(data);
 
     connection.send({
       type: 'refundAck',
       payload: provider.signRefund(data).refund.toJSON()
     });
 
-    this.emit('broadcast:start', connection.peer);
   };
 
   StreamiumProvider.prototype.handlers.end = function(connection, data) {
     if (data) {
       StreamiumProvider.prototype.handlers.payment(data);
     }
-    Insight.broadcast(this.mapClientIdToProvider[connection.peer.id].paymentTx, console.log);
-    this.emit('broadcast:end', connection.peer);
+    this.endBroadcast(connection.peer);
+  };
+
+  StreamiumProvider.prototype.endBroadcast = function(peer) {
+    Insight.broadcast(this.mapClientIdToProvider[peer.id].paymentTx, function(err) {
+      if (err) {
+        console.log(err);
+      }
+    });
+    this.emit('broadcast:end', peer);
   };
 
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
 
     // TODO: Assert state
-
     // TODO: this looks like duplicated code
+ 
     var provider = this.mapClientIdToProvider[connection.peer.id];
-    var status = this.mapClientIdToStatus[connection.peer.id];
-    var data = JSON.parse(data);
+    data = JSON.parse(data);
 
+    var firstPayment = !provider.currentAmount;
     provider.validPayment(data);
-    /*
-    try {
-      if (provider.validPayment(data)) {
-        console.log(data);
-        alert('Invalid payment received');
-      }
-    } catch (e) {
-      console.log(e);
-      alert('Invalid payment received');
+
+    if (firstPayment) {
+      provider.startTime = new Date().getTime();
     }
-    */
-    // TODO: Do some check with provider.currentAmount
+
+    var time = Math.round(provider.currentAmount / (this.rateSatoshis / MILLIS_IN_MINUTE));
+    console.log('time is ' + time);
+    var expiration = provider.startTime + time;
+    var self = this;
+
+    clearTimeout(provider.timeout);
+    provider.timeout = setTimeout(function() {
+      console.log('DIE');
+      self.endBroadcast(connection.peer);
+    }, expiration - new Date().getTime());
+
+    console.log('Set new expiration date to ' + new Date(expiration));
+    console.log('Current time is ' + new Date());
+
+    if (firstPayment) {
+      this.emit('broadcast:start', connection.peer);
+    }
 
     connection.send({
       type: 'paymentAck',
       payload: {
         success: true,
-        nextTimeout: 0 // TODO: Signal when the next payment is due
+        creditedTime: time
       }
     });
   };
