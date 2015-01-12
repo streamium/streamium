@@ -1,34 +1,96 @@
-<h2>Join {{client.streamId}}'s stream</h2>
 
-<!-- <p>Status: {{client.status}}</p> -->
-<!-- <p>Provider PubKey: {{client.providerKey}}</p> -->
-<!-- <p>Funding address: {{fundingAddress}}</p> -->
-<!-- <p>Funds received: {{funds}}</p> -->
+<div class="background">
+  <!-- =========================
+  SECTION: HOME / HEADER
+  ============================== -->
+  <header>
+  <!-- STICKY NAVIGATION -->
+  <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
+      <div class="container">
+          <div class="navbar-header">
 
-<p>Rate: {{client.rate}} usd/min</p>
-<form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
+              <!-- LOGO ON STICKY NAV BAR -->
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-grid-2x2"></span>
+              </button>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-4">
-      <select
-        name="minutes" required
-        ng-model="stream.minutes"
-        class="form-control col-md-2"
-        ng-options="val + ' minutes' for val in minutes"/>
-    </div>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" id="btc" value="{{stream.minutes * client.rate|BTC2USD}}" disabled="disabled">
+              <!-- LOGO -->
+              <a class="navbar-brand" href="#">
+                  <img src="../assets/img/logo-nav.png" alt="">
+              </a>
+          </div>
+
+          <!-- TOP BAR -->
+          <div class="navbar-collapse collapse" id="stamp-navigation">
+
+              <!-- NAVIGATION LINK -->
+
+              <ul class="nav navbar-nav navbar-left main-navigation small-text">
+                  <li>
+                  <a id="copylink" class="lowercase" data-toggle="tooltip"
+                    data-placement="right" title="Share your stream">{{client.getLink()}}</a>
+                </li>
+              </ul>
+          </div>
+      </div>
+      <!-- /END CONTAINER -->
+
+  </div>
+  <!-- /END STICKY NAVIGATION -->
+  </header>
+
+  <!-- =========================
+  SECTION: Container
+  ============================== -->
+  <div class="container content-pg">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <h2>Join {{client.streamId}}'s stream</h2>
+        <p>You are about to join {{client.streamId}}'s stream. First of all, you need to show 
+          that you have funds to watch this for some time. Choose how long are you willing to pay for it. (cambiar esto)</p>
+        <!-- <p>Status: {{client.status}}</p> -->
+        <!-- <p>Provider PubKey: {{client.providerKey}}</p> -->
+        <!-- <p>Funding address: {{fundingAddress}}</p> -->
+        <!-- <p>Funds received: {{funds}}</p> -->
+
+        <p>The rate is <strong>{{client.rate}} usd/min</strong></p>
+        <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
+
+          <div class="form-group">
+            <div class="col-sm-4">
+              <select
+                name="minutes" required
+                ng-model="stream.minutes"
+                class="form-control col-md-2"
+                ng-options="val + ' minutes' for val in minutes"/>
+            </div>
+            <div class="col-sm-4">
+              <span id="helpBlock" class="help-block">That is {{stream.minutes * client.rate|BTC2USD}}.</span>
+            </div>
+          </div>
+          <p>Remember that you are not paying this. You pay only for the time you watch. In case you watch 4 minutes you will pay only {{4 * client.rate|BTC2USD}}. In that case you will receive the money left (e.g.  {{ (stream.minutes-4) * client.rate|BTC2USD}} on the next address:</p>
+          <div class="form-group">
+            <input type="text" class="form-control" name="changeaddress" id="changeaddress" placeholder="Bitcoin Address">
+          </div>
+
+          <p>Please make the payment and you are ready to watch {{client.streamId}}'s stream.</p>
+          <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
+
+          <input type="hidden" ng-model="funded" required>
+
+          <div class="form-group">
+              <button
+                type="submit"
+                class="btn btn-success"
+                ng-disabled="form.$invalid">Start</button>
+          </div>
+        </form>
+      </div>  
     </div>
   </div>
+</div>
 
-  <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
 
-  <input type="hidden" ng-model="funded" required>
 
-  <div class="form-group">
-      <button
-        type="submit"
-        class="btn btn-success"
-        ng-disabled="form.$invalid">Start</button>
-  </div>
-</form>
+
