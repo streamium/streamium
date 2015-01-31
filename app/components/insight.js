@@ -21,18 +21,19 @@ angular.module('streamium.insight', [])
   };
 
   var pollBalance = function(address, callback) {
-    queryBalance(address, function(err, response) {
+    queryBalance(address, function(err, utxos) {
       if (err) {
         return setTimeout(function() {
           pollBalance(address, callback);
         }, 10000);
       }
-      if (response.length === 0) {
+      // if no utxos found in that address...
+      if (utxos.length === 0) {
         return setTimeout(function() {
           pollBalance(address, callback);
         }, 10000);
       } else {
-        return callback(null, response);
+        return callback(null, utxos);
       }
     });
   };
