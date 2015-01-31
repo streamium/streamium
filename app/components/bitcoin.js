@@ -25,6 +25,7 @@ angular.module('streamium.bitcoin', [])
       link: function(scope, elem, attrs, ctrl) {
 
         var validator = function(value) {
+          console.log('Validate value', value);
           if (!value) return;
 
           var valid = bitcore.Address.isValid(value, config.network);
