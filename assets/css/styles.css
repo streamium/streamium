@@ -406,6 +406,10 @@ strong,
 	color: #ffffff;
 }
 
+.green-text {
+	color: #119616;
+}
+
 .white-bg-border {
 	background: #ffffff;
 	border-top: 1px solid #eaebec;
@@ -424,6 +428,10 @@ strong,
 
 .dark-bg {
 	background: #2e3336;
+}
+
+.semidark-bg{
+	background: rgba(0, 0, 0, 0.45);	
 }
 
 .colored-line-left {
@@ -503,7 +511,7 @@ strong,
     padding-top: 84px;
 }
 .header {
-    background: url(../images/background-images/1.jpg) no-repeat center top fixed;
+    background: url(../img/background-images/1.jpg) no-repeat center top fixed;
     -webkit-background-size: cover;
     background-size: cover;
 }
@@ -763,7 +771,7 @@ strong,
    3.5 SECTION: STATS
 -----------------------------------------*/
 .stats {
-	background: url(../images/background-images/2.jpg) no-repeat center top fixed;
+	background: url(../img/background-images/2.jpg) no-repeat center top fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
 }
@@ -919,7 +927,7 @@ strong,
    3.8 SECTION: SCREENSHOTS
 -----------------------------------------*/
 .features {
-	background: url(../images/background-images/1.jpg) no-repeat top center fixed;
+	background: url(../img/background-images/1.jpg) no-repeat top center fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
 }
@@ -1118,7 +1126,7 @@ strong,
    3.12 SECTION: CALL TO ACTION
 -----------------------------------------*/
 .call-to-action {
-    background: url('../images/background-images/2.jpg') fixed no-repeat top center;
+    background: url('../img/background-images/2.jpg') fixed no-repeat top center;
     -webkit-background-size: cover;
     background-size: cover;
 }
@@ -1249,7 +1257,7 @@ strong,
 	font-size: 18px;
 	line-height: 28px;
 	color: #FFF;
-	font-weight: 600;
+	font-weight: 400;
 	text-shadow: 0 0 5px #333;
 }
 
@@ -1272,4 +1280,11 @@ strong,
 	width: 100%;
 }
 
+.text-center {
+	text-align: center;
+}
 
+.font-big{
+	font-size: 40px;
+	line-height: 80px;
+}
