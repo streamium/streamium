@@ -26,10 +26,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.stream = {
     rate: $scope.prices[0]
   };
-  var key = bitcore.PrivateKey('75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc');
-  $scope.stream.name = 'sexybabe69';
-  $scope.stream.address = key.toAddress().toString();
-  $scope.stream.rate = 0.001;
+
+  $scope.stream.name = config.DEBUG ? config.defaults.providerStream : '';
+  $scope.stream.address = config.DEBUG ? config.defaults.providerAddress : '';
+  $scope.stream.rate = config.DEBUG ? config.defaults.providerRate : 0.001;;
 
   $scope.stream.error = null;
   $scope.stream.loading = false;
