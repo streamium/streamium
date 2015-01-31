@@ -2,6 +2,7 @@
 
 .center { text-align: center; }
 .space-top { margin-top: 40px; }
+.space-top-big { margin-top: 80px; }
 
 .menu {
   list-style: none;
@@ -46,5 +47,9 @@
 
 .card.card-status .glyphicon {
   font-size: 2.4rem;
+}
+
+.background {
+  padding-bottom: 20px;
 }
 
