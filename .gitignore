@@ -7,3 +7,4 @@ tmp
 .idea
 README.html
 *.log
+*.sw[a-z]
