@@ -60,7 +60,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   };
 })
 
-.controller('BroadcastStreamCtrl', function($scope, $location, video, StreamiumProvider) {
+.controller('BroadcastStreamCtrl', function($scope, $location, $routeParams, video, StreamiumProvider) {
   var name = $location.$$url.split('/')[2];
   $scope.requiresApproval = true;
 
@@ -80,6 +80,11 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     video.end(peer);
     $scope.$apply();
   });
+
+  $scope.end = function() {
+    // TODO: StreamiumProvider.end();
+    $location.path('/provider/' + $routeParams.streamId + '/cashout');
+  };
 
   var startCamera = function() {
     $scope.client = StreamiumProvider;

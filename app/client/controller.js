@@ -88,8 +88,10 @@ angular.module('streamium.client.controller', ['ngRoute'])
       console.log($scope.remainingTime - new Date().getTime());
     }, 2000);
   });
+
   $scope.end = function() {
     StreamiumClient.end();
+    $location.path('/stream/' + $routeParams.streamId + '/cashout');
   };
 
 })
