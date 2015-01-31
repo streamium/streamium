@@ -81,25 +81,28 @@
 
                         <div class="form-group has-feedback">
                           <div class="input-group">
-                            <div class="input-group-addon">Streamium.io/app/stream/</div>
+                            <div class="input-group-addon">Streamium.io/app/#/stream/</div>
                             <input  id="streamname"
                               class="form-control"
                               name="name" required
                               ng-model="stream.name"
-                              placeholder="Stream name"
+                              placeholder="my-stream-name"
                               ng-change="normalizeName()">
                             <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.name.$valid"></span>
                           </div>
                         </div>
 
-                        <div id="createstream" style="display: none">
+                        <div id="createstream">
                           <div class="form-group has-feedback">
+                            <div class="input-group">
+                              <div class="input-group-addon">Funds destination</div>
                               <input
                                 class="form-control"
                                 name="address" required
                                 ng-model="stream.address" valid-address
                                 placeholder="Bitcoin address">
                               <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.address.$valid"></span>
+                            </div>
                           </div>
 
                           <div class="form-group">
