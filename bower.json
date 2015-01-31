@@ -16,6 +16,7 @@
     "angular-qr": "~0.2.0",
     "angular-moment": "~0.8.3",
     "bitcore": "~0.9.4",
-    "bitcore-channel": "~0.9.1"
+    "bitcore-channel": "~0.9.1",
+    "bitcore-explorers": "~0.9.1"
   }
 }
