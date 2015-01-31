@@ -1,34 +1,157 @@
-<h2>Join {{client.streamId}} channel</h2>
 
-<p>Status: {{client.status}}</p>
-<p>Rate: {{client.rate}} usd/min</p>
-<p>Provider PubKey: {{client.providerKey}}</p>
-<p>Funding address: {{fundingAddress}}</p>
-<p>Funds received: {{funds}}</p>
-<form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
+<div class="background">
+  <!-- =========================
+  SECTION: HOME / HEADER
+  ============================== -->
+  <header>
+    <!-- STICKY NAVIGATION -->
+    <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-4">
-      <select
-        name="minutes" required
-        ng-model="stream.minutes"
-        class="form-control col-md-2"
-        ng-options="val + ' minutes' for val in minutes"/>
+          <!-- LOGO ON STICKY NAV BAR -->
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-grid-2x2"></span>
+          </button>
+
+          <!-- LOGO -->
+          <a class="navbar-brand" href="#">
+            <img src="../assets/img/logo-nav.png" alt="">
+          </a>
+        </div>
+
+        <!-- TOP BAR -->
+        <div class="navbar-collapse collapse" id="stamp-navigation">
+        </div>
+      </div>
+      <!-- /END CONTAINER -->
+
     </div>
-    <div class="col-sm-4">
-      <input type="text" class="form-control" id="btc" value="{{stream.minutes * client.rate|BTC2USD}}" disabled="disabled">
+    <!-- /END STICKY NAVIGATION -->
+  </header>
+
+  <!-- =========================
+  SECTION: Container
+  ============================== -->
+  <div class="container content-pg">
+
+  <div class="row card space-top" ng-show="client.status == 'connecting'">
+    <div class="col-sm-2 center">
+      <h2><span class="glyphicon glyphicon-hourglass"></span></h2>
+    </div>
+    <div class="col-sm-10">
+      <h2>Connecting to XXX</h2>
     </div>
   </div>
 
-  <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
-
-  <input type="hidden" ng-model="funded" required>
-  <input ng-model="changeAddress" valid-address required>
-
-  <div class="form-group">
-      <button
-        type="submit"
-        class="btn btn-success"
-        ng-disabled="form.$invalid">Start</button>
+  <div class="row card space-top" ng-show="client.status == 'error'">
+    <div class="col-sm-2 center">
+      <h2><span class="glyphicon glyphicon-remove"></span></h2>
+    </div>
+    <div class="col-sm-10">
+      <h2>Error while connecting to XXX</h2>
+    </div>
   </div>
-</form>
+
+  <div class="row card" ng-show="client.status == 'funding'">
+    <h3>Stream info</h3>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label for="pubkey" class="col-sm-2 control-label">Public Key</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="pubkey" value="{{client.providerKey}}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="rate" class="col-sm-2 control-label">Price</label>
+        <div class="col-sm-5">
+          <div class="input-group">
+            <input type="text" class="form-control" id="rate" value="{{client.rate}}" readonly>
+            <div class="input-group-addon">USD/min</div>
+          </div>
+        </div>
+        <div class="col-sm-5">
+          <div class="input-group">
+            <input type="text" class="form-control" id="rate" value="{{client.rate}}" readonly>
+            <div class="input-group-addon">BTC/min</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="row card" ng-show="client.status == 'funding'">
+    <h3>Fund channel</h3>
+    <form class="form-horizontal">
+      <div class="form-group">
+        <label class="col-sm-2 control-label">Status</label>
+        <div class="col-sm-10">
+          <span class="label label-warning" ng-show="client.status == 'funding'">Waiting for funds</span>
+          <span class="label label-success" ng-show="client.status != 'funding'">Ready to start</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="amount" class="col-sm-2 control-label">Funds received</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="amount" value="{{funds}}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="address" class="col-sm-2 control-label">Funding address</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="address" value="{{fundingAddress}}" readonly>
+        </div>
+      </div>
+    </form>
+
+    <div class="row space-top">
+      <div class="col-sm-4 center">
+        <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
+      </div>
+      <div class="col-sm-8">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-4 control-label">Maximum time</label>
+            <div class="col-sm-8">
+              <select
+                name="minutes" required
+                ng-model="stream.minutes"
+                class="form-control col-md-2"
+                ng-options="val + ' minutes' for val in minutes"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="amount" class="col-sm-4 control-label">Maximum spend</label>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input type="text" class="form-control" id="btc"
+                       value="{{stream.minutes * client.rate|BTC2USD}}" disabled="disabled">
+                <div class="input-group-addon">USD</div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="input-group">
+                <input type="text" class="form-control" id="btc"
+                       value="{{stream.minutes * client.rate}}" disabled="disabled">
+                <div class="input-group-addon">BTC</div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
+      <a href="#" class="btn btn-success btn-lg btn-end">
+        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Start
+      </a>
+    </div>
+  </div>
+
+<!-- <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate> -->
+
+</div>

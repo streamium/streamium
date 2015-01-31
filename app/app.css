@@ -1,5 +1,8 @@
 /* app css stylesheet */
 
+.center { text-align: center; }
+.space-top { margin-top: 40px; }
+
 .menu {
   list-style: none;
   border-bottom: 0.1em solid black;
@@ -28,3 +31,20 @@
   content: "";
   padding: 0;
 }
+
+.card {
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px #333;
+}
+
+.card h3 {
+  margin-top: 0px;
+}
+
+.card.card-status .glyphicon {
+  font-size: 2.4rem;
+}
+
