@@ -3,15 +3,15 @@
 angular.module('streamium.rates', [])
 
 .service('Rates', function($http) {
-  
-  function RateService () {
+
+  function RateService() {
     this.rate = 0;
 
     var self = this;
     $http.get('https://bitpay.com/api/rates/usd').success(function(data) {
       self.rate = data.rate;
     });
-  };
+  }
 
   return new RateService();
 })
@@ -26,6 +26,8 @@ angular.module('streamium.rates', [])
 .filter('BTC2USD', function(Rates, bitcore) {
   return function(btc) {
     if (!Rates.rate) return '0 USD';
-    return bitcore.Unit.fromBTC(btc).atRate(Rates.rate) + ' USD';
+    var usd = bitcore.Unit.fromBTC(btc).atRate(Rates.rate);
+    console.log(usd);
+    return usd + ' USD';
   };
 });

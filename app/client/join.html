@@ -68,13 +68,13 @@
         <div class="col-sm-5">
           <div class="input-group">
             <input type="text" class="form-control" id="rate" value="{{client.rate}}" readonly>
-            <div class="input-group-addon">USD/min</div>
+            <div class="input-group-addon">BTC/min</div>
           </div>
         </div>
         <div class="col-sm-5">
           <div class="input-group">
-            <input type="text" class="form-control" id="rate" value="{{client.rate}}" readonly>
-            <div class="input-group-addon">BTC/min</div>
+            <input type="text" class="form-control" id="rate" value="{{client.rate|BTC2USD}}" readonly>
+            <div class="input-group-addon">USD/min</div>
           </div>
         </div>
       </div>
