@@ -27,6 +27,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.stream = {};
   $scope.stream.minutes = $scope.minutes[0];
   $scope.stream.founds = 0;
+  $scope.stream.name = $routeParams.streamId;
 
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;

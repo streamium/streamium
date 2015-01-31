@@ -41,7 +41,7 @@
       <h2><span class="glyphicon glyphicon-hourglass"></span></h2>
     </div>
     <div class="col-sm-10">
-      <h2>Connecting to XXX</h2>
+      <h2>Connecting to {{stream.name}}</h2>
     </div>
   </div>
 
@@ -50,7 +50,7 @@
       <h2><span class="glyphicon glyphicon-remove"></span></h2>
     </div>
     <div class="col-sm-10">
-      <h2>Error while connecting to XXX</h2>
+      <h2>Error while connecting to {{stream.name}}</h2>
     </div>
   </div>
 
@@ -82,7 +82,7 @@
   </div>
 
   <div class="row card" ng-show="client.status == 'funding'">
-    <h3>Fund channel</h3>
+    <h3>Fund stream</h3>
     <form class="form-horizontal">
       <div class="form-group">
         <label class="col-sm-2 control-label">Status</label>
