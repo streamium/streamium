@@ -38,6 +38,7 @@
 	============================== -->
 </header>
 <div class="container content-pg">
+
   <div class="row">
     <div class="col-md-12" ng-hide="requiresApproval">
       <video class="col-sm-8 col-sm-offset-2 col-md-6
@@ -45,12 +46,24 @@
     </div>
   </div>
 
-  <div ng-show="remainingTime > 0">
-    Your credit will expire <span am-time-ago="remainingTime"></span>
-  </div>
-  <div ng-show="remainingTime <= 0">
-    Your credit has expired.
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
+      <div class="col-md-10 col-sm-10 stream-data">
+        <ul class="list-unstyled">
+          <div ng-show="remainingTime > 0">
+            Your credit will expire <span am-time-ago="remainingTime"></span>
+          </div>
+          <div ng-show="remainingTime <= 0">
+            Your credit has expired.
+          </div>
+        </ul>
+      </div>
+    </div>
   </div>
 
-  <button ng-disabled="established" ng-click="end()" class="btn btn-success">Terminate early</button>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
+      <button ng-disabled="established" ng-click="end()" class="btn btn-danger btn-lg btn-end btn-full">Terminate early</button>
+    </div>
+  </div>
 </div>
