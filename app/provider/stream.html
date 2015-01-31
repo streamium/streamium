@@ -67,7 +67,12 @@
       <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
         <div class="col-md-10 col-sm-10 stream-data">
           <ul class="list-unstyled">
-            <li><span class="glyphicon glyphicon-usd" aria-hidden="true"></span> {{client.totalBalance}} ({{client.rate}} $/min)</li>
+            <li>
+              {{client.totalBalance}} ({{client.rate|BTC2USD}} $/min)
+            </li>
+            <li>
+              {{client.totalBalance}} ({{client.rate}} BTC/min)
+            </li>
           </ul>
         </div>
         <div class="col-md-2 col-sm-2 stream-data">

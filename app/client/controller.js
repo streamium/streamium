@@ -43,6 +43,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
       }
       StreamiumClient.processFunding(utxos);
       $scope.funds = funds;
+      $scope.fundedSeconds = StreamiumClient.getDuration(funds);
       $scope.funded = true;
       $scope.$apply();
     };
@@ -83,9 +84,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
       startViewer();
     }
     $interval(function() {
-      $scope.remainingTime = StreamiumClient.getRemainingTime();
-      console.log($scope.remainingTime);
-      console.log($scope.remainingTime - new Date().getTime());
+      $scope.expirationDate = StreamiumClient.getExpirationDate();
+      console.log('expir date: ' + $scope.expirationDate);
+      console.log('delta: ' + ($scope.expirationDate - new Date().getTime()));
     }, 2000);
   });
 

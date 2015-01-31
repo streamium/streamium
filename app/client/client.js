@@ -2,7 +2,7 @@
 
 angular.module('streamium.client.service', [])
 
-.service('StreamiumClient', function(bitcore, channel, Insight, events, inherits) {
+.service('StreamiumClient', function(bitcore, channel, Insight, events, inherits, Duration) {
   var Consumer = channel.Consumer;
 
   var SECONDS_IN_MINUTE = 60;
@@ -115,13 +115,12 @@ angular.module('streamium.client.service', [])
    */
   };
 
+  StreamiumClient.prototype.getDuration = function(satoshis) {
+    return Duration.for(this.rate, satoshis);
+  };
 
-  StreamiumClient.prototype.getRemainingTime = function() {
-    console.log(this.startTime);
-    console.log(this.consumer.refundTx);
-    console.log(this.rate);
-    return this.startTime +
-      this.consumer.refundTx._outputAmount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
+  StreamiumClient.prototype.getExpirationDate = function() {
+    return new Date(this.startTime + this.getDuration(this.consumer.refundTx._outputAmount));
   };
 
   StreamiumClient.prototype.startPaying = function() {
