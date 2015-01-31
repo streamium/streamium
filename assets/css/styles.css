@@ -1268,5 +1268,8 @@ strong,
 	display: block;
 }
 
+.btn-full {
+	width: 100%;
+}
 
 
