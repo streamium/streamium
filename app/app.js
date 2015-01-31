@@ -12,6 +12,7 @@ angular.module('streamium', [
   'streamium.insight',
   'streamium.core',
   'streamium.video',
+  'angularMoment',
   'ja.qr'
 ]).
 

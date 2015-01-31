@@ -144,14 +144,16 @@
 
   </div>
 
-  <div class="row">
-    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-      <a href="#" class="btn btn-success btn-lg btn-end">
-        <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Start
-      </a>
+  <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate>
+    <input type="hidden" ng-model="funded" required>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
+        <button type="submit" ng-disabled="form.$invalid" class="btn btn-success btn-lg btn-end">
+          <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Start
+        </button>
+      </div>
     </div>
-  </div>
+  </form>
 
-<!-- <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate> -->
 
 </div>

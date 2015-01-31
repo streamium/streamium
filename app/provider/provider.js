@@ -119,11 +119,15 @@ angular.module('streamium.provider.service', [])
 
     var provider = this.mapClientIdToProvider[connection.peer];
     var status = this.mapClientIdToStatus[connection.peer];
+    console.log(data);
     data = JSON.parse(data);
+
+    provider.signRefund(data);
+    var refund = provider.refund;
 
     connection.send({
       type: 'refundAck',
-      payload: provider.signRefund(data).refund.toJSON()
+      payload: refund.toJSON()
     });
 
   };
@@ -144,11 +148,16 @@ angular.module('streamium.provider.service', [])
     this.emit('broadcast:end', peer);
   };
 
+  StreamiumProvider.prototype.getRemainingTimeFor = function(provider) {
+    return provider.startTime +
+      provider.refund.amount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
+  };
+
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
 
     // TODO: Assert state
     // TODO: this looks like duplicated code
- 
+
     var provider = this.mapClientIdToProvider[connection.peer];
     data = JSON.parse(data);
 
@@ -172,6 +181,7 @@ angular.module('streamium.provider.service', [])
 
     console.log('Set new expiration date to ' + new Date(expiration));
     console.log('Current time is ' + new Date());
+    console.log(this.getRemainingTimeFor(provider));
 
     if (firstPayment) {
       this.emit('broadcast:start', connection.peer);
