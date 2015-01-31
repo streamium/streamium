@@ -148,9 +148,9 @@ angular.module('streamium.provider.service', [])
     this.emit('broadcast:end', peer);
   };
 
-  StreamiumProvider.prototype.getRemainingTimeFor = function(provider) {
+  StreamiumProvider.prototype.getExpirationDateFor = function(provider) {
     return provider.startTime +
-      provider.refund.amount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
+      provider.refund._outputAmount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
   };
 
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
@@ -181,7 +181,7 @@ angular.module('streamium.provider.service', [])
 
     console.log('Set new expiration date to ' + new Date(expiration));
     console.log('Current time is ' + new Date());
-    console.log(this.getRemainingTimeFor(provider));
+    console.log(this.getExpirationDateFor(provider));
 
     if (firstPayment) {
       this.emit('broadcast:start', connection.peer);
