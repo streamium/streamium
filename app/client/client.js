@@ -72,7 +72,6 @@ angular.module('streamium.client.service', [])
   StreamiumClient.prototype.handlers = {};
   StreamiumClient.prototype.handlers.hello = function(data) {
     this.rate = data.rate;
-    console.log(this.rate);
     this.stepSatoshis = Math.round(
       TIMESTEP * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE
     );
