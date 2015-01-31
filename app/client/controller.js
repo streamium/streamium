@@ -44,7 +44,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
       $scope.funds = funds;
       $scope.funded = true;
       $scope.$apply();
-      console.log('updated balance');
     };
     Insight.pollBalance(fundingAddress, updateBalance);
   });
@@ -73,23 +72,24 @@ angular.module('streamium.client.controller', ['ngRoute'])
       $scope.$digest();
     });
   };
-  if (!StreamiumClient.peer) {
-    StreamiumClient.connect(streamId, function(err, fundingAddress) {
-      if (err) throw err;
+  StreamiumClient.on('commitmentBroadcast', function() {
+    if (!StreamiumClient.peer) {
+      StreamiumClient.connect(streamId, function(err, fundingAddress) {
+        if (err) throw err;
+        startViewer();
+      });
+    } else {
       startViewer();
-    });
-  } else {
-    startViewer();
-  }
+    }
+    $interval(function() {
+      $scope.remainingTime = StreamiumClient.getRemainingTime();
+      console.log($scope.remainingTime);
+      console.log($scope.remainingTime - new Date().getTime());
+    }, 2000);
+  });
   $scope.end = function() {
     StreamiumClient.end();
   };
-
-  $interval(function() {
-    $scope.remainingTime = StreamiumClient.getRemainingTime();
-    console.log($scope.remainingTime);
-    console.log($scope.remainingTime - new Date().getTime());
-  }, 2000);
 
 })
 

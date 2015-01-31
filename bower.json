@@ -14,6 +14,8 @@
     "jquery": "~2.1.1",
     "peerjs": "~0.3.14",
     "angular-qr": "~0.2.0",
-    "angular-moment": "~0.8.3"
+    "angular-moment": "~0.8.3",
+    "bitcore": "~0.9.4",
+    "bitcore-channel": "~0.9.1"
   }
 }

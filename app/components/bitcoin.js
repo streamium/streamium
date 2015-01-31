@@ -5,6 +5,9 @@ angular.module('streamium.bitcoin', [])
 .factory('bitcore', function() {
   return require('bitcore');
 })
+.factory('explorers', function() {
+  return require('bitcore-explorers');
+})
 .factory('channel', function() {
   return require('bitcore-channel');
 })

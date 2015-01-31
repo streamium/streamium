@@ -99,23 +99,32 @@ angular.module('streamium.client.service', [])
     data = JSON.parse(data);
     this.consumer.validateRefund(data);
 
+    // TODO: remove this, should only call if broadcast was successful
+    self.startPaying();
+    self.emit('commitmentBroadcast');
+
+    /*
     Insight.broadcast(this.consumer.commitmentTx, function(err) {
+      self.emit('commitmentBroadcast');
       if (err) {
-        alert('Impossibe to broadcast to insight');
+        console.log('Impossibe to broadcast to insight');
         return;
       }
       self.startPaying();
     });
+   */
   };
 
 
   StreamiumClient.prototype.getRemainingTime = function() {
+    console.log(this.startTime);
+    console.log(this.consumer.refundTx);
+    console.log(this.rate);
     return this.startTime +
-      this.consumer.refundTx.amount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
+      this.consumer.refundTx._outputAmount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
   };
 
   StreamiumClient.prototype.startPaying = function() {
-
     var self = this;
     var satoshis = 2 * this.stepSatoshis;
     this.startTime = new Date().getTime();

@@ -45,8 +45,11 @@
     </div>
   </div>
 
-  <div>
+  <div ng-show="remainingTime > 0">
     Your credit will expire <span am-time-ago="remainingTime"></span>
+  </div>
+  <div ng-show="remainingTime <= 0">
+    Your credit has expired.
   </div>
 
   <button ng-disabled="established" ng-click="end()" class="btn btn-success">Terminate early</button>
