@@ -2,7 +2,7 @@
 
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore, channel, events, inherits, Insight) {
+.service('StreamiumProvider', function(bitcore, channel, events, inherits, Insight, Duration) {
   var Provider = channel.Provider;
 
   var SECONDS_IN_MINUTE = 60;
@@ -139,18 +139,22 @@ angular.module('streamium.provider.service', [])
     this.endBroadcast(connection.peer);
   };
 
-  StreamiumProvider.prototype.endBroadcast = function(peer) {
-    Insight.broadcast(this.mapClientIdToProvider[peer].paymentTx, function(err) {
+  StreamiumProvider.prototype.endBroadcast = function(connection) {
+    var payment = this.mapClientIdToProvider[connection.peer].paymentTx;
+    console.log('Broadcasting ' + payment);
+    // TODO: actually broadcast the tx
+    /*
+    Insight.broadcast(payment, function(err) {
       if (err) {
         console.log(err);
       }
     });
-    this.emit('broadcast:end', peer);
+    */
+    this.emit('broadcast:end', connection);
   };
 
-  StreamiumProvider.prototype.getExpirationDateFor = function(provider) {
-    return provider.startTime +
-      provider.refund._outputAmount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
+  StreamiumProvider.prototype.getFinalExpirationFor = function(provider) {
+    return provider.startTime + Duration.for(this.rate, provider.refund._outputAmount);
   };
 
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
@@ -158,30 +162,28 @@ angular.module('streamium.provider.service', [])
     // TODO: Assert state
     // TODO: this looks like duplicated code
 
+    var self = this;
     var provider = this.mapClientIdToProvider[connection.peer];
     data = JSON.parse(data);
 
     var firstPayment = !provider.currentAmount;
-    provider.validPayment(data);
-
     if (firstPayment) {
       provider.startTime = new Date().getTime();
     }
 
-    var time = Math.round(provider.currentAmount / (this.rateSatoshis / MILLIS_IN_MINUTE));
-    console.log('time is ' + time);
-    var expiration = provider.startTime + time;
-    var self = this;
+    provider.validPayment(data);
+    var finalExpiration = this.getFinalExpirationFor(provider);
+    var expiration = provider.startTime + Duration.for(this.rate, provider.currentAmount);
 
     clearTimeout(provider.timeout);
     provider.timeout = setTimeout(function() {
       console.log('DIE');
-      self.endBroadcast(connection.peer);
-    }, expiration - new Date().getTime());
+      self.endBroadcast(connection);
+    }, Math.min(expiration, finalExpiration) - new Date().getTime());
 
     console.log('Set new expiration date to ' + new Date(expiration));
     console.log('Current time is ' + new Date());
-    console.log(this.getExpirationDateFor(provider));
+    console.log(finalExpiration);
 
     if (firstPayment) {
       this.emit('broadcast:start', connection.peer);
@@ -191,7 +193,6 @@ angular.module('streamium.provider.service', [])
       type: 'paymentAck',
       payload: {
         success: true,
-        creditedTime: time
       }
     });
   };

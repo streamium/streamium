@@ -3,6 +3,7 @@
 
 var Video = function() {
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+  this.calls = {};
 };
 
 Video.prototype.setPeer = function(peer) {
@@ -34,11 +35,15 @@ Video.prototype.broadcast = function(peer, cb) {
   call.on('close', function() {
     console.log('client ' + clientName + ' out of funds');
   });
+  this.calls[peer] = call;
+
   cb(null);
 };
 
-Video.prototype.end = function(peer, cb) {
-  // TODO
+Video.prototype.end = function(connection) {
+  connection.close();
+  this.calls[connection.peer].close();
+  delete this.calls[connection.peer];
 };
 
 Video.prototype.view = function(streamId, cb) {

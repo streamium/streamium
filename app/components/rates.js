@@ -27,7 +27,6 @@ angular.module('streamium.rates', [])
   return function(btc) {
     if (!Rates.rate) return '0 USD';
     var usd = bitcore.Unit.fromBTC(btc).atRate(Rates.rate);
-    console.log(usd);
     return usd + ' USD';
   };
 });

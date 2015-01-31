@@ -13,7 +13,7 @@ angular.module('streamium.insight', [])
       'vout': 0,
       'ts': 1408464227,
       'scriptPubKey': bitcore.Script.fromAddress(address).toString(),
-      'amount': 0.001,
+      'amount': 0.012,
       'confirmations': 6,
     })]);
     // TODO: should be: 

@@ -43,6 +43,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
       }
       StreamiumClient.processFunding(utxos);
       $scope.funds = funds;
+      $scope.fundedSeconds = StreamiumClient.getDuration(funds);
       $scope.funded = true;
       $scope.$apply();
     };
