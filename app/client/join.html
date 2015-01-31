@@ -58,6 +58,12 @@
     <h3>Stream info</h3>
     <form class="form-horizontal">
       <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="name" value="{{stream.name}}" readonly>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="pubkey" class="col-sm-2 control-label">Public Key</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="pubkey" value="{{client.providerKey}}" readonly>
@@ -150,11 +156,25 @@
 
   </div>
 
+  <div class="row card" ng-show="client.status == 'funding'">
+    <h3>Change Address</h3>
+    <form class="form-horizontal" name="change">
+      <div class="form-group has-feedback">
+        <label for="change" class="col-sm-2 control-label">Change address</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="change" ng-model="client.change" placeholder="where to send your change" valid-address required>
+          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="change.change.$valid"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+
     <div class="row">
       <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate ng-hide="client.status == 'connecting'">
-      <input type="hidden" ng-model="funded" required>
+      <input type="hidden" name="funded" ng-model="funded" required>
+      <input type="hidden" name="change" ng-model="client.change" required>
       <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-        <button type="submit" ng-disabled="form.$invalid" class="btn btn-success btn-lg btn-end btn-full">
+        <button type="submit" ng-disabled="form.$invalid || change.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
           <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Start
         </button>
       </div>
