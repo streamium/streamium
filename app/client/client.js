@@ -108,6 +108,12 @@ angular.module('streamium.client.service', [])
     });
   };
 
+
+  StreamiumClient.prototype.getRemainingTime = function() {
+    return this.startTime +
+      this.consumer.refundTx.amount * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE;
+  };
+
   StreamiumClient.prototype.startPaying = function() {
 
     var self = this;

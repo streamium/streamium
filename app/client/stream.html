@@ -45,5 +45,9 @@
     </div>
   </div>
 
-  <button ng-disabled="established" ng-click="end()" class="btn btn-success">End transmission</button>
+  <div>
+    Your credit will expire <span am-time-ago="remainingTime"></span>
+  </div>
+
+  <button ng-disabled="established" ng-click="end()" class="btn btn-success">Terminate early</button>
 </div>
