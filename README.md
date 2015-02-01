@@ -28,6 +28,8 @@ and then access it from any [WebRTC-supporting](http://www.webrtc.org/) browser:
 
 http://localhost:8000/
 
+We suggest you provide a PeerJS server to your users (or at least [change the peerjs.org identifier](https://github.com/streamium/paystream/blob/master/app/config.js#L6))
+
 ## How does it work
 
 ### 1. Channel creation
