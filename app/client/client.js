@@ -58,12 +58,12 @@ angular.module('streamium.client.service', [])
     });
 
     this.peer.on('close', function onClose() {
-      self.status = StreamiumClient.STATUS.finished;
+      self.end();
     });
 
     this.peer.on('error', function onError(error) {
       self.status = StreamiumClient.STATUS.disconnected;
-      console.log('we have an error');
+      console.log('we have an error initializing');
       callback(error);
     });
 
@@ -155,6 +155,10 @@ angular.module('streamium.client.service', [])
     // TODO: Pass
   };
 
+  StreamiumClient.prototype.handlers.end = function(data) {
+    this.end();
+  };
+
   StreamiumClient.prototype.isReady = function() {
     return !!this.consumer;
   };
@@ -174,10 +178,12 @@ angular.module('streamium.client.service', [])
 
   StreamiumClient.prototype.end = function() {
     clearInterval(this.interval);
+    self.status = StreamiumClient.STATUS.finished;
     this.connection.send({
       type: 'end',
       payload: this.consumer.paymentTx.toJSON()
     });
+    this.emit('end');
   };
 
   return new StreamiumClient();
