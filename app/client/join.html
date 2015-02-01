@@ -9,12 +9,6 @@
       <div class="container">
         <div class="navbar-header">
 
-          <!-- LOGO ON STICKY NAV BAR -->
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#stamp-navigation">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-grid-2x2"></span>
-          </button>
-
           <!-- LOGO -->
           <a class="navbar-brand" href="#">
             <img src="../assets/img/logo-nav.png" alt="">
@@ -34,13 +28,13 @@
   <!-- =========================
   SECTION: Container
   ============================== -->
-  <div class="container content-pg">
+  <div class="container content-pg space-top">
 
   <div class="row card space-top" ng-show="client.status == 'connecting'">
     <div class="col-sm-2 center">
       <h2><span class="glyphicon glyphicon-hourglass"></span></h2>
     </div>
-    <div class="col-sm-10">
+    <div class="col-sm-10 text-center">
       <h2>Connecting to {{stream.name}}</h2>
     </div>
   </div>
