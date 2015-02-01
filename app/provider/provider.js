@@ -160,21 +160,28 @@ angular.module('streamium.provider.service', [])
     var payment = this.mapClientIdToProvider[connection.peer].paymentTx;
     var self = this;
     console.log('Broadcasting ' + payment);
-    // TODO: actually broadcast the tx
-    /*
     Insight.broadcast(payment, function(err) {
       if (err) {
         console.log(err);
       }
-      self.emit('broadcast:end', connection);
     });
-    */
     this.emit('broadcast:end', connection);
   };
 
   StreamiumProvider.prototype.getFinalExpirationFor = function(provider) {
 
     return provider.startTime + Duration.for(this.rate, provider.refund._outputAmount);
+  };
+
+  StreamiumProvider.prototype.handlers.commitment = function(connection, data) {
+    var commitment = channel.Transactions.Commitment(JSON.parse(data));
+
+    Insight.broadcast(commitment, function(err) {
+      if (err) {
+        console.log(err);
+        this.emit('broadcast:end', connection);
+      }
+    });
   };
 
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
