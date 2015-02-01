@@ -65,6 +65,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.peers = {};
 
   StreamiumProvider.on('broadcast:start', function(peer) {
+    console.log('Start broadcast for ' + peer.id);
     $scope.peers[peer.id] = peer;
     video.broadcast(peer, function(err) {
       if (err) throw err;
@@ -73,9 +74,9 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     });
   });
 
-  StreamiumProvider.on('broadcast:end', function(connection) {
-    delete $scope.peers[connection.peer.id];
-    video.end(connection);
+  StreamiumProvider.on('broadcast:end', function(peer) {
+    delete $scope.peers[peer];
+    video.end(peer);
     $scope.$apply();
   });
 

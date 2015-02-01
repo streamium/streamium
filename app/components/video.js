@@ -40,10 +40,9 @@ Video.prototype.broadcast = function(peer, cb) {
   cb(null);
 };
 
-Video.prototype.end = function(connection) {
-  connection.close();
-  this.calls[connection.peer].close();
-  delete this.calls[connection.peer];
+Video.prototype.end = function(peer) {
+  this.calls[peer].close();
+  delete this.calls[peer];
 };
 
 Video.prototype.view = function(streamId, cb) {
