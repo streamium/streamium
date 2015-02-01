@@ -114,7 +114,7 @@
             <div class="col-sm-4">
               <div class="input-group">
                 <input type="text" class="form-control" id="btc"
-                       value="{{stream.minutes * client.rate|BTC2USD}}" disabled="disabled">
+                       value="{{stream.minutes * client.rate|SATOSHIS2USD}}" disabled="disabled">
                 <div class="input-group-addon">USD</div>
               </div>
             </div>
@@ -130,13 +130,13 @@
             <label for="amount" class="col-sm-4 control-label">Funds locked</label>
             <div class="col-sm-4">
               <div class="input-group">
-                <input type="text" class="form-control" id="amount" value="{{fundedSeconds}}" readonly>
+                <input type="text" class="form-control" id="amount" value="{{fundedMinutes}}" readonly>
                 <div class="input-group-addon">min</div>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="input-group">
-                <input type="text" class="form-control" id="amount" value="{{funds}}" readonly>
+                <input type="text" class="form-control" id="amount" value="{{funds|SATOSHIS2BTC}}" readonly>
                 <div class="input-group-addon">BTC</div>
               </div>
             </div>
