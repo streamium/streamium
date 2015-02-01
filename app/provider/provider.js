@@ -25,9 +25,10 @@ angular.module('streamium.provider.service', [])
   inherits(StreamiumProvider, events.EventEmitter);
 
   StreamiumProvider.STATUS = {
-    disconnected: 'disconnected',
-    connecting: 'connecting',
-    ready: 'ready',
+    disconnected: 'disconnected', // finished abnormally
+    connecting: 'connecting', // started the dance
+    waiting: 'waiting', // waiting for first payment (plus commitment tx)
+    ready: 'ready', // receiving payments
     finished: 'finished'
   };
 
@@ -105,7 +106,7 @@ angular.module('streamium.provider.service', [])
     });
 
     this.mapClientIdToProvider[connection.peer] = provider;
-    this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.disconnected;
+    this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.connecting;
 
     connection.send({
       type: 'hello',
@@ -122,12 +123,14 @@ angular.module('streamium.provider.service', [])
     var provider = this.mapClientIdToProvider[connection.peer];
     var status = this.mapClientIdToStatus[connection.peer];
 
-    if (status !== StreamiumProvider.STATUS.disconnected) {
-      console.log('Error: Received `sign` from non-existing or connected peer:', data);
+    if (status !== StreamiumProvider.STATUS.connecting) {
+      console.log('Error: Received `sign` from a non-existing or connected peer:', data);
       return;
     }
 
     console.log('Received a request to sign a refund tx:', data);
+
+    this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.waiting;
 
     data = JSON.parse(data);
     provider.signRefund(data);
@@ -140,9 +143,16 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.handlers.end = function(connection, data) {
-    if (data) {
-      StreamiumProvider.prototype.handlers.payment(data);
+
+    if (!(connection.peer in this.mapClientIdProvider)) {
+      console.log('Error: Received `end` from non-existing peer:', data);
+      return;
     }
+
+    if (data) {
+      this.handlers.payment(connection, data);
+    }
+
     this.endBroadcast(connection.peer);
   };
 
@@ -163,37 +173,44 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.getFinalExpirationFor = function(provider) {
+
     return provider.startTime + Duration.for(this.rate, provider.refund._outputAmount);
   };
 
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
 
-    // TODO: Assert state
-    // TODO: this looks like duplicated code
-
-    var self = this;
     var provider = this.mapClientIdToProvider[connection.peer];
-    data = JSON.parse(data);
+    var status = this.mapClientIdToStatus[connection.peer];
+    var firstPayment = false;
 
-    var firstPayment = !provider.currentAmount;
-    if (firstPayment) {
+    if (status === StreamiumProvider.STATUS.waiting) {
+      this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.ready;
       provider.startTime = new Date().getTime();
+      firstPayment = true;
     }
 
+    if (status !== StreamiumProvider.STATUS.ready) {
+      console.log('Error: Received `payment` from a non-existing or unprepared peer:', data);
+      return;
+    }
+
+    data = JSON.parse(data);
     provider.validPayment(data);
-    var finalExpiration = this.getFinalExpirationFor(provider);
-    console.log(provider.currentAmount);
-    var expiration = provider.startTime + Duration.for(this.rate, provider.currentAmount);
+
+    var refundExpiration = this.getFinalExpirationFor(provider);
+    var paymentsExpiration = provider.startTime + Duration.for(this.rate, provider.currentAmount);
+    var expiration = Math.min(refundExpiration, paymentsExpiration);
+    var self = this;
 
     clearTimeout(provider.timeout);
     provider.timeout = setTimeout(function() {
-      console.log('DIE');
+      console.log('Peer connection timed out');
       self.endBroadcast(connection);
-    }, Math.min(expiration, finalExpiration) - new Date().getTime());
+    }, expiration - new Date().getTime());
 
     console.log('Set new expiration date to ' + new Date(expiration));
     console.log('Current time is ' + new Date());
-    console.log(finalExpiration);
+    console.log('Expiration for the refund tx is ' + new Date(refundExpiration));
 
     if (firstPayment) {
       this.emit('broadcast:start', connection.peer);
