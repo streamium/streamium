@@ -141,6 +141,7 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.endBroadcast = function(connection) {
     var payment = this.mapClientIdToProvider[connection.peer].paymentTx;
+    var self = this;
     console.log('Broadcasting ' + payment);
     // TODO: actually broadcast the tx
     /*
@@ -148,6 +149,7 @@ angular.module('streamium.provider.service', [])
       if (err) {
         console.log(err);
       }
+      self.emit('broadcast:end', connection);
     });
     */
     this.emit('broadcast:end', connection);
@@ -173,6 +175,7 @@ angular.module('streamium.provider.service', [])
 
     provider.validPayment(data);
     var finalExpiration = this.getFinalExpirationFor(provider);
+    console.log(provider.currentAmount);
     var expiration = provider.startTime + Duration.for(this.rate, provider.currentAmount);
 
     clearTimeout(provider.timeout);

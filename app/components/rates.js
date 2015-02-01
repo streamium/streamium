@@ -29,4 +29,22 @@ angular.module('streamium.rates', [])
     var usd = bitcore.Unit.fromBTC(btc).atRate(Rates.rate);
     return usd;
   };
+})
+
+.filter('SATOSHIS2USD', function(Rates, bitcore) {
+  return function(satoshis) {
+    if (!Rates.rate) return '0 USD';
+    var usd = bitcore.Unit.fromSatoshis(satoshis).atRate(Rates.rate);
+    return usd;
+  };
+})
+
+.filter('SATOSHIS2BTC', function(bitcore) {
+  return function(satoshis) {
+    var btc = bitcore.Unit.fromSatoshis(satoshis).toBTC();
+    if (!btc) {
+      return 0;
+    }
+    return btc;
+  };
 });
