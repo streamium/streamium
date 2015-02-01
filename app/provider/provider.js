@@ -48,41 +48,42 @@ angular.module('streamium.provider.service', [])
 
     this.peer = new Peer(this.streamId, this.config);
     var self = this;
+
     this.peer.on('open', function onOpen() {
-      console.log('Conected to peer:', self.peer);
-      callback(null, true);
+      console.log('Connected to peer server:', self.peer);
+      callback();
     });
 
     this.peer.on('close', function onClose() {
+      console.log('Connection to peer server closed');
       self.status = StreamiumProvider.STATUS.finished;
     });
 
     this.peer.on('error', function onError(error) {
+      console.log('Error with peer server:', error);
       self.status = StreamiumProvider.STATUS.disconnected;
-      console.log('we have an error');
       callback(error);
     });
 
     this.peer.on('connection', function onConnection(connection) {
-      console.log('New connection!', connection);
+      console.log('New peer connected:', connection);
       self.clientConnections.push(connection);
 
       connection.on('data', function(data) {
-        console.log('New message', data);
+        console.log('New message:', data);
         if (!data.type || !self.handlers[data.type]) throw 'Kernel panic'; // TODO!
         self.handlers[data.type].call(self, connection, data.payload);
       });
 
-      connection.on('error', function(err) {
-        console.log(err);
+      connection.on('error', function(error) {
+        console.log('Error with peer connection', error);
         self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
       });
 
       connection.on('close', function() {
-        console.log('client connection closed');
+        console.log('Client connection closed');
         self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
       });
-
     });
 
     // Init Provider
@@ -93,7 +94,10 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.handlers.hello = function(connection, data) {
 
-    // TODO: Assert state
+    if (connection.peer in this.mapClientIdProvider) {
+      console.log('Error: Received `hello` from existing peer:', data);
+      return;
+    }
 
     var provider = new Provider({
       network: this.address.network,
@@ -115,13 +119,17 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.handlers.sign = function(connection, data) {
 
-    // TODO: Assert state
-
     var provider = this.mapClientIdToProvider[connection.peer];
     var status = this.mapClientIdToStatus[connection.peer];
-    console.log(data);
-    data = JSON.parse(data);
 
+    if (status !== StreamiumProvider.STATUS.disconnected) {
+      console.log('Error: Received `sign` from non-existing or connected peer:', data);
+      return;
+    }
+
+    console.log('Received a request to sign a refund tx:', data);
+
+    data = JSON.parse(data);
     provider.signRefund(data);
     var refund = provider.refund;
 
@@ -129,7 +137,6 @@ angular.module('streamium.provider.service', [])
       type: 'refundAck',
       payload: refund.toJSON()
     });
-
   };
 
   StreamiumProvider.prototype.handlers.end = function(connection, data) {
