@@ -80,7 +80,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   });
 
   $scope.end = function() {
-    // TODO: StreamiumProvider.end();
+    StreamiumProvider.endAllBroadcasts();
     $location.path('/provider/' + $routeParams.streamId + '/cashout');
   };
 
