@@ -23,9 +23,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
 .controller('CreateStreamCtrl', function($scope, $location, StreamiumProvider, bitcore) {
   $scope.prices = [0.1, 0.01, 0.001];
-  $scope.stream = {
-    rate: $scope.prices[0]
-  };
+  $scope.stream = {};
 
   $scope.stream.name = config.DEBUG ? config.defaults.providerStream : '';
   $scope.stream.address = config.DEBUG ? config.defaults.providerAddress : '';
@@ -36,7 +34,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
   $scope.normalizeName = function() {
     var name = $scope.stream.name || '';
-    name = name.trim().toLowerCase().replace(/ /g, '-').replace(/\\/g, '-');
+    name = name.trim().toLowerCase().replace(/ |\\/g, '-');
     $scope.stream.name = name;
   };
 
