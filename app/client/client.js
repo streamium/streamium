@@ -127,6 +127,7 @@ angular.module('streamium.client.service', [])
     this.interval = setInterval(function() {
       self.updatePayment();
     }, TIMESTEP);
+    console.log('Interval is ', this.interval);
 
     this.consumer.incrementPaymentBy(satoshis);
     this.sendPayment();
@@ -142,6 +143,7 @@ angular.module('streamium.client.service', [])
       type: 'payment',
       payload: this.consumer.paymentTx.toJSON()
     });
+    this.emit('paymentUpdate');
   };
 
   StreamiumClient.prototype.sendCommitment = function() {
@@ -156,6 +158,7 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.handlers.end = function(data) {
+    console.log('ending');
     this.end();
   };
 
@@ -177,6 +180,7 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.end = function() {
+    console.log('clearing interval ' + this.interval);
     clearInterval(this.interval);
     self.status = StreamiumClient.STATUS.finished;
     this.connection.send({

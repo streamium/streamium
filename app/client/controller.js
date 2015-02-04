@@ -92,14 +92,14 @@ angular.module('streamium.client.controller', ['ngRoute'])
     } else {
       startViewer();
     }
-    $interval(function() {
-      $scope.expirationDate = StreamiumClient.getExpirationDate();
-      console.log('expir date: ' + $scope.expirationDate);
-      console.log('delta: ' + ($scope.expirationDate - new Date().getTime()));
-    }, 2000);
+  });
+
+  StreamiumClient.on('paymentUpdate', function() {
+    $scope.expirationDate = StreamiumClient.getExpirationDate();
   });
 
   StreamiumClient.on('end', function() {
+    console.log('Moving to cashout stream', $routeParams);
     $location.path('/stream/' + $routeParams.streamId + '/cashout');
   });
 
