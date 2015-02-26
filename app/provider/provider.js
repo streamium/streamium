@@ -94,7 +94,7 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.handlers.hello = function(connection, data) {
 
-    if (connection.peer in this.mapClientIdProvider) {
+    if (connection.peer in this.mapClientIdToProvider) {
       console.log('Error: Received `hello` from existing peer:', data);
       return;
     }
@@ -213,7 +213,7 @@ angular.module('streamium.provider.service', [])
     provider.timeout = setTimeout(function() {
       console.log('Peer connection timed out');
       self.endBroadcast(connection.peer);
-    }, Math.min(expiration, finalExpiration) - new Date().getTime());
+    }, Math.min(expiration, refundExpiration) - new Date().getTime());
 
     console.log('Set new expiration date to ' + new Date(expiration));
     console.log('Current time is ' + new Date());
