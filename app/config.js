@@ -13,7 +13,7 @@ var config = {
       }]
     }
   },
-  DEBUG: true,
+  DEBUG: false,
   defaults: {
     providerStream: 'sexybabe69',
     providerPrivkey: '75d79298ce12ea86863794f0080a14b424d9169f7e325fad52f60753eb072afc',

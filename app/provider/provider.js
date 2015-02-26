@@ -2,7 +2,7 @@
 
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore, channel, events, inherits, Insight, Duration) {
+.service('StreamiumProvider', function(bitcore, channel, events, inherits, async, Insight, Duration) {
   var Provider = channel.Provider;
 
   var SECONDS_IN_MINUTE = 60;
@@ -14,7 +14,6 @@ angular.module('streamium.provider.service', [])
     bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
 
     this.address = this.streamId = this.rate = null;
-    this.clients = [];
 
     // TODO: this screams for a status object or add status into Provider
     this.mapClientIdToProvider = {};
@@ -156,25 +155,33 @@ angular.module('streamium.provider.service', [])
     this.endBroadcast(connection.peer);
   };
 
-  StreamiumProvider.prototype.endBroadcast = function(connection) {
-    var payment = this.mapClientIdToProvider[connection.peer].paymentTx;
-    var self = this;
-    console.log('Broadcasting ' + payment);
-    // TODO: actually broadcast the tx
-    /*
+  StreamiumProvider.prototype.endBroadcast = function(peerId) {
+    var payment = this.mapClientIdToProvider[peerId].paymentTx;
     Insight.broadcast(payment, function(err) {
       if (err) {
+        console.log('Error broadcasting ' + payment);
         console.log(err);
+      } else {
+        console.log('Payment broadcasted correctly');
       }
-      self.emit('broadcast:end', connection);
     });
-    */
-    this.emit('broadcast:end', connection);
+    this.emit('broadcast:end', peerId);
   };
 
   StreamiumProvider.prototype.getFinalExpirationFor = function(provider) {
 
     return provider.startTime + Duration.for(this.rate, provider.refund._outputAmount);
+  };
+
+  StreamiumProvider.prototype.handlers.commitment = function(connection, data) {
+    var commitment = channel.Transactions.Commitment(JSON.parse(data));
+
+    Insight.broadcast(commitment, function(err) {
+      if (err) {
+        console.log(err);
+        this.emit('broadcast:end', connection);
+      }
+    });
   };
 
   StreamiumProvider.prototype.handlers.payment = function(connection, data) {
@@ -205,8 +212,8 @@ angular.module('streamium.provider.service', [])
     clearTimeout(provider.timeout);
     provider.timeout = setTimeout(function() {
       console.log('Peer connection timed out');
-      self.endBroadcast(connection);
-    }, expiration - new Date().getTime());
+      self.endBroadcast(connection.peer);
+    }, Math.min(expiration, finalExpiration) - new Date().getTime());
 
     console.log('Set new expiration date to ' + new Date(expiration));
     console.log('Current time is ' + new Date());
@@ -221,6 +228,13 @@ angular.module('streamium.provider.service', [])
       payload: {
         success: true,
       }
+    });
+  };
+
+  StreamiumProvider.prototype.endAllBroadcasts = function() {
+    var self = this;
+    async.map(_.keys(this.mapClientIdToProvider), function(client) {
+      self.endBroadcast(client);
     });
   };
 

@@ -58,12 +58,12 @@ angular.module('streamium.client.service', [])
     });
 
     this.peer.on('close', function onClose() {
-      self.status = StreamiumClient.STATUS.finished;
+      self.end();
     });
 
     this.peer.on('error', function onError(error) {
       self.status = StreamiumClient.STATUS.disconnected;
-      console.log('we have an error');
+      console.log('we have an error initializing');
       callback(error);
     });
 
@@ -99,11 +99,6 @@ angular.module('streamium.client.service', [])
     data = JSON.parse(data);
     this.consumer.validateRefund(data);
 
-    // TODO: remove this, should only call if broadcast was successful
-    self.startPaying();
-    self.emit('commitmentBroadcast');
-
-    /*
     Insight.broadcast(this.consumer.commitmentTx, function(err) {
       self.emit('commitmentBroadcast');
       if (err) {
@@ -111,8 +106,8 @@ angular.module('streamium.client.service', [])
         return;
       }
       self.startPaying();
+      self.emit('commitmentBroadcast');
     });
-   */
   };
 
   StreamiumClient.prototype.getDuration = function(satoshis) {
@@ -128,9 +123,11 @@ angular.module('streamium.client.service', [])
     var satoshis = 2 * this.stepSatoshis;
     this.startTime = new Date().getTime();
 
+    this.sendCommitment();
     this.interval = setInterval(function() {
       self.updatePayment();
     }, TIMESTEP);
+    console.log('Interval is ', this.interval);
 
     this.consumer.incrementPaymentBy(satoshis);
     this.sendPayment();
@@ -146,10 +143,23 @@ angular.module('streamium.client.service', [])
       type: 'payment',
       payload: this.consumer.paymentTx.toJSON()
     });
+    this.emit('paymentUpdate');
+  };
+
+  StreamiumClient.prototype.sendCommitment = function() {
+    this.connection.send({
+      type: 'commitment',
+      payload: this.consumer.commitmentTx.toJSON()
+    });
   };
 
   StreamiumClient.prototype.handlers.paymentAck = function(data) {
     // TODO: Pass
+  };
+
+  StreamiumClient.prototype.handlers.end = function(data) {
+    console.log('ending');
+    this.end();
   };
 
   StreamiumClient.prototype.isReady = function() {
@@ -170,11 +180,14 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.end = function() {
+    console.log('clearing interval ' + this.interval);
     clearInterval(this.interval);
+    self.status = StreamiumClient.STATUS.finished;
     this.connection.send({
       type: 'end',
       payload: this.consumer.paymentTx.toJSON()
     });
+    this.emit('end');
   };
 
   return new StreamiumClient();

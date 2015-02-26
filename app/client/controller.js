@@ -71,13 +71,18 @@ angular.module('streamium.client.controller', ['ngRoute'])
     video.setPeer(StreamiumClient.peer);
     video.view(streamId, function(err, stream) {
       // called on provider calling us
-      if (err) throw err;
+      if (err) {
+        console.log(err);
+        StreamiumClient.end();
+        return;
+      }
 
       var videoSrc = URL.createObjectURL(stream);
       $scope.videoSrc = videoSrc;
       $scope.$digest();
     });
   };
+
   StreamiumClient.on('commitmentBroadcast', function() {
     if (!StreamiumClient.peer) {
       StreamiumClient.connect(streamId, function(err, fundingAddress) {
@@ -87,18 +92,20 @@ angular.module('streamium.client.controller', ['ngRoute'])
     } else {
       startViewer();
     }
-    $interval(function() {
-      $scope.expirationDate = StreamiumClient.getExpirationDate();
-      console.log('expir date: ' + $scope.expirationDate);
-      console.log('delta: ' + ($scope.expirationDate - new Date().getTime()));
-    }, 2000);
+  });
+
+  StreamiumClient.on('paymentUpdate', function() {
+    $scope.expirationDate = StreamiumClient.getExpirationDate();
+  });
+
+  StreamiumClient.on('end', function() {
+    console.log('Moving to cashout stream', $routeParams);
+    $location.path('/stream/' + $routeParams.streamId + '/cashout');
   });
 
   $scope.end = function() {
     StreamiumClient.end();
-    $location.path('/stream/' + $routeParams.streamId + '/cashout');
   };
-
 })
 
 .controller('WithdrawStreamCtrl', function($routeParams) {
