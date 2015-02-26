@@ -2,7 +2,7 @@
 
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore, channel, events, inherits, async, Insight, Duration) {
+.service('StreamiumProvider', function(bitcore, channel, events, inherits, Insight, Duration) {
   var Provider = channel.Provider;
 
   var SECONDS_IN_MINUTE = 60;
