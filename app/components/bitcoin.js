@@ -17,9 +17,6 @@ angular.module('streamium.bitcoin', [])
 .factory('inherits', function() {
   return require('inherits');
 })
-.factory('async', function() {
-  return require('async');
-})
 
 .directive('validAddress', ['bitcore',
   function(bitcore) {
