@@ -108,6 +108,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
 })
 
-.controller('WithdrawStreamCtrl', function($routeParams) {
+.controller('WithdrawStreamCtrl', function($scope, $routeParams) {
   console.log('Cashout stream', $routeParams);
+  $scope.apply();
 });
