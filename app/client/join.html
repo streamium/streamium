@@ -127,7 +127,9 @@
             </div>
           </div>
           <div class="form-group space-top-big">
-            <label for="amount" class="col-sm-4 control-label">Funds locked</label>
+            <label for="amount" class="col-sm-4 control-label">Funds locked
+              <span class="glyphicon glyphicon-ok" ng-show="fundedMinutes >= 1"></span>
+            </label>
             <div class="col-sm-4">
               <div class="input-group">
                 <input type="text" class="form-control" id="amount" value="{{fundedMinutes}}" readonly>

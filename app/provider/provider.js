@@ -143,7 +143,7 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.handlers.end = function(connection, data) {
 
-    if (!(connection.peer in this.mapClientIdProvider)) {
+    if (!(connection.peer in this.mapClientIdToProvider)) {
       console.log('Error: Received `end` from non-existing peer:', data);
       return;
     }
