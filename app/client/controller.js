@@ -3,29 +3,29 @@
 angular.module('streamium.client.controller', ['ngRoute'])
 
 .config(['$routeProvider',
-  function($routeProvider) {
-    $routeProvider.when('/join/:streamId', {
-      templateUrl: 'client/join.html',
-      controller: 'JoinStreamCtrl'
-    });
+        function($routeProvider) {
+          $routeProvider.when('/join/:streamId', {
+            templateUrl: 'client/join.html',
+            controller: 'JoinStreamCtrl'
+          });
 
-    $routeProvider.when('/stream/:streamId', {
-      templateUrl: 'client/stream.html',
-      controller: 'WatchStreamCtrl'
-    });
+          $routeProvider.when('/stream/:streamId', {
+            templateUrl: 'client/stream.html',
+            controller: 'WatchStreamCtrl'
+          });
 
-    $routeProvider.when('/stream/:streamId/cashout', {
-      templateUrl: 'client/cashout.html',
-      controller: 'WithdrawStreamCtrl'
-    });
-  }
+          $routeProvider.when('/stream/:streamId/cashout', {
+            templateUrl: 'client/cashout.html',
+            controller: 'WithdrawStreamCtrl'
+          });
+        }
 ])
 
 .controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location) {
   $scope.client = StreamiumClient;
-  $scope.minutes = [5, 10, 30];
+  $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 25, 30, 45, 60];
   $scope.stream = {};
-  $scope.stream.minutes = $scope.minutes[0];
+  $scope.stream.minutes = $scope.minutes[5];
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
 
@@ -94,9 +94,14 @@ angular.module('streamium.client.controller', ['ngRoute'])
     }
   });
 
+  var calculateSeconds = function() {
+    $scope.secondsLeft = Math.floor(($scope.expirationDate - new Date().getTime()) / 1000);
+  };
   StreamiumClient.on('paymentUpdate', function() {
     $scope.expirationDate = StreamiumClient.getExpirationDate();
+    calculateSeconds();
   });
+  $interval(calculateSeconds, 1000);
 
   StreamiumClient.on('end', function() {
     console.log('Moving to cashout stream', $routeParams);

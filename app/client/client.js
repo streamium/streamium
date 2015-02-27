@@ -79,13 +79,10 @@ angular.module('streamium.client.service', [])
     this.providerKey = data.publicKey;
     this.providerAddress = new bitcore.Address(data.paymentAddress);
     
-    var fundingKey = new bitcore.PrivateKey('cTpeZzUtBszsyNpDPRNDpnYwRjXVY6hkhbSZ1pHM4yQsdjqcKC6A');
-
     this.consumer = new Consumer({
       network: this.network,
       providerPublicKey: this.providerKey,
       providerAddress: this.providerAddress,
-      fundingKey: fundingKey,
       refundAddress: this.refundAddress
     });
     this.status = StreamiumClient.STATUS.funding;
