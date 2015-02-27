@@ -191,7 +191,7 @@ angular.module('streamium.provider.service', [])
     var firstPayment = false;
 
     if (status === StreamiumProvider.STATUS.waiting) {
-      this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.ready;
+      status = this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.ready;
       provider.startTime = new Date().getTime();
       firstPayment = true;
     }
