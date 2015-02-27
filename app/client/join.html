@@ -35,7 +35,7 @@
       <h2><span class="glyphicon glyphicon-hourglass"></span></h2>
     </div>
     <div class="col-sm-10 text-center">
-      <h2>Connecting to {{stream.name}}</h2>
+      <h2>Connecting to {{stream.name}}...</h2>
     </div>
   </div>
 
@@ -49,7 +49,7 @@
   </div>
 
   <div class="row card" ng-show="client.status == 'funding'">
-    <h3>Stream info</h3>
+    <h3>Connecting to stream:</h3>
     <form class="form-horizontal">
       <div class="form-group">
         <label for="name" class="col-sm-2 control-label">Name</label>
@@ -82,11 +82,11 @@
   </div>
 
   <div class="row card" ng-show="client.status == 'funding'">
-    <h3>1 - Lock Funds</h3>
+    <h3>1 - Fund payment channel</h3>
     <p>We need to lock enough funds to cover the maximum time you expect to spend during the streaming. If you decide to terminate the streaming early, you will receive your change back.</p>
     <form class="form-horizontal">
       <div class="form-group">
-        <label for="address" class="col-sm-2 control-label">Funding address</label>
+        <label for="address" class="col-sm-2 control-label">Send bitcoins to:</label>
         <div class="col-sm-10">
           <input type="text" class="form-control" id="address" value="{{fundingAddress}}" readonly>
         </div>
@@ -110,7 +110,7 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="amount" class="col-sm-4 control-label">Maximum spend</label>
+            <label for="amount" class="col-sm-4 control-label"></label>
             <div class="col-sm-4">
               <div class="input-group">
                 <input type="text" class="form-control" id="btc"
