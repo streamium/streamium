@@ -114,7 +114,7 @@
             <div class="col-sm-4">
               <div class="input-group">
                 <input type="text" class="form-control" id="btc"
-                       value="{{stream.minutes * client.rate|SATOSHIS2USD}}" disabled="disabled">
+                       value="{{(stream.minutes * client.rate)|BTC2USD}}" disabled="disabled">
                 <div class="input-group-addon">USD</div>
               </div>
             </div>
@@ -127,7 +127,7 @@
             </div>
           </div>
           <div class="form-group space-top-big">
-            <label for="amount" class="col-sm-4 control-label">Funds locked
+            <label for="amount" class="col-sm-4 control-label">Funds received
               <span class="glyphicon glyphicon-ok" ng-show="fundedMinutes >= 1"></span>
             </label>
             <div class="col-sm-4">
