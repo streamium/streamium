@@ -106,16 +106,16 @@
                           </div>
 
                           <div class="form-group">
-                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-md-5 col-sm-5 col-xs-5">
                               <select
                                 name="rate" required
                                 ng-model="stream.rate"
                                 class="form-control col-md-2"
-                                ng-options="'$' + val + ' BTC/min' for val in prices"/>
+                                ng-options="val + ' BTC/min' for val in prices"/>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="col-md-7 col-sm-7 col-xs-7">
                               <input type="text" class="form-control" id="btc"
-                                value="{{stream.rate|BTC2USD}} USD/min" disabled="disabled">
+                              value="{{stream.rate|BTC2USD}} USD/min ({{(stream.rate*60)|BTC2USD}} USD/hour)" disabled="disabled">
                             </div>
                           </div>
                         </div>
