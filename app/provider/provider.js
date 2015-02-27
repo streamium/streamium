@@ -241,7 +241,9 @@ angular.module('streamium.provider.service', [])
   StreamiumProvider.prototype.endAllBroadcasts = function() {
     var self = this;
     async.map(_.keys(this.mapClientIdToProvider), function(client) {
-      self.endBroadcast(client);
+      if (self.mapClientIdToStatus[client] === StreamiumProvider.STATUS.ready) {
+        self.endBroadcast(client);
+      }
     });
   };
 
