@@ -117,6 +117,17 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   }
 })
 
-.controller('CashoutStreamCtrl', function($scope, $location) {
-  console.log('Cashout Ctrl');
+.controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope) {
+  $scope.client = StreamiumProvider;
+  $scope.clients = [];
+  for (var i in $scope.client.mapClientIdToProvider) {
+    var amount = $scope.client.mapClientIdToProvider[i].currentAmount;
+    var time = Duration.for(StreamiumProvider.rate, amount);
+    if (amount > 0) {
+      $scope.clients.push({
+        amount: amount,
+        timeSpent: time / 1000
+      });
+    }
+  }
 });
