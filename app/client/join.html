@@ -169,7 +169,7 @@
       <input type="hidden" name="change" ng-model="client.change" required>
       <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
         <button type="submit" ng-disabled="form.$invalid || change.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
-          <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> Start
+          <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> {{(!funded)?'Waiting for payment...':(change.change.$invalid?'Please set change address':'Start')}}
         </button>
       </div>
       </form>
