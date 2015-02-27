@@ -80,6 +80,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $scope.$apply();
   });
 
+  StreamiumProvider.on('balanceUpdated', function() {
+    $scope.$apply();
+  });
+
   $scope.end = function() {
     StreamiumProvider.endAllBroadcasts();
     $location.path('/provider/' + $routeParams.streamId + '/cashout');

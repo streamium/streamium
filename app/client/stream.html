@@ -17,7 +17,8 @@
 
         <ul class="nav navbar-nav navbar-left main-navigation small-text">
           <li>
-            <a id="copylink" class="lowercase" data-toggle="tooltip" data-placement="right" title="Share your stream">{{client.getLink()}}</a>
+            <a id="copylink" class="lowercase" data-toggle="tooltip"
+              data-placement="right" title="Share your stream">{{client.getLink()}}</a>
           </li>
         </ul>
       </div>
@@ -35,8 +36,8 @@
 
   <div class="row">
     <div class="col-md-12" ng-hide="requiresApproval">
-      <video class="col-sm-8 col-sm-offset-2 col-md-6
-        col-md-offset-3 col-xs-12 col-xs-offset-0 stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+      <video class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2
+        col-xs-12 col-xs-offset-0 stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
     </div>
   </div>
 
@@ -45,7 +46,7 @@
       <div class="col-md-10 col-sm-10 stream-data">
         <ul class="list-unstyled">
           <div>
-            Your credit will expire <span am-time-ago="expirationDate"></span>
+            Your credit will expire <span am-time-ago="expirationDate"></span> ({{secondsLeft}} seconds)
           </div>
         </ul>
       </div>
@@ -53,8 +54,8 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-      <button ng-disabled="established" ng-click="end()" class="btn btn-danger btn-lg btn-end btn-full">Terminate early</button>
+    <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 ">
+      <button ng-disabled="established" ng-click="end()" class="btn btn-danger btn-lg btn-end btn-full">End stream</button>
     </div>
   </div>
 </div>

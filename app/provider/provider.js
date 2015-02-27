@@ -16,6 +16,7 @@ angular.module('streamium.provider.service', [])
     this.address = this.streamId = this.rate = null;
 
     // TODO: this screams for a status object or add status into Provider
+    this.totalMoney = 0;
     this.mapClientIdToProvider = {};
     this.mapClientIdToStatus = {};
     this.config = config.peerJS;
@@ -222,6 +223,12 @@ angular.module('streamium.provider.service', [])
     if (firstPayment) {
       this.emit('broadcast:start', connection.peer);
     }
+
+    self.totalMoney = 0;
+    for (var providerId in this.mapClientIdToProvider) {
+      self.totalMoney += this.mapClientIdToProvider[providerId].currentAmount;
+    }
+    self.emit('balanceUpdated', self.totalMoney);
 
     connection.send({
       type: 'paymentAck',
