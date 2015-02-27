@@ -174,7 +174,7 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.handlers.commitment = function(connection, data) {
-    var commitment = channel.Transactions.Commitment(JSON.parse(data));
+    var commitment = new channel.Transactions.Commitment(JSON.parse(data));
 
     Insight.broadcast(commitment, function(err) {
       if (err) {
