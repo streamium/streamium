@@ -22,7 +22,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 ])
 
 .controller('CreateStreamCtrl', function($scope, $location, StreamiumProvider, bitcore) {
-  $scope.prices = [0.1, 0.01, 0.001];
+  $scope.prices = [0.5, 0.3, 0.1, 0.07, 0.05, 0.03, 0.01, 0.007, 0.005, 0.003, 0.001, 0.0007, 0.0005, 0.0003, 0.0001];
   $scope.stream = {};
 
   $scope.stream.name = config.DEBUG ? config.defaults.providerStream : '';

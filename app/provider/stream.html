@@ -36,7 +36,10 @@
 
     <div class="row card space-top" ng-show="requiresApproval">
       <div class="col-sm-2 center">
-        <h2><span class="glyphicon glyphicon-facetime-video"></span></h2>
+        <h2>
+          <span class="glyphicon glyphicon-arrow-up"></span>
+          <span class="glyphicon glyphicon-facetime-video"></span>
+        </h2>
       </div>
       <div class="col-sm-10 text-center">
         <h2>Please allow Streamium to use the camera.</h2>
@@ -45,15 +48,15 @@
 
     <div class="row space-top" ng-hide="requiresApproval">
       <div class="col-md-12">
-        <span class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 card">
-          <span class="glyphicon glyphicon-facetime-video"></span> &nbsp;Share this link: <a>{{client.getLink()}}</a>
+        <span class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 card">
+          <span class="glyphicon glyphicon-facetime-video"></span> &nbsp;Share this link with your viewers: <a>{{client.getLink()}}</a>
         </span>
       </div>
     </div>
 
     <div class="row" ng-hide="requiresApproval">
       <div class="col-md-12">
-        <video class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+        <video class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
       </div>
     </div>
 
