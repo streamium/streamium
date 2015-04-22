@@ -83,7 +83,7 @@
 
   <div class="row card" ng-show="client.status == 'funding'">
     <h3>1 - Fund payment channel</h3>
-    <p>We need to lock enough funds to cover the maximum time you expect to spend during the streaming. If you decide to terminate the streaming early, you will receive your change back.</p>
+    <p>In order to prove you've got enough funds to pay the broadcaster, due to the Payment Channel protocol, you should estimate how much time you intend to watch the stream and lock the corresponding funds in the blockchain. If you decide to terminate the streaming before the estimated time, you will receive your change back at a chosen address.</p>
     <form class="form-horizontal">
       <div class="form-group">
         <label for="address" class="col-sm-2 control-label">Send bitcoins to:</label>
@@ -169,7 +169,7 @@
       <input type="hidden" name="change" ng-model="client.change" required>
       <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
         <button type="submit" ng-disabled="form.$invalid || change.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
-          <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> {{(!funded)?'Waiting for payment...':(change.change.$invalid?'Please set change address':'Start')}}
+          {{(!funded)?'Waiting for payment...':(change.change.$invalid?'Please set change address':'Start')}}
         </button>
       </div>
       </form>

@@ -68,8 +68,8 @@
             <div class="intro-section">
 
               <!-- WELCOM MESSAGE -->
-              <h1 class="intro white-text">Create a video streaming channel. Get paid.</h1>
-              <h5 class="white-text">Choose a name for your channel, designate a bitcoin address to cash out your funds, and set how much you want to charge per minute.</h5>
+              <h1 class="intro white-text">Stream Live Video And Get Paid</h1>
+              <h5 class="white-text">Set how much you want to charge your viewers, start broadcasting and earn bitcoins on a per-minute basis.</h5>
 
               <!-- CREATE CHANNEL FORM -->
               <div class="row">
@@ -86,7 +86,7 @@
                               class="form-control"
                               name="name" required
                               ng-model="stream.name"
-                              placeholder="my-stream-name"
+                              placeholder="What's happening?"
                               ng-change="normalizeName()">
                             <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.name.$valid"></span>
                           </div>
@@ -100,7 +100,7 @@
                                 class="form-control"
                                 name="address" required
                                 ng-model="stream.address" valid-address
-                                placeholder="Bitcoin address" style="padding-right:20px">
+                                placeholder="Bitcoin address to receive your earnings" style="padding-right:20px">
                               <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.address.$valid"></span>
                             </div>
                           </div>
@@ -124,7 +124,7 @@
                             <button
                               type="submit"
                               class="btn btn-primary standard-button"
-                              ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Create stream now'}}</button>
+                              ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Start broadcasting'}}</button>
                         </div>
 
                         <script>
@@ -175,7 +175,7 @@
                 <div class="small-text-medium uppercase colored-text">
 
                 </div>
-                <h2 class="dark-text">Stream video directly to your viewers and <strong>get paid instantly</strong>. No middlemen.</h2>
+                <h2 class="dark-text">Stream live video directly to your viewers and <strong>get paid instantly</strong>. No middlemen.</h2>
                 <div class="colored-line">
                 </div>
                 <div class="sub-heading">
@@ -193,7 +193,7 @@
                         </div>
                         <h3 class="colored-text">1. Create</h3>
                         <p>
-                            Create a stream tied to your bitcoin address.
+                            Create a video stream tied to your bitcoin address for free.
                         </p>
                     </div>
                 </div>
@@ -206,7 +206,7 @@
                         </div>
                         <h3 class="colored-text">2. Start</h3>
                         <p>
-                            Start streaming and charge your viewers on a per second basis.
+                            Start live streaming and charge your viewers on a per second basis.
                         </p>
                     </div>
                 </div>
@@ -241,101 +241,7 @@
         </div>
     </section>
 
-    <!-- =========================
-     SECTION: BRIEF RIGHT
-    ============================== -->
-    <section class="brief grey-bg text-left" id="section3">
-        <div class="container">
-            <div class="row">
-
-                <!-- BRIEF IMAGE -->
-                <div class="col-md-6 "  >
-                    <div class="brief-image-left">
-                        <img src="../assets/img/imac-ipad.png" alt="">
-                    </div>
-                </div>
-
-                <!-- BRIEF HEADING -->
-                <div class="col-md-6 content-section "  >
-                    <div class="small-text-medium uppercase colored-text">
-                        
-                    </div>
-                    <h2 class="text-left dark-text">For<strong> Free</strong>. No Risks.</h2>
-                    <div class="colored-line-left">
-                    </div>
-                    <p class="text-left">
-                    </p>
-
-                    <!-- FEATUR ACCORDION WITH ICON -->
-                    <div class="panel-group" id="accordion">
-
-                        <!-- SINGLE ACORDIION -->
-                        <div class="panel panel-default">
-
-                            <!-- ACORDIION HEADING / TITLE -->
-                            <div class="panel-heading" id="headingOne">
-                                <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        <span class="icon-container color-bg"><span class="icon-ecommerce-dollar white-text"></span></span><span class="title-text">$0 Service Fees</span>
-                        </a>
-                        </h4>
-                            </div>
-
-                            <!-- ACORDIION DESCRIPTION / TEXT -->
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    All the bitcoins you earned are yours to keep. There are no middlemen to charge fees or withholding payment.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- SINGLE ACORDIION -->
-                        <div class="panel panel-default">
-
-                            <!-- ACORDIION HEADING / TITLE -->
-                            <div class="panel-heading" id="headingTwo">
-                                <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <span class="icon-container color-bg"><span class="icon-basic-lock white-text"></span></span><span class="title-text">Completely Private</span>
-                        </a>
-                        </h4>
-                            </div>
-
-                            <!-- ACORDIION DESCRIPTION / TEXT -->
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                    Stream directly to your viewers using a private connection. Your stream is not hosted by Streamium nor any other third party.
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- SINGLE ACORDIION -->
-                        <div class="panel panel-default">
-
-                            <!-- ACORDIION HEADING / TITLE -->
-                            <div class="panel-heading" id="headingThree">
-                                <h4 class="panel-title">
-                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <span class="icon-container color-bg"><span class="icon-lightbulb-alt white-text"></span></span><span class="title-text">Get paid as you Stream</span>
-                        </a>
-                        </h4>
-                            </div>
-
-                            <!-- ACORDIION DESCRIPTION / TEXT -->
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body">
-                                    Payments are made using bitcoin payment channels, allowing you to charge per second for content streamed. Trustless payment and communication.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- =========================
+<!-- =========================
      SECTION: BENEFITS
     ============================== -->
     <section class="unique-features white-bg" id="section5">
@@ -346,7 +252,7 @@
                 <div class="small-text-medium uppercase colored-text">
                     
                 </div>
-                <h2 class="dark-text">With many <strong>Use Cases</strong></h2>
+                <h2 class="dark-text">Just like Meerkat and Periscope, <strong>but with Bitcoin.</strong></h2>
                 <div class="colored-line">
                 </div>
                 <div class="sub-heading">
@@ -465,6 +371,101 @@
 
 
     <!-- =========================
+     SECTION: BRIEF RIGHT
+    ============================== -->
+    <section class="brief grey-bg text-left" id="section3">
+        <div class="container">
+            <div class="row">
+
+                <!-- BRIEF IMAGE -->
+                <div class="col-md-6 "  >
+                    <div class="brief-image-left">
+                        <img src="../assets/img/imac-ipad.png" alt="">
+                    </div>
+                </div>
+
+                <!-- BRIEF HEADING -->
+                <div class="col-md-6 content-section "  >
+                    <div class="small-text-medium uppercase colored-text">
+                        
+                    </div>
+                    <h2 class="text-left dark-text">For<strong> Free</strong>. No Risks.</h2>
+                    <div class="colored-line-left">
+                    </div>
+                    <p class="text-left">
+                    </p>
+
+                    <!-- FEATUR ACCORDION WITH ICON -->
+                    <div class="panel-group" id="accordion">
+
+                        <!-- SINGLE ACORDIION -->
+                        <div class="panel panel-default">
+
+                            <!-- ACORDIION HEADING / TITLE -->
+                            <div class="panel-heading" id="headingOne">
+                                <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <span class="icon-container color-bg"><span class="icon-ecommerce-dollar white-text"></span></span><span class="title-text">$0 Service Fees</span>
+                        </a>
+                        </h4>
+                            </div>
+
+                            <!-- ACORDIION DESCRIPTION / TEXT -->
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    All the bitcoins you earned are yours to keep. There are no middlemen to charge fees or withholding payment.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SINGLE ACORDIION -->
+                        <div class="panel panel-default">
+
+                            <!-- ACORDIION HEADING / TITLE -->
+                            <div class="panel-heading" id="headingTwo">
+                                <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <span class="icon-container color-bg"><span class="icon-basic-lock white-text"></span></span><span class="title-text">Completely Private</span>
+                        </a>
+                        </h4>
+                            </div>
+
+                            <!-- ACORDIION DESCRIPTION / TEXT -->
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    Stream directly to your viewers using a private connection. Your stream is not hosted by Streamium nor any other third party.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SINGLE ACORDIION -->
+                        <div class="panel panel-default">
+
+                            <!-- ACORDIION HEADING / TITLE -->
+                            <div class="panel-heading" id="headingThree">
+                                <h4 class="panel-title">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <span class="icon-container color-bg"><span class="icon-lightbulb-alt white-text"></span></span><span class="title-text">Get paid as you Stream</span>
+                        </a>
+                        </h4>
+                            </div>
+
+                            <!-- ACORDIION DESCRIPTION / TEXT -->
+                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body">
+                                    Payments are made using bitcoin payment channels, allowing you to charge per second for content streamed. Trustless payment and communication.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- =========================
      SECTION: SOME STATS
     ============================== -->
     <!-- =========================
@@ -556,7 +557,7 @@
                         <div class="single-feature border-right-colored">
                             <h4 class="colored-text">webRTC</h4>
                             <p class="transparent-text">
-                                Enable web browsers with Real-Time Communications (RTC) capabilities via simple JavaScript APIs, to achieve peer-to-peer video conferencing
+                                The fastest real-time communication service between web browsers
                             </p>
                         </div>
 
@@ -564,7 +565,7 @@
                         <div class="single-feature border-right-colored">
                             <h4 class="colored-text">Bitcoin</h4>
                             <p class="transparent-text">
-                                The world’s first and most popular decentralized cryptocurrency and peer-to-peer payment network
+                                The world’s most popular decentralized cryptocurrency and peer-to-peer payment network
                             </p>
                         </div>
 
@@ -572,7 +573,7 @@
                         <div class="single-feature border-right-colored">
                             <h4 class="colored-text">Micropayments Channel</h4>
                             <p class="transparent-text">
-                                A protocol that leverages the “programmable money” nature of bitcoin transactions to create a stream of payments between two parties in a trustless manner.
+                                A smart contract to create a stream of payments between two parties in a trustless manner
                             </p>
                         </div>
 
@@ -600,7 +601,7 @@
                         <div class="single-feature border-left-colored">
                             <h4 class="colored-text">Bitcore</h4>
                             <p class="transparent-text">
-                                A complete, native interface to the Bitcoin network, and provides the core functionality needed to develop apps for bitcoin.
+                                A complete, native interface for developing apps on the Bitcoin network
                             </p>
                         </div>
 
@@ -608,7 +609,7 @@
                         <div class="single-feature border-left-colored">
                             <h4 class="colored-text">HTML 5</h4>
                             <p class="transparent-text">
-                                HTML5 is a core technology markup language of the Internet used for structuring and presenting content for the World Wide Web.
+                                A core technology markup language used for structuring and presenting content
                             </p>
                         </div>
 
@@ -616,7 +617,7 @@
                         <div class="single-feature border-left-colored">
                             <h4 class="colored-text">Love</h4>
                             <p class="transparent-text">
-                                Yes, Streamium is made with love
+                                Yes, Streamium is made from Argentina with love
                             </p>
                         </div>
 
@@ -625,6 +626,47 @@
             </div>
         </div>
     </section>
+
+<div class="row">
+  <div class="col-md-5" > 
+
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+  #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;}
+  /* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+     We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+<div id="mc_embed_signup">
+<form action="//streamium.us10.list-manage.com/subscribe/post?u=3ca28a4c930c8ccb0748ffd6b&amp;id=b38712ae43" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+  <div id="mc_embed_signup_scroll">
+
+
+<div class="mc-field-group">
+  <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+</div>
+
+  <div id="mce-responses" class="clear">
+    <div class="response" id="mce-error-response" style="display:none"></div>
+    <div class="response" id="mce-success-response" style="display:none"></div>
+  </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+
+
+
+    <div style="position: absolute; left: -5000px;"><input type="text" name="b_3ca28a4c930c8ccb0748ffd6b_b38712ae43" tabindex="-1" value=""></div>
+
+
+  </div> 
+  <div class="col-md-4" > 
+    <div class="clear"><input type="submit" value="Keep me updated" name="subscribe" id="mc-embedded-subscribe" class="button">
+    </div>
+  </div>
+</form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+<!--End mc_embed_signup-->
+</div>
+
 
     <!-- =========================
      SECTION: CONTACT INFO
@@ -647,7 +689,7 @@
     </div>
     <!-- FOOTER -->
     <footer class="footer grey-bg">
-        Streamium. Source code <a href="https://github.com/streamium/paystream/">on Github</a>
+        Streamium. Source code <a href="https://github.com/streamium/paystream/">on GitHub</a>
 
         <!-- SOCIAL ICONS -->
         <ul class="social-icons">
