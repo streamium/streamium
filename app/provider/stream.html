@@ -65,7 +65,7 @@
         <div class="col-md-8 col-sm-8 stream-data">
           <ul class="list-unstyled">
             <li>
-              Balance: {{client.totalMoney | SATOSHIS2BTC}} BTC
+              Earned so far: {{client.totalMoney | SATOSHIS2BTC}} BTC
             </li>
             <li>
               {{client.rate}} BTC/min
@@ -86,7 +86,7 @@
     <div class="row" ng-hide="requiresApproval">
       <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
         <button type="button" class="btn btn-danger btn-lg btn-end btn-full" ng-click="end()">
-          <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> End
+          End broadcast
         </button>
       </div>
     </div>
