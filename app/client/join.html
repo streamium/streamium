@@ -49,130 +49,70 @@
   </div>
 
   <div class="row card" ng-show="client.status == 'funding'">
-    <h3>Connecting to stream:</h3>
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label for="name" class="col-sm-2 control-label">Name</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" value="{{stream.name}}" readonly>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="pubkey" class="col-sm-2 control-label">Public Key</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="pubkey" value="{{client.providerKey}}" readonly>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="rate" class="col-sm-2 control-label">Price</label>
-        <div class="col-sm-5">
-          <div class="input-group">
-            <input type="text" class="form-control" id="rate" value="{{client.rate}}" readonly>
-            <div class="input-group-addon">BTC/min</div>
-          </div>
-        </div>
-        <div class="col-sm-5">
-          <div class="input-group">
-            <input type="text" class="form-control" id="rate" value="{{client.rate|BTC2USD}}" readonly>
-            <div class="input-group-addon">USD/min</div>
-          </div>
-        </div>
-      </div>
-    </form>
+    <h3>Connecting to <strong>{{stream.name}}</strong></h3>
+    <p>
+      In order to prove you've got enough funds to pay the broadcaster, due to the Payment channel protocol, you should estimate how much time you intend to watch the stream, and lock the corresponding funds in the blockchain.
+    </p>
+    <p>
+      If you decide to terminate the streaming before the estimated time, you will receive your change back at a chosen address.
+    </p>
   </div>
 
   <div class="row card" ng-show="client.status == 'funding'">
-    <h3>1 - Fund payment channel</h3>
-    <p>In order to prove you've got enough funds to pay the broadcaster, due to the Payment Channel protocol, you should estimate how much time you intend to watch the stream and lock the corresponding funds in the blockchain. If you decide to terminate the streaming before the estimated time, you will receive your change back at a chosen address.</p>
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label for="address" class="col-sm-2 control-label">Send bitcoins to:</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" id="address" value="{{fundingAddress}}" readonly>
-        </div>
-      </div>
-    </form>
-
-    <div class="row space-top">
-      <div class="col-sm-4 center">
-        <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
-      </div>
-      <div class="col-sm-8">
-        <form class="form-horizontal">
-          <div class="form-group">
-            <label class="col-sm-4 control-label">Maximum time</label>
-            <div class="col-sm-8">
-              <select
-                name="minutes" required
-                ng-model="stream.minutes"
-                class="form-control col-md-2"
-                ng-options="val + ' minutes' for val in minutes"/>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="amount" class="col-sm-4 control-label"></label>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" id="btc"
-                       value="{{(stream.minutes * client.rate)|BTC2USD}}" disabled="disabled">
-                <div class="input-group-addon">USD</div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" id="btc"
-                       value="{{stream.minutes * client.rate}}" disabled="disabled">
-                <div class="input-group-addon">BTC</div>
-              </div>
-            </div>
-          </div>
-          <div class="form-group space-top-big">
-            <label for="amount" class="col-sm-4 control-label">Funds received
-              <span class="glyphicon glyphicon-ok" ng-show="fundedMinutes >= 1"></span>
-            </label>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" id="amount" value="{{fundedMinutes}}" readonly>
-                <div class="input-group-addon">min</div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="input-group">
-                <input type="text" class="form-control" id="amount" value="{{funds|SATOSHIS2BTC}}" readonly>
-                <div class="input-group-addon">BTC</div>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+    <div class="col-sm-1 center step-count">1</div>
+    <div class="col-sm-11 left-border">
+      I want to watch
+      <select
+        name="minutes" required
+        class="borderless"
+        ng-model="stream.minutes"
+        ng-options="val + ' minutes' for val in minutes"/><br/>
+      <strong>Price</strong>
+      <span class="rate">{{client.rate}} BTC/min</span>
+      <span class="rate">{{client.rate|BTC2USD}} USD/min</span>
     </div>
-
   </div>
 
   <div class="row card" ng-show="client.status == 'funding'">
-    <h3>2 - Change Address</h3>
-    <p>Please provide a bitcoin address to send your change when the stream finishes.</p>
-    <form class="form-horizontal" name="change">
-      <div class="form-group has-feedback">
-        <label for="change" class="col-sm-2 control-label">Change address</label>
-        <div class="col-sm-10">
-          <input type="text" class="form-control" name="change" ng-model="client.change" placeholder="send my change here" valid-address required>
-          <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="change.change.$valid"></span>
+    <div class="col-sm-1 center step-count">2</div>
+    <div class="col-sm-11 left-border">
+      Send <strong>{{stream.minutes * client.rate}}</strong> BTC to
+    
+      <div class="row" style="margin-top: 20px">
+        <div class="col-sm-4 center">
+          <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
+        </div>
+        <div class="col-sm-8">
+          <div class="funding-address">{{fundingAddress}}</div>
+          <div ng-hide="funds">Waiting for transaction</div>
+          <ul class="checkmark" ng-show="funds">
+            <li>Transaction received</li>
+            <li>{{funds|SATOSHIS2BTC}} BTC</li>
+            <li>{{fundedMinutes}} minutes</li>
+          </ul>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 
-    <div class="row">
-      <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate ng-hide="client.status == 'connecting'">
-      <input type="hidden" name="funded" ng-model="funded" required>
-      <input type="hidden" name="change" ng-model="client.change" required>
-      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-        <button type="submit" ng-disabled="form.$invalid || change.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
-          {{(!funded)?'Waiting for payment...':(change.change.$invalid?'Please set change address':'Start')}}
-        </button>
-      </div>
-      </form>
+  <div class="row card" ng-show="client.status == 'funding'">
+    <div class="col-sm-1 center step-count">3</div>
+    <div class="col-sm-11 left-border">
+      When the stream ends, I want to receive my change at <input type="text" name="change" ng-model="client.change" placeholder="bitcoin change address" class="borderless" valid-address required>
     </div>
+  </div>
+
+
+  <div class="row">
+    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate ng-hide="client.status == 'connecting'">
+    <input type="hidden" name="funded" ng-model="funded" required>
+    <input type="hidden" name="change" ng-model="client.change" required>
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
+      <button type="submit" ng-disabled="form.$invalid || change.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
+        {{(!funded)?'Waiting for payment...':(change.change.$invalid?'Please set change address':'Start')}}
+      </button>
+    </div>
+    </form>
+  </div>
 
 </div>
