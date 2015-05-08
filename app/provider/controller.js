@@ -117,16 +117,23 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   }
 })
 
-.controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope) {
+.controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore) {
   $scope.client = StreamiumProvider;
+  $scope.totalMoney = 0;
   $scope.clients = [];
   for (var i in $scope.client.mapClientIdToProvider) {
     var amount = $scope.client.mapClientIdToProvider[i].currentAmount;
     var time = Duration.for(StreamiumProvider.rate, amount);
+    $scope.totalMoney += amount;
     if (amount > 0) {
+      var txId = $scope.client.mapClientIdToProvider[i].paymentTx.id;
       $scope.clients.push({
         amount: amount,
-        timeSpent: time / 1000
+        timeSpent: time / 1000,
+        transactionName: txId.substr(0, 4) + '...' + txId.substr(60, 64),
+        transactionUrl:  'https://'
+          + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '')
+          + 'insight.bitpay.com/tx/' + txId
       });
     }
   }

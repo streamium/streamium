@@ -21,13 +21,19 @@ angular.module('streamium.client.controller', ['ngRoute'])
         }
 ])
 
-.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location) {
+.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore) {
   $scope.client = StreamiumClient;
   $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 25, 30, 45, 60];
   $scope.stream = {};
   $scope.stream.minutes = $scope.minutes[5];
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
+
+  $scope.$watch('refundAddress', function(newValue) {
+    if (bitcore.Address.isValid(newValue)) {
+      $scope.client.refundAddress = new bitcore.Address(newValue);
+    }
+  });
 
   if (config.DEBUG) $scope.client.change = config.defaults.clientChange;
 
@@ -113,7 +119,16 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
 })
 
-.controller('WithdrawStreamCtrl', function($scope, $routeParams) {
-  console.log('Cashout stream', $routeParams);
-  $scope.apply();
+.controller('WithdrawStreamCtrl', function($scope, $routeParams, StreamiumClient, Duration, bitcore) {
+  $scope.client = StreamiumClient;
+
+  $scope.spent = StreamiumClient.consumer.paymentTx.paid;
+  $scope.duration = Duration.for(StreamiumClient.consumer.paymentTx.paid);
+  $scope.change = StreamiumClient.consumer.paymentTx.amount - StreamiumClient.consumer.paymentTx.paid;
+  $scope.transaction = StreamiumClient.consumer.paymentTx.id;
+
+  $scope.transactionUrl = 'https://'
+    + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'testnet-' : '')
+    + 'insight.bitpay.com/tx/' + $scope.transaction;
+
 });

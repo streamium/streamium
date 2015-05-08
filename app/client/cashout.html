@@ -35,17 +35,22 @@
       
       <dl class="dl-horizontal">
         <dt>Spent:</dt>
-        <dd>85858 USD</dd>
+        <dd>{{spent | SATOSHIS2USD}} ({{spent}} satoshis)</dd>
       </dl>
 
       <dl class="dl-horizontal">
         <dt>Duration:</dt>
-        <dd>1:04</dd>
+        <dd>{{duration}}</dd>
       </dl>
 
       <dl class="dl-horizontal">
         <dt>Change:</dt>
-        <dd>5 USD</dd>
+        <dd>{{change | SATOSHIS2USD}} ({{change}} satoshis)</dd>
+      </dl>
+
+      <dl class="dl-horizontal">
+        <dt>Transaction:</dt>
+        <dd><a href="{{transactionUrl}}">{{transaction}}</a></dd>
       </dl>
 
 
