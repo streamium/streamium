@@ -98,18 +98,22 @@
   <div class="row card" ng-show="client.status == 'funding'">
     <div class="col-sm-1 center step-count">3</div>
     <div class="col-sm-11 left-border">
-      When the stream ends, I want to receive my change at <input type="text" name="change" ng-model="client.change" placeholder="bitcoin change address" class="borderless" valid-address required>
+      <div class="col-md-6">
+        When the stream ends, I want to receive my change at
+      </div>
+        <input type="text" name="change" ng-model="client.change"
+          placeholder="bitcoin change address" class="col-md-6 borderless" valid-address required>
     </div>
   </div>
 
 
   <div class="row">
-    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate ng-hide="client.status == 'connecting'">
+    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" novalidate ng-hide="client.status === 'connecting'">
     <input type="hidden" name="funded" ng-model="funded" required>
-    <input type="hidden" name="change" ng-model="client.change" required>
+    <input type="hidden" name="change" ng-model="client.change" required validAddress>
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-      <button type="submit" ng-disabled="form.$invalid || change.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
-        {{(!funded)?'Waiting for payment...':(change.change.$invalid?'Please set change address':'Start')}}
+      <button type="submit" ng-disabled="form.$invalid || form.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
+        {{(!funded)?'Waiting for payment...':(form.change.$invalid?'Please set valid change address':'Start')}}
       </button>
     </div>
     </form>

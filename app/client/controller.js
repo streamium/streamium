@@ -3,22 +3,22 @@
 angular.module('streamium.client.controller', ['ngRoute'])
 
 .config(['$routeProvider',
-        function($routeProvider) {
-          $routeProvider.when('/join/:streamId', {
-            templateUrl: 'client/join.html',
-            controller: 'JoinStreamCtrl'
-          });
+  function($routeProvider) {
+    $routeProvider.when('/join/:streamId', {
+      templateUrl: 'client/join.html',
+      controller: 'JoinStreamCtrl'
+    });
 
-          $routeProvider.when('/stream/:streamId', {
-            templateUrl: 'client/stream.html',
-            controller: 'WatchStreamCtrl'
-          });
+    $routeProvider.when('/stream/:streamId', {
+      templateUrl: 'client/stream.html',
+      controller: 'WatchStreamCtrl'
+    });
 
-          $routeProvider.when('/stream/:streamId/cashout', {
-            templateUrl: 'client/cashout.html',
-            controller: 'WithdrawStreamCtrl'
-          });
-        }
+    $routeProvider.when('/stream/:streamId/cashout', {
+      templateUrl: 'client/cashout.html',
+      controller: 'WithdrawStreamCtrl'
+    });
+  }
 ])
 
 .controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore) {
@@ -29,13 +29,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
 
-  $scope.$watch('refundAddress', function(newValue) {
-    if (bitcore.Address.isValid(newValue)) {
-      $scope.client.refundAddress = new bitcore.Address(newValue);
-    }
-  });
-
-  if (config.DEBUG) $scope.client.change = config.defaults.clientChange;
+  if (config.DEBUG) {
+    $scope.client.change = config.defaults.clientChange;
+  }
 
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;
@@ -61,7 +57,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   });
 
   $scope.submit = function() {
-    StreamiumClient.refundAddress = $scope.changeAddress;
+    StreamiumClient.consumer.refundAddress = $scope.changeAddress;
     $location.path('/stream/' + $routeParams.streamId);
   };
 })

@@ -3,20 +3,20 @@
 angular.module('streamium.bitcoin', [])
 
 .factory('bitcore', function() {
-  return require('bitcore');
-})
-.factory('explorers', function() {
-  return require('bitcore-explorers');
-})
-.factory('channel', function() {
-  return require('bitcore-channel');
-})
-.factory('events', function() {
-  return require('events');
-})
-.factory('inherits', function() {
-  return require('inherits');
-})
+    return require('bitcore');
+  })
+  .factory('explorers', function() {
+    return require('bitcore-explorers');
+  })
+  .factory('channel', function() {
+    return require('bitcore-channel');
+  })
+  .factory('events', function() {
+    return require('events');
+  })
+  .factory('inherits', function() {
+    return require('inherits');
+  })
 
 .directive('validAddress', ['bitcore',
   function(bitcore) {
@@ -25,15 +25,18 @@ angular.module('streamium.bitcoin', [])
       link: function(scope, elem, attrs, ctrl) {
 
         var validator = function(value) {
-          console.log('Validate value', value);
           if (!value) return;
 
           var valid = bitcore.Address.isValid(value, config.network);
           ctrl.$setValidity('validAddress', valid);
-          return value;
+          return valid ? value : undefined;
         };
 
         ctrl.$parsers.unshift(validator);
+        ctrl.$formatters.unshift(function(value) {
+          ctrl.$setValidity('validAddress', bitcore.Address.isValid(value, config.network));
+          return value;
+        });
       }
     };
   }
