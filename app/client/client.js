@@ -14,7 +14,7 @@ angular.module('streamium.client.service', [])
     this.network = bitcore.Networks.testnet;
     bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
 
-    this.fundingKey = config.DEBUG ? new bitcore.PrivateKey(config.defaults.fundingKey) : '';
+    this.fundingKey = config.DEBUG ? new bitcore.PrivateKey(config.defaults.fundingKey) : undefined;
     this.rate = this.providerKey = null;
     this.peer = this.connection = null;
 
@@ -136,7 +136,7 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.getExpirationDate = function() {
-    return new Date(this.startTime + this.getDuration(this.consumer.refundTx._outputAmount));
+    return new Date(this.startTime + this.getDuration(this.consumer.refundTx.outputAmount));
   };
 
   StreamiumClient.prototype.startPaying = function() {

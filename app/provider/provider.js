@@ -158,7 +158,7 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.endBroadcast = function(peerId) {
     var payment = this.mapClientIdToProvider[peerId].paymentTx;
-    Insight.broadcast(payment.uncheckedSerialize(), function(err) {
+    Insight.broadcast(payment.serialize(), function(err) {
       if (err) {
         console.log('Error broadcasting ' + payment);
         console.log(err);
@@ -171,13 +171,13 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.getFinalExpirationFor = function(provider) {
 
-    return provider.startTime + Duration.for(this.rate, provider.refund._outputAmount);
+    return provider.startTime + Duration.for(this.rate, provider.refund.outputAmount);
   };
 
   StreamiumProvider.prototype.handlers.commitment = function(connection, data) {
     var commitment = new channel.Transactions.Commitment(JSON.parse(data));
 
-    Insight.broadcast(commitment.uncheckedSerialize(), function(err) {
+    Insight.broadcast(commitment.serialize(), function(err) {
       if (err) {
         console.log(err);
         this.emit('broadcast:end', connection);
