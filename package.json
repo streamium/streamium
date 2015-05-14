@@ -17,8 +17,6 @@
     "node": "*"
   },
   "dependencies": {
-    "bitcore": "git://github.com/bitpay/bitcore.git",
-    "bitcore-channel": "git://github.com/bitpay/bitcore-channel.git",
     "http-server": "^0.6.1",
     "peer": "^0.2.8"
   },
