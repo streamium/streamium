@@ -57,7 +57,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   });
 
   $scope.submit = function() {
-    StreamiumClient.consumer.refundAddress = $scope.changeAddress;
+    StreamiumClient.refundAddress = $scope.changeAddress;
     $location.path('/stream/' + $routeParams.streamId);
   };
 })

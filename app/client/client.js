@@ -14,6 +14,7 @@ angular.module('streamium.client.service', [])
     this.network = bitcore.Networks.testnet;
     bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
 
+    this.fundingKey = config.DEBUG ? new bitcore.PrivateKey(config.defaults.fundingKey) : '';
     this.rate = this.providerKey = null;
     this.peer = this.connection = null;
 
@@ -91,12 +92,12 @@ angular.module('streamium.client.service', [])
     this.providerAddress = new bitcore.Address(data.paymentAddress);
     this.status = StreamiumClient.STATUS.funding;
 
-    console.log('Change address is ' + this.refundAddress);
     this.consumer = new Consumer({
       network: this.network,
       providerPublicKey: this.providerKey,
       providerAddress: this.providerAddress,
-      refundAddress: this.refundAddress
+      refundAddress: this.refundAddress,
+      fundingKey: this.fundingKey
     });
 
     this.fundingCallback(null, this.consumer.fundingAddress.toString());
