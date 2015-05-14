@@ -108,12 +108,12 @@
 
 
   <div class="row">
-    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" no-validate ng-hide="client.status == 'connecting'">
+    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" novalidate ng-hide="client.status === 'connecting'">
     <input type="hidden" name="funded" ng-model="funded" required>
-    <input type="hidden" name="change" ng-model="client.change" required>
+    <input type="hidden" name="change" ng-model="client.change" required validAddress>
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-      <button type="submit" ng-disabled="form.$invalid || change.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
-        {{(!funded)?'Waiting for payment...':(change.change.$invalid?'Please set change address':'Start')}}
+      <button type="submit" ng-disabled="form.$invalid || form.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
+        {{(!funded)?'Waiting for payment...':(form.change.$invalid?'Please set valid change address':'Start')}}
       </button>
     </div>
     </form>
