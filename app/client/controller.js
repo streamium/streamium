@@ -29,13 +29,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
 
-  $scope.$watch('refundAddress', function(newValue) {
-    if (bitcore.Address.isValid(newValue)) {
-      $scope.client.refundAddress = new bitcore.Address(newValue);
-    }
-  });
-
-  if (config.DEBUG) $scope.client.change = config.defaults.clientChange;
+  if (config.DEBUG) {
+    $scope.client.change = config.defaults.clientChange;
+  }
 
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) throw err;
