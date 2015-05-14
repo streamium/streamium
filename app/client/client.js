@@ -91,6 +91,7 @@ angular.module('streamium.client.service', [])
     this.providerAddress = new bitcore.Address(data.paymentAddress);
     this.status = StreamiumClient.STATUS.funding;
 
+    console.log('Change address is ' + this.refundAddress);
     this.consumer = new Consumer({
       network: this.network,
       providerPublicKey: this.providerKey,
@@ -146,7 +147,6 @@ angular.module('streamium.client.service', [])
     this.interval = setInterval(function() {
       self.updatePayment();
     }, TIMESTEP);
-    console.log('Interval is ', this.interval);
 
     this.consumer.incrementPaymentBy(satoshis);
     this.sendPayment();

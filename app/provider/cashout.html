@@ -33,8 +33,8 @@
 				<h2>Stream Earnings</h2>
 			</div>
 			<div class="text-center">
-        <h1><span class="green-text">{{client.totalMoney || SATOSHIS2USD}} USD</span></h1>	
-        <h4><span class="green-text">{{client.totalMoney || SATOSHIS2BTC}} BTC</span></h4>	
+        <h1><span class="green-text">{{totalMoney | SATOSHIS2USD}} USD</span></h1>	
+        <h4><span class="green-text">{{totalMoney | SATOSHIS2BTC}} BTC</span></h4>	
 			</div>
 			
 
@@ -43,16 +43,19 @@
 				<caption>Check out the users transactions:</caption>
 				<thead>
 					<tr>
-						<td>User</td>
+						<td></td>
 						<td>Time Spent</td>
 						<td>Payment</td>
+						<td>Transaction ID</td>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="client in clients">
-						<td>User</td>
+            <td>Viewer {{$index + 1}}</td>
             <td>{{client.timeSpent}} seconds</td>
             <td>${{client.amount | SATOSHIS2USD}} ({{client.amount | SATOSHIS2BTC}} BTC)</td>
+            <td>{{client.transactionId}}</td>
+            <td><a href="{{client.transactionUrl}}">{{client.transactionName}}</a></td>
 					</tr>	
 				</tbody>
 			</table>
