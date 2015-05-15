@@ -160,10 +160,12 @@ angular.module('streamium.provider.service', [])
   StreamiumProvider.prototype.handlers.commitment = function(connection, data) {
     var commitment = new channel.Transactions.Commitment(JSON.parse(data));
 
-    Insight.broadcast(commitment.serialize(), function(err) {
+    Insight.broadcast(commitment.serialize(), function(err, txid) {
       if (err) {
         console.log(err);
         this.emit('broadcast:end', connection);
+      } else {
+        console.log('Commitment tx broadcasted', txid);
       }
     });
   };
