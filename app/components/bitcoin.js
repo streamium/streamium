@@ -3,7 +3,8 @@
 angular.module('streamium.bitcoin', [])
 
 .factory('bitcore', function() {
-    return require('bitcore');
+    var bitcore = require('bitcore');
+    return bitcore;
   })
   .factory('explorers', function() {
     return require('bitcore-explorers');

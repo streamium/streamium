@@ -11,8 +11,8 @@ angular.module('streamium.client.service', [])
   var TIMESTEP = 10 * MILLIS_IN_SECOND;
 
   function StreamiumClient() {
-    this.network = bitcore.Networks.testnet;
-    bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
+    this.network = bitcore.Networks.get(config.network);
+    bitcore.Networks.defaultNetwork = this.network;
 
     this.fundingKey = config.DEBUG ? new bitcore.PrivateKey(config.defaults.fundingKey) : undefined;
     this.rate = this.providerKey = null;

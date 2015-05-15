@@ -4,7 +4,7 @@ angular.module('streamium.insight', [])
 
 .service('Insight', function(bitcore, explorers) {
 
-  var insight = new explorers.Insight('testnet');
+  var insight = new explorers.Insight(config.network);
 
   var queryBalance = function(address, callback) {
     insight.getUnspentUtxos(address, callback);

@@ -1,11 +1,11 @@
 'use strict';
 
 var config = {
-  network: 'testnet',
+  network: 'livenet',
   peerJS: {
     key: 'gqjtidom02akyb9',
-    host: '192.168.1.124',
-    port: 9000,
+    //host: '192.168.1.124',
+    //port: 9000,
     debug: 0,
     config: {
       'iceServers': [{

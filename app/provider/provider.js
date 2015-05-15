@@ -10,8 +10,8 @@ angular.module('streamium.provider.service', [])
   var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
 
   function StreamiumProvider() {
-    this.network = bitcore.Networks.testnet;
-    bitcore.Networks.defaultNetwork = bitcore.Networks.testnet;
+    this.network = bitcore.Networks.get(config.network);
+    bitcore.Networks.defaultNetwork = this.network;
 
     this.address = this.streamId = this.rate = null;
 
