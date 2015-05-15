@@ -120,6 +120,7 @@ angular.module('streamium.client.service', [])
     this.consumer.validateRefund(data);
     this.status = StreamiumClient.STATUS.ready;
 
+    console.log(this.consumer.commitmentTx.toJSON());
     Insight.broadcast(this.consumer.commitmentTx, function(err) {
       self.emit('commitmentBroadcast');
       if (err) {
@@ -200,12 +201,11 @@ angular.module('streamium.client.service', [])
     }
 
     bitcore.util.preconditions.checkState(
-      this.consumer.commitmentTx._inputAmount,
+      this.consumer.commitmentTx.inputAmount > 0,
       'Transaction is not funded'
     );
 
     this.status = StreamiumClient.STATUS.waiting;
-    this.consumer.commitmentTx._updateChangeOutput();
     var payload = this.consumer.setupRefund().toJSON();
     this.connection.send({
       type: 'sign',

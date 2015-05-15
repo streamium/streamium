@@ -105,7 +105,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     });
   };
   if (!StreamiumProvider.streamId) {
-    StreamiumProvider.init(name, 'n3vNjpQB8GUVNz5R2hSM8rq4EgMEQqS4AZ', 0.012, function(err) {
+    // TODO: remove this
+    StreamiumProvider.init(name, 'n3vNjpQB8GUVNz5R2hSM8rq4EgMEQqS4AZ', 0.001, function(err) {
       if (err) {
         console.log(err);
         return;

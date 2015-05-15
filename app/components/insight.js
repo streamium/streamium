@@ -10,6 +10,10 @@ angular.module('streamium.insight', [])
     insight.getUnspentUtxos(address, callback);
   };
 
+  var validateUTXOS = function(utxos) {
+    return utxos.length === 0;
+  };
+
   var pollBalance = function(address, callback) {
     queryBalance(address, function(err, utxos) {
       if (err) {
@@ -18,7 +22,7 @@ angular.module('streamium.insight', [])
         }, 10000);
       }
       // if no utxos found in that address...
-      if (utxos.length === 0) {
+      if (validateUTXOS(utxos)) {
         return setTimeout(function() {
           pollBalance(address, callback);
         }, 10000);
