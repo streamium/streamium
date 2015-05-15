@@ -25,7 +25,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.client = StreamiumClient;
   $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 25, 30, 45, 60];
   $scope.stream = {};
-  $scope.stream.minutes = $scope.minutes[5];
+  $scope.stream.minutes = $scope.minutes[1];
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
 
@@ -62,7 +62,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
 })
 
-.controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval) {
+.controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval, bitcore) {
   if (!StreamiumClient.isReady()) {
     $location.path('/join/' + $routeParams.streamId);
     return;
