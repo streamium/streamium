@@ -209,7 +209,6 @@ angular.module('streamium.client.service', [])
 
   StreamiumClient.prototype.end = function() {
     console.log('clearing interval ' + this.interval);
-    console.trace();
     clearInterval(this.interval);
     this.status = StreamiumClient.STATUS.finished;
     this.emit('end');
