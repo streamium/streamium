@@ -79,20 +79,28 @@ angular.module('streamium.client.controller', ['ngRoute'])
         return;
       }
 
+      // show provider video on screen
       var videoSrc = URL.createObjectURL(stream);
       $scope.videoSrc = videoSrc;
       $scope.$digest();
+
+      // start sending payments at regular intervals
+      StreamiumClient.setupPaymentUpdates();
     });
   };
 
-  StreamiumClient.on('commitmentBroadcast', function() {
+  StreamiumClient.on('refundReceived', function() {
     if (!StreamiumClient.peer) {
       StreamiumClient.connect(streamId, function(err, fundingAddress) {
         if (err) throw err;
+        console.log('refund received 1');
         startViewer();
+        StreamiumClient.startPaying();
       });
     } else {
+      console.log('refund received 2');
       startViewer();
+      StreamiumClient.startPaying();
     }
   });
 
@@ -123,8 +131,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.change = StreamiumClient.consumer.paymentTx.amount - StreamiumClient.consumer.paymentTx.paid;
   $scope.transaction = StreamiumClient.consumer.paymentTx.id;
 
-  $scope.transactionUrl = 'https://'
-    + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'testnet-' : '')
-    + 'insight.bitpay.com/tx/' + $scope.transaction;
+  $scope.transactionUrl = 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'testnet-' : '') + 'insight.bitpay.com/tx/' + $scope.transaction;
 
 });

@@ -120,16 +120,7 @@ angular.module('streamium.client.service', [])
     this.consumer.validateRefund(data);
     this.status = StreamiumClient.STATUS.ready;
 
-    console.log(this.consumer.commitmentTx.toJSON());
-    Insight.broadcast(this.consumer.commitmentTx, function(err) {
-      self.emit('commitmentBroadcast');
-      if (err) {
-        console.log('Impossibe to broadcast to insight');
-        return;
-      }
-      self.startPaying();
-      self.emit('commitmentBroadcast');
-    });
+    self.emit('refundReceived');
   };
 
   StreamiumClient.prototype.getDuration = function(satoshis) {
@@ -141,17 +132,19 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.startPaying = function() {
-    var self = this;
     var satoshis = 2 * this.stepSatoshis;
     this.startTime = new Date().getTime();
 
     this.sendCommitment();
+    this.consumer.incrementPaymentBy(satoshis);
+    this.sendPayment();
+  };
+
+  StreamiumClient.prototype.setupPaymentUpdates = function() {
+    var self = this;
     this.interval = setInterval(function() {
       self.updatePayment();
     }, TIMESTEP);
-
-    this.consumer.incrementPaymentBy(satoshis);
-    this.sendPayment();
   };
 
   StreamiumClient.prototype.updatePayment = function() {
