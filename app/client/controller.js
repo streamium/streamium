@@ -75,6 +75,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
       // called on provider calling us
       if (err) {
         console.log(err);
+        StreamiumClient.errored = true;
         StreamiumClient.end();
         return;
       }
@@ -117,11 +118,20 @@ angular.module('streamium.client.controller', ['ngRoute'])
 .controller('WithdrawStreamCtrl', function($scope, $routeParams, StreamiumClient, Duration, bitcore) {
   $scope.client = StreamiumClient;
 
+  $scope.refundTx = StreamiumClient.consumer.refundTx.uncheckedSerialize();
+  $scope.displayRefund = StreamiumClient.errored;
+
   $scope.spent = StreamiumClient.consumer.paymentTx.paid;
   $scope.duration = Duration.for(StreamiumClient.consumer.paymentTx.paid);
   $scope.change = StreamiumClient.consumer.paymentTx.amount - StreamiumClient.consumer.paymentTx.paid;
   $scope.transaction = StreamiumClient.consumer.paymentTx.id;
 
-  $scope.transactionUrl = 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'testnet-' : '') + 'insight.bitpay.com/tx/' + $scope.transaction;
+  $scope.commitmentTx = StreamiumClient.consumer.commitmentTx.uncheckedSerialize();
+  $scope.fundingKey = StreamiumClient.consumer.fundingKey.toString()
+  $scope.privkey = StreamiumClient.consumer.commitmentKey.toString()
+  $scope.serverPubkey = StreamiumClient.consumer.providerPublicKey.toString();
+  $scope.contractAddress = StreamiumClient.consumer.commitmentTx.address.toString();
+
+  $scope.transactionUrl = 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '') + 'insight.bitpay.com/tx/' + $scope.transaction;
 
 });

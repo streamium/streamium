@@ -28,6 +28,15 @@
 </header>
 <div class="container content-pg">
   <div class="row card space-top">
+    <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 "
+      ng-show="displayRefund">
+      <div class="bg-warning center">
+        The provider did not finish correctly the stream. You can broadcast the refund transaction tomorrow, if the provider did not sent the last transaction (using <a href="https://blockchain.info/pushtx">https://blockchain.info/pushtx</a>).
+        <textarea cols=50>
+          {{ refundTx }}
+        </textarea>
+      </div>
+    </div>
     <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 ">
       <div class="page-header">
         <h2>Payment overview</h2>
@@ -69,6 +78,46 @@
 
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
       <p>Show your love and donate to: <a href="bitcoin:3PNpvbnDoJRN6wmkWTq3NNxWURcqLtBFLt">3PNpvbnDoJRN6wmkWTq3NNxWURcqLtBFLt</a></p>
+
+      <h3>Transaction technical details</h3>
+      <button class="btn" ng-click="showTech = 1" ng-hide="showTech">Show</button>
+      <div ng-show="showTech" class="center">
+        <dl class="dl-horizontal">
+          <dt>Commitment Transaction:</dt>
+          <dd>
+            <textarea cols=50>
+              {{ commitmentTx }}
+            </textarea>
+          </dd>
+        </dl>
+        
+        <dl class="dl-horizontal">
+          <dt>Refund Transaction:</dt>
+          <dd>
+            <textarea cols=50>
+              {{ refundTx }}
+            </textarea>
+          </dd>
+        </dl>
+        
+        <dl class="dl-horizontal">
+          <dt>Contract Address:
+          <dd>{{ contractAddress }}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Funding private key:</dt>
+          <dd>{{ fundingKey }}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Contract private key:</dt>
+          <dd>{{ privkey }}</dd>
+        </dl>
+        <dl class="dl-horizontal">
+          <dt>Server public key
+          <dd>{{ serverPubkey }}</dd>
+        </dl>
+      </div>
+
     </div>
   </div>
 </div>

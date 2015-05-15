@@ -64,6 +64,7 @@ angular.module('streamium.client.service', [])
 
     this.peer.on('error', function onError(error) {
       console.log('Error with provider connection', error);
+      self.errored = true;
       self.status = StreamiumClient.STATUS.disconnected;
       callback(error);
     });
