@@ -128,8 +128,6 @@ angular.module('streamium.provider.service', [])
       return;
     }
 
-    console.log('Received a request to sign a refund tx:', data);
-
     this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.waiting;
 
     data = JSON.parse(data);
@@ -142,35 +140,20 @@ angular.module('streamium.provider.service', [])
     });
   };
 
-  StreamiumProvider.prototype.handlers.end = function(connection, data) {
-
-    if (!(connection.peer in this.mapClientIdToProvider)) {
-      console.log('Error: Received `end` from non-existing peer:', data);
-      return;
-    }
-
-    if (data) {
-      this.handlers.payment(connection, data);
-    }
-
-    this.endBroadcast(connection.peer);
-  };
-
   StreamiumProvider.prototype.endBroadcast = function(peerId) {
+    this.emit('broadcast:end', peerId);
     var payment = this.mapClientIdToProvider[peerId].paymentTx;
-    Insight.broadcast(payment.serialize(), function(err) {
+    Insight.broadcast(payment.serialize(), function(err, txid) {
       if (err) {
         console.log('Error broadcasting ' + payment);
         console.log(err);
       } else {
-        console.log('Payment broadcasted correctly');
+        console.log('Payment broadcasted correctly', txid);
       }
     });
-    this.emit('broadcast:end', peerId);
   };
 
   StreamiumProvider.prototype.getFinalExpirationFor = function(provider) {
-
     return provider.startTime + Duration.for(this.rate, provider.refund.outputAmount);
   };
 
@@ -212,7 +195,7 @@ angular.module('streamium.provider.service', [])
 
     clearTimeout(provider.timeout);
     provider.timeout = setTimeout(function() {
-      console.log('Peer connection timed out');
+      console.log('Payment channel out of funds for ', connection.peer);
       self.endBroadcast(connection.peer);
     }, Math.min(expiration, refundExpiration) - new Date().getTime());
 

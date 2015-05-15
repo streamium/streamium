@@ -149,12 +149,17 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.updatePayment = function() {
+    var maxSatoshis = this.consumer.refundTx.outputAmount;
+    var currentSatoshis = this.consumer.paymentTx.paid + this.consumer.paymentTx.getFee() + this.stepSatoshis;
+    if (currentSatoshis > maxSatoshis) {
+      return;
+    }
+    console.log('used', currentSatoshis, 'of', maxSatoshis, 'satoshis');
     this.consumer.incrementPaymentBy(this.stepSatoshis);
     this.sendPayment();
   };
 
   StreamiumClient.prototype.sendPayment = function() {
-
     if (this.status !== StreamiumClient.STATUS.ready) {
       console.log('Error: not ready to pay! Status is: ', this.status);
       return;
@@ -174,13 +179,8 @@ angular.module('streamium.client.service', [])
     });
   };
 
-  StreamiumClient.prototype.handlers.paymentAck = function(data) {
+  StreamiumClient.prototype.handlers.paymentAck = function() {
     // TODO: Pass
-  };
-
-  StreamiumClient.prototype.handlers.end = function(data) {
-    console.log('ending');
-    this.end();
   };
 
   StreamiumClient.prototype.isReady = function() {
@@ -209,12 +209,9 @@ angular.module('streamium.client.service', [])
 
   StreamiumClient.prototype.end = function() {
     console.log('clearing interval ' + this.interval);
+    console.trace();
     clearInterval(this.interval);
-    self.status = StreamiumClient.STATUS.finished;
-    this.connection.send({
-      type: 'end',
-      payload: this.consumer.paymentTx.toJSON()
-    });
+    this.status = StreamiumClient.STATUS.finished;
     this.emit('end');
   };
 
