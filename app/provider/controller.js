@@ -75,8 +75,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   });
 
   StreamiumProvider.on('broadcast:end', function(peer) {
-    delete $scope.peers[peer];
-    video.end(peer);
+    if ($scope.peers[peer]) {
+      delete $scope.peers[peer];
+      video.end(peer);
+    }
     $scope.$apply();
   });
 
