@@ -1,0 +1,39 @@
+{
+  "name": "bitcore-channel",
+  "main": "./bitcore-channel.min.js",
+  "version": "0.9.1",
+  "homepage": "https://github.com/bitpay/bitcore-channel",
+  "authors": [
+    "BitPay"
+  ],
+  "description": "Payment Channels implemented for Bitcore.",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "bitcoin",
+    "bitcore",
+    "btc",
+    "satoshi",
+    "payment channels",
+    "channel",
+    "smart contract"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "_release": "0.9.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.9.1",
+    "commit": "49d283ac808f5f86d51da0efa2d904ccf6feb80b"
+  },
+  "_source": "git://github.com/bitpay/bitcore-channel.git",
+  "_target": "~0.9.1",
+  "_originalSource": "bitcore-channel"
+}

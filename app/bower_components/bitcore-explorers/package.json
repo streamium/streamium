@@ -1,0 +1,44 @@
+{
+  "name": "bitcore-explorers",
+  "version": "0.11.0",
+  "description": "ECIES implemented for Bitcore.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "coverage": "gulp coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitpay/bitcore-explorers.git"
+  },
+  "keywords": [
+    "bitcoin",
+    "bitcore",
+    "insight"
+  ],
+  "author": "BitPay",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bitpay/bitcore-explorers/issues"
+  },
+  "browser": {
+    "request": "browser-request"
+  },
+  "homepage": "https://github.com/bitpay/bitcore-explorers",
+  "devDependencies": {
+    "bitcore-build": "git://github.com/bitpay/bitcore-build.git",
+    "brfs": "^1.2.0",
+    "browserify": "^8.1.1",
+    "chai": "^2.0.0",
+    "gulp": "^3.8.10",
+    "sinon": "^1.12.2"
+  },
+  "dependencies": {
+    "bitcore": "^0.12.0",
+    "browser-request": "^0.3.3",
+    "request": "^2.51.0"
+  }
+}

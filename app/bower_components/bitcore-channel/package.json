@@ -1,0 +1,36 @@
+{
+  "name": "bitcore-channel",
+  "version": "0.9.1",
+  "description": "Add payment channels support to bitcore",
+  "scripts": {
+    "lint": "gulp lint",
+    "test": "gulp test",
+    "coverage": "gulp coverage"
+  },
+  "author": "Esteban Ordano <eordano@gmail.com>",
+  "keywords": [
+    "bitcoin",
+    "bitcore",
+    "btc",
+    "satoshi",
+    "payment channels",
+    "channel",
+    "smart contract"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/eordano/bitcore-channel",
+  "dependencies": {
+    "bitcore": "^0.9.0",
+    "browserify": "^8.1.0",
+    "inherits": "=2.0.1",
+    "lodash": "=2.4.1"
+  },
+  "devDependencies": {
+    "bitcore-build": "git://github.com/bitpay/bitcore-build.git",
+    "brfs": "^1.2.0",
+    "gulp": "^3.8.10",
+    "nodejs-externs": "^0.10.0",
+    "request": "^2.48.0",
+    "vinyl-transform": "^1.0.0"
+  }
+}

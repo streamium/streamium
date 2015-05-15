@@ -1,0 +1,39 @@
+{
+  "name": "bitcore-explorers",
+  "main": "/bitcore-explorers.min.js",
+  "version": "0.11.0",
+  "homepage": "https://github.com/bitpay/bitcore-explorers",
+  "authors": [
+    "BitPay"
+  ],
+  "description": "Module to query blockchain apis for Bitcore.",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "bitcoin",
+    "bitcore",
+    "btc",
+    "satoshi",
+    "insight"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "index.js",
+    "gulpfile.js",
+    "README.md",
+    "node_modules",
+    "bower_components",
+    "test"
+  ],
+  "_release": "0.11.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.11.0",
+    "commit": "dff9f4ec7477660fdd886ab3705cf30e5db1a8bc"
+  },
+  "_source": "git://github.com/bitpay/bitcore-explorers.git",
+  "_target": "^0.11.0",
+  "_originalSource": "bitcore-explorers"
+}
