@@ -65,8 +65,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.peers = {};
 
   StreamiumProvider.on('broadcast:start', function(peer) {
-    console.log('Start broadcast for ' + peer.id);
-    $scope.peers[peer.id] = peer;
+    console.log('Start broadcast for ' + peer);
+    $scope.peers[peer] = peer;
     video.broadcast(peer, function(err) {
       if (err) throw err;
       $scope.broadcasting = true;

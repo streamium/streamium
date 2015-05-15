@@ -148,12 +148,18 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.updatePayment = function() {
+    var maxSatoshis = this.consumer.refundTx.outputAmount;
+    var currentSatoshis = this.consumer.paymentTx.paid + this.stepSatoshis;
+    console.log('used', currentSatoshis, 'of', maxSatoshis, 'satoshis');
+    if (currentSatoshis > maxSatoshis) {
+      this.end();
+      return;
+    }
     this.consumer.incrementPaymentBy(this.stepSatoshis);
     this.sendPayment();
   };
 
   StreamiumClient.prototype.sendPayment = function() {
-
     if (this.status !== StreamiumClient.STATUS.ready) {
       console.log('Error: not ready to pay! Status is: ', this.status);
       return;
@@ -209,7 +215,7 @@ angular.module('streamium.client.service', [])
   StreamiumClient.prototype.end = function() {
     console.log('clearing interval ' + this.interval);
     clearInterval(this.interval);
-    self.status = StreamiumClient.STATUS.finished;
+    this.status = StreamiumClient.STATUS.finished;
     this.connection.send({
       type: 'end',
       payload: this.consumer.paymentTx.toJSON()
