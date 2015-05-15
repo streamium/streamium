@@ -31,10 +31,15 @@
     <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 "
       ng-show="displayRefund">
       <div class="bg-warning center">
-        The provider did not finish correctly the stream. You can broadcast the refund transaction tomorrow, if the provider did not sent the last transaction (using <a href="https://blockchain.info/pushtx">https://blockchain.info/pushtx</a>).
+        The provider ended the stream unexpectedly (disconnected without notice).
+        To recover your funds, broadcast the refund transaction below in 24 hours,
+        (using <a href="https://blockchain.info/pushtx">https://blockchain.info/pushtx</a>).
         <textarea cols=50>
           {{ refundTx }}
         </textarea>
+        <br />
+        Note this transaction is time-locked using nLockTime, so it will only be valid in 24 hours. 
+        You won't be able to broadcast it now.
       </div>
     </div>
     <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 ">

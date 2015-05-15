@@ -141,7 +141,7 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.endBroadcast = function(peerId) {
-    this.mapClientIdToStatus[client] = StreamiumProvider.STATUS.finished;
+    this.mapClientIdToStatus[peerId] = StreamiumProvider.STATUS.finished;
     this.emit('broadcast:end', peerId);
     var payment = this.mapClientIdToProvider[peerId].paymentTx;
     Insight.broadcast(payment.serialize(), function(err, txid) {
