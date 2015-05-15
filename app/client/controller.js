@@ -132,6 +132,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.serverPubkey = StreamiumClient.consumer.providerPublicKey.toString();
   $scope.contractAddress = StreamiumClient.consumer.commitmentTx.address.toString();
 
-  $scope.transactionUrl = 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '') + 'insight.bitpay.com/tx/' + $scope.transaction;
+  $scope.addressUrl = 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '') + 'insight.bitpay.com/address/' + $scope.contractAddress;
 
 });
