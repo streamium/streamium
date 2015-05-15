@@ -58,13 +58,12 @@ angular.module('streamium.client.service', [])
 
     this.peer.on('close', function onClose() {
       console.log('Provider connection closed');
-      self.status = StreamiumProvider.STATUS.finished;
+      self.status = StreamiumClient.STATUS.finished;
       self.end();
     });
 
     this.peer.on('error', function onError(error) {
       console.log('Error with provider connection', error);
-      self.errored = true;
       self.status = StreamiumClient.STATUS.disconnected;
       callback(error);
     });
@@ -72,6 +71,10 @@ angular.module('streamium.client.service', [])
 
   StreamiumClient.prototype.handlers = {};
 
+  StreamiumClient.prototype.handlers.end = function() {
+    // provider is letting us know that he broadcasted the payment
+    this.errored = false;
+  };
   StreamiumClient.prototype.handlers.hello = function(data) {
 
     if (this.status !== StreamiumClient.STATUS.connecting) {
@@ -84,6 +87,7 @@ angular.module('streamium.client.service', [])
       return;
     }
 
+    this.errored = true;
     this.rate = data.rate;
     this.stepSatoshis = Math.round(
       TIMESTEP * bitcore.Unit.fromBTC(this.rate).toSatoshis() / MILLIS_IN_MINUTE

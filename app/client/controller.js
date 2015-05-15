@@ -57,7 +57,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   });
 
   $scope.submit = function() {
-    StreamiumClient.refundAddress = $scope.changeAddress;
+    StreamiumClient.consumer.refundAddress = $scope.client.change;
     $location.path('/stream/' + $routeParams.streamId);
   };
 })
@@ -75,7 +75,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
       // called on provider calling us
       if (err) {
         console.log(err);
-        StreamiumClient.errored = true;
         StreamiumClient.end();
         return;
       }
@@ -127,8 +126,8 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.transaction = StreamiumClient.consumer.paymentTx.id;
 
   $scope.commitmentTx = StreamiumClient.consumer.commitmentTx.uncheckedSerialize();
-  $scope.fundingKey = StreamiumClient.consumer.fundingKey.toString()
-  $scope.privkey = StreamiumClient.consumer.commitmentKey.toString()
+  $scope.fundingKey = StreamiumClient.consumer.fundingKey.toString();
+  $scope.privkey = StreamiumClient.consumer.commitmentKey.toString();
   $scope.serverPubkey = StreamiumClient.consumer.providerPublicKey.toString();
   $scope.contractAddress = StreamiumClient.consumer.commitmentTx.address.toString();
 

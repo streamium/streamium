@@ -46,8 +46,10 @@ angular.module('streamium.provider.service', [])
     this.rate = rate;
     this.rateSatoshis = bitcore.Unit.fromBTC(rate).toSatoshis();
     this.clientConnections = [];
+    this.clientConnectionMap = {};
 
     this.peer = new Peer(this.streamId, this.config);
+
     var self = this;
 
     this.peer.on('open', function onOpen() {
@@ -69,6 +71,7 @@ angular.module('streamium.provider.service', [])
     this.peer.on('connection', function onConnection(connection) {
       console.log('New peer connected:', connection);
       self.clientConnections.push(connection);
+      self.clientConnectionMap[connection.peer] = connection;
 
       connection.on('data', function(data) {
         console.log('New message:', data);
@@ -79,11 +82,13 @@ angular.module('streamium.provider.service', [])
       connection.on('error', function(error) {
         console.log('Error with peer connection', error);
         self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
+        delete self.clientConnectionMap[connection.peer];
       });
 
       connection.on('close', function() {
         console.log('Client connection closed');
         self.clientConnections.splice(self.clientConnections.indexOf(connection), 1);
+        delete self.clientConnectionMap[connection.peer];
       });
     });
 
@@ -142,15 +147,20 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.endBroadcast = function(peerId) {
     this.mapClientIdToStatus[peerId] = StreamiumProvider.STATUS.finished;
-    this.emit('broadcast:end', peerId);
     var payment = this.mapClientIdToProvider[peerId].paymentTx;
+    var self = this;
     Insight.broadcast(payment.serialize(), function(err, txid) {
       if (err) {
         console.log('Error broadcasting ' + payment);
         console.log(err);
       } else {
         console.log('Payment broadcasted correctly', txid);
+        var connection = self.clientConnectionMap[peerId];
+        connection.send({
+          type: 'end'
+        });
       }
+      self.emit('broadcast:end', peerId);
     });
   };
 

@@ -41,8 +41,12 @@ Video.prototype.broadcast = function(peer, cb) {
 };
 
 Video.prototype.end = function(peer) {
-  this.calls[peer].close();
-  delete this.calls[peer];
+  if (this.calls[peer]) {
+    this.calls[peer].close();
+    delete this.calls[peer];
+  } else {
+    console.log('trying to end call from already closed peer', peer);
+  }
 };
 
 Video.prototype.view = function(streamId, cb) {
