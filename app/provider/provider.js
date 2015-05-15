@@ -218,7 +218,7 @@ angular.module('streamium.provider.service', [])
 
     console.log('Set new expiration date to ' + new Date(expiration));
     console.log('Current time is ' + new Date());
-    console.log('Expiration for the refund tx is ' + new Date(refundExpiration));
+    console.log('Funds will run out at ' + new Date(refundExpiration));
 
     if (firstPayment) {
       this.emit('broadcast:start', connection.peer);

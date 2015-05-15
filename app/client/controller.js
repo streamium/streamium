@@ -90,18 +90,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
 
   StreamiumClient.on('refundReceived', function() {
-    if (!StreamiumClient.peer) {
-      StreamiumClient.connect(streamId, function(err, fundingAddress) {
-        if (err) throw err;
-        console.log('refund received 1');
-        startViewer();
-        StreamiumClient.startPaying();
-      });
-    } else {
-      console.log('refund received 2');
-      startViewer();
-      StreamiumClient.startPaying();
-    }
+    bitcore.util.preconditions.checkState(StreamiumClient.peer, 'StreamiumClient.peer should be set');
+    startViewer();
+    StreamiumClient.startPaying();
   });
 
   var calculateSeconds = function() {
