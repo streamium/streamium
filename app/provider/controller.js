@@ -32,6 +32,9 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.stream.error = null;
   $scope.stream.loading = false;
 
+  $scope.otherNetwork = config.otherNetwork;
+  $scope.linkToOther = config.linkToOther;
+
   $scope.normalizeName = function() {
     var name = $scope.stream.name || '';
     name = name.trim().toLowerCase().replace(/ |\\/g, '-');
