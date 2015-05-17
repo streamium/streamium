@@ -2,6 +2,8 @@
 
 var config = {
   network: 'livenet',
+  otherNetwork: 'testnet',
+  linkToOther: '/testnet',
   peerJS: {
     key: 'gqjtidom02akyb9',
     //host: '192.168.1.124',
