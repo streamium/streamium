@@ -90,3 +90,14 @@ ul.checkmark li:before {
   background: transparent;
   border-bottom: solid 1px;
 }
+
+.naked {
+  border: none;
+  width: 50%;
+  color: blue;
+}
+
+.naked2 {
+  border: none;
+  width: 100%;
+}

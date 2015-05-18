@@ -47,4 +47,15 @@ angular.module('streamium.rates', [])
     }
     return btc;
   };
+})
+
+.directive('autoSelect', function() {
+  return {
+    link: function(scope, element, attrs) {
+      $(element).click(function(){
+        $(this).select();
+      });
+      element.attr('spellcheck', false);
+    }
+  };
 });

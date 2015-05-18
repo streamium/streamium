@@ -124,9 +124,10 @@
                             <button
                               type="submit"
                               class="btn btn-primary standard-button"
+                              style="width: 50%;"
                               ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Start broadcasting'}}</button>
                         </div>
-                        <div>(Try it on <a ng-href="{{linkToOther}}">{{otherNetwork}}</a>)</div>
+                        <div style="color: gray; font-size:14px">(Try it on <a ng-href="{{linkToOther}}">{{otherNetwork}}</a>)</div>
 
                         <script>
                             $(document).ready(function(){

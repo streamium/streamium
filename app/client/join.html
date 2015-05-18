@@ -83,7 +83,9 @@
           <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
         </div>
         <div class="col-sm-8">
-          <div class="funding-address">{{fundingAddress}}</div>
+          <div class="funding-address">
+            <input class="naked2" value="{{fundingAddress}}" readonly auto-select/>
+          </div>
           <div ng-hide="funds">Waiting for transaction</div>
           <ul class="checkmark" ng-show="funds">
             <li>Transaction received</li>
