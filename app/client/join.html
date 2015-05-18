@@ -80,12 +80,18 @@
     
       <div class="row" style="margin-top: 20px">
         <div class="col-sm-4 center">
-          <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
+          <a href="{{payUrl}}">
+            <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
+          </a>
         </div>
         <div class="col-sm-8">
-          <div class="funding-address">
+          <div class="funding-address center">
             <input class="naked2" value="{{fundingAddress}}" readonly auto-select/>
           </div>
+          <div class="center">
+            <a ng-hide="funds" href="{{payUrl}}" role="button" class="btn btn-large btn-info">Launch Wallet</a>
+          </div>
+          <br/>
           <div ng-hide="funds">Waiting for transaction</div>
           <ul class="checkmark" ng-show="funds">
             <li>Transaction received</li>

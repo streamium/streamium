@@ -16,6 +16,11 @@ angular.module('streamium', [
   'ja.qr'
 ]).
 
+// This prevents bitcoin: links to be preffixed by angular with "unsafe:"
+config(function ($compileProvider) {   
+  $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|bitcoin|ftp|mailto|chrome-extension):/);
+}).
+
 config(function($routeProvider, $sceProvider) {
   $routeProvider.otherwise({
     redirectTo: '/provider'
