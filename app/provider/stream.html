@@ -68,7 +68,7 @@
               Earned so far: {{client.totalMoney | SATOSHIS2BTC}} BTC
             </li>
             <li>
-              {{client.rate}} BTC/min
+              {{client.rate / 60.0|number:8}} BTC/seg
             </li>
           </ul>
         </div>
@@ -76,7 +76,7 @@
           <ul class="list-unstyled">
             <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.clientConnections.length}}</li>
             <li>
-              ({{client.rate|BTC2USD}} $/min)
+              ({{client.rate * 60|BTC2USD}} $/hour)
             </li>
           </ul>
         </div>

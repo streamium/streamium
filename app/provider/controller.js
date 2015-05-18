@@ -21,13 +21,12 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   }
 ])
 
-.controller('CreateStreamCtrl', function($scope, $location, StreamiumProvider, bitcore) {
-  $scope.prices = [0.5, 0.3, 0.1, 0.07, 0.05, 0.03, 0.01, 0.007, 0.005, 0.003, 0.001, 0.0007, 0.0005, 0.0003, 0.0001];
+.controller('CreateStreamCtrl', function($scope, $location, Rates, StreamiumProvider, bitcore) {
   $scope.stream = {};
 
   $scope.stream.name = config.DEBUG ? config.defaults.providerStream : '';
   $scope.stream.address = config.DEBUG ? config.defaults.providerAddress : '';
-  $scope.stream.rate = config.DEBUG ? config.defaults.providerRate : 0.001;;
+  $scope.stream.rate = 60;
 
   $scope.stream.error = null;
   $scope.stream.loading = false;
@@ -41,13 +40,25 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $scope.stream.name = name;
   };
 
+  $scope.usdHourToBtcSec = function(usdHour) {
+    var usdSecond = usdHour / 3600;
+    var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
+    return btcSecond ? btcSecond : 0;
+  }
+
+  $scope.usdHourToBtcMin = function(usdHour) {
+    var usdSecond = usdHour / 60;
+    var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
+    return btcSecond ? btcSecond : 0;
+  }
+
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
     $scope.stream.loading = true;
     StreamiumProvider.init(
       $scope.stream.name,
       $scope.stream.address,
-      $scope.stream.rate,
+      $scope.usdHourToBtcMin($scope.stream.rate),
       function onCreate(err, done) {
         $scope.stream.loading = false;
         if (err) {
