@@ -23,11 +23,16 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 .controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore) {
   $scope.client = StreamiumClient;
-  $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 25, 30, 45, 60];
+  $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 30, 45, 60, 90, 120, 240];
   $scope.stream = {};
   $scope.stream.minutes = $scope.minutes[1];
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
+
+  $scope.$watch('stream.minutes', function() {
+    $scope.amount = ($scope.stream.minutes * $scope.client.rate).toFixed(8);
+    $scope.payUrl = 'bitcoin:' + $scope.fundingAddress + '?amount=' + $scope.amount;
+  });
 
   if (config.DEBUG) {
     $scope.client.change = config.defaults.clientChange;
@@ -37,6 +42,8 @@ angular.module('streamium.client.controller', ['ngRoute'])
     if (err) throw err;
 
     $scope.fundingAddress = fundingAddress;
+    $scope.amount = ($scope.stream.minutes * $scope.client.rate).toFixed(8);
+    $scope.payUrl = 'bitcoin:' + fundingAddress + '?amount=' + $scope.amount;
     $scope.$apply();
 
     var updateBalance = function(err, utxos) {
