@@ -62,5 +62,5 @@ a secure pay-as-you-go mechanism with no need for a third party.
 ## License
 Code released under the [MIT license](https://github.com/streamium/paystream/blob/master/LICENSE).
 
-Copyright 2014 Streamium developers
+Copyright 2015 Streamium developers
 
