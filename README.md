@@ -19,7 +19,7 @@ with no counterparty risk.
 To run Streamium, just serve the root directory using any web server.
 For example:
 ```
-cd paystream/
+cd streamium/
 bower install
 python -m "SimpleHTTPServer"
 ```
@@ -28,7 +28,7 @@ and then access it from any [WebRTC-supporting](http://www.webrtc.org/) browser:
 
 http://localhost:8000/
 
-We suggest you provide a PeerJS server to your users (or at least [change the peerjs.org identifier](https://github.com/streamium/paystream/blob/master/app/config.js#L6))
+We suggest you provide a PeerJS server to your users (or at least [change the peerjs.org identifier](https://github.com/streamium/paystream/blob/master/app/config.js#L8))
 
 ## How does it work
 
