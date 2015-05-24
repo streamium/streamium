@@ -19,7 +19,7 @@ with no counterparty risk.
 To run Streamium, just serve the root directory using any web server.
 For example:
 ```
-cd paystream/
+cd streamium/
 bower install
 python -m "SimpleHTTPServer"
 ```

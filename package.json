@@ -2,7 +2,7 @@
   "name": "streamium",
   "description": "Decentralized trustless video streaming using bitcoin payment channels.",
   "version": "0.0.1",
-  "repository": "git://github.com/streamium/paystream",
+  "repository": "git://github.com/streamium/streamium",
   "license": "MIT",
   "keywords": [
     "video",

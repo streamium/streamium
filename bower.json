@@ -2,7 +2,7 @@
   "name": "Streamium",
   "description": "Decentralized trustless video streaming using bitcoin payment channels",
   "version": "0.0.0",
-  "homepage": "https://github.com/maraoz/streamium",
+  "homepage": "https://github.com/streamium/streamium",
   "license": "MIT",
   "private": true,
   "dependencies": {
