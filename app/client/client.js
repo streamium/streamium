@@ -136,7 +136,9 @@ angular.module('streamium.client.service', [])
     return new Date(this.startTime + this.getDuration(this.consumer.refundTx.outputAmount));
   };
 
-  StreamiumClient.prototype.startPaying = function() {
+  StreamiumClient.prototype.sendFirstPayment = function() {
+    // The time window to establish so the provider doesn't cut the channel.
+    // Currently two times the step between payments (20 seconds)
     var satoshis = 2 * this.stepSatoshis;
     this.startTime = new Date().getTime();
 
@@ -147,6 +149,7 @@ angular.module('streamium.client.service', [])
 
   StreamiumClient.prototype.setupPaymentUpdates = function() {
     var self = this;
+    this.startTime = new Date().getTime();
     this.interval = setInterval(function() {
       self.updatePayment();
     }, TIMESTEP);

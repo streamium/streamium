@@ -17,8 +17,10 @@
     "node": "*"
   },
   "dependencies": {
+    "bluebird": "^2.9.25",
     "http-server": "^0.6.1",
-    "peer": "^0.2.8"
+    "peer": "^0.2.8",
+    "request": "^2.55.0"
   },
   "scripts": {
     "prestart": "npm install",

@@ -92,6 +92,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
       $scope.$digest();
 
       // start sending payments at regular intervals
+      $interval(calculateSeconds, 1000);
       StreamiumClient.setupPaymentUpdates();
     });
   };
@@ -99,7 +100,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   StreamiumClient.on('refundReceived', function() {
     bitcore.util.preconditions.checkState(StreamiumClient.peer, 'StreamiumClient.peer should be set');
     startViewer();
-    StreamiumClient.startPaying();
+    StreamiumClient.sendFirstPayment();
   });
 
   var calculateSeconds = function() {
@@ -109,7 +110,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
     $scope.expirationDate = StreamiumClient.getExpirationDate();
     calculateSeconds();
   });
-  $interval(calculateSeconds, 1000);
 
   StreamiumClient.on('end', function() {
     console.log('Moving to cashout stream', $routeParams);

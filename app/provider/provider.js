@@ -189,7 +189,6 @@ angular.module('streamium.provider.service', [])
 
     if (status === StreamiumProvider.STATUS.waiting) {
       status = this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.ready;
-      provider.startTime = new Date().getTime();
       firstPayment = true;
     }
 
@@ -200,38 +199,87 @@ angular.module('streamium.provider.service', [])
 
     data = JSON.parse(data);
     provider.validPayment(data);
-
-    var refundExpiration = this.getFinalExpirationFor(provider);
-    var paymentsExpiration = provider.startTime + Duration.for(this.rate, provider.currentAmount);
-    var expiration = Math.min(refundExpiration, paymentsExpiration);
     var self = this;
 
-    clearTimeout(provider.timeout);
-    provider.timeout = setTimeout(function() {
-      console.log('Payment channel out of funds for ', connection.peer);
-      self.endBroadcast(connection.peer);
-    }, Math.min(expiration, refundExpiration) - new Date().getTime());
+    var updatePayment = function() {
 
-    console.log('Set new expiration date to ' + new Date(expiration));
-    console.log('Current time is ' + new Date());
-    console.log('Funds will run out at ' + new Date(refundExpiration));
+      var refundExpiration = self.getFinalExpirationFor(provider);
+      var paymentsExpiration = provider.startTime + Duration.for(self.rate, provider.currentAmount);
+      var expiration = Math.min(refundExpiration, paymentsExpiration);
+
+      clearTimeout(provider.timeout);
+      provider.timeout = setTimeout(function() {
+        console.log('Payment channel out of funds for ', connection.peer);
+        self.endBroadcast(connection.peer);
+      }, Math.min(expiration, refundExpiration) - new Date().getTime());
+
+      console.log(connection.peer + ' expires at ' + new Date(expiration));
+      // console.log('Current time is ' + new Date());
+      // console.log('Funds will run out at ' + new Date(refundExpiration));
+
+      self.totalMoney = 0;
+      for (var providerId in self.mapClientIdToProvider) {
+        self.totalMoney += self.mapClientIdToProvider[providerId].currentAmount;
+      }
+
+      self.emit('balanceUpdated', self.totalMoney);
+      connection.send({
+        type: 'paymentAck',
+        payload: {
+          success: true,
+        }
+      });
+    };
 
     if (firstPayment) {
-      this.emit('broadcast:start', connection.peer);
-    }
+      return this.paymentVerification(data, function(err) {
 
-    self.totalMoney = 0;
-    for (var providerId in this.mapClientIdToProvider) {
-      self.totalMoney += this.mapClientIdToProvider[providerId].currentAmount;
-    }
-    self.emit('balanceUpdated', self.totalMoney);
+        if (err) {
+          console.log('Error accepting commitment:', err);
+          return self.endBroadcast(connection.peer);
+        }
+        provider.startTime = new Date().getTime();
+        updatePayment();
 
-    connection.send({
-      type: 'paymentAck',
-      payload: {
-        success: true,
-      }
-    });
+        self.emit('broadcast:start', connection.peer);
+      });
+    } else {
+      updatePayment();
+    }
+  };
+
+  StreamiumProvider.prototype.paymentVerification = function(data, callback) {
+
+    var maxRetry = 20;
+    var targetConfidence = 0.85;
+    var retryDelay = 4000;
+    var txid = data.transaction.inputs[0].prevTxId.toString('hex');
+    var tryFetch = function(retry) {
+      return function() {
+        if (retry > maxRetry) {
+          return callback(StreamiumProvider.ERROR.UNCONFIRMED);
+        }
+        $.ajax({
+          url: config.BLOCKCYPHERTX + txid,
+          dataType: 'json'
+        }).done(function(confidence) {
+          if (confidence.double_spend) {
+            return callback(StreamiumProvider.ERROR.DOUBLESPEND);
+          }
+          if (confidence.confidence > targetConfidence) {
+            return callback();
+          }
+          console.log('Confidence at '
+                      + confidence.confidence
+                      + '; waiting to reach ' + targetConfidence
+          );
+          return setTimeout(tryFetch(retry + 1), retryDelay);
+        }).fail(function(err) {
+          return setTimeout(tryFetch(retry + 1), retryDelay);
+        });
+      };
+    };
+    tryFetch(0)();
   };
 
   StreamiumProvider.prototype.endAllBroadcasts = function() {
@@ -247,6 +295,11 @@ angular.module('streamium.provider.service', [])
     if (this.status === StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
     var baseURL = window.location.origin;
     return baseURL + '/app/#/join/' + this.streamId;
+  };
+
+  StreamiumProvider.ERROR = {
+    UNCONFIRMED: 'Unconfirmed',
+    DOUBLESPEND: 'Double spend detected'
   };
 
   return new StreamiumProvider();

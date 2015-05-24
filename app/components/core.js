@@ -1,11 +1,8 @@
 'use strict';
 
-
-
 var SECONDS_IN_MINUTE = 60;
 var MILLIS_IN_SECOND = 1000;
 var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
-
 
 angular.module('streamium.core', [])
   .service('Session', function() {
