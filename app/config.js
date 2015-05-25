@@ -18,6 +18,7 @@ var config = {
       }]
     }
   },
+  analytics: true,
   DEBUG: false,
   defaults: {
     providerStream: 'sexybabe69',
