@@ -115,3 +115,8 @@ body > div {
     border-top: 1px solid #eaebec;
     background: #F7F8FA;
 }
+
+#bitmag {
+  padding-left: 29px;
+  padding-right: 29px;
+}
