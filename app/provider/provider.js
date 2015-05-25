@@ -250,9 +250,9 @@ angular.module('streamium.provider.service', [])
 
   StreamiumProvider.prototype.paymentVerification = function(data, callback) {
 
-    var maxRetry = 20;
-    var targetConfidence = 0.85;
-    var retryDelay = 4000;
+    var maxRetry = config.confidenceRetry;
+    var targetConfidence = config.confidenceTarget;
+    var retryDelay = config.confidenceDelay;
     var txid = data.transaction.inputs[0].prevTxId.toString('hex');
     var tryFetch = function(retry) {
       return function() {

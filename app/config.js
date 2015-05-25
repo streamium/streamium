@@ -19,6 +19,9 @@ var config = {
       }]
     }
   },
+  confidenceDelay: 5000,
+  confidenceTarget: 0.85,
+  confidenceRetry: 15,
   analytics: true,
   DEBUG: false,
   defaults: {
