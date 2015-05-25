@@ -336,7 +336,7 @@ angular.module('streamium.provider.service', [])
   StreamiumProvider.prototype.getLink = function() {
     if (this.status === StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
     var baseURL = window.location.origin;
-    return baseURL + config.appPrefix + '/app/#/join/'+ this.config.index + '/' + this.streamId;
+    return baseURL + config.appPrefix + '/app/#/join/' + this.streamId;
   };
 
   StreamiumProvider.ERROR = {

@@ -4,7 +4,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 .config(['$routeProvider',
   function($routeProvider) {
-    $routeProvider.when('/join/:serverIndex/:streamId', {
+    $routeProvider.when('/join/:streamId', {
       templateUrl: 'client/join.html',
       controller: 'JoinStreamCtrl'
     });
@@ -21,7 +21,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   }
 ])
 
-.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore, PeerJS) {
+.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore) {
   $scope.client = StreamiumClient;
   $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 30, 45, 60, 90, 120, 240];
   $scope.stream = {};
@@ -45,8 +45,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
     $scope.client.change = config.defaults.clientChange;
   }
 
-  var peerConfig = PeerJS.get($routeParams.serverIndex)
-  StreamiumClient.connect(peerConfig, $routeParams.streamId, function(err, fundingAddress) {
+  StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
     if (err) {
       if (err.type === 'peer-unavailable') {
         $scope.error = 'Unable to connect to stream ' + $routeParams.streamId + ', looks like it\'s offline at the moment.';

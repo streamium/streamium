@@ -20,7 +20,6 @@ angular.module('streamium.peer', [])
     primary: getPeerJSConfig(config, 0),
     secondary: getPeerJSConfig(config, 1),
     get: function(index) {
-      console.log('INDEX> ', index);
       return getPeerJSConfig(config, index);
     }
   };
