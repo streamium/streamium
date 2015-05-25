@@ -210,6 +210,7 @@ angular.module('streamium.provider.service', [])
       clearTimeout(provider.timeout);
       provider.timeout = setTimeout(function() {
         console.log('Payment channel out of funds for ', connection.peer);
+        clearTimeout(provider.timeout);
         self.endBroadcast(connection.peer);
       }, Math.min(expiration, refundExpiration) - new Date().getTime());
 
@@ -254,6 +255,10 @@ angular.module('streamium.provider.service', [])
     var targetConfidence = config.confidenceTarget;
     var retryDelay = config.confidenceDelay;
     var txid = data.transaction.inputs[0].prevTxId.toString('hex');
+
+    var started = false;
+    var confidenceReached = false;
+
     var tryFetch = function(retry) {
       return function() {
         if (retry > maxRetry) {
@@ -266,8 +271,23 @@ angular.module('streamium.provider.service', [])
           if (confidence.double_spend) {
             return callback(StreamiumProvider.ERROR.DOUBLESPEND);
           }
+          if (!started) {
+            started = true;
+            callback();
+          }
+          if (confidence.block_hash) {
+            console.log('Transaction inserted into a block. No more doublespend checks');
+            return;
+          }
           if (confidence.confidence > targetConfidence) {
-            return callback();
+            if (!confidenceReached) {
+              console.log('Confidence reached target! Will continue to check for doublespends');
+              confidenceReached = true;
+            }
+            return setTimeout(
+              tryFetch(retry),  /* no increment */
+              retryDelay * 10   /* less stress on server */
+            );
           }
           console.log('Confidence at '
                       + confidence.confidence
