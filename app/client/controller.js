@@ -29,6 +29,10 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
 
+  if (!DetectRTC.isWebRTCSupported) {
+    return $location.path('/no-webrtc');
+  }
+
   $scope.$watch('stream.minutes', function() {
     $scope.amount = ($scope.stream.minutes * $scope.client.rate).toFixed(8);
     $scope.payUrl = 'bitcoin:' + $scope.fundingAddress + '?amount=' + $scope.amount;
