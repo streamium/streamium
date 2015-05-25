@@ -45,8 +45,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   };
 
   $scope.usdHourToBtcSec = function(usdHour) {
-    var usdSecond = usdHour / 3600;
-    var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
+    if (Rates.rate) {
+      var usdSecond = usdHour / 3600;
+      var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
+    }
     return btcSecond ? btcSecond : 0;
   }
 
