@@ -39,12 +39,12 @@
     </div>
   </div>
 
-  <div class="row card space-top" ng-show="client.status == 'error'">
+  <div class="row card space-top" ng-show="error">
     <div class="col-sm-2 center">
       <h2><span class="glyphicon glyphicon-remove"></span></h2>
     </div>
     <div class="col-sm-10">
-      <h2>Error while connecting to {{stream.name}}</h2>
+      <h2>Error: {{error}}</h2>
     </div>
   </div>
 
@@ -116,7 +116,7 @@
 
 
   <div class="row">
-    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" novalidate ng-hide="client.status === 'connecting'">
+    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" novalidate ng-hide="client.status === 'connecting' || error">
     <input type="hidden" name="funded" ng-model="funded" required>
     <input type="hidden" name="change" ng-model="client.change" required validAddress>
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">

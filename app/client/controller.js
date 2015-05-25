@@ -39,7 +39,15 @@ angular.module('streamium.client.controller', ['ngRoute'])
   }
 
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
-    if (err) throw err;
+    if (err) {
+      if (err.type === 'peer-unavailable') {
+        $scope.error = 'Unable to connect to stream ' + $routeParams.streamId + ', looks like it\'s offline at the moment.';
+      } else {
+        $scope.error = 'Unexpected error when trying to join ' + $routeParams.streamId;
+      }
+      $scope.$apply();
+      return;
+    }
 
     $scope.fundingAddress = fundingAddress;
     $scope.amount = ($scope.stream.minutes * $scope.client.rate).toFixed(8);
