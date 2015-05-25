@@ -2,6 +2,7 @@
 
 var config = {
   network: 'livenet',
+  appPrefix: '', // For testnet, set to '/testnet'
   otherNetwork: 'testnet',
   linkToOther: '/testnet',
   BLOCKCYPHERTX: 'https://api.blockcypher.com/v1/btc/'
