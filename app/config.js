@@ -4,6 +4,9 @@ var config = {
   network: 'livenet',
   otherNetwork: 'testnet',
   linkToOther: '/testnet',
+  BLOCKCYPHERTX: 'https://api.blockcypher.com/v1/btc/'
+    + 'main' // For testnet, use: 'test3'
+    + '/txs/',
   peerJS: {
     key: 'gqjtidom02akyb9',
     //host: '192.168.1.124',
