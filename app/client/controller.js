@@ -28,6 +28,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.stream.minutes = $scope.minutes[1];
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
+  $scope.config = config;
+
+  config.analytics && mixpanel.track('cli-join');
 
   if (!DetectRTC.isWebRTCSupported) {
     return $location.path('/no-webrtc');
@@ -65,6 +68,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
         funds += utxos[utxo].satoshis;
       }
       StreamiumClient.processFunding(utxos);
+      config.analytics && mixpanel.track('cli-funded');
       $scope.funds = funds;
       $scope.fundedMillis = StreamiumClient.getDuration(funds);
       $scope.fundedSeconds = $scope.fundedMillis / 1000;
@@ -87,6 +91,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
     return;
   }
   StreamiumClient.askForRefund();
+  config.analytics && mixpanel.track('cli-start');
   var streamId = $routeParams.streamId;
   var startViewer = function() {
     video.setPeer(StreamiumClient.peer);
@@ -106,6 +111,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
       // start sending payments at regular intervals
       $interval(calculateSeconds, 1000);
       StreamiumClient.setupPaymentUpdates();
+      config.analytics && mixpanel.track('cli-watch');
     });
   };
 
@@ -125,6 +131,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
   StreamiumClient.on('end', function() {
     console.log('Moving to cashout stream', $routeParams);
+    config.analytics && mixpanel.track('cli-ended');
     $location.path('/stream/' + $routeParams.streamId + '/cashout');
   });
 

@@ -31,6 +31,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.stream.error = null;
   $scope.stream.loading = false;
 
+  $scope.config = config;
   $scope.otherNetwork = config.otherNetwork;
   $scope.linkToOther = config.linkToOther;
 
@@ -45,20 +46,28 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   };
 
   $scope.usdHourToBtcSec = function(usdHour) {
+    if (!Rates.rate) {
+      return 0;
+    }
     var usdSecond = usdHour / 3600;
     var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
     return btcSecond ? btcSecond : 0;
   }
 
   $scope.usdHourToBtcMin = function(usdHour) {
+    if (!Rates.rate) {
+      return 0;
+    }
     var usdSecond = usdHour / 60;
     var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
     return btcSecond ? btcSecond : 0;
   }
+  config.analytics && mixpanel.track('homepage');
 
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
     $scope.stream.loading = true;
+    config.analytics && mixpanel.track('prov-created');
     StreamiumProvider.init(
       $scope.stream.name,
       $scope.stream.address,
@@ -85,6 +94,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   StreamiumProvider.on('broadcast:start', function(peer) {
     console.log('Start broadcast for ' + peer);
     $scope.peers[peer] = peer;
+    config.analytics && mixpanel.track('prov-started');
     video.broadcast(peer, function(err) {
       if (err) throw err;
       $scope.broadcasting = true;
@@ -142,6 +152,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.client = StreamiumProvider;
   $scope.totalMoney = 0;
   $scope.clients = [];
+  config.analytics && mixpanel.track('prov-end');
   for (var i in $scope.client.mapClientIdToProvider) {
     var amount = $scope.client.mapClientIdToProvider[i].currentAmount;
     var time = Duration.for(StreamiumProvider.rate, amount);
