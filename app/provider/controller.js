@@ -34,6 +34,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.otherNetwork = config.otherNetwork;
   $scope.linkToOther = config.linkToOther;
 
+  if (!DetectRTC.isWebRTCSupported) {
+    return $location.path('/no-webrtc');
+  }
+
   $scope.normalizeName = function() {
     var name = $scope.stream.name || '';
     name = name.trim().toLowerCase().replace(/ |\\/g, '-');

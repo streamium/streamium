@@ -26,4 +26,12 @@ config(function($routeProvider, $sceProvider) {
     redirectTo: '/provider'
   });
   $sceProvider.enabled(false);
-});
+})
+
+.config(['$routeProvider',
+  function($routeProvider) {
+    $routeProvider.when('/no-webrtc', {
+      templateUrl: 'error.html'
+    });
+  }
+]);
