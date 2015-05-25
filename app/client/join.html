@@ -107,10 +107,10 @@
     <div class="col-sm-1 center step-count">3</div>
     <div class="col-sm-11 left-border">
       <div class="col-md-6">
-        When the stream ends, I want to receive my change at
+        When the stream ends, I want to receive my change at <span ng-show="client.change && changeFromTransaction === client.change">(detected from funding transaction)</span>
       </div>
-        <input type="text" name="change" ng-model="client.change"
-          placeholder="bitcoin change address" class="col-md-6 borderless" valid-address required>
+      <input type="text" name="change" ng-model="client.change"
+        placeholder="bitcoin change address" class="col-md-6 borderless" valid-address required>
     </div>
   </div>
 

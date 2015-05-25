@@ -64,6 +64,14 @@ angular.module('streamium.client.controller', ['ngRoute'])
       for (utxo in utxos) {
         funds += utxos[utxo].satoshis;
       }
+      $.ajax({
+        url: config.BLOCKCYPHERTX + utxos[0].txId,
+        dataType: 'json'
+      }).done(function(transaction) {
+        $scope.client.change = transaction.inputs[0].addresses[0];
+        $scope.changeFromTransaction = $scope.client.change;
+        $scope.$apply();
+      });
       StreamiumClient.processFunding(utxos);
       $scope.funds = funds;
       $scope.fundedMillis = StreamiumClient.getDuration(funds);
