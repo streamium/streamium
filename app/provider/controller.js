@@ -66,12 +66,20 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
+
+    var priceRate = $scope.usdHourToBtcMin($scope.stream.rate);
+
+    if (priceRate <= 0) {
+      $scope.stream.error = "Price rate must be a positive number";
+      return;
+    }
+
     $scope.stream.loading = true;
     config.analytics && mixpanel.track('prov-created');
     StreamiumProvider.init(
       $scope.stream.name,
       $scope.stream.address,
-      $scope.usdHourToBtcMin($scope.stream.rate),
+      priceRate,
       function onCreate(err, done) {
         $scope.stream.loading = false;
         if (err) {
