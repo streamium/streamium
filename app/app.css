@@ -101,3 +101,17 @@ ul.checkmark li:before {
   border: none;
   width: 100%;
 }
+
+html, body {
+    height: 100%;
+}
+
+body > div {
+    min-height: 100%;
+}
+
+#global-footer {
+    padding: 30px;
+    border-top: 1px solid #eaebec;
+    background: #F7F8FA;
+}
