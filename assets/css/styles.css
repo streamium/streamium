@@ -680,6 +680,14 @@ strong,
 	margin-top: 15px;
 }
 
+.brief .content-section .panel-group .panel-heading {
+    cursor: pointer;
+}
+
+.brief .content-section .panel-group .panel-heading:hover {
+    color: #008ed6;
+}
+
 .brief h2 {
 	margin-bottom: 15px;
 	margin-top: 10px;
