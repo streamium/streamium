@@ -61,7 +61,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
     var priceRate = $scope.usdHourToBtcMin($scope.stream.rate);
 
-    if (priceRate < 0) {
+    if (priceRate <= 0) {
       $scope.stream.error = "Price rate must be a positive number";
       return;
     }
