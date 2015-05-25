@@ -18,7 +18,6 @@ angular.module('streamium.client.service', [])
     this.rate = this.providerKey = null;
     this.peer = this.connection = null;
 
-    this.config = config.peerJS;
     events.EventEmitter.call(this);
   }
   inherits(StreamiumClient, events.EventEmitter);
@@ -32,8 +31,8 @@ angular.module('streamium.client.service', [])
     finished: 'finished'
   };
 
-  StreamiumClient.prototype.connect = function(streamId, callback) {
-    this.peer = new Peer(null, this.config);
+  StreamiumClient.prototype.connect = function(config, streamId, callback) {
+    this.peer = new Peer(null, config);
     this.status = StreamiumClient.STATUS.connecting;
     this.fundingCallback = callback;
 

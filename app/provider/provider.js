@@ -2,7 +2,7 @@
 
 angular.module('streamium.provider.service', [])
 
-.service('StreamiumProvider', function(bitcore, channel, events, inherits, Insight, Duration) {
+.service('StreamiumProvider', function(bitcore, channel, events, inherits, Insight, Duration, PeerJS) {
   var Provider = channel.Provider;
 
   var SECONDS_IN_MINUTE = 60;
@@ -19,7 +19,8 @@ angular.module('streamium.provider.service', [])
     this.totalMoney = 0;
     this.mapClientIdToProvider = {};
     this.mapClientIdToStatus = {};
-    this.config = config.peerJS;
+    this.config = PeerJS.primary;
+
     events.EventEmitter.call(this);
   }
   inherits(StreamiumProvider, events.EventEmitter);
@@ -41,20 +42,24 @@ angular.module('streamium.provider.service', [])
       return callback('Invalid address');
     }
 
+    this.isIdTaken = false;
     this.streamId = streamId;
     this.address = address;
     this.rate = rate;
     this.rateSatoshis = bitcore.Unit.fromBTC(rate).toSatoshis();
     this.clientConnections = [];
     this.clientConnectionMap = {};
+    this.status = StreamiumProvider.STATUS.connecting
 
+    console.log('Connecting with peer', this.config);
     this.peer = new Peer(this.streamId, this.config);
 
     var self = this;
 
     this.peer.on('open', function onOpen() {
       console.log('Connected to peer server:', self.peer);
-      callback();
+      self.status = StreamiumProvider.STATUS.ready;
+      callback(null, self);
     });
 
     this.peer.on('close', function onClose() {
@@ -64,8 +69,19 @@ angular.module('streamium.provider.service', [])
 
     this.peer.on('error', function onError(error) {
       console.log('Error with peer server:', error);
-      self.status = StreamiumProvider.STATUS.disconnected;
-      callback(error);
+      error = getError(error);
+
+      if (error == StreamiumProvider.ERROR.IDISTAKEN) {
+        self.isIdTaken = true;
+        self.status = StreamiumProvider.STATUS.disconnected;
+        callback(error);
+      } else if (error == StreamiumProvider.ERROR.UNREACHABLE && self.canFallback()) {
+        self.config = PeerJS.secondary; // fallback peerjs server
+        return self.init(streamId, address, rate, callback);
+      } else if (!self.isIdTaken) {
+        self.status = StreamiumProvider.STATUS.disconnected;
+        callback(error);
+      }
     });
 
     this.peer.on('connection', function onConnection(connection) {
@@ -94,6 +110,12 @@ angular.module('streamium.provider.service', [])
 
     // Init Provider
     // Change status
+  };
+
+  StreamiumProvider.prototype.canFallback = function () {
+    return this.config == PeerJS.primary &&
+           this.status == StreamiumProvider.STATUS.connecting &&
+           !this.isIdTaken;
   };
 
   StreamiumProvider.prototype.handlers = {};
@@ -314,13 +336,27 @@ angular.module('streamium.provider.service', [])
   StreamiumProvider.prototype.getLink = function() {
     if (this.status === StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
     var baseURL = window.location.origin;
-    return baseURL + config.appPrefix + '/app/#/join/' + this.streamId;
+    return baseURL + config.appPrefix + '/app/#/join/'+ this.config.index + '/' + this.streamId;
   };
 
   StreamiumProvider.ERROR = {
     UNCONFIRMED: 'Unconfirmed',
-    DOUBLESPEND: 'Double spend detected'
+    DOUBLESPEND: 'Double spend detected',
+    IDISTAKEN  : 'Id is taken',
+    UNREACHABLE: 'Server is unreachable'
   };
+
+  StreamiumProvider.prototype.ERROR = StreamiumProvider.ERROR;
+
+  function getError(error) {
+    if (error.type == "unavailable-id") {
+      return StreamiumProvider.ERROR.IDISTAKEN;
+    } else if (error.type == "network") {
+      return StreamiumProvider.ERROR.UNREACHABLE;
+    } else {
+      throw new Error("Unknown error");
+    }
+  }
 
   return new StreamiumProvider();
 });

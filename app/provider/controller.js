@@ -82,10 +82,15 @@ angular.module('streamium.provider.controller', ['ngRoute'])
       priceRate,
       function onCreate(err, done) {
         $scope.stream.loading = false;
-        if (err) {
+
+        if (err == StreamiumProvider.ERROR.UNREACHABLE) {
+          $scope.stream.error = "Server unreachable :(";
+        } else if (err == StreamiumProvider.ERROR.IDISTAKEN) {
           $scope.stream.error = "Channel name is taken, please pick a different one";
-        } else {
+        } else if (err == null) {
           $location.path('/provider/' + $scope.stream.name);
+        } else {
+          console.log(err);
         }
 
         $scope.$apply();
