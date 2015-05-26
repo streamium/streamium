@@ -94,7 +94,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 })
 
 .controller('BroadcastStreamCtrl', function($scope, $location, $routeParams, video, StreamiumProvider) {
-  var name = $location.$$url.split('/')[2];
+  $scope.name = $location.$$url.split('/')[2];
   $scope.requiresApproval = true;
 
   $scope.peers = {};
@@ -180,4 +180,24 @@ angular.module('streamium.provider.controller', ['ngRoute'])
       });
     }
   }
-});
+})
+.directive('twitter',
+  function($timeout) {
+    return {
+      link: function(scope, element, attr) {
+        $timeout(function() {
+          if (twttr && twttr.widgets) {
+            twttr.widgets.createShareButton(
+              attr.url,
+              element[0],
+              function(el) {}, {
+                count: 'none',
+                text: attr.text
+              }
+            );
+          }
+        });
+      }
+    }
+  }
+);
