@@ -2,7 +2,7 @@
 
 angular.module('streamium.client.service', [])
 
-.service('StreamiumClient', function(bitcore, channel, Insight, events, inherits, Duration) {
+.service('StreamiumClient', function(bitcore, channel, Insight, events, inherits, Duration, PeerJS) {
   var Consumer = channel.Consumer;
 
   var SECONDS_IN_MINUTE = 60;
@@ -17,8 +17,8 @@ angular.module('streamium.client.service', [])
     this.fundingKey = config.DEBUG ? new bitcore.PrivateKey(config.defaults.fundingKey) : undefined;
     this.rate = this.providerKey = null;
     this.peer = this.connection = null;
+    this.config = PeerJS.primary;
 
-    this.config = config.peerJS;
     events.EventEmitter.call(this);
   }
   inherits(StreamiumClient, events.EventEmitter);
@@ -64,9 +64,19 @@ angular.module('streamium.client.service', [])
 
     this.peer.on('error', function onError(error) {
       console.log('Error with provider connection', error);
-      self.status = StreamiumClient.STATUS.disconnected;
-      callback(error);
+      if (self.canFallback()) {
+        self.config = PeerJS.secondary;
+        self.connect(streamId, callback);
+      } else {
+        self.status = StreamiumClient.STATUS.disconnected;
+        callback(error);
+      }
     });
+  };
+
+  StreamiumClient.prototype.canFallback = function (argument) {
+    return this.config == PeerJS.primary &&
+           this.status == StreamiumClient.STATUS.connecting;
   };
 
   StreamiumClient.prototype.handlers = {};
