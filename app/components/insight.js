@@ -2,12 +2,39 @@
 
 angular.module('streamium.insight', [])
 
-.service('Insight', function(bitcore, explorers) {
+.service('Insight', function(bitcore) {
 
-  var insight = new explorers.Insight(config.network);
+  var broadcast = function(tx, callback) {
+    $.ajax({
+      method: 'POST',
+      url: config.BLOCKCYPHERTX + 'push',
+      dataType: 'json',
+      data: JSON.stringify({
+        tx: tx
+      })
+    }).done(function(response) {
+      return callback(null, response.tx.hash);
+    }).fail(function(response) {
+      return callback(response);
+    });
+  };
 
   var queryBalance = function(address, callback) {
-    insight.getUnspentUtxos(address, callback);
+    $.ajax({
+      url: config.CHAIN + 'addresses/' + address + '/unspents?api-key-id=' + config.CHAIN_API_KEY,
+      dataType: 'json'
+    }).done(function(result) {
+      return callback(null, result.map(function(unspent) {
+        return new bitcore.Transaction.UnspentOutput({
+          txid: unspent.transaction_hash,
+          outputIndex: unspent.output_index,
+          script: unspent.script_hex,
+          satoshis: unspent.value
+        });
+      }));
+    }).fail(function(response) {
+      return callback(response);
+    });
   };
 
   var validateUTXOS = function(utxos) {
@@ -35,7 +62,7 @@ angular.module('streamium.insight', [])
   return {
     checkBalance: queryBalance,
     pollBalance: pollBalance,
-    broadcast: insight.broadcast.bind(insight)
+    broadcast: broadcast
   };
 
 });
