@@ -5,6 +5,10 @@ var config = {
   appPrefix: '', // For testnet, set to '/testnet'
   otherNetwork: 'testnet',
   linkToOther: '/testnet',
+  CHAIN: 'https://api.chain.com/v2/bitcoin/',
+  // CHAIN: 'https://api.chain.com/v2/testnet3/',
+  CHAIN_API_KEY: '45c19e4cfc41937124964a7a7931b427',
+  BLOCKCYPHER: 'https://api.blockcypher.com/v1/btc/',
   BLOCKCYPHERTX: 'https://api.blockcypher.com/v1/btc/'
     + 'main' // For testnet, use: 'test3'
     + '/txs/',
