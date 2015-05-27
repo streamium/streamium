@@ -3,15 +3,13 @@
 
 angular.module('streamium.peer', [])
 
-.service('PeerJS', function() {
+.service('PeerJS', function(bitcore) {
 
   function getPeerJSConfig(config, index) {
     if (index >= config.peerServers.length) throw new Error('Invalid Server number');
 
-    var ret  = angular.copy(config.peerJS);
-    ret.key  = config.peerServers[index].key;
-    ret.host = config.peerServers[index].host;
-    ret.port = config.peerServers[index].port;
+    var ret = angular.copy(config.peerJS);
+    bitcore.deps._.extend(ret, config.peerServers[index]);
     ret.index = index;
     return ret;
   }
