@@ -16,8 +16,8 @@
                   </button>
 
                   <!-- LOGO -->
-                  <a class="navbar-brand" href="#">
-                      <img src="../assets/img/logo-nav.png" alt="">
+                  <a class="navbar-brand" href="/">
+                      <img src="/assets/img/logo-nav.png" alt="">
                   </a>
               </div>
 
@@ -56,7 +56,7 @@
         <div class="only-logo">
             <div class="navbar">
                 <div class="navbar-header">
-                    <img src="../assets/img/logo-2.png" alt="">
+                    <img src="/assets/img/logo-2.png" alt="">
                 </div>
             </div>
         </div>
@@ -129,7 +129,7 @@
                               class="btn btn-primary standard-button"
                               ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Start broadcasting'}}</button>
                         </div>
-                        <div style="color: gray; font-size:14px">(Try it on <a ng-href="{{linkToOther}}">{{otherNetwork}}</a>)</div>
+                        <div style="color: gray; font-size:14px">(Try it on <a ng-click="switchNetwork()">{{otherNetwork}}</a>)</div>
                         <div style="color: gray; font-size:14px"><input type="checkbox" ng-model="config.analytics"/><span>&nbsp;</span>Send annonymous usage statistics</div>
 
                         <script>
@@ -162,14 +162,14 @@
     <div class="clients white-bg">
         <ul class="client-logos" style="padding-top:17px;">
             <li>
-                <a href="http://techcrunch.com/2015/05/23/the-bitcoin-blocksize-blackjack-mining-blues/"><img src="../assets/img/companies/techcrunch.png"></a>
+                <a href="http://techcrunch.com/2015/05/23/the-bitcoin-blocksize-blackjack-mining-blues/"><img src="/assets/img/companies/techcrunch.png"></a>
             </li>
             <li>
-                <img src="../assets/img/companies/1.png" alt="" style="margin-bottom:20px">
+                <img src="/assets/img/companies/1.png" alt="" style="margin-bottom:20px">
                 <h2 style="display:inline"><a href="https://medium.com/@demibre/a-decentralized-pay-as-you-go-streaming-service-b71ef89cd714">Why we built Streamium</a></h2>
             </li>
             <li>
-                <a href="https://bitcoinmagazine.com/20517/5-freelancers-may-use-bitcoin-powered-streamium-cut-middlemen/"><img id="bitmag" src="../assets/img/companies/bitcoinmag.png"></a>
+                <a href="https://bitcoinmagazine.com/20517/5-freelancers-may-use-bitcoin-powered-streamium-cut-middlemen/"><img id="bitmag" src="/assets/img/companies/bitcoinmag.png"></a>
             </li>
         </ul>
     </div>
@@ -324,7 +324,7 @@
                 <!-- IPAD IMAGE -->
                 <div class="col-md-4">
                     <div class="ipad-image "  >
-                        <img src="../assets/img/ipad-air.png" alt="">
+                        <img src="/assets/img/ipad-air.png" alt="">
                     </div>
                 </div>
 
@@ -391,7 +391,7 @@
                 <!-- BRIEF IMAGE -->
                 <div class="col-md-6">
                     <div class="brief-image-left">
-                        <img src="../assets/img/imac-ipad.png" alt="">
+                        <img src="/assets/img/imac-ipad.png" alt="">
                     </div>
                 </div>
 
@@ -590,8 +590,8 @@
 
                             <!-- SINGLE SCREENSHOT -->
                             <div class="screenshot">
-                                <a href="../assets/img/screenshots/1@2x.png" data-lightbox-gallery="gallery1">
-                                    <img src="../assets/img/screenshots/1.png" alt="" />
+                                <a href="/assets/img/screenshots/1@2x.png" data-lightbox-gallery="gallery1">
+                                    <img src="/assets/img/screenshots/1.png" alt="" />
                                 </a>
                             </div>
 

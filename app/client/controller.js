@@ -4,20 +4,27 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 .config(['$routeProvider',
   function($routeProvider) {
-    $routeProvider.when('/join/:streamId', {
-      templateUrl: 'client/join.html',
+
+    var join = {
+      templateUrl: '/app/client/join.html',
       controller: 'JoinStreamCtrl'
-    });
+    };
+    $routeProvider.when('/s/:streamId', join);
+    $routeProvider.when('/t/s/:streamId', join);
 
-    $routeProvider.when('/stream/:streamId', {
-      templateUrl: 'client/stream.html',
+    var watch = {
+      templateUrl: '/app/client/stream.html',
       controller: 'WatchStreamCtrl'
-    });
+    };
+    $routeProvider.when('/s/:streamId/watch', watch);
+    $routeProvider.when('/t/s/:streamId/watch', watch);
 
-    $routeProvider.when('/stream/:streamId/cashout', {
-      templateUrl: 'client/cashout.html',
+    var cashout = {
+      templateUrl: '/app/client/cashout.html',
       controller: 'WithdrawStreamCtrl'
-    });
+    };
+    $routeProvider.when('/s/:streamId/cashout', cashout);
+    $routeProvider.when('/t/s/:streamId/cashout', cashout);
   }
 ])
 
@@ -89,13 +96,13 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
   $scope.submit = function() {
     StreamiumClient.consumer.refundAddress = $scope.client.change;
-    $location.path('/stream/' + $routeParams.streamId);
+    $location.path(config.appPrefix + '/s/' + $routeParams.streamId + '/watch');
   };
 })
 
 .controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval, bitcore) {
   if (!StreamiumClient.isReady()) {
-    $location.path('/join/' + $routeParams.streamId);
+    $location.path(config.appPrefix + '/s/' + $routeParams.streamId);
     return;
   }
   StreamiumClient.askForRefund();
@@ -140,7 +147,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   StreamiumClient.on('end', function() {
     console.log('Moving to cashout stream', $routeParams);
     config.analytics && mixpanel.track('cli-ended');
-    $location.path('/stream/' + $routeParams.streamId + '/cashout');
+    $location.path(config.appPrefix + '/s/' + $routeParams.streamId + '/cashout');
   });
 
   $scope.end = function() {

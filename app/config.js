@@ -2,9 +2,9 @@
 
 var config = {
   network: 'livenet',
-  appPrefix: '', // For testnet, set to '/testnet'
+  appPrefix: '', // For testnet, set to '/t'
   otherNetwork: 'testnet',
-  linkToOther: '/testnet',
+  linkToOther: '/t',
   CHAIN: 'https://api.chain.com/v2/bitcoin/',
   // CHAIN: 'https://api.chain.com/v2/testnet3/',
   CHAIN_API_KEY: '45c19e4cfc41937124964a7a7931b427',

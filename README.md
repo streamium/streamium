@@ -21,7 +21,7 @@ For example:
 ```
 cd streamium/
 bower install
-python -m "SimpleHTTPServer"
+npm start
 ```
 
 and then access it from any [WebRTC-supporting](http://www.webrtc.org/) browser:

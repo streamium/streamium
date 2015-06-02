@@ -4,24 +4,31 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
 .config(['$routeProvider',
   function($routeProvider) {
-    $routeProvider.when('/provider', {
-      templateUrl: 'provider/create.html',
+
+    var create = {
+      templateUrl: '/app/provider/create.html',
       controller: 'CreateStreamCtrl'
-    });
+    };
+    $routeProvider.when('/', create);
+    $routeProvider.when('/t', create);
 
-    $routeProvider.when('/provider/:streamId', {
-      templateUrl: 'provider/stream.html',
+    var broadcast = {
+      templateUrl: '/app/provider/stream.html',
       controller: 'BroadcastStreamCtrl'
-    });
+    };
+    $routeProvider.when('/b/:streamId', broadcast);
+    $routeProvider.when('/t/b/:streamId', broadcast);
 
-    $routeProvider.when('/provider/:streamId/cashout', {
-      templateUrl: 'provider/cashout.html',
+    var cashout = {
+      templateUrl: '/app/provider/cashout.html',
       controller: 'CashoutStreamCtrl'
-    });
+    };
+    $routeProvider.when('/b/:streamId/cashout', cashout);
+    $routeProvider.when('/t/b/:streamId/cashout', cashout);
   }
 ])
 
-.controller('CreateStreamCtrl', function($scope, $location, Rates, StreamiumProvider, bitcore) {
+.controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore) {
   $scope.stream = {};
 
   $scope.stream.name = config.DEBUG ? config.defaults.providerStream : '';
@@ -64,6 +71,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   }
   config.analytics && mixpanel.track('homepage');
 
+  $scope.switchNetwork = function() {
+    window.location = window.location.origin + config.linkToOther;
+  };
+
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
 
@@ -88,7 +99,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
         } else if (err == StreamiumProvider.ERROR.IDISTAKEN) {
           $scope.stream.error = "Channel name is taken, please pick a different one";
         } else if (err == null) {
-          $location.path('/provider/' + $scope.stream.name);
+          $location.path(config.appPrefix + '/b/' + $scope.stream.name);
         } else {
           console.log(err);
         }
@@ -129,7 +140,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
   $scope.end = function() {
     StreamiumProvider.endAllBroadcasts();
-    $location.path('/provider/' + $routeParams.streamId + '/cashout');
+    $location.path(config.appPrefix + '/b/' + $routeParams.streamId + '/cashout');
   };
 
   var startCamera = function() {
@@ -149,7 +160,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   };
 
   if (!StreamiumProvider.streamId && !config.DEBUG) {
-    $location.path('/');
+    $location.path(config.appPrefix + '/');
     return;
   } else if (!StreamiumProvider.streamId && config.DEBUG) {
     StreamiumProvider.init(name, 'n3vNjpQB8GUVNz5R2hSM8rq4EgMEQqS4AZ', 0.001, function(err) {
