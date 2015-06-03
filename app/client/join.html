@@ -71,7 +71,7 @@
         ng-model="stream.minutes"
         ng-options="val + ' minutes' for val in minutes"/><br/>
       <strong>Price</strong>
-      <span class="rate">{{client.rate / 60.0|number:8}} BTC/seg</span>
+      <span class="rate">{{(client.rate / 60.0).toFixed(8)}} BTC/seg</span>
       <span class="rate">{{client.rate * 60.0|BTC2USD}} USD/hour</span>
     </div>
   </div>
@@ -79,7 +79,7 @@
   <div class="row card" ng-show="client.status == 'funding'">
     <div class="col-sm-1 center step-count">2</div>
     <div class="col-sm-11 left-border">
-      Send <strong>{{stream.minutes * client.rate|number:8}}</strong> BTC to
+      Send <strong>{{(stream.minutes * client.rate).toFixed(8)}}</strong> BTC to
     
       <div class="row" style="margin-top: 20px">
         <div class="col-sm-4 center">
