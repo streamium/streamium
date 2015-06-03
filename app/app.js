@@ -22,11 +22,12 @@ config(function ($compileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|bitcoin|ftp|mailto|chrome-extension):/);
 }).
 
-config(function($routeProvider, $sceProvider) {
+config(function($routeProvider, $sceProvider, $locationProvider) {
   $routeProvider.otherwise({
-    redirectTo: '/provider'
+    redirectTo: '/'
   });
   $sceProvider.enabled(false);
+  $locationProvider.html5Mode(true);
 })
 
 .config(['$routeProvider',

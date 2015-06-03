@@ -9,15 +9,15 @@
   <title>Streamium</title>
   <meta name="description" content="Decentralized trustless video streaming using bitcoin payment channels">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="app.css">
-  <link rel="stylesheet" href="../assets/css/styles.css">
-  <link rel="stylesheet" href="../assets/css/colors/blue.css">
-  <link rel="stylesheet" href="../assets/icons/icons.css">
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <link rel="icon" type="image/png" href="../assets/img/logo.png">
-  <link href='../assets/css/font.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/app/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/app/app.css">
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link rel="stylesheet" href="/assets/css/colors/blue.css">
+  <link rel="stylesheet" href="/assets/icons/icons.css">
+  <script src="/app/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="/app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="icon" type="image/png" href="/assets/img/logo.png">
+  <link href='/assets/css/font.css' rel='stylesheet'>
 </head>
 <body>
   <!--[if lt IE 7]>
@@ -40,37 +40,37 @@
   <script
   src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
-  <script src="config.js"></script>
-  <script src="bower_components/async/lib/async.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/peerjs/peer.min.js"></script>
-  <script src="bitcore.min.js"></script>
-  <script src="bitcore-channel.min.js"></script>
-  <script src="bower_components/bitcore-explorers/bitcore-explorers.js"></script>
-  <script src="bower_components/qrcode/lib/qrcode.min.js"></script>
-  <script src="bower_components/angular-qr/angular-qr.min.js"></script>
-  <script src="bower_components/events.js"></script>
-  <script src="bower_components/lodash/lodash.min.js"></script>
-  <script src="bower_components/inherits.js"></script>
-  <script src="bower_components/moment/moment.js"></script>
-  <script src="bower_components/angular-moment/angular-moment.js"></script>
-  <script src="bower_components/detectrtc/DetectRTC.min.js"></script>
+  <script src="/testnet/config.js"></script>
+  <script src="/app/bower_components/async/lib/async.js"></script>
+  <script src="/app/bower_components/angular/angular.js"></script>
+  <script src="/app/bower_components/angular-route/angular-route.js"></script>
+  <script src="/app/bower_components/peerjs/peer.min.js"></script>
+  <script src="/app/bitcore.min.js"></script>
+  <script src="/app/bitcore-channel.min.js"></script>
+  <script src="/app/bower_components/bitcore-explorers/bitcore-explorers.js"></script>
+  <script src="/app/bower_components/qrcode/lib/qrcode.min.js"></script>
+  <script src="/app/bower_components/angular-qr/angular-qr.min.js"></script>
+  <script src="/app/bower_components/events.js"></script>
+  <script src="/app/bower_components/lodash/lodash.min.js"></script>
+  <script src="/app/bower_components/inherits.js"></script>
+  <script src="/app/bower_components/moment/moment.js"></script>
+  <script src="/app/bower_components/angular-moment/angular-moment.js"></script>
+  <script src="/app/bower_components/detectrtc/DetectRTC.min.js"></script>
 
 
-  <script src="app.js"></script>
+  <script src="/app/app.js"></script>
 
-  <script src="components/rates.js"></script>
-  <script src="components/bitcoin.js"></script>
-  <script src="components/core.js"></script>
-  <script src="components/video.js"></script>
-  <script src="components/insight.js"></script>
-  <script src="components/peer.js"></script>
+  <script src="/app/components/rates.js"></script>
+  <script src="/app/components/bitcoin.js"></script>
+  <script src="/app/components/core.js"></script>
+  <script src="/app/components/video.js"></script>
+  <script src="/app/components/insight.js"></script>
+  <script src="/app/components/peer.js"></script>
 
-  <script src="client/client.js"></script>
-  <script src="provider/provider.js"></script>
-  <script src="client/controller.js"></script>
-  <script src="provider/controller.js"></script>
+  <script src="/app/client/client.js"></script>
+  <script src="/app/provider/provider.js"></script>
+  <script src="/app/client/controller.js"></script>
+  <script src="/app/provider/controller.js"></script>
 
   <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
   for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
@@ -96,12 +96,12 @@
   js.id = id;
   js.src = "https://platform.twitter.com/widgets.js";
   fjs.parentNode.insertBefore(js, fjs);
- 
+
   t._e = [];
   t.ready = function(f) {
     t._e.push(f);
   };
- 
+
   return t;
   }(document, "script", "twitter-wjs"));</script>
 </body>

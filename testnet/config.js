@@ -1,16 +1,15 @@
 'use strict';
 
 var config = {
-  network: 'livenet',
-  appPrefix: '', // For testnet, set to '/t'
-  otherNetwork: 'testnet',
-  linkToOther: '/t',
-  CHAIN: 'https://api.chain.com/v2/bitcoin/',
-  // CHAIN: 'https://api.chain.com/v2/testnet3/',
+  network: 'testnet',
+  appPrefix: '/t', // For testnet, set to '/t'
+  otherNetwork: 'livenet',
+  linkToOther: '/',
+  CHAIN: 'https://api.chain.com/v2/testnet3/',
   CHAIN_API_KEY: '45c19e4cfc41937124964a7a7931b427',
-  BLOCKCYPHER: 'https://api.blockcypher.com/v1/btc/',
+  BLOCKCYPHER: 'https://api.blockcypher.com/v1/btc/test3/',
   BLOCKCYPHERTX: 'https://api.blockcypher.com/v1/btc/'
-    + 'main' // For testnet, use: 'test3'
+    + 'test3'
     + '/txs/',
   peerServers: [
     {
