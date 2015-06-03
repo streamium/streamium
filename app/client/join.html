@@ -79,12 +79,12 @@
   <div class="row card" ng-show="client.status == 'funding'">
     <div class="col-sm-1 center step-count">2</div>
     <div class="col-sm-11 left-border">
-      Send <strong>{{stream.minutes * client.rate}}</strong> BTC to
+      Send <strong>{{stream.minutes * client.rate|number:8}}</strong> BTC to
     
       <div class="row" style="margin-top: 20px">
         <div class="col-sm-4 center">
           <a href="{{payUrl}}">
-            <qr text="'bitcoin:' + fundingAddress + '?amount=' + stream.minutes * client.rate" ng-show="fundingAddress"></qr>
+            <qr text="'bitcoin:' + fundingAddress + '?amount=' + (stream.minutes * client.rate).toFixed(8)" ng-show="fundingAddress"></qr>
           </a>
         </div>
         <div class="col-sm-8">
