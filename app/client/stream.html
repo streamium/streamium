@@ -37,7 +37,8 @@
   <div class="row" ng-hide="requiresApproval">
     <div class="row-same-height">
       <video class="col-md-8 col-xs-height col-full-height stream-video" id="video" ng-src="{{videoSrc}}" autoplay></video>
-      <div class="col-md-4 col-xs-height col-full-height card chat">
+
+      <div class="hidden-xs hidden-sm col-md-4 col-xs-height col-full-height card chat">
         <h1><span class="circle" style="background-color: 'red';"/> {{name}}</h1>
         <ul class="messages" scroll-glue>
           <li ng-repeat="m in messages"><span class="circle" style="background-color: {{m.color || 'red'}};"/>{{m.text}}</li>
