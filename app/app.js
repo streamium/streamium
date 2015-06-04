@@ -13,6 +13,7 @@ angular.module('streamium', [
   'streamium.core',
   'streamium.video',
   'streamium.peer',
+  'luegg.directives',
   'angularMoment',
   'ja.qr'
 ]).

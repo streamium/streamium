@@ -138,6 +138,10 @@ angular.module('streamium.client.service', [])
     self.emit('refundReceived');
   };
 
+  StreamiumClient.prototype.handlers.message = function(data) {
+    this.emit('chatroom:message', data);
+  };
+
   StreamiumClient.prototype.getDuration = function(satoshis) {
     return Duration.for(this.rate, satoshis);
   };
@@ -202,6 +206,13 @@ angular.module('streamium.client.service', [])
 
   StreamiumClient.prototype.isReady = function() {
     return !!this.consumer;
+  };
+
+  StreamiumClient.prototype.sendMessage = function(message) {
+    this.connection.send({
+      type: 'message',
+      payload: message
+    });
   };
 
   StreamiumClient.prototype.askForRefund = function() {

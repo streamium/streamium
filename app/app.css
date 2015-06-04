@@ -120,3 +120,89 @@ body > div {
   padding-left: 29px;
   padding-right: 29px;
 }
+
+.chat {
+  box-shadow: 0 0 5px #333;
+  padding-top: 0;
+}
+
+.chat h1 {
+  font-size: 1.4em;
+  line-height: 3rem;
+  text-align: center;
+  border-bottom: solid 2px #DDD;
+  margin-top: 0px;
+  height: 10%;
+}
+
+.chat .messages {
+  height: 80%;
+  overflow-y: scroll;
+}
+
+.circle {
+  background-color: red;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  margin-right: 15px;
+  display: inline-block;
+}
+
+.chat .input {
+  position: absolute;
+  bottom: 10px;
+  width: 90%;
+}
+
+.chat .input input {
+  width: 80%;
+}
+
+.chat .input button {
+  width: 18%;
+}
+
+.video {
+  margin-bottom: 20px;
+}
+
+
+/* columns of same height styles */
+
+.row-full-height {
+  height: 100%;
+}
+.col-full-height {
+  height: 100%;
+  vertical-align: middle;
+}
+.row-same-height {
+  display: table;
+  width: 100%;
+  /* fix overflow */
+  table-layout: fixed;
+}
+.col-xs-height {
+  display: table-cell;
+  float: none !important;
+}
+
+@media (min-width: 768px) {
+  .col-sm-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 992px) {
+  .col-md-height {
+    display: table-cell;
+    float: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .col-lg-height {
+    display: table-cell;
+    float: none !important;
+  }
+}

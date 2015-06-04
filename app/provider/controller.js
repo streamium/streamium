@@ -114,6 +114,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.requiresApproval = true;
 
   $scope.peers = {};
+  $scope.message = "";
+  $scope.messages = [];
 
   StreamiumProvider.on('broadcast:start', function(peer) {
     console.log('Start broadcast for ' + peer);
@@ -134,6 +136,15 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $scope.$apply();
   });
 
+  StreamiumProvider.on('chatroom:message', function(data) {
+    $scope.messages.push({
+      color: data.color,
+      text: data.message
+    });
+
+    if (data.color) $scope.$apply(); // Only for clients
+  });
+
   StreamiumProvider.on('balanceUpdated', function() {
     $scope.$apply();
   });
@@ -141,6 +152,11 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.end = function() {
     StreamiumProvider.endAllBroadcasts();
     $location.path(config.appPrefix + '/b/' + $routeParams.streamId + '/cashout');
+  };
+
+  $scope.chat = function () {
+    StreamiumProvider.sendMessage($scope.message);
+    $scope.message = '';
   };
 
   var startCamera = function() {
@@ -163,7 +179,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $location.path(config.appPrefix + '/');
     return;
   } else if (!StreamiumProvider.streamId && config.DEBUG) {
-    StreamiumProvider.init(name, 'n3vNjpQB8GUVNz5R2hSM8rq4EgMEQqS4AZ', 0.001, function(err) {
+    StreamiumProvider.init(config.defaults.providerStream, 'n3vNjpQB8GUVNz5R2hSM8rq4EgMEQqS4AZ', 0.001, function(err) {
       if (err) {
         console.log(err);
         return;
@@ -173,6 +189,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   } else {
     startCamera();
   }
+
 })
 
 .controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore) {

@@ -98,19 +98,23 @@ angular.module('streamium.client.controller', ['ngRoute'])
     StreamiumClient.consumer.refundAddress = $scope.client.change;
     $location.path(config.appPrefix + '/s/' + $routeParams.streamId + '/watch');
   };
+
 })
 
 .controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval, bitcore) {
+  $scope.message = "";
+  $scope.messages = [];
+  $scope.name = $routeParams.streamId;
+
   if (!StreamiumClient.isReady()) {
-    $location.path(config.appPrefix + '/s/' + $routeParams.streamId);
+    $location.path(config.appPrefix + '/s/' + $scope.name);
     return;
   }
   StreamiumClient.askForRefund();
   config.analytics && mixpanel.track('cli-start');
-  var streamId = $routeParams.streamId;
   var startViewer = function() {
     video.setPeer(StreamiumClient.peer);
-    video.view(streamId, function(err, stream) {
+    video.view($scope.name, function(err, stream) {
       // called on provider calling us
       if (err) {
         console.log(err);
@@ -136,6 +140,13 @@ angular.module('streamium.client.controller', ['ngRoute'])
     StreamiumClient.sendFirstPayment();
   });
 
+  StreamiumClient.on('chatroom:message', function(data) {
+    $scope.messages.push({
+      color: data.color,
+      text: data.message
+    });
+  });
+
   var calculateSeconds = function() {
     $scope.secondsLeft = Math.floor(($scope.expirationDate - new Date().getTime()) / 1000);
   };
@@ -152,6 +163,11 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
   $scope.end = function() {
     StreamiumClient.end();
+  };
+
+  $scope.chat = function () {
+    StreamiumClient.sendMessage($scope.message);
+    $scope.message = '';
   };
 })
 

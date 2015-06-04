@@ -20,6 +20,8 @@
     "bitcore": "^0.12.0",
     "bitcore-channel": "~0.9.1",
     "bitcore-explorers": "^0.11.0",
-    "detectrtc": "*"
+    "detectrtc": "*",
+    "angular-scroll-glue": "~2.0.5",
+    "randomcolor": "~0.2.0"
   }
 }
