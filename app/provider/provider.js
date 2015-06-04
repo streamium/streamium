@@ -170,7 +170,6 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.handlers.message = function(connection, message) {
-    console.log('>>', connection.id, message);
     var data = {
       color: this.clientColorsMap[connection.peer],
       message: message
