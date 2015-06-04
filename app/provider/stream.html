@@ -55,9 +55,22 @@
       </div>
     </div>
 
-    <div class="row" ng-hide="requiresApproval">
-      <div class="col-md-12">
-        <video class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+    <div class="row video" ng-hide="requiresApproval">
+      <div class="row-same-height">
+        <video class="col-md-8 col-xs-height col-full-height stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+
+        <div class="hidden-xs hidden-sm col-md-4 col-xs-height col-full-height card chat">
+          <h1><span class="circle" style="background-color: 'red';"/>{{name}}</h1>
+          <ul class="messages" scroll-glue>
+            <li ng-repeat="m in messages"><span class="circle" style="background-color: {{m.color || 'red'}};"/>{{m.text}}</li>
+          </ul>
+          <div class="input">
+            <form name="form" ng-submit="chat()">
+            <input type="text" ng-model="message" required/>
+            <button class="btn btn-primary" type="submit" ng-disabled="!message">Send</button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
 

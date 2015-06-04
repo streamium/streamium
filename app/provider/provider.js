@@ -49,6 +49,7 @@ angular.module('streamium.provider.service', [])
     this.rateSatoshis = bitcore.Unit.fromBTC(rate).toSatoshis();
     this.clientConnections = [];
     this.clientConnectionMap = {};
+    this.clientColorsMap = {};
     this.status = StreamiumProvider.STATUS.connecting
 
     console.log('Connecting with peer', this.config);
@@ -88,6 +89,7 @@ angular.module('streamium.provider.service', [])
       console.log('New peer connected:', connection);
       self.clientConnections.push(connection);
       self.clientConnectionMap[connection.peer] = connection;
+      self.clientColorsMap[connection.peer] = randomColor();
 
       connection.on('data', function(data) {
         console.log('New message:', data);
@@ -165,6 +167,15 @@ angular.module('streamium.provider.service', [])
       type: 'refundAck',
       payload: refund.toJSON()
     });
+  };
+
+  StreamiumProvider.prototype.handlers.message = function(connection, message) {
+    var data = {
+      color: this.clientColorsMap[connection.peer],
+      message: message
+    };
+    this.broadcastMessage(data);
+    this.emit('chatroom:message', data);
   };
 
   StreamiumProvider.prototype.endBroadcast = function(peerId) {
@@ -338,6 +349,25 @@ angular.module('streamium.provider.service', [])
     if (this.status === StreamiumProvider.STATUS.disconnected) throw 'Invalid State';
     var baseURL = window.location.origin;
     return baseURL + config.appPrefix + '/s/' + this.streamId;
+  };
+
+  StreamiumProvider.prototype.sendMessage = function(message) {
+    var data = {
+      color: this.clientColorsMap[this.peer.id],
+      message: message
+    };
+
+    this.broadcastMessage(data);
+    this.emit('chatroom:message', data);
+  };
+
+  StreamiumProvider.prototype.broadcastMessage = function(data) {
+    this.clientConnections.forEach(function(connection) {
+      connection.send({
+        type: 'message',
+        payload: data
+      });
+    });
   };
 
   StreamiumProvider.ERROR = {

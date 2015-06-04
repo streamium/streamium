@@ -1258,7 +1258,7 @@ strong,
 .stream-video {
 	box-shadow: 0 0 10px #333;
 	padding: 0;
-	margin-bottom: 20px;
+	width: 100%;
 }
 
 .stream-data {
