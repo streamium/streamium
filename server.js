@@ -1,8 +1,10 @@
+'use strict';
+
 var express = require('express');
 var app = express();
 
 // This routes enables HTML5Mode by forwarding missing files to the index.html
-app.configure(function(){
+app.use(function(){
 
   // Livenet
   app.all('/b/*', function(req, res) {
@@ -29,4 +31,7 @@ app.configure(function(){
 
 });
 
-app.listen(8000);
+var port = 8000;
+app.listen(port, function() {
+  console.log('Server listening on port', port);
+});
