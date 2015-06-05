@@ -71,7 +71,7 @@
         ng-model="stream.minutes"
         ng-options="val + ' minutes' for val in minutes"/><br/>
       <strong>Price</strong>
-      <span class="rate">{{(client.rate / 60.0).toFixed(8)}} BTC/seg</span>
+      <span class="rate">{{(client.rate / 60.0).toFixed(8)}} BTC/sec</span>
       <span class="rate">{{client.rate * 60.0|BTC2USD}} USD/hour</span>
     </div>
   </div>
