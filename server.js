@@ -4,7 +4,7 @@ var express = require('express');
 var app = express();
 
 // This routes enables HTML5Mode by forwarding missing files to the index.html
-app.use(function(){
+app.configure(function(){
 
   // Livenet
   app.all('/b/*', function(req, res) {
