@@ -14,7 +14,13 @@ angular.module('streamium.client.service', [])
     this.network = bitcore.Networks.get(config.network);
     bitcore.Networks.defaultNetwork = this.network;
 
-    this.fundingKey = config.DEBUG ? new bitcore.PrivateKey(config.defaults.fundingKey) : undefined;
+    this.fundingKey = localStorage.getItem('fundingKey');
+    if (!this.fundingKey) {
+      this.fundingKey = new bitcore.PrivateKey();
+      localStorage.setItem('fundingKey', this.fundingKey.toString());
+    } else {
+      this.fundingKey = new bitcore.PrivateKey(this.fundingKey);
+    }
     this.rate = this.providerKey = null;
     this.peer = this.connection = null;
     this.config = PeerJS.primary;
@@ -134,6 +140,7 @@ angular.module('streamium.client.service', [])
     data = JSON.parse(data);
     this.consumer.validateRefund(data);
     this.status = StreamiumClient.STATUS.ready;
+    localStorage.setItem('refund_' + new Date().getTime(), this.consumer.refundTx.toString());
 
     self.emit('refundReceived');
   };
