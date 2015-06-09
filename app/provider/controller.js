@@ -94,11 +94,11 @@ angular.module('streamium.provider.controller', ['ngRoute'])
       function onCreate(err, done) {
         $scope.stream.loading = false;
 
-        if (err == StreamiumProvider.ERROR.UNREACHABLE) {
-          $scope.stream.error = "Server unreachable :(";
-        } else if (err == StreamiumProvider.ERROR.IDISTAKEN) {
-          $scope.stream.error = "Channel name is taken, please pick a different one";
-        } else if (err == null) {
+        if (err === StreamiumProvider.ERROR.UNREACHABLE) {
+          $scope.stream.error = 'Sorry, we\'re unable to start the stream right now. Mind trying again later?';
+        } else if (err === StreamiumProvider.ERROR.IDISTAKEN) {
+          $scope.stream.error = 'Looks like that channel name is already taken. Mind trying a different one?';
+        } else if (err === null) {
           $location.path(config.appPrefix + '/b/' + $scope.stream.name);
         } else {
           console.log(err);
