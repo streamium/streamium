@@ -276,11 +276,11 @@ function retrievePendingTxs(Insight) {
     }
   }
   if (messages.length === 1) {
-    var msg = 'You have locked funds from the stream "' + messages[0] + '". Come back tomorrow to try to claim them!';
-    $('.top-right').notify({ message: msg}).show();
+    // var msg = 'You have locked funds from the stream "' + messages[0] + '". Come back tomorrow to try to claim them!';
+    // $('.top-right').notify({ message: msg}).show();
   } else if (messages.length > 1) {
-    var msg = 'You have locked funds from the streams "' + messages.join('", "') + '". Come back tomorrow to try to claim them!';
-    $('.top-right').notify({ message: msg}).show();
+    // var msg = 'You have locked funds from the streams "' + messages.join('", "') + '". Come back tomorrow to try to claim them!';
+    // $('.top-right').notify({ message: msg}).show();
   }
   broadcast.map(function(tx) {
     Insight.broadcast(tx.tx, function(err, txid) {
