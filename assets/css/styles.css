@@ -120,6 +120,7 @@ a {
 	text-decoration: none;
 	-webkit-transition: all ease 0.25s;
 	transition: all ease 0.25s;
+  cursor: pointer;
 }
 
 a:hover {
