@@ -61,7 +61,8 @@
           id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
 
         <div class="hidden-xs hidden-sm col-md-4 col-xs-height col-full-height card chat">
-          <h1><span class="circle" style="background-color: {{PROVIDER_COLOR}};"/>{{name}}</h1>
+          <h1 class="truncate">
+            <span class="circle" style="background-color: {{PROVIDER_COLOR}};"/>{{name}}</h1>
           <ul class="messages" scroll-glue>
             <li ng-repeat="m in messages"><span class="circle" style="background-color: {{m.color || PROVIDER_COLOR}};"/>{{m.text}}</li>
           </ul>

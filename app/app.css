@@ -1,8 +1,16 @@
 /* app css stylesheet */
 
-.center { text-align: center; }
-.space-top { margin-top: 40px; }
-.space-top-big { margin-top: 80px; }
+.center {
+  text-align: center;
+}
+
+.space-top {
+  margin-top: 40px;
+}
+
+.space-top-big {
+  margin-top: 80px;
+}
 
 .menu {
   list-style: none;
@@ -82,7 +90,7 @@ qr canvas {
 }
 
 ul.checkmark li:before {
-    content:"\2713\0020";
+  content: "\2713\0020";
 }
 
 .borderless {
@@ -102,18 +110,19 @@ ul.checkmark li:before {
   width: 100%;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
 body > div {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 #global-footer {
-    padding: 30px;
-    border-top: 1px solid #eaebec;
-    background: #F7F8FA;
+  padding: 30px;
+  border-top: 1px solid #eaebec;
+  background: #F7F8FA;
 }
 
 #bitmag {
@@ -166,23 +175,25 @@ body > div {
 .video {
   margin-bottom: 20px;
 }
-
-
 /* columns of same height styles */
 
 .row-full-height {
   height: 100%;
 }
+
 .col-full-height {
   height: 100%;
   vertical-align: middle;
 }
+
 .row-same-height {
   display: table;
   width: 100%;
   /* fix overflow */
+  
   table-layout: fixed;
 }
+
 .col-xs-height {
   display: table-cell;
   float: none !important;
@@ -194,15 +205,23 @@ body > div {
     float: none !important;
   }
 }
+
 @media (min-width: 992px) {
   .col-md-height {
     display: table-cell;
     float: none !important;
   }
 }
+
 @media (min-width: 1200px) {
   .col-lg-height {
     display: table-cell;
     float: none !important;
   }
+}
+
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }

@@ -89,7 +89,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
       $scope.fundedSeconds = $scope.fundedMillis / 1000;
       $scope.fundedMinutes = $scope.fundedSeconds / 60;
       $scope.funded = true;
-      $scope.$apply();
+      //$scope.$apply();
     };
     Insight.pollBalance(fundingAddress, updateBalance);
   });
@@ -102,8 +102,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
 })
 
 .controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval, bitcore) {
-  $scope.message = "";
+  $scope.message = '';
   $scope.messages = [];
+  $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
   $scope.name = $routeParams.streamId;
 
   if (!StreamiumClient.isReady()) {
