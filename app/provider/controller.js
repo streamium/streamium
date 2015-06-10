@@ -114,11 +114,12 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 })
 
 .controller('BroadcastStreamCtrl', function($scope, $location, $routeParams, video, StreamiumProvider) {
-  $scope.name = $routeParams.$streamId;
+  $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
+  $scope.name = $routeParams.streamId;
   $scope.requiresApproval = true;
 
   $scope.peers = {};
-  $scope.message = "";
+  $scope.message = '';
   $scope.messages = [];
 
   StreamiumProvider.on('broadcast:start', function(peer) {
