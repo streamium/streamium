@@ -130,7 +130,9 @@
                               ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Start broadcasting'}}</button>
                         </div>
                         <div style="color: gray; font-size:14px">(Try it on <a ng-click="switchNetwork()">{{otherNetwork}}</a>)</div>
-                        <div style="color: gray; font-size:14px"><input type="checkbox" ng-model="config.analytics"/><span>&nbsp;</span>Send annonymous usage statistics</div>
+                        <div style="color: gray; font-size:14px">
+                          <input type="checkbox" ng-model="config.analytics"/>
+                          <span>&nbsp;</span>Send anonymous usage statistics</div>
 
                         <script>
                             $(document).ready(function(){
