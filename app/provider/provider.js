@@ -17,8 +17,8 @@ angular.module('streamium.provider.service', [])
 
     // TODO: this screams for a status object or add status into Provider
     this.totalMoney = 0;
-    this.mapClientIdToProvider = {};
     this.mapClientIdToStatus = {};
+    this.mapClientIdToProvider = {};
     this.config = PeerJS.primary;
 
     events.EventEmitter.call(this);
@@ -179,12 +179,24 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.handlers.message = function(connection, message) {
+    var status = this.mapClientIdToStatus[connection.peer];
+    if (status !== StreamiumProvider.STATUS.ready) {
+      return;
+    }
     var data = {
       color: this.clientColorsMap[connection.peer],
       message: message
     };
-    this.broadcastMessage(data);
+    this.broadcastToConnected(data);
     this.emit('chatroom:message', data);
+  };
+
+  StreamiumProvider.prototype.getConnected = function() {
+    var count = 0;
+    for (var i in this.mapClientIdToStatus) {
+      count += (this.mapClientIdToStatus[i] === StreamiumProvider.STATUS.ready);
+    }
+    return count;
   };
 
   StreamiumProvider.prototype.endBroadcast = function(peerId) {
@@ -234,6 +246,7 @@ angular.module('streamium.provider.service', [])
     if (status === StreamiumProvider.STATUS.waiting) {
       status = this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.ready;
       firstPayment = true;
+      this.emit('client-watching', { peerId: connection.peer });
     }
 
     if (status !== StreamiumProvider.STATUS.ready) {
@@ -378,6 +391,18 @@ angular.module('streamium.provider.service', [])
         type: 'message',
         payload: data
       });
+    });
+  };
+
+  StreamiumProvider.prototype.broadcastToConnected = function(data) {
+    var self = this;
+    this.clientConnections.forEach(function(connection) {
+      if (self.mapClientIdToStatus[connection.peer] === StreamiumProvider.STATUS.ready) {
+        connection.send({
+          type: 'message',
+          payload: data
+        });
+      }
     });
   };
 

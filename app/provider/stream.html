@@ -89,7 +89,7 @@
         </div>
         <div class="col-md-4 col-sm-4 stream-data">
           <ul class="list-unstyled">
-            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.clientConnections.length}}</li>
+            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.getConnected() }}</li>
             <li>
               ({{client.rate * 60|BTC2USD}} $/hour)
             </li>

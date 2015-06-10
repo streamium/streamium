@@ -56,7 +56,7 @@ angular.module('streamium.client.service', [])
         });
 
         self.connection.on('data', function(data) {
-          console.log('New message:', data);
+          // console.log('New message:', data);
           if (!data.type || !self.handlers[data.type]) throw 'Kernel panic'; // TODO!
           self.handlers[data.type].call(self, data.payload);
         });
