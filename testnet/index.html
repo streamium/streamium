@@ -15,9 +15,11 @@
   <link rel="stylesheet" href="/assets/css/colors/blue.css">
   <link rel="stylesheet" href="/assets/icons/icons.css">
   <script src="/app/bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript">jQueryBackup = $;</script>
   <script src="/app/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <link rel="icon" type="image/png" href="/assets/img/logo.png">
   <link href='/assets/css/font.css' rel='stylesheet'>
+  <link href='/assets/css/bootstrap-notify.css' rel='stylesheet'>
 </head>
 <body>
   <!--[if lt IE 7]>
@@ -58,6 +60,7 @@
   <script src="/app/bower_components/detectrtc/DetectRTC.min.js"></script>
   <script src="/app/bower_components/angular-scroll-glue/src/scrollglue.js"></script>
   <script src="/app/bower_components/randomcolor/randomColor.js"></script>
+  <script src="/app/components/bootstrap-notify.js"></script>
 
 
   <script src="/app/app.js"></script>
@@ -106,5 +109,6 @@
 
   return t;
   }(document, "script", "twitter-wjs"));</script>
+  <div class='notifications top-right'></div>
 </body>
 </html>

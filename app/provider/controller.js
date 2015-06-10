@@ -28,7 +28,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   }
 ])
 
-.controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore) {
+.controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore, Insight) {
   $scope.stream = {};
 
   $scope.stream.name = config.DEBUG ? config.defaults.providerStream : '';
@@ -75,6 +75,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     window.location = window.location.origin + config.linkToOther;
   };
 
+  jQueryBackup(function() {
+    retrievePendingTxs(Insight);
+  });
+
   $scope.submit = function() {
     if (!$scope.form.$valid) return;
 
@@ -110,7 +114,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 })
 
 .controller('BroadcastStreamCtrl', function($scope, $location, $routeParams, video, StreamiumProvider) {
-  $scope.name = $location.$$url.split('/')[2];
+  $scope.name = $routeParams.$streamId;
   $scope.requiresApproval = true;
 
   $scope.peers = {};
@@ -234,3 +238,61 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     }
   }
 );
+
+function retrievePendingTxs(Insight) {
+
+  var $ = jQueryBackup;
+  var broadcast = [];
+  var messages = [];
+  var i, txraw, parts, name, time, peerid;
+  for (i in localStorage) {
+    parts = i.split('_');
+    if (parts.length !== 3) {
+      continue;
+    }
+    txraw = localStorage.getItem(i);
+    if (i.indexOf('payment_') === 0) {
+      broadcast.push({
+        key: i,
+        name: parts[1],
+        tx: txraw,
+        peerid: parts[2]
+      });
+    }
+    if (i.indexOf('refund') === 0) {
+      name = parts[1];
+      time = parts[2];
+      if (time < new Date().getTime() / 1000) {
+        broadcast.push({
+          key: i,
+          name: parts[1],
+          tx: txraw,
+          time: parts[2]
+        });
+      } else {
+        messages.push(parts[1]);
+      }
+    }
+  }
+  if (messages.length === 1) {
+    var msg = 'You have locked funds from the stream "' + messages[0] + '". Come back tomorrow to try to claim them!';
+    $('.top-right').notify({ message: msg}).show();
+  } else if (messages.length > 1) {
+    var msg = 'You have locked funds from the streams "' + messages.join('", "') + '". Come back tomorrow to try to claim them!';
+    $('.top-right').notify({ message: msg}).show();
+  }
+  broadcast.map(function(tx) {
+    Insight.broadcast(tx.tx, function(err, txid) {
+      if (err) {
+        if (tx.time) {
+          localStorage.removeItem(tx.key);
+        }
+        console.log('Could not broadcast transaction', broadcast[i]);
+        return;
+      }
+      var msg = 'Unclaimed funds from the stream "' + tx.name + '" were just sent to you. Check your wallet!';
+      $('.top-right').notify({ message: msg}).show();
+      localStorage.removeItem(tx.key);
+    });
+  });
+}
