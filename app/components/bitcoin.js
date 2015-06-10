@@ -12,6 +12,9 @@ angular.module('streamium.bitcoin', [])
   .factory('channel', function() {
     return require('bitcore-channel');
   })
+  .factory('jQuery', function() {
+    return window.jQuery;
+  })
   .factory('events', function() {
     return require('events');
   })

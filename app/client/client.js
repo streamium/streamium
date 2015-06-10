@@ -39,6 +39,7 @@ angular.module('streamium.client.service', [])
   };
 
   StreamiumClient.prototype.connect = function(streamId, callback) {
+    this.streamId = streamId;
     this.peer = new Peer(null, this.config);
     this.status = StreamiumClient.STATUS.connecting;
     this.fundingCallback = callback;
@@ -140,7 +141,7 @@ angular.module('streamium.client.service', [])
     data = JSON.parse(data);
     this.consumer.validateRefund(data);
     this.status = StreamiumClient.STATUS.ready;
-    localStorage.setItem('refund_' + new Date().getTime(), this.consumer.refundTx.toString());
+    localStorage.setItem('refund_' + this.streamId + '_' + this.consumer.refundTx.nLockTime, this.consumer.refundTx.toString());
 
     self.emit('refundReceived');
   };

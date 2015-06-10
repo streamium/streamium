@@ -2,28 +2,31 @@
 
 angular.module('streamium.insight', [])
 
-.service('Insight', function(bitcore) {
+.service('Insight', function(bitcore, $http) {
 
   var broadcast = function(tx, callback) {
-    $.ajax({
-      method: 'POST',
-      url: config.BLOCKCYPHERTX + 'push',
-      dataType: 'json',
-      data: JSON.stringify({
+    $http.post(
+      config.BLOCKCYPHERTX + 'push',
+      {
         tx: tx
-      })
-    }).done(function(response) {
+      }
+    ).success(function(response, status, headers, config) {
       return callback(null, response.tx.hash);
-    }).fail(function(response) {
-      return callback(response);
+    }).error(function(response, status, headers, config) {
+      if (response.errors.length === 1) {
+        var error = response.errors[0].error;
+        if (error.indexOf('already included')) {
+          return callback(null, response.tx.hash);
+        }
+      }
+      return callback(response.data.errors);
     });
   };
 
   var queryBalance = function(address, callback) {
-    $.ajax({
-      url: config.CHAIN + 'addresses/' + address + '/unspents?api-key-id=' + config.CHAIN_API_KEY,
-      dataType: 'json'
-    }).done(function(result) {
+    $http.get(
+      config.CHAIN + 'addresses/' + address + '/unspents?api-key-id=' + config.CHAIN_API_KEY
+    ).success(function(result, status, headers, config) {
       return callback(null, result.map(function(unspent) {
         return new bitcore.Transaction.UnspentOutput({
           txid: unspent.transaction_hash,
@@ -32,7 +35,7 @@ angular.module('streamium.insight', [])
           satoshis: unspent.value
         });
       }));
-    }).fail(function(response) {
+    }).error(function(response, status, headers, config) {
       return callback(response);
     });
   };

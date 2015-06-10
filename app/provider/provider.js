@@ -131,7 +131,7 @@ angular.module('streamium.provider.service', [])
     var stored = localStorage.getItem('privateKey');
     var privateKey;
     if (!stored) {
-      privateKey = new bitcore.PrivateKey(stored);
+      privateKey = new bitcore.PrivateKey();
       localStorage.setItem('privateKey', privateKey.toString());
     } else {
       privateKey = new bitcore.PrivateKey(stored);
@@ -196,6 +196,7 @@ angular.module('streamium.provider.service', [])
         console.log('Error broadcasting ' + payment);
         console.log(err);
       } else {
+        localStorage.removeItem('payment_' + self.streamId + '_' + peerId);
         console.log('Payment broadcasted correctly', txid);
         var connection = self.clientConnectionMap[peerId];
         connection.send({
@@ -260,7 +261,7 @@ angular.module('streamium.provider.service', [])
       console.log(connection.peer + ' expires at ' + new Date(expiration));
       // console.log('Current time is ' + new Date());
       // console.log('Funds will run out at ' + new Date(refundExpiration));
-      localStorage.setItem('payment_' + connection.peer, provider.paymentTx.toString());
+      localStorage.setItem('payment_' + self.streamId + '_' + connection.peer, provider.paymentTx.toString());
 
       self.totalMoney = 0;
       for (var providerId in self.mapClientIdToProvider) {
