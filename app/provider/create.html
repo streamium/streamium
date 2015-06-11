@@ -67,7 +67,7 @@
             <!-- HEADING AND BUTTONS -->
             <div class="intro-section">
 
-              <!-- WELCOM MESSAGE -->
+              <!-- WELCOME MESSAGE -->
               <h1 class="intro white-text">Stream Live Video And Get Paid</h1>
               <h5 class="white-text">Set how much you want to charge your viewers, start broadcasting and earn bitcoins on a per-minute basis.</h5>
 
@@ -129,10 +129,6 @@
                               class="btn btn-primary standard-button"
                               ng-disabled="form.$invalid || stream.loading">{{stream.loading ? 'Loading' : 'Start broadcasting'}}</button>
                         </div>
-                        <div style="color: gray; font-size:14px">(Try it on <a ng-click="switchNetwork()">{{otherNetwork}}</a>)</div>
-                        <div style="color: gray; font-size:14px">
-                          <input type="checkbox" ng-model="config.analytics"/>
-                          <span>&nbsp;</span>Send anonymous usage statistics</div>
 
                         <script>
                             $(document).ready(function(){
