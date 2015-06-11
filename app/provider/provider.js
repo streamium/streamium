@@ -17,6 +17,7 @@ angular.module('streamium.provider.service', [])
 
     // TODO: this screams for a status object or add status into Provider
     this.totalMoney = 0;
+    this.clientMaxActive = 0;
     this.mapClientIdToStatus = {};
     this.mapClientIdToProvider = {};
     this.config = PeerJS.primary;
@@ -282,12 +283,17 @@ angular.module('streamium.provider.service', [])
       }
 
       self.emit('balanceUpdated', self.totalMoney);
-      connection.send({
-        type: 'paymentAck',
-        payload: {
-          success: true,
-        }
-      });
+      try {
+        connection.send({
+          type: 'paymentAck',
+          payload: {
+            success: true,
+          }
+        });
+      } catch(e) {
+        console.log(e);
+        self.endBroadcast(connection.peer);
+      }
     };
 
     if (firstPayment) {
@@ -299,6 +305,7 @@ angular.module('streamium.provider.service', [])
         }
         provider.startTime = new Date().getTime();
         updatePayment();
+        self.clientMaxActive = Math.max(self.clientMaxActive, self.getConnected());
 
         self.emit('broadcast:start', connection.peer);
       });

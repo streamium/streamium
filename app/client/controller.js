@@ -28,7 +28,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   }
 ])
 
-.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore) {
+.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore, Stats) {
   $scope.client = StreamiumClient;
   $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 30, 45, 60, 90, 120, 240];
   $scope.stream = {};
@@ -36,8 +36,9 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
   $scope.config = config;
+  var started = new Date();
 
-  config.analytics && mixpanel.track('cli-join');
+  Stats.client.joinedRoom($scope.stream.name);
 
   if (!DetectRTC.isWebRTCSupported) {
     $scope.nowebrtc = true;
@@ -85,7 +86,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
         $scope.$apply();
       });
       StreamiumClient.processFunding(utxos);
-      config.analytics && mixpanel.track('cli-funded');
       $scope.funds = funds;
       $scope.fundedMillis = StreamiumClient.getDuration(funds);
       $scope.fundedSeconds = $scope.fundedMillis / 1000;
@@ -97,6 +97,11 @@ angular.module('streamium.client.controller', ['ngRoute'])
   });
 
   $scope.submit = function() {
+    Stats.client.funded({
+      receivedMoney: StreamiumClient.consumer.commitmentTx.inputAmount,
+      delayToJoin: (new Date().getTime() - started.getTime()) / 1000,
+      rate: StreamiumClient.rate
+    })
     StreamiumClient.consumer.refundAddress = $scope.client.change;
     window.scrollTo(0, 0);
     $location.path(config.appPrefix + '/s/' + $routeParams.streamId + '/watch');
@@ -104,11 +109,12 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 })
 
-.controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval, bitcore) {
+.controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval, bitcore, Stats) {
   $scope.message = '';
   $scope.messages = [];
   $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
   $scope.name = $routeParams.streamId;
+  $scope.started = new Date().getTime();
 
   window.addEventListener('beforeunload', dontCloseClient);
 
@@ -117,7 +123,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
     return;
   }
   StreamiumClient.askForRefund();
-  config.analytics && mixpanel.track('cli-start');
   var startViewer = function() {
     video.setPeer(StreamiumClient.peer);
     video.view($scope.name, function(err, stream) {
@@ -136,7 +141,10 @@ angular.module('streamium.client.controller', ['ngRoute'])
       // start sending payments at regular intervals
       $interval(calculateSeconds, 1000);
       StreamiumClient.setupPaymentUpdates();
-      config.analytics && mixpanel.track('cli-watch');
+      Stats.client.startedWatching({
+        receivedMoney: StreamiumClient.consumer.commitmentTx.inputAmount,
+        rate: StreamiumClient.rate
+      });
     });
   };
 
@@ -158,12 +166,17 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
   StreamiumClient.on('paymentUpdate', function() {
     $scope.expirationDate = StreamiumClient.getExpirationDate();
+    Stats.client.watchingUpdate((new Date().getTime() - $scope.started) / 1000);
     calculateSeconds();
   });
 
   StreamiumClient.on('end', function() {
     console.log('Moving to cashout stream', $routeParams);
-    config.analytics && mixpanel.track('cli-ended');
+    var seconds = (new Date().getTime() - $scope.started) / 1000;
+    Stats.client.endStream({
+      seconds: seconds,
+      totalSpent: StreamiumClient.consumer.paymentTx.paid,
+    });
     $location.path(config.appPrefix + '/s/' + $routeParams.streamId + '/cashout');
   });
 
