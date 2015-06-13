@@ -122,6 +122,16 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.message = '';
   $scope.messages = [];
 
+  window.onbeforeunload = function (e) {
+    var e = e || window.event;
+    var question = 'Are you sure you\'d like to end this session?'; 
+
+    if (e) {
+      e.returnValue = question;
+    }
+    return question;
+  };
+
   StreamiumProvider.on('broadcast:start', function(peer) {
     console.log('Start broadcast for ' + peer);
     $scope.peers[peer] = peer;
@@ -198,6 +208,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 })
 
 .controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore) {
+
+  window.onbeforeunload = function() { };
   $scope.client = StreamiumProvider;
   $scope.totalMoney = 0;
   $scope.clients = [];
