@@ -30,7 +30,7 @@
   ============================== -->
   <div class="container content-pg space-top">
 
-  <div class="row card space-top" ng-show="client.status == 'connecting'">
+  <div class="row card space-top" ng-show="client.status == 'connecting'" ng-hide="nowebrtc">
     <div class="col-sm-2 center">
       <h2><span class="glyphicon glyphicon-hourglass"></span></h2>
     </div>
@@ -38,6 +38,22 @@
       <h2>Connecting to {{stream.name}}...</h2>
     </div>
   </div>
+
+	<div class="row card space-top" ng-show="nowebrtc">
+		<div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 ">
+			<div class="page-header">
+				<h2>Join this Stream!</h2>
+			</div>
+			<div class="text-center">
+        		<h4>
+              You're using a web browser we don't support.
+              Mind trying again using <a href="https://www.google.com/chrome/">Chrome</a> or
+              <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>?</h4>
+            <h4></h4>
+			</div>
+
+		</div>
+	</div>
 
   <div class="row card space-top" ng-show="error">
     <div class="col-sm-2 center">

@@ -40,7 +40,8 @@ angular.module('streamium.client.controller', ['ngRoute'])
   config.analytics && mixpanel.track('cli-join');
 
   if (!DetectRTC.isWebRTCSupported) {
-    return $location.path('/no-webrtc');
+    $scope.nowebrtc = true;
+    return;
   }
 
   $scope.$watch('stream.minutes', function() {

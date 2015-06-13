@@ -43,7 +43,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.linkToOther = config.linkToOther;
 
   if (!DetectRTC.isWebRTCSupported) {
-    return $location.path('/no-webrtc');
+    $scope.nowebrtc = true;
   }
 
   $scope.normalizeName = function() {
