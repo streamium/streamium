@@ -32,7 +32,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.client = StreamiumClient;
   $scope.minutes = [1, 2, 3, 5, 8, 10, 13, 15, 20, 30, 45, 60, 90, 120, 240];
   $scope.stream = {};
-  $scope.stream.minutes = $scope.minutes[1];
+  $scope.stream.minutes = $scope.minutes[7];
   $scope.stream.founds = 0;
   $scope.stream.name = $routeParams.streamId;
   $scope.config = config;
@@ -43,9 +43,10 @@ angular.module('streamium.client.controller', ['ngRoute'])
     $scope.nowebrtc = true;
     return;
   }
+  var twoFees = 0.0002;
 
   $scope.$watch('stream.minutes', function() {
-    $scope.amount = ($scope.stream.minutes * $scope.client.rate).toFixed(8);
+    $scope.amount = ($scope.stream.minutes * $scope.client.rate + twoFees).toFixed(8);
     $scope.payUrl = 'bitcoin:' + $scope.fundingAddress + '?amount=' + $scope.amount;
   });
 
@@ -65,7 +66,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
     }
 
     $scope.fundingAddress = fundingAddress;
-    $scope.amount = ($scope.stream.minutes * $scope.client.rate).toFixed(8);
+    $scope.amount = ($scope.stream.minutes * $scope.client.rate + twoFees).toFixed(8);
     $scope.payUrl = 'bitcoin:' + fundingAddress + '?amount=' + $scope.amount;
     $scope.$apply();
 
@@ -97,6 +98,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
   $scope.submit = function() {
     StreamiumClient.consumer.refundAddress = $scope.client.change;
+    window.scrollTo(0, 0);
     $location.path(config.appPrefix + '/s/' + $routeParams.streamId + '/watch');
   };
 
@@ -166,6 +168,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   });
 
   $scope.end = function() {
+    StreamiumClient.errored = false;
     StreamiumClient.end();
   };
 
@@ -175,9 +178,14 @@ angular.module('streamium.client.controller', ['ngRoute'])
   };
 })
 
-.controller('WithdrawStreamCtrl', function($scope, $routeParams, StreamiumClient, Duration, bitcore) {
+.controller('WithdrawStreamCtrl', function($scope, $routeParams, $location, StreamiumClient, Duration, bitcore) {
   $scope.client = StreamiumClient;
   window.removeEventListener('beforeunload', dontCloseClient);
+
+  if (!StreamiumClient.consumer) {
+    $location.path(config.appPrefix + '/');
+    return;
+  }
 
   $scope.refundTx = StreamiumClient.consumer.refundTx.uncheckedSerialize();
   $scope.displayRefund = StreamiumClient.errored;
