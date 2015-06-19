@@ -108,15 +108,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
   $scope.name = $routeParams.streamId;
 
-  window.onbeforeunload = function (e) {
-    var e = e || window.event;
-    var question = 'Are you sure you\'d like to end this session?'; 
-
-    if (e) {
-      e.returnValue = question;
-    }
-    return question;
-  };
+  window.addEventListener('beforeunload', dontCloseClient);
 
   if (!StreamiumClient.isReady()) {
     $location.path(config.appPrefix + '/s/' + $scope.name);
@@ -185,7 +177,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 .controller('WithdrawStreamCtrl', function($scope, $routeParams, StreamiumClient, Duration, bitcore) {
   $scope.client = StreamiumClient;
-  window.onbeforeunload = function() { };
+  window.removeEventListener('beforeunload', dontCloseClient);
 
   $scope.refundTx = StreamiumClient.consumer.refundTx.uncheckedSerialize();
   $scope.displayRefund = StreamiumClient.errored;
@@ -204,3 +196,13 @@ angular.module('streamium.client.controller', ['ngRoute'])
   $scope.addressUrl = 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '') + 'insight.bitpay.com/address/' + $scope.contractAddress;
 
 });
+
+var dontCloseClient = function (e) {
+  var e = e || window.event;
+  var question = 'Leaving now will close the stream.';
+
+  if (e) {
+    e.returnValue = question;
+  }
+  return question;
+};
