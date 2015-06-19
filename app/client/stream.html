@@ -34,7 +34,7 @@
 </header>
 <div class="container content-pg">
 
-  <div class="row" ng-hide="requiresApproval">
+  <div class="row" ng-show="expirationDate">
     <div class="row-same-height">
       <video class="col-md-8 col-xs-height col-full-height stream-video"
         id="video" ng-src="{{videoSrc}}" autoplay></video>
@@ -59,7 +59,7 @@
     <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
       <div class="col-md-10 col-sm-10 stream-data">
         <ul class="list-unstyled">
-          <div ng-hide="expirationDate">
+          <div ng-hide="expirationDate" class="text-center">
             Establishing channel...
           </div>
           <div ng-show="expirationDate">
@@ -70,9 +70,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" ng-show="expirationDate">
     <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 ">
-      <button ng-disabled="established" ng-click="end()" class="btn btn-danger btn-lg btn-end btn-full">End stream!</button>
+      <button ng-click="end()" class="btn btn-danger btn-lg btn-end btn-full">End stream!</button>
     </div>
   </div>
 </div>
