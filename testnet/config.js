@@ -13,9 +13,9 @@ var config = {
     + '/txs/',
   peerServers: [
     {
-      key: 'peerjs',
-      // host: '192.168.0.11',
-      // port: 9000,
+      key: 'igd9tuakix0w9udi',
+      host: 'localhost',
+      port: 9000,
     },
     {
       key: 'peerjs',
