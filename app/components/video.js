@@ -10,18 +10,63 @@ Video.prototype.setPeer = function(peer) {
   this.peer = peer;
 };
 
-Video.prototype.camera = function(cb) {
+Video.prototype.camera = function(screen, cb) {
   var self = this;
-  navigator.getUserMedia({
-    audio: true,
-    video: true
-  }, function(stream) {
-    cb(null, stream);
-    self.stream = stream;
-  }, function() {
-    cb('error acquiring video');
-  });
 
+  if (!screen) {
+    navigator.getUserMedia({
+      audio: true,
+      video: true
+    }, function(stream) {
+      self.stream = stream;
+      cb(null, stream);
+    }, function() {
+      cb('error acquiring video');
+    });
+
+  } else {
+
+    getScreenId(function (error, sourceId, screen_constraints) {
+      if (error) {
+        if (error === 'permission-denied') {
+          alert('Please allow Streamium to broadcast');
+        } else if (error === 'not-installed') {
+          alert('Please install the extensions needed for Streamium to work');
+        } else if (error === 'installed-disabled') {
+          alert('The extension is disabled! Streamium can\'t work without it');
+        } else if (sourceId !== 'firefox') {
+          alert('Improve your experience by using Chrome!');
+        }
+        return cb('error acquiring video');
+      }
+
+      if (sourceId && sourceId !== 'firefox') {
+        screen_constraints = {
+          video: {
+            mandatory: {
+              chromeMediaSource: 'screen',
+              maxWidth: 1920,
+              maxHeight: 1080,
+              minAspectRatio: 1.77
+            }
+          }
+        };
+
+        if (sourceId) {
+          screen_constraints.video.mandatory.chromeMediaSource = 'desktop';
+          screen_constraints.video.mandatory.chromeMediaSourceId = sourceId;
+        }
+      }
+
+      navigator.getUserMedia = navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
+      navigator.getUserMedia(screen_constraints, function (stream) {
+        self.stream = stream;
+        cb(null, stream);
+      }, function (error) {
+        cb('error acquiring video');
+      });
+    });
+  }
 };
 
 Video.prototype.broadcast = function(peer, cb) {

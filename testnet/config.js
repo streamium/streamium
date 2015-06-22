@@ -13,18 +13,19 @@ var config = {
     + '/txs/',
   peerServers: [
     {
-      key: 'igd9tuakix0w9udi',
+      key: 'peerjs',
       host: 'localhost',
       port: 9000,
     },
     {
       key: 'peerjs',
-      // host: '192.168.0.11',
-      // port: 9001,
+      host: 'localhost',
+      port: 9000,
     }
   ],
   peerJS: {
     debug: 0,
+    secure: true,
     config: {
       'iceServers': [
         {url:'stun:stun.l.google.com:19302'},

@@ -12,6 +12,13 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $routeProvider.when('/', create);
     $routeProvider.when('/t', create);
 
+    var screen = {
+      templateUrl: '/app/provider/empty.html',
+      controller: 'ScreenCtrl'
+    };
+    $routeProvider.when('/screen', screen);
+    $routeProvider.when('/t/screen', screen);
+
     var broadcast = {
       templateUrl: '/app/provider/stream.html',
       controller: 'BroadcastStreamCtrl'
@@ -34,6 +41,12 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $routeProvider.when('/tutorial-address', tutorial.address);
   }
 ])
+
+.controller('ScreenCtrl', function($rootScope, $location) {
+  $rootScope.screen = true;
+
+  $location.path(config.appPrefix);
+})
 
 .controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore, Insight) {
   $scope.stream = {};
@@ -128,20 +141,44 @@ angular.module('streamium.provider.controller', ['ngRoute'])
         }
 
         $scope.$apply();
-      });
+      }
+    );
   };
 })
 
-.controller('BroadcastStreamCtrl', function($scope, $location, $routeParams, video, StreamiumProvider) {
+.controller('BroadcastStreamCtrl', function($rootScope, $scope, $location, $routeParams, video, StreamiumProvider) {
+
   $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
   $scope.name = $routeParams.streamId;
   $scope.requiresApproval = true;
+
+  $scope.isChrome = !!navigator.webkitGetUserMedia;
+  $scope.isFirefox = !!navigator.mozGetUserMedia;
+  $scope.screen = $rootScope.screen;
 
   $scope.peers = {};
   $scope.message = '';
   $scope.messages = [];
 
-  window.addEventListener('beforeunload', dontClose);
+  $scope.switchScreen = function(ev) {
+    $rootScope.switched = true;
+    $scope.screen = $rootScope.screen = !$rootScope.screen;
+    try {
+      video.stream.end();
+    } catch (e) {
+    }
+    try {
+      video.stream.close();
+    } catch (e) {
+    }
+    try {
+      video.stream.stop();
+    } catch (e) {
+    }
+    $scope.requiresApproval = true;
+    startCamera();
+    return false;
+  };
 
   StreamiumProvider.on('broadcast:start', function(peer) {
     console.log('Start broadcast for ' + peer);
@@ -189,9 +226,9 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $scope.client = StreamiumProvider;
     $scope.filming = true;
     video.setPeer(StreamiumProvider.peer);
-    video.camera(function(err, stream) {
+    video.camera(!!$rootScope.screen, function(err, stream) {
       if (err) {
-        console.log(err);
+        console.log("error:", err);
         return;
       }
 
@@ -216,6 +253,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     startCamera();
   }
 
+  window.addEventListener('beforeunload', dontClose);
 })
 
 .controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore) {

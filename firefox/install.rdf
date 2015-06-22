@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+    <Description about="urn:mozilla:install-manifest">
+        <em:id>{022E7EA6-1950-11E5-AFA5-E0C21D5D46B0}</em:id>
+        <em:type>2</em:type>
+        <em:name>Streamium Screen Broadcast</em:name>
+        <em:description>Firefox extension to enable screen broadcasting on Firefox</em:description>
+        <em:version>1.0</em:version>
+        <em:bootstrap>true</em:bootstrap>
+        <em:creator>Esteban Ordano</em:creator>
+        <em:homepageURL>https://streamium.io</em:homepageURL>
+        <em:iconURL>icon.png</em:iconURL>
+        <em:targetApplication>
+            <Description>
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>37.0</em:minVersion>
+                <em:maxVersion>47.0</em:maxVersion>
+            </Description>
+        </em:targetApplication>
+    </Description>
+</RDF>
