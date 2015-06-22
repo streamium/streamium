@@ -31,9 +31,11 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 .controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore, Insight) {
   $scope.stream = {};
 
-  $scope.stream.name = config.DEBUG ? config.defaults.providerStream : '';
-  $scope.stream.address = config.DEBUG ? config.defaults.providerAddress : '';
-  $scope.stream.rate = 60;
+  var storedStream = JSON.parse(localStorage.getItem('providerInfo'));
+
+  $scope.stream.name = storedStream.name || (config.DEBUG ? config.defaults.providerStream : '');
+  $scope.stream.address = storedStream.address || (config.DEBUG ? config.defaults.providerAddress : '');
+  $scope.stream.rate = storedStream.rate || 60;
 
   $scope.stream.error = null;
   $scope.stream.loading = false;
@@ -59,7 +61,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     var usdSecond = usdHour / 3600;
     var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
     return btcSecond ? btcSecond : 0;
-  }
+  };
 
   $scope.usdHourToBtcMin = function(usdHour) {
     if (!Rates.rate) {
@@ -68,7 +70,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     var usdSecond = usdHour / 60;
     var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
     return btcSecond ? btcSecond : 0;
-  }
+  };
   config.analytics && mixpanel.track('homepage');
 
   $scope.switchNetwork = function() {
@@ -80,22 +82,26 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   });
 
   $scope.submit = function() {
-    if (!$scope.form.$valid) return;
+    if (!$scope.form.$valid) {
+      return;
+    }
 
     var priceRate = $scope.usdHourToBtcMin($scope.stream.rate);
 
     if (priceRate <= 0) {
-      $scope.stream.error = "Price rate must be a positive number";
+      $scope.stream.error = 'Price rate must be a positive number';
       return;
     }
 
     $scope.stream.loading = true;
-    config.analytics && mixpanel.track('prov-created');
+    if (config.analytics) {
+      mixpanel.track('prov-created');
+    }
     StreamiumProvider.init(
       $scope.stream.name,
       $scope.stream.address,
       priceRate,
-      function onCreate(err, done) {
+      function onCreate(err) {
         $scope.stream.loading = false;
 
         if (err === StreamiumProvider.ERROR.UNREACHABLE) {
@@ -103,6 +109,11 @@ angular.module('streamium.provider.controller', ['ngRoute'])
         } else if (err === StreamiumProvider.ERROR.IDISTAKEN) {
           $scope.stream.error = 'Looks like that channel name is already taken. Mind trying a different one?';
         } else if (err === null) {
+          localStorage.setItem('providerInfo', JSON.stringify({
+            name: $scope.stream.name,
+            address: $scope.stream.address,
+            rate: $scope.stream.rate
+          }));
           $location.path(config.appPrefix + '/b/' + $scope.stream.name);
         } else {
           console.log(err);
@@ -161,7 +172,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $location.path(config.appPrefix + '/b/' + $routeParams.streamId + '/cashout');
   };
 
-  $scope.chat = function () {
+  $scope.chat = function() {
     StreamiumProvider.sendMessage($scope.message);
     $scope.message = '';
   };
@@ -201,48 +212,46 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
 .controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore) {
 
-  window.removeEventListener('beforeunload', dontClose);
-  $scope.client = StreamiumProvider;
-  $scope.totalMoney = 0;
-  $scope.clients = [];
-  config.analytics && mixpanel.track('prov-end');
-  for (var i in $scope.client.mapClientIdToProvider) {
-    var amount = $scope.client.mapClientIdToProvider[i].currentAmount;
-    var time = Duration.for(StreamiumProvider.rate, amount);
-    $scope.totalMoney += amount;
-    if (amount > 0) {
-      var txId = $scope.client.mapClientIdToProvider[i].paymentTx.id;
-      $scope.clients.push({
-        amount: amount,
-        timeSpent: time / 1000,
-        transactionName: txId.substr(0, 4) + '...' + txId.substr(60, 64),
-        transactionUrl:  'https://'
-          + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '')
-          + 'insight.bitpay.com/tx/' + txId
-      });
-    }
-  }
-})
-.directive('twitter',
-  function($timeout) {
-    return {
-      link: function(scope, element, attr) {
-        $timeout(function() {
-          if (twttr && twttr.widgets) {
-            twttr.widgets.createShareButton(
-              attr.url,
-              element[0],
-              function(el) {}, {
-                count: 'none',
-                text: attr.text
-              }
-            );
-          }
+    window.removeEventListener('beforeunload', dontClose);
+    $scope.client = StreamiumProvider;
+    $scope.totalMoney = 0;
+    $scope.clients = [];
+    config.analytics && mixpanel.track('prov-end');
+    for (var i in $scope.client.mapClientIdToProvider) {
+      var amount = $scope.client.mapClientIdToProvider[i].currentAmount;
+      var time = Duration.for(StreamiumProvider.rate, amount);
+      $scope.totalMoney += amount;
+      if (amount > 0) {
+        var txId = $scope.client.mapClientIdToProvider[i].paymentTx.id;
+        $scope.clients.push({
+          amount: amount,
+          timeSpent: time / 1000,
+          transactionName: txId.substr(0, 4) + '...' + txId.substr(60, 64),
+          transactionUrl: 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '') + 'insight.bitpay.com/tx/' + txId
         });
       }
     }
-  }
-);
+  })
+  .directive('twitter',
+    function($timeout) {
+      return {
+        link: function(scope, element, attr) {
+          $timeout(function() {
+            if (twttr && twttr.widgets) {
+              twttr.widgets.createShareButton(
+                attr.url,
+                element[0],
+                function(el) {}, {
+                  count: 'none',
+                  text: attr.text
+                }
+              );
+            }
+          });
+        }
+      }
+    }
+  );
 
 function retrievePendingTxs(Insight) {
 
@@ -279,13 +288,16 @@ function retrievePendingTxs(Insight) {
       }
     }
   }
+  /*
   if (messages.length === 1) {
-    // var msg = 'You have locked funds from the stream "' + messages[0] + '". Come back tomorrow to try to claim them!';
-    // $('.top-right').notify({ message: msg}).show();
+    var msg = 'You have locked funds from the stream "' + messages[0] + '". Come back tomorrow to try to claim them!';
+    $('.top-right').notify({ message: msg}).show();
   } else if (messages.length > 1) {
-    // var msg = 'You have locked funds from the streams "' + messages.join('", "') + '". Come back tomorrow to try to claim them!';
-    // $('.top-right').notify({ message: msg}).show();
+    var msg = 'You have locked funds from the streams "' +
+      messages.join('", "') + '". Come back tomorrow to try to claim them!';
+    $('.top-right').notify({ message: msg}).show();
   }
+  */
   broadcast.map(function(tx) {
     Insight.broadcast(tx.tx, function(err, txid) {
       if (err) {
@@ -296,13 +308,15 @@ function retrievePendingTxs(Insight) {
         return;
       }
       var msg = 'Unclaimed funds from the stream "' + tx.name + '" were just sent to you. Check your wallet!';
-      $('.top-right').notify({ message: msg}).show();
+      $('.top-right').notify({
+        message: msg
+      }).show();
       localStorage.removeItem(tx.key);
     });
   });
 }
 
-var dontClose = function (e) {
+var dontClose = function(e) {
   var e = e || window.event;
   var question = 'This will end the broadcast';
 
