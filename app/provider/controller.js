@@ -25,6 +25,13 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     };
     $routeProvider.when('/b/:streamId/cashout', cashout);
     $routeProvider.when('/t/b/:streamId/cashout', cashout);
+    var tutorial = {
+      address: {
+        templateUrl: '/app/provider/tutorial-address.html',
+        controller: 'CashoutStreamCtrl'
+      }
+    };
+    $routeProvider.when('/tutorial-address', tutorial.address);
   }
 ])
 

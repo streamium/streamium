@@ -29,6 +29,8 @@ app.configure(function(){
 
   app.use('/t', express.static('./testnet'));
 
+  app.use('/tutorial-address', express.static('.'));
+
 });
 
 var port = 8000;
