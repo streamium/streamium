@@ -230,3 +230,7 @@ body > div {
   font-size: 14px;
   width: 160px;
 }
+
+.text-justify {
+  text-align: justify;
+}
