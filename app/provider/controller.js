@@ -31,7 +31,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 .controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore, Insight) {
   $scope.stream = {};
 
-  var storedStream = JSON.parse(localStorage.getItem('providerInfo'));
+  jQueryBackup('[data-toggle="tooltip"]').tooltip();
+  var storedStream = JSON.parse(localStorage.getItem('providerInfo') || '{}');
 
   $scope.stream.name = storedStream.name || (config.DEBUG ? config.defaults.providerStream : '');
   $scope.stream.address = storedStream.address || (config.DEBUG ? config.defaults.providerAddress : '');

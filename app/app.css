@@ -225,3 +225,8 @@ body > div {
   white-space: nowrap;
   overflow: hidden;
 }
+
+.tooltip-inner {
+  font-size: 14px;
+  width: 160px;
+}

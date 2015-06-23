@@ -111,13 +111,22 @@
                         <div id="createstream">
                           <div class="form-group has-feedback">
                             <div class="input-group">
-                              <div class="input-group-addon">Cash out address</div>
+                              <div class="input-group-addon">Cashout address</div>
                               <input
                                 class="form-control"
                                 name="address" required
+                                data-toggle="tooltip"
+                                data-placement="right"
+                                data-trigger="focus hover"
+                                data-delay='{ "hide": 3000 }'
+                                data-html="true"
+                                title="Need help getting your own bitcoin address?
+                                <a target='_blank' href='http://google.com'>This tutorial may help</a>."
                                 ng-model="stream.address" valid-address
                                 placeholder="Bitcoin address to receive your earnings" style="padding-right:20px">
                               <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.address.$valid"></span>
+                              <span class="glyphicon glyphicon-question-sign form-control-feedback"
+                                ng-show="!form.address.$valid"></span>
                             </div>
                           </div>
 
@@ -733,5 +742,3 @@
     </footer>
   </div>
 </div>
-
-
