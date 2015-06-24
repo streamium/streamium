@@ -85,7 +85,23 @@ Video.prototype.broadcast = function(peer, cb) {
   cb(null);
 };
 
+Video.prototype.finish = function() {
+  try {
+    video.stream.end();
+  } catch (e) {
+  }
+  try {
+    video.stream.close();
+  } catch (e) {
+  }
+  try {
+    video.stream.stop();
+  } catch (e) {
+  }
+};
+
 Video.prototype.end = function(peer) {
+
   if (this.calls[peer]) {
     this.calls[peer].close();
     delete this.calls[peer];

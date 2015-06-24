@@ -163,19 +163,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.switchScreen = function(ev) {
     $rootScope.switched = true;
     $scope.screen = $rootScope.screen = !$rootScope.screen;
-    try {
-      video.stream.end();
-    } catch (e) {
-    }
-    try {
-      video.stream.close();
-    } catch (e) {
-    }
-    try {
-      video.stream.stop();
-    } catch (e) {
-    }
     $scope.requiresApproval = true;
+    video.finish();
     startCamera();
     return false;
   };
@@ -228,7 +217,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     video.setPeer(StreamiumProvider.peer);
     video.camera(!!$rootScope.screen, function(err, stream) {
       if (err) {
-        console.log("error:", err);
+        console.log('error starting video:', err);
         return;
       }
 
