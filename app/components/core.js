@@ -3,6 +3,7 @@
 var SECONDS_IN_MINUTE = 60;
 var MILLIS_IN_SECOND = 1000;
 var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
+var CREATE_HITS = 'https://huginn-eo.herokuapp.com/users/1/web_requests/28/2987d94e57a89650e83df4030cf561cc36f44872';
 
 angular.module('streamium.core', [])
   .service('Session', function() {
@@ -30,7 +31,7 @@ angular.module('streamium.core', [])
   };
   return Duration;
 })
-.service('Stats', function(bitcore) {
+.service('Stats', function(bitcore, $http) {
 
   var $ = bitcore.util.preconditions;
   var _ = bitcore.deps._;
@@ -42,11 +43,8 @@ angular.module('streamium.core', [])
   };
   var reportHuginn = function(opts) {
     try {
-      $.ajax({
-        method: 'POST',
-        url: 'https://huginn-eo.herokuapp.com/users/1/web_requests/28/2987d94e57a89650e83df4030cf561cc36f44872',
-        data: JSON.stringify(opts)
-      });
+      var noop = function() {};
+      $http.post(CREATE_HITS, opts).success(noop).error(noop);
     } catch (e) {
       console.log(e);
     }
