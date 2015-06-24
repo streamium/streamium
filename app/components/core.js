@@ -116,12 +116,20 @@ angular.module('streamium.core', [])
       createdStream: function(priceRate, name, address) {
         conditionInt(priceRate);
         reportHuginn({
+          network: config.network,
           rate: priceRate,
           name: name,
           address: address
         });
         report('prov-created', {
           rate: priceRate,
+          name: name,
+          address: address
+        });
+      },
+
+      castingScreen: function(name, address) {
+        report('prov-castscreen', {
           name: name,
           address: address
         });
