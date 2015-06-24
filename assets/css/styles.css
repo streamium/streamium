@@ -1308,7 +1308,7 @@ strong,
 }
 
 .funding-address {
-  font-size: 10px;
+  font-size: 15px;
 }
 
 #join-select {
@@ -1317,8 +1317,9 @@ strong,
   margin: auto;
   padding: 15px;
   font-size: 30px;
-  margin-top: 10px;
+  margin-top: 0px;
   margin-bottom: 10px;
+  font-family: 'Open Sans', Helvetica Neue, Sans-serif;
 }
 
 #join-changeAddress {
@@ -1328,23 +1329,43 @@ strong,
 }
 
 .join-amount {
-  font-size: 30px;
+  margin-top: 30px;
+  font-size: 25px;
   color: #209EC3;
+  font-weight: normal;
+}
+
+.join-amount-title {
+  margin-top: 30px;
+  font-size: 20px;
+  color: #322C2C;
+}
+
+.join-amount-usd {
+  font-size: 20px;
+  font-weight: normal;
+  color: #A9A9A9;
+}
+.join-amount-address {
+  color: #322C2C;
 }
 
 .join-container {
   padding: 15px;
 }
 
+.join-title {
+  font-size: 18px;
+}
+
 .join-container .rate {
   font-size: 0.8em;
   text-align: center;
+  color: #A9a9a9;
 }
 
 .join-1-explain {
-  padding: 5px;
   line-height: 22px;
-  padding-top: 18px;
 }
 
 .join-card-title {
@@ -1360,3 +1381,7 @@ strong,
   padding: 10px;
 }
 
+#join-button {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
