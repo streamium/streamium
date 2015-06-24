@@ -608,7 +608,8 @@ strong,
   background: rgba(0, 0, 0, 0.45);
   color: white;
   border-radius: 6px;
-  padding: 25px 25px 7px 25px;
+  font-family: Helvetica Neue, Sans-serif;
+  padding: 15px 25px 7px 25px;
 }
 
 .horizontal-subscribe-form form {
