@@ -138,10 +138,6 @@ angular.module('streamium.core', [])
         report('prov-chatmessage');
       },
 
-      clientLeft: function() {
-        report('prov-userleft');
-      },
-
       endedStream: function(options) {
         conditionInt(options.totalEarned);
         conditionInt(options.totalTime);

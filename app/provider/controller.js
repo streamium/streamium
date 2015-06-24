@@ -188,10 +188,6 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $scope.$apply();
   });
 
-  StreamiumProvider.on('', function(data) {
-    Stats.provider.clientLeft();
-  });
-
   StreamiumProvider.on('chatroom:message', function(data) {
 
     Stats.provider.chatMessage();
