@@ -119,9 +119,11 @@ body > div {
 }
 
 #global-footer {
-  padding: 30px;
+  padding: 18px;
   border-top: 1px solid #eaebec;
   background: #F7F8FA;
+  font-size: 12px;
+  line-height: 12px;
 }
 
 #bitmag {
