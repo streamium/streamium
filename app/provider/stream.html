@@ -41,14 +41,23 @@
           <span class="glyphicon glyphicon-facetime-video"></span>
         </h2>
       </div>
-      <div class="col-sm-10 text-center">
-        <h2>Please allow Streamium to use the camera.</h2>
+      <div ng-hide="screen">
+        <h2 ng-hide="screen">Please allow Streamium to use the camera.</h2>
+      </div>
+      <div ng-show="screen">
+        <h3>Please allow Streamium to cast your desktop.</h3>
+        <h4 ng-show="isChrome" id="chromeinstall">
+          If you haven't already, <a href="https://chrome.google.com/webstore/detail/screen-capturing/ajhifddimkapgcifgcodmmfdlknahffk" target="_blank">install this Chrome Extension</a> and restart 
+        </h4>
+        <h4 ng-show="isFirefox" id="firefoxinstall">
+          If you haven't already, <a href="/assets/firefox-extension.xpi" target="_blank">install this Firefox Extension</a> and then refresh this page.
+        </h4>
       </div>
     </div>
 
     <div class="row space-top" ng-hide="requiresApproval">
       <div class="col-md-12">
-        <span class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 card">
+        <span class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 card text-center">
           <span class="glyphicon glyphicon-facetime-video"></span> &nbsp;Share this link with your viewers: <a target="_blank" href="{{client.getLink()}}">{{client.getLink()}}</a>
           <a twitter data-text="Join my #streamium channel '{{name}}' at" data-url="{{client.getLink()}}"></a>
         </span>
@@ -64,6 +73,7 @@
           <h1 class="truncate">
             <span class="circle" style="background-color: {{PROVIDER_COLOR}};"/>{{name}}</h1>
           <ul class="messages" scroll-glue>
+            <li style="font-size: 0.9em; color: #313131; line-height: 25px;">Congratulations on creating this stream! <span ng-hide="switched || screen">Did you know you can share your screen instead of your webcam?</span></li>
             <li ng-repeat="m in messages"><span class="circle" style="background-color: {{m.color || PROVIDER_COLOR}};"/>{{m.text}}</li>
           </ul>
           <div class="input">
@@ -77,24 +87,30 @@
     </div>
 
     <div class="row" ng-hide="requiresApproval">
-      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-        <div class="col-md-8 col-sm-8 stream-data">
-          <ul class="list-unstyled">
-            <li>
-              Earned so far: {{client.totalMoney | SATOSHIS2BTC}} BTC
-            </li>
-            <li>
-              {{client.rate / 60.0|number:8}} BTC/sec
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-4 col-sm-4 stream-data">
-          <ul class="list-unstyled">
-            <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.getConnected() }}</li>
-            <li>
-              ({{client.rate * 60|BTC2USD}} $/hour)
-            </li>
-          </ul>
+      <div class="col-sm-1 col-md-1 col-xs-6 col-sm-offset-0 col-xs-offset-1" style="margin-left: -15px">
+        <a ng-hide="switched || screen" href="#" ng-click="switchScreen()" class="btn btn-default" style="background-color: #3B5CB2; color: white; border: none; text-shadow: none;">Switch to screen<br/> sharing mode</a>
+        <a ng-hide="switched || !screen" href="#" ng-click="switchScreen()" class="btn btn-default" style="background-color: #3B5CB2; color: white; border: none; text-shadow: none;">Switch to share<br/> your webcam</a>
+      </div>
+      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-2 col-xs-6 col-xs-offset-0 ">
+        <div class="row">
+          <div class="col-md-8 col-sm-8 stream-data">
+            <ul class="list-unstyled">
+              <li>
+                Earned so far: {{client.totalMoney | SATOSHIS2BTC}} BTC
+              </li>
+              <li>
+                {{client.rate / 60.0|number:8}} BTC/sec
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-4 col-sm-4 stream-data">
+            <ul class="list-unstyled">
+              <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.getConnected() }}</li>
+              <li>
+                ({{client.rate * 60|BTC2USD}} $/hour)
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

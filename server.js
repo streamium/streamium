@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+var https = require('https');
 var express = require('express');
 var app = express();
 
@@ -17,6 +19,12 @@ app.configure(function(){
 
   app.use('/', express.static('.'));
 
+  app.all('/screen', function(req, res) {
+    res.sendfile('./index.html');
+  });
+  app.all('/t/screen', function(req, res) {
+    res.sendfile('./testnet/index.html');
+  });
 
   // Testnet
   app.all('/t/b/*', function(req, res) {
@@ -33,7 +41,14 @@ app.configure(function(){
 
 });
 
-var port = 8000;
-app.listen(port, function() {
-  console.log('Server listening on port', port);
+var port = 8443;
+
+var secureServer = https.createServer({
+  key: fs.readFileSync('./ssl/server.key'),
+  cert: fs.readFileSync('./ssl/server.crt'),
+  ca: fs.readFileSync('./ssl/ca.crt'),
+  requestCert: true,
+  rejectUnauthorized: false
+}, app).listen(port, function() {
+  console.log("Secure Express server listening on port " + port);
 });

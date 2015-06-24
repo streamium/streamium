@@ -21,14 +21,14 @@ For example:
 ```
 cd streamium/
 bower install
-npm start
+npm install
+node server.js &
+node ssl_server.js &
 ```
 
 and then access it from any [WebRTC-supporting](http://www.webrtc.org/) browser:
 
-http://localhost:8000/
-
-We suggest you provide a PeerJS server to your users (or at least [change the peerjs.org identifier](https://github.com/streamium/paystream/blob/master/app/config.js#L8))
+https://localhost:8443/
 
 ## How does it work
 
