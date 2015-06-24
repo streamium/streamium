@@ -46,7 +46,6 @@
   margin-bottom: 20px;
   padding: 20px;
   border-radius: 4px;
-  box-shadow: 0 0 10px #333;
 }
 
 .card h3 {
@@ -131,7 +130,6 @@ body > div {
 }
 
 .chat {
-  box-shadow: 0 0 5px #333;
   padding-top: 0;
 }
 
