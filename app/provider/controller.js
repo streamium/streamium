@@ -159,6 +159,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   var started = new Date();
 
   $scope.switchScreen = function(ev) {
+    Stats.castingScreen(StreamiumProvider.name, StreamiumProvider.address);
     $rootScope.switched = true;
     $scope.screen = $rootScope.screen = !$rootScope.screen;
     $scope.requiresApproval = true;
@@ -247,7 +248,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   window.addEventListener('beforeunload', dontClose);
 })
 
-.controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore, Stats) {
+.controller('CashoutStreamCtrl', function($rootScope, StreamiumProvider, $location, Duration, $scope, bitcore, Stats) {
 
   window.removeEventListener('beforeunload', dontClose);
 
@@ -276,6 +277,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     totalTime: Duration.for(StreamiumProvider.rate, $scope.totalMoney) / 1000,
     rate: StreamiumProvider.rate,
     maxActive: StreamiumProvider.clientMaxActive,
+    screen: $rootScope.screen,
     totalClients: StreamiumProvider.clientConnections.length
   });
 })
