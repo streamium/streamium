@@ -29,4 +29,125 @@ angular.module('streamium.core', [])
     return satoshis / satRate * MILLIS_IN_MINUTE;
   };
   return Duration;
+})
+.service('Stats', function(bitcore) {
+
+  var $ = bitcore.util.preconditions;
+  var _ = bitcore.deps._;
+
+  var report = function(name, obj) {
+    obj = obj || {};
+    obj.network = config.network;
+    config.analytics && mixpanel.track(name, obj);
+  };
+  var reportHuginn = function(opts) {
+    try {
+      $.ajax({
+        method: 'POST',
+        url: 'https://huginn-eo.herokuapp.com/users/1/web_requests/28/2987d94e57a89650e83df4030cf561cc36f44872',
+        data: JSON.stringify(opts)
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  var conditionInt = function(e) {
+    try {
+      $.checkArgument(_.isString(name));
+    } catch (e) {
+      mixpanel.track('error', e.message);
+    }
+  };
+  var conditionStr = function(e) {
+    try {
+      $.checkArgument(_.isString(name));
+    } catch (e) {
+      mixpanel.track('error', e.message);
+    }
+  };
+
+  return {
+
+    homepage: function() {
+      report('homepage');
+    },
+
+    error: function(message) {
+      report('error', {message: message});
+    },
+
+    client: {
+
+      joinedRoom: function(name) {
+        conditionStr(name);
+        report('cli-join', {
+          name: name
+        });
+      },
+
+      funded: function(options) {
+        conditionInt(options.receivedMoney);
+        conditionInt(options.delayToJoin);
+        conditionInt(options.rate);
+        report('cli-funded', options);
+      },
+
+      startedWatching: function(options) {
+        conditionInt(options.receivedMoney);
+        conditionInt(options.rate);
+        report('cli-start', options);
+      },
+
+      watchingUpdate: function(seconds) {
+        conditionInt(seconds);
+        report('cli-update', {
+          secondsElapsed: seconds
+        });
+      },
+
+      endStream: function(options) {
+        conditionInt(options.seconds);
+        conditionInt(options.totalSpent);
+        report('cli-ended', options);
+      }
+    },
+
+    provider: {
+
+      createdStream: function(priceRate, name, address) {
+        conditionInt(priceRate);
+        reportHuginn({
+          rate: priceRate,
+          name: name,
+          address: address
+        });
+        report('prov-created', {
+          rate: priceRate,
+          name: name,
+          address: address
+        });
+      },
+
+      clientJoined: function(options) {
+        conditionInt(options.delayToJoin);
+        report('prov-userjoin', options);
+      },
+
+      chatMessage: function() {
+        report('prov-chatmessage');
+      },
+
+      endedStream: function(options) {
+        conditionInt(options.totalEarned);
+        conditionInt(options.totalTime);
+        conditionInt(options.rate);
+        conditionInt(options.maxActive);
+        conditionInt(options.totalClients);
+        conditionStr(options.name);
+        report('prov-ended', options);
+      }
+    }
+  };
+
 });

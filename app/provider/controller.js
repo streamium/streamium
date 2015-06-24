@@ -48,7 +48,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $location.path(config.appPrefix);
 })
 
-.controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore, Insight) {
+.controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore, Insight, Stats) {
   $scope.stream = {};
 
   jQueryBackup('[data-toggle="tooltip"]').tooltip();
@@ -92,7 +92,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     var btcSecond = bitcore.Unit.fromFiat(usdSecond, Rates.rate).toBTC();
     return btcSecond ? btcSecond : 0;
   };
-  config.analytics && mixpanel.track('homepage');
+  Stats.homepage();
 
   $scope.switchNetwork = function() {
     window.location = window.location.origin + config.linkToOther;
@@ -115,9 +115,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     }
 
     $scope.stream.loading = true;
-    if (config.analytics) {
-      mixpanel.track('prov-created');
-    }
+    Stats.provider.createdStream(priceRate, $scope.stream.name, $scope.stream.address);
     StreamiumProvider.init(
       $scope.stream.name,
       $scope.stream.address,
@@ -146,8 +144,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   };
 })
 
-.controller('BroadcastStreamCtrl', function($rootScope, $scope, $location, $routeParams, video, StreamiumProvider) {
-
+.controller('BroadcastStreamCtrl', function($rootScope, $scope, $location, $routeParams, video, StreamiumProvider, Stats) {
   $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
   $scope.name = $routeParams.streamId;
   $scope.requiresApproval = true;
@@ -159,6 +156,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.peers = {};
   $scope.message = '';
   $scope.messages = [];
+  var started = new Date();
 
   $scope.switchScreen = function(ev) {
     $rootScope.switched = true;
@@ -172,7 +170,9 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   StreamiumProvider.on('broadcast:start', function(peer) {
     console.log('Start broadcast for ' + peer);
     $scope.peers[peer] = peer;
-    config.analytics && mixpanel.track('prov-started');
+    Stats.provider.clientJoined({
+      delayToJoin: (new Date().getTime() - started.getTime()) / 1000
+    });
     video.broadcast(peer, function(err) {
       if (err) throw err;
       $scope.broadcasting = true;
@@ -189,6 +189,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   });
 
   StreamiumProvider.on('chatroom:message', function(data) {
+
+    Stats.provider.chatMessage();
     $scope.messages.push({
       color: data.color,
       text: data.message
@@ -245,48 +247,58 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   window.addEventListener('beforeunload', dontClose);
 })
 
-.controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore) {
+.controller('CashoutStreamCtrl', function(StreamiumProvider, $location, Duration, $scope, bitcore, Stats) {
 
-    window.removeEventListener('beforeunload', dontClose);
-    $scope.client = StreamiumProvider;
-    $scope.totalMoney = 0;
-    $scope.clients = [];
-    config.analytics && mixpanel.track('prov-end');
-    for (var i in $scope.client.mapClientIdToProvider) {
-      var amount = $scope.client.mapClientIdToProvider[i].currentAmount;
-      var time = Duration.for(StreamiumProvider.rate, amount);
-      $scope.totalMoney += amount;
-      if (amount > 0) {
-        var txId = $scope.client.mapClientIdToProvider[i].paymentTx.id;
-        $scope.clients.push({
-          amount: amount,
-          timeSpent: time / 1000,
-          transactionName: txId.substr(0, 4) + '...' + txId.substr(60, 64),
-          transactionUrl: 'https://' + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '') + 'insight.bitpay.com/tx/' + txId
+  window.removeEventListener('beforeunload', dontClose);
+
+  $scope.client = StreamiumProvider;
+  $scope.totalMoney = 0;
+  $scope.clients = [];
+  for (var i in $scope.client.mapClientIdToProvider) {
+    var amount = $scope.client.mapClientIdToProvider[i].currentAmount;
+    var time = Duration.for(StreamiumProvider.rate, amount);
+    $scope.totalMoney += amount;
+    if (amount > 0) {
+      var txId = $scope.client.mapClientIdToProvider[i].paymentTx.id;
+      $scope.clients.push({
+        amount: amount,
+        timeSpent: time / 1000,
+        transactionName: txId.substr(0, 4) + '...' + txId.substr(60, 64),
+        transactionUrl:  'https://'
+          + (bitcore.Networks.defaultNetwork.name === 'testnet' ? 'test-' : '')
+          + 'insight.bitpay.com/tx/' + txId
+      });
+    }
+  }
+  Stats.provider.endedStream({
+    name: $scope.client.name,
+    totalEarned: $scope.totalMoney,
+    totalTime: Duration.for(StreamiumProvider.rate, $scope.totalMoney) / 1000,
+    rate: StreamiumProvider.rate,
+    maxActive: StreamiumProvider.clientMaxActive,
+    totalClients: StreamiumProvider.clientConnections.length
+  });
+})
+.directive('twitter',
+  function($timeout) {
+    return {
+      link: function(scope, element, attr) {
+        $timeout(function() {
+          if (twttr && twttr.widgets) {
+            twttr.widgets.createShareButton(
+              attr.url,
+              element[0],
+              function(el) {}, {
+                count: 'none',
+                text: attr.text
+              }
+            );
+          }
         });
       }
     }
-  })
-  .directive('twitter',
-    function($timeout) {
-      return {
-        link: function(scope, element, attr) {
-          $timeout(function() {
-            if (twttr && twttr.widgets) {
-              twttr.widgets.createShareButton(
-                attr.url,
-                element[0],
-                function(el) {}, {
-                  count: 'none',
-                  text: attr.text
-                }
-              );
-            }
-          });
-        }
-      }
-    }
-  );
+  }
+);
 
 function retrievePendingTxs(Insight) {
 
