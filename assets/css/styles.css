@@ -1306,3 +1306,57 @@ strong,
   font-size: 40px;
   line-height: 80px;
 }
+
+.funding-address {
+  font-size: 10px;
+}
+
+#join-select {
+  color: #209EC3;
+  width: 100%;
+  margin: auto;
+  padding: 15px;
+  font-size: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#join-changeAddress {
+  width: 80%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.join-amount {
+  font-size: 30px;
+  color: #209EC3;
+}
+
+.join-container {
+  padding: 15px;
+}
+
+.join-container .rate {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.join-1-explain {
+  padding: 5px;
+  line-height: 22px;
+  padding-top: 18px;
+}
+
+.join-card-title {
+  background-color: #408CBF;
+  color: white;
+  height: 40px;
+  padding-top: 5px;
+  padding-left: 15px;
+}
+
+.join-card {
+  background-color: white;
+  padding: 10px;
+}
+

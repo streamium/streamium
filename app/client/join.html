@@ -42,7 +42,7 @@
 	<div class="row card space-top" ng-show="nowebrtc">
 		<div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-xs-12 col-xs-offset-0 ">
 			<div class="page-header">
-				<h2>Join this Stream!</h2>
+				<h2>Join this Stream</h2>
 			</div>
 			<div class="text-center">
         		<h4>
@@ -69,86 +69,88 @@
     </div>
   </div>
 
-  <div class="row card" ng-show="client.status == 'funding'">
-    <h3>Connecting to <strong>{{stream.name}}</strong></h3>
-    <p>
-      In order to prove you've got enough funds to pay the broadcaster, due to the Payment channel protocol, you should estimate how much time you intend to watch the stream, and lock the corresponding funds in the blockchain.
-    </p>
-    <p>
-      If you decide to terminate the streaming before the estimated time, you will receive your change back at a chosen address.
-    </p>
-    <p>
-      <input type="checkbox" ng-model="config.analytics"/><span>&nbsp;</span>Send anonymous usage statistics
-    </p>
-  </div>
-
-  <div class="row card" ng-show="client.status == 'funding'">
-    <div class="col-sm-1 center step-count">1</div>
-    <div class="col-sm-11 left-border">
-      I want to watch
-      <select
-        name="minutes" required
-        class="borderless"
-        ng-model="stream.minutes"
-        ng-options="val + ' minutes' for val in minutes"/><br/>
-      <strong>Price</strong>
-      <span class="rate">{{(client.rate / 60.0).toFixed(8)}} BTC/sec</span>
-      <span class="rate">{{client.rate * 60.0|BTC2USD}} USD/hour</span>
-    </div>
-  </div>
-
-  <div class="row card" ng-show="client.status == 'funding'">
-    <div class="col-sm-1 center step-count">2</div>
-    <div class="col-sm-11 left-border">
-      Send <strong>{{(stream.minutes * client.rate).toFixed(8)}}</strong> BTC to
-    
-      <div class="row" style="margin-top: 20px">
-        <div class="col-sm-4 center">
-          <a href="{{payUrl}}">
-            <qr text="'bitcoin:' + fundingAddress + '?amount=' + (stream.minutes * client.rate).toFixed(8)" ng-show="fundingAddress"></qr>
-          </a>
+  <div class="row" ng-show="client.status === 'funding'">
+    <div class="col-sm-12 col-md-4 join-container">
+      <div class="join-card-title">
+        1. I want to watch
+      </div>
+      <div class="join-card">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <select
+              id="join-select"
+              name="minutes" required
+              class="borderless"
+              ng-model="stream.minutes"
+              ng-options="val + ' minutes' for val in minutes"/>
+          </div>
         </div>
-        <div class="col-sm-8">
-          <div class="funding-address center">
-            <input class="naked2" value="{{fundingAddress}}" readonly auto-select/>
+        <p class="rate">{{(client.rate / 60.0 * 1e6).toFixed(2)}} bits per second</p>
+        <p class="rate">{{client.rate * 60.0|BTC2USD}} USD per hour</p>
+        <p class="join-1-explain">You will only be charged per minute watched. In case you leave the stream before the estimated time, you will receive your change back.</p>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-4 join-container">
+      <div class="join-card-title">
+        2. Authorize payment
+      </div>
+      <div class="join-card">
+        <div class="row" style="margin-top: 20px">
+          <div class="col-sm-4 col-md-4">
+            <a href="{{payUrl}}">
+              <qr text="'bitcoin:' + fundingAddress + '?amount=' + (stream.minutes * client.rate).toFixed(8)" ng-show="fundingAddress"></qr>
+            </a>
           </div>
-          <div class="center">
-            <a ng-hide="funds" href="{{payUrl}}" role="button" class="btn btn-large btn-info">Launch Wallet</a>
+          <div class="col-sm-8 center">
+            <div class="join-amount">
+              <strong>{{(stream.minutes * client.rate).toFixed(8)}}</strong> BTC
+            </div>
+            <div class="funding-address center">
+              <input class="naked2" value="{{fundingAddress}}" readonly auto-select/>
+            </div>
+            <div class="center">
+              <a ng-hide="funds" href="{{payUrl}}" role="button" class="btn btn-large btn-info">Launch Wallet</a>
+            </div>
+            <br/>
           </div>
-          <br/>
-          <div ng-hide="funds">Waiting for transaction</div>
-          <ul class="checkmark" ng-show="funds">
-            <li>Transaction received</li>
-            <li>{{funds|SATOSHIS2BTC}} BTC</li>
-            <li>{{fundedMinutes}} minutes</li>
-          </ul>
+          <div class="col-sm-12 center">
+            <div ng-hide="funds">Waiting for transaction</div>
+            <ul class="checkmark" ng-show="funds">
+              <li>Transaction received</li>
+              <li>{{funds|SATOSHIS2BTC}} BTC</li>
+              <li>{{fundedMinutes}} minutes</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="row card" ng-show="client.status == 'funding'">
-    <div class="col-sm-1 center step-count">3</div>
-    <div class="col-sm-11 left-border">
-      <div class="col-md-6">
-        When the stream ends, I want to receive my change at <span ng-show="client.change && changeFromTransaction === client.change">(detected from funding transaction)</span>
+    <div class="col-sm-12 col-md-4 join-container">
+      <div class="join-card-title">
+        3. Join
       </div>
-      <input type="text" name="change" ng-model="client.change"
-        placeholder="bitcoin change address" class="col-md-6 borderless" valid-address required>
+      <div class="join-card center">
+        <div class="row">
+          You will receive your funds back at
+          <span ng-show="client.change && changeFromTransaction === client.change">(detected from funding transaction)</span>:
+        </div>
+        <div class="row center">
+          <input type="text" name="change" id="join-changeAddress" ng-model="client.change"
+            placeholder="bitcoin change address" valid-address required>
+        </div>
+        <div class="row">
+          <form name="form" ng-submit="submit()" class="form-horizontal" role="form" novalidate ng-hide="client.status === 'connecting' || error">
+            <input type="hidden" name="funded" ng-model="funded" required>
+            <input type="hidden" name="change" ng-model="client.change" required validAddress>
+            <div class="col-sm-10 col-sm-offset-1">
+              <button type="submit" ng-disabled="form.$invalid || form.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
+                {{(!funded)?'Waiting for payment...':(form.change.$invalid?'Please set valid change address':'Start')}}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-
-
-  <div class="row">
-    <form name="form" ng-submit="submit()" class="form-horizontal" role="form" novalidate ng-hide="client.status === 'connecting' || error">
-    <input type="hidden" name="funded" ng-model="funded" required>
-    <input type="hidden" name="change" ng-model="client.change" required validAddress>
-    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-      <button type="submit" ng-disabled="form.$invalid || form.change.$invalid" class="btn btn-success btn-lg btn-end btn-full">
-        {{(!funded)?'Waiting for payment...':(form.change.$invalid?'Please set valid change address':'Start')}}
-      </button>
-    </div>
-    </form>
   </div>
 
 </div>
