@@ -271,7 +271,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     }
   }
   Stats.provider.endedStream({
-    name: $scope.client.name,
+    name: StreamiumProvider.name,
     totalEarned: $scope.totalMoney,
     totalTime: Duration.for(StreamiumProvider.rate, $scope.totalMoney) / 1000,
     rate: StreamiumProvider.rate,
