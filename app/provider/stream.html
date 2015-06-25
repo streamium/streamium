@@ -7,20 +7,14 @@
     <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
       <div class="container">
         <div class="navbar-header">
-
-          <!-- LOGO -->
           <a class="navbar-brand" href="/">
-            <img src="/assets/img/logo-nav.png" alt="">
+            <img src="/assets/img/logo-nav.png" alt="Streamium">
           </a>
         </div>
+          <button style="margin-top:24px;" type="button" class="navbar-right btn btn-info btn-xs" ng-click="end()">
+            End &amp; Cashout
+          </button>
 
-        <!-- TOP BAR -->
-        <div class="navbar-collapse collapse" id="stamp-navigation">
-
-          <span ng-show="broadcasting" class="label pull-right label-success">
-					<span class="glyphicon glyphicon-record" aria-hidden="true"></span>LIVE!
-          </span>
-        </div>
       </div>
       <!-- /END CONTAINER -->
 
@@ -59,27 +53,26 @@
       <div class="col-md-12">
         <span class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 card text-center">
           <span class="glyphicon glyphicon-facetime-video"></span> &nbsp;Share this link with your viewers: <a target="_blank" href="{{client.getLink()}}">{{client.getLink()}}</a>
-          <a twitter data-text="Join my #streamium channel '{{name}}' at" data-url="{{client.getLink()}}"></a>
+        <a twitter data-text="Join my #streamium channel '{{name}}' at" data-url="{{client.getLink()}}"></a>
         </span>
       </div>
     </div>
 
     <div class="row video" ng-hide="requiresApproval">
       <div class="row-same-height">
-        <video class="col-md-8 col-xs-height col-full-height stream-video"
-          id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
+        <video class="col-md-8 col-xs-height col-full-height stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
 
         <div class="hidden-xs hidden-sm col-md-4 col-xs-height col-full-height card chat">
           <h1 class="truncate">
             <span class="circle" style="background-color: {{PROVIDER_COLOR}};"/>{{name}}</h1>
           <ul class="messages" scroll-glue>
             <li style="font-size: 0.9em; color: #313131; line-height: 25px;">Congratulations on creating your stream! <span ng-hide="switched || screen">Did you know you can share your screen instead of your webcam?</span></li>
-            <li ng-repeat="m in messages"><span class="circle" style="background-color: {{m.color || PROVIDER_COLOR}};"/>{{m.text}}</li>
+            <li ng-repeat="m in messages"><span class="circle" style="background-color: {{m.color || PROVIDER_COLOR}};" />{{m.text}}</li>
           </ul>
           <div class="input">
             <form name="form" ng-submit="chat()">
-            <input type="text" ng-model="message" required/>
-            <button class="btn btn-primary" type="submit" ng-disabled="!message">Send</button>
+              <input type="text" ng-model="message" required/>
+              <button class="btn btn-info" type="submit" ng-disabled="!message">Send</button>
             </form>
           </div>
         </div>
@@ -87,13 +80,16 @@
     </div>
 
     <div class="row" ng-hide="requiresApproval">
-      <div class="col-sm-1 col-md-1 col-xs-12" style="margin-left: -15px">
-        <a ng-hide="switched || screen" href="#" ng-click="switchScreen()" class="btn btn-default" style="background-color: #3B5CB2; color: white; border: none; text-shadow: none;">Switch to screen<br/> sharing mode</a>
-        <a ng-hide="switched || !screen" href="#" ng-click="switchScreen()" class="btn btn-default" style="background-color: #3B5CB2; color: white; border: none; text-shadow: none;">Switch to share<br/> your webcam</a>
+      <div class="col-sm-1 col-md-2 col-xs-12" style="margin-left: -15px">
+        <a ng-hide="switched || screen" href="#" ng-click="switchScreen()" class="btn btn-info">
+          Switch to screen<br/> sharing mode</a>
+        <a ng-hide="switched || !screen" href="#" ng-click="switchScreen()" class="btn btn-info">
+          Switch to sharing<br/> your webcam</a>
       </div>
+
       <div class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2 col-xs-12 col-xs-offset-0 ">
         <div class="row">
-          <div class="col-md-6 col-sm-8 col-xs-6 stream-data">
+          <div class="col-md-5 col-sm-8 col-xs-6 stream-data">
             <ul class="list-unstyled">
               <li>
                 Earned so far: {{client.totalMoney | SATOSHIS2BTC}} BTC
@@ -113,12 +109,6 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-2 col-md-3 col-xs-12">
-        <button type="button" class="btn btn-danger btn-lg" ng-click="end()">
-          End &amp; Cashout
-        </button>
-      </div>
     </div>
   </div>
 </div>
-
