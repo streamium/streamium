@@ -87,13 +87,13 @@
     </div>
 
     <div class="row" ng-hide="requiresApproval">
-      <div class="col-sm-1 col-md-1 col-xs-6 col-sm-offset-0 col-xs-offset-1" style="margin-left: -15px">
+      <div class="col-sm-1 col-md-1 col-xs-12" style="margin-left: -15px">
         <a ng-hide="switched || screen" href="#" ng-click="switchScreen()" class="btn btn-default" style="background-color: #3B5CB2; color: white; border: none; text-shadow: none;">Switch to screen<br/> sharing mode</a>
         <a ng-hide="switched || !screen" href="#" ng-click="switchScreen()" class="btn btn-default" style="background-color: #3B5CB2; color: white; border: none; text-shadow: none;">Switch to share<br/> your webcam</a>
       </div>
-      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-2 col-xs-6 col-xs-offset-0 ">
+      <div class="col-sm-6 col-sm-offset-2 col-md-6 col-md-offset-2 col-xs-12 col-xs-offset-0 ">
         <div class="row">
-          <div class="col-md-8 col-sm-8 stream-data">
+          <div class="col-md-6 col-sm-8 col-xs-6 stream-data">
             <ul class="list-unstyled">
               <li>
                 Earned so far: {{client.totalMoney | SATOSHIS2BTC}} BTC
@@ -103,7 +103,7 @@
               </li>
             </ul>
           </div>
-          <div class="col-md-4 col-sm-4 stream-data">
+          <div class="col-md-6 col-sm-4 col-xs-6 stream-data">
             <ul class="list-unstyled">
               <li><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{client.getConnected() }}</li>
               <li>
@@ -113,12 +113,9 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="row" ng-hide="requiresApproval">
-      <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-        <button type="button" class="btn btn-danger btn-lg btn-end btn-full" ng-click="end()">
-          End broadcast
+      <div class="col-sm-2 col-md-3 col-xs-12">
+        <button type="button" class="btn btn-danger btn-lg" ng-click="end()">
+          End &amp; Cashout
         </button>
       </div>
     </div>
