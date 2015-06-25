@@ -1364,16 +1364,22 @@ strong,
   color: #A9a9a9;
 }
 
+.join-fund-confirm {
+  font-weight: bold;
+  font-size: 22px;
+}
+
 .join-1-explain {
   line-height: 22px;
 }
 
 .join-card-title {
   background-color: #408CBF;
+  font-size: 25px;
   color: white;
-  height: 40px;
-  padding-top: 5px;
-  padding-left: 15px;
+  height: 55px;
+  padding-top: 13px;
+  padding-left: 20px;
 }
 
 .join-card {
