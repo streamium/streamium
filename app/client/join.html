@@ -147,10 +147,12 @@
             <p class="join-1-explain">
               <span ng-hide="funds">You</span>
               <span ng-show="funds">Remember, you</span>
-            will only be charged per minute watched </p>
+            will only be charged per minute watched. </p>
           </div>
           <div class="col-md-8 col-md-offset-2">
-            Unused funds will be sent back to <span ng-hide="funds">you.</span> <span ng-show="funds && !changeRefund"> your address <a href="#" class="btn btn-xs btn-default" ng-click="changeRefund = true">modify</a></span>
+            Unused funds will be sent back to <span ng-hide="funds">you.</span>
+            <span ng-show="funds && !changeRefund"> <a href="#" class="softlink" ng-click="changeRefund = true">
+              your address</a>.</span>
           </div>
         </div>
         <div class="row center" ng-show="funds && changeRefund">

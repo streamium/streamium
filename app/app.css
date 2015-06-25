@@ -234,3 +234,17 @@ body > div {
 .text-justify {
   text-align: justify;
 }
+
+.tungsten {
+  color: #555555;
+}
+
+.softlink {
+  color: inherit;
+  border-bottom: 1px dashed #999;
+}
+
+.softlink:hover {
+  color: inherit;
+  text-decoration: none;
+}
