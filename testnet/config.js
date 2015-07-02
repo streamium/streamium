@@ -11,6 +11,7 @@ var config = {
   BLOCKCYPHERTX: 'https://api.blockcypher.com/v1/btc/'
     + 'test3'
     + '/txs/',
+  BLOCKCYPHERTOKEN: '55eeac1a8340a08ff29536052c17c160',
   peerServers: [
     {
       key: 'peerjs',

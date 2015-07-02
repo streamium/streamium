@@ -5,12 +5,13 @@ angular.module('streamium.insight', [])
 .service('Insight', function(bitcore, $http) {
 
   var broadcast = function(tx, callback) {
-    $http.post(
-      config.BLOCKCYPHERTX + 'push',
-      {
+    $http({
+      method: 'POST',
+      url: config.BLOCKCYPHERTX + 'push?token=' + config.BLOCKCYPHERTOKEN,
+      data: {
         tx: tx
       }
-    ).success(function(response, status, headers, config) {
+    }).success(function(response, status, headers, config) {
       return callback(null, response.tx.hash);
     }).error(function(response, status, headers, config) {
       if (response.errors.length === 1) {
