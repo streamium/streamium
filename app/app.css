@@ -249,3 +249,9 @@ body > div {
   text-decoration: none;
 }
 
+
+.btn-navbar {
+  margin-top: 24px;
+  min-width: 90px;
+  margin-left: 20px;
+}

@@ -1,19 +1,18 @@
 <header>
-  <!-- STICKY NAVIGATION -->
   <div class="navbar navbar-inverse bs-docs-nav navbar-fixed-top sticky-navigation" role="navigation">
     <div class="container">
       <div class="navbar-header">
-
-        <!-- LOGO -->
         <a class="navbar-brand" href="/">
           <img src="/assets/img/logo-nav.png" alt="">
         </a>
       </div>
+      <button type="button"
+        ng-show="expirationDate" class="navbar-right btn btn-navbar btn-info btn-xs" ng-click="end()">
+        Exit stream
+      </button>
 
-      <!-- TOP BAR -->
       <div class="navbar-collapse collapse" id="stamp-navigation">
 
-        <!-- NAVIGATION LINK -->
 
         <ul class="nav navbar-nav navbar-left main-navigation small-text">
           <li>
@@ -23,10 +22,8 @@
         </ul>
       </div>
     </div>
-    <!-- /END CONTAINER -->
 
   </div>
-  <!-- /END STICKY NAVIGATION -->
 
   <!-- =========================
 	SECTION: Container
@@ -36,7 +33,7 @@
 
   <div class="row" ng-show="expirationDate">
     <div class="row-same-height">
-      <video class="col-md-8 col-xs-height col-full-height stream-video"
+      <video controls class="col-md-8 col-xs-height col-full-height stream-video"
         id="video" ng-src="{{videoSrc}}" autoplay></video>
 
       <div class="hidden-xs hidden-sm col-md-4 col-xs-height col-full-height card chat">
@@ -56,31 +53,35 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-xs-12 col-xs-offset-0 ">
-      <div class="col-md-10 col-sm-10 stream-data">
-        <ul class="list-unstyled">
-          <div class="row card space-top" ng-hide="expirationDate">
-            <div class="col-sm-2 center">
-              <h2><span class="glyphicon glyphicon-hourglass"></span></h2>
-            </div>
-            <div class="col-sm-10 text-center">
-              <h2>Welcome to {{name}}.</h2>
-            </div>
+    <div class="col-sm-8 col-sm-offset-0 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 ">
+      <ul class="list-unstyled">
+        <div class="row card space-top" ng-hide="expirationDate">
+          <div class="col-sm-2 center">
+            <h2><span class="glyphicon glyphicon-hourglass"></span></h2>
           </div>
-          <div ng-show="(castType === 'static') && loadingStatic">
-            Loading stream...
+          <div class="col-sm-10 text-center">
+            <h2>Welcome to {{name}}.</h2>
           </div>
-          <div ng-show="expirationDate && ((castType !== 'static') || !loadingStatic)">
-            Your funds will run out <span am-time-ago="expirationDate"></span> ({{secondsLeft}} seconds)
-          </div>
-        </ul>
-      </div>
+        </div>
+      </ul>
+    </div>
+    <div class="col-sm-8 col-sm-offset-0 col-md-6 col-md-offset-0 col-xs-12 col-xs-offset-0 ">
+        <div ng-show="(castType === 'static') && loadingStatic">
+          Loading stream...
+        </div>
+        <span ng-show="expirationDate && ((castType !== 'static') || !loadingStatic)">
+          Your funds will run out <span am-time-ago="expirationDate"></span> ({{secondsLeft}} seconds).
+        </span>
+      </ul>
+    </div>
+    <div class="col-sm-4 col-sm-offset-2 col-md-4 col-md-offset-0 col-xs-12 col-xs-offset-0 ">
+      <a href="https://github.com/streamium/streamium/issues/new"
+        target="_blank"
+        ng-show="expirationDate"
+        class="softlink">
+        Problems with stream?
+      </a>
     </div>
   </div>
 
-  <div class="row" ng-show="expirationDate">
-    <div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 ">
-      <button ng-click="end()" class="btn btn-danger btn-lg btn-end btn-full">End stream!</button>
-    </div>
-  </div>
 </div>
