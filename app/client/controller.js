@@ -128,7 +128,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
   StreamiumClient.askForRefund();
   var startViewer = function() {
 
-    console.log($rootScope.castType)
     if ($rootScope.castType !== 'static') {
       video.setPeer(StreamiumClient.peer);
       video.view($scope.name, function(err, stream) {
@@ -172,7 +171,6 @@ angular.module('streamium.client.controller', ['ngRoute'])
       StreamiumClient.onStream = function (payload) {
         $scope.loadingStatic = false;
         try {
-          console.log('Received data...', payload);
           if (payload.data.end) {
             streamer.end();
           }
