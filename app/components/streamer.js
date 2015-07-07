@@ -6,7 +6,7 @@
 
 angular.module('streamium.streamer', [])
 .factory('Streamer', function() { return function Streamer() {
-  var SEND_FREQUENCY = 100;
+  var SEND_FREQUENCY = 1000;
   var queue = function(f) {
     console.log('Queued to send more data...');
     setTimeout(f, SEND_FREQUENCY);
@@ -45,7 +45,7 @@ angular.module('streamium.streamer', [])
         if(!blob) return;
               var size = blob.size,
                   startIndex = 0,
-                  plus = 3000;
+                  plus = 120000;
 
               console.debug('one chunk size: <', plus, '>');
 
