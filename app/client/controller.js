@@ -28,7 +28,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
   }
 ])
 
-.controller('JoinStreamCtrl', function($scope, $routeParams, StreamiumClient, Insight, $location, bitcore, Stats) {
+.controller('JoinStreamCtrl', function($scope, $rootScope, $routeParams, StreamiumClient, Insight, $location, bitcore, Stats) {
   $scope.client = StreamiumClient;
   $scope.minutes = [5, 10, 15, 30, 60, 90, 120];
   $scope.stream = {};
@@ -55,7 +55,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
     $scope.client.change = config.defaults.clientChange;
   }
 
-  StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress) {
+  StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress, isStatic) {
     if (err) {
       if (err.type === 'peer-unavailable') {
         $scope.error = 'Looks like ' + $routeParams.streamId + ' is offline at the moment.';
@@ -65,6 +65,8 @@ angular.module('streamium.client.controller', ['ngRoute'])
       $scope.$apply();
       return;
     }
+
+    $rootScope.castType = isStatic ? 'static' : 'stream';
 
     $scope.fundingAddress = fundingAddress;
     $scope.amount = ($scope.stream.minutes * $scope.client.rate + twoFees).toFixed(8);
@@ -109,12 +111,13 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 })
 
-.controller('WatchStreamCtrl', function($location, $routeParams, $scope, video, StreamiumClient, $interval, bitcore, Stats) {
+.controller('WatchStreamCtrl', function($location, $rootScope, $routeParams, $scope, video, StreamiumClient, $interval, bitcore, Stats, Streamer) {
   $scope.message = '';
   $scope.messages = [];
   $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
   $scope.name = $routeParams.streamId;
   $scope.started = new Date().getTime();
+  $scope.loadingStatic = true;
 
   window.addEventListener('beforeunload', dontCloseClient);
 
@@ -124,18 +127,34 @@ angular.module('streamium.client.controller', ['ngRoute'])
   }
   StreamiumClient.askForRefund();
   var startViewer = function() {
-    video.setPeer(StreamiumClient.peer);
-    video.view($scope.name, function(err, stream) {
-      // called on provider calling us
-      if (err) {
-        console.log(err);
-        StreamiumClient.end();
-        return;
-      }
 
-      // show provider video on screen
-      var videoSrc = URL.createObjectURL(stream);
-      $scope.videoSrc = videoSrc;
+    console.log($rootScope.castType)
+    if ($rootScope.castType !== 'static') {
+      video.setPeer(StreamiumClient.peer);
+      video.view($scope.name, function(err, stream) {
+        // called on provider calling us
+        if (err) {
+          console.log(err);
+          StreamiumClient.end();
+          return;
+        }
+        // show provider video on screen
+        var videoSrc = URL.createObjectURL(stream);
+        $scope.videoSrc = videoSrc;
+        $scope.$digest();
+
+        // start sending payments at regular intervals
+        $interval(calculateSeconds, 1000);
+        StreamiumClient.setupPaymentUpdates();
+        Stats.client.startedWatching({
+          receivedMoney: StreamiumClient.consumer.commitmentTx.inputAmount,
+          rate: StreamiumClient.rate
+        });
+      });
+    } else {
+      var streamer = new Streamer();
+      streamer.video = document.getElementById('video');
+      streamer.receive();
       $scope.$digest();
 
       // start sending payments at regular intervals
@@ -145,7 +164,27 @@ angular.module('streamium.client.controller', ['ngRoute'])
         receivedMoney: StreamiumClient.consumer.commitmentTx.inputAmount,
         rate: StreamiumClient.rate
       });
-    });
+      streamer.video.addEventListener('ended', function() {
+        StreamiumClient.errored = false;
+        StreamiumClient.end();
+      }, false);
+
+      StreamiumClient.onStream = function (payload) {
+        $scope.loadingStatic = false;
+        try {
+          if (payload.data.end) {
+            streamer.end();
+          }
+          else {
+            var data = new window.Uint8Array(payload.data, 'base64');
+            streamer.append(data);
+          }
+        } catch (e) {
+          StreamiumClient.errored = false;
+          StreamiumClient.end();
+        }
+      };
+    }
   };
 
   StreamiumClient.on('refundReceived', function() {

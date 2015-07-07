@@ -19,6 +19,13 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     $routeProvider.when('/screen', screen);
     $routeProvider.when('/t/screen', screen);
 
+    var staticServe = {
+      templateUrl: '/app/provider/empty.html',
+      controller: 'StaticServeCtrl'
+    };
+    $routeProvider.when('/static', staticServe);
+    $routeProvider.when('/t/static', staticServe);
+
     var broadcast = {
       templateUrl: '/app/provider/stream.html',
       controller: 'BroadcastStreamCtrl'
@@ -43,13 +50,22 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 ])
 
 .controller('ScreenCtrl', function($rootScope, $location) {
-  $rootScope.screen = true;
+  $rootScope.castType = 'screen';
+
+  $location.path(config.appPrefix);
+})
+
+.controller('StaticServeCtrl', function($rootScope, $location) {
+  $rootScope.castType = 'static';
 
   $location.path(config.appPrefix);
 })
 
 .controller('CreateStreamCtrl', function($rootScope, $scope, $location, Rates, StreamiumProvider, bitcore, Insight, Stats) {
   $scope.stream = {};
+  if (!$rootScope.castType) {
+    $rootScope.castType = 'webcam';
+  }
 
   jQueryBackup('[data-toggle="tooltip"]').tooltip();
   var storedStream = JSON.parse(localStorage.getItem('providerInfo') || '{}');
@@ -102,6 +118,10 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     retrievePendingTxs(Insight);
   });
 
+  document.querySelector('input[type=file]').onchange = function () {
+    StreamiumProvider.fileToSend = this.files[0];
+  };
+
   $scope.submit = function() {
     if (!$scope.form.$valid) {
       return;
@@ -120,6 +140,8 @@ angular.module('streamium.provider.controller', ['ngRoute'])
       $scope.stream.name,
       $scope.stream.address,
       priceRate,
+      $rootScope.castType === 'static',
+      $scope.filename,
       function onCreate(err) {
         $scope.stream.loading = false;
 
@@ -144,14 +166,22 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   };
 })
 
-.controller('BroadcastStreamCtrl', function($rootScope, $scope, $location, $routeParams, video, StreamiumProvider, Stats) {
+.controller('BroadcastStreamCtrl', function($rootScope, $scope, $location, $routeParams, video, StreamiumProvider, Stats, Streamer) {
   $scope.PROVIDER_COLOR = config.PROVIDER_COLOR;
   $scope.name = $routeParams.streamId;
   $scope.requiresApproval = true;
+  if ($rootScope.castType === 'static') {
+    $scope.requiresApproval = false;
+    $scope.isStatic = StreamiumProvider.isStatic;
+    $scope.filename = StreamiumProvider.filename;
+    $scope.client = StreamiumProvider;
+    $scope.filming = true;
+    video.setPeer(StreamiumProvider.peer);
+  }
 
   $scope.isChrome = !!navigator.webkitGetUserMedia;
   $scope.isFirefox = !!navigator.mozGetUserMedia;
-  $scope.screen = $rootScope.screen;
+  $scope.castType = $rootScope.castType;
 
   $scope.peers = {};
   $scope.message = '';
@@ -161,7 +191,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   $scope.switchScreen = function(ev) {
     Stats.provider.castingScreen($scope.name, StreamiumProvider.address.toString());
     $rootScope.switched = true;
-    $scope.screen = $rootScope.screen = !$rootScope.screen;
+    $scope.castType = $rootScope.castType = ($rootScope.castType === 'screen' ? 'webcam' : 'screen');
     $scope.requiresApproval = true;
     video.finish();
     startCamera();
@@ -174,11 +204,19 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     Stats.provider.clientJoined({
       delayToJoin: (new Date().getTime() - started.getTime()) / 1000
     });
-    video.broadcast(peer, function(err) {
-      if (err) throw err;
-      $scope.broadcasting = true;
-      $scope.$apply();
-    });
+    if ($rootScope.castType === 'static') {
+      video.streamer = new Streamer();
+      video.streamer.push = function(data) {
+        StreamiumProvider.pushVideo(peer, data);
+      };
+      video.streamer.stream(StreamiumProvider.fileToSend);
+    } else {
+      video.broadcast(peer, function(err) {
+        if (err) throw err;
+        $scope.broadcasting = true;
+        $scope.$apply();
+      });
+    }
   });
 
   StreamiumProvider.on('broadcast:end', function(peer) {
@@ -215,32 +253,26 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   };
 
   var startCamera = function() {
-    $scope.client = StreamiumProvider;
-    $scope.filming = true;
-    video.setPeer(StreamiumProvider.peer);
-    video.camera(!!$rootScope.screen, function(err, stream) {
-      if (err) {
-        console.log('error starting video:', err);
-        return;
-      }
+    if ($rootScope.castType !== 'static') {
+      $scope.client = StreamiumProvider;
+      $scope.filming = true;
+      video.setPeer(StreamiumProvider.peer);
+      video.camera($rootScope.castType, function(err, stream) {
+        if (err) {
+          console.log('error starting video:', err);
+          return;
+        }
 
-      $scope.requiresApproval = false;
-      $scope.videoSrc = URL.createObjectURL(stream);
-      $scope.$digest();
-    });
+        $scope.requiresApproval = false;
+        $scope.videoSrc = URL.createObjectURL(stream);
+        $scope.$digest();
+      });
+    }
   };
 
   if (!StreamiumProvider.streamId && !config.DEBUG) {
     $location.path(config.appPrefix + '/');
     return;
-  } else if (!StreamiumProvider.streamId && config.DEBUG) {
-    StreamiumProvider.init(config.defaults.providerStream, 'n3vNjpQB8GUVNz5R2hSM8rq4EgMEQqS4AZ', 0.001, function(err) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      startCamera();
-    });
   } else {
     startCamera();
   }
@@ -277,7 +309,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
     totalTime: Duration.for(StreamiumProvider.rate, $scope.totalMoney) / 1000,
     rate: StreamiumProvider.rate,
     maxActive: StreamiumProvider.clientMaxActive,
-    screen: $rootScope.screen,
+    castType: $rootScope.castType,
     totalClients: StreamiumProvider.clientConnections.length
   });
 })

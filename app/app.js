@@ -11,6 +11,7 @@ angular.module('streamium', [
   'streamium.bitcoin',
   'streamium.insight',
   'streamium.core',
+  'streamium.streamer',
   'streamium.video',
   'streamium.peer',
   'luegg.directives',

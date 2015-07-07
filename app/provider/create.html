@@ -90,6 +90,19 @@
                           </div>
                         </div>
 
+                        <div class="form-group" ng-show="castType === 'static'">
+                          <div class="input-group">
+                            <div class="input-group-addon" style="padding-right: 38px;">File to Broadcast</div>
+                            <input  id="file"
+                              type="file"
+                              class="form-control"
+                              name="filename"
+                              ng-model="filename"
+                            >
+                            <span class="glyphicon glyphicon-ok form-control-feedback" ng-show="form.filename.$valid"></span>
+                          </div>
+                        </div>
+
                         <div id="createstream">
                           <div class="form-group has-feedback">
                             <div class="input-group">

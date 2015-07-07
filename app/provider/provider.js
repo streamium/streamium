@@ -34,7 +34,7 @@ angular.module('streamium.provider.service', [])
     finished: 'finished'
   };
 
-  StreamiumProvider.prototype.init = function(streamId, address, rate, callback) {
+  StreamiumProvider.prototype.init = function(streamId, address, rate, isStatic, filename, callback) {
     if (!streamId || !address || !rate || !callback) return callback('Invalid arguments');
 
     try {
@@ -47,6 +47,8 @@ angular.module('streamium.provider.service', [])
     this.streamId = streamId;
     this.address = address;
     this.rate = rate;
+    this.isStatic = isStatic;
+    this.filename = filename;
     this.rateSatoshis = bitcore.Unit.fromBTC(rate).toSatoshis();
     this.clientConnections = [];
     this.clientConnectionMap = {};
@@ -121,6 +123,15 @@ angular.module('streamium.provider.service', [])
            !this.isIdTaken;
   };
 
+  StreamiumProvider.prototype.pushVideo = function (peer, data) {
+    this.clientConnectionMap[peer].send({
+      type: 'video',
+      payload: {
+        data: data.end ? { end: true } : data
+      }
+    })
+  };
+
   StreamiumProvider.prototype.handlers = {};
 
   StreamiumProvider.prototype.handlers.hello = function(connection, data) {
@@ -152,7 +163,8 @@ angular.module('streamium.provider.service', [])
       payload: {
         publicKey: provider.key.publicKey.toString(),
         paymentAddress: this.address.toString(),
-        rate: this.rate
+        rate: this.rate,
+        isStatic: this.isStatic
       }
     });
   };
