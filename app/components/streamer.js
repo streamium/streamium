@@ -8,6 +8,7 @@ angular.module('streamium.streamer', [])
 .factory('Streamer', function() { return function Streamer() {
   var SEND_FREQUENCY = 100;
   var queue = function(f) {
+    console.log('Queued to send more data...');
     setTimeout(f, SEND_FREQUENCY);
   };
 
@@ -84,6 +85,13 @@ angular.module('streamium.streamer', [])
       mediaSource.addEventListener(prefix+'sourceopen', function () {
           self.receiver = mediaSource.addSourceBuffer('video/webm; codecs="vorbis,vp8"');
           self.mediaSource = mediaSource;
+          self.receiver.addEventListener('update', function() {
+            if (appendQueue.length) {
+              var newQueue = appendQueue.splice(1)
+              self.receiver.appendBuffer(appendQueue[0]);
+              appendQueue = newQueue;
+            }
+          });
 
           console.debug('MediaSource readyState: <', this.readyState, '>');
       }, false);
@@ -94,8 +102,14 @@ angular.module('streamium.streamer', [])
       }, false);
   }
 
+  var appendQueue = [];
+
   this.append = function (data) {
+    if (self.receiver.updating) {
+      appendQueue.push(data);
+    } else {
       self.receiver.appendBuffer(data);
+    }
   };
 
   this.end = function (data) {

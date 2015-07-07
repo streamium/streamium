@@ -172,14 +172,16 @@ angular.module('streamium.client.controller', ['ngRoute'])
       StreamiumClient.onStream = function (payload) {
         $scope.loadingStatic = false;
         try {
+          console.log('Received data...', payload);
           if (payload.data.end) {
             streamer.end();
           }
           else {
-            var data = new window.Uint8Array(payload.data, 'base64');
+            var data = new window.Uint8Array(payload.data);
             streamer.append(data);
           }
         } catch (e) {
+          console.log(e, e.stack);
           StreamiumClient.errored = false;
           StreamiumClient.end();
         }
