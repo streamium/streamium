@@ -76,8 +76,6 @@ Video.prototype.broadcast = function(peer, cb) {
     return;
   }
 
-  console.log(this.stream)
-
   var call = this.peer.call(peer, this.stream);
   var clientName = call.peer;
   call.on('close', function() {
