@@ -67,7 +67,10 @@
               <h2>Welcome to {{name}}.</h2>
             </div>
           </div>
-          <div ng-show="expirationDate">
+          <div ng-show="(castType === 'static') && loadingStatic">
+            Loading stream...
+          </div>
+          <div ng-show="expirationDate && ((castType !== 'static') || !loadingStatic)">
             Your funds will run out <span am-time-ago="expirationDate"></span> ({{secondsLeft}} seconds)
           </div>
         </ul>

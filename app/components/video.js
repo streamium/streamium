@@ -1,6 +1,5 @@
 'use strict';
 
-
 var Video = function() {
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
   this.calls = {};
@@ -10,10 +9,10 @@ Video.prototype.setPeer = function(peer) {
   this.peer = peer;
 };
 
-Video.prototype.camera = function(screen, cb) {
+Video.prototype.camera = function(type, cb) {
   var self = this;
 
-  if (!screen) {
+  if (type === 'webcam') {
     navigator.getUserMedia({
       audio: true,
       video: true
@@ -24,7 +23,7 @@ Video.prototype.camera = function(screen, cb) {
       cb('error acquiring video');
     });
 
-  } else {
+  } else if (type === 'screen') {
 
     getScreenId(function (error, sourceId, screen_constraints) {
       if (error) {
@@ -66,6 +65,8 @@ Video.prototype.camera = function(screen, cb) {
         cb('error acquiring video');
       });
     });
+  } else {
+    cb('Type of stream not set');
   }
 };
 

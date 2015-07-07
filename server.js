@@ -25,6 +25,12 @@ app.configure(function(){
   app.all('/t/screen', function(req, res) {
     res.sendfile('./testnet/index.html');
   });
+  app.all('/static', function(req, res) {
+    res.sendfile('./index.html');
+  });
+  app.all('/t/static', function(req, res) {
+    res.sendfile('./testnet/index.html');
+  });
 
   // Testnet
   app.all('/t/b/*', function(req, res) {

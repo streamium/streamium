@@ -113,6 +113,7 @@ angular.module('streamium.client.service', [])
     this.providerKey = data.publicKey;
     this.providerAddress = new bitcore.Address(data.paymentAddress);
     this.status = StreamiumClient.STATUS.funding;
+    this.isStatic = data.isStatic;
 
     this.consumer = new Consumer({
       network: this.network,
@@ -122,12 +123,20 @@ angular.module('streamium.client.service', [])
       fundingKey: this.fundingKey
     });
 
-    this.fundingCallback(null, this.consumer.fundingAddress.toString());
+    this.fundingCallback(null, this.consumer.fundingAddress.toString(), this.isStatic);
     this.fundingCallback = null;
   };
 
   StreamiumClient.prototype.processFunding = function(utxos) {
     this.consumer.processFunding(utxos);
+  };
+
+  StreamiumClient.prototype.handlers.video = function(data) {
+    this.onStream.apply(self, arguments);
+  };
+
+  StreamiumClient.prototype.onStream = function() {
+    console.log('No stream handler');
   };
 
   StreamiumClient.prototype.handlers.refundAck = function(data) {

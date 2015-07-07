@@ -35,10 +35,10 @@
           <span class="glyphicon glyphicon-facetime-video"></span>
         </h2>
       </div>
-      <div ng-hide="screen">
-        <h2 ng-hide="screen">Please allow Streamium to use the camera.</h2>
+      <div ng-hide="castType === 'webcam'">
+        <h2>Please allow Streamium to use the camera.</h2>
       </div>
-      <div ng-show="screen">
+      <div ng-show="castType === 'screen'">
         <h3>Please allow Streamium to cast your desktop.</h3>
         <h4 ng-show="isChrome" id="chromeinstall">
           If you haven't already, <a href="https://chrome.google.com/webstore/detail/screen-capturing/ajhifddimkapgcifgcodmmfdlknahffk" target="_blank">install this Chrome Extension</a> and restart 
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="row video" ng-hide="requiresApproval">
+    <div class="row video" ng-hide="requiresApproval || (castType === 'static')">
       <div class="row-same-height">
         <video class="col-md-8 col-xs-height col-full-height stream-video" id="video" muted="true" ng-src="{{videoSrc}}" autoplay></video>
 
@@ -66,7 +66,7 @@
           <h1 class="truncate">
             <span class="circle" style="background-color: {{PROVIDER_COLOR}};"/>{{name}}</h1>
           <ul class="messages" scroll-glue>
-            <li style="font-size: 0.9em; color: #313131; line-height: 25px;">Congratulations on creating your stream! <span ng-hide="switched || screen">Did you know you can share your screen instead of your webcam?</span></li>
+            <li style="font-size: 0.9em; color: #313131; line-height: 25px;">Congratulations on creating your stream! <span ng-hide="switched || (castType === 'screen')">Did you know you can share your screen instead of your webcam?</span></li>
             <li ng-repeat="m in messages"><span class="circle" style="background-color: {{m.color || PROVIDER_COLOR}};" />{{m.text}}</li>
           </ul>
           <div class="input">
@@ -79,11 +79,11 @@
       </div>
     </div>
 
-    <div class="row" ng-hide="requiresApproval">
+    <div class="row" ng-hide="requiresApproval || (castType === 'static')">
       <div class="col-sm-1 col-md-2 col-xs-12" style="margin-left: -15px">
-        <a ng-hide="switched || screen" href="#" ng-click="switchScreen()" class="btn btn-info">
+        <a ng-hide="switched || (castType === 'webcam')" href="#" ng-click="switchScreen()" class="btn btn-info">
           Switch to screen<br/> sharing mode</a>
-        <a ng-hide="switched || !screen" href="#" ng-click="switchScreen()" class="btn btn-info">
+        <a ng-hide="switched || (castType === 'screen')" href="#" ng-click="switchScreen()" class="btn btn-info">
           Switch to sharing<br/> your webcam</a>
       </div>
 
