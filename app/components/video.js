@@ -13,10 +13,7 @@ Video.prototype.camera = function(type, cb) {
   var self = this;
 
   if (type === 'webcam') {
-    navigator.getUserMedia({
-      audio: true,
-      video: true
-    }, function(stream) {
+    navigator.getUserMedia(config.userMedia, function(stream) {
       self.stream = stream;
       cb(null, stream);
     }, function() {
