@@ -50,6 +50,10 @@ var config = {
       ]
     }
   },
+  userMedia: {
+    audio: true,
+    video: true
+  },
   confidenceDelay: 5000,
   confidenceTarget: 0.85,
   confidenceRetry: 15,
