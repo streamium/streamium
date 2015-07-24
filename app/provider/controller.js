@@ -72,7 +72,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
 
   $scope.stream.name = storedStream.name || (config.DEBUG ? config.defaults.providerStream : '');
   $scope.stream.address = storedStream.address || (config.DEBUG ? config.defaults.providerAddress : '');
-  $scope.stream.rate = storedStream.rate || 60;
+  $scope.stream.rate = storedStream.rate || config.defaults.rateUSD;
 
   $scope.stream.error = null;
   $scope.stream.loading = false;
