@@ -66,6 +66,7 @@ angular.module('streamium.provider.controller', ['ngRoute'])
   if (!$rootScope.castType) {
     $rootScope.castType = 'webcam';
   }
+  $scope.feature = config.feature;
 
   jQueryBackup('[data-toggle="tooltip"]').tooltip();
   var storedStream = JSON.parse(localStorage.getItem('providerInfo') || '{}');

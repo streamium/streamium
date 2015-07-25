@@ -55,6 +55,11 @@ var config = {
     audio: true,
     video: true
   },
+  feature: {
+    show: false,
+    link: 'the-end-of-money',
+    title: '"Bitcoin: The End of Money As We Know It" documentary'
+  },
   confidenceDelay: 5000,
   confidenceTarget: 0.85,
   confidenceRetry: 15,

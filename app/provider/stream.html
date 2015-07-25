@@ -35,7 +35,7 @@
           <span class="glyphicon glyphicon-facetime-video"></span>
         </h2>
       </div>
-      <div ng-hide="castType === 'webcam'">
+      <div ng-show="castType === 'webcam'">
         <h2>Please allow Streamium to use the camera.</h2>
       </div>
       <div ng-show="castType === 'screen'">
