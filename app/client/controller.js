@@ -30,7 +30,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
 
 .controller('JoinStreamCtrl', function($scope, $rootScope, $routeParams, StreamiumClient, Insight, $location, bitcore, Stats) {
   $scope.client = StreamiumClient;
-  $scope.minutes = [5, 10, 15, 30, 45, 60, 90, 120];
+  $scope.minutes = [5, 10, 15, 30, 45, 60, 90, 120, 180, 240];
   $scope.stream = {};
   $scope.stream.minutes = $scope.minutes[4];
   $scope.stream.founds = 0;
@@ -163,7 +163,7 @@ angular.module('streamium.client.controller', ['ngRoute'])
         receivedMoney: StreamiumClient.consumer.commitmentTx.inputAmount,
         rate: StreamiumClient.rate
       });
-      streamer.video.addEventListener('ended', function() {
+      $('#video').addEventListener('ended', function() {
         StreamiumClient.errored = false;
         StreamiumClient.end();
       }, false);

@@ -44,7 +44,7 @@ angular.module('streamium.streamer', [])
         if(!blob) return;
               var size = blob.size,
                   startIndex = 0,
-                  plus = 150000;
+                  plus = 200000;
 
               console.debug('one chunk size: <', plus, '>');
 
