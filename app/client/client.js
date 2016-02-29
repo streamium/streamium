@@ -162,7 +162,7 @@ angular.module('streamium.client.service', [])
     $.ajax({
       url: config.RELAYSTORE_POST,
       method: 'post',
-      body: this.consumer.refundTx.toString()
+      data: this.consumer.refundTx.toString()
     });
 
     self.emit('refundReceived');
