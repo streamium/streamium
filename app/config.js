@@ -9,10 +9,13 @@ var config = {
   // CHAIN: 'https://api.chain.com/v2/testnet3/',
   CHAIN_API_KEY: '45c19e4cfc41937124964a7a7931b427',
   BLOCKCYPHER: 'https://api.blockcypher.com/v1/btc/',
+  BLOCKCYPHER_BASE: 'https://api.blockcypher.com/v1/btc/main',
   BLOCKCYPHERTX: 'https://api.blockcypher.com/v1/btc/'
     + 'main' // For testnet, use: 'test3'
     + '/txs/',
   BLOCKCYPHERTOKEN: '55eeac1a8340a08ff29536052c17c160',
+  RELAYSTORE_QUERY: 'https://relaystore.eordano.com/price',
+  RELAYSTORE_POST: 'https://relaystore.eordano.com/store',
   peerServers: [
     {
       key: 'peerjs',

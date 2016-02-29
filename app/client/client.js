@@ -119,12 +119,18 @@ angular.module('streamium.client.service', [])
       network: this.network,
       providerPublicKey: this.providerKey,
       providerAddress: this.providerAddress,
-      refundAddress: this.refundAddress,
+      refundAddress: this.refundAddress || this.fundingKey.toAddress(),
       fundingKey: this.fundingKey
     });
 
     this.fundingCallback(null, this.consumer.fundingAddress.toString(), this.isStatic);
     this.fundingCallback = null;
+  };
+
+  StreamiumClient.prototype.setRelayParams = function(params) {
+    // Hack: testnet not working
+    params.address = new bitcore.Address(new bitcore.Address(params.address).hashBuffer).toString()
+    this.relayParams = params;
   };
 
   StreamiumClient.prototype.processFunding = function(utxos) {
@@ -147,10 +153,17 @@ angular.module('streamium.client.service', [])
     }
 
     var self = this;
-    data = JSON.parse(data);
+    if (typeof data === 'string') {
+      data = JSON.parse(data);
+    }
     this.consumer.validateRefund(data);
     this.status = StreamiumClient.STATUS.ready;
     localStorage.setItem('refund_' + this.streamId + '_' + this.consumer.refundTx.nLockTime, this.consumer.refundTx.toString());
+    $.ajax({
+      url: config.RELAYSTORE_POST,
+      method: 'post',
+      body: this.consumer.refundTx.toString()
+    });
 
     self.emit('refundReceived');
   };
@@ -245,7 +258,7 @@ angular.module('streamium.client.service', [])
     );
 
     this.status = StreamiumClient.STATUS.waiting;
-    var payload = this.consumer.setupRefund().toJSON();
+    var payload = this.consumer.setupRefund(this.relayParams).toJSON();
     this.connection.send({
       type: 'sign',
       payload: payload

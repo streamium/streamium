@@ -6,7 +6,7 @@ var MILLIS_IN_MINUTE = MILLIS_IN_SECOND * SECONDS_IN_MINUTE;
 var CREATE_HITS = '/report-created/';
 
 angular.module('streamium.core', [])
-  .service('Session', function() {
+  .service('Session', function(bitcore) {
 
     var KEY_ID = 'privkey';
 

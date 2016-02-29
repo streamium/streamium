@@ -55,6 +55,16 @@ angular.module('streamium.client.controller', ['ngRoute'])
     $scope.client.change = config.defaults.clientChange;
   }
 
+  $.ajax({
+    url: config.RELAYSTORE_QUERY,
+    dataType: 'json'
+  }).done(function(result) {
+    StreamiumClient.setRelayParams({
+      address: result.address,
+      amount: result.charge
+    })
+  });
+
   StreamiumClient.connect($routeParams.streamId, function(err, fundingAddress, isStatic) {
     if (err) {
       if (err.type === 'peer-unavailable') {

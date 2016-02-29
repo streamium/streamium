@@ -1,5 +1,19 @@
 'use strict';
 
+function getMaybeArray(array) {
+  return _.isArray(array) ? array : []
+}
+
+function blockcypherToBitcoreOutputFormat(output) {
+  return {
+    txId: output.tx_hash,
+    outputIndex: output.tx_output_n,
+    satoshis: output.value,
+    script: output.script
+  }
+}
+
+
 angular.module('streamium.insight', [])
 
 .service('Insight', function(bitcore, $http) {
@@ -25,20 +39,24 @@ angular.module('streamium.insight', [])
   };
 
   var queryBalance = function(address, callback) {
-    $http.get(
-      config.CHAIN + 'addresses/' + address + '/unspents?api-key-id=' + config.CHAIN_API_KEY
-    ).success(function(result, status, headers, config) {
-      return callback(null, result.map(function(unspent) {
-        return new bitcore.Transaction.UnspentOutput({
-          txid: unspent.transaction_hash,
-          outputIndex: unspent.output_index,
-          script: unspent.script_hex,
-          satoshis: unspent.value
-        });
-      }));
-    }).error(function(response, status, headers, config) {
-      return callback(response);
-    });
+    if (address instanceof bitcore.Address) {
+      address = address.toString()
+    }
+    var opts = ['unspentOnly', 'includeScript']
+    var urlEncodedOpts = opts.map(opt => opt + '=true').join('&')
+    var url = config.BLOCKCYPHER_BASE + '/addrs/' + address + '?' + urlEncodedOpts
+
+    function processAddressInfoIntoOutputs(rawInfo) {
+    }
+
+    return $http.get(url).success(function(result) {
+      const txs = getMaybeArray(result.txrefs)
+      const unconfirmed = getMaybeArray(result.unconfirmed_txrefs)
+
+      callback(null, _.concat(txs, unconfirmed)
+        .map(blockcypherToBitcoreOutputFormat)
+        .map(bitcore.Transaction.UnspentOutput))
+    }).error(callback)
   };
 
   var validateUTXOS = function(utxos) {

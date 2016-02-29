@@ -181,7 +181,9 @@ angular.module('streamium.provider.service', [])
 
     this.mapClientIdToStatus[connection.peer] = StreamiumProvider.STATUS.waiting;
 
-    data = JSON.parse(data);
+    if (typeof data === 'string') {
+      data = JSON.parse(data);
+    }
     provider.signRefund(data);
     var refund = provider.refund;
 
@@ -237,7 +239,10 @@ angular.module('streamium.provider.service', [])
   };
 
   StreamiumProvider.prototype.handlers.commitment = function(connection, data) {
-    var commitment = new channel.Transactions.Commitment(JSON.parse(data));
+    if (typeof data === 'string') {
+      data = JSON.parse(data);
+    }
+    var commitment = new channel.Transactions.Commitment(data);
     var self = this;
 
     Insight.broadcast(commitment.serialize(), function(err, txid) {
@@ -267,7 +272,9 @@ angular.module('streamium.provider.service', [])
       return;
     }
 
-    data = JSON.parse(data);
+    if (typeof data === 'string') {
+      data = JSON.parse(data);
+    }
     provider.validPayment(data);
     var self = this;
 
