@@ -23,7 +23,7 @@ cd streamium/
 bower install
 npm install
 node server.js &
-node ssl_server.js &
+node ssl_peerjs.js &
 ```
 
 and then access it from any [WebRTC-supporting](http://www.webrtc.org/) browser:
