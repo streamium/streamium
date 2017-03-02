@@ -19,12 +19,12 @@ var config = {
   peerServers: [
     {
       key: 'peerjs',
-      host: 'localhost',
+      host: '198.50.242.32.',
       port: 9000,
     },
     {
       key: 'peerjs',
-      host: 'localhost',
+      host: '198.50.242.32.',
       port: 9000,
     }
   ],
